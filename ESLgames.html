@@ -1,0 +1,505 @@
+!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Modern English Australia · Koala Spies Sydney</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f6f7f5;
+      --ink:#111111;
+      --charcoal:#1e1e1e;
+      --muted:#5f6a66;
+      --accent:#0f6f6a;
+      --line:rgba(0,0,0,.10);
+
+      --header: var(--charcoal);
+      --header-ink: #f5f5f5;
+
+      --max: 860px;
+      --radius: 16px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Newsreader", Georgia, serif;
+      background: rgb(234, 238, 240);
+      color:var(--ink);
+      line-height:1.9;
+      overflow-x:hidden;                 /* iPhone tiny overflow protection */
+      -webkit-text-size-adjust:100%;
+    }
+
+    img{ max-width:100%; height:auto; display:block; }
+    a{ color:inherit; text-decoration:none; }
+    a:active{ text-decoration: underline; } /* click/press underline only */
+
+    /* optional: avoids iOS tap highlight “flash” without changing your link styles */
+    a{ -webkit-tap-highlight-color: transparent; }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px; }
+    .muted{ color:var(--muted); }
+    .small{ font-size:.95rem; }
+
+    /* Header */
+    header{
+      background:var(--header);
+      color:#ff7a1a;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding: 10px 0;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:220px;
+      min-width:0; /* iOS flex overflow fix */
+    }
+
+    .brand-top{
+      color:#ff7a1a;
+      letter-spacing:4px;
+      font-weight:900;
+      text-transform:uppercase;
+      font-size:2.25rem;
+      line-height:1.1;
+      overflow-wrap:anywhere; /* protects iPhone widths */
+    }
+
+    .kss-font{
+      font-family:"tt-modernoir", sans-serif;
+      font-weight:700;
+      font-size:15px;
+      letter-spacing:8px;
+      color:#ffffff;
+      animation:glow 2.4s ease-in-out infinite;
+      overflow-wrap:anywhere;
+    }
+
+    @keyframes glow{
+      0%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
+      50%{ text-shadow:0 0 8px rgba(255,255,255,0.7); }
+      100%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    nav a{
+      color:var(--header-ink);
+      opacity:.92;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      transition:opacity .12s ease, border-color .12s ease, transform .12s ease;
+      background:rgba(255,255,255,.04);
+      white-space:nowrap;
+    }
+
+    nav a:hover{
+      opacity:1;
+      border-color:rgba(255,255,255,.28);
+      transform:translateY(-1px);
+    }
+
+    /* Main */
+    main{ display:block; }
+
+    .section{
+      padding:44px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    /* Typography */
+    .kicker{
+      color:var(--accent);
+      font-weight:700;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+      font-size:.9rem;
+      margin:0 0 10px;
+    }
+
+    h1,h2,h3{ margin:0 0 12px; line-height:1.22; }
+    h1{ font-size:clamp(2rem, 1.4rem + 2.2vw, 3rem); }
+    h2{ font-size:clamp(1.35rem, 1.1rem + 1vw, 2rem); margin-top:12px; }
+    h3{ font-size:1.1rem; margin-top:18px; }
+    p{ margin:0 0 14px; }
+
+      p{ margin:0 0 14px; 
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;}
+
+    /* Animated phrase (kept) */
+    .animated-phrase{
+      display:inline-block;
+      position:relative;
+      color:var(--accent);
+      font-weight:900;
+      white-space:nowrap;
+      animation:slide-across 4.5s ease-in-out infinite;
+    }
+
+    @keyframes slide-across{
+      0%   { transform: translateX(-30%); opacity: 0; }
+      10%  { opacity: 1; }
+      70%  { transform: translateX(0); opacity: 1; }
+      100% { transform: translateX(30%); opacity: 0; }
+    }
+
+    .animated-phrase::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-4px;
+      width:100%;
+      height:3px;
+      background:var(--accent);
+      animation:underline-slide 4.5s ease-in-out infinite;
+    }
+
+    @keyframes underline-slide{
+      0%   { transform:translateX(-120%); opacity:0; }
+      20%  { opacity:1; }
+      70%  { transform:translateX(0); opacity:1; }
+      100% { transform:translateX(120%); opacity:0; }
+    }
+
+    /* Content cards */
+    .category{
+      margin-top:22px;
+      padding:18px 18px 8px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.55);
+    }
+
+    .category-title{
+      margin:0 0 10px;
+      font-size:1.25rem;
+      font-weight:900;
+      color:var(--ink);
+    }
+
+    .item-list{
+      margin:0;
+      padding-left:20px;
+    }
+
+    .item-list li{
+      margin:10px 0;
+    }
+
+    .link-centered{
+      display:block;
+      text-align:center;
+      margin:16px 0 6px;
+      color:var(--accent);
+      font-weight:700;
+    }
+    .link-centered:hover{ text-decoration:underline; }
+
+    /* Buttons */
+    .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; }
+    .btn{
+      display:inline-block;
+      padding:10px 18px;
+      border-radius:999px;
+      border: transparent;
+      background: rgba(255,255,255,.75);
+      color: var(--accent);
+      font-weight:800;
+    }
+    .btn:hover{ text-decoration:underline; }
+
+
+
+  /* Divider */
+  .section-divider{
+    border:0;
+    height:2px;
+    margin:44px 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.18),
+      rgba(0,0,0,.55),
+      transparent
+    );
+    opacity:.9;
+
+  }
+    /* Footer */
+    footer{
+      background:var(--header);
+      color:var(--header-ink);
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:18px 0;
+    }
+
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      text-align:center;
+    }
+
+    .footer-links{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      width:100%;
+      flex-wrap:wrap;
+    }
+
+    .footer-links a{
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      opacity:.9;
+      background:rgba(255,255,255,.04);
+      color:var(--header-ink);
+    }
+    .footer-links a:hover{ opacity:1; border-color:rgba(255,255,255,.28); }
+
+    /* Responsive */
+    @media (max-width:720px){
+      .wrap{ padding:0 12px; }
+
+      .header-inner{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+      }
+
+      .brand{ min-width:0; }
+
+      .brand-top{
+        font-size:1.6rem;
+        letter-spacing:2px;
+      }
+      .kss-font{
+        font-size:12px;
+        letter-spacing:4px;
+      }
+
+      nav{ justify-content:flex-start; }
+      nav a{
+        font-size:.85rem;
+        padding:6px 10px;
+        border-radius:10px;
+      }
+
+        .section-divider{
+    border:0;
+    height:2px;
+    margin:44px 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.18),
+      rgba(0,0,0,.55),
+      transparent
+    );
+    opacity:.9;
+
+      .footer-links{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .footer-links a{
+        width:100%;
+      }
+
+      /* If the animated phrase risks clipping, allow wrapping on very small screens */
+      .animated-phrase{ white-space:normal; }
+    }
+    
+  </style>
+</head>
+
+<body id="top">
+
+<header>
+  <div class="wrap header-inner">
+    <a class="brand" href="#top">
+      <div class="brand-top">Modern English Au</div>
+      <span class="kss-font">Koala Spies Sydney</span>
+    </a>
+
+    <nav>
+      <a href="MEAtests.html">IELTS/PTE+</a>
+       <a href="MEAtests.html">Games&Tools</a>
+        <a href="MEAtests.html">Back</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:14px;">
+  <h1><span class="animated-phrase">meaningful language learning</span></h1>
+</div>
+
+<main>
+  <section id="micro-lessons" class="section">
+    <div class="wrap">
+
+      <h1>Micro Lessons</h1>
+      <h2>for Classroom Teaching and Self-Study</h2>
+
+      <p>
+        These microlessons and mini-tests were all devised while I was working in an ESL classroom and studying UX design and coding.
+        Feel free to use them and send me feedback.
+      </p>
+
+        <hr class="section-divider">       
+            <h2>Pronunciation &amp; Vocab</h2>
+          <ul>
+                <li><a href="https://koalaspiessydney.github.io/b1static-verbs/">Money Idioms // B1 pre-intermediate </a></li>
+            <li><a href="https://koalaspiessydney.github.io/c1staticverbs/">Casual vs Academic language  // C1 upper intermediate</a></li>
+    
+          </ul>
+      
+       <hr class="section-divider">       
+    
+
+      
+
+        <!-- =========================
+     DUMMY PILL DROPDOWN (copy/paste)
+     ========================= -->
+
+<style>
+  /* Pill dropdown (dummy) */
+  .pill-dd{
+    margin: 18px 0;
+    max-width: 680px;
+  }
+
+  .pill-dd summary{
+    list-style: none;                 /* remove default marker */
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 16px;
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.65);
+    border: 1px solid rgba(0,0,0,.10);
+
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  /* remove marker on Safari */
+  .pill-dd summary::-webkit-details-marker{ display:none; }
+
+  .pill-dd summary::after{
+    content: "▾";
+    font-weight: 900;
+    transform: translateY(-1px);
+    transition: transform .18s ease;
+  }
+
+  .pill-dd[open] summary::after{
+    transform: rotate(180deg) translateY(1px);
+  }
+
+  .pill-dd .pill-panel{
+    margin-top: 10px;
+    padding: 14px 16px;
+    border-radius: 16px;
+
+    background: rgba(255,255,255,.55);
+    border: 1px solid rgba(0,0,0,.10);
+
+    line-height: 1.7;
+  }
+
+  /* Optional: make the pill full width on phones */
+  @media (max-width: 720px){
+    .pill-dd summary{
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<details class="pill-dd">
+  <summary>Dummy dropdown pill</summary>
+  <div class="pill-panel">
+    <p style="margin:0 0 10px;">
+      This is placeholder content. Put anything here: text, links, lists, etc.
+    </p>
+    <ul style="margin:0; padding-left:18px;">
+      <li>Item one</li>
+      <li>Item two</li>
+      <li>Item three</li>
+    </ul>
+  </div>
+</details>
+
+
+ 
+
+
+  <section id="contact" class="section">
+    <div class="wrap">
+      <p class="kicker">Contact &amp; Feedback</p>
+
+      <p class="muted">
+        I’m also happy to keep creating and posting microlessons — send me your requests!
+      </p>
+
+      <p>
+        I would be absolutely thrilled to create bespoke and branded lessons for your organisation.
+        Go to the contact page to request a quote.
+      </p>
+
+      <div class="actions">
+        <a class="btn" href="wpcontact.html">Send Feedback</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</div>
+    <div class="footer-links">
+      <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">KOALA SPIES SYDNEY</a>
+      <a href="index.html">Modern English AU</a>
+      <a href="MEAtests.html">IELTS/PTE+</a>
+      <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/contact.index.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
