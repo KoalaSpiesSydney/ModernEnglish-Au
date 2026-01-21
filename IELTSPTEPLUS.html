@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
   :root{
     --bg: rgb(234, 238, 240);
@@ -33,7 +33,7 @@
   body{
     margin:0;
     font-family:"Newsreader", Georgia, serif;
-    background:var(--bg);
+    background:rgb(234, 238, 240);
     color:var(--ink);
     line-height:1.9;
     -webkit-text-size-adjust:100%;
@@ -178,7 +178,8 @@
   h2{ font-size:clamp(1.25rem, 1.05rem + 1vw, 1.85rem); margin-top:22px; }
   h3{ font-size:1.1rem; margin-top:18px; }
 
-  p{ margin:0 0 14px; }
+  p{ margin:0 0 14px; 
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;}
 
   /* Animated phrase */
   .animated-phrase{
@@ -435,6 +436,20 @@
     .kss-font{ letter-spacing:3px; }
   }
 
+  /* Divider */
+  .section-divider{
+    border:0;
+    height:2px;
+    margin:44px 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.18),
+      rgba(0,0,0,.55),
+      transparent
+    );
+    opacity:.9;
 
   </style>
 </head>
@@ -469,27 +484,33 @@
           These microlessons and mini-tests were all devised while I was working in an ESL classroom
           and studying UX design and coding. Feel free to use them and send me feedback.
         </p>
+      
+      
+
 
       <section class="mini-tests">
         <p>These tests have been separated into mini tests. They were designed to teach and test, after each section the students scores themselves and sees an explanation of each answer. They can be taken in class or on a phone - there a QR code generator in the top left corner. Based on real test but updated on topics and sometimes localised to Australia,  there format is similar to IELTS online.</p>
-          <h2>Mini GENERAL IELTS Readings Tests Set 1</h2>
+         
+            <hr class="section-divider">
+        <h2>Mini GENERAL IELTS Readings Tests Set 1</h2>
           <ul>
             <li><a href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1Matching.html/">IELTS General// Reading Part 1 // The Little Byron Beach Festival // Matching paragraphs</a></li>
            
            <li> <a href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1tfng.htm./"> IELTS General// Reading Part 1// Lloyd Lock-up // True, False or Not Given
            <li> <a href= "https://koalaspiessydney.github.io/IELTSGenReadingtestp2TenantsRightcompleteinfo/">IELTS General // Reading Part 2 // Tenants Right- the landlord wants to sell // Complete informations
             <li> <a href= "https://koalaspiessydney.github.io/IELTSGeneralReadingp1tfng.htm./"> IELTS General //Reading Part 2 //How to give a Presentatoion // Matching headings
+           <li> <a href= "https://koalaspiessydney.github.io/IELTSgeneralpart3IndianTextiles/"> IELTS General // Reading Part 3 // Threads of Influence- Indian textiles // Multiple Choice and COmplete paragraph
             </li>
             <div>
                 <h2>Mini GENERAL IELTS Readings Tests - Set 2</h2>
             <li><a href="https://ieltspteaustralianexaminertutor.com/ielts-general-reading-part-1-meka-cosmetics-short-answer/">IELTS General Reading Part 1 Meka Cosmetic: Notice Product Return Short answer questions/a></li>
-            <li><a href="https://ieltspteaustralianexaminertutor.com/ielts-general-reading/">IELTS General Reading Part 2: Tips for Giving A Presentation/ Gap fill practice</a></li>
+            <li><a href="https://ieltspteaustralianexaminertutor.com/ielts-general-reading/">IELTS General Reading "Part 2: Tips for Giving A Presentation/ Gap fill practice</a></li>
             <li><a href="https://ieltspteaustralianexaminertutor.com/ielts-general-reading-part-2-how-to-become-a-professional-smoothie-and-juice-maker-gap-fill/">IELTS General Reading Part 2: How to become a professional smoothie and juice maker. Gap fill</a></li>
           </ul>
         </section>
         
 
-
+      <hr class="section-divider">
 
         <section class="mini-tests">
             <p> ***The colours and format vary in this set as part of my research but the pedagogy is sound. </p>
@@ -503,13 +524,15 @@
           </ul>
         </section>
 
-      
+           <hr class="section-divider">
+
             <section class="mini-tests">
           <h2>Mini ACADEMIC IELTS Readings Tests</h2>
           <ul>
             <li><a href="https://ieltspteaustralianexaminertutor.com/academic-reading-australias-only-nobel-prize-winning-chemist-sir-john-cornforth-true-false-not-give-summary-completion/">Academic Reading Australia’s Only Nobel Prize Winning Chemist, Sir John Cornforth, True, False not Give & Summary Completion</a></li>
        </ul>
           </section>
+              <hr class="section-divider">
               <section class="mini-tests">
           <h2>IELTS & PTE Multiple Choice Listening and Reading</h2>
           <ul>
@@ -615,7 +638,7 @@
 
   </div>
 </details>
-
+    <hr class="section-divider">
               <section class="mini-tests">
 
                 
@@ -630,10 +653,11 @@
         
           </ul>
        </section>
+           <hr class="section-divider">
         <section class="mini-tests">
           <h2>Reading Tests- arrange, matching & organizing parpagraphs</h2>
           <ul>
-            <li><a href="https://koalaspiessydney.github.io/Arrangeparatech/"> Arrange Paragraphs -Technology & Social Media/a></li>
+            <li><a href="https://koalaspiessydney.github.io/Arrangeparatech/"> Arrange Paragraphs -Technology & Social Media</li>
             <li><a href=""> Mini Test 2 Coming Soon</a></li>
             <li><a href=""> Mini Test 3 Coming soon</a></li>
          
@@ -750,8 +774,7 @@
   </div>
 </details>
 
-        <
-      </div>
+          <hr class="section-divider">
     </section>
 
     <section id="contact" class="section">
@@ -818,6 +841,4 @@
 
 </body>
 </html>
-
-
 
