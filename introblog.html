@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Welcome to Modern English Australia</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: rgb(234,238,240);
+      --ink:#111;
+      --muted:#555;
+      --accent:#6555a1;
+      --line:rgba(0,0,0,.2);
+      --header:#2b2a2a;
+      --max:780px;
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    *{ box-sizing:border-box; }
+
+    html, body{
+      margin:0;
+      padding:0;
+      height:100%;
+      overflow-x:hidden;
+    }
+
+    body{
+      font-family:"Newsreader", Georgia, serif;
+      font-size:20px;
+      line-height:1.9;
+      background:var(--bg);
+      color:var(--ink);
+      -webkit-text-size-adjust:100%;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:clamp(14px, 3vw, 22px);
+    }
+
+    /* ================= HEADER ================= */
+
+    header{
+      background:var(--header);
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      padding-top:var(--safe-top);
+    }
+
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      min-width:0;
+    }
+
+    .brand{
+      font-weight:700;
+      letter-spacing:.04em;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    nav a{
+      font-size:.9rem;
+      font-weight:600;
+      padding:10px 12px;
+      min-height:44px;
+      display:flex;
+      align-items:center;
+      opacity:.9;
+    }
+
+    nav a:hover{ opacity:1; }
+
+    /* ================= ARTICLE ================= */
+
+    main{
+      padding-bottom:40px;
+    }
+
+    article{
+      margin-top:24px;
+    }
+
+    h1{
+      font-size:clamp(2rem, 1.4rem + 2vw, 2.6rem);
+      line-height:1.25;
+      margin:0 0 10px;
+      font-weight:700;
+      letter-spacing:-0.01em;
+    }
+
+    .meta{
+      font-size:.85rem;
+      color:var(--muted);
+      margin-bottom:26px;
+    }
+
+    .news-rule{
+      border:0;
+      height:1px;
+      background:rgba(0,0,0,.6);
+      margin:26px 0 34px;
+    }
+
+    .post-image{
+      margin:28px 0 32px;
+      border-radius:14px;
+      overflow:hidden;
+    }
+
+    /* Force newspaper B&W images */
+    .post-image img{
+      width:100%;
+      height:auto;
+      max-height:80vh;
+      object-fit:cover;
+      filter:grayscale(100%) contrast(1.1) brightness(0.95);
+    }
+
+    article p{
+      margin:0 0 18px;
+      max-width:68ch;
+    }
+
+    /* Lead paragraph */
+    article p:first-of-type{
+      font-size:1.15rem;
+      font-weight:600;
+    }
+
+    .back-link{
+      display:inline-block;
+      margin-top:40px;
+      font-weight:700;
+      color:var(--accent);
+      text-decoration:underline;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer{
+      background:#171616;
+      color:#f6f8f4;
+      font-size:.85rem;
+      text-align:center;
+      padding:18px 0;
+      padding-bottom:calc(18px + var(--safe-bottom));
+      border-top:1px solid rgba(255,255,255,.1);
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width:480px){
+      body{ font-size:19px; }
+    }
+
+    @media (min-width:900px){
+      article{
+        max-width:72ch;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="brand">Modern English Au</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="../blog.html">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <article>
+
+    <h1>Welcome to Modern English Australia</h1>
+    <div class="meta">Posted September 2025 · Opinion</div>
+
+    <hr class="news-rule">
+
+    <div class="post-image">
+      <img src="Intheclassrom.png" alt="Black and white editorial blog image">
+    </div>
+
+    <p>
+      Modern English-AU exists because something important is missing.
+    </p>
+
+    <p>
+      The English-language learning market in Australia is no longer driven by Australian voices.
+      Online, it is dominated by influencer-teachers with limited classroom experience, or by large
+      overseas markets producing content for their own national audiences. Much of this material is
+      well marketed, but poorly grounded in Australian language use, assessment standards, or real
+      migrant experience.
+    </p>
+
+    <p>
+      For many migrants—especially those from smaller countries and smaller markets—this creates a
+      real problem. When every tutor you encounter online is teaching through the lens of another
+      country’s accent, test strategy, or cultural assumptions, you are quietly discouraged from
+      engaging with Australian sources, Australian English, and Australian ways of communicating.
+    </p>
+
+    <p>
+      I come from the Australian system. I have taught in ELICOS colleges, worked as an examiner,
+      delivered university-level test preparation, and designed learning for adult migrants navigating
+      real stakes: visas, work, and life in Australia. Knowing how to market English online is not the
+      same as knowing how people actually acquire it.
+    </p>
+
+    <p>
+      Modern English Australia is my response to that gap. I design micro-lessons and tools that
+      reflect Australian life, culture, and communication, and I design with how people now read,
+      concentrate, and learn in mind. I want to do things differently—and better.
+    </p>
+
+    <a class="back-link" href="../blog.html">← Back to blog</a>
+
+  </article>
+</main>
+
+<footer>
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
+
+</body>
+</html>

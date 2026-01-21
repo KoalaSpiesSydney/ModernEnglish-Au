@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Modern English Australia · Koala Spies Sydney</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+
+  <style>
+  :root{
+    --bg:#f6f7f5;
+    --ink:#111111;
+    --charcoal: rgba(255,255,255,.10);
+    --muted:#427b98;
+    --accent:#6555a1;
+    --line:rgba(194, 192, 192, 0.1);
+    --max:1120px;
+    --header:#2b2a2a;
+    --var:#e1e819;
+
+
+
+    /* iOS safe-area helpers */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Base */
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+
+  body{
+    margin:0;
+    font-family:"Newsreader", Georgia, serif;
+    font-size:20px;
+    background: rgb(234, 238, 240);
+    color:var(--ink);
+    line-height:1.9;
+
+    /* iOS/Android stability */
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  .png-links img{
+    margin-top: 40px;
+    width:100%;
+    max-width: 400px;
+    height:auto;
+    border-radius:5px;
+    opacity: 70%;
+    cursor:pointer;
+    transition: opacity 0.2s ease;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    align-items:center;   /* THIS centres the images horizontally */
+    margin:60px 0;
+    padding:10px;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.18));
+}
+
+
+    
+
+
+  img{ max-width:100%; height:auto; display:block; }
+
+  a{ color:inherit; text-decoration:none; -webkit-tap-highlight-color: transparent; }
+  .muted{ color:var(--muted); }
+  .small{ font-size:.95rem; }
+
+  /* Consistent padding that works on phones + tablets */
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding-inline: clamp(12px, 3vw, 20px);
+  }
+
+  /* HEADER */
+  header{
+    background:var(--header);
+    color:#f1f09e;
+    border-bottom:1px solid rgba(255,255,255,.10);
+    font-size:30px;
+
+    /* notch safe */
+    padding-top: var(--safe-top);
+  }
+
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding-block: 10px;
+    min-width:0; /* prevents iOS overflow */
+  }
+
+  .brand{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    min-width:0; /* critical for iOS */
+  }
+
+  .brand-top{
+    color:#dae80b;
+    letter-spacing:4px;
+    font-weight:900;
+    text-transform:uppercase;
+    font-size:2.25rem;
+    line-height:1.1;
+
+    /* prevent overflow */
+    max-width:100%;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+
+  .kss-font{
+    font-family:"tt-modernoir", sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:8px;
+    color:#ffffff;
+    animation:glow 2.4s ease-in-out infinite;
+
+    max-width:100%;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+
+  @keyframes glow {
+    0%   { text-shadow:0 0 0px rgba(255,255,255,0.3); }
+    50%  { text-shadow:0 0 8px rgba(255,255,255,0.7); }
+    100% { text-shadow:0 0 0px rgba(255,255,255,0.3); }
+  }
+
+  /* NAVIGATION */
+  nav{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    min-width:0;
+  }
+
+  nav a{
+    color:#ffffff;
+    opacity:.9;
+    padding:10px 12px;
+    border-radius:12px;
+    border:1px solid transparent;
+    font-size:0.95rem;
+    font-weight:600;
+    transition:opacity .12s ease, border-color .12s ease, color .12s ease;
+    white-space:nowrap;
+  }
+
+  nav a:hover{
+    opacity:1;
+    border-color:rgba(255,255,255,.22);
+    color:#ffffff;
+  }
+
+  nav a.active{
+    opacity:1;
+    border-color:rgba(255,255,255,.35);
+    color:#ffffff;
+  }
+
+  nav a.cta{
+    background:var(--accent);
+    color:#ffffff;
+    font-weight:900;
+    border-color:transparent !important;
+  }
+
+  /* SECTIONS */
+  .section{
+    padding:56px 0;
+    border-bottom:1px solid var(--line);
+  }
+
+  /* TWO COLUMNS */
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:44px;
+    align-items:start;
+  }
+  /* iOS grid overflow fix */
+  .two-col > *{ min-width:0; }
+
+  /* TYPOGRAPHY */
+  h1,h2,h3{
+    margin:0 0 12px;
+    line-height:1.22;
+  }
+
+  h1{ font-size:clamp(2rem, 1.4rem + 2.2vw, 3rem); }
+  h2{ font-size:clamp(1.35rem, 1.1rem + 1vw, 2rem); margin-top:26px; }
+  h3{ font-size:1.1rem; margin-top:22px; }
+  p{ margin:0 0 14px; }
+
+  ul{ margin:10px 0 16px; padding-left:18px; }
+  li{ margin:8px 0; }
+
+  /* BLOCKS */
+  .block{
+    padding-top:19px;
+    border-top:1px solid var(--line);
+    margin-top:18px;
+    text-align:left;
+  }
+  .block ul { text-align:left; padding-left:18px; }
+
+  /* BUTTONS */
+  .actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:18px;
+  }
+
+  /* Keep your “text-like” buttons, but fix the missing vars */
+  .actions .btn,
+  .actions .btn.primary{
+    background:none;
+    border:none;
+    padding:10px 0;
+    font-family:""Newsreader", Georgia, serif;";
+    font-weight:900;
+    font-size:1.15rem;
+    color: #331e80;
+    text-decoration: underline;
+    letter-spacing: 0.01em;
+    cursor:pointer;
+  }
+
+  .actions .btn:hover,
+  .actions .btn.primary:hover{
+    color: var(--accent1);
+    text-decoration: underline;
+  }
+
+
+  /* ANIMATED PHRASE */
+  .animated-phrase{
+    display:inline-block;
+    position:relative;
+    color:var(--accent);
+    font-weight:900;
+    white-space:nowrap;
+    animation:slide-across 4.5s ease-out forwards;
+  }
+  .animated-phrase::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity:.6;
+  }
+  @keyframes slide-across{
+    0%{ transform:translateX(-40px); opacity:0; }
+    60%{ opacity:1; }
+    100%{ transform:translateX(0); opacity:1; }
+  }
+
+  /* PNG links */
+.btn.plain-link {
+
+    padding: 14px 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 999px;          /* pill shape */
+    background: transparent;  /* subtle neutral background */
+    color: var(--accent);          /* uses your existing palette */
+    font-weight: 600;
+    font-size: 1.55rem;
+    text-decoration: none;
+    border:transparent
+    transition: background 0.15s ease, color 0.15s ease;
+    
+
+}
+
+.btn.plain-link:hover {
+    background: #08a17d(8, 199, 173, 0.533);
+    opacity: 10%;
+    color: var(--accent1);
+}
+
+  /* Divider */
+  .section-divider{
+    border:0;
+    height:2px;
+    margin:44px 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.18),
+      rgba(0,0,0,.55),
+      transparent
+    );
+    opacity:.9;
+  }
+
+  footer{
+    background:rgb(23, 22, 22);
+    color:rgb(246, 248, 244);
+    border-top:1px solid rgba(255,255,255,.10);
+    padding:18px 0;
+    padding-bottom: calc(18px + var(--safe-bottom));
+  }
+
+  .footer-inner{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    text-align:center;
+  }
+
+  .footer-links a{
+    padding:8px 10px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.12);
+    opacity:.9;
+    background:rgba(241, 231, 231, 0.04);
+    display:inline-block;
+  }
+  .footer-links a:hover{ opacity:1; border-color:rgba(255,255,255,.28); }
+
+  /* RESPONSIVE */
+  @media (max-width:980px){
+    .two-col{ grid-template-columns:1fr; gap:28px; }
+    nav{ justify-content:flex-start; }
+  }
+
+  @media (max-width:720px){
+    header{ overflow-x:hidden; }
+
+    .header-inner{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:12px;
+    }
+
+    .brand-top{
+      font-size:1.6rem;
+      letter-spacing:2px;
+    }
+
+    .kss-font{
+      font-size:12px;
+      letter-spacing:4px;
+    }
+
+    nav{
+      width:100%;
+      justify-content:flex-start;
+      gap:8px;
+    }
+
+    nav a{
+      font-size:0.85rem;
+      padding:6px 10px;
+      white-space:normal;
+    }
+
+    /* If the animated phrase ever causes a squeeze, allow wrapping on small screens */
+    .animated-phrase{ white-space:normal; }
+  }
+
+  /* Slightly reduce big images on smaller screens to avoid “too tall” feel */
+  @media (max-width:420px){
+    body{ font-size:19px; }
+    .png-links img{ max-width: 340px; }
+  }
+  /* BLOG PREVIEW */
+.blog-feature{
+  margin-top:28px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  background:#ffffff;
+}
+
+.blog-feature img{
+  aspect-ratio:3 / 4;
+  object-fit:cover;
+  width:100%;
+}
+
+.blog-feature .content{
+  padding:18px;
+}
+
+.blog-feature h3{
+  margin:0 0 8px;
+}
+
+.blog-list{
+  margin-top:18px;
+  padding-left:0;
+  list-style:none;
+}
+
+.blog-list li{
+  margin:8px 0;
+}
+
+.blog-date{
+  font-size:.85rem;
+  opacity:.65;
+}
+
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap header-inner">
+    <div class="brand">
+      <a href="#top" class="brand-top">Modern English Au</a>
+      <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-font">Koala Spies Sydney</a>
+    </div>
+
+    <nav>
+      <a href="microlesson.html">Lessons &amp; Games</a>
+      <a href="MEAtests.html">IELTS / PTE +</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap two-col">
+
+    <!-- LEFT COLUMN -->
+    <div>
+      <h1>
+        New ways to approach learning
+        <span class="animated-phrase">education revolution</span>
+      </h1>
+
+      <p>
+        Welcome to my UX and Learning Design portfolio. I bring together experience in adult education,
+        English examining, freelance writing, and media production. I teach, I code, I use AI ethically
+        and I design—building learning experiences that are clear, engaging, and purposeful.
+      </p>
+
+      <p>
+        I also teach the teacher to code and create their own interactive activities—
+        <i>no more Kraphoots!</i>
+      </p>
+
+      <img src="india-iphone.jpg" alt="Description of the image" width="500">
+
+      <p class="muted" style="font-weight:800;">
+        EdTech Designer • UX Designer • Creative Educator
+      </p>
+
+
+
+      <div class="actions">
+        <a class="btn" href="about.html">More about me</a>
+      </div>
+
+<!-- BLOG PREVIEW -->
+<div class="blog-feature" id="featured-blog">
+  <img src="placeholder-blog.jpg" alt="Blog image placeholder">
+  <div class="content">
+    <h3 id="blog-title">Blog title placeholder</h3>
+    <p id="blog-excerpt">
+      This is the first paragraph of the blog post. It gives a short introduction and
+      invites the reader to continue.
+    </p>
+    <a class="btn" href="blog/post.html">Read more</a>
+  </div>
+</div>
+
+<ul class="blog-list" id="recent-blogs">
+  <!-- populated by JS -->
+</ul>
+
+    </div>
+    <!-- END LEFT COLUMN -->
+
+    <!-- RIGHT COLUMN -->
+    <div>
+      <div class="block">
+        <h2>Bespoke Learning Tools</h2>
+      </div>
+
+      <ul>
+        <li>Interactive learning games</li>
+        <li>Listening &amp; pronunciation tools</li>
+        <li>Drag-and-drop activities</li>
+        <li>Grammar and vocabulary systems</li>
+        <li>Audio-visual classroom content</li>
+        <li>Tests with automated reporting tools</li>
+        <li>Creative tools to expand the possibilities in the classroom</li>
+      </ul>
+
+      <hr class="section-divider">
+
+      <div class="block">
+        <h2>Test for immigration or specific language points</h2>
+      </div>
+      <p>IELTS, PTE and Cambridge mini tests, including write from dictation, academic language, reading, writing and listening.</p>
+    
+      <a class="btn plain-link" href="IELTSPTEPLUS.html">IELTS PTE +</a>
+    
+
+
+      <hr class="section-divider">
+
+      <h2 style="margin-top:0;">Micro Lessons for Classroom Teaching, Self-Study, and Skill Development</h2>
+      <p>10 minute and 20 minute lessons on grammar points with games and worksheets.</p>
+    
+      <a class="btn plain-link" href="microlesson.html">MicroLessons</a>
+
+    <hr class="section-divider">
+
+
+      <h2 style="margin-top:0;">Vocabulary &amp; Grammar Games</h2>
+      <p>Just for fun or revision</p>
+      <a class="btn plain-link" href="microlesson.html"> Games</a>
+
+          <hr class="section-divider">
+
+      <div id="micro-lessons">
+        <div class="actions">
+          <a class="btn" href="contact.html">Contact me today</a>
+        </div>
+      </div>
+    </div>
+    <!-- END RIGHT COLUMN -->
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</div>
+    <div class="footer-links">
+      <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">KOALA SPIES SYDNEY</a>
+      <a class="cta" href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+<script>
+const featuredPost = {
+  title: "Placeholder blog title",
+  excerpt: "This is a short excerpt from the current featured blog post.",
+  image: "placeholder-blog.jpg",
+  link: "blog/post.html"
+};
+
+const recentPosts = [
+  { title: "Previous blog post one", date: "12 Sep 2025", link: "blog/post.html" },
+  { title: "Previous blog post two", date: "02 Sep 2025", link: "blog/post.html" },
+  { title: "Previous blog post three", date: "18 Aug 2025", link: "blog/post.html" },
+  { title: "Previous blog post four", date: "01 Aug 2025", link: "blog/post.html" }
+];
+
+// Populate featured
+document.getElementById("blog-title").textContent = featuredPost.title;
+document.getElementById("blog-excerpt").textContent = featuredPost.excerpt;
+document.querySelector("#featured-blog img").src = featuredPost.image;
+document.querySelector("#featured-blog a").href = featuredPost.link;
+
+// Populate list
+const list = document.getElementById("recent-blogs");
+recentPosts.forEach(post => {
+  const li = document.createElement("li");
+  li.innerHTML = `<a href="${post.link}">${post.title}</a>
+                  <div class="blog-date">${post.date}</div>`;
+  list.appendChild(li);
+});
+</script>
+
+</body>
+</html>
