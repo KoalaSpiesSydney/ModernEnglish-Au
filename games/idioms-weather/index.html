@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Weather Idioms Matching Game – Modern English AU</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f5f5f5;
+  --card:#2a2a2a;
+  --ink:#1e1e1e;
+  --muted:#bbbbbb;
+  --accent:#2e0e5b;
+  --line:#484141;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:"Newsreader", Georgia, serif;
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+
+/* ===== Header ===== */
+header{
+  background:#f7f4f4;
+  color:var(--accent);
+  text-align:center;
+  padding:1.4rem 0 1rem;
+  letter-spacing:2px;
+  font-weight:700;
+  font-size:1.2rem;
+}
+header span{
+  display:block;
+  color:#302d2d;
+  font-weight:300;
+  font-size:.6rem;
+  letter-spacing:3px;
+  margin-top:1px;
+}
+
+/* ===== QR + HOME ===== */
+.qr-toggle{
+  position:fixed;
+  left:14px;
+  top:14px;
+  z-index:9999;
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(255,255,255,.92);
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.qr-panel{
+  position:fixed;
+  left:14px;
+  top:70px;
+  z-index:9999;
+  width:240px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  display:none;
+}
+.qr-panel .qr-title{
+  font-weight:800;
+  color:#111;
+  margin:0 0 8px;
+  font-size:.95rem;
+  letter-spacing:.5px;
+}
+.qr-panel .qr-url{
+  font-size:.72rem;
+  color:rgba(0,0,0,.65);
+  word-break:break-all;
+  margin:8px 0 0;
+  line-height:1.35;
+}
+.qr-code{
+  width:200px;
+  height:200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.10);
+}
+.home-btn{
+  position:fixed;
+  right:14px;
+  top:14px;
+  z-index:9999;
+  padding:.7rem 1rem;
+  border-radius:14px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  color:#111;
+  text-decoration:none;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+@media (hover:hover){
+  .home-btn:hover{ background:#ffffff; }
+  .qr-toggle:hover{ background:#ffffff; }
+}
+
+/* ===== Video background (fixes) ===== */
+.bg-video{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  pointer-events:none; /* important */
+  background:#000;     /* prevents “blank white” during load */
+}
+.bg-overlay{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:rgba(245,245,245,.78);
+}
+
+/* tiny debug (only shows if video fails) */
+.video-debug{
+  position:fixed;
+  left:14px;
+  bottom:14px;
+  z-index:9999;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:12px;
+  padding:.6rem .8rem;
+  font-size:.78rem;
+  color:#111;
+  display:none;
+  max-width:min(520px, calc(100% - 28px));
+  text-align:left;
+}
+
+/* ===== Main ===== */
+main{
+  flex:1;
+  text-align:center;
+  padding:2rem 1rem 3rem;
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+h1{
+  color:var(--accent);
+  letter-spacing:2px;
+  margin-top:1rem;
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  font-weight:700;
+}
+
+p{
+  max-width:720px;
+  margin:.5rem auto 1.2rem;
+  opacity:.9;
+}
+
+/* ===== Controls ===== */
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:.8rem;
+  margin-bottom:1.2rem;
+}
+
+button.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.75rem 1.4rem;
+  border-radius:45px;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  font-family:inherit;
+}
+button.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+
+/* ===== Game Grid ===== */
+#game{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:14px;
+  width:90%;
+  max-width:900px;
+  margin:0 auto;
+}
+
+.card{
+  background:#671321;
+  border:2px solid var(--accent);
+  border-radius:16px;
+  padding:20px;
+  min-height:100px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  font-size:1rem;
+  color:#fff;
+  transition:background .3s,color .3s,transform .2s;
+  box-shadow:0 3px 6px rgba(0,0,0,.12);
+}
+
+.card.flipped{
+  background:var(--accent);
+  color:#000;
+  transform:scale(1.05);
+}
+
+.card.matched{
+  color:#000;
+  cursor:default;
+}
+
+#status{
+  margin-top:1.2rem;
+  font-size:1.05rem;
+  font-weight:600;
+  min-height:1.6em;
+}
+
+/* ===== Links ===== */
+.links{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  margin-top:2rem;
+}
+
+a.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  text-decoration:none;
+  padding:.8rem 1.4rem;
+  border-radius:45px;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+}
+a.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--card);
+  color:var(--muted);
+  text-align:center;
+  padding:1rem 0;
+  border-top:1px solid var(--line);
+  font-size:.9rem;
+}
+
+/* ===== Mobile ===== */
+@media(max-width:600px){
+  .card{
+    min-height:80px;
+    font-size:1.1rem;
+    padding:12px;
+  }
+  #game{gap:10px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== Background video (fixed) =====
+  1) Put the file in the SAME folder as this HTML
+  2) Use EXACT filename here (case sensitive on GitHub)
+  3) Best format: MP4 (H.264 video + AAC audio), no weird characters in filename
+-->
+<video
+  class="bg-video"
+  id="bgVideo"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  poster="weather-poster.jpg"
+>
+  <source src="weatheridioms.mp4" type="video/mp4">
+  <source src="weatheridioms.webm" type="video/webm">
+</video>
+<div class="bg-overlay"></div>
+
+<div class="video-debug" id="videoDebug"></div>
+
+<!-- ===== QR + Home ===== -->
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR">QR</button>
+<div class="qr-panel" id="qrPanel" aria-label="QR code panel">
+  <div class="qr-title">Open this page on your phone</div>
+  <div class="qr-code" id="qrCode"></div>
+  <div class="qr-url" id="qrUrl"></div>
+</div>
+
+<a class="home-btn" href="index.html">Home</a>
+
+<header>
+  MODERN ENGLISH AU
+  <span>Koala Spies Sydney</span>
+</header>
+
+<main>
+  <h1>Weather Idioms Matching Game</h1>
+  <p>
+    Flip two cards to match each idiom with its meaning.
+    Each round uses <strong>20 idioms</strong> selected from the full set.
+  </p>
+
+  <div class="controls">
+    <button class="btn" id="newRoundBtn">New Round</button>
+  </div>
+
+  <div id="game"></div>
+  <div id="status"></div>
+
+  <div class="links">
+    <a href="https://ieltspteaustralianexaminertutor.com/" class="btn">Home</a>
+  </div>
+</main>
+
+<footer>
+  © Modern English AU · All Rights Reserved
+</footer>
+
+<!-- QRCode.js -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script>
+/* ============================================================
+   QR GENERATOR (Top Left)
+   ============================================================ */
+(function(){
+  const toggle = document.getElementById("qrToggle");
+  const panel = document.getElementById("qrPanel");
+  const box = document.getElementById("qrCode");
+  const urlLabel = document.getElementById("qrUrl");
+  if(!toggle || !panel || !box || !urlLabel) return;
+
+  let made = false;
+
+  function make(){
+    const url = window.location.href;
+    urlLabel.textContent = url;
+
+    box.innerHTML = "";
+    new QRCode(box, {
+      text: url,
+      width: 200,
+      height: 200,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+
+    made = true;
+  }
+
+  toggle.addEventListener("click", () => {
+    const open = panel.style.display === "block";
+    panel.style.display = open ? "none" : "block";
+    if(!open && !made) make();
+  });
+
+  document.addEventListener("click", (e) => {
+    if(panel.style.display !== "block") return;
+    const inside = panel.contains(e.target) || toggle.contains(e.target);
+    if(!inside) panel.style.display = "none";
+  });
+})();
+</script>
+
+<script>
+/* ============================================================
+   VIDEO DEBUG (helps you instantly see why it fails)
+   ============================================================ */
+(function(){
+  const v = document.getElementById("bgVideo");
+  const dbg = document.getElementById("videoDebug");
+  if(!v || !dbg) return;
+
+  function show(msg){
+    dbg.textContent = "Video issue: " + msg;
+    dbg.style.display = "block";
+  }
+
+  v.addEventListener("error", () => {
+    const err = v.error;
+    show(err ? ("code " + err.code + " (file/codec issue)") : "unknown error");
+  });
+
+  // If it still doesn't play (autoplay policies/codec), this will catch it.
+  setTimeout(() => {
+    const canPlay = v.readyState >= 2;   // HAVE_CURRENT_DATA
+    const isPlaying = !v.paused && !v.ended && v.currentTime > 0;
+
+    if(!canPlay){
+      show("not loading. Check filename/path + GitHub case-sensitivity.");
+      return;
+    }
+
+    if(!isPlaying){
+      v.play().catch(() => show("autoplay blocked or codec unsupported. Convert to MP4 (H.264)."));
+    }
+  }, 900);
+})();
+</script>
+
+<script>
+/* ===== WEATHER IDIOMS BANK (25) ===== */
+const WEATHER_IDIOMS = [
+  ["Under the weather","Feeling sick or unwell"],
+  ["A storm in a teacup","A big reaction to something small"],
+  ["Take a rain check","Postpone something"],
+  ["On cloud nine","Extremely happy"],
+  ["Every cloud has a silver lining","There is something good in every bad situation"],
+  ["Steal someone’s thunder","Take attention away from someone"],
+  ["Calm before the storm","A quiet period before trouble starts"],
+  ["Chase rainbows","Pursue unrealistic goals"],
+  ["Come rain or shine","No matter what happens"],
+  ["Break the ice","Make people feel more comfortable"],
+  ["Throw caution to the wind","Take a risk"],
+  ["Head in the clouds","Not paying attention"],
+  ["Snowed under","Extremely busy"],
+  ["A fair-weather friend","A friend who is only around in good times"],
+  ["Weather the storm","Survive a difficult situation"],
+  ["Lightning fast","Very fast"],
+  ["A bolt from the blue","A complete surprise"],
+  ["Make hay while the sun shines","Take advantage of a good opportunity"],
+  ["In the eye of the storm","In the centre of a difficult situation"],
+  ["It’s raining cats and dogs","Raining very heavily"],
+  ["Break like a thunderstorm","Emotions suddenly explode"],
+  ["Cloud over","Become sad or upset"],
+  ["A ray of sunshine","Someone who brings happiness"],
+  ["Skate on thin ice","Take a dangerous risk"],
+  ["As right as rain","Completely fine or healthy again"]
+];
+
+const PAIRS_PER_ROUND = 20;
+
+/* Pastel starting colours */
+const pastelColors = [
+  "#f8cdda","#fce1e4","#e0f2fe","#e8f5e9","#fff3cd",
+  "#ede7f6","#e1f5fe","#f3e5f5","#f1f8e9","#fffde7"
+];
+
+/* Strong match colours */
+const matchColors = [
+  "#27ae60","#2980b9","#8e44ad","#f39c12","#e67e22",
+  "#16a085","#c0392b","#1abc9c","#d35400","#9b59b6"
+];
+
+const game = document.getElementById("game");
+const statusEl = document.getElementById("status");
+const newRoundBtn = document.getElementById("newRoundBtn");
+
+let first=null, second=null, lock=false, matched=0, colorMap={};
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function buildRound(){
+  game.innerHTML="";
+  statusEl.textContent="";
+  first=second=null;lock=false;matched=0;colorMap={};
+
+  const roundPairs = shuffle(WEATHER_IDIOMS).slice(0,PAIRS_PER_ROUND);
+  const cards = shuffle(roundPairs.flatMap(([i,m])=>[
+    {text:i,pair:i},{text:m,pair:i}
+  ]));
+
+  cards.forEach((data,idx)=>{
+    const div=document.createElement("div");
+    div.className="card";
+    div.textContent="";
+    div.dataset.text=data.text;
+    div.dataset.pair=data.pair;
+    div.style.background = pastelColors[idx % pastelColors.length];
+    game.appendChild(div);
+
+    div.addEventListener("click",()=>{
+      if(lock||div.classList.contains("flipped")||div.classList.contains("matched")) return;
+
+      div.classList.add("flipped");
+      div.textContent=data.text;
+
+      if(!first){ first=div; return; }
+
+      second=div;
+      lock=true;
+
+      setTimeout(()=>{
+        if(first.dataset.pair===second.dataset.pair){
+          if(!colorMap[first.dataset.pair]){
+            const idx=Object.keys(colorMap).length;
+            colorMap[first.dataset.pair]=matchColors[idx%matchColors.length];
+          }
+          const c=colorMap[first.dataset.pair];
+          [first,second].forEach(card=>{
+            card.classList.remove("flipped");
+            card.classList.add("matched");
+            card.style.background=c;
+          });
+          matched++;
+          if(matched===roundPairs.length){
+            statusEl.textContent="Excellent work — all idioms matched.";
+          }
+        }else{
+          [first,second].forEach(card=>{
+            card.classList.remove("flipped");
+            card.textContent="";
+          });
+        }
+        first=second=null;
+        lock=false;
+      },700);
+    });
+  });
+}
+
+newRoundBtn.addEventListener("click",buildRound);
+buildRound();
+</script>
+
+</body>
+</html>
