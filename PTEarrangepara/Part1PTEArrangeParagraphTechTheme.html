@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>PTE – Re-order Paragraph (Part 1) | Modern English Australia</title>
+
+<style>
+:root{
+  /* Page */
+  --bg:#eef2f6;                 /* very light blue-grey */
+  --card:#ffffff;               /* clean white cards */
+  --ink:#1e2933;                /* dark blue-grey text */
+  --muted:#6b7280;              /* neutral grey */
+
+  /* Accent (PTE-like blue) */
+  --accent:#4f5052;             /* Pearson-style blue */
+  --accent-soft:#b2cdf5;        /* soft highlight */
+
+  /* Lines & feedback */
+  --line:#d9e0ea;
+  --ok:#1db954;
+  --err:#e74c3c;
+
+  --radius:14px;
+  --shadow:0 8px 24px rgba(30,41,59,.08);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+  line-height:1.6;
+}
+
+/* ===== Header ===== */
+/* ===== Header ===== */
+header{
+  background:#0f2a44;              /* dark PTE-style blue */
+  color:#ffffff;
+  text-align:center;
+  padding:1.4rem;
+  position:relative;
+  border-bottom:none;
+}
+
+header h1{
+  margin:0;
+  font-size:1.4rem;
+  font-weight:700;
+}
+
+/* Remove pill look entirely */
+header span{
+  background:none;
+  color:#ffffff;
+  padding:0;
+  border-radius:0;
+  margin-right:6px;
+  font-weight:800;
+}
+
+/* Timer stays visible */
+#timer{
+  position:absolute;
+  right:1rem;
+  top:1.1rem;
+  background:#d64c1e;             /* lighter blue accent */
+  color:#ffffff;
+  padding:.4rem .8rem;
+  border-radius:8px;
+  font-weight:800;
+}
+
+
+/* ===== Main ===== */
+main{
+  max-width:900px;
+  margin:2rem auto;
+  padding:0 1rem;
+}
+.instructions{
+  text-align:center;
+  color:var(--muted);
+  margin-bottom:1.2rem;
+  background:var(--accent-soft);
+  padding:.75rem 1rem;
+  border-radius:10px;
+}
+
+/* ===== Controls row ===== */
+.controls{
+  display:flex;
+  gap:.75rem;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin:0 0 1.2rem;
+}
+.btn{
+  padding:.85rem 1.35rem;
+  border-radius:12px;
+  border:1px solid transparent;
+  font-weight:800;
+  cursor:pointer;
+  background:var(--accent);
+  color:#ffffff;
+}
+.btn.secondary{
+  background:#ffffff;
+  color:var(--accent);
+  border-color:var(--accent);
+}
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+/* ===== Cards ===== */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:1.2rem;
+  border:1px solid var(--line);
+  margin-bottom:1.2rem;
+}
+.card h2{
+  margin-top:0;
+  text-align:center;
+  color:var(--accent);
+}
+
+/* ===== Paragraph build ===== */
+.built{
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+}
+.sentence{
+  background:#f8fafc;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:.9rem 1rem;
+  color:var(--ink);
+}
+
+/* ===== Options ===== */
+.options{
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+}
+.option{
+  background:#f4f7fb;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:.9rem 1rem;
+  cursor:pointer;
+  color:var(--ink);
+  transition:transform .12s ease, background .2s ease;
+}
+.option:hover{
+  background:var(--accent-soft);
+  transform:scale(1.01);
+}
+
+/* ===== Feedback ===== */
+.feedback{
+  text-align:center;
+  font-weight:800;
+  margin-top:.9rem;
+}
+.correct{color:var(--ok);}
+.incorrect{color:var(--err);}
+
+/* ===== Bottom Navigation ===== */
+.nav-links{
+  display:flex;
+  justify-content:center;
+  gap:.75rem;
+  flex-wrap:wrap;
+  margin:2rem 0 1rem;
+}
+.nav-links a{
+  text-decoration:none;
+  font-weight:800;
+  padding:.75rem 1.4rem;
+  border-radius:10px;
+  background:#ffffff;
+  color:var(--accent);
+  border:1px solid var(--line);
+  transition:all .2s ease;
+}
+.nav-links a:hover{
+  background:var(--accent);
+  color:#ffffff;
+}
+
+/* ===== Footer ===== */
+footer{
+  background:#f4f7fb;
+  color:var(--muted);
+  text-align:center;
+  padding:1rem;
+  margin-top:2rem;
+  border-top:1px solid var(--line);
+}
+footer span{color:var(--accent);font-weight:800;}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1><span>Modern English AU</span> PTE – Re-order Paragraph</h1>
+  <div id="timer">05:00</div>
+</header>
+
+<main>
+  <p class="instructions">
+    Select the sentence that logically comes <strong>next</strong>. Use <strong>Undo</strong> if you change your mind.
+  </p>
+
+  <div class="controls">
+    <button class="btn secondary" id="undoBtn" type="button" disabled>Undo</button>
+    <button class="btn secondary" id="resetBtn" type="button">Start again</button>
+    <button class="btn" id="checkBtn" type="button" disabled>Check Answers</button>
+  </div>
+
+  <div class="card">
+    <h2>Your Paragraph</h2>
+    <div id="built" class="built"></div>
+  </div>
+
+  <div class="card">
+    <h2>Choose the Next Sentence</h2>
+    <div id="options" class="options"></div>
+  </div>
+
+  <div id="feedback" class="feedback"></div>
+
+  <div class="nav-links">
+    <a href="ArrangeParagraphTechTheme.html">Home</a>
+    <a href="Part2ArrangeParagraphTechTheme.html">Part 2</a>
+    <a href="Part3ArrangeParagraphTechTheme.html">Part 3</a>
+  </div>
+</main>
+
+<footer>
+  © <span>Koala Spies Sydney</span> · Modern English Australia · All Rights Reserved
+</footer>
+
+<script>
+// ===== SENTENCES (correct order) =====
+const sentences = [
+  "Artificial intelligence presents both transformative opportunities and significant risks across societal domains.",
+  "On one hand, AI enhances efficiency, accuracy, and scalability in fields such as healthcare, education, and logistics, enabling predictive diagnostics and personalized learning.",
+  "Conversely, its deployment raises ethical concerns, including algorithmic bias, surveillance, and labor displacement.",
+  "The opacity of decision-making in complex models challenges accountability, while unchecked automation may exacerbate inequality.",
+  "Responsible governance, transparency, and interdisciplinary oversight are essential to ensure that AI development aligns with human values and public interest."
+];
+
+// ===== STATE =====
+let built = [];
+let remaining = [];
+let history = []; // stack of chosen sentences (for undo)
+
+// ===== DOM =====
+const builtEl = document.getElementById("built");
+const optionsEl = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const checkBtn = document.getElementById("checkBtn");
+const undoBtn = document.getElementById("undoBtn");
+const resetBtn = document.getElementById("resetBtn");
+
+// ===== INIT =====
+startAgain();
+
+function startAgain(){
+  built = [sentences[0]];
+  remaining = sentences.slice(1);
+  history = [];
+  feedback.innerHTML = "";
+  checkBtn.disabled = true;
+  undoBtn.disabled = true;
+  renderBuilt();
+  renderOptions();
+}
+
+// ===== RENDER =====
+function renderBuilt(){
+  builtEl.innerHTML = "";
+  built.forEach((s, idx) => {
+    const div = document.createElement("div");
+    div.className = "sentence";
+    div.textContent = s;
+
+    // visual hint for fixed first sentence
+    if(idx === 0){
+      div.style.borderColor = "rgba(30,107,214,.45)"; // blue tint
+    }
+    builtEl.appendChild(div);
+  });
+}
+
+function renderOptions(){
+  optionsEl.innerHTML = "";
+
+  if(remaining.length === 0){
+    optionsEl.innerHTML = "<p style='text-align:center;color:var(--muted)'>All sentences placed.</p>";
+    checkBtn.disabled = false;
+    return;
+  }
+
+  shuffle([...remaining]).forEach(text => {
+    const div = document.createElement("div");
+    div.className = "option";
+    div.textContent = text;
+    div.addEventListener("click", () => choose(text));
+    optionsEl.appendChild(div);
+  });
+
+  checkBtn.disabled = true;
+}
+
+// ===== ACTIONS =====
+function choose(text){
+  built.push(text);
+  remaining = remaining.filter(s => s !== text);
+  history.push(text);
+
+  feedback.innerHTML = "";
+  renderBuilt();
+  renderOptions();
+
+  undoBtn.disabled = history.length === 0;
+}
+
+function undo(){
+  if(history.length === 0) return;
+
+  const last = history.pop();
+
+  if(built.length > 1){
+    built.pop();
+  }
+
+  remaining.push(last);
+
+  feedback.innerHTML = "";
+  checkBtn.disabled = true;
+  undoBtn.disabled = history.length === 0;
+
+  renderBuilt();
+  renderOptions();
+}
+
+// ===== HELPERS =====
+function shuffle(arr){
+  return arr.sort(() => Math.random() - 0.5);
+}
+
+// ===== SCORING (Adjacent links) =====
+function checkAnswers(){
+  let score = 0;
+  for(let i=0;i<sentences.length-1;i++){
+    if(built[i] === sentences[i] && built[i+1] === sentences[i+1]){
+      score++;
+    }
+  }
+
+  feedback.innerHTML = score === 4
+    ? `<span class="correct">Perfect! You scored ${score}/4 adjacent links.</span>`
+    : `<span class="incorrect">You scored ${score}/4 adjacent links.</span>`;
+
+  localStorage.setItem("PTE_Part1_Score", score);
+}
+
+// ===== EVENTS =====
+undoBtn.addEventListener("click", undo);
+resetBtn.addEventListener("click", startAgain);
+checkBtn.addEventListener("click", checkAnswers);
+
+// ===== TIMER =====
+let timeLeft = 5*60;
+const timerDisplay = document.getElementById("timer");
+const countdown = setInterval(() => {
+  const m = Math.floor(timeLeft / 60);
+  const s = timeLeft % 60;
+  timerDisplay.textContent = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+  if(timeLeft <= 0){
+    clearInterval(countdown);
+    checkBtn.disabled = true;
+    undoBtn.disabled = true;
+    resetBtn.disabled = true;
+    feedback.innerHTML = `<span class="incorrect">Time’s up.</span>`;
+  }
+  timeLeft--;
+}, 1000);
+</script>
+
+</body>
+</html>
