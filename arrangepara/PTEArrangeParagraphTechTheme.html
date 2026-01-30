@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
+<title>Arranging Paragraphs – Reading Test | Modern English Australia</title>
+
+<style>
+:root{
+  /* PTE-style palette */
+  --bg:#eef2f6;
+  --card:#ffffff;
+  --ink:#1e2933;
+  --muted:#6b7280;
+
+  --accent:#1e6bd6;       /* Pearson-style blue */
+  --accent-soft:#e7f0ff;
+
+  --line:#d9e0ea;
+  --radius:14px;
+  --shadow:0 10px 28px rgba(30,41,59,.12);
+
+  --header:#0f2f5f;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  text-align:center;
+  line-height:1.7;
+}
+
+/* ===== Header ===== */
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:var(--header);
+  color:#ffffff;
+  padding:1.2rem 1rem;
+}
+
+header h1{
+  margin:0;
+  font-size:1.35rem;
+  font-weight:800;
+}
+header .sub{
+  display:block;
+  margin-top:.35rem;
+  font-size:.95rem;
+  font-weight:500;
+  opacity:.92;
+}
+
+/* ===== Header buttons ===== */
+.home-btn{
+  position:absolute;
+  right:12px;
+  top:12px;
+  padding:.45rem .8rem;
+  border-radius:10px;
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  text-decoration:none;
+  font-weight:900;
+  border:1px solid rgba(255,255,255,.22);
+  line-height:1;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+@media (hover:hover){
+  .home-btn:hover{ background:rgba(255,255,255,.18); }
+}
+
+/* ===== QR (Top Left) ===== */
+.qr-wrap{
+  position:absolute;
+  left:12px;
+  top:12px;
+  z-index:60;
+}
+.qr-toggle{
+  padding:.45rem .7rem;
+  border-radius:10px;
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.22);
+  font-weight:900;
+  cursor:pointer;
+  line-height:1;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+@media (hover:hover){
+  .qr-toggle:hover{ background:rgba(255,255,255,.18); }
+}
+.qr-panel{
+  margin-top:.5rem;
+  width:220px;
+  background:#ffffff;
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  padding:.75rem;
+  display:none;
+  text-align:left;
+}
+.qr-panel .label{
+  font-size:.85rem;
+  color:var(--muted);
+  margin:0 0 .5rem;
+}
+#qrCode{
+  width:180px;
+  height:180px;
+  margin:.25rem auto .5rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.qr-url{
+  font-size:.78rem;
+  color:var(--muted);
+  word-break:break-all;
+  margin:0;
+}
+
+/* ===== Main wrapper with video background ===== */
+main{
+  position:relative;
+  flex:1;
+  width:min(820px,100%);
+  margin:1.6rem auto 2rem;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  border:1px solid var(--line);
+}
+
+/* Background video layer */
+.bg-layer{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  background:#dfe7f2; /* fallback if video fails */
+}
+.bg-layer video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* Readability overlay */
+.bg-layer::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.88);
+}
+
+/* Foreground content */
+.content{
+  position:relative;
+  z-index:1;
+  padding:2rem 1.5rem;
+}
+
+/* Intro text */
+.content p{
+  max-width:640px;
+  margin:0 auto 1.5rem;
+  color:var(--muted);
+  background:var(--accent-soft);
+  border:1px solid rgba(30,107,214,.18);
+  padding:.9rem 1rem;
+  border-radius:12px;
+}
+
+/* Part buttons */
+a.part{
+  display:block;
+  width:70%;
+  max-width:420px;
+  margin:1rem auto;
+  padding:1rem 0;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:900;
+  font-size:1.05rem;
+  background:var(--accent);
+  color:#ffffff;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  box-shadow:0 6px 18px rgba(30,41,59,.25);
+}
+@media (hover:hover){
+  a.part:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(30,41,59,.35);
+  }
+}
+
+/* Score box */
+.scorebox{
+  margin:2rem auto 0;
+  max-width:520px;
+  background:var(--card);
+  border-radius:12px;
+  padding:1.25rem;
+  box-shadow:var(--shadow);
+  font-weight:800;
+  border:1px solid var(--line);
+}
+.scorebox p{
+  margin:.45rem 0;
+  color:var(--ink);
+}
+.scorebox span{
+  color:var(--muted);
+  font-weight:800;
+}
+.total{
+  margin-top:1rem;
+  font-size:1.25rem;
+  color:var(--accent);
+  font-weight:900;
+}
+
+/* External link */
+.return-link{
+  display:inline-block;
+  margin-top:2rem;
+  padding:1rem 2.5rem;
+  border-radius:12px;
+  background:var(--accent);
+  color:#ffffff;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 6px 18px rgba(30,41,59,.25);
+  border:1px solid rgba(255,255,255,.12);
+}
+@media (hover:hover){
+  .return-link:hover{ transform:translateY(-1px); }
+}
+
+/* Footer */
+footer{
+  background:#f4f7fb;
+  color:var(--muted);
+  padding:1rem;
+  font-size:.95rem;
+  border-top:1px solid var(--line);
+}
+footer span{
+  color:var(--accent);
+  font-weight:900;
+}
+
+/* Mobile tweaks */
+@media(max-width:600px){
+  main{ margin:1.2rem 1rem 1.8rem; }
+  a.part{ width:92%; }
+  header h1{ font-size:1.18rem; }
+  .qr-panel{ width:200px; }
+  #qrCode{ width:160px; height:160px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="qr-wrap">
+    <button class="qr-toggle" id="qrToggle" type="button">QR</button>
+    <div class="qr-panel" id="qrPanel" aria-label="QR code panel">
+      <p class="label">Scan to open this page</p>
+      <div id="qrCode" aria-label="QR code"></div>
+      <p class="qr-url" id="qrUrl"></p>
+    </div>
+  </div>
+
+  <a href="index.html" class="home-btn">Home</a>
+
+  <h1>Modern English Australia</h1>
+  <span class="sub">Arranging Paragraphs – Reading Test</span>
+</header>
+
+<main>
+  <div class="bg-layer" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="tech.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="content">
+    <p>
+      Complete the three arranging paragraph tasks below. Each task must be done within the time limit.
+      When finished, return here to view your <strong>total score (out of 10)</strong>.
+    </p>
+
+    <a href="Part1ArrangeParagraphTechTheme.html" class="part">Part 1 – Technology & Society (4 marks)</a>
+    <a href="Part2ArrangeParagraphTechTheme.html" class="part">Part 2 – Technology & Work (4 marks)</a>
+    <a href="Part3ArrangeParagraphTechTheme.html" class="part">Part 3 – Social Media & Children (2 marks)</a>
+
+    <div class="scorebox">
+      <p>Part 1 Score: <span id="p1">Not completed</span></p>
+      <p>Part 2 Score: <span id="p2">Not completed</span></p>
+      <p>Part 3 Score: <span id="p3">Not completed</span></p>
+      <div class="total">Total Score: <span id="total">0 / 10</span></div>
+    </div>
+r
+    </a>
+  </div>
+</main>
+
+<footer>
+  © <span>Koala Spies Sydney</span> · Modern English Australia · All Rights Reserved
+</footer>
+
+<!-- QR library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+/* ============================================================
+   SCORES
+   ============================================================ */
+function getScore(key){
+  const val = localStorage.getItem(key);
+  return val ? parseInt(val, 10) : null;
+}
+
+const p1 = getScore("PTE_Part1_Score");
+const p2 = getScore("PTE_Part2_Score");
+const p3 = getScore("PTE_Part3_Score");
+
+document.getElementById("p1").textContent = p1 !== null ? `${p1} / 4` : "Not completed";
+document.getElementById("p2").textContent = p2 !== null ? `${p2} / 4` : "Not completed";
+document.getElementById("p3").textContent = p3 !== null ? `${p3} / 2` : "Not completed";
+
+const total = (p1 || 0) + (p2 || 0) + (p3 || 0);
+document.getElementById("total").textContent = `${total} / 10`;
+
+/* ============================================================
+   QR GENERATOR (Top Left)
+   ============================================================ */
+(function(){
+  const toggle = document.getElementById("qrToggle");
+  const panel = document.getElementById("qrPanel");
+  const box = document.getElementById("qrCode");
+  const urlLabel = document.getElementById("qrUrl");
+
+  if(!toggle || !panel || !box || !urlLabel) return;
+
+  let made = false;
+
+  function make(){
+    const url = window.location.href;
+    urlLabel.textContent = url;
+
+    box.innerHTML = "";
+    if(typeof QRCode === "undefined"){
+      box.textContent = "QR library not loaded.";
+      return;
+    }
+
+    new QRCode(box, {
+      text: url,
+      width: 180,
+      height: 180,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+
+    made = true;
+  }
+
+  toggle.addEventListener("click", () => {
+    const open = panel.style.display === "block";
+    panel.style.display = open ? "none" : "block";
+    if(!open && !made) make();
+  });
+
+  // close when tapping outside
+  document.addEventListener("click", (e) => {
+    if(!panel || panel.style.display !== "block") return;
+    if(panel.contains(e.target) || toggle.contains(e.target)) return;
+    panel.style.display = "none";
+  }, { passive:true });
+})();
+</script>
+
+</body>
+</html>
