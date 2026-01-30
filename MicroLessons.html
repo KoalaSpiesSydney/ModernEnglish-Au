@@ -49,12 +49,11 @@
       overflow-x:hidden;
       -webkit-text-size-adjust:100%;
       background:
-        radial-gradient(1200px 680px at 20% 20%, rgba(164, 219, 217, 0.18), transparent 80%),
-        radial-gradient(900px 520px at 92% 18%, rgba(223, 191, 168, 0.14), transparent 75%),
-        radial-gradient(1000px 650px at 55% 105%, rgba(78, 80, 83, 0.1), transparent 80%),
+        radial-gradient(1200px 680px at 20% 20%, rgba(221, 228, 228, 0.18), transparent 80%),
+        radial-gradient(900px 520px at 92% 18%, rgba(218, 213, 209, 0.14), transparent 75%),
+        radial-gradient(1000px 650px at 55% 105%, rgba(217, 221, 224, 0.1), transparent 80%),
         rgb(234, 238, 240);
     }
-    
 
     img{ max-width:100%; height:auto; display:block; }
     a{ color:inherit; text-decoration:none; }
@@ -115,38 +114,34 @@
       100%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
     }
 
-nav{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-  font-family:var(--sans);
-}
+    nav{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      font-family:var(--sans);
+    }
 
-/* If you want invisible text-links (no button look), keep this. */
-nav a{
-  color:var(--header-ink);
-  font-weight:700;
-  letter-spacing:.3px;
-  opacity:.92;
-  padding:0;
-  border:0;
-  border-radius:0;
-  background:transparent;
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-  transition:opacity .12s ease, transform .12s ease;
-  white-space:nowrap;
-  
-}
+    nav a{
+      color:var(--header-ink);
+      font-weight:700;
+      letter-spacing:.3px;
+      opacity:.92;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+      transition:opacity .12s ease, transform .12s ease;
+      white-space:nowrap;
+    }
 
-nav a:hover{
-  opacity:1;
-  transform:translateY(-1px);
-
-}
-  
+    nav a:hover{
+      opacity:1;
+      transform:translateY(-1px);
+    }
 
     /* Sections */
     main{ display:block; }
@@ -192,28 +187,26 @@ nav a:hover{
       margin:0 0 10px;
     }
 
-    /* === CHANGE 1: remove the glass block behind the animated phrase === */
     .top-strip{
       margin-top:14px;
-      padding:0;              /* no padding */
-      border:0;               /* no border */
-      background:transparent; /* no background */
-      box-shadow:none;        /* no shadow */
+      padding:0;
+      border:0;
+      background:transparent;
+      box-shadow:none;
       backdrop-filter:none;
       -webkit-backdrop-filter:none;
     }
 
-    /* === CHANGE 2: animated phrase font back to Newsreader (serif) === */
+    /* Animated phrase */
     .animated-phrase{
       display:inline-block;
       position:relative;
-      color:#0a6848;
+      color:var(--accent);
       font-weight:900;
       white-space:nowrap;
       animation:slide-across 4.5s ease-in-out infinite;
-      font-family:var(--serif); /* Newsreader */
+      font-family:var(--serif);
       letter-spacing:-.01em;
-      opacity: 50%;
     }
 
     @keyframes slide-across{
@@ -223,28 +216,27 @@ nav a:hover{
       100% { transform: translateX(30%); opacity: 0; }
     }
 
-.animated-phrase::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-4px;
-  width:100%;
-  height:3px;
+    .animated-phrase::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-4px;
+      width:100%;
+      height:3px;
 
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(5, 146, 111, 0.25) 18%,
-    rgba(10, 82, 23, 0.95) 50%,
-    rgba(109, 242, 79, 0.25) 82%,
-    transparent 100%
-  );
+      /* MATCHES YOUR ACCENT (no pale green clash) */
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(10,104,72,.20) 18%,
+        rgba(10,104,72,.95) 50%,
+        rgba(10,104,72,.20) 82%,
+        transparent 100%
+      );
 
-  animation:underline-slide 4.5s ease-in-out infinite;
-  filter: drop-shadow(0 0 6px rgba(146,5,83,.35));
-}
-
-
+      animation:underline-slide 4.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(10,104,72,.28));
+    }
 
     @keyframes underline-slide{
       0%   { transform:translateX(-120%); opacity:0; }
@@ -423,6 +415,7 @@ nav a:hover{
       font-weight:800;
       font-family:var(--sans);
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      text-decoration:none;
     }
 
     .btn:hover{
@@ -470,6 +463,7 @@ nav a:hover{
       -webkit-backdrop-filter: blur(var(--glass-blur));
       color:var(--header-ink);
       transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      text-decoration:none;
     }
 
     .footer-links a:hover{
@@ -479,7 +473,6 @@ nav a:hover{
       text-decoration:none;
     }
 
-    /* Responsive */
     @media (max-width:900px){
       .bento{ grid-template-columns: 1fr; }
     }
@@ -523,85 +516,71 @@ nav a:hover{
       }
     }
 
-    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
       .animated-phrase{ animation:none; }
       .animated-phrase::after{ animation:none; }
       nav a, .btn, .footer-links a, .link-pill{ transition:none; }
     }
 
-    /* =========================
-   SPONSORED PILL STYLING
-========================= */
-.sponsored summary{
-  gap:12px;
-}
+    /* Sponsored pill styling */
+    .sponsored summary{ gap:12px; }
 
-.sponsor-tag{
-  font-family:var(--sans);
-  font-size:.7rem;
-  font-weight:800;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-  padding:4px 8px;
-  border-radius:999px;
-  background:rgba(100,8,58,.18);
-  color:red;
-}
+    .sponsor-tag{
+      font-family:var(--sans);
+      font-size:.7rem;
+      font-weight:800;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      padding:4px 8px;
+      border-radius:999px;
+      background:rgba(100,8,58,.18);
+      color:red;
+    }
 
-.sponsor-panel{
-  border-color:rgba(180,120,150,.34);
-}
+    .sponsor-panel{ border-color:rgba(180,120,150,.34); }
 
-.sponsor-headline{
-  font-family:var(--serif);
-  font-size:1.25rem;
-  line-height:1.3;
-  margin:0 0 8px;
-  color:var(--ink);
-}
+    .sponsor-headline{
+      font-family:var(--serif);
+      font-size:1.25rem;
+      line-height:1.3;
+      margin:0 0 8px;
+      color:var(--ink);
+    }
 
-.sponsor-copy{
-  font-family:var(--sans);
-  color:var(--muted);
-  margin-bottom:12px;
-}
+    .sponsor-copy{
+      font-family:var(--sans);
+      color:var(--muted);
+      margin-bottom:12px;
+    }
 
-.sponsor-list{
-  margin:0 0 12px;
-  padding-left:18px;
-  font-family:var(--sans);
-}
+    .sponsor-list{
+      margin:0 0 12px;
+      padding-left:18px;
+      font-family:var(--sans);
+    }
 
-.sponsor-list li{
-  margin:6px 0;
-}
+    .sponsor-list li{ margin:6px 0; }
 
-.sponsor-offer{
-  font-family:var(--sans);
-  font-weight:600;
-  color:var(--accent);
-  margin:0 0 14px;
-}
+    .sponsor-offer{
+      font-family:var(--sans);
+      font-weight:600;
+      color:var(--accent);
+      margin:0 0 14px;
+    }
 
-.sponsor-actions{
-  gap:10px;
-}
+    .sponsor-actions{ gap:10px; }
 
-.sponsor-btn{
-  color: orange;
-}
+    .sponsor-btn{ color: orange; }
 
-.sponsor-btn.ghost{
-  background:transparent;
-  border:1px dashed rgba(100,8,58,.35);
-}
+    .sponsor-btn.ghost{
+      background:transparent;
+      border:1px dashed rgba(100,8,58,.35);
+    }
 
-.sponsor-disclaimer{
-  margin-top:10px;
-  color:rgba(0,0,0,.45);
-}
-
+    .sponsor-disclaimer{
+      margin-top:10px;
+      color:rgba(0,0,0,.45);
+    }
   </style>
 </head>
 
@@ -624,9 +603,7 @@ nav a:hover{
 
 <div class="wrap">
   <div class="top-strip">
-
-    <h2 span class="animated-phrase" style="color:#07b7ae;">meaningful English language learning</span></h2>
-
+    <h2><span class="animated-phrase">meaningful English language learning</span></h2>
   </div>
 </div>
 
@@ -717,45 +694,45 @@ nav a:hover{
         </div>
       </div>
 
-     <details class="pill-dd sponsored">
-  <summary>
-    <span class="sponsor-tag">Sponsored</span>
-    Red Dust Language School · Broken Hill
-  </summary>
+      <details class="pill-dd sponsored">
+        <summary>
+          <span class="sponsor-tag">Sponsored</span>
+          Red Dust Language School · Broken Hill
+        </summary>
 
-  <div class="pill-panel sponsor-panel">
-    <h3 class="sponsor-headline">
-      Learn English in the heart of the Australian outback
-    </h3>
+        <div class="pill-panel sponsor-panel">
+          <h3 class="sponsor-headline">
+            Learn English in the heart of the Australian outback
+          </h3>
 
-    <p class="sponsor-copy">
-      Red Dust Language School offers small-group English classes in Broken Hill,
-      where real conversation, culture, and confidence come first.
-      Our students learn English through community, creativity, and connection —
-      not worksheets.
-    </p>
+          <p class="sponsor-copy">
+            Red Dust Language School offers small-group English classes in Broken Hill,
+            where real conversation, culture, and confidence come first.
+            Our students learn English through community, creativity, and connection —
+            not worksheets.
+          </p>
 
-    <ul class="sponsor-list">
-      <li><strong>Outback Conversation Clubs</strong> — relaxed speaking in real settings</li>
-      <li><strong>Exam Preparation</strong> — IELTS, PTE & Cambridge with clear feedback</li>
-      <li><strong>Workplace English</strong> — hospitality, retail & regional employment</li>
-      <li><strong>Flexible study</strong> — evenings, weekends & short intensives</li>
-    </ul>
+          <ul class="sponsor-list">
+            <li><strong>Outback Conversation Clubs</strong> — relaxed speaking in real settings</li>
+            <li><strong>Exam Preparation</strong> — IELTS, PTE & Cambridge with clear feedback</li>
+            <li><strong>Workplace English</strong> — hospitality, retail & regional employment</li>
+            <li><strong>Flexible study</strong> — evenings, weekends & short intensives</li>
+          </ul>
 
-    <p class="sponsor-offer">
-      Complimentary level check for MEA visitors — mention <strong>MEA-MICRO</strong>
-    </p>
+          <p class="sponsor-offer">
+            Complimentary level check for MEA visitors — mention <strong>MEA-MICRO</strong>
+          </p>
 
-    <div class="actions sponsor-actions">
-      <a class="btn sponsor-btn" href="contact.html">Enquire</a>
-      <a class="btn sponsor-btn ghost" href="#top">View timetable</a>
-    </div>
+          <div class="actions sponsor-actions">
+            <a class="btn sponsor-btn" href="contact.html">Enquire</a>
+            <a class="btn sponsor-btn ghost" href="#top">View timetable</a>
+          </div>
 
-    <p class="small sponsor-disclaimer">
-      Sponsored placement · fictional school for demonstration purposes
-    </p>
-  </div>
-</details>
+          <p class="small sponsor-disclaimer">
+            Sponsored placement · fictional school for demonstration purposes
+          </p>
+        </div>
+      </details>
 
     </div>
   </section>
@@ -791,6 +768,8 @@ nav a:hover{
 
 </body>
 </html>
+
+
 
 
 
