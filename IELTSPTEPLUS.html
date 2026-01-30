@@ -5,814 +5,865 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Modern English Australia · Koala Spies Sydney</title>
 
-  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
-  :root{
-    --bg: rgb(234, 238, 240);
-    --ink:#111111;
-    --charcoal:#1e1e1e;
-    --muted:#5f6a66;
-    --accent:#0f6f6a;
-    --line:rgba(0,0,0,.12);
-    --header: var(--charcoal);
-    --header-ink:#f5f5f5;
-    --max:860px;
+    :root{
+      --bg: rgb(234, 238, 240);
+      --ink:#111111;
+      --charcoal:#1e1e1e;
+      --muted:#5f6a66;
+      --accent:#0f6f6a;
+      --line:rgba(0,0,0,.10);
 
-    /* iPhone safe-area */
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-bottom: env(safe-area-inset-bottom, 0px);
-  }
+      --header: var(--charcoal);
+      --header-ink:#f5f5f5;
 
-  /* Base */
-  *{ box-sizing:border-box; }
-  html,body{ height:100%; }
-  body{
-    margin:0;
-    font-family:"Newsreader", Georgia, serif;
-    background:rgb(234, 238, 240);
-    color:var(--ink);
-    line-height:1.9;
-    -webkit-text-size-adjust:100%;
-    overflow-x:hidden;
-  }
+      --max: 980px;
+      --radius: 16px;
 
-  img{ max-width:100%; height:auto; display:block; }
-  a{ color:inherit; text-decoration:none; -webkit-tap-highlight-color: transparent; }
-  a:hover{ text-decoration:underline; }
+      /* Fonts */
+      --serif: "Newsreader", Georgia, serif;
+      --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
-  .wrap{
-    max-width:var(--max);
-    margin:0 auto;
-    padding-inline: clamp(12px, 3vw, 20px);
-    min-width:0;
-  }
+      /* GLASS */
+      --glass-blur: 14px;
+      --glass-bg: rgba(255,255,255,.18);
+      --glass-bg-strong: rgba(255,255,255,.22);
+      --glass-border: rgba(255,255,255,.34);
+      --glass-border-soft: rgba(255,255,255,.22);
+      --glass-shadow: 0 18px 55px rgba(0,0,0,.14);
+      --glass-shadow-soft: 0 10px 30px rgba(0,0,0,.10);
 
-  .muted{ color:var(--muted); }
+      /* iPhone safe-area */
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
 
-  /* Header */
-  header{
-    background:var(--header);
-    color:#ff7a1a;
-    border-bottom:1px solid rgba(255,255,255,.10);
-    padding-top: var(--safe-top);
-  }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
 
-  .header-inner{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    padding:12px 0;
-    min-width:0;
-  }
+    body{
+      margin:0;
+      font-family:var(--serif);
+      color:var(--ink);
+      line-height:1.9;
+      overflow-x:hidden;
+      -webkit-text-size-adjust:100%;
+      background:
+        radial-gradient(1200px 680px at 20% 20%, rgba(164, 219, 217, 0.18), transparent 80%),
+        radial-gradient(900px 520px at 92% 18%, rgba(223, 191, 168, 0.14), transparent 75%),
+        radial-gradient(1000px 650px at 55% 105%, rgba(78, 80, 83, 0.1), transparent 80%),
+        rgb(234, 238, 240);
+    }
 
-  .brand{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-    min-width:0;
-    text-decoration:none;
-  }
+    img{ max-width:100%; height:auto; display:block; }
+    a{ color:inherit; text-decoration:none; -webkit-tap-highlight-color: transparent; }
+    a:active{ text-decoration: underline; }
 
-  .brand-top{
-    color:#ff7a1a;
-    letter-spacing:4px;
-    font-weight:900;
-    text-transform:uppercase;
-    font-size:clamp(1.6rem, 1.25rem + 1.2vw, 2.25rem);
-    line-height:1.05;
-    max-width:100%;
-    overflow-wrap:anywhere;
-    word-break:break-word;
-  }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px; }
+    .muted{ color:var(--muted); }
+    .small{ font-size:.95rem; }
 
-  .kss-font{
-    font-family:"tt-modernoir", sans-serif;
-    font-weight:700;
-    font-size:12px;
-    letter-spacing:4px;
-    color:#ffffff;
-    animation:glow 2.4s ease-in-out infinite;
-    max-width:100%;
-    overflow-wrap:anywhere;
-    word-break:break-word;
-  }
+    /* Header */
+    header{
+      padding-top: var(--safe-top);
+      background: rgba(30,30,30,.84);
+      border-bottom:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+    }
 
-  @keyframes glow{
-    0%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
-    50%{ text-shadow:0 0 8px rgba(255,255,255,0.7); }
-    100%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
-  }
-
-  /* Nav */
-  nav{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-    min-width:0;
-  }
-
-  nav a{
-    color:var(--header-ink);
-    opacity:.92;
-    padding:10px 12px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,.12);
-    background:rgba(255,255,255,.04);
-    transition:opacity .12s ease, border-color .12s ease, transform .12s ease;
-    white-space:nowrap;
-    text-decoration:none;
-    min-height:44px;
-    display:inline-flex;
-    align-items:center;
-  }
-
-  nav a:hover{
-    opacity:1;
-    border-color:rgba(255,255,255,.28);
-    transform:translateY(-1px);
-    text-decoration:none;
-  }
-
-  nav a.active{
-    opacity:1;
-    border-color:rgba(255,255,255,.35);
-    background:rgba(255,255,255,.07);
-  }
-
-  nav a.cta{
-    background:var(--accent);
-    color:#f4f7f7;
-    font-weight:700;
-    border-color:transparent;
-  }
-
-  /* Sections */
-  .section{
-    padding:44px 0;
-    border-bottom:1px solid var(--line);
-  }
-
-  /* Typography */
-  .kicker{
-    color:var(--accent);
-    font-weight:700;
-    letter-spacing:1.6px;
-    text-transform:uppercase;
-    font-size:.9rem;
-    margin:0 0 10px;
-  }
-
-  h1,h2,h3{
-    margin:0 0 12px;
-    line-height:1.22;
-  }
-
-  h1{ font-size:clamp(1.9rem, 1.35rem + 2.2vw, 2.8rem); }
-  h2{ font-size:clamp(1.25rem, 1.05rem + 1vw, 1.85rem); margin-top:22px; }
-  h3{ font-size:1.1rem; margin-top:18px; }
-
-  p{ margin:0 0 14px; 
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;}
-
-  /* Animated phrase */
-  .animated-phrase{
-    display:inline-block;
-    position:relative;
-    color:var(--accent);
-    font-weight:900;
-    white-space:nowrap;
-    animation:slide-across 4.5s ease-in-out infinite;
-  }
-
-  @keyframes slide-across{
-    0%{ transform: translateX(-30%); opacity: 0; }
-    10%{ opacity: 1; }
-    70%{ transform: translateX(0); opacity: 1; }
-    100%{ transform: translateX(30%); opacity: 0; }
-  }
-
-  .animated-phrase::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-4px;
-    width:100%;
-    height:3px;
-    background:var(--accent);
-    animation:underline-slide 4.5s ease-in-out infinite;
-  }
-
-  @keyframes underline-slide{
-    0%{ transform:translateX(-120%); opacity:0; }
-    20%{ opacity:1; }
-    70%{ transform:translateX(0); opacity:1; }
-    100%{ transform:translateX(120%); opacity:0; }
-  }
-
-  /* Lists — cleaner, more spaced, no “cards” */
-  ul{
-    margin: 10px 0 22px;
-    padding-left: 22px;
-  }
-  li{
-    margin: 10px 0;
-    line-height: 1.7;
-  }
-
-  /* Remove card styling behind list groups */
-  .mini-tests,
-  .category{
-    margin-top:28px;
-    padding:0;
-    border:0;
-    border-radius:0;
-    background:transparent;
-    min-width:0;
-  }
-
-  /* Add subtle separators between groups */
-  .mini-tests + .mini-tests,
-  .mini-tests + .category,
-  .category + .category{
-    margin-top:28px;
-    padding-top:22px;
-    border-top:1px solid var(--line);
-  }
-
-  /* If you still want a little hierarchy label */
-  .category-title{
-    font-weight:800;
-    color:var(--accent);
-    letter-spacing:.3px;
-    margin:0 0 10px;
-  }
-
-  .item-list{
-    margin: 10px 0 22px;
-    padding-left: 22px;
-  }
-
-  /* Iframes */
-  .iframe-wrap{
-    position:relative;
-    width:100%;
-    aspect-ratio:16/9;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 6px 20px rgba(0,0,0,0.25);
-    margin:14px 0 0;
-    background:#000;
-    min-width:0;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-  }
-
-  .iframe-wrap iframe{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    border:0;
-    display:block;
-  }
-
-  /* QR area */
-  .qr-area{
-    margin-top:14px;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:10px;
-    min-width:0;
-  }
-
-  .qr-link{
-    display:inline-flex;
-    align-items:center;
-    justify-content:flex-start;
-    gap:10px;
-    padding:10px 12px;
-    border-radius:12px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.65);
-    cursor:pointer;
-    text-decoration:none;
-    font-weight:700;
-    min-width:0;
-  }
-
-  .qr-wrap{
-    padding:14px;
-    display:inline-block;
-    background:#ffffff;
-    border-radius:14px;
-    box-shadow:0 10px 24px rgba(0,0,0,0.15);
-    text-align:center;
-    max-width:100%;
-  }
-
-  .qr-wrap p{
-    margin:10px 0 0;
-    font-size:0.85rem;
-    color:#555;
-  }
-
-  /* Buttons/Actions (you use this class later) */
-  .actions{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:16px;
-  }
-
-  .btn{
-    display:inline-block;
-    padding:10px 12px;
-    border-radius:12px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.55);
-    font-weight:800;
-    text-decoration:none;
-  }
-  .btn:hover{ text-decoration:none; }
-
-  .btn.primary{
-    background:var(--accent);
-    color:#fff;
-    border-color:transparent;
-  }
-
-  /* Footer */
-  footer{
-    background:var(--header);
-    color:var(--header-ink);
-    border-top:1px solid rgba(255,255,255,.10);
-    padding:18px 0;
-    padding-bottom: calc(18px + var(--safe-bottom));
-  }
-
-  .footer-inner{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:14px;
-    flex-wrap:wrap;
-    text-align:center;
-    min-width:0;
-  }
-
-  .footer-links{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:center;
-    min-width:0;
-  }
-
-  .footer-links a{
-    padding:8px 10px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,.12);
-    opacity:.9;
-    background:rgba(255,255,255,.04);
-    text-decoration:none;
-    color:var(--header-ink);
-    min-width:0;
-    overflow-wrap:anywhere;
-    word-break:break-word;
-  }
-
-  .footer-links a:hover{
-    opacity:1;
-    border-color:rgba(255,255,255,.28);
-  }
-
-  .footer-links a.cta{
-    background:var(--accent);
-    border-color:transparent;
-    font-weight:700;
-  }
-
-  /* Responsive */
-  @media (max-width:720px){
     .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding: 10px 0;
+      min-width:0;
+    }
+
+    .brand{
+      display:flex;
       flex-direction:column;
-      align-items:flex-start;
-      gap:12px;
+      gap:2px;
+      min-width:0;
     }
 
-    nav{ justify-content:flex-start; width:100%; }
+    .brand-top{
+      color:#f7f7f5;
+      letter-spacing:4px;
+      font-weight:900;
+      text-transform:uppercase;
+      font-size:clamp(1.6rem, 1.25rem + 1.2vw, 2.25rem);
+      line-height:1.05;
+      overflow-wrap:anywhere;
+      font-family:var(--serif);
+    }
 
+    .kss-font{
+      font-family:"tt-modernoir", sans-serif;
+      font-weight:700;
+      font-size:12px;
+      letter-spacing:4px;
+      color:#ffffff;
+      animation:glow 2.4s ease-in-out infinite;
+      overflow-wrap:anywhere;
+    }
+
+    @keyframes glow{
+      0%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
+      50%{ text-shadow:0 0 8px rgba(255,255,255,0.7); }
+      100%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      font-family:var(--sans);
+      min-width:0;
+    }
+
+    /* Invisible text-links (no button look) */
     nav a{
-      font-size:.85rem;
-      padding:8px 10px;
-      white-space:normal;
+      color:var(--header-ink);
+      font-weight:700;
+      letter-spacing:.3px;
+      opacity:.92;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      transition:opacity .12s ease, transform .12s ease;
+      white-space:nowrap;
     }
 
-    /* Allow animated word wrap */
-    .animated-phrase{ white-space:normal; }
+    nav a:hover{
+      opacity:1;
+      transform:translateY(-1px);
+      text-decoration:none;
+    }
 
-    .qr-area{ align-items:stretch; }
-    .qr-link{ justify-content:center; width:100%; }
-    .qr-wrap{ width:100%; }
+    /* Top strip */
+    .top-strip{
+      margin-top:14px;
+      padding:0;
+      border:0;
+      background:transparent;
+      box-shadow:none;
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+    }
+
+    /* Animated phrase */
+    .animated-phrase{
+      display:inline-block;
+      position:relative;
+      color:var(--accent);
+      font-weight:900;
+      white-space:nowrap;
+      animation:slide-across 4.5s ease-in-out infinite;
+      font-family:var(--serif);
+      letter-spacing:-.01em;
+    }
+
+    @keyframes slide-across{
+      0%   { transform: translateX(-30%); opacity: 0; }
+      10%  { opacity: 1; }
+      70%  { transform: translateX(0); opacity: 1; }
+      100% { transform: translateX(30%); opacity: 0; }
+    }
+
+    .animated-phrase::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-4px;
+      width:100%;
+      height:3px;
+      background:var(--accent);
+      animation:underline-slide 4.5s ease-in-out infinite;
+    }
+
+    @keyframes underline-slide{
+      0%   { transform:translateX(-120%); opacity:0; }
+      20%  { opacity:1; }
+      70%  { transform:translateX(0); opacity:1; }
+      100% { transform:translateX(120%); opacity:0; }
+    }
+
+    /* Sections */
+    main{ display:block; }
+    .section{
+      padding:44px 0 56px;
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+
+    /* Type hierarchy */
+    h1,h2,h3{ margin:0 0 12px; line-height:1.18; }
+    h1{
+      font-family:var(--serif);
+      font-size:clamp(2.05rem, 1.45rem + 2.2vw, 3.05rem);
+      letter-spacing:-.01em;
+    }
+    h2{
+      font-family:var(--serif);
+      font-size:clamp(1.35rem, 1.1rem + 1vw, 2.05rem);
+      margin-top:12px;
+      letter-spacing:-.01em;
+    }
+    h3{
+      font-family:var(--sans);
+      font-size:1.05rem;
+      font-weight:600;
+      letter-spacing:.2px;
+      color:var(--muted);
+      margin-top:14px;
+    }
+
+    p{
+      margin:0 0 14px;
+      font-family:var(--sans);
+    }
+
+    .kicker{
+      color:var(--accent);
+      font-family:var(--sans);
+      font-weight:800;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+      font-size:.86rem;
+      margin:0 0 10px;
+    }
+
+    /* Divider */
+    .section-divider{
+      border:0;
+      height:2px;
+      margin:34px 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.60),
+        rgba(0,0,0,.12),
+        rgba(255,255,255,.60),
+        transparent
+      );
+      opacity:.95;
+    }
+
+    /* Bento + Glass */
+    .bento{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap:18px;
+    }
+
+    .stack{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:18px;
+    }
+
+    .bento-card{
+      padding:18px;
+      border-radius: calc(var(--radius) + 6px);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      position:relative;
+      overflow:hidden;
+    }
+
+    .bento-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(700px 220px at 10% 0%, rgba(255,255,255,.22), transparent 85%),
+        radial-gradient(520px 240px at 90% 20%, rgba(106, 156, 153, 0.16), transparent 80%);
+      pointer-events:none;
+    }
+
+    .bento-card > *{ position:relative; }
+
+    .bento-kicker{
+      color:var(--accent);
+      font-family:var(--sans);
+      font-weight:800;
+      letter-spacing:1.4px;
+      text-transform:uppercase;
+      font-size:.82rem;
+      margin:0 0 8px;
+    }
+
+    .link-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .link-pill{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--glass-border-soft);
+      background: rgba(255,255,255,.14);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      transition:transform .12s ease, background .12s ease, border-color .12s ease;
+      font-family:var(--sans);
+      line-height:1.35;
+    }
+
+    .link-pill:hover{
+      transform:translateY(-1px);
+      background: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.38);
+      text-decoration:none;
+    }
+
+    .link-pill .title{
+      font-weight:650;
+      letter-spacing:.1px;
+    }
+
+    .link-pill .meta{
+      color:var(--muted);
+      font-size:.92rem;
+      white-space:nowrap;
+      font-weight:600;
+      letter-spacing:.2px;
+    }
+
+    /* “Plain” list block inside cards */
+    .plain-list{
+      margin:10px 0 0;
+      padding-left:18px;
+      font-family:var(--sans);
+    }
+    .plain-list li{ margin:8px 0; }
+
+    /* Details pill (guides) */
+    .pill-dd{
+      margin: 18px 0 0;
+      max-width: 720px;
+    }
+
+    .pill-dd summary{
+      list-style:none;
+      cursor:pointer;
+      user-select:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.32);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      font-weight:800;
+      line-height:1;
+      font-family:var(--sans);
+    }
+
+    .pill-dd summary::-webkit-details-marker{ display:none; }
+
+    .pill-dd summary::after{
+      content:"▾";
+      font-weight:900;
+      transform: translateY(-1px);
+      transition: transform .18s ease;
+    }
+
+    .pill-dd[open] summary::after{
+      transform: rotate(180deg) translateY(1px);
+    }
+
+    .pill-dd .pill-panel{
+      margin-top:10px;
+      padding:14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.32);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      box-shadow: var(--glass-shadow-soft);
+      line-height:1.7;
+      font-family:var(--sans);
+    }
+
+    .pill-panel h3{
+      margin:0 0 10px;
+      color:var(--ink);
+      font-family:var(--serif);
+      font-size:1.15rem;
+    }
+    .pill-panel p{ margin:0 0 12px; }
+    .pill-panel ul, .pill-panel ol{ margin:0 0 12px; padding-left:18px; }
+    .pill-panel li{ margin:6px 0; }
+
+    /* Buttons */
+    .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; }
+    .btn{
+      display:inline-block;
+      padding:10px 18px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.34);
+      background: rgba(158, 153, 153, 0.14);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      color: var(--accent);
+      font-weight:800;
+      font-family:var(--sans);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      text-decoration:none;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      background: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.44);
+      text-decoration:none;
+    }
+
+    .btn.primary{
+      background: var(--accent);
+      color:#fff;
+      border-color: transparent;
+    }
+
+    /* Footer */
+    footer{
+      background: rgba(30,30,30,.86);
+      color:var(--header-ink);
+      border-top:1px solid rgba(255,255,255,.14);
+      padding:18px 0;
+      padding-bottom: calc(18px + var(--safe-bottom));
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+    }
+
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      text-align:center;
+      font-family:var(--sans);
+    }
 
     .footer-links{
-      flex-direction:column;
+      display:flex;
+      justify-content:center;
+      gap:10px;
       width:100%;
-      align-items:center;
+      flex-wrap:wrap;
     }
-    .footer-links a{ width:min(100%, 520px); }
-  }
 
-  @media (max-width:420px){
-    .brand-top{ letter-spacing:1px; }
-    .kss-font{ letter-spacing:3px; }
-  }
+    .footer-links a{
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.18);
+      opacity:.95;
+      background: rgba(54, 105, 96, 0.06);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      color:var(--header-ink);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
 
-  /* Divider */
-  .section-divider{
-    border:0;
-    height:2px;
-    margin:44px 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0,0,0,.55),
-      rgba(0,0,0,.18),
-      rgba(0,0,0,.55),
-      transparent
-    );
-    opacity:.9;
+    .footer-links a:hover{
+      transform: translateY(-1px);
+      border-color:rgba(255,255,255,.30);
+      background: rgba(255,255,255,.09);
+      text-decoration:none;
+    }
 
+    .footer-links a.cta{
+      background: var(--accent);
+      border-color: transparent;
+      font-weight:800;
+    }
+
+    /* Responsive */
+    @media (max-width:900px){
+      .bento{ grid-template-columns: 1fr; }
+    }
+
+    @media (max-width:720px){
+      .wrap{ padding:0 12px; }
+
+      .header-inner{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+      }
+
+      nav{ justify-content:flex-start; width:100%; }
+
+      .animated-phrase{ white-space:normal; }
+
+      .pill-dd summary{
+        width: 100%;
+        justify-content: center;
+      }
+
+      .footer-links{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .footer-links a{ width:100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .animated-phrase{ animation:none; }
+      .animated-phrase::after{ animation:none; }
+      nav a, .btn, .footer-links a, .link-pill{ transition:none; }
+    }
   </style>
 </head>
 
 <body id="top">
 
-  <header>
-    <div class="wrap header-inner">
-      <a class="brand" href="#top">
-        <div class="brand-top">Modern English Au</div>
-        <span class="kss-font">Koala Spies Sydney</span>
-      </a>
+<header>
+  <div class="wrap header-inner">
+    <a class="brand" href="#top">
+      <div class="brand-top">Modern English Au</div>
+      <span class="kss-font">Koala Spies Sydney</span>
+    </a>
 
-      <nav>
-        <a href="MicroLessons.html">Mico Lessons</a>
-           <a href="ESLgames.html">ESL Games</a>
-             
-      </nav>
-    </div>
-  </header>
-
-  <div class="wrap" style="padding-top:18px;">
-    <h1><span class="animated-phrase">meaningful language learning</span></h1>
+    <nav>
+      <a href="MicroLessons.html">Mico Lessons</a>
+      <a href="ESLgames.html">ESL Games</a>
+      <a href="index.html"> Home</a>
+    </nav>
   </div>
+</header>
 
-  <main>
-    <section id="micro-lessons" class="section">
-      <div class="wrap">
-        <h1>IELTS/PTE/CAE+ Skills Practice &amp; Mini Test</h1>
+<div class="wrap">
+  <div class="top-strip">
+    <h2 style="margin:0;"><span class="animated-phrase">meaningful English language learning</span></h2>
+  </div>
+</div>
 
-        <p>
-          These microlessons and mini-tests were all devised while I was working in an ESL classroom
-          and studying UX design and coding. Feel free to use them and send me feedback.
-        </p>
-      
-      
+<main>
+  <section id="micro-lessons" class="section">
+    <div class="wrap">
+      <h1>IELTS/PTE/CAE+ Skills Practice &amp; Mini Test</h1>
 
+      <p>
+        These microlessons and mini-tests were all devised while I was working in an ESL classroom
+        and studying UX design and coding. Feel free to use them and send me feedback.
+      </p>
 
-      <section class="mini-tests">
-        <p>These tests have been separated into mini tests. They were designed to teach and test, after each section the students scores themselves and sees an explanation of each answer. They can be taken in class or on a phone - there a QR code generator in the top left corner. Based on real test but updated on topics and sometimes localised to Australia,  there format is similar to IELTS online.</p>
-         
-            <hr class="section-divider">
-        <h2>Mini GENERAL IELTS Readings Tests Set 1</h2>
-          <ul>
-            <li><a href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1Matching.html/">IELTS General// Reading Part 1 // The Little Byron Beach Festival // Matching paragraphs</a></li>
-           
-           <li> <a href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1tfng.htm./"> IELTS General// Reading Part 1// Lloyd Lock-up // True, False or Not Given
-           <li> <a href= "https://koalaspiessydney.github.io/IELTSGenReadingtestp2TenantsRightcompleteinfo/">IELTS General // Reading Part 2 // Tenants Right- the landlord wants to sell // Complete informations
-            <li> <a href= "https://koalaspiessydney.github.io/IELTSGeneralReadingp1tfng.htm./"> IELTS General //Reading Part 2 //How to give a Presentatoion // Matching headings
-           <li> <a href= "https://koalaspiessydney.github.io/IELTSgeneralpart3IndianTextiles/"> IELTS General // Reading Part 3 // Threads of Influence- Indian textiles // Multiple Choice and COmplete paragraph
-           
-           </li>
-            <div>
-                <h2>Mini GENERAL IELTS Readings Tests - Set 2</h2>
-            <li><a href="https://ieltspteaustralianexaminertutor.com/ielts-general-reading-part-1-meka-cosmetics-short-answer/">IELTS General Reading Part 1 Meka Cosmetic: Notice Product Return Short answer questions/a></li
-            <li><a href="https://ieltspteaustralianexaminertutor.com/ielts-general-reading-part-2-how-to-become-a-professional-smoothie-and-juice-maker-gap-fill/">IELTS General Reading Part 2: How to become a professional smoothie and juice maker. Gap fill</a></li>
-          </ul>
-        </section>
-        
+      <p>
+        These tests have been separated into mini tests. They were designed to teach and test, after each section the students scores themselves and sees an explanation of each answer. They can be taken in class or on a phone - there a QR code generator in the top left corner. Based on real test but updated on topics and sometimes localised to Australia, there format is similar to IELTS online.
+      </p>
 
       <hr class="section-divider">
 
-        <section class="mini-tests">
-            <p> ***The colours and format vary in this set as part of my research but the pedagogy is sound. </p>
-          <h2>Mini CAE Reading & Use of Language Tests</h2>
-          <ul>
-             <li><a href="https://ieltspteaustralianexaminertutor.com/preparing-for-the-cae-exam-overview-in-part-one-style/">CAE Intro Test</a></li>
-            <li><a href="https://koalaspiessydney.github.io/CAEt1.html/">CAE Mini Test 1</a></li>
-            <li><a href="https://koalaspiessydney.github.io/ReadingTestWk4/">CAE Mini Test 2</a></li>
-            <li><a href="https://koalaspiessydney.github.io/U2UseofENG/">CAE Mini Test 3</a></li>
-            <li><a href="https://koalaspiessydney.github.io/CAEp4.html/">CAE Mini Test 4</a></li>
-          </ul>
-        </section>
+      <div class="bento">
 
-           <hr class="section-divider">
+        <!-- LEFT COLUMN (bigger) -->
+        <div class="bento-card">
+          <div class="bento-kicker">Mini GENERAL IELTS</div>
 
-            <section class="mini-tests">
-          <h2>Mini ACADEMIC IELTS Readings Tests</h2>
-          <ul>
-            <li><a href="https://ieltspteaustralianexaminertutor.com/academic-reading-australias-only-nobel-prize-winning-chemist-sir-john-cornforth-true-false-not-give-summary-completion/">Academic Reading Australia’s Only Nobel Prize Winning Chemist, Sir John Cornforth, True, False not Give & Summary Completion</a></li>
-       </ul>
-          </section>
-              <hr class="section-divider">
-              <section class="mini-tests">
-          <h2>IELTS & PTE Multiple Choice Listening and Reading</h2>
-          <ul>
-            <li><a href="">Multiple Choice Listening 1 - coming soon</a></li>
-            <li><a href="https://ieltspteaustralianexaminertutor.com/predicting-collocations-complete-text-gap-fill-listening-and-reading/"> Commoon Collocations in Reading Tests </a></li>
-            <li><a href="">Multiple Choice Listening 3- coming soon</a></li>
-            <li><a href="">Multple Choice Reading - coming soon</a></li>
-          </ul>
-          </section>
-           <hr class="section-divider">
-        <section class="mini-tests">
-          <h2>Reading Tests- arrange, matching & organizing parpagraphs</h2>
-          <ul>
-            <li><a href="PTEArrangeParagraphTechTheme.html"> Arrange Paragraphs // Technology & Social Media</a></li>
-            <li><a href=""> Mini Test 2 Coming Soon</a></li>
-            <li><a href=""> Mini Test 3 Coming soon</a></li>
-         
-          </ul>
-          </section>
-          <!-- =========================
-     DUMMY PILL DROPDOWN (copy/paste)
-     ========================= -->
+          <h2>Mini GENERAL IELTS Readings Tests Set 1</h2>
 
-<style>
-  /* Pill dropdown (dummy) */
-  .pill-dd{
-    margin: 18px 0;
-    max-width: 680px;
-  }
+          <div class="link-grid">
+            <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1Matching.html/">
+              <span class="title">IELTS General// Reading Part 1 // The Little Byron Beach Festival // Matching paragraphs</span>
+              <span class="meta">Open</span>
+            </a>
 
-  .pill-dd summary{
-    list-style: none;                 /* remove default marker */
-    cursor: pointer;
-    user-select: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+            <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1tfng.htm./">
+              <span class="title">IELTS General// Reading Part 1// Lloyd Lock-up // True, False or Not Given</span>
+              <span class="meta">Open</span>
+            </a>
 
-    padding: 10px 16px;
-    border-radius: 999px;
+            <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGenReadingtestp2TenantsRightcompleteinfo/">
+              <span class="title">IELTS General // Reading Part 2 // Tenants Right- the landlord wants to sell // Complete informations</span>
+              <span class="meta">Open</span>
+            </a>
 
-    background: rgba(255,255,255,.65);
-    border: 1px solid rgba(0,0,0,.10);
+            <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1tfng.htm./">
+              <span class="title">IELTS General //Reading Part 2 //How to give a Presentatoion // Matching headings</span>
+              <span class="meta">Open</span>
+            </a>
 
-    font-weight: 800;
-    line-height: 1;
-  }
-
-  /* remove marker on Safari */
-  .pill-dd summary::-webkit-details-marker{ display:none; }
-
-  .pill-dd summary::after{
-    content: "▾";
-    font-weight: 900;
-    transform: translateY(-1px);
-    transition: transform .18s ease;
-  }
-
-  .pill-dd[open] summary::after{
-    transform: rotate(180deg) translateY(1px);
-  }
-
-  .pill-dd .pill-panel{
-    margin-top: 10px;
-    padding: 14px 16px;
-    border-radius: 16px;
-
-    background: rgba(255,255,255,.55);
-    border: 1px solid rgba(0,0,0,.10);
-
-    line-height: 1.7;
-  }
-
-  /* Optional: make the pill full width on phones */
-  @media (max-width: 720px){
-    .pill-dd summary{
-      width: 100%;
-      justify-content: center;
-    }
-  }
-</style>
-
-<details class="pill-dd">
-  <summary>Mastering Multiple Choice </summary>
-  <div class="pill-panel">
-    <p style="margin:0 0 10px;">
-      This is placeholder content. Put anything here: text, links, lists, etc.
-    </p>
-    <ul style="margin:0; padding-left:18px;">
-  <div class="pill-dropdown">
-
-  <button class="pill-toggle">Method 1 — read deeply, read smartly</button>
-  <div class="pill-content">
-    <ol>
-      <li>Read the questions and not the options before you read the text or listen to the audio.</li>
-      <li>Find your own answer in the text or the audio.</li>
-      <li>Then find the option that matches your answer most closely — the words won't be the same but the meaning will be.</li>
-    </ol>
-  </div>
-
-  <button class="pill-toggle">Method 2 — backwards method</button>
-  <div class="pill-content">
-    <p>If Step 1 fails or takes more than a couple of minutes, try the backwards method.</p>
-    <ul>
-      <li>Most likely, one answer will have information that is not in the test — eliminate it.</li>
-      <li>Most likely, one answer will have a lot of words or phrases similar to the text — too similar, so be suspicious. It may be saying the opposite thing or talking about a different point. Eliminate it.</li>
-      <li>You probably have two answers that are true to the text and answer the question. Which one answers the question better? That’s your answer.</li>
-    </ul>
-  </div>
-
-</div>
-
-  </div>
-</details>
-    <hr class="section-divider">
-              <section class="mini-tests">
-
-                
-          <h2> PTE Write from Dictation & Repeat Sentence</h2>
-          <ul>
-            <li><a href="writefromdictation1.html">Set 1 with phrasal verb and vocab lessons</a></li>
-            <li><a href="https://koalaspiessydney.github.io/Dictation-throughthough/">Set 2 with through, though, thorough &amp; thought lessons</a></li>
-            <li><a href="https://koalaspiessydney.github.io/CasualvsAcademic/acadrepeat2.html">8 Academic Sentences</a></li>
-            <li><a href="https://ieltspteaustralianexaminertutor.com/repeat-sentence-understanding-the-beginning/">Why you can't hear the beginning of the sentence</a></li>
-            <li><a href="https://ieltspteaustralianexaminertutor.com/repeat-sentence-plus-challenge-thorough-through-though-and-thoughts/">Though / through / thorough / thought</a></li>
-            <li><a href="https://ieltspteaustralianexaminertutor.com/dictation-practice-understanding-contractions-with-deductions/">Contractions with models of deductions</a></li>
-        
-          </ul>
-
-<!-- =========================
-     DUMMY PILL DROPDOWN (copy/paste)
-     ========================= -->
-
-<style>
-  /* Pill dropdown (dummy) */
-  .pill-dd{
-    margin: 18px 0;
-    max-width: 680px;
-  }
-
-  .pill-dd summary{
-    list-style: none;                 /* remove default marker */
-    cursor: pointer;
-    user-select: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 10px 16px;
-    border-radius: 999px;
-
-    background: rgba(255,255,255,.65);
-    border: 1px solid rgba(0,0,0,.10);
-
-    font-weight: 800;
-    line-height: 1;
-  }
-
-  /* remove marker on Safari */
-  .pill-dd summary::-webkit-details-marker{ display:none; }
-
-  .pill-dd summary::after{
-    content: "▾";
-    font-weight: 900;
-    transform: translateY(-1px);
-    transition: transform .18s ease;
-  }
-
-  .pill-dd[open] summary::after{
-    transform: rotate(180deg) translateY(1px);
-  }
-
-  .pill-dd .pill-panel{
-    margin-top: 10px;
-    padding: 14px 16px;
-    border-radius: 16px;
-
-    background: rgba(255,255,255,.55);
-    border: 1px solid rgba(0,0,0,.10);
-
-    line-height: 1.7;
-  }
-
-  /* Optional: make the pill full width on phones */
-  @media (max-width: 720px){
-    .pill-dd summary{
-      width: 100%;
-      justify-content: center;
-    }
-  }
-</style>
-
-<details class="pill-dd">
-  <summary> Mastering Matching Paragrahs</summary>
-  <div class="pill-panel">
-    <p style="margin:0 0 10px;">
-      Mastering Multiple Choice Questions.
-    </p>
-    <ul style="margin:0; padding-left:18px;">
-  <div class="pill-dropdown">
-    <ol>
- <div class="pill-dropdown">
-
-  <button class="pill-toggle">Matching Paragraphs — step‑by‑step method</button>
-  <div class="pill-content">
-    <ul>
-      <li>If you have fewer paragraphs than questions, start with the paragraphs.</li>
-      <li>If you have fewer questions than paragraphs, start with the questions.</li>
-    </ul>
-
-    <p>Assume we have fewer paragraphs than questions (the most common case):</p>
-
-    <ol>
-      <li>Read the first paragraph only, then read all the questions and mark all the possibilities.</li>
-      <li>If it’s a perfect match, mark it as the answer and cross it out.</li>
-      <li>If you’re not sure, put a question mark and move on.</li>
-      <li>Read the second paragraph, then read all the questions except the ones you have crossed out.</li>
-      <li>Continue until all the paragraphs are finished.</li>
-      <li>If you don’t find any questions that match a paragraph, keep going. By the end of the reading, you should have most of the answers.</li>
-    </ol>
-  </div>
-
-</div>
-
-  <button class="pill-toggle">Method 2 — backwards method</button>
-  <div class="pill-content">
-    <p>If Step 1 fails or takes more than a couple of minutes, try the backwards method.</p>
-    <ul>
-      <li>Most likely, one answer will have information that is not in the test — eliminate it.</li>
-      <li>Most likely, one answer will have a lot of words or phrases similar to the text — too similar, so be suspicious. It may be saying the opposite thing or talking about a different point. Eliminate it.</li>
-      <li>You probably have two answers that are true to the text and answer the question. Which one answers the question better? That’s your answer.</li>
-    </ul>
-  </div>
-
-</div>
-
-    </ul>
-  </div>
-</details>
+            <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSgeneralpart3IndianTextiles/">
+              <span class="title">IELTS General // Reading Part 3 // Threads of Influence- Indian textiles // Multiple Choice and COmplete paragraph</span>
+              <span class="meta">Open</span>
+            </a>
+          </div>
 
           <hr class="section-divider">
-    </section>
 
-    <section id="contact" class="section">
-      <div class="wrap">
-        <p class="kicker">Contact &amp; Feedback</p>
+          <h2>Mini GENERAL IELTS Readings Tests - Set 2</h2>
 
-        <p class="muted">
-          I’m also happy to keep creating and posting microlessons — send me your requests!
-        </p>
+          <div class="link-grid">
+            <a class="link-pill" href="https://ieltspteaustralianexaminertutor.com/ielts-general-reading-part-1-meka-cosmetics-short-answer/">
+              <span class="title">IELTS General Reading Part 1 Meka Cosmetic: Notice Product Return Short answer questions/a></span>
+              <span class="meta">Open</span>
+            </a>
 
-        <p>
-          I would be absolutely thrilled to create bespoke and branded lessons for your organisation.
-          Go to the contact page to request a quote.
-        </p>
+            <a class="link-pill" href="https://ieltspteaustralianexaminertutor.com/ielts-general-reading-part-2-how-to-become-a-professional-smoothie-and-juice-maker-gap-fill/">
+              <span class="title">IELTS General Reading Part 2: How to become a professional smoothie and juice maker. Gap fill</span>
+              <span class="meta">Open</span>
+            </a>
+          </div>
 
-        <div class="actions">
-          <a class="btn primary" href="contact.html"><u>Send Feedback</u></a>
+          <details class="pill-dd" style="margin-top:18px;">
+            <summary>Mastering Multiple Choice</summary>
+            <div class="pill-panel">
+              <h3>Method 1 — read deeply, read smartly</h3>
+              <ol>
+                <li>Read the questions and not the options before you read the text or listen to the audio.</li>
+                <li>Find your own answer in the text or the audio.</li>
+                <li>Then find the option that matches your answer most closely — the words won't be the same but the meaning will be.</li>
+              </ol>
+
+              <h3>Method 2 — backwards method</h3>
+              <p>If Step 1 fails or takes more than a couple of minutes, try the backwards method.</p>
+              <ul>
+                <li>Most likely, one answer will have information that is not in the test — eliminate it.</li>
+                <li>Most likely, one answer will have a lot of words or phrases similar to the text — too similar, so be suspicious. It may be saying the opposite thing or talking about a different point. Eliminate it.</li>
+                <li>You probably have two answers that are true to the text and answer the question. Which one answers the question better? That’s your answer.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <!-- RIGHT COLUMN (stack) -->
+        <div class="stack">
+
+          <div class="bento-card">
+            <div class="bento-kicker">Mini CAE</div>
+            <p class="muted" style="margin-top:-4px;">***The colours and format vary in this set as part of my research but the pedagogy is sound.</p>
+
+            <h2>Mini CAE Reading &amp; Use of Language Tests</h2>
+
+            <div class="link-grid">
+              <a class="link-pill" href="https://ieltspteaustralianexaminertutor.com/preparing-for-the-cae-exam-overview-in-part-one-style/">
+                <span class="title">CAE Intro Test</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="https://koalaspiessydney.github.io/CAEt1.html/">
+                <span class="title">CAE Mini Test 1</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="https://koalaspiessydney.github.io/ReadingTestWk4/">
+                <span class="title">CAE Mini Test 2</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="https://koalaspiessydney.github.io/U2UseofENG/">
+                <span class="title">CAE Mini Test 3</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="https://koalaspiessydney.github.io/CAEp4.html/">
+                <span class="title">CAE Mini Test 4</span>
+                <span class="meta">Open</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="bento-card">
+            <div class="bento-kicker">Mini ACADEMIC IELTS</div>
+
+            <h2>Mini ACADEMIC IELTS Readings Tests</h2>
+
+            <div class="link-grid">
+              <a class="link-pill" href="https://ieltspteaustralianexaminertutor.com/academic-reading-australias-only-nobel-prize-winning-chemist-sir-john-cornforth-true-false-not-give-summary-completion/">
+                <span class="title">Academic Reading Australia’s Only Nobel Prize Winning Chemist, Sir John Cornforth, True, False not Give &amp; Summary Completion</span>
+                <span class="meta">Open</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="bento-card">
+            <div class="bento-kicker">IELTS &amp; PTE Multiple Choice</div>
+
+            <h2>IELTS &amp; PTE Multiple Choice Listening and Reading</h2>
+
+            <div class="link-grid">
+              <a class="link-pill" href="">
+                <span class="title">Multiple Choice Listening 1 - coming soon</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="https://ieltspteaustralianexaminertutor.com/predicting-collocations-complete-text-gap-fill-listening-and-reading/">
+                <span class="title">Commoon Collocations in Reading Tests</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="">
+                <span class="title">Multiple Choice Listening 3- coming soon</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="">
+                <span class="title">Multple Choice Reading - coming soon</span>
+                <span class="meta">Open</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="bento-card">
+            <div class="bento-kicker">Arrange / Match / Organize</div>
+
+            <h2>Reading Tests- arrange, matching &amp; organizing parpagraphs</h2>
+
+            <div class="link-grid">
+              <a class="link-pill" href="PTEArrangeParagraphTechTheme.html">
+                <span class="title">Arrange Paragraphs // Technology &amp; Social Media</span>
+                <span class="meta">Open</span>
+              </a>
+              <a class="link-pill" href="">
+                <span class="title">Mini Test 2 Coming Soon</span>
+                <span class="meta">Open</span>
+              </a>
+              <a class="link-pill" href="">
+                <span class="title">Mini Test 3 Coming soon</span>
+                <span class="meta">Open</span>
+              </a>
+            </div>
+
+            <details class="pill-dd" style="margin-top:18px;">
+              <summary>Mastering Matching Paragrahs</summary>
+              <div class="pill-panel">
+                <p>Mastering Multiple Choice Questions.</p>
+
+                <h3>Matching Paragraphs — step-by-step method</h3>
+                <ul>
+                  <li>If you have fewer paragraphs than questions, start with the paragraphs.</li>
+                  <li>If you have fewer questions than paragraphs, start with the questions.</li>
+                </ul>
+
+                <p>Assume we have fewer paragraphs than questions (the most common case):</p>
+
+                <ol>
+                  <li>Read the first paragraph only, then read all the questions and mark all the possibilities.</li>
+                  <li>If it’s a perfect match, mark it as the answer and cross it out.</li>
+                  <li>If you’re not sure, put a question mark and move on.</li>
+                  <li>Read the second paragraph, then read all the questions except the ones you have crossed out.</li>
+                  <li>Continue until all the paragraphs are finished.</li>
+                  <li>If you don’t find any questions that match a paragraph, keep going. By the end of the reading, you should have most of the answers.</li>
+                </ol>
+
+                <h3>Method 2 — backwards method</h3>
+                <p>If Step 1 fails or takes more than a couple of minutes, try the backwards method.</p>
+                <ul>
+                  <li>Most likely, one answer will have information that is not in the test — eliminate it.</li>
+                  <li>Most likely, one answer will have a lot of words or phrases similar to the text — too similar, so be suspicious. It may be saying the opposite thing or talking about a different point. Eliminate it.</li>
+                  <li>You probably have two answers that are true to the text and answer the question. Which one answers the question better? That’s your answer.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+
+          <div class="bento-card">
+            <div class="bento-kicker">PTE</div>
+
+            <h2>PTE Write from Dictation &amp; Repeat Sentence</h2>
+
+            <div class="link-grid">
+              <a class="link-pill" href="writefromdictation1.html">
+                <span class="title">Set 1 with phrasal verb and vocab lessons</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="https://koalaspiessydney.github.io/Dictation-throughthough/">
+                <span class="title">Set 2 with through, though, thorough &amp; thought lessons</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="https://koalaspiessydney.github.io/CasualvsAcademic/acadrepeat2.html">
+                <span class="title">8 Academic Sentences</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="https://ieltspteaustralianexaminertutor.com/repeat-sentence-understanding-the-beginning/">
+                <span class="title">Why you can't hear the beginning of the sentence</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="https://ieltspteaustralianexaminertutor.com/repeat-sentence-plus-challenge-thorough-through-though-and-thoughts/">
+                <span class="title">Though / through / thorough / thought</span>
+                <span class="meta">Open</span>
+              </a>
+
+              <a class="link-pill" href="https://ieltspteaustralianexaminertutor.com/dictation-practice-understanding-contractions-with-deductions/">
+                <span class="title">Contractions with models of deductions</span>
+                <span class="meta">Open</span>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="wrap footer-inner">
-      <div>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</div>
-      <div class="footer-links">
-        <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">KOALA SPIES SYDNEY</a>
-      
-        <a class="cta" href="contact.html">Contact</a>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="wrap">
+      <p class="kicker">Contact &amp; Feedback</p>
+
+      <p class="muted">
+        I’m also happy to keep creating and posting microlessons — send me your requests!
+      </p>
+
+      <p>
+        I would be absolutely thrilled to create bespoke and branded lessons for your organisation.
+        Go to the contact page to request a quote.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="contact.html">Send Feedback</a>
       </div>
     </div>
-  </footer>
+  </section>
+</main>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script>
-    const qrToggle = document.getElementById("qrToggle");
-    const qrWrap = document.getElementById("qrWrap");
-    let qrInstance = null;
+<footer>
+  <div class="wrap footer-inner">
+    <div>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</div>
+    <div class="footer-links">
+      <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">KOALA SPIES SYDNEY</a>
+         <a href="contact.html">CONTACT</a>
+    </div>
+  </div>
+</footer>
 
+<!-- (Your original QR script is preserved below exactly as a block, but it requires elements
+     with ids: qrToggle, qrWrap, and qrcode to exist on the page to function.) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  const qrToggle = document.getElementById("qrToggle");
+  const qrWrap = document.getElementById("qrWrap");
+  let qrInstance = null;
+
+  if (qrToggle && qrWrap) {
     qrToggle.addEventListener("click", (e) => {
       e.preventDefault();
 
@@ -835,13 +886,11 @@
         qrWrap.setAttribute("hidden", "");
       }
     });
-  </script>
+  }
+</script>
 
 </body>
 </html>
-
-
-
 
 
 
