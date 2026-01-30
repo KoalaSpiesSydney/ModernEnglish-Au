@@ -1,4 +1,4 @@
-!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -8,52 +8,85 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#f6f7f5;
-      --ink:#111111;
-      --charcoal:#1e1e1e;
-      --muted:#5f6a66;
-      --accent:#0f6f6a;
-      --line:rgba(0,0,0,.10);
+      /* =========================
+         CORE PALETTE (Dark Cherry)
+      ========================= */
+      --bg:#f7f5f6;
+      --ink:#161215;
+      --charcoal:#1f1a1d;
+      --muted:#6a5f67;
+      --accent:#920553;
+      --line:rgba(100,8,58,.14);
 
-      --header: var(--charcoal);
-      --header-ink: #f5f5f5;
+      --header:var(--charcoal);
+      --header-ink:#f6f3f5;
 
-      --max: 860px;
-      --radius: 16px;
+      --max:980px;
+      --radius:16px;
+
+      /* Fonts */
+      --serif:"Newsreader", Georgia, serif;
+      --sans:"Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* =========================
+         GLASS SYSTEM (Cherry-tuned)
+      ========================= */
+      --glass-blur:14px;
+      --glass-bg:rgba(255,255,255,.28);
+      --glass-bg-strong:rgba(255,255,255,.34);
+      --glass-border:rgba(190,150,170,.44);
+      --glass-border-soft:rgba(209, 183, 196, 0.32);
+      --glass-shadow:0 18px 55px rgba(0,0,0,.24);
+      --glass-shadow-soft:0 10px 30px rgba(0,0,0,.20);
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+
     body{
       margin:0;
-      font-family:"Newsreader", Georgia, serif;
-      background: rgb(234, 238, 240);
+      font-family:var(--serif);
       color:var(--ink);
       line-height:1.9;
-      overflow-x:hidden;                 /* iPhone tiny overflow protection */
+      overflow-x:hidden;
       -webkit-text-size-adjust:100%;
+      background:
+        radial-gradient(1200px 680px at 10% 10%, rgba(100,8,58,.20), transparent 60%),
+        radial-gradient(900px 520px at 92% 18%, rgba(170,70,120,.16), transparent 55%),
+        radial-gradient(1000px 650px at 55% 105%, rgba(35,24,30,.10), transparent 60%),
+        #eceff1;
     }
 
     img{ max-width:100%; height:auto; display:block; }
-    a{ color:inherit; text-decoration:none; }
-    a:active{ text-decoration: underline; } /* click/press underline only */
 
-    /* optional: avoids iOS tap highlight “flash” without changing your link styles */
-    a{ -webkit-tap-highlight-color: transparent; }
+    a{
+      color:inherit;
+      text-decoration:none;
+      -webkit-tap-highlight-color:transparent;
+    }
+    a:active{ text-decoration:underline; }
 
-    .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px; }
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 20px;
+    }
+
     .muted{ color:var(--muted); }
     .small{ font-size:.95rem; }
 
-    /* Header */
+    /* =========================
+       HEADER
+    ========================= */
     header{
-      background:var(--header);
-      color:#ff7a1a;
-      border-bottom:1px solid rgba(255,255,255,.10);
+      background: rgba(31,26,29,.88);
+      border-bottom:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
     }
 
     .header-inner{
@@ -61,30 +94,29 @@
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      padding: 10px 0;
+      padding:10px 0;
     }
 
     .brand{
       display:flex;
       flex-direction:column;
       gap:2px;
-      min-width:220px;
-      min-width:0; /* iOS flex overflow fix */
+      min-width:0;
     }
 
     .brand-top{
-      color:#ff7a1a;
-      letter-spacing:4px;
+      font-family:var(--serif);
       font-weight:900;
-      text-transform:uppercase;
       font-size:2.25rem;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      color:#fafaf9;
       line-height:1.1;
-      overflow-wrap:anywhere; /* protects iPhone widths */
+      overflow-wrap:anywhere;
     }
 
     .kss-font{
       font-family:"tt-modernoir", sans-serif;
-      font-weight:700;
       font-size:15px;
       letter-spacing:8px;
       color:#ffffff;
@@ -93,169 +125,415 @@
     }
 
     @keyframes glow{
-      0%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
-      50%{ text-shadow:0 0 8px rgba(255,255,255,0.7); }
-      100%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
+      0%{ text-shadow:0 0 0 rgba(255,255,255,.3); }
+      50%{ text-shadow:0 0 8px rgba(255,255,255,.7); }
+      100%{ text-shadow:0 0 0 rgba(255,255,255,.3); }
     }
 
     nav{
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:14px;
       flex-wrap:wrap;
       justify-content:flex-end;
+      font-family:var(--sans);
     }
 
+    /* Invisible text-links (no button look) */
     nav a{
       color:var(--header-ink);
+      font-weight:700;
+      letter-spacing:.3px;
       opacity:.92;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      transition:opacity .12s ease, border-color .12s ease, transform .12s ease;
-      background:rgba(255,255,255,.04);
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      transition:opacity .12s ease, transform .12s ease;
       white-space:nowrap;
     }
 
     nav a:hover{
       opacity:1;
-      border-color:rgba(255,255,255,.28);
       transform:translateY(-1px);
+      text-decoration:underline;
     }
 
-    /* Main */
+    /* =========================
+       SECTIONS & TYPE
+    ========================= */
     main{ display:block; }
 
     .section{
-      padding:44px 0;
+      padding:44px 0 56px;
       border-bottom:1px solid var(--line);
     }
 
-    /* Typography */
     .kicker{
-      color:var(--accent);
-      font-weight:700;
+      font-family:var(--sans);
+      font-weight:800;
+      font-size:.85rem;
       letter-spacing:1.6px;
       text-transform:uppercase;
-      font-size:.9rem;
+      color:var(--accent);
       margin:0 0 10px;
     }
 
-    h1,h2,h3{ margin:0 0 12px; line-height:1.22; }
-    h1{ font-size:clamp(2rem, 1.4rem + 2.2vw, 3rem); }
-    h2{ font-size:clamp(1.35rem, 1.1rem + 1vw, 2rem); margin-top:12px; }
-    h3{ font-size:1.1rem; margin-top:18px; }
-    p{ margin:0 0 14px; }
+    h1,h2,h3{
+      margin:0 0 12px;
+      line-height:1.18;
+    }
 
-      p{ margin:0 0 14px; 
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;}
+    h1{
+      font-family:var(--serif);
+      font-size:clamp(2.1rem,1.5rem + 2.2vw,3.1rem);
+      letter-spacing:-.01em;
+    }
 
-    /* Animated phrase (kept) */
+    h2{
+      font-family:var(--serif);
+      font-size:clamp(1.35rem,1.1rem + 1vw,2.05rem);
+      letter-spacing:-.01em;
+      margin-top:12px;
+    }
+
+    h3{
+      font-family:var(--sans);
+      font-size:1.05rem;
+      font-weight:600;
+      color:var(--muted);
+      margin-top:14px;
+    }
+
+    p{
+      font-family:var(--sans);
+      margin:0 0 14px;
+    }
+
+    /* =========================
+       ANIMATED PHRASE
+    ========================= */
     .animated-phrase{
-      display:inline-block;
-      position:relative;
-      color:var(--accent);
+      font-family:var(--serif);
       font-weight:900;
+      color:var(--accent);
+      position:relative;
+      display:inline-block;
       white-space:nowrap;
       animation:slide-across 4.5s ease-in-out infinite;
     }
 
     @keyframes slide-across{
-      0%   { transform: translateX(-30%); opacity: 0; }
-      10%  { opacity: 1; }
-      70%  { transform: translateX(0); opacity: 1; }
-      100% { transform: translateX(30%); opacity: 0; }
+      0%{ transform:translateX(-30%); opacity:0; }
+      10%{ opacity:1; }
+      70%{ transform:translateX(0); opacity:1; }
+      100%{ transform:translateX(30%); opacity:0; }
     }
+.animated-phrase::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+  width:100%;
+  height:3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(146,5,83,.25) 18%,
+    rgba(146,5,83,.95) 50%,
+    rgba(146,5,83,.25) 82%,
+    transparent 100%
+  );
+  animation:underline-slide 4.5s ease-in-out infinite;
+}
 
-    .animated-phrase::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:-4px;
-      width:100%;
-      height:3px;
-      background:var(--accent);
-      animation:underline-slide 4.5s ease-in-out infinite;
-    }
 
     @keyframes underline-slide{
-      0%   { transform:translateX(-120%); opacity:0; }
-      20%  { opacity:1; }
-      70%  { transform:translateX(0); opacity:1; }
-      100% { transform:translateX(120%); opacity:0; }
+      0%{ transform:translateX(-120%); opacity:0; }
+      20%{ opacity:1; }
+      70%{ transform:translateX(0); opacity:1; }
+      100%{ transform:translateX(120%); opacity:0; }
     }
 
-    /* Content cards */
-    .category{
+    /* =========================
+       DIVIDER
+    ========================= */
+    .section-divider{
+      border:0;
+      height:2px;
+      margin:34px 0;
+      background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.65),
+        rgba(100,8,58,.20),
+        rgba(255,255,255,.65),
+        transparent
+      );
+      opacity:.95;
+    }
+
+    /* =========================
+       GLASS BENTO
+    ========================= */
+    .bento{
       margin-top:22px;
-      padding:18px 18px 8px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:rgba(255,255,255,.55);
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:start; /* keeps columns aligned at the top */
     }
 
-    .category-title{
-      margin:0 0 10px;
-      font-size:1.25rem;
+    .stack{
+      display:grid;
+      gap:18px;
+    }
+
+    .bento-card{
+      padding:18px;
+      border-radius:calc(var(--radius) + 6px);
+      background:var(--glass-bg);
+      border:1px solid var(--glass-border);
+      box-shadow:var(--glass-shadow);
+      backdrop-filter:blur(var(--glass-blur));
+      -webkit-backdrop-filter:blur(var(--glass-blur));
+      position:relative;
+      overflow:hidden;
+    }
+
+    .bento-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(700px 220px at 10% 0%, rgba(255,255,255,.26), transparent 75%),
+        radial-gradient(520px 240px at 90% 20%, rgba(165, 109, 140, 0.18), transparent 80%);
+      pointer-events:none;
+    }
+
+    .bento-card > *{ position:relative; }
+
+    .bento-kicker{
+      font-family:var(--sans);
+      font-weight:800;
+      font-size:.8rem;
+      letter-spacing:1.4px;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin:0 0 6px;
+    }
+
+    /* =========================
+       LINK PILLS
+    ========================= */
+    .link-grid{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .link-pill{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--glass-border-soft);
+      background:rgba(255,255,255,.14);
+      backdrop-filter:blur(var(--glass-blur));
+      -webkit-backdrop-filter:blur(var(--glass-blur));
+      font-family:var(--sans);
+      line-height:1.35;
+      transition:transform .12s ease, background .12s ease, border-color .12s ease;
+      text-decoration:none;
+    }
+
+    .link-pill:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.22);
+      border-color:rgba(210,170,190,.34);
+      text-decoration:none;
+    }
+
+    .link-pill .title{ font-weight:650; letter-spacing:.1px; }
+    .link-pill .meta{
+      font-size:.9rem;
+      color:var(--muted);
+      font-weight:600;
+      white-space:nowrap;
+    }
+
+    /* =========================
+       PILL DROPDOWN (Glass)
+    ========================= */
+    .pill-dd{
+      margin:16px 0 0;        /* sits neatly under the left bento content */
+      width:100%;             /* ensures it lines up under the left card */
+      max-width:none;         /* do NOT cap width inside the bento card */
+    }
+
+    .pill-dd summary{
+      list-style:none;
+      cursor:pointer;
+      user-select:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+
+      background:rgba(255,255,255,.16);
+      border:1px solid var(--glass-border);
+
+      backdrop-filter:blur(var(--glass-blur));
+      -webkit-backdrop-filter:blur(var(--glass-blur));
+
+      font-weight:800;
+      line-height:1;
+      font-family:var(--sans);
+      text-decoration:none;
+    }
+
+    .pill-dd summary::-webkit-details-marker{ display:none; }
+
+    .pill-dd summary::after{
+      content:"▾";
       font-weight:900;
+      transform:translateY(-1px);
+      transition:transform .18s ease;
+    }
+
+    .pill-dd[open] summary::after{
+      transform:rotate(180deg) translateY(1px);
+    }
+
+    .pill-dd .pill-panel{
+      margin-top:10px;
+      padding:14px 16px;
+      border-radius:16px;
+
+      background:rgba(255,255,255,.16);
+      border:1px solid var(--glass-border);
+
+      backdrop-filter:blur(var(--glass-blur));
+      -webkit-backdrop-filter:blur(var(--glass-blur));
+
+      box-shadow:var(--glass-shadow-soft);
+      line-height:1.7;
+      font-family:var(--sans);
+    }
+
+    /* =========================
+       SPONSORED: REEF THEME
+    ========================= */
+    .sponsored summary{
+      gap:12px;
+    }
+
+    .sponsor-tag{
+      font-family:var(--sans);
+      font-size:.7rem;
+      font-weight:800;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      padding:4px 8px;
+      border-radius:999px;
+      background: rgba(146,5,83,.16);
+      border:1px solid rgba(146,5,83,.20);
+      color: var(--accent);
+    }
+
+    .reef-panel{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .reef-panel::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(520px 220px at 12% 0%, rgba(146,5,83,.16), transparent 70%),
+        radial-gradient(420px 240px at 92% 18%, rgba(255,190,120,.12), transparent 72%),
+        radial-gradient(520px 260px at 58% 105%, rgba(160,120,180,.10), transparent 78%);
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    .reef-panel > *{ position:relative; }
+
+    .sponsor-headline{
+      font-family:var(--serif);
+      font-size:1.25rem;
+      line-height:1.3;
+      margin:0 0 8px;
       color:var(--ink);
     }
 
-    .item-list{
-      margin:0;
-      padding-left:20px;
+    .sponsor-copy{
+      margin:0 0 12px;
+      color:var(--muted);
     }
 
-    .item-list li{
-      margin:10px 0;
+    .sponsor-list{
+      margin:0 0 12px;
+      padding-left:18px;
     }
 
-    .link-centered{
-      display:block;
-      text-align:center;
-      margin:16px 0 6px;
+    .sponsor-list li{ margin:6px 0; }
+
+    .sponsor-offer{
+      margin:0 0 14px;
       color:var(--accent);
       font-weight:700;
     }
-    .link-centered:hover{ text-decoration:underline; }
 
-    /* Buttons */
+    /* =========================
+       BUTTONS
+    ========================= */
     .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; }
+
     .btn{
       display:inline-block;
-      padding:10px 18px;
-      border-radius:999px;
-      border: transparent;
-      background: rgba(255,255,255,.75);
-      color: var(--accent);
+      padding:.7rem 1.1rem;
+      border-radius:10px;
+      background:var(--accent);
+      color:#fff;
+      border:none;
       font-weight:800;
+      font-family:var(--sans);
+      cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+      text-decoration:none;
+      transition:transform .12s ease, filter .12s ease;
     }
-    .btn:hover{ text-decoration:underline; }
 
+    .btn.secondary{
+      background:rgba(255,255,255,.55);
+      color:var(--ink);
+      border:1px solid rgba(0,0,0,.08);
+    }
 
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.03);
+      text-decoration:none;
+    }
 
-  /* Divider */
-  .section-divider{
-    border:0;
-    height:2px;
-    margin:44px 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0,0,0,.55),
-      rgba(0,0,0,.18),
-      rgba(0,0,0,.55),
-      transparent
-    );
-    opacity:.9;
+    a.btn:active,
+    a.btn:hover{ text-decoration:none; }
 
-  }
-    /* Footer */
+    /* =========================
+       FOOTER
+    ========================= */
     footer{
-      background:var(--header);
+      background:rgba(31,26,29,.90);
       color:var(--header-ink);
-      border-top:1px solid rgba(255,255,255,.10);
+      border-top:1px solid rgba(255,255,255,.14);
       padding:18px 0;
+      backdrop-filter:blur(var(--glass-blur));
+      -webkit-backdrop-filter:blur(var(--glass-blur));
     }
 
     .footer-inner{
@@ -265,6 +543,7 @@
       gap:14px;
       flex-wrap:wrap;
       text-align:center;
+      font-family:var(--sans);
     }
 
     .footer-links{
@@ -278,14 +557,30 @@
     .footer-links a{
       padding:8px 10px;
       border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      opacity:.9;
-      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.18);
+      opacity:.95;
+      background:rgba(255,255,255,.06);
+      backdrop-filter:blur(var(--glass-blur));
+      -webkit-backdrop-filter:blur(var(--glass-blur));
       color:var(--header-ink);
+      transition:transform .12s ease, border-color .12s ease, background .12s ease;
+      text-decoration:none;
     }
-    .footer-links a:hover{ opacity:1; border-color:rgba(255,255,255,.28); }
 
-    /* Responsive */
+    .footer-links a:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,.30);
+      background:rgba(255,255,255,.09);
+      text-decoration:none;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+    @media (max-width:900px){
+      .bento{ grid-template-columns:1fr; }
+    }
+
     @media (max-width:720px){
       .wrap{ padding:0 12px; }
 
@@ -295,50 +590,39 @@
         gap:12px;
       }
 
-      .brand{ min-width:0; }
-
       .brand-top{
         font-size:1.6rem;
         letter-spacing:2px;
       }
+
       .kss-font{
         font-size:12px;
         letter-spacing:4px;
       }
 
       nav{ justify-content:flex-start; }
-      nav a{
-        font-size:.85rem;
-        padding:6px 10px;
-        border-radius:10px;
-      }
 
-        .section-divider{
-    border:0;
-    height:2px;
-    margin:44px 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0,0,0,.55),
-      rgba(0,0,0,.18),
-      rgba(0,0,0,.55),
-      transparent
-    );
-    opacity:.9;
+      .animated-phrase{ white-space:normal; }
+
+      /* make pill full width in the left card on phones */
+      .pill-dd summary{
+        width:100%;
+        justify-content:center;
+      }
 
       .footer-links{
         flex-direction:column;
         align-items:flex-start;
       }
-      .footer-links a{
-        width:100%;
-      }
-
-      /* If the animated phrase risks clipping, allow wrapping on very small screens */
-      .animated-phrase{ white-space:normal; }
+      .footer-links a{ width:100%; }
     }
-    
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .animated-phrase,
+      .animated-phrase::after{ animation:none; }
+      nav a, .btn, .footer-links a, .link-pill{ transition:none; }
+    }
   </style>
 </head>
 
@@ -353,14 +637,16 @@
 
     <nav>
       <a href="IELTSPTEPLUS.html">IELTS/PTE+</a>
-       <a href="MicroLessons.html">Micro Lessons</a>
-        <a href="index.html">Home</a>
+      <a href="MicroLessons.html">Micro Lessons</a>
+      <a href="index.html">Home</a>
     </nav>
   </div>
 </header>
 
 <div class="wrap" style="padding-top:14px;">
-  <h1><span class="animated-phrase">meaningful language learning</span></h1>
+  <h2 style="margin:0;">
+     <h2 style="margin:0;"><span class="animated-phrase">meaningful English language learning</span></h2>
+  </h2>
 </div>
 
 <main>
@@ -370,103 +656,96 @@
       <h1>ESL Games</h1>
       <h2>for Classroom Teaching and Self-Study</h2>
 
-      <p>
-        Games to do as a class or on your phone.
-      </p>
+      <p>Games to do as a class or on your phone.</p>
 
-        <hr class="section-divider">       
-            <h2> Vocab Games</h2>
-      
-        <li><a href="games/idioms-weather/index.html"> Weather Idioms Game</a></li>
+      <hr class="section-divider">
 
-        <li><a href="https://koalaspiessydney.github.io/MoneyIdioms/">Money Idioms // B2 intermediate </a></li>
-        
-            <hr class="section-divider">       
-             <h2> Pronunciation Games</h2>
-      
-        <li><a href= "bingo2.html"> BINGO! // long and short e, i, and y sounds</a></li>
-      
-       <hr class="section-divider">       
-    
-        <!-- =========================
-     DUMMY PILL DROPDOWN (copy/paste)    ========================= -->
+      <!-- GLASS BENTO LAYOUT -->
+      <div class="bento">
 
-<style>
-  /* Pill dropdown (dummy) */
-  .pill-dd{
-    margin: 18px 0;
-    max-width: 680px;
-  }
+        <!-- LEFT: Vocab Games (bigger) -->
+        <div class="bento-card">
+          <div class="bento-kicker">Vocab Games</div>
+          <h2>Vocab Games</h2>
+          <p class="muted" style="margin-top:-4px;">Quick, mobile-friendly vocabulary practice.</p>
 
-  .pill-dd summary{
-    list-style: none;                 /* remove default marker */
-    cursor: pointer;
-    user-select: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+          <div class="link-grid">
+            <a class="link-pill" href="games/idioms-weather/index.html">
+              <span class="title">Weather Idioms Game</span>
+              <span class="meta">Open</span>
+            </a>
 
-    padding: 10px 16px;
-    border-radius: 999px;
+            <a class="link-pill" href="https://koalaspiessydney.github.io/MoneyIdioms/">
+              <span class="title">Money Idioms // B2 intermediate</span>
+              <span class="meta">Open</span>
+            </a>
+          </div>
 
-    background: rgba(255,255,255,.65);
-    border: 1px solid rgba(0,0,0,.10);
+          <!-- ✅ SPONSORED PILL: now correctly inside LEFT bento card -->
+          <details class="pill-dd sponsored">
+            <summary>
+              <span class="sponsor-tag">Sponsored</span>
+              ReefKind Volunteer Internships · Great Barrier Reef
+            </summary>
 
-    font-weight: 800;
-    line-height: 1;
-  }
+            <div class="pill-panel reef-panel">
+              <h3 class="sponsor-headline">Swap screens for sea breeze</h3>
 
-  /* remove marker on Safari */
-  .pill-dd summary::-webkit-details-marker{ display:none; }
+              <p class="sponsor-copy">
+                A volunteer internship program for international students who want real-world experience,
+                new friends, and a week that feels like a postcard. Learn, help, and head home with stories
+                (and better English) that actually happened.
+              </p>
 
-  .pill-dd summary::after{
-    content: "▾";
-    font-weight: 900;
-    transform: translateY(-1px);
-    transition: transform .18s ease;
-  }
+              <ul class="sponsor-list">
+                <li><strong>Reef clean-up mornings</strong> — light volunteer work + team support</li>
+                <li><strong>Eco-tour shadowing</strong> — hospitality + workplace English in action</li>
+                <li><strong>Community nights</strong> — BBQs, board games, and conversation circles</li>
+                <li><strong>Certificate + reference</strong> — for resumes and future study</li>
+              </ul>
 
-  .pill-dd[open] summary::after{
-    transform: rotate(180deg) translateY(1px);
-  }
+              <p class="sponsor-offer">
+                Bonus: free placement help + a friendly “first week” guide for new arrivals.
+              </p>
 
-  .pill-dd .pill-panel{
-    margin-top: 10px;
-    padding: 14px 16px;
-    border-radius: 16px;
+              <div class="actions" style="margin-top:0;">
+                <a class="btn" href="contact.html">Apply</a>
+                <a class="btn secondary" href="#top">Program details</a>
+              </div>
 
-    background: rgba(255,255,255,.55);
-    border: 1px solid rgba(0,0,0,.10);
+              <p class="small muted" style="margin:12px 0 0;">
+                Sponsored placement · fictional program for demonstration purposes
+              </p>
+            </div>
+          </details>
+        </div>
 
-    line-height: 1.7;
-  }
+        <!-- RIGHT: stacked cards -->
+        <div class="stack">
 
-  /* Optional: make the pill full width on phones */
-  @media (max-width: 720px){
-    .pill-dd summary{
-      width: 100%;
-      justify-content: center;
-    }
-  }
-</style>
+          <div class="bento-card">
+            <div class="bento-kicker">Pronunciation Games</div>
+            <h2>Pronunciation Games</h2>
 
-<details class="pill-dd">
-  <summary>Dummy dropdown pill</summary>
-  <div class="pill-panel">
-    <p style="margin:0 0 10px;">
-      This is placeholder content. Put anything here: text, links, lists, etc.
-    </p>
-    <ul style="margin:0; padding-left:18px;">
-      <li>Item one</li>
-      <li>Item two</li>
-      <li>Item three</li>
-    </ul>
-  </div>
-</details>
+            <div class="link-grid">
+              <a class="link-pill" href="bingo2.html">
+                <span class="title">BINGO! // long and short e, i, and y sounds</span>
+                <span class="meta">Open</span>
+              </a>
+            </div>
+          </div>
 
+          <div class="bento-card">
+            <div class="bento-kicker">Extras</div>
+            <h2>Extras</h2>
+            <p class="muted" style="margin-top:-4px;">Add more game tiles here as you build.</p>
+          </div>
 
- 
+        </div>
+      </div>
 
+    </div>
+  </section>
 
   <section id="contact" class="section">
     <div class="wrap">
@@ -500,11 +779,6 @@
 
 </body>
 </html>
-
-
-
-
-
 
 
 
