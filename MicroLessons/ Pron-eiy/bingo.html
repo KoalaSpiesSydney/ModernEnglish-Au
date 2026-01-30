@@ -69,6 +69,91 @@ header span{
   .home-btn:hover{ background:var(--accent); border-color:transparent; }
 }
 
+/* ===== QR (Top Left) ===== */
+.qr-wrap{
+  position:absolute;
+  left:12px;
+  top:12px;
+  z-index:60;
+}
+.qr-toggle{
+  padding:.45rem .75rem;
+  border-radius:10px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  text-decoration:none;
+  font-weight:900;
+  border:1px solid rgba(255,255,255,.18);
+  cursor:pointer;
+  line-height:1;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+@media (hover:hover){
+  .qr-toggle:hover{ background:var(--accent); border-color:transparent; }
+}
+.qr-panel{
+  position:absolute;
+  left:0;
+  top:44px;
+  width:220px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:.75rem;
+  box-shadow:0 10px 28px rgba(0,0,0,.18);
+  display:none;
+}
+.qr-panel.open{ display:block; }
+.qr-title{
+  font-weight:900;
+  margin:0 0 .45rem;
+  color:var(--ink);
+}
+.qr-code{
+  width:180px;
+  height:180px;
+  margin:.35rem auto .5rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.qr-url{
+  font-size:.78rem;
+  color:rgba(0,0,0,.65);
+  line-height:1.3;
+  word-break:break-all;
+  margin:0;
+}
+/* ===== TRUE BACKGROUND LAYER ===== */
+.bg-media{
+  position: fixed;       /* removes it from normal flow */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;           /* forces it behind all content */
+  overflow: hidden;
+  background: #000;
+}
+
+.bg-media img,
+.bg-media video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.55);
+}
+
+/* Safety: ensure content sits above */
+header,
+main,
+footer{
+  position: relative;
+  z-index: 1;
+}
+
 /* ===== Main ===== */
 main{
   flex:1;
@@ -77,6 +162,11 @@ main{
   padding:1rem;
 }
 
+/* Better tap/reading on small screens */
+p{ line-height:1.5; }
+.btn, .tile, .pill, .qr-toggle, .home-btn{ touch-action:manipulation; }
+
+/* Review bits */
 .review-top{margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--line)}
 .sound-grid{display:grid;grid-template-columns:1fr;gap:1rem}
 .sound-card{background:#f9fbfb;border:1px solid var(--line);border-radius:16px;padding:1rem;text-align:center}
@@ -88,6 +178,21 @@ main{
 .more-info a{color:var(--accent);font-weight:800;text-decoration:none}
 .more-info a:hover{text-decoration:underline}
 @media (min-width:700px){.sound-grid{grid-template-columns:1fr 1fr}}
+
+/* ===== Phone visibility: thin coloured borders for buttons ===== */
+.btn{
+  border:2px solid rgba(0,0,0,.18);   /* default border (fallback) */
+}
+
+/* border colour variants */
+.btn.b-green{ border-color:#0b5d3a; } /* dark green */
+.btn.b-blue{  border-color:#0b3a8a; } /* dark blue */
+.btn.b-pink{  border-color:#8a1b5a; } /* dark pink */
+
+/* optional: slightly stronger border on small screens */
+@media (max-width:520px){
+  .btn{ border-width:3px; }
+}
 
 .panel{
   background:#fff;
@@ -113,28 +218,11 @@ main{
   font-weight:800;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
 }
 .btn.secondary{
   background:#e9eff0;
   color:#000;
   border:1px solid rgba(0,0,0,.08);
-
-
-  /* ===== Button border visibility (add) ===== */
-.btn{
-  border:2px solid rgba(0,0,0,.18) !important; /* overrides border:none */
-}
-
-.btn.b-blue{  border-color:#0b3a8a !important; }  /* dark blue */
-.btn.b-green{ border-color:#0b5d3a !important; }  /* dark green */
-.btn.b-pink{  border-color:#8a1b5a !important; }  /* dark pink */
-
-/* optional: slightly thicker on phones */
-@media (max-width:520px){
-  .btn{ border-width:3px !important; }
-}
-
 }
 .btn:disabled{
   opacity:.55;
@@ -164,19 +252,29 @@ main{
   cursor:pointer;
   user-select:none;
   -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
+  line-height:1.2;
+  text-align:center;
+  word-break:break-word;
 }
 
-.tile.marked{
-  background:rgba(0,150,136,.08);
-  border-color:var(--accent);
-}
+
 .tile.marked::after{
   position:absolute;
   top:8px;
   right:10px;
   font-weight:900;
   color:var(--accent);
+}
+
+/* Responsive board sizing */
+@media (max-width:520px){
+  main{ padding:.85rem; }
+  .board{ gap:10px; }
+  .tile{ min-height:68px; padding:12px; font-size:.95rem; }
+}
+@media (max-width:380px){
+  .board{ gap:8px; }
+  .tile{ min-height:62px; padding:10px; font-size:.9rem; }
 }
 
 /* =========================
@@ -193,7 +291,7 @@ main{
   animation:shake .35s ease;
 }
 
-/* ===== Review ===== */
+/* ===== Review (game results) ===== */
 .review{
   border-top:1px solid var(--line);
   margin-top:1.25rem;
@@ -255,11 +353,11 @@ main{
   align-items:center;
   justify-content:center;
   -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
 }
 @media (hover:hover){
   .play-mini:hover{ background:#fff; }
 }
+
 .links{
   display:flex;
   justify-content:center;
@@ -271,6 +369,75 @@ main{
   text-decoration: none;
 }
 
+/* =========================
+   DROPDOWN PILL (Review)
+   ========================= */
+.pill{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.8rem;
+  padding:.85rem 1rem;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.12);
+  background:#fff;
+  font-weight:900;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.pill .pill-left{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  min-width:0;
+}
+.pill .pill-title{
+  color:var(--accent);
+  letter-spacing:.4px;
+  white-space:nowrap;
+}
+.pill .pill-hint{
+  font-weight:700;
+  color:rgba(0,0,0,.6);
+  font-size:.95rem;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.pill .pill-chevron{
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.10);
+  background:rgba(0,0,0,.03);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  line-height:1;
+}
+@media (hover:hover){
+  .pill:hover{ border-color:rgba(0,0,0,.18); }
+  .pill:hover .pill-chevron{ background:rgba(0,0,0,.06); }
+}
+
+.pill-panel{
+  margin-top:.8rem;
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:16px;
+  background:#fff;
+  padding:1rem;
+  display:none;
+}
+.pill-panel.open{ display:block; }
+
+/* optional: less spacing when in pill panel */
+.pill-panel .review-top{
+  margin:0;
+  padding:0;
+  border:0;
+}
 
 footer{
   background:var(--card);
@@ -285,7 +452,6 @@ footer{
   font-family: "Trebuchet MS", Arial, sans-serif !important;
   font-weight: 500 !important;
 }
-
 .links a.btn:hover,
 .links a.btn:focus,
 .links a.btn:visited,
@@ -293,12 +459,87 @@ footer{
   text-decoration: none !important;
 }
 
+.panel{
+  position: relative;
+  background: transparent;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* transparent background layer */
+.panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(255,255,255,0.78); /* transparency level */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index:0;
+}
+
+/* keep content solid */
+.panel > *{
+  position: relative;
+  z-index:1;
+}
+
+/* Make the panel host a background layer */
+/* Background layer inside the panel */
+.panel-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+.panel-bg img,
+.panel-bg video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:brightness(.55);
+}
+
+/* Ensure panel content stays above */
+.panel > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Optional: “glass” feel */
+.panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(6px);
+}
+
 </style>
+
+<!-- QRCode.js (client-side generator) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 
 <body>
+<div class="bg-media" aria-hidden="true">
+  <video autoplay muted loop playsinline preload="metadata">
+    <source src="bingo.mp4" type="video/mp4">
+  </video>
+</div>
 
 <header>
+  <!-- QR (Top Left) -->
+  <div class="qr-wrap">
+    <button class="qr-toggle" id="qrToggle" type="button" aria-expanded="false" aria-controls="qrPanel">QR</button>
+    <div class="qr-panel" id="qrPanel" role="dialog" aria-label="QR code panel">
+      <p class="qr-title">Open this page</p>
+      <div class="qr-code" id="qrCode" aria-label="QR code"></div>
+      <p class="qr-url" id="qrUrl"></p>
+    </div>
+  </div>
+
   <a href="index.html" class="home-btn">Home</a>
   MODERN ENGLISH AUSTRALIA
   <span> Long ee & short i Bingo</span>
@@ -306,64 +547,77 @@ footer{
 
 <main>
 <section class="panel">
-<!-- ===== Review Section ===== -->
-<div class="review-top">
 
-  <p>
-    <strong>Review</strong><br>
-    Listen to the <strong>short i</strong> and <strong>long ee</strong> videos below, then play
-    <strong>Check Bingo</strong>.
-  </p>
 
-  <div class="sound-grid">
+<!-- ===== Review Dropdown Pill ===== -->
+<button class="pill" id="reviewPill" type="button" aria-expanded="false" aria-controls="reviewPanel">
+  <span class="pill-left">
+    <span class="pill-title">Review</span>
+    <span class="pill-hint">Short i + Long ee videos</span>
+  </span>
+  <span class="pill-chevron" aria-hidden="true">⌄</span>
+</button>
 
-    <!-- Short i -->
-    <div class="sound-card">
-      <h3>Short i /ɪ/</h3>
+<div class="pill-panel" id="reviewPanel">
+  <!-- ===== Review Section (inside dropdown) ===== -->
+  <div class="review-top">
 
-      <video class="sound-video" controls playsinline preload="metadata">
-        <source src="Ship- it.mov" type="video/mp4">
-      </video>
+    <p>
+      <strong>Review</strong><br>
+      Listen to the <strong>short i</strong> and <strong>long ee</strong> videos below, then play
+      <strong>Check Bingo</strong>.
+    </p>
 
-      <ul>
-        <li>ship</li><li>bin</li><li>sit</li><li>hit</li><li>pick</li>
-      </ul>
+    <div class="sound-grid">
+
+      <!-- Short i -->
+      <div class="sound-card">
+        <h3>Short i /ɪ/</h3>
+
+        <video class="sound-video" controls playsinline preload="metadata">
+          <source src="Ship- it.mov" type="video/mp4">
+        </video>
+
+        <ul>
+          <li>ship</li><li>bin</li><li>sit</li><li>hit</li><li>pick</li>
+        </ul>
+      </div>
+
+      <!-- Long ee -->
+      <div class="sound-card">
+        <h3>Long ee /iː/</h3>
+
+        <video class="sound-video" controls playsinline preload="metadata">
+          <source src="please-ee.mov" type="video/mp4">
+        </video>
+
+        <ul>
+          <li>sheep</li><li>bean</li><li>seat</li><li>heat</li><li>peak</li>
+        </ul>
+      </div>
+
     </div>
 
-    <!-- Long ee -->
-    <div class="sound-card">
-      <h3>Long ee /iː/</h3>
-
-      <video class="sound-video" controls playsinline preload="metadata">
-        <source src="please-ee.mov" type="video/mp4">
-      </video>
-
-      <ul>
-        <li>sheep</li><li>bean</li><li>seat</li><li>heat</li><li>peak</li>
-      </ul>
-    </div>
+    <p class="more-info">
+      <strong>More information:</strong>
+      <a href="sounds-i-e-y.html">Sounds of i, e and y</a>
+    </p>
 
   </div>
-
-  <p class="more-info">
-    <strong>More information:</strong>
-    <a href="sounds-i-e-y.html">Sounds of i, e and y</a>
-  </p>
-
+  <!-- ===== End Review Section ===== -->
 </div>
-<!-- ===== End Review Section ===== -->
+<!-- ===== End Review Dropdown Pill ===== -->
 
-
-
-<p><strong>Instructions</strong></p>
+<p style="margin-top:1rem;"><strong>Instructions</strong></p>
 <p><strong>Classroom:</strong> Project onto the whiteboard- play audio Students play on their phones. After a few rounds you can write down the words, put them in a hat and have the teacher or student read them out.</p>
 <p><strong>Self-study:</strong> listen, mark your board, then press <strong>Check Bingo</strong>.</p>
 <p>There is a <strong>Repeat button</strong> to lay again<strong> Check Bingo</strong> to review after the game.</p>
+
 <div class="controls">
-  <button class="btn b-blue" id="playBtn" type="button">Play</button>
-  <button class="btn secondary b-green" id="repeatBtn" type="button">Repeat</button>
-  <button class="btn secondary b-pink" id="resetBtn" type="button">Reset</button>
-  <button class="btn secondary b-blue" id="checkBtn" type="button">Check Bingo</button>
+  <button class="btn" id="playBtn" type="button">Play</button>
+  <button class="btn secondary" id="repeatBtn" type="button">Repeat</button>
+  <button class="btn secondary" id="resetBtn" type="button">Reset</button>
+  <button class="btn secondary" id="checkBtn" type="button">Check Bingo</button>
 </div>
 
 <div class="board" id="board" aria-label="Bingo board"></div>
@@ -389,36 +643,115 @@ footer{
 
 </section>
 </main>
+
 <div class="back-wrap">
   <button class="btn back-btn" onclick="history.back()">← Back</button>
 </div>
 
-    <div class="links">
-      <a href="iminimalpairs.html" class="btn"> Practice identifying sounds </a>
-      <a href="A3pract.html" class="btn">Practice Say long and short sounds/a>
-       <a href="A3pract.html" class="btn">Listening Gapfill </a>
-    </div>
-  </main>
+<div class="links">
+  <a href="iminimalpairs.html" class="btn"> Practice identifying sounds </a>
+  <a href="A3pract.html" class="btn">Practice Say long and short sounds/a>
+  <a href="A3pract.html" class="btn">Listening Gapfill </a>
+</div>
 
 <footer>
 © Koala Spies Sydney · Modern English Australia · All Rights Reserved
 </footer>
 
 <script>
+/* =========================
+   QR GENERATOR (Top Left)
+   ========================= */
+(function(){
+  const toggle = document.getElementById("qrToggle");
+  const panel = document.getElementById("qrPanel");
+  const box = document.getElementById("qrCode");
+  const urlLabel = document.getElementById("qrUrl");
+
+  if(!toggle || !panel || !box || !urlLabel) return;
+
+  let made = false;
+
+  function make(){
+    const url = window.location.href;
+    urlLabel.textContent = url;
+
+    box.innerHTML = "";
+    if(typeof QRCode !== "function") {
+      box.textContent = "QR library not loaded.";
+      return;
+    }
+
+    new QRCode(box, {
+      text: url,
+      width: 180,
+      height: 180,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+
+    made = true;
+  }
+
+  function setOpen(open){
+    panel.classList.toggle("open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if(open && !made) make();
+  }
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setOpen(!panel.classList.contains("open"));
+  });
+
+  document.addEventListener("click", (e) => {
+    if(panel.classList.contains("open")){
+      const within = panel.contains(e.target) || toggle.contains(e.target);
+      if(!within) setOpen(false);
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") setOpen(false);
+  });
+})();
+
+/* =========================
+   REVIEW DROPDOWN PILL
+   ========================= */
+(function(){
+  const pill = document.getElementById("reviewPill");
+  const panel = document.getElementById("reviewPanel");
+  if(!pill || !panel) return;
+
+  function setOpen(open){
+    panel.classList.toggle("open", open);
+    pill.setAttribute("aria-expanded", open ? "true" : "false");
+    const chev = pill.querySelector(".pill-chevron");
+    if(chev) chev.textContent = open ? "⌃" : "⌄";
+  }
+
+  pill.addEventListener("click", () => {
+    const open = panel.classList.contains("open");
+    setOpen(!open);
+  });
+
+  setOpen(false);
+})();
+
 /* ============================================================
    WORD POOL
    ============================================================ */
-
-   
 const ITEMS = [
   "ship","sheep","bin","been","beach","sheet","sick","seek",
-  "pill","peel","six","sleep","Tim","team","dim","dime",
+  "pill","peel","six","sleep","Tim","team","dim","deem",
   "bed","bead","fit","feet","hit","heat","sit","seat",
   "bit","beat","lip","leap","fill","feel","pick","peak",
   "tin","teen","lick","leak","still","steel","live","leave",
   "this","these","rid","read","did","deed","chick","cheek",
   "hit", "sin", "fifteen", "fifty", "sixty", "thirty", "fourteen",
   "believe", "lift", "cream", "criminal", "scenery", "pin", "leave",
+"believe", "lift", "cream", "finish", "scenery", "pin", "leave",
+  "middle", "media", "achieve", "treaty", "image", "critic", "mint",
 ];
 
 /* ============================================================
@@ -444,9 +777,6 @@ const playCalledNotOnBoardBtn = document.getElementById("playCalledNotOnBoardBtn
 
 /* ============================================================
    STATE
-   - boardWords: 16 words on the tiles
-   - callDeck: words to be called (FULL pool, so many will NOT be on board)
-   - calledHistory: everything that has been called this round
    ============================================================ */
 let boardWords = [];
 let callDeck = [];
@@ -477,14 +807,10 @@ function buildBoard(){
       t.classList.toggle("marked");
       t.setAttribute("aria-pressed", t.classList.contains("marked") ? "true" : "false");
 
-      /* =========================
-         SHAKE HINT WHEN WRONG
-         (marked but never called)
-         ========================= */
       if(t.classList.contains("marked") && calledHistory.length){
         const calledSet = new Set(calledHistory);
         if(!calledSet.has(t.textContent)){
-          t.classList.remove("shake");   // restart animation
+          t.classList.remove("shake");
           void t.offsetWidth;
           t.classList.add("shake");
           setTimeout(() => t.classList.remove("shake"), 400);
@@ -497,7 +823,6 @@ function buildBoard(){
 }
 
 function resetGame(){
-  // new board + new calling deck from FULL pool
   buildBoard();
   callDeck = shuffle(ITEMS);
   calledHistory = [];
@@ -666,3 +991,4 @@ resetGame();
 
 </body>
 </html>
+
