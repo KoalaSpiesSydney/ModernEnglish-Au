@@ -1,4 +1,4 @@
-!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -16,33 +16,49 @@
       --ink:#111111;
       --charcoal:#1e1e1e;
       --muted:#5f6a66;
-      --accent:#0f6f6a;
+      --accent:#0a6848;
       --line:rgba(0,0,0,.10);
 
       --header: var(--charcoal);
       --header-ink: #f5f5f5;
 
-      --max: 860px;
+      --max: 980px;
       --radius: 16px;
+
+      /* Fonts */
+      --serif: "Newsreader", Georgia, serif;
+      --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* GLASS */
+      --glass-blur: 14px;
+      --glass-bg: rgba(255,255,255,.18);
+      --glass-border: rgba(255,255,255,.34);
+      --glass-border-soft: rgba(255,255,255,.22);
+      --glass-shadow: 0 18px 55px rgba(0,0,0,.14);
+      --glass-shadow-soft: 0 10px 30px rgba(0,0,0,.10);
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+
     body{
       margin:0;
-      font-family:"Newsreader", Georgia, serif;
-        background:rgb(234, 238, 240);
+      font-family:var(--serif);
       color:var(--ink);
       line-height:1.9;
-      overflow-x:hidden;                 /* iPhone tiny overflow protection */
+      overflow-x:hidden;
       -webkit-text-size-adjust:100%;
+      background:
+        radial-gradient(1200px 680px at 20% 20%, rgba(164, 219, 217, 0.18), transparent 80%),
+        radial-gradient(900px 520px at 92% 18%, rgba(223, 191, 168, 0.14), transparent 75%),
+        radial-gradient(1000px 650px at 55% 105%, rgba(78, 80, 83, 0.1), transparent 80%),
+        rgb(234, 238, 240);
     }
+    
 
     img{ max-width:100%; height:auto; display:block; }
     a{ color:inherit; text-decoration:none; }
-    a:active{ text-decoration: underline; } /* click/press underline only */
-
-    /* optional: avoids iOS tap highlight “flash” without changing your link styles */
+    a:active{ text-decoration: underline; }
     a{ -webkit-tap-highlight-color: transparent; }
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px; }
@@ -51,9 +67,10 @@
 
     /* Header */
     header{
-      background:var(--header);
-      color:#ff7a1a;
-      border-bottom:1px solid rgba(255,255,255,.10);
+      background: rgba(30,30,30,.84);
+      border-bottom:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
     }
 
     .header-inner{
@@ -68,18 +85,18 @@
       display:flex;
       flex-direction:column;
       gap:2px;
-      min-width:220px;
-      min-width:0; /* iOS flex overflow fix */
+      min-width:0;
     }
 
     .brand-top{
-      color:#ff7a1a;
+      color:#f1f5f4;
       letter-spacing:4px;
       font-weight:900;
       text-transform:uppercase;
       font-size:2.25rem;
       line-height:1.1;
-      overflow-wrap:anywhere; /* protects iPhone widths */
+      overflow-wrap:anywhere;
+      font-family:var(--serif);
     }
 
     .kss-font{
@@ -98,65 +115,105 @@
       100%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
     }
 
-    nav{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
+nav{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  font-family:var(--sans);
+}
 
-    nav a{
-      color:var(--header-ink);
-      opacity:.92;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      transition:opacity .12s ease, border-color .12s ease, transform .12s ease;
-      background:rgba(255,255,255,.04);
-      white-space:nowrap;
-    }
+/* If you want invisible text-links (no button look), keep this. */
+nav a{
+  color:var(--header-ink);
+  font-weight:700;
+  letter-spacing:.3px;
+  opacity:.92;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  transition:opacity .12s ease, transform .12s ease;
+  white-space:nowrap;
+  
+}
 
-    nav a:hover{
-      opacity:1;
-      border-color:rgba(255,255,255,.28);
-      transform:translateY(-1px);
-    }
+nav a:hover{
+  opacity:1;
+  transform:translateY(-1px);
 
-    /* Main */
+}
+  
+
+    /* Sections */
     main{ display:block; }
-
     .section{
-      padding:44px 0;
-      border-bottom:1px solid var(--line);
+      padding:44px 0 56px;
+      border-bottom:1px solid rgba(0,0,0,.06);
     }
 
-    /* Typography */
+    /* Typography hierarchy */
+    h1,h2,h3{ margin:0 0 12px; line-height:1.18; }
+    h1{
+      font-family:var(--serif);
+      font-size:clamp(2.05rem, 1.45rem + 2.2vw, 3.05rem);
+      letter-spacing:-.01em;
+    }
+    h2{
+      font-family:var(--serif);
+      font-size:clamp(1.35rem, 1.1rem + 1vw, 2.05rem);
+      margin-top:12px;
+      letter-spacing:-.01em;
+    }
+    h3{
+      font-family:var(--sans);
+      font-size:1.05rem;
+      font-weight:600;
+      letter-spacing:.2px;
+      color:var(--muted);
+      margin-top:14px;
+    }
+
+    p{
+      margin:0 0 14px;
+      font-family:var(--sans);
+    }
+
     .kicker{
       color:var(--accent);
-      font-weight:700;
+      font-family:var(--sans);
+      font-weight:800;
       letter-spacing:1.6px;
       text-transform:uppercase;
-      font-size:.9rem;
+      font-size:.86rem;
       margin:0 0 10px;
     }
 
-    h1,h2,h3{ margin:0 0 12px; line-height:1.22; }
-    h1{ font-size:clamp(2rem, 1.4rem + 2.2vw, 3rem); }
-    h2{ font-size:clamp(1.35rem, 1.1rem + 1vw, 2rem); margin-top:12px; }
-    h3{ font-size:1.1rem; margin-top:18px; }
-    p{ margin:0 0 14px; }
+    /* === CHANGE 1: remove the glass block behind the animated phrase === */
+    .top-strip{
+      margin-top:14px;
+      padding:0;              /* no padding */
+      border:0;               /* no border */
+      background:transparent; /* no background */
+      box-shadow:none;        /* no shadow */
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+    }
 
-      p{ margin:0 0 14px; 
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;}
-    /* Animated phrase (kept) */
+    /* === CHANGE 2: animated phrase font back to Newsreader (serif) === */
     .animated-phrase{
       display:inline-block;
       position:relative;
-      color:var(--accent);
+      color:#0a6848;
       font-weight:900;
       white-space:nowrap;
       animation:slide-across 4.5s ease-in-out infinite;
+      font-family:var(--serif); /* Newsreader */
+      letter-spacing:-.01em;
+      opacity: 50%;
     }
 
     @keyframes slide-across{
@@ -166,16 +223,28 @@
       100% { transform: translateX(30%); opacity: 0; }
     }
 
-    .animated-phrase::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:-4px;
-      width:100%;
-      height:3px;
-      background:var(--accent);
-      animation:underline-slide 4.5s ease-in-out infinite;
-    }
+.animated-phrase::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+  width:100%;
+  height:3px;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(5, 146, 111, 0.25) 18%,
+    rgba(10, 82, 23, 0.95) 50%,
+    rgba(109, 242, 79, 0.25) 82%,
+    transparent 100%
+  );
+
+  animation:underline-slide 4.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(146,5,83,.35));
+}
+
+
 
     @keyframes underline-slide{
       0%   { transform:translateX(-120%); opacity:0; }
@@ -184,75 +253,193 @@
       100% { transform:translateX(120%); opacity:0; }
     }
 
-    /* Content cards */
-    .category{
+    /* Divider */
+    .section-divider{
+      border:0;
+      height:2px;
+      margin:34px 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.60),
+        rgba(0,0,0,.12),
+        rgba(255,255,255,.60),
+        transparent
+      );
+      opacity:.95;
+    }
+
+    /* Bento + Glass */
+    .bento{
       margin-top:22px;
-      padding:18px 18px 8px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:rgba(255,255,255,.55);
+      display:grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap:18px;
     }
 
-    .category-title{
-      margin:0 0 10px;
-      font-size:1.25rem;
-      font-weight:900;
-      color:var(--ink);
+    .stack{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:18px;
     }
 
-    .item-list{
-      margin:0;
-      padding-left:20px;
+    .bento-card{
+      padding:18px;
+      border-radius: calc(var(--radius) + 6px);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      position:relative;
+      overflow:hidden;
     }
 
-    .item-list li{
-      margin:10px 0;
+    .bento-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(700px 220px at 10% 0%, rgba(255,255,255,.22), transparent 85%),
+        radial-gradient(520px 240px at 90% 20%, rgba(106, 156, 153, 0.16), transparent 80%);
+      pointer-events:none;
     }
 
-    .link-centered{
-      display:block;
-      text-align:center;
-      margin:16px 0 6px;
+    .bento-card > *{ position:relative; }
+
+    .bento-kicker{
       color:var(--accent);
-      font-weight:700;
+      font-family:var(--sans);
+      font-weight:800;
+      letter-spacing:1.4px;
+      text-transform:uppercase;
+      font-size:.82rem;
+      margin:0 0 8px;
     }
-    .link-centered:hover{ text-decoration:underline; }
+
+    .link-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+
+    .link-pill{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--glass-border-soft);
+      background: rgba(255,255,255,.14);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      transition:transform .12s ease, background .12s ease, border-color .12s ease;
+      font-family:var(--sans);
+      line-height:1.35;
+    }
+
+    .link-pill:hover{
+      transform:translateY(-1px);
+      background: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.38);
+      text-decoration:none;
+    }
+
+    .link-pill .title{
+      font-weight:650;
+      letter-spacing:.1px;
+    }
+
+    .link-pill .meta{
+      color:var(--muted);
+      font-size:.92rem;
+      white-space:nowrap;
+      font-weight:600;
+      letter-spacing:.2px;
+    }
+
+    /* Sponsor dropdown */
+    .pill-dd{
+      margin: 18px 0 0;
+      max-width: 720px;
+    }
+
+    .pill-dd summary{
+      list-style:none;
+      cursor:pointer;
+      user-select:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.32);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      font-weight:800;
+      line-height:1;
+      font-family:var(--sans);
+    }
+
+    .pill-dd summary::-webkit-details-marker{ display:none; }
+
+    .pill-dd summary::after{
+      content:"▾";
+      font-weight:900;
+      transform: translateY(-1px);
+      transition: transform .18s ease;
+    }
+
+    .pill-dd[open] summary::after{
+      transform: rotate(180deg) translateY(1px);
+    }
+
+    .pill-dd .pill-panel{
+      margin-top:10px;
+      padding:14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.32);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      box-shadow: var(--glass-shadow-soft);
+      line-height:1.7;
+      font-family:var(--sans);
+    }
 
     /* Buttons */
     .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; }
     .btn{
       display:inline-block;
       padding:10px 18px;
-      border-radius:999px;
-      border: transparent;
-      background: rgba(255,255,255,.75);
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.34);
+      background: rgba(158, 153, 153, 0.14);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
       color: var(--accent);
       font-weight:800;
+      font-family:var(--sans);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    .btn:hover{ text-decoration:underline; }
-      
 
-  /* Divider */
-  .section-divider{
-    border:0;
-    height:2px;
-    margin:44px 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0,0,0,.55),
-      rgba(0,0,0,.18),
-      rgba(0,0,0,.55),
-      transparent
-    );
-    opacity:.9;
-  }
+    .btn:hover{
+      transform:translateY(-1px);
+      background: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.44);
+      text-decoration:none;
+    }
+
     /* Footer */
     footer{
-      background:var(--header);
+      background: rgba(30,30,30,.86);
       color:var(--header-ink);
-      border-top:1px solid rgba(255,255,255,.10);
+      border-top:1px solid rgba(255,255,255,.14);
       padding:18px 0;
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
     }
 
     .footer-inner{
@@ -262,6 +449,7 @@
       gap:14px;
       flex-wrap:wrap;
       text-align:center;
+      font-family:var(--sans);
     }
 
     .footer-links{
@@ -274,15 +462,28 @@
 
     .footer-links a{
       padding:8px 10px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      opacity:.9;
-      background:rgba(255,255,255,.04);
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.18);
+      opacity:.95;
+      background: rgba(54, 105, 96, 0.06);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
       color:var(--header-ink);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
     }
-    .footer-links a:hover{ opacity:1; border-color:rgba(255,255,255,.28); }
+
+    .footer-links a:hover{
+      transform: translateY(-1px);
+      border-color:rgba(255,255,255,.30);
+      background: rgba(255,255,255,.09);
+      text-decoration:none;
+    }
 
     /* Responsive */
+    @media (max-width:900px){
+      .bento{ grid-template-columns: 1fr; }
+    }
+
     @media (max-width:720px){
       .wrap{ padding:0 12px; }
 
@@ -291,8 +492,6 @@
         align-items:flex-start;
         gap:12px;
       }
-
-      .brand{ min-width:0; }
 
       .brand-top{
         font-size:1.6rem;
@@ -309,31 +508,100 @@
         padding:6px 10px;
         border-radius:10px;
       }
-        .section-divider{
-    border:0;
-    height:2px;
-    margin:44px 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0,0,0,.55),
-      rgba(0,0,0,.18),
-      rgba(0,0,0,.55),
-      transparent
-    );
-    opacity:.9;
 
       .footer-links{
         flex-direction:column;
         align-items:flex-start;
       }
-      .footer-links a{
-        width:100%;
-      }
+      .footer-links a{ width:100%; }
 
-      /* If the animated phrase risks clipping, allow wrapping on very small screens */
       .animated-phrase{ white-space:normal; }
+
+      .pill-dd summary{
+        width: 100%;
+        justify-content: center;
+      }
     }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .animated-phrase{ animation:none; }
+      .animated-phrase::after{ animation:none; }
+      nav a, .btn, .footer-links a, .link-pill{ transition:none; }
+    }
+
+    /* =========================
+   SPONSORED PILL STYLING
+========================= */
+.sponsored summary{
+  gap:12px;
+}
+
+.sponsor-tag{
+  font-family:var(--sans);
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  padding:4px 8px;
+  border-radius:999px;
+  background:rgba(100,8,58,.18);
+  color:red;
+}
+
+.sponsor-panel{
+  border-color:rgba(180,120,150,.34);
+}
+
+.sponsor-headline{
+  font-family:var(--serif);
+  font-size:1.25rem;
+  line-height:1.3;
+  margin:0 0 8px;
+  color:var(--ink);
+}
+
+.sponsor-copy{
+  font-family:var(--sans);
+  color:var(--muted);
+  margin-bottom:12px;
+}
+
+.sponsor-list{
+  margin:0 0 12px;
+  padding-left:18px;
+  font-family:var(--sans);
+}
+
+.sponsor-list li{
+  margin:6px 0;
+}
+
+.sponsor-offer{
+  font-family:var(--sans);
+  font-weight:600;
+  color:var(--accent);
+  margin:0 0 14px;
+}
+
+.sponsor-actions{
+  gap:10px;
+}
+
+.sponsor-btn{
+  color: orange;
+}
+
+.sponsor-btn.ghost{
+  background:transparent;
+  border:1px dashed rgba(100,8,58,.35);
+}
+
+.sponsor-disclaimer{
+  margin-top:10px;
+  color:rgba(0,0,0,.45);
+}
+
   </style>
 </head>
 
@@ -348,14 +616,18 @@
 
     <nav>
       <a href="IELTSPTEPLUS.html">IELTS/PTE+</a>
-       <a href="ESLgames.html">Games&Tools</a>
-      
+      <a href="ESLgames.html">ESL Games</a>
+      <a href="index.html">Home</a>
     </nav>
   </div>
 </header>
 
-<div class="wrap" style="padding-top:14px;">
-  <h1><span class="animated-phrase">meaningful language learning</span></h1>
+<div class="wrap">
+  <div class="top-strip">
+
+    <h2 span class="animated-phrase" style="color:#07b7ae;">meaningful English language learning</span></h2>
+
+  </div>
 </div>
 
 <main>
@@ -370,120 +642,123 @@
         Feel free to use them and send me feedback.
       </p>
 
-        <hr class="section-divider">           
-            <section class="mini-tests">
-          <h2>Grammar </h2>
-          
-          <ul>
+      <hr class="section-divider">
 
-            <li><a href= "https://koalaspiessydney.github.io/preposition-song/"> Verbs and Preposition // Song lesson // B1 pre-intermediate</a></li>
-           <li><a href="https://koalaspiessydney.github.io/b1static-verbs/">State Verbs // B1 pre-intermediate </a></li>
-            <li><a href="https://koalaspiessydney.github.io/c1staticverbs/"> State Verbs // C1 upper intermediate</a></li>
-            <li><a href="https://koalaspiessydney.github.io/Verbpatternsandreportedspeech/" >Reported speach // C1 Test- full lesson coming soon </a></li>
-          </ul>
+      <div class="bento">
 
+        <div class="bento-card">
+          <div class="bento-kicker">Grammar</div>
+          <h2>Grammar</h2>
 
-      
-       <hr class="section-divider">       
+          <div class="link-grid">
+            <a class="link-pill" href="https://koalaspiessydney.github.io/preposition-song/">
+              <span class="title">Verbs and Preposition // Song lesson // B1 pre-intermediate</span>
+              <span class="meta">Open</span>
+            </a>
 
-          <h2>Pronunciation &amp; Vocab</h2>
-          <ul>
-            <li><a href="MicroLessons/ Pron-eiy/index.html">  Vowel Sounds // the many forms of 'e', 'i' & 'y'</a></li>
-            <li><a href="https://koalaspiessydney.github.io/Vowelsoundgame/">  Vowel Sounds // the 4 sounds of 'U'</a></li>
-            <li><a href="https://koalaspiessydney.github.io/Greekwords/index.html">  WORD STRESS in Academic Words with Greek origins </a></li>
-            <li><a href="https://koalaspiessydney.github.io/Dictation-throughthough/"> Confusing words // Through, though, thorough and thought</a></li>
-        
-          </ul>
-        </section>
- 
-       <hr class="section-divider">   
-        <section class="mini-tests">
-          <h2>Listening, Speaking and Writing</h2>
-          <ul>
-            <li><a href="https://koalaspiessydney.github.io/BiographyCanvapastverbs/">A biography of an Entrepreneur — past verbs, listening and writing</a></li>
-          </ul>
-        </section>
+            <a class="link-pill" href="https://koalaspiessydney.github.io/b1static-verbs/">
+              <span class="title">State Verbs // B1 pre-intermediate</span>
+              <span class="meta">Open</span>
+            </a>
 
-        <!-- =========================
-     DUMMY PILL DROPDOWN (copy/paste)
-     ========================= -->
+            <a class="link-pill" href="https://koalaspiessydney.github.io/c1staticverbs/">
+              <span class="title">State Verbs // C1 upper intermediate</span>
+              <span class="meta">Open</span>
+            </a>
 
-<style>
-  /* Pill dropdown (dummy) */
-  .pill-dd{
-    margin: 18px 0;
-    max-width: 680px;
-  }
+            <a class="link-pill" href="https://koalaspiessydney.github.io/Verbpatternsandreportedspeech/">
+              <span class="title">Reported speach // C1 Test- full lesson coming soon</span>
+              <span class="meta">Open</span>
+            </a>
+          </div>
+        </div>
 
-  .pill-dd summary{
-    list-style: none;                 /* remove default marker */
-    cursor: pointer;
-    user-select: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+        <div class="stack">
 
-    padding: 10px 16px;
-    border-radius: 999px;
+          <div class="bento-card">
+            <div class="bento-kicker">Pronunciation &amp; Vocab</div>
+            <h2>Pronunciation &amp; Vocab</h2>
 
-    background: rgba(255,255,255,.65);
-    border: 1px solid rgba(0,0,0,.10);
+            <div class="link-grid">
+              <a class="link-pill" href="MicroLessons/ Pron-eiy/index.html">
+                <span class="title">Vowel Sounds // the many forms of 'e', 'i' &amp; 'y'</span>
+                <span class="meta">Open</span>
+              </a>
 
-    font-weight: 800;
-    line-height: 1;
-  }
+              <a class="link-pill" href="https://koalaspiessydney.github.io/Vowelsoundgame/">
+                <span class="title">Vowel Sounds // the 4 sounds of 'U'</span>
+                <span class="meta">Open</span>
+              </a>
 
-  /* remove marker on Safari */
-  .pill-dd summary::-webkit-details-marker{ display:none; }
+              <a class="link-pill" href="https://koalaspiessydney.github.io/Greekwords/index.html">
+                <span class="title">WORD STRESS in Academic Words with Greek origins</span>
+                <span class="meta">Open</span>
+              </a>
 
-  .pill-dd summary::after{
-    content: "▾";
-    font-weight: 900;
-    transform: translateY(-1px);
-    transition: transform .18s ease;
-  }
+              <a class="link-pill" href="https://koalaspiessydney.github.io/Dictation-throughthough/">
+                <span class="title">Confusing words // Through, though, thorough and thought</span>
+                <span class="meta">Open</span>
+              </a>
+            </div>
+          </div>
 
-  .pill-dd[open] summary::after{
-    transform: rotate(180deg) translateY(1px);
-  }
+          <div class="bento-card">
+            <div class="bento-kicker">Listening, Speaking and Writing</div>
+            <h2>Listening, Speaking and Writing</h2>
 
-  .pill-dd .pill-panel{
-    margin-top: 10px;
-    padding: 14px 16px;
-    border-radius: 16px;
+            <div class="link-grid">
+              <a class="link-pill" href="https://koalaspiessydney.github.io/BiographyCanvapastverbs/">
+                <span class="title">A biography of an Entrepreneur — past verbs, listening and writing</span>
+                <span class="meta">Open</span>
+              </a>
+            </div>
+          </div>
 
-    background: rgba(255,255,255,.55);
-    border: 1px solid rgba(0,0,0,.10);
+        </div>
+      </div>
 
-    line-height: 1.7;
-  }
+     <details class="pill-dd sponsored">
+  <summary>
+    <span class="sponsor-tag">Sponsored</span>
+    Red Dust Language School · Broken Hill
+  </summary>
 
-  /* Optional: make the pill full width on phones */
-  @media (max-width: 720px){
-    .pill-dd summary{
-      width: 100%;
-      justify-content: center;
-    }
-  }
-</style>
+  <div class="pill-panel sponsor-panel">
+    <h3 class="sponsor-headline">
+      Learn English in the heart of the Australian outback
+    </h3>
 
-<details class="pill-dd">
-  <summary>Sponsor this spot</summary>
-  <div class="pill-panel">
-    <p style="margin:0 0 10px;">
-      Sponsor this page and promote your business
+    <p class="sponsor-copy">
+      Red Dust Language School offers small-group English classes in Broken Hill,
+      where real conversation, culture, and confidence come first.
+      Our students learn English through community, creativity, and connection —
+      not worksheets.
     </p>
-    <ul style="margin:0; padding-left:18px;">
-      <li>Support meaningful learning</li>
-      <li>Align yourself with what this page stands for</li>
-      <li>Go to the contact page</li>
+
+    <ul class="sponsor-list">
+      <li><strong>Outback Conversation Clubs</strong> — relaxed speaking in real settings</li>
+      <li><strong>Exam Preparation</strong> — IELTS, PTE & Cambridge with clear feedback</li>
+      <li><strong>Workplace English</strong> — hospitality, retail & regional employment</li>
+      <li><strong>Flexible study</strong> — evenings, weekends & short intensives</li>
     </ul>
+
+    <p class="sponsor-offer">
+      Complimentary level check for MEA visitors — mention <strong>MEA-MICRO</strong>
+    </p>
+
+    <div class="actions sponsor-actions">
+      <a class="btn sponsor-btn" href="contact.html">Enquire</a>
+      <a class="btn sponsor-btn ghost" href="#top">View timetable</a>
+    </div>
+
+    <p class="small sponsor-disclaimer">
+      Sponsored placement · fictional school for demonstration purposes
+    </p>
   </div>
 </details>
 
-
- 
-
+    </div>
+  </section>
 
   <section id="contact" class="section">
     <div class="wrap">
@@ -495,7 +770,6 @@
 
       <p>
         I would be absolutely thrilled to create bespoke and branded lessons for your organisation.
-        Go to the contact page to request a quote.
       </p>
 
       <div class="actions">
@@ -517,8 +791,6 @@
 
 </body>
 </html>
-
-
 
 
 
