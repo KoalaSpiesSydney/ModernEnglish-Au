@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -29,14 +29,10 @@
       --serif: "Newsreader", Georgia, serif;
       --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
-      /* GLASS */
+      /* Glass tokens (were referenced but missing) */
       --glass-blur: 14px;
-      --glass-bg: rgba(255,255,255,.18);
-      --glass-bg-strong: rgba(255,255,255,.22);
-      --glass-border: rgba(255,255,255,.34);
-      --glass-border-soft: rgba(255,255,255,.22);
-      --glass-shadow: 0 18px 55px rgba(0,0,0,.14);
-      --glass-shadow-soft: 0 10px 30px rgba(0,0,0,.10);
+      --glass-border-soft: rgba(255,255,255,.32);
+      --glass-shadow-soft: 0 10px 26px rgba(0,0,0,.10);
 
       /* iPhone safe-area */
       --safe-top: env(safe-area-inset-top, 0px);
@@ -45,6 +41,19 @@
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+    /* Load Rise-style fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Lato:wght@400;700&display=swap');
+
+/* Apply Lato as the body font */
+body {
+  font-family: 'Lato', Arial, sans-serif;
+}
+
+/* Apply Poppins for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 600;
+}
 
     body{
       margin:0;
@@ -57,7 +66,7 @@
         radial-gradient(1200px 680px at 20% 20%, rgba(164, 219, 217, 0.18), transparent 80%),
         radial-gradient(900px 520px at 92% 18%, rgba(223, 191, 168, 0.14), transparent 75%),
         radial-gradient(1000px 650px at 55% 105%, rgba(78, 80, 83, 0.1), transparent 80%),
-        rgb(234, 238, 240);
+        var(--bg);
     }
 
     img{ max-width:100%; height:auto; display:block; }
@@ -105,7 +114,7 @@
     }
 
     .kss-font{
-      font-family:"tt-modernoir", sans-serif;
+      font-family: var(--sans);
       font-weight:700;
       font-size:12px;
       letter-spacing:4px;
@@ -149,6 +158,23 @@
       transform:translateY(-1px);
       text-decoration:none;
     }
+
+    /* QR toggle (minimal markup so your existing script can run) */
+    .qr-wrap{
+      position:absolute;
+      top: calc(var(--safe-top) + 54px);
+      left: 14px;
+      z-index: 30;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.12);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      box-shadow: var(--glass-shadow-soft);
+    }
+    .qr-wrap[hidden]{ display:none; }
+    #qrcode{ display:flex; justify-content:center; }
 
     /* Top strip */
     .top-strip{
@@ -258,54 +284,6 @@
       opacity:.95;
     }
 
-    /* Bento + Glass */
-    .bento{
-      margin-top:22px;
-      display:grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap:18px;
-    }
-
-    .stack{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:18px;
-    }
-
-    .bento-card{
-      padding:18px;
-      border-radius: calc(var(--radius) + 6px);
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      position:relative;
-      overflow:hidden;
-    }
-
-    .bento-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(700px 220px at 10% 0%, rgba(255,255,255,.22), transparent 85%),
-        radial-gradient(520px 240px at 90% 20%, rgba(106, 156, 153, 0.16), transparent 80%);
-      pointer-events:none;
-    }
-
-    .bento-card > *{ position:relative; }
-
-    .bento-kicker{
-      color:var(--accent);
-      font-family:var(--sans);
-      font-weight:800;
-      letter-spacing:1.4px;
-      text-transform:uppercase;
-      font-size:.82rem;
-      margin:0 0 8px;
-    }
-
     .link-grid{
       display:grid;
       grid-template-columns: 1fr;
@@ -349,21 +327,20 @@
       letter-spacing:.2px;
     }
 
-    /* “Plain” list block inside cards */
-    .plain-list{
-      margin:10px 0 0;
-      padding-left:18px;
-      font-family:var(--sans);
-    }
-    .plain-list li{ margin:8px 0; }
-
     /* Details pill (guides) */
     .pill-dd{
       margin: 18px 0 0;
       max-width: 720px;
     }
+/* Center the text inside the <summary> pills */
+
+
+/* Keep the arrow nicely aligned at the end */
 
     .pill-dd summary{
+          justify-content: center;
+  text-align: center;
+  width: 100%;
       list-style:none;
       cursor:pointer;
       user-select:none;
@@ -388,7 +365,9 @@
       font-weight:900;
       transform: translateY(-1px);
       transition: transform .18s ease;
+      
     }
+    
 
     .pill-dd[open] summary::after{
       transform: rotate(180deg) translateY(1px);
@@ -416,6 +395,8 @@
     .pill-panel p{ margin:0 0 12px; }
     .pill-panel ul, .pill-panel ol{ margin:0 0 12px; padding-left:18px; }
     .pill-panel li{ margin:6px 0; }
+
+    
 
     /* Buttons */
     .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; }
@@ -502,10 +483,6 @@
     }
 
     /* Responsive */
-    @media (max-width:900px){
-      .bento{ grid-template-columns: 1fr; }
-    }
-
     @media (max-width:720px){
       .wrap{ padding:0 12px; }
 
@@ -529,12 +506,19 @@
         align-items:flex-start;
       }
       .footer-links a{ width:100%; }
+
+      .qr-wrap{
+        left: 12px;
+        right: 12px;
+        width: auto;
+      }
     }
 
     @media (prefers-reduced-motion: reduce){
       .animated-phrase{ animation:none; }
       .animated-phrase::after{ animation:none; }
       nav a, .btn, .footer-links a, .link-pill{ transition:none; }
+      .kss-font{ animation:none; }
     }
   </style>
 </head>
@@ -543,22 +527,32 @@
 
 <header>
   <div class="wrap header-inner">
-    <a class="brand" href="#top">
+    <a class="brand" href="#top" aria-label="Back to top">
       <div class="brand-top">Modern English Au</div>
       <span class="kss-font">Koala Spies Sydney</span>
     </a>
 
-    <nav>
-      <a href="MicroLessons.html">Mico Lessons</a>
+    <nav aria-label="Primary">
+      <!-- Minimal QR toggle so your existing script can work -->
+      <a id="qrToggle" href="#" aria-controls="qrWrap" aria-expanded="false">QR</a>
+
+      <a href="MicroLessons.html">Micro Lessons</a>
       <a href="ESLgames.html">ESL Games</a>
-      <a href="index.html"> Home</a>
+      <a href="index.html">Home</a>
     </nav>
   </div>
 </header>
 
+<!-- QR container required by your script -->
+<div id="qrWrap" class="qr-wrap" hidden>
+  <div id="qrcode" aria-label="QR code"></div>
+</div>
+
 <div class="wrap">
   <div class="top-strip">
-    <h2 style="margin:0;"><span class="animated-phrase">meaningful English language learning</span></h2>
+    <h2 style="margin:0;">
+      <span class="animated-phrase">meaningful English language learning</span>
+    </h2>
   </div>
 </div>
 
@@ -568,203 +562,155 @@
       <h1>IELTS/PTE/CAE+ Skills Practice &amp; Mini Test</h1>
 
       <p>
-        These microlessons and mini-tests were all devised while I was working in an ESL classroom
-        and studying UX design and coding. Feel free to use them and send me feedback.
+        These microlessons and mini-tests can be used by teachers in the classroom (use the QR codes so that your students can follow along on their phone) and also for indivdual 10-15 minutes lessons and tests for individual study
       </p>
 
-      <p>
-        These tests have been separated into mini tests. They were designed to teach and test, after each section the students scores themselves and sees an explanation of each answer. They can be taken in class or on a phone - there a QR code generator in the top left corner. Based on real test but updated on topics and sometimes localised to Australia, there format is similar to IELTS online.
-      </p>
 
       <hr class="section-divider">
 
-      <div class="bento">
+      <h2>MicroLessons</h2>
+      <div class="link-grid">
+        <a class="link-pill" href="https://koalaspiessydney.github.io/describeaprocess/#/lessons/atdniB-9rvYDM0Dr0CSkDycefMsIpnu3">
+          <span class="title">How to describe a process or a flow chart (IELTS Academic Writing &amp; PTE Speaking)</span>
+          <span class="meta">Open</span>
+        </a>
 
-        <!-- LEFT COLUMN (bigger) -->
-        <div class="bento-card">
-          <div class="bento-kicker">Mini GENERAL IELTS</div>
+        <a class="link-pill" href="https://koalaspiessydney.github.io/bargraphandpiechart/">
+          <span class="title">How to explain bar graphs and pie charts (IELTS Academic Writing &amp; PTE Speaking)</span>
+          <span class="meta">Open</span>
+        </a>
 
-          <h2>Mini GENERAL IELTS Readings Tests Set 1</h2>
+        <a class="link-pill" href="#">
+          <span class="title">How to work out vocabulary like a native (Greek &amp; Latin origin words)</span>
+          <span class="meta">Soon</span>
+        </a>
+      </div>
 
-          <div class="link-grid">
-            <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1Matching.html/">
-              <span class="title">IELTS General// Reading Part 1 // The Little Byron Beach Festival // Matching paragraphs</span>
-              <span class="meta">Open</span>
-            </a>
+      <hr class="section-divider">
 
-            <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1tfng.htm./">
-              <span class="title">IELTS General// Reading Part 1// Lloyd Lock-up // True, False or Not Given</span>
-              <span class="meta">Open</span>
-            </a>
+      <h2>Mini GENERAL IELTS Reading Tests Set 1</h2>
+      <div class="link-grid">
+        <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1Matching.html/">
+          <span class="title">IELTS General · Reading Part 1 · The Little Byron Beach Festival · Matching paragraphs</span>
+          <span class="meta">Open</span>
+        </a>
 
-            <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGenReadingtestp2TenantsRightcompleteinfo/">
-              <span class="title">IELTS General // Reading Part 2 // Tenants Right- the landlord wants to sell // Complete informations</span>
-              <span class="meta">Open</span>
-            </a>
+        <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1tfng.htm./">
+          <span class="title">IELTS General · Reading Part 1 · Lloyd Lock-up · True/False/Not Given</span>
+          <span class="meta">Open</span>
+        </a>
 
-            <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1tfng.htm./">
-              <span class="title">IELTS General //Reading Part 2 //How to give a Presentatoion // Matching headings</span>
-              <span class="meta">Open</span>
-            </a>
+        <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGenReadingtestp2TenantsRightcompleteinfo/">
+          <span class="title">IELTS General · Reading Part 2 · Tenants’ rights · Complete information</span>
+          <span class="meta">Open</span>
+        </a>
 
-            <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSgeneralpart3IndianTextiles/">
-              <span class="title">IELTS General // Reading Part 3 // Threads of Influence- Indian textiles // Multiple Choice and COmplete paragraph</span>
-              <span class="meta">Open</span>
-            </a>
-          </div>
+        <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSGeneralReadingp1tfng.htm./">
+          <span class="title">IELTS General · Reading Part 2 · How to give a presentation · Matching headings</span>
+          <span class="meta">Open</span>
+        </a>
 
-          <hr class="section-divider">
+        <a class="link-pill" href="https://koalaspiessydney.github.io/IELTSgeneralpart3IndianTextiles/">
+          <span class="title">IELTS General · Reading Part 3 · Indian textiles · Multiple choice &amp; complete paragraph</span>
+          <span class="meta">Open</span>
+        </a>
+      </div>
 
+      <details class="pill-dd">
+        <summary>Mastering Multiple Choice</summary>
+        <div class="pill-panel">
+          <h3>Method 1 — read deeply, read smartly</h3>
+          <ol>
+            <li>Read the questions (not the options) before you read the text or listen to the audio.</li>
+            <li>Find your own answer in the text or the audio.</li>
+            <li>Then choose the option that matches your answer most closely.</li>
+          </ol>
 
-          <details class="pill-dd" style="margin-top:18px;">
-            <summary>Mastering Multiple Choice</summary>
-            <div class="pill-panel">
-              <h3>Method 1 — read deeply, read smartly</h3>
-              <ol>
-                <li>Read the questions and not the options before you read the text or listen to the audio.</li>
-                <li>Find your own answer in the text or the audio.</li>
-                <li>Then find the option that matches your answer most closely — the words won't be the same but the meaning will be.</li>
-              </ol>
-
-              <h3>Method 2 — backwards method</h3>
-              <p>If Step 1 fails or takes more than a couple of minutes, try the backwards method.</p>
-              <ul>
-                <li>Most likely, one answer will have information that is not in the test — eliminate it.</li>
-                <li>Most likely, one answer will have a lot of words or phrases similar to the text — too similar, so be suspicious. It may be saying the opposite thing or talking about a different point. Eliminate it.</li>
-                <li>You probably have two answers that are true to the text and answer the question. Which one answers the question better? That’s your answer.</li>
-              </ul>
-            </div>
-          </details>
+          <h3>Method 2 — backwards method</h3>
+          <p>If Method 1 fails or takes too long, try this:</p>
+          <ul>
+            <li>Eliminate the option that includes information not in the text.</li>
+            <li>Be suspicious of an option that looks “too similar” to the wording in the text.</li>
+            <li>If two options seem possible, pick the one that answers the question more directly.</li>
+          </ul>
         </div>
+      </details>
 
-        <!-- RIGHT COLUMN (stack) -->
-        <div class="stack">
+      <hr class="section-divider">
 
-          <div class="bento-card">
-            <div class="bento-kicker">Mini CAE</div>
-            <p class="muted" style="margin-top:-4px;">***The colours and format vary in this set as part of my research but the pedagogy is sound.</p>
+      <h2>Mini CAE Reading &amp; Use of English Tests</h2>
+      <p class="muted small">The colours and format vary in this set as part of research, but the pedagogy is consistent.</p>
 
-            <h2>Mini CAE Reading &amp; Use of Language Tests</h2>
+      <div class="link-grid">
+        <a class="link-pill" href="https://koalaspiessydney.github.io/CAEt1.html/">
+          <span class="title">CAE Mini Test 1</span>
+          <span class="meta">Open</span>
+        </a>
 
+        <a class="link-pill" href="https://koalaspiessydney.github.io/ReadingTestWk4/">
+          <span class="title">CAE Mini Test 2</span>
+          <span class="meta">Open</span>
+        </a>
 
-              <a class="link-pill" href="https://koalaspiessydney.github.io/CAEt1.html/">
-                <span class="title">CAE Mini Test 1</span>
-                <span class="meta">Open</span>
-              </a>
+        <a class="link-pill" href="https://koalaspiessydney.github.io/U2UseofENG/">
+          <span class="title">CAE Mini Test 3</span>
+          <span class="meta">Open</span>
+        </a>
 
-              <a class="link-pill" href="https://koalaspiessydney.github.io/ReadingTestWk4/">
-                <span class="title">CAE Mini Test 2</span>
-                <span class="meta">Open</span>
-              </a>
+        <a class="link-pill" href="https://koalaspiessydney.github.io/CAEp4.html/">
+          <span class="title">CAE Mini Test 4</span>
+          <span class="meta">Open</span>
+        </a>
+      </div>
 
-              <a class="link-pill" href="https://koalaspiessydney.github.io/U2UseofENG/">
-                <span class="title">CAE Mini Test 3</span>
-                <span class="meta">Open</span>
-              </a>
+      <hr class="section-divider">
 
-              <a class="link-pill" href="https://koalaspiessydney.github.io/CAEp4.html/">
-                <span class="title">CAE Mini Test 4</span>
-                <span class="meta">Open</span>
-              </a>
-            </div>
-          </div>
+      <h2>Arrange / Match / Organize</h2>
+      <div class="link-grid">
+        <a class="link-pill" href="PTEarrangepara/index.html">
+          <span class="title">Arrange Paragraphs · Technology &amp; Social Media</span>
+          <span class="meta">Open</span>
+        </a>
 
-          <div class="bento-card">
-            <div class="bento-kicker">Mini ACADEMIC IELTS</div>
+        <a class="link-pill" href="https://koalaspiessydney.github.io/caespeakingpart2.html/">
+          <span class="title">Write from dictation &amp; pair speaking · PTE and CAE speaking part 2</span>
+          <span class="meta">Open</span>
+        </a>
 
-            <h2>Mini ACADEMIC IELTS Readings Tests</h2>
+        <a class="link-pill" href="#">
+          <span class="title">Mini Test 3 (coming soon)</span>
+          <span class="meta">Soon</span>
+        </a>
+      </div>
 
-            <div class="link-grid">
-              <a class="link-pill" href="lessons/index.html">
-                <span class="lessons">How to write an academic report on a graph or chart</span>
-                <span class="meta">Open</span>
-              </a>
-            </div>
-          </div>
+      <details class="pill-dd">
+        <summary>Mastering Matching Paragraphs</summary>
+        <div class="pill-panel">
+          <h3>Step-by-step method</h3>
+          <ul>
+            <li>If you have fewer paragraphs than questions, start with the paragraphs.</li>
+            <li>If you have fewer questions than paragraphs, start with the questions.</li>
+          </ul>
 
-          <div class="bento-card">
-            <div class="bento-kicker">IELTS &amp; PTE Multiple Choice</div>
-
-            <h2>IELTS &amp; PTE Multiple Choice Listening and Reading</h2>
-
-            <div class="link-grid">
-              <a class="link-pill" href="">
-                <span class="title">Multiple Choice Listening 1 - coming soon</span>
-                <span class="meta">Open</span>
-              </a>
-
-  
-
-          <div class="bento-card">
-            <div class="bento-kicker">Arrange / Match / Organize</div>
-
-            <h2>Reading Tests- arrange, matching &amp; organizing parpagraphs</h2>
-
-            <div class="link-grid">
-              <a class="link-pill" href="PTEarrangepara/index.html">
-                <span class="title">Arrange Paragraphs // Technology &amp; Social Media</span>
-                <span class="meta">Open</span>
-              </a>
-              <a class="link-pill" href="https://koalaspiessydney.github.io/caespeakingpart2.html/">
-                <span class="title">Write from dictation & pair speaking  // PTE and CAE speaking part 2</span>
-                <span class="meta">Open</span>
-              </a>
-              <a class="link-pill" href="">
-                <span class="title">Mini Test 3 Coming soon</span>
-                <span class="meta">Open</span>
-              </a>
-            </div>
-
-            <details class="pill-dd" style="margin-top:18px;">
-              <summary>Mastering Matching Paragrahs</summary>
-              <div class="pill-panel">
-                <p>Mastering Multiple Choice Questions.</p>
-
-                <h3>Matching Paragraphs — step-by-step method</h3>
-                <ul>
-                  <li>If you have fewer paragraphs than questions, start with the paragraphs.</li>
-                  <li>If you have fewer questions than paragraphs, start with the questions.</li>
-                </ul>
-
-                <p>Assume we have fewer paragraphs than questions (the most common case):</p>
-
-                <ol>
-                  <li>Read the first paragraph only, then read all the questions and mark all the possibilities.</li>
-                  <li>If it’s a perfect match, mark it as the answer and cross it out.</li>
-                  <li>If you’re not sure, put a question mark and move on.</li>
-                  <li>Read the second paragraph, then read all the questions except the ones you have crossed out.</li>
-                  <li>Continue until all the paragraphs are finished.</li>
-                  <li>If you don’t find any questions that match a paragraph, keep going. By the end of the reading, you should have most of the answers.</li>
-                </ol>
-
-                <h3>Method 2 — backwards method</h3>
-                <p>If Step 1 fails or takes more than a couple of minutes, try the backwards method.</p>
-                <ul>
-                  <li>Most likely, one answer will have information that is not in the test — eliminate it.</li>
-                  <li>Most likely, one answer will have a lot of words or phrases similar to the text — too similar, so be suspicious. It may be saying the opposite thing or talking about a different point. Eliminate it.</li>
-                  <li>You probably have two answers that are true to the text and answer the question. Which one answers the question better? That’s your answer.</li>
-                </ul>
-              </div>
-            </details>
-          </div>
-
-          <div class="bento-card">
-            <div class="bento-kicker">PTE</div>
-
-            <h2>PTE Write from Dictation &amp; Repeat Sentence</h2>
-
-              <a class="link-pill" href="https://koalaspiessydney.github.io/Dictation-throughthough/">
-                <span class="title">Set 2 with through, though, thorough &amp; thought lessons</span>
-                <span class="meta">Open</span>
-              </a>
-
-
-  
-            </div>
-            </div>
-          </div>
-
+          <p>Common case: fewer paragraphs than questions</p>
+          <ol>
+            <li>Read paragraph 1 only, then skim all questions and mark possible matches.</li>
+            <li>If it’s a perfect match, lock it in and cross that question out.</li>
+            <li>If you’re unsure, mark a question mark and keep going.</li>
+            <li>Repeat for each paragraph, ignoring questions already answered.</li>
+            <li>By the end, most answers should be clear; then resolve the remaining ones.</li>
+          </ol>
         </div>
+      </details>
+
+      <hr class="section-divider">
+
+      <h2>PTE Write from Dictation &amp; Repeat Sentence</h2>
+      <div class="link-grid">
+        <a class="link-pill" href="https://koalaspiessydney.github.io/Dictation-throughthough/">
+          <span class="title">Set 2 · through / though / thorough / thought lessons</span>
+          <span class="meta">Open</span>
+        </a>
       </div>
 
     </div>
@@ -775,12 +721,12 @@
       <p class="kicker">Contact &amp; Feedback</p>
 
       <p class="muted">
-        I’m also happy to keep creating and posting microlessons — send me your requests!
+        I’m happy to keep creating and posting microlessons — send requests.
       </p>
 
       <p>
-        I would be absolutely thrilled to create bespoke and branded lessons for your organisation.
-        Go to the contact page to request a quote.
+        I can create bespoke and branded lessons for your organisation.
+        Visit the contact page to request a quote.
       </p>
 
       <div class="actions">
@@ -795,13 +741,11 @@
     <div>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</div>
     <div class="footer-links">
       <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">KOALA SPIES SYDNEY</a>
-         <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/contact.index.html">CONTACT</a>
+      <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/contact.index.html">CONTACT</a>
     </div>
   </div>
 </footer>
 
-<!-- (Your original QR script is preserved below exactly as a block, but it requires elements
-     with ids: qrToggle, qrWrap, and qrcode to exist on the page to function.) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
   const qrToggle = document.getElementById("qrToggle");
@@ -816,6 +760,7 @@
 
       if (isHidden) {
         qrWrap.removeAttribute("hidden");
+        qrToggle.setAttribute("aria-expanded", "true");
 
         if (!qrInstance) {
           qrInstance = new QRCode(document.getElementById("qrcode"), {
@@ -829,6 +774,7 @@
         }
       } else {
         qrWrap.setAttribute("hidden", "");
+        qrToggle.setAttribute("aria-expanded", "false");
       }
     });
   }
@@ -836,10 +782,7 @@
 
 </body>
 </html>
-
-
-
-
+```
 
 
 
