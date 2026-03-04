@@ -29,7 +29,7 @@
       --serif: "Newsreader", Georgia, serif;
       --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
-      /* Glass tokens (were referenced but missing) */
+      /* Glass tokens */
       --glass-blur: 14px;
       --glass-border-soft: rgba(255,255,255,.32);
       --glass-shadow-soft: 0 10px 26px rgba(0,0,0,.10);
@@ -41,19 +41,9 @@
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
-    /* Load Rise-style fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Lato:wght@400;700&display=swap');
 
-/* Apply Lato as the body font */
-body {
-  font-family: 'Lato', Arial, sans-serif;
-}
-
-/* Apply Poppins for headings */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', Arial, sans-serif;
-  font-weight: 600;
-}
+    /* (Removed the blog fonts/import + conflicting font overrides)
+       Keep typography consistent via --serif/--sans below. */
 
     body{
       margin:0;
@@ -73,6 +63,7 @@ h1, h2, h3, h4, h5, h6 {
     a{ color:inherit; text-decoration:none; -webkit-tap-highlight-color: transparent; }
     a:active{ text-decoration: underline; }
 
+    /* Balanced page rhythm */
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px; }
     .muted{ color:var(--muted); }
     .small{ font-size:.95rem; }
@@ -91,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      padding: 10px 0;
+      padding: 12px 0; /* slightly more breathing room */
       min-width:0;
     }
 
@@ -139,7 +130,6 @@ h1, h2, h3, h4, h5, h6 {
       min-width:0;
     }
 
-    /* Invisible text-links (no button look) */
     nav a{
       color:var(--header-ink);
       font-weight:700;
@@ -159,7 +149,7 @@ h1, h2, h3, h4, h5, h6 {
       text-decoration:none;
     }
 
-    /* QR toggle (minimal markup so your existing script can run) */
+    /* QR toggle */
     .qr-wrap{
       position:absolute;
       top: calc(var(--safe-top) + 54px);
@@ -178,7 +168,7 @@ h1, h2, h3, h4, h5, h6 {
 
     /* Top strip */
     .top-strip{
-      margin-top:14px;
+      margin-top:18px; /* balanced spacing */
       padding:0;
       border:0;
       background:transparent;
@@ -227,7 +217,7 @@ h1, h2, h3, h4, h5, h6 {
     /* Sections */
     main{ display:block; }
     .section{
-      padding:44px 0 56px;
+      padding:40px 0 54px;  /* slightly tighter + consistent */
       border-bottom:1px solid rgba(0,0,0,.06);
     }
 
@@ -241,7 +231,7 @@ h1, h2, h3, h4, h5, h6 {
     h2{
       font-family:var(--serif);
       font-size:clamp(1.35rem, 1.1rem + 1vw, 2.05rem);
-      margin-top:12px;
+      margin-top:14px;
       letter-spacing:-.01em;
     }
     h3{
@@ -272,7 +262,7 @@ h1, h2, h3, h4, h5, h6 {
     .section-divider{
       border:0;
       height:2px;
-      margin:34px 0;
+      margin:30px 0; /* balanced */
       background: linear-gradient(
         90deg,
         transparent,
@@ -332,22 +322,16 @@ h1, h2, h3, h4, h5, h6 {
       margin: 18px 0 0;
       max-width: 720px;
     }
-/* Center the text inside the <summary> pills */
-
-
-/* Keep the arrow nicely aligned at the end */
 
     .pill-dd summary{
-          justify-content: center;
-  text-align: center;
-  width: 100%;
       list-style:none;
       cursor:pointer;
       user-select:none;
-      display:inline-flex;
+      display:flex;            /* make centering reliable */
       align-items:center;
+      justify-content:center;  /* center label */
       gap:10px;
-      padding:10px 16px;
+      padding:10px 44px 10px 16px; /* reserve room for arrow */
       border-radius:999px;
       background: rgba(255,255,255,.16);
       border: 1px solid rgba(255,255,255,.32);
@@ -356,21 +340,26 @@ h1, h2, h3, h4, h5, h6 {
       font-weight:800;
       line-height:1;
       font-family:var(--sans);
+      position:relative;       /* for arrow positioning */
+      width: fit-content;
     }
 
     .pill-dd summary::-webkit-details-marker{ display:none; }
 
+    /* Keep arrow aligned at far right */
     .pill-dd summary::after{
       content:"▾";
       font-weight:900;
-      transform: translateY(-1px);
+      position:absolute;
+      right:14px;
+      top:50%;
+      transform:translateY(-52%);
       transition: transform .18s ease;
-      
+      pointer-events:none;
     }
-    
 
     .pill-dd[open] summary::after{
-      transform: rotate(180deg) translateY(1px);
+      transform:translateY(-52%) rotate(180deg);
     }
 
     .pill-dd .pill-panel{
@@ -395,8 +384,6 @@ h1, h2, h3, h4, h5, h6 {
     .pill-panel p{ margin:0 0 12px; }
     .pill-panel ul, .pill-panel ol{ margin:0 0 12px; padding-left:18px; }
     .pill-panel li{ margin:6px 0; }
-
-    
 
     /* Buttons */
     .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; }
@@ -498,7 +485,7 @@ h1, h2, h3, h4, h5, h6 {
 
       .pill-dd summary{
         width: 100%;
-        justify-content: center;
+        max-width: 720px;
       }
 
       .footer-links{
@@ -533,7 +520,6 @@ h1, h2, h3, h4, h5, h6 {
     </a>
 
     <nav aria-label="Primary">
-      <!-- Minimal QR toggle so your existing script can work -->
       <a id="qrToggle" href="#" aria-controls="qrWrap" aria-expanded="false">QR</a>
 
       <a href="MicroLessons.html">Micro Lessons</a>
@@ -543,7 +529,6 @@ h1, h2, h3, h4, h5, h6 {
   </div>
 </header>
 
-<!-- QR container required by your script -->
 <div id="qrWrap" class="qr-wrap" hidden>
   <div id="qrcode" aria-label="QR code"></div>
 </div>
@@ -564,7 +549,6 @@ h1, h2, h3, h4, h5, h6 {
       <p>
         These microlessons and mini-tests can be used by teachers in the classroom (use the QR codes so that your students can follow along on their phone) and also for indivdual 10-15 minutes lessons and tests for individual study
       </p>
-
 
       <hr class="section-divider">
 
@@ -671,8 +655,7 @@ h1, h2, h3, h4, h5, h6 {
           <span class="title">Arrange Paragraphs · Technology &amp; Social Media</span>
           <span class="meta">Open</span>
         </a>
-    
-      <hr class="section-divider">
+      </div>
 
       <details class="pill-dd">
         <summary>Mastering Matching Paragraphs</summary>
@@ -698,29 +681,32 @@ h1, h2, h3, h4, h5, h6 {
 
       <h2>PTE Write from Dictation &amp; Repeat Sentence</h2>
       <div class="link-grid">
-    <a class="link-pill" href="https://koalaspiessydney.github.io/Dictation-throughthough/">
-          <span class="title">Set 1  Focus on nailing the beginning</span>
+        <a class="link-pill" href="https://koalaspiessydney.github.io/Dictation-throughthough/">
+          <span class="title">Set 1 · Focus on nailing the beginning</span>
           <span class="meta">Open</span>
         </a>
-      </div>
 
-        
         <a class="link-pill" href="https://koalaspiessydney.github.io/Dictation-throughthough/">
           <span class="title">Set 2 · through / though / thorough / thought lessons</span>
           <span class="meta">Open</span>
         </a>
       </div>
-      
+
       <hr class="section-divider">
-      
-      <h2>New PTE Speaking Question 2026- Respond to Situation</h2>
-        <p>The PTE 'Respond to a Situation' task builds your ability to react clearly and politely when someone gives you a problem or request. You show you understand the context, choose the right tone, and organise your message logically. This skill directly supports the IELTS General Training letter, where you also respond to a situation by explaining, requesting, apologising, or suggesting. Practising PTE situations strengthens the clarity and tone control needed for effective IELTS letters.</p>
-    
-          <a class="link-pill" href="PTErespondtosituation/respondtosituationpte.html">
-          <span class="title">PTE Respond to Situation </span>
+
+      <h2>New PTE Speaking Question 2026 — Respond to Situation</h2>
+      <p>
+        The PTE 'Respond to a Situation' task builds your ability to react clearly and politely when someone gives you a problem or request. You show you understand the context, choose the right tone, and organise your message logically. This skill directly supports the IELTS General Training letter, where you also respond to a situation by explaining, requesting, apologising, or suggesting. Practising PTE situations strengthens the clarity and tone control needed for effective IELTS letters.
+      </p>
+
+      <div class="link-grid">
+        <a class="link-pill" href="PTErespondtosituation/respondtosituationpte.html">
+          <span class="title">PTE Respond to Situation</span>
           <span class="meta">Open</span>
         </a>
-    
+      </div>
+
+    </div>
   </section>
 
   <section id="contact" class="section">
@@ -789,11 +775,6 @@ h1, h2, h3, h4, h5, h6 {
 
 </body>
 </html>
-```
-
-
-
-
 
 
 
