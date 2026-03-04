@@ -1,0 +1,1238 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PTE Respond to Situation – Modern English Australia</title>
+
+  <style>
+    :root{
+      --bg:#f5f7fa;
+      --ink:#1a1f36;
+      --muted:#030f1e;
+      --shadow: 0 6px 18px rgba(26,31,54,.10), 0 2px 6px rgba(26,31,54,.06);
+      --radius:10px;
+      --max:860px;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: "Helvetica Neue", Arial, sans-serif;
+
+      --focus: 0 0 0 3px rgba(3,3,79,.18);
+      --accent:#03034f;
+      --accent-2:#080118;
+
+      --fs-body: 16px;
+      --fs-lead: 15.5px;
+      --fs-h1: clamp(26px, 2.6vw, 30px);
+      --fs-h2: 17px;
+      --fs-hint: 13.5px;
+      --fs-chip: 13px;
+      --fs-label: 12.5px;
+      --fs-prompt: 16.5px;
+      --lh-tight: 1.15;
+      --lh-body: 1.55;
+
+      --muted-2: rgba(110,122,138,.92);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ===== Background video layer ===== */
+    .bg-video-wrap{
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .bg-video{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      filter: blur(2px) saturate(1.05) brightness(.72);
+      opacity: 0.20;
+    }
+    .bg-overlay{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(3,3,79,.12), transparent 60%),
+        radial-gradient(1000px 700px at 80% 30%, rgba(0,0,0,.16), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.08) 40%, rgba(0,0,0,.18));
+    }
+
+    /* ===== Header ===== */
+    header{
+      position: sticky;
+      top:0;
+      z-index:10;
+      background: rgba(30,31,33,.90);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .topbar{
+      max-width: calc(var(--max) + 32px);
+      margin:0 auto;
+      padding: 12px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width: 260px;
+      color:#fff;
+    }
+    .brand .title{
+      font-weight: 800;
+      letter-spacing: .2px;
+      font-size: 14px;
+    }
+    .brand .sub{
+      color: rgba(255,255,255,.78);
+      font-size: 12.5px;
+    }
+    .topmeta{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .chipBtn{
+      cursor:pointer;
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.92);
+      font: inherit;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 750;
+      font-size: var(--fs-chip);
+    }
+    .chipBtn:hover{border-color: rgba(255,255,255,.22);}
+
+    /* ===== Main layout ===== */
+    main{
+      flex:1;
+      max-width: var(--max);
+      margin: 18px auto 34px;
+      padding: 0 16px;
+      width:100%;
+    }
+
+    .hero{padding: 14px 0 10px}
+    h1{
+      margin:0 0 8px;
+      font-size: var(--fs-h1);
+      line-height: var(--lh-tight);
+      letter-spacing: -0.2px;
+      font-weight: 800;
+    }
+    .lead{
+      margin:0;
+      font-size: var(--fs-lead);
+      line-height: 1.6;
+      color: var(--muted-2);
+      max-width: 70ch;
+    }
+
+    /* ===== Situation counter: white card, no border, shrink-to-fit ===== */
+    .controlBar{
+      margin-top: 12px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(6px);
+      border: 1px solid transparent;
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      padding: 10px 14px;
+      display:inline-flex;
+      width: fit-content;
+      max-width: 100%;
+      align-items:center;
+      gap:10px;
+      opacity: .96;
+    }
+    .controlBar strong{ font-weight: 900; }
+
+    /* ===== Panels ===== */
+    .panel{
+      margin-top: 14px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(6px);
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panelHeader{
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid transparent;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .panelHeader h2{
+      margin:0;
+      font-size: var(--fs-h2);
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .panelHeader .hint{
+      margin:6px 0 0;
+      color: var(--muted-2);
+      font-size: var(--fs-hint);
+    }
+    .panelBody{padding: 16px 18px 18px}
+
+    /* ===== Prompt block ===== */
+    .prompt{
+      background: rgba(249,250,251,.90);
+      backdrop-filter: blur(6px);
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: var(--fs-prompt);
+      line-height: 1.65;
+      box-shadow: 0 2px 10px rgba(26,31,54,.06);
+    }
+    #promptText{
+      font-weight: 520;
+      color: rgba(26,31,54,.95);
+      white-space: normal;
+      word-break: normal;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 12px;
+    }
+
+    /* ===== Buttons ===== */
+    button{
+      border:1px solid transparent;
+      background:#fff;
+      color:var(--ink);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      cursor:pointer;
+      transition: transform .06s ease, background .15s ease, box-shadow .15s ease;
+      font: inherit;
+    }
+    button:hover{ box-shadow: 0 2px 12px rgba(26,31,54,.10); }
+    button:active{transform: translateY(1px)}
+    button:focus{outline:none; box-shadow: var(--focus)}
+    button[disabled]{opacity:.55; cursor:not-allowed; transform:none; box-shadow:none}
+
+    button.primary{
+      background: var(--accent);
+      color:#fff;
+      font-weight: 900;
+    }
+    button.primary:hover{ background: var(--accent-2); }
+
+    /* ===== Timer bar ===== */
+    .timerWrap{
+      margin-top: 12px;
+      padding-top: 8px;
+      border: 0;
+      background: transparent;
+    }
+    .timerBar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .timerClock{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      flex: 1 1 auto;
+      min-width: 140px;
+    }
+    .time{
+      font-family: var(--mono);
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: .5px;
+      margin:0;
+      padding: 5px 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.85);
+      box-shadow: 0 2px 10px rgba(26,31,54,.06);
+    }
+    .timerActions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex: 0 0 auto;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .timerActions button{ padding: 9px 12px; border-radius: 12px; }
+
+    .timerMeta{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-top: 10px;
+      flex-wrap:wrap;
+    }
+    .progressLine{
+      flex: 0 0 160px;
+      height: 6px;
+      background: rgba(0,0,0,.06);
+      border-radius: 10px;
+      overflow:hidden;
+      border: 1px solid transparent;
+    }
+    .bar{
+      height:100%;
+      width:0%;
+      background: var(--accent);
+      border-radius: 10px;
+      transition: width .2s linear;
+    }
+    .sub{
+      margin:0;
+      font-size: var(--fs-label);
+      color: var(--muted-2);
+      line-height: 1.25;
+    }
+
+    /* ===== Textarea ===== */
+    textarea{
+      width:100%;
+      min-height: 220px;
+      resize: vertical;
+      border:1px solid transparent;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 16px;
+      line-height: 1.65;
+      background:#fff;
+      box-shadow: 0 2px 10px rgba(26,31,54,.06);
+    }
+    textarea:focus{ outline:none; box-shadow: var(--focus); }
+
+    .note{
+      font-size: var(--fs-label);
+      color: var(--muted-2);
+      margin: 10px 0 0;
+    }
+
+    .kbd{
+      font-family: var(--mono);
+      border:1px solid transparent;
+      border-bottom-width:2px;
+      padding:2px 6px;
+      border-radius: 8px;
+      background:#fff;
+      font-size:12px;
+      color:#334155;
+      box-shadow: 0 1px 6px rgba(26,31,54,.08);
+    }
+
+    /* ===== Footer ===== */
+    footer{
+      background:#1e1f21;
+      color: rgba(255,255,255,.78);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .footerWrap{
+      max-width: calc(var(--max) + 32px);
+      margin:0 auto;
+      padding: 14px 16px;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-size: 13px;
+    }
+    .footerWrap strong{color:#fff}
+    .footerLinks{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .footerLinks a{
+      color: rgba(255,255,255,.85);
+      text-decoration:none;
+      border-bottom: 1px solid rgba(255,255,255,.18);
+    }
+    .footerLinks a:hover{border-bottom-color: rgba(255,255,255,.55)}
+
+    /* ===== Slide-in help panel ===== */
+    .sideOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.38);
+      z-index: 50;
+    }
+    .sidePanel{
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(420px, 92vw);
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(10px);
+      border-left: 1px solid rgba(220,225,231,.9);
+      box-shadow: -12px 0 30px rgba(0,0,0,.18);
+      z-index: 60;
+
+      transform: translateX(102%);
+      transition: transform .22s ease;
+      display:flex;
+      flex-direction:column;
+    }
+    .sidePanel.open{ transform: translateX(0); }
+    .sideHeader{
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid rgba(220,225,231,.9);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .sideKicker{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .2px;
+    }
+    .sideHeader h3{
+      margin: 2px 0 0;
+      font-size: 18px;
+      line-height: 1.25;
+      font-weight: 900;
+      color: var(--ink);
+    }
+    .iconBtn{
+      border: 1px solid rgba(220,225,231,.9);
+      background: #fff;
+      color: var(--ink);
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      font-size: 20px;
+      line-height: 1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+    .sideBody{
+      padding: 14px 16px 16px;
+      overflow:auto;
+      color: rgba(26,31,54,.92);
+      line-height: 1.6;
+    }
+    .sideBody p{ margin: 0 0 12px; font-size: 15.5px; }
+    .sideCallout{
+      border: 1px solid rgba(220,225,231,.95);
+      background: rgba(249,250,251,.9);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+    .sideFooter{
+      padding: 12px 16px 16px;
+      border-top: 1px solid rgba(220,225,231,.9);
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+    }
+
+    /* ===== Template pill button + floating “pill window” ===== */
+    .templatePillBtn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid transparent;
+      box-shadow: 0 2px 10px rgba(26,31,54,.10);
+      font-weight: 900;
+      letter-spacing: .01em;
+    }
+    .templatePillBtn:hover{ box-shadow: 0 4px 14px rgba(26,31,54,.12); }
+
+    .pillCaret{
+      margin-left: 2px;
+      width: 0; height: 0;
+      border-left:6px solid transparent;
+      border-right:6px solid transparent;
+      border-top:7px solid rgba(3,15,30,.45);
+      transition: transform .15s ease;
+    }
+    .templatePillBtn[aria-expanded="true"] .pillCaret{ transform: rotate(180deg); }
+
+    .tplOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.36);
+      z-index: 70;
+    }
+
+    .tplWindow{
+      position: fixed;
+      left: 50%;
+      top: 18%;
+      width: min(720px, calc(100vw - 32px));
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      box-shadow: 0 22px 60px rgba(0,0,0,.20);
+      z-index: 80;
+
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(8px);
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .tplWindow.open{
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .tplHead{
+      padding: 14px 16px 12px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+    .tplKicker{
+      font-size: 12px;
+      color: rgba(3,15,30,.70);
+      letter-spacing: .02em;
+    }
+    .tplHead h3{
+      margin: 2px 0 0;
+      font-size: 18px;
+      line-height: 1.25;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .tplClose{
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.92);
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      font-size: 22px;
+      line-height: 1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+    .tplClose:hover{ box-shadow: 0 2px 10px rgba(26,31,54,.10); }
+
+    .tplBody{ padding: 14px 16px 16px; }
+
+    .tplCode{
+      margin: 0;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(249,250,251,.98);
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 0 1px 10px rgba(26,31,54,.06);
+      white-space: pre-wrap;
+      font-family: var(--mono);
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #111827;
+    }
+
+    .tplActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 520px){
+      .timerBar{ justify-content:flex-start; }
+      .timerClock{ flex: 1 1 100%; }
+      .timerActions{ width: 100%; justify-content:flex-start; }
+      .sidePanel{ width: 100vw; border-left:none; }
+      .tplWindow{ top: 10%; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-video-wrap" aria-hidden="true">
+    <video class="bg-video" autoplay muted loop playsinline preload="auto">
+      <source src="businesslady.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="title">Modern English Australia</div>
+        <div class="sub">Koala Spies Sydney · PTE Respond to Situation – Practice</div>
+      </div>
+
+      <div class="topmeta">
+        <button class="chipBtn" id="btnHelp" type="button" aria-haspopup="dialog" aria-controls="helpPanel" aria-expanded="false">
+          Listening settings
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Respond to situation</h1>
+
+      <p>
+        Respond politely and clearly to the situation. Include:
+        <br><br>
+        1) A short introduction saying why you are contacting the person.
+        <br>
+        2) The key details of the problem, request, or situation.
+        <br>
+        3) A clear action you want (solution, advice, permission, information, next steps).
+        <br>
+        4) A polite closing showing appreciation or willingness to cooperate.
+      </p>
+
+      <h1>How to Practice with this Page</h1>
+
+      <p>Press “Start”. The prompt will play once. Ten seconds after the audio finishes, you will hear a beep. Then you have 40 seconds to respond.</p>
+      <p>Use speech-to-text to see what you said and self-correct. It clears when you press “Try again” or “Next” (copy it out first if you want to keep it).</p>
+
+      <div class="controlBar" aria-label="Session status">
+        Situation: <strong><span id="sitCounter">1</span>/<span id="sitTotal">6</span></strong>
+      </div>
+    </div>
+
+    <section class="panel" aria-label="Situation">
+      <div class="panelHeader">
+        <div>
+          <h2>Situation</h2>
+          <div class="hint" id="situationHint">Follow the task type (e.g., explaining, complaining). Use clear workplace language.</div>
+        </div>
+      </div>
+
+      <div class="panelBody">
+        <div class="prompt" id="promptBox">
+          <div id="promptText"></div>
+        </div>
+
+        <div class="timerWrap" role="status" aria-live="polite">
+          <div class="timerBar">
+            <div class="timerClock" aria-label="Time remaining">
+              <span class="time" id="countLabel">00:00</span>
+            </div>
+
+            <div class="timerActions">
+              <button class="primary" id="btnStart" type="button">Start</button>
+              <button id="btnTryAgain" type="button">Try again</button>
+              <button id="btnNext" type="button">Next</button>
+            </div>
+          </div>
+
+          <div class="timerMeta">
+            <div class="progressLine" aria-hidden="true"><div class="bar" id="bar"></div></div>
+            <div class="sub" id="subLabel">Press “Start” to play the prompt and begin.</div>
+          </div>
+        </div>
+
+        <p class="note">Tip: Use “Try again” to repeat the same situation. Use “Next” to move on.</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Answer">
+      <div class="panelHeader">
+        <div>
+          <h2>Your answer</h2>
+          <div class="hint">Type, or use speech-to-text (Chrome/Edge usually support it).</div>
+        </div>
+      </div>
+
+      <div class="panelBody">
+        <div class="row">
+          <button id="btnMic" type="button" disabled>Start speaking (speech-to-text)</button>
+        </div>
+        <p class="note" id="sttNote"></p>
+
+        <div class="row" style="margin-top:10px">
+          <textarea id="answerBox" placeholder="Type your response here…"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Template" style="margin-top:14px;">
+      <div class="panelHeader">
+        <div>
+          <h2>Template</h2>
+          <div class="hint">Optional: open the hint window and insert a template response.</div>
+        </div>
+      </div>
+
+      <div class="panelBody">
+        <button id="btnTemplatePill" type="button" class="templatePillBtn" aria-haspopup="dialog" aria-controls="templateWindow" aria-expanded="false">
+          HINT / USE A TEMPLATE
+          <span class="pillCaret" aria-hidden="true"></span>
+        </button>
+
+        <template id="templateText">
+Hi… , I’d just like to explain/ complain/ ask for advice/ request/ suggest that/about …
+You see, (what happened) …, and in that case I’d like (what you want to happen) …
+Thanks so much for your attention on the matter.
+        </template>
+
+        <p class="note">Shortcut: <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> inserts the template.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footerWrap">
+      <div><strong>Koala Spies Sydney</strong> · Modern English Australia · All Rights Reserved</div>
+      <div class="footerLinks">
+        <a href="#" onclick="return false;">Home</a>
+        <a href="#" onclick="return false;">PTE</a>
+        <a href="#" onclick="return false;">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sideOverlay" id="helpOverlay" hidden></div>
+
+  <aside class="sidePanel" id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" aria-hidden="true">
+    <div class="sideHeader">
+      <div>
+        <div class="sideKicker">Help</div>
+        <h3 id="helpTitle">Listening settings</h3>
+      </div>
+      <button class="iconBtn" id="btnHelpClose" type="button" aria-label="Close panel">×</button>
+    </div>
+
+    <div class="sideBody">
+      <p>
+        To keep the listening activities in the correct native accent, change your device language and voice settings to
+        English (Australia/UK) and turn off any personalised or adaptive speech features. This stops your phone or laptop
+        from switching to your own accent and ensures all audio and dictation stay in the native model your teacher intends.
+      </p>
+
+      <div class="sideCallout">
+        If speech-to-text accuracy drops, double-check your browser microphone permissions and the selected input device.
+      </div>
+    </div>
+
+    <div class="sideFooter">
+      <button id="btnHelpDone" class="primary" type="button">Done</button>
+    </div>
+  </aside>
+
+  <div class="tplOverlay" id="tplOverlay" hidden></div>
+
+  <aside class="tplWindow" id="templateWindow" role="dialog" aria-modal="true" aria-labelledby="tplTitle" aria-hidden="true">
+    <div class="tplHead">
+      <div>
+        <div class="tplKicker">Hint</div>
+        <h3 id="tplTitle">Template response</h3>
+      </div>
+      <button class="tplClose" id="btnTplClose" type="button" aria-label="Close template">×</button>
+    </div>
+
+    <div class="tplBody">
+      <pre class="tplCode" id="tplCode"></pre>
+
+      <div class="tplActions">
+        <button id="btnTplInsert" class="primary" type="button">Insert into answer</button>
+        <button id="btnTplCopy" type="button">Copy</button>
+      </div>
+
+      <p class="note">Shortcut: <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> inserts the template.</p>
+    </div>
+  </aside>
+
+  <audio id="promptAudio" preload="auto"></audio>
+
+  <script>
+(() => {
+  const PREP_SECONDS = 10;
+  const SPEAK_SECONDS = 40;
+
+  const SITUATIONS = [
+    { n: 1, audio: "situation1.mp3",
+      text: "You arrive at work and discover that an important meeting has been moved forward by two hours. Your manager asks you to update the team immediately so everyone can adjust their plans. Explain what you would say to the team in this situation." },
+    { n: 2, audio: "situation2.mp3",
+      text: "You recently bought a new pair of headphones online, but they arrived damaged and don’t work properly. You contact customer service to explain the issue and request a replacement or refund. Describe what you would say to the customer service representative." },
+    { n: 3, audio: "situation3.mp3",
+      text: "You’ve just been offered two job opportunities—one with a higher salary but longer hours, and another with better work-life balance but lower pay. You’re unsure which to choose and decide to speak with a trusted mentor. Explain what you would say to ask for their advice." },
+    { n: 4, audio: "situation4.mp3",
+      text: "You’ve been working on a major project for several weeks and now need to take two days off for a personal matter. You decide to speak with your manager to request this time off without disrupting the team’s progress. Explain what you would say to your manager." },
+    { n: 5, audio: "situation5.mp3",
+      text: "Your team has been facing delays in completing a project due to unclear communication. You believe that holding a short daily meeting could help everyone stay aligned and address issues quickly. Explain what you would say to your manager to suggest this idea." },
+    { n: 6, audio: "situation6.mp3",
+      text: "You missed an important deadline because of a scheduling error on your part. Your manager asks for an explanation and wants to know how you’ll prevent it from happening again. Explain what you would say to apologise and take responsibility." }
+  ];
+
+  // Elements
+  const countLabel = document.getElementById('countLabel');
+  const subLabel = document.getElementById('subLabel');
+  const bar = document.getElementById('bar');
+
+  const sitCounter = document.getElementById('sitCounter');
+  const sitTotal = document.getElementById('sitTotal');
+  const promptTextEl = document.getElementById('promptText');
+
+  const answerBox = document.getElementById('answerBox');
+  const btnStart = document.getElementById('btnStart');
+  const btnTryAgain = document.getElementById('btnTryAgain');
+  const btnNext = document.getElementById('btnNext');
+
+  const btnMic = document.getElementById('btnMic');
+  const sttNote = document.getElementById('sttNote');
+
+  const audioEl = document.getElementById('promptAudio');
+
+  // Helpers
+  const pad2 = (n) => String(n).padStart(2,'0');
+  const mmss = (sec) => `${pad2(Math.floor(sec/60))}:${pad2(sec%60)}`;
+
+  function setStatusText(text){ subLabel.textContent = text; }
+
+  function setTime(sec, totalSec){
+    countLabel.textContent = mmss(Math.max(0, sec));
+    if (!totalSec || totalSec <= 0){
+      bar.style.width = "0%";
+      return;
+    }
+    const pct = Math.max(0, Math.min(100, ((totalSec - sec) / totalSec) * 100));
+    bar.style.width = pct.toFixed(1) + "%";
+  }
+
+  // Beep
+  let audioCtx;
+  function ensureAudioContext(){
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+  }
+  function beep(durationMs = 180, frequency = 880){
+    const ctx = ensureAudioContext();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = "sine";
+    o.frequency.value = frequency;
+    const now = ctx.currentTime;
+
+    g.gain.setValueAtTime(0.0001, now);
+    g.gain.exponentialRampToValueAtTime(0.20, now + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, now + durationMs/1000);
+
+    o.connect(g);
+    g.connect(ctx.destination);
+    o.start(now);
+    o.stop(now + durationMs/1000 + 0.02);
+  }
+
+  // Prompt MP3
+  function stopPromptAudio(){
+    audioEl.pause();
+    audioEl.currentTime = 0;
+    audioEl.onended = null;
+    audioEl.onerror = null;
+  }
+  function preloadPromptAudio(index){
+    audioEl.src = SITUATIONS[index].audio;
+    audioEl.load();
+  }
+  function playPromptAudio(index){
+    return new Promise((resolve) => {
+      stopPromptAudio();
+      audioEl.src = SITUATIONS[index].audio;
+
+      const cleanup = () => {
+        audioEl.onended = null;
+        audioEl.onerror = null;
+      };
+
+      audioEl.onended = () => { cleanup(); resolve(true); };
+      audioEl.onerror = () => { cleanup(); resolve(false); };
+
+      audioEl.play().catch(() => {
+        cleanup();
+        resolve(false);
+      });
+    });
+  }
+
+  // Timer engine
+  let tickTimer = null;
+  let remaining = 0;
+  let total = 0;
+
+  function clearTick(){
+    if (tickTimer){ clearInterval(tickTimer); tickTimer = null; }
+  }
+
+  function lockUI(running){
+    btnStart.disabled = running;
+    btnTryAgain.disabled = running;
+    btnNext.disabled = running;
+  }
+
+  function runCountdown(seconds, labelText, onDone){
+    remaining = seconds;
+    total = seconds;
+
+    setStatusText(labelText);
+    setTime(remaining, total);
+
+    clearTick();
+    tickTimer = setInterval(() => {
+      remaining -= 1;
+      if (remaining <= 0){
+        clearTick();
+        setTime(0, total);
+        if (typeof onDone === "function") onDone();
+      } else {
+        setTime(remaining, total);
+      }
+    }, 1000);
+  }
+
+  // Speech-to-text
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let recognition = null;
+  let sttAvailable = false;
+  let sttRunning = false;
+
+  function stripLive(){
+    answerBox.value = answerBox.value.replace(/\s*\[live\][\s\S]*?\[\/live\]\s*/g, "").trimEnd();
+  }
+
+  // Clears speech-to-text output (and the whole box, per your current design)
+  function clearSTTTranscript({ clearAll = true } = {}){
+    stripLive();
+    if (clearAll) answerBox.value = "";
+  }
+
+  function initSTT(){
+    if (!SpeechRecognition){
+      sttAvailable = false;
+      btnMic.disabled = true;
+      sttNote.textContent = "Speech-to-text not available in this browser. Use typing instead.";
+      return;
+    }
+    sttAvailable = true;
+    btnMic.disabled = false;
+    sttNote.textContent = "Speech-to-text ready. Allow microphone access when prompted.";
+
+    recognition = new SpeechRecognition();
+    recognition.lang = "en-AU";
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    let finalText = "";
+
+    recognition.onstart = () => {
+      finalText = "";
+      stripLive();
+    };
+
+    recognition.onresult = (event) => {
+      let interim = "";
+      for (let i = event.resultIndex; i < event.results.length; i++){
+        const txt = event.results[i][0].transcript;
+        if (event.results[i].isFinal){
+          finalText += txt.trim() + " ";
+        } else {
+          interim += txt;
+        }
+      }
+      const base = answerBox.value.replace(/\s*\[live\][\s\S]*?\[\/live\]\s*/g, "").trimEnd();
+      const live = interim ? `\n\n[live]\n${interim.trim()}\n[/live]` : "";
+      answerBox.value = (base + (base ? " " : "") + finalText).trim() + live;
+    };
+
+    recognition.onerror = () => { stopSTT(); };
+    recognition.onend = () => {
+      if (sttRunning){
+        sttRunning = false;
+        btnMic.textContent = "Start speaking (speech-to-text)";
+        stripLive();
+      }
+    };
+  }
+
+  function startSTT(silent=false){
+    if (!sttAvailable || !recognition || sttRunning) return;
+    try{
+      recognition.start();
+      sttRunning = true;
+      btnMic.textContent = "Stop speaking (speech-to-text)";
+      if (!silent) answerBox.focus();
+    } catch(e){}
+  }
+
+  function stopSTT(){
+    if (!sttAvailable || !recognition) return;
+    try{ recognition.stop(); } catch(e){}
+    sttRunning = false;
+    btnMic.textContent = "Start speaking (speech-to-text)";
+    stripLive();
+  }
+
+  // Attempt runner (same situation)
+  let idx = 0;
+
+  async function runAttempt(){
+    // new attempt: clear so nothing carries over
+    clearSTTTranscript({ clearAll: true });
+
+    stopSTT();
+    clearTick();
+    lockUI(true);
+
+    try { ensureAudioContext().resume?.(); } catch(e){}
+
+    setStatusText("Playing the prompt…");
+    setTime(0, 0);
+
+    const ok = await playPromptAudio(idx);
+    if (!ok){
+      lockUI(false);
+      setStatusText("Audio failed to play. Check the mp3 path and run this page from a web server (not file://).");
+      setTime(0, 0);
+      return;
+    }
+
+    runCountdown(
+      PREP_SECONDS,
+      "Get ready. Beep in 10 seconds.",
+      () => {
+        beep();
+
+        runCountdown(
+          SPEAK_SECONDS,
+          "Respond now (40 seconds). Speak or type.",
+          () => {
+            setStatusText("Time is up. Use “Try again” to repeat, or “Next” to continue.");
+            setTime(0, 0);
+            lockUI(false);
+
+            // end attempt: stop and clear STT so it never carries over
+            stopSTT();
+            clearSTTTranscript({ clearAll: true });
+          }
+        );
+
+        if (sttAvailable) startSTT(true);
+      }
+    );
+  }
+
+  function resetInternal(){
+    stopPromptAudio();
+    stopSTT();
+    clearTick();
+    lockUI(false);
+
+    // reset between tasks too
+    clearSTTTranscript({ clearAll: true });
+
+    setStatusText("Press “Start” to play the prompt and begin.");
+    setTime(0, 0);
+  }
+
+  function renderSituation(){
+    const s = SITUATIONS[idx];
+    sitCounter.textContent = String(s.n);
+    sitTotal.textContent = String(SITUATIONS.length);
+    promptTextEl.textContent = s.text;
+
+    resetInternal();
+    preloadPromptAudio(idx);
+  }
+
+  function nextSituation(){
+    // clear on next so students start fresh
+    clearSTTTranscript({ clearAll: true });
+    idx = (idx + 1) % SITUATIONS.length;
+    renderSituation();
+  }
+
+  function tryAgain(){
+    // clear and immediately re-run the same prompt
+    clearSTTTranscript({ clearAll: true });
+    if (btnStart.disabled) return; // currently running
+    runAttempt();
+  }
+
+  // ===== Template pill window =====
+  const btnTemplatePill = document.getElementById('btnTemplatePill');
+  const tplOverlay = document.getElementById('tplOverlay');
+  const templateWindow = document.getElementById('templateWindow');
+  const btnTplClose = document.getElementById('btnTplClose');
+  const btnTplInsert = document.getElementById('btnTplInsert');
+  const btnTplCopy = document.getElementById('btnTplCopy');
+  const tplCode = document.getElementById('tplCode');
+
+  const tplSource = document.getElementById('templateText');
+  const TEMPLATE = (tplSource?.content?.textContent || tplSource?.textContent || "").trim();
+  if (tplCode) tplCode.textContent = TEMPLATE;
+
+  function openTemplateWindow(){
+    if (!templateWindow || !tplOverlay || !btnTemplatePill) return;
+    tplOverlay.hidden = false;
+    templateWindow.classList.add('open');
+    templateWindow.setAttribute('aria-hidden', 'false');
+    btnTemplatePill.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    btnTplClose?.focus?.();
+  }
+
+  function closeTemplateWindow(){
+    if (!templateWindow || !tplOverlay || !btnTemplatePill) return;
+    templateWindow.classList.remove('open');
+    templateWindow.setAttribute('aria-hidden', 'true');
+    btnTemplatePill.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    setTimeout(() => { tplOverlay.hidden = true; }, 180);
+    btnTemplatePill.focus();
+  }
+
+  btnTemplatePill?.addEventListener('click', () => {
+    const isOpen = templateWindow?.classList.contains('open');
+    if (isOpen) closeTemplateWindow();
+    else openTemplateWindow();
+  });
+
+  tplOverlay?.addEventListener('click', closeTemplateWindow);
+  btnTplClose?.addEventListener('click', closeTemplateWindow);
+
+  btnTplInsert?.addEventListener('click', () => {
+    const current = answerBox.value.trim();
+    answerBox.value = current ? (current + "\n\n" + TEMPLATE) : TEMPLATE;
+    answerBox.focus();
+    closeTemplateWindow();
+  });
+
+  btnTplCopy?.addEventListener('click', async () => {
+    try{
+      await navigator.clipboard.writeText(TEMPLATE);
+      setStatusText("Template copied.");
+      setTimeout(() => setStatusText("Press “Start” to play the prompt and begin."), 900);
+    } catch(e){}
+  });
+
+  // Help side panel
+  const btnHelp = document.getElementById('btnHelp');
+  const helpPanel = document.getElementById('helpPanel');
+  const helpOverlay = document.getElementById('helpOverlay');
+  const btnHelpClose = document.getElementById('btnHelpClose');
+  const btnHelpDone = document.getElementById('btnHelpDone');
+
+  function openHelp(){
+    if (!helpPanel || !helpOverlay || !btnHelp) return;
+    helpOverlay.hidden = false;
+    helpPanel.classList.add('open');
+    helpPanel.setAttribute('aria-hidden', 'false');
+    btnHelp.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    btnHelpClose?.focus?.();
+  }
+
+  function closeHelp(){
+    if (!helpPanel || !helpOverlay || !btnHelp) return;
+    helpPanel.classList.remove('open');
+    helpPanel.setAttribute('aria-hidden', 'true');
+    btnHelp.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    setTimeout(() => { helpOverlay.hidden = true; }, 220);
+    btnHelp.focus();
+  }
+
+  btnHelp?.addEventListener('click', openHelp);
+  helpOverlay?.addEventListener('click', closeHelp);
+  btnHelpClose?.addEventListener('click', closeHelp);
+  btnHelpDone?.addEventListener('click', closeHelp);
+
+  // Events
+  btnStart.addEventListener('click', runAttempt);
+  btnTryAgain.addEventListener('click', tryAgain);
+  btnNext.addEventListener('click', nextSituation);
+
+  btnMic.addEventListener('click', () => {
+    if (!sttAvailable) return;
+    if (sttRunning) stopSTT();
+    else startSTT(false);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape'){
+      if (helpPanel?.classList.contains('open')) closeHelp();
+      if (templateWindow?.classList.contains('open')) closeTemplateWindow();
+    }
+    if (e.ctrlKey && e.key === "Enter"){
+      e.preventDefault();
+      const current = answerBox.value.trim();
+      answerBox.value = current ? (current + "\n\n" + TEMPLATE) : TEMPLATE;
+      answerBox.focus();
+    }
+  });
+
+  // Init
+  initSTT();
+  renderSituation();
+})();
+  </script>
+</body>
+</html>
+```
