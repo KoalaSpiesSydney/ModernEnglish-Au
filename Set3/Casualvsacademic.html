@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Casual ↔ Academic Matching + Gap-Fill – Modern English Australia</title>
+
+<style>
+:root{
+  /* Neutral palette */
+  --bg:#f6f6f6;
+  --card:#ffffff;
+  --ink:#222;
+  --muted:#6b6b6b;
+  --accent:#8a8a8a;
+  --line:#e3e3e3;
+  --ok:#2f7d4b;
+  --err:#b94a48;
+  --dark:#1f1f1f;
+
+  --radius:16px;
+  --shadow:0 10px 24px rgba(0,0,0,.10);
+  --max:1100px;
+}
+/* Background image behind the game */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("background.png") center / cover no-repeat;
+  opacity:0.25;
+  z-index:-1;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Top bar + footer */
+.topbar{
+  background:var(--dark);
+  color:#fff;
+  text-align:center;
+  padding:1rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  border-bottom:2px solid var(--line);
+}
+footer{
+  margin-top:auto;
+  background:var(--dark);
+  color:#fff;
+  text-align:center;
+  padding:1rem;
+  font-size:.9rem;
+  border-top:2px solid var(--line);
+}
+
+/* Page container */
+.page{
+  width:min(var(--max), 100%);
+  margin:0 auto;
+  padding:1.25rem 1rem 2.25rem;
+}
+
+h1,h2{
+  text-align:center;
+  color:var(--ink);
+  letter-spacing:.01em;
+}
+h1{
+  font-size:clamp(1.25rem, 2vw, 1.6rem);
+  margin:.35rem 0 .3rem;
+}
+h2{
+  font-size:clamp(1.05rem, 1.6vw, 1.25rem);
+  margin:1.25rem 0 .75rem;
+  color:var(--muted);
+  font-weight:700;
+}
+
+/* Controls */
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:.75rem;
+  flex-wrap:wrap;
+  margin:.75rem 0 1.25rem;
+}
+button{
+  appearance:none;
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--ink);
+  padding:.7rem 1.15rem;
+  border-radius:999px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 10px 18px rgba(0,0,0,.06);
+}
+button:hover{transform:translateY(-1px)}
+button:active{transform:translateY(0)}
+button:focus-visible{outline:3px solid rgba(0,0,0,.15); outline-offset:3px}
+
+/* Game wrapper - centered */
+.game-wrap{
+  display:flex;
+  justify-content:center;
+}
+
+/* Game grid: ALWAYS 4 x 4 */
+#game{
+  width:min(920px, 100%);
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:clamp(.55rem, 1.4vw, 1rem);
+}
+
+/* Card */
+.card{
+  position:relative;
+  width:100%;
+  aspect-ratio: 1.65 / 1;
+  perspective:900px;
+  cursor:pointer;
+  border-radius:var(--radius);
+  background:transparent;
+  -webkit-tap-highlight-color:transparent;
+}
+.inner{
+  position:absolute;
+  inset:0;
+  transform-style:preserve-3d;
+  transition:transform .45s ease;
+}
+.card.flipped .inner{transform:rotateY(180deg)}
+
+.front,.back{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  border-radius:calc(var(--radius) - 2px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:clamp(.55rem, 1.2vw, .95rem);
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  font-size:clamp(.72rem, 1.15vw, .98rem);
+  line-height:1.25;
+  overflow:hidden;
+}
+
+.front{
+  background:linear-gradient(180deg, #fff, #fbfbfb);
+  color:var(--muted);
+}
+.back{
+  transform:rotateY(180deg);
+  background:#f1f1f1;
+  color:var(--ink);
+}
+
+/* Subtle type indicators (neutral) */
+.card[data-type="casual"] .front{border-color:#d7d7d7}
+.card[data-type="academic"] .front{border-color:#cfcfcf}
+
+/* Matched state */
+.matched .front,.matched .back{
+  background:#e9f0ea !important;
+  color:var(--ink) !important;
+  cursor:default;
+  border-color:#d6e3da !important;
+}
+
+/* Keyboard */
+.card:focus-visible{outline:3px solid rgba(0,0,0,.18); outline-offset:4px}
+
+/* Gap fill */
+#gapfill{
+  width:min(920px, 100%);
+  margin:1.6rem auto 0;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:1.2rem 1.1rem;
+}
+#gapfill p{margin:.75rem 0;color:var(--ink)}
+#gapfill strong{color:var(--ink)}
+#gapfill em{color:var(--muted)}
+#gapfill input{
+  width:clamp(72px, 12vw, 110px);
+  border:none;
+  border-bottom:2px solid var(--line);
+  background:transparent;
+  color:var(--ink);
+  text-align:center;
+  margin:0 .2rem;
+  font-size:1rem;
+  padding:.25rem .2rem;
+}
+#gapfill input:focus{outline:none;border-bottom-color:#bdbdbd}
+.correct{color:var(--ok);border-bottom-color:var(--ok)!important}
+.incorrect{color:var(--err);border-bottom-color:var(--err)!important}
+
+#checkBtn{
+  display:block;
+  margin:1rem auto 0;
+  border:1px solid var(--line);
+  background:#f3f3f3;
+  color:var(--ink);
+  padding:.75rem 1.25rem;
+  border-radius:999px;
+  font-weight:900;
+  box-shadow:0 10px 18px rgba(0,0,0,.06);
+}
+#checkBtn:hover{background:#ededed}
+
+#feedback{
+  text-align:center;
+  margin-top:.85rem;
+  color:var(--muted);
+  font-weight:800;
+}
+
+/* Nav */
+.nav-buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:.75rem;
+  margin:1.5rem 0 0;
+}
+.nav-buttons a{
+  display:inline-block;
+  text-decoration:none;
+  color:#fff;
+  background:#2b2b2b;
+  padding:.75rem 1.2rem;
+  border-radius:999px;
+  font-weight:900;
+  letter-spacing:.02em;
+}
+.nav-buttons a:hover{opacity:.92}
+
+/* Phone comfort: keep 4 cols but reduce height and text a touch */
+@media (max-width: 520px){
+  .page{padding:1rem .75rem 2rem}
+  #game{gap:.5rem}
+  .card{aspect-ratio: 1.55 / 1}
+}
+</style>
+</head>
+
+<body>
+  <div class="topbar">MODERN ENGLISH AUSTRALIA · Koala Spies Sydney</div>
+
+  <div class="page">
+    <h1>Casual ↔ Academic Matching + Gap-Fill</h1>
+    <h2>Part 1 – Match Casual with Academic language</h2>
+
+    <div class="controls">
+      <button type="button" onclick="initGame()">Play Again</button>
+    </div>
+
+    <div class="game-wrap">
+      <div id="game" aria-label="Matching game board"></div>
+    </div>
+
+    <section id="gapfill" aria-label="Gap fill practice">
+      <h2 style="margin-top:0">Part 2 – Academic English Gap-Fill Practice</h2>
+      <p><strong>Topic:</strong> Ancient Ceramics<br>
+      Fill each gap with <em>one suitable word</em>. Use formal or academic language.</p>
+
+      <p>
+        There had been (1) <input id="g1" autocomplete="off"> developments in ceramic production before that period.<br>
+        It was (2) <input id="g2" autocomplete="off"> practice to use such vessels for the storage of food and water.<br>
+        These artefacts (3) <input id="g3" autocomplete="off"> specific iconography that attracted (4) <input id="g4" autocomplete="off"> support among local communities.<br>
+        Although some items (5) <input id="g5" autocomplete="off"> minor errors, they are still regarded as culturally valuable.<br>
+        Over time, the (6) <input id="g6" autocomplete="off"> increased (7) <input id="g7" autocomplete="off">, and artisans (8) <input id="g8" autocomplete="off"> substantial influence.<br>
+        (9) <input id="g9" autocomplete="off"> findings from new manufacturing techniques seem encouraging,<br>
+        suggesting that they played a (10) <input id="g10" autocomplete="off"> role in technological progress.
+      </p>
+
+      <button id="checkBtn" type="button" onclick="checkAnswers()">Check Answers</button>
+      <div id="feedback"></div>
+    </section>
+
+    <div class="nav-buttons">
+      
+      <a href="modernenglish.au">Home</a>
+    </div>
+  </div>
+
+  <footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</footer>
+
+<script>
+/* ==== PART 1: MATCHING GAME (4 x 4 = 16 cards) ==== */
+const pairs = [
+  ["Before that, there were important changes.","There had been significant developments."],
+  ["That’s an important part.","That’s a significant aspect."],
+  ["The prices went up a lot.","The costs increased significantly."],
+  ["There was a very big difference.","There was an enormous variation."],
+  ["There were a lot of different types.","There was considerable diversity."],
+  ["They had a lot of power.","They wielded substantial influence."],
+  ["It shows special and unique designs.","It displays specific iconography."],
+  ["It has tiny mistakes in it.","It contains minor errors."],
+  ["The idea is really popular.","There is widespread support."],
+  ["They agree.","There is common ground."],
+  ["Everyone knows that…","It is common knowledge that…"],
+  ["Everyone was doing this.","It was common practice to do this."],
+  ["She did a lot of research.","She undertook extensive research."],
+  ["The results didn’t match.","The findings conflicted."],
+  ["He could continue the research.","He was able to maintain the program."],
+  ["It was difficult to keep the people focused.","It was challenging to maintain engagement."],
+  ["They asked different people to answer questions.","They surveyed a random sample."],
+  ["For ages.","For an extended period of time."],
+  ["There is still a big argument about that.","Considerable debate continues."],
+  ["How long it takes is important.","Timing is crucial."],
+  ["There are different parts that don’t make sense.","There are some conflicting elements."],
+  ["The first results look good.","Preliminary findings seem encouraging."],
+  ["They were important in the process.","They played a pivotal role."],
+  ["People are richer.","People are better off in economic terms."],
+  ["People think it’s a bad idea.","It is widely regarded as ineffective."],
+  ["The plan didn’t work.","The strategy proved unsuccessful."],
+  ["Their work was important.","They played a pivotal role."],
+  ["Thousands of years ago, it was usual.","In ancient times, it was commonplace."]
+];
+
+let flipped = [];
+let matched = [];
+
+const board = document.getElementById('game');
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function initGame(){
+  board.innerHTML='';
+  flipped=[];
+  matched=[];
+
+  // Pick exactly 8 pairs => 16 cards => 4x4
+  const gamePairs = shuffle([...pairs]).slice(0, 8);
+
+  const cards=[];
+  gamePairs.forEach((p,i)=>{
+    cards.push({text:p[0],pair:i,type:'casual'});
+    cards.push({text:p[1],pair:i,type:'academic'});
+  });
+
+  shuffle(cards).forEach(c=>{
+    const card=document.createElement('div');
+    card.className='card';
+    card.tabIndex=0;
+    card.setAttribute('role','button');
+    card.dataset.pair=c.pair;
+    card.dataset.type=c.type;
+
+    card.innerHTML = `
+      <div class="inner">
+        <div class="front"></div>
+        <div class="back">${c.text}</div>
+      </div>
+    `;
+
+    card.addEventListener('click', ()=>flip(card));
+    card.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        flip(card);
+      }
+    });
+
+    board.appendChild(card);
+  });
+}
+
+function flip(card){
+  if(card.classList.contains('flipped') || card.classList.contains('matched')) return;
+  if(flipped.length === 2) return;
+
+  card.classList.add('flipped');
+  flipped.push(card);
+
+  if(flipped.length === 2){
+    const [c1,c2]=flipped;
+    const isMatch = (c1.dataset.pair === c2.dataset.pair) && (c1.dataset.type !== c2.dataset.type);
+
+    if(isMatch){
+      c1.classList.add('matched');
+      c2.classList.add('matched');
+      matched.push(c1.dataset.pair);
+      flipped=[];
+    }else{
+      setTimeout(()=>{
+        c1.classList.remove('flipped');
+        c2.classList.remove('flipped');
+        flipped=[];
+      }, 700);
+    }
+  }
+}
+
+/* Start */
+initGame();
+
+/* ==== PART 2: GAP FILL ==== */
+const answers=[
+  "significant","common","display","widespread","support","contain","significantly","wielded","preliminary","pivotal"
+];
+
+function checkAnswers(){
+  let correct=0;
+
+  for(let i=0;i<answers.length;i++){
+    const box=document.getElementById('g'+(i+1));
+    if(!box) continue;
+
+    box.classList.remove('correct','incorrect');
+
+    const user=box.value.trim().toLowerCase();
+    const target=answers[i].toLowerCase();
+
+    if(user === target){
+      box.classList.add('correct');
+      correct++;
+    }else{
+      box.classList.add('incorrect');
+    }
+  }
+
+  document.getElementById('feedback').textContent = `You got ${correct}/${answers.length} correct.`;
+}
+</script>
+</body>
+</html>
