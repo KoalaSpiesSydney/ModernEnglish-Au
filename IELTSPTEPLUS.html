@@ -5,34 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Modern English Australia · Koala Spies Sydney</title>
 
+  <!-- Rise-like: clean sans + readable serif for headings -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg: rgb(234, 238, 240);
-      --ink:#111111;
-      --charcoal:#1e1e1e;
-      --muted:#5f6a66;
-      --accent:#0f6f6a;
-      --line:rgba(0,0,0,.10);
+      /* Rise-ish blue/black/off-white */
+      --bg:#f6f8fb;
+      --surface:#ffffff;
+      --ink:#0f172a;          /* blue-black */
+      --muted:#475569;        /* slate */
+      --line:rgba(15,23,42,.10);
 
-      --header: var(--charcoal);
-      --header-ink:#f5f5f5;
+      --accent:#2563eb;       /* blue */
+      --accent2:#1e40af;
+      --link:#1d4ed8;
+
+      --header:#0b1220;
+      --header-ink:#f8fafc;
 
       --max: 980px;
-      --radius: 16px;
 
       /* Fonts */
-      --serif: "Newsreader", Georgia, serif;
-      --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --sans:"Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      --serif:"Source Serif 4", Georgia, serif;
 
-      /* Glass tokens */
+      /* Glass tokens (kept for QR only; page background is flat now) */
       --glass-blur: 14px;
-      --glass-border-soft: rgba(255,255,255,.32);
-      --glass-shadow-soft: 0 10px 26px rgba(0,0,0,.10);
 
       /* iPhone safe-area */
       --safe-top: env(safe-area-inset-top, 0px);
@@ -42,28 +43,28 @@
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
 
-    /* (Removed the blog fonts/import + conflicting font overrides)
-       Keep typography consistent via --serif/--sans below. */
-
     body{
       margin:0;
-      font-family:var(--serif);
+      font-family:var(--sans);
+      font-size:19px;
       color:var(--ink);
-      line-height:1.9;
+      line-height:1.75;
       overflow-x:hidden;
       -webkit-text-size-adjust:100%;
-      background:
-        radial-gradient(1200px 680px at 20% 20%, rgba(164, 219, 217, 0.18), transparent 80%),
-        radial-gradient(900px 520px at 92% 18%, rgba(223, 191, 168, 0.14), transparent 75%),
-        radial-gradient(1000px 650px at 55% 105%, rgba(78, 80, 83, 0.1), transparent 80%),
-        var(--bg);
+      background: var(--bg);
     }
 
     img{ max-width:100%; height:auto; display:block; }
-    a{ color:inherit; text-decoration:none; -webkit-tap-highlight-color: transparent; }
-    a:active{ text-decoration: underline; }
 
-    /* Balanced page rhythm */
+    a{
+      color:var(--link);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    a:hover{ color:var(--accent2); }
+    a:active{ opacity:.9; }
+
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 20px; }
     .muted{ color:var(--muted); }
     .small{ font-size:.95rem; }
@@ -71,10 +72,10 @@
     /* Header */
     header{
       padding-top: var(--safe-top);
-      background: rgba(30,30,30,.84);
-      border-bottom:1px solid rgba(255,255,255,.14);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
+      background: var(--header);
+      border-bottom:1px solid rgba(255,255,255,.10);
+      position:relative;
+      color: var(--header-ink);
     }
 
     .header-inner{
@@ -82,7 +83,7 @@
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      padding: 12px 0; /* slightly more breathing room */
+      padding: 12px 0;
       min-width:0;
     }
 
@@ -94,32 +95,30 @@
     }
 
     .brand-top{
-      color:#f7f7f5;
-      letter-spacing:4px;
-      font-weight:900;
+      color:var(--header-ink);
+      letter-spacing:3px;
+      font-weight:800;
       text-transform:uppercase;
-      font-size:clamp(1.6rem, 1.25rem + 1.2vw, 2.25rem);
+      font-size:clamp(1.45rem, 1.1rem + 1.25vw, 2.1rem);
       line-height:1.05;
       overflow-wrap:anywhere;
       font-family:var(--serif);
+      text-decoration:none;
     }
+    .brand-top:hover{ color:#ffffff; }
 
     .kss-font{
       font-family: var(--sans);
       font-weight:700;
       font-size:12px;
       letter-spacing:4px;
-      color:#ffffff;
-      animation:glow 2.4s ease-in-out infinite;
+      color: rgba(248,250,252,.92);
       overflow-wrap:anywhere;
+      text-decoration:none;
     }
+    .kss-font:hover{ color:#ffffff; }
 
-    @keyframes glow{
-      0%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
-      50%{ text-shadow:0 0 8px rgba(255,255,255,0.7); }
-      100%{ text-shadow:0 0 0px rgba(255,255,255,0.3); }
-    }
-
+    /* Nav: clickable text only */
     nav{
       display:flex;
       align-items:center;
@@ -131,22 +130,23 @@
     }
 
     nav a{
-      color:var(--header-ink);
+      color: rgba(248,250,252,.92);
       font-weight:700;
-      letter-spacing:.3px;
+      letter-spacing:.2px;
       opacity:.92;
       padding:0;
       border:0;
-      border-radius:0;
       background:transparent;
       transition:opacity .12s ease, transform .12s ease;
       white-space:nowrap;
+      text-decoration:none;
     }
 
     nav a:hover{
       opacity:1;
       transform:translateY(-1px);
-      text-decoration:none;
+      text-decoration: underline;
+      text-underline-offset: 5px;
     }
 
     /* QR toggle */
@@ -157,68 +157,55 @@
       z-index: 30;
       padding:12px;
       border-radius:14px;
-      border:1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.12);
-      backdrop-filter: blur(var(--glass-blur));
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      box-shadow: 0 10px 26px rgba(0,0,0,.14);
       -webkit-backdrop-filter: blur(var(--glass-blur));
-      box-shadow: var(--glass-shadow-soft);
+      backdrop-filter: blur(var(--glass-blur));
     }
     .qr-wrap[hidden]{ display:none; }
     #qrcode{ display:flex; justify-content:center; }
 
     /* Top strip */
     .top-strip{
-      margin-top:18px; /* balanced spacing */
+      margin-top:18px;
       padding:0;
       border:0;
       background:transparent;
-      box-shadow:none;
-      backdrop-filter:none;
-      -webkit-backdrop-filter:none;
     }
 
-    /* Animated phrase */
     .animated-phrase{
       display:inline-block;
       position:relative;
       color:var(--accent);
-      font-weight:900;
+      font-weight:800;
       white-space:nowrap;
-      animation:slide-across 4.5s ease-in-out infinite;
+      animation:slide-across 450ms ease-out both;
       font-family:var(--serif);
       letter-spacing:-.01em;
     }
 
     @keyframes slide-across{
-      0%   { transform: translateX(-30%); opacity: 0; }
-      10%  { opacity: 1; }
-      70%  { transform: translateX(0); opacity: 1; }
-      100% { transform: translateX(30%); opacity: 0; }
+      from{ transform: translateX(-24px); opacity: 0; }
+      to{ transform: translateX(0); opacity: 1; }
     }
 
     .animated-phrase::after{
       content:"";
       position:absolute;
       left:0;
-      bottom:-4px;
+      bottom:-6px;
       width:100%;
       height:3px;
-      background:var(--accent);
-      animation:underline-slide 4.5s ease-in-out infinite;
-    }
-
-    @keyframes underline-slide{
-      0%   { transform:translateX(-120%); opacity:0; }
-      20%  { opacity:1; }
-      70%  { transform:translateX(0); opacity:1; }
-      100% { transform:translateX(120%); opacity:0; }
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,.95), transparent);
+      opacity:.55;
     }
 
     /* Sections */
     main{ display:block; }
     .section{
-      padding:40px 0 54px;  /* slightly tighter + consistent */
-      border-bottom:1px solid rgba(0,0,0,.06);
+      padding:40px 0 54px;
+      border-bottom:1px solid var(--line);
     }
 
     /* Type hierarchy */
@@ -237,22 +224,19 @@
     h3{
       font-family:var(--sans);
       font-size:1.05rem;
-      font-weight:600;
+      font-weight:700;
       letter-spacing:.2px;
       color:var(--muted);
       margin-top:14px;
     }
 
-    p{
-      margin:0 0 14px;
-      font-family:var(--sans);
-    }
+    p{ margin:0 0 14px; font-family:var(--sans); }
 
     .kicker{
       color:var(--accent);
       font-family:var(--sans);
       font-weight:800;
-      letter-spacing:1.6px;
+      letter-spacing:1.2px;
       text-transform:uppercase;
       font-size:.86rem;
       margin:0 0 10px;
@@ -261,19 +245,13 @@
     /* Divider */
     .section-divider{
       border:0;
-      height:2px;
-      margin:30px 0; /* balanced */
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.60),
-        rgba(0,0,0,.12),
-        rgba(255,255,255,.60),
-        transparent
-      );
-      opacity:.95;
+      height:1px;
+      margin:26px 0;
+      background: var(--line);
+      opacity:1;
     }
 
+    /* Link list: keep your pill rows but Rise-neutral */
     .link-grid{
       display:grid;
       grid-template-columns: 1fr;
@@ -283,41 +261,35 @@
 
     .link-pill{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
       gap:12px;
       padding:12px 14px;
       border-radius:14px;
-      border:1px solid var(--glass-border-soft);
-      background: rgba(255,255,255,.14);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      transition:transform .12s ease, background .12s ease, border-color .12s ease;
+      border:1px solid rgba(15,23,42,.10);
+      background: var(--surface);
+      transition:transform .12s ease, border-color .12s ease;
       font-family:var(--sans);
       line-height:1.35;
+      text-decoration:none;
+      color: var(--ink);
     }
 
     .link-pill:hover{
       transform:translateY(-1px);
-      background: rgba(255,255,255,.22);
-      border-color: rgba(255,255,255,.38);
-      text-decoration:none;
+      border-color: rgba(37,99,235,.35);
     }
 
-    .link-pill .title{
-      font-weight:650;
-      letter-spacing:.1px;
-    }
-
+    .link-pill .title{ font-weight:700; letter-spacing:.1px; }
     .link-pill .meta{
       color:var(--muted);
       font-size:.92rem;
       white-space:nowrap;
-      font-weight:600;
+      font-weight:700;
       letter-spacing:.2px;
     }
 
-    /* Details pill (guides) */
+    /* Details pill: make it flat / Rise-ish */
     .pill-dd{
       margin: 18px 0 0;
       max-width: 720px;
@@ -327,26 +299,24 @@
       list-style:none;
       cursor:pointer;
       user-select:none;
-      display:flex;            /* make centering reliable */
+      display:flex;
       align-items:center;
-      justify-content:center;  /* center label */
+      justify-content:center;
       gap:10px;
-      padding:10px 44px 10px 16px; /* reserve room for arrow */
+      padding:10px 44px 10px 16px;
       border-radius:999px;
-      background: rgba(255,255,255,.16);
-      border: 1px solid rgba(255,255,255,.32);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
+      background: transparent;
+      border:1px solid rgba(15,23,42,.14);
       font-weight:800;
       line-height:1;
       font-family:var(--sans);
-      position:relative;       /* for arrow positioning */
+      position:relative;
       width: fit-content;
+      color: var(--ink);
+      text-decoration:none;
     }
-
     .pill-dd summary::-webkit-details-marker{ display:none; }
 
-    /* Keep arrow aligned at far right */
     .pill-dd summary::after{
       content:"▾";
       font-weight:900;
@@ -356,8 +326,8 @@
       transform:translateY(-52%);
       transition: transform .18s ease;
       pointer-events:none;
+      color: var(--muted);
     }
-
     .pill-dd[open] summary::after{
       transform:translateY(-52%) rotate(180deg);
     }
@@ -365,12 +335,10 @@
     .pill-dd .pill-panel{
       margin-top:10px;
       padding:14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.16);
-      border: 1px solid rgba(255,255,255,.32);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      box-shadow: var(--glass-shadow-soft);
+      border-radius: 14px;
+      background: var(--surface);
+      border:1px solid rgba(15,23,42,.10);
+      box-shadow: 0 10px 22px rgba(15,23,42,.06);
       line-height:1.7;
       font-family:var(--sans);
     }
@@ -385,45 +353,27 @@
     .pill-panel ul, .pill-panel ol{ margin:0 0 12px; padding-left:18px; }
     .pill-panel li{ margin:6px 0; }
 
-    /* Buttons */
+    /* Buttons: remove the “button look”, keep as plain links */
     .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; }
-    .btn{
-      display:inline-block;
-      padding:10px 18px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,.34);
-      background: rgba(158, 153, 153, 0.14);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      color: var(--accent);
-      font-weight:800;
+    .btn, .btn.primary{
+      all: unset;
       font-family:var(--sans);
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      text-decoration:none;
+      font-weight:700;
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor:pointer;
+      display:inline;
     }
-
-    .btn:hover{
-      transform:translateY(-1px);
-      background: rgba(255,255,255,.22);
-      border-color: rgba(255,255,255,.44);
-      text-decoration:none;
-    }
-
-    .btn.primary{
-      background: var(--accent);
-      color:#fff;
-      border-color: transparent;
-    }
+    .btn:hover, .btn.primary:hover{ color: var(--accent2); }
 
     /* Footer */
     footer{
-      background: rgba(30,30,30,.86);
+      background: var(--header);
       color:var(--header-ink);
-      border-top:1px solid rgba(255,255,255,.14);
+      border-top:1px solid rgba(255,255,255,.10);
       padding:18px 0;
       padding-bottom: calc(18px + var(--safe-bottom));
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
     }
 
     .footer-inner{
@@ -434,39 +384,29 @@
       flex-wrap:wrap;
       text-align:center;
       font-family:var(--sans);
+      font-size:.95rem;
     }
 
     .footer-links{
       display:flex;
       justify-content:center;
-      gap:10px;
+      gap:12px;
       width:100%;
       flex-wrap:wrap;
     }
 
     .footer-links a{
-      padding:8px 10px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,.18);
-      opacity:.95;
-      background: rgba(54, 105, 96, 0.06);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      color:var(--header-ink);
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      color: rgba(248,250,252,.92);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      padding:0;
+      border:0;
+      background:transparent;
+      opacity:.92;
     }
-
     .footer-links a:hover{
-      transform: translateY(-1px);
-      border-color:rgba(255,255,255,.30);
-      background: rgba(255,255,255,.09);
-      text-decoration:none;
-    }
-
-    .footer-links a.cta{
-      background: var(--accent);
-      border-color: transparent;
-      font-weight:800;
+      opacity:1;
+      color:#ffffff;
     }
 
     /* Responsive */
@@ -480,6 +420,7 @@
       }
 
       nav{ justify-content:flex-start; width:100%; }
+      nav a{ font-size:.92rem; white-space:normal; }
 
       .animated-phrase{ white-space:normal; }
 
@@ -504,8 +445,7 @@
     @media (prefers-reduced-motion: reduce){
       .animated-phrase{ animation:none; }
       .animated-phrase::after{ animation:none; }
-      nav a, .btn, .footer-links a, .link-pill{ transition:none; }
-      .kss-font{ animation:none; }
+      nav a, .footer-links a, .link-pill{ transition:none; }
     }
   </style>
 </head>
@@ -514,24 +454,24 @@
 
 <header>
   <div class="wrap header-inner">
-    <a class="brand" href="#top" aria-label="Back to top">
-      <div class="brand-top">Modern English Au</div>
-      <span class="kss-font">Koala Spies Sydney</span>
-    </a>
+    <div class="brand">
+      <a href="index.html" class="brand-top">Modern English Au</a>
+      <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-font">Koala Spies Sydney</a>
+    </div>
+
 
     <nav aria-label="Primary">
       <a id="qrToggle" href="#" aria-controls="qrWrap" aria-expanded="false">QR</a>
-
       <a href="MicroLessons.html">Micro Lessons</a>
       <a href="ESLgames.html">ESL Games</a>
       <a href="index.html">Home</a>
     </nav>
   </div>
-</header>
 
-<div id="qrWrap" class="qr-wrap" hidden>
-  <div id="qrcode" aria-label="QR code"></div>
-</div>
+  <div id="qrWrap" class="qr-wrap" hidden>
+    <div id="qrcode" aria-label="QR code"></div>
+  </div>
+</header>
 
 <div class="wrap">
   <div class="top-strip">
@@ -723,7 +663,7 @@
       </p>
 
       <div class="actions">
-        <a class="btn primary" href="https://koalaspiessydney.github.io/KoalaSpiesSyd/contact.index.html">Send Feedback</a>
+        <a class="btn" href="https://koalaspiessydney.github.io/KoalaSpiesSyd/contact.index.html">Send Feedback</a>
       </div>
     </div>
   </section>
@@ -745,6 +685,9 @@
   const qrWrap = document.getElementById("qrWrap");
   let qrInstance = null;
 
+  // QR points to the current page by default
+  const QR_URL = window.location.href;
+
   if (qrToggle && qrWrap) {
     qrToggle.addEventListener("click", (e) => {
       e.preventDefault();
@@ -757,10 +700,10 @@
 
         if (!qrInstance) {
           qrInstance = new QRCode(document.getElementById("qrcode"), {
-            text: "https://koalaspiessydney.github.io/ReadingTestWk4/",
+            text: QR_URL,
             width: 160,
             height: 160,
-            colorDark: "#1e1e1e",
+            colorDark: "#0f172a",
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
           });
@@ -775,7 +718,7 @@
 
 </body>
 </html>
-
+```
 
 
 
