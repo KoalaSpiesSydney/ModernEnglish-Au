@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Money Idioms Matching Game – Modern English Australia</title>
+
+<style>
+  :root {
+    --bg:#f5f5f5;
+    --card:#2a2a2a;
+    --ink:#1e1e1e;
+    --muted:#bbbbbb;
+    --accent:#ff7a1a;
+    --line:#3a3a3a;
+  }
+
+  *{ box-sizing:border-box; }
+
+  /* Background video */
+  .bg-video{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0.5;          /* 50% opacity */
+    z-index:-1;
+    pointer-events:none;
+  }
+
+  body {
+    margin:0;
+    font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+  }
+
+  /* ===== Header ===== */
+  header {
+    position:relative;
+    background:var(--card);
+    color:var(--accent);
+    text-align:center;
+    padding:1.15rem 0;
+    font-size:1.5rem;
+    font-weight:bold;
+    letter-spacing:2px;
+    border-bottom:1px solid var(--line);
+    /* safer on iPhones with notch */
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right:max(12px, env(safe-area-inset-right));
+  }
+  header span {
+    color:#f5f5f5;
+    font-weight:300;
+    display:block;
+    font-size:1rem;
+    letter-spacing:3px;
+  }
+
+  /* ===== QR (top-left) ===== */
+  .qr-wrap{
+    position:absolute;
+    top:10px;
+    left:10px;
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    z-index:5;
+  }
+  .qr-toggle{
+    appearance:none;
+    border:1px solid var(--line);
+    background:rgba(0,0,0,.25);
+    color:#fff;
+    padding:.55rem .8rem;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:700;
+    letter-spacing:.5px;
+    line-height:1;
+    transition:transform .15s ease, opacity .15s ease;
+    backdrop-filter: blur(6px);
+  }
+  .qr-toggle:hover{ opacity:.95; transform:translateY(-1px); }
+  .qr-toggle:active{ transform:translateY(0); }
+
+  .qr-panel{
+    width:min(260px, calc(100vw - 24px));
+    background:rgba(42,42,42,.92);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px;
+    box-shadow:0 10px 24px rgba(0,0,0,.28);
+    display:none;
+  }
+  .qr-panel.open{ display:block; }
+  .qr-panel label{
+    display:block;
+    color:#fff;
+    font-size:.85rem;
+    margin:0 0 6px;
+    opacity:.9;
+    letter-spacing:.3px;
+    text-align:left;
+  }
+  .qr-row{
+    display:flex;
+    gap:8px;
+  }
+  .qr-input{
+    flex:1;
+    padding:.55rem .65rem;
+    border-radius:10px;
+    border:1px solid #5a5a5a;
+    background:#111;
+    color:#fff;
+    outline:none;
+  }
+  .qr-input:focus{ border-color: var(--accent); }
+  .qr-make{
+    border:none;
+    border-radius:10px;
+    padding:.55rem .75rem;
+    cursor:pointer;
+    font-weight:800;
+    background:var(--accent);
+    color:#111;
+  }
+  .qr-make:active{ transform:translateY(1px); }
+
+  .qr-canvas{
+    margin-top:10px;
+    background:#fff;
+    border-radius:12px;
+    padding:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .qr-help{
+    margin-top:8px;
+    font-size:.8rem;
+    color:#fff;
+    opacity:.85;
+    text-align:left;
+  }
+
+  /* Make sure header text stays readable on small screens */
+  @media (max-width:520px){
+    header{ padding-top:1.35rem; padding-bottom:1rem; font-size:1.25rem; }
+    header span{ font-size:.9rem; }
+    .qr-wrap{ top:8px; left:8px; gap:8px; }
+    .qr-toggle{ padding:.5rem .7rem; border-radius:11px; }
+  }
+
+  /* ===== Main ===== */
+  main {
+    flex:1;
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+  }
+
+  h1 {
+    color:var(--accent);
+    letter-spacing:2px;
+    margin-top:1rem;
+    font-size:clamp(1.4rem,2.5vw,2rem);
+  }
+
+  p {
+    max-width:700px;
+    margin:0.5rem auto 1.5rem auto;
+    opacity:0.9;
+  }
+
+  /* ===== Game Grid ===== */
+  #game {
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap:14px;
+    width:90%;
+    max-width:900px;
+    margin:0 auto;
+  }
+
+  .card {
+    background:#518858;
+    border:2px solid var(--accent);
+    border-radius:16px;
+    padding:20px;
+    text-align:center;
+    cursor:pointer;
+    transition:background .25s, color .25s, transform .2s;
+    min-height:110px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1rem;
+    box-shadow:0 3px 6px rgba(0,0,0,0.1);
+    user-select:none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .card.flipped {
+    background:var(--accent);
+    color:#000;
+    transform:scale(1.03);
+  }
+
+  .card.matched {
+    color:#000;
+    cursor:default;
+  }
+
+  #status {
+    margin-top:18px;
+    font-size:1.05rem;
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  /* Reset link */
+  .reset-row{
+    margin-top:10px;
+    font-family:inherit;
+  }
+  .reset-row a{
+    color:var(--accent);
+    text-decoration:underline;
+    text-underline-offset:4px;
+    font-weight:700;
+  }
+  .reset-row a:hover{ opacity:.9; }
+
+  /* ===== Links ===== */
+  .links {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:1rem;
+    margin-top:2rem;
+  }
+
+  a.btn {
+    background:var(--accent);
+    color:#fff;
+    font-weight:600;
+    text-decoration:none;
+    padding:.8rem 1.4rem;
+    border-radius:45px;
+    border:none;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    transition:all .25s ease;
+  }
+
+  a.btn:hover {
+    background:linear-gradient(90deg,var(--accent),#ff9b3d);
+    transform:translateY(-2px);
+  }
+
+  a.btn:active { transform:translateY(0); }
+
+  /* ===== Footer ===== */
+  footer {
+    width:100%;
+    text-align:center;
+    background:var(--card);
+    color:var(--muted);
+    padding:1rem 0;
+    border-top:1px solid var(--line);
+    font-size:0.9rem;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right:max(12px, env(safe-area-inset-right));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  /* Responsive grid */
+  @media (max-width:900px){
+    #game{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width:600px){
+    #game{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; }
+    .card { min-height:90px; font-size:1.05rem; padding:12px; }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .card, a.btn, .qr-toggle{ transition:none; }
+  }
+</style>
+</head>
+
+<body>
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="money.mp4" type="video/mp4">
+  </video>
+
+  <!-- ===== Header ===== -->
+  <header>
+    <!-- QR generator (top-left) -->
+    <div class="qr-wrap" aria-label="QR code tools">
+      <button class="qr-toggle" id="qrToggle" type="button" aria-expanded="false" aria-controls="qrPanel">
+        QR
+      </button>
+
+      <div class="qr-panel" id="qrPanel" role="dialog" aria-label="QR code generator">
+        <label for="qrText">QR link (defaults to this page URL)</label>
+        <div class="qr-row">
+          <input class="qr-input" id="qrText" type="text" inputmode="url" autocomplete="off" />
+          <button class="qr-make" id="qrMake" type="button">Make</button>
+        </div>
+
+        <div class="qr-canvas" aria-label="QR code preview">
+          <div id="qrCode"></div>
+        </div>
+
+        <div class="qr-help">
+          Tip: paste any URL, click Make, then scan.
+        </div>
+      </div>
+    </div>
+
+    MODERN ENGLISH AUSTRALIA
+    <span>Koala Spies Sydney</span>
+  </header>
+
+  <!-- ===== Game Section ===== -->
+  <main>
+    <h1>Money Idioms Matching Game</h1>
+    <p>Flip two cards to match each idiom with its meaning.</p>
+
+    <div id="game" aria-label="Matching game grid"></div>
+    <div id="status" aria-live="polite"></div>
+    <div class="reset-row">
+      <a href="#" id="resetLink">Reset game</a>
+    </div>
+
+    <div class="links">
+      <a href="1moneydating.html" class="btn">Listening</a>
+      <a href="https://ieltspteaustralianexaminertutor.com/" class="btn">Home</a>
+    </div>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+  </footer>
+
+  <!-- QRCode.js (client-side) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+
+<script>
+  const pairs = [
+    ["Break the bank","Be very expensive"],
+    ["Tighten your belt","Go on a tight budget"],
+    ["Cost an arm and a leg","Extremely expensive"],
+    ["In the red","Owe money / negative balance"],
+    ["In the black","Have profit / positive balance"],
+    ["Money doesn’t grow on trees","Money is not easy to earn"],
+    ["Pay through the nose","Pay too much for something"],
+    ["Rolling in money","Be very rich"],
+    ["On the house","Free of charge"],
+    ["Foot the bill","Pay someone else's expenses"]
+  ];
+
+  const matchColors = [
+    "#27ae60","#2980b9","#8e44ad","#f1c40f","#e67e22",
+    "#16a085","#c0392b","#1abc9c","#d35400","#9b59b6"
+  ];
+
+  const game = document.getElementById("game");
+  const statusEl = document.getElementById("status");
+  const resetLink = document.getElementById("resetLink");
+
+  const GRID_PAIRS = 8; // 4x4 = 16 cards = 8 pairs
+
+  let first = null, second = null, lock = false, matchedPairs = 0;
+  let colorMap = {};
+  let currentRoundPairs = [];
+
+  function shuffle(arr){
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function pickPairs(){
+    const copy = pairs.slice();
+    shuffle(copy);
+    return copy.slice(0, GRID_PAIRS);
+  }
+
+  function buildCards(roundPairs){
+    const cards = roundPairs.flatMap(([idiom, meaning]) => [
+      { text: idiom, pair: idiom },
+      { text: meaning, pair: idiom }
+    ]);
+    shuffle(cards);
+    return cards;
+  }
+
+  function renderGame(){
+    game.innerHTML = "";
+    statusEl.textContent = "";
+    first = null; second = null; lock = false; matchedPairs = 0;
+    colorMap = {};
+
+    currentRoundPairs = pickPairs();
+    const cards = buildCards(currentRoundPairs);
+
+    cards.forEach(data => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.textContent = "";
+      div.dataset.pair = data.pair;
+      div.dataset.text = data.text;
+      div.setAttribute("role", "button");
+      div.setAttribute("tabindex", "0");
+      div.setAttribute("aria-label", "Hidden card");
+
+      function flip(){
+        if (lock || div.classList.contains("flipped") || div.classList.contains("matched")) return;
+
+        div.classList.add("flipped");
+        div.textContent = data.text;
+        div.setAttribute("aria-label", data.text);
+
+        if (!first) {
+          first = div;
+          return;
+        }
+
+        second = div;
+        lock = true;
+
+        setTimeout(() => {
+          if (first.dataset.pair === second.dataset.pair) {
+            if (!colorMap[first.dataset.pair]) {
+              const used = Object.keys(colorMap).length;
+              colorMap[first.dataset.pair] = matchColors[used % matchColors.length];
+            }
+            const c = colorMap[first.dataset.pair];
+
+            [first, second].forEach(card => {
+              card.classList.remove("flipped");
+              card.classList.add("matched");
+              card.style.background = c;
+            });
+
+            matchedPairs++;
+            if (matchedPairs === GRID_PAIRS) {
+              statusEl.textContent = "Brilliant! You matched all idioms in this round.";
+            }
+          } else {
+            first.classList.remove("flipped");
+            second.classList.remove("flipped");
+            first.textContent = "";
+            second.textContent = "";
+            first.setAttribute("aria-label", "Hidden card");
+            second.setAttribute("aria-label", "Hidden card");
+          }
+
+          first = null;
+          second = null;
+          lock = false;
+        }, 800);
+      }
+
+      div.addEventListener("click", flip);
+      div.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          flip();
+        }
+      });
+
+      game.appendChild(div);
+    });
+  }
+
+  resetLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    renderGame();
+  });
+
+  renderGame();
+
+  /* ===== QR generator logic ===== */
+  const qrToggle = document.getElementById("qrToggle");
+  const qrPanel  = document.getElementById("qrPanel");
+  const qrText   = document.getElementById("qrText");
+  const qrMake   = document.getElementById("qrMake");
+  const qrCodeEl = document.getElementById("qrCode");
+
+  let qrInstance = null;
+
+  function ensureQrLibReady(){
+    return typeof window.QRCode !== "undefined";
+  }
+
+  function makeQr(value){
+    const text = (value && value.trim()) ? value.trim() : window.location.href;
+
+    // clear old
+    qrCodeEl.innerHTML = "";
+    qrInstance = new QRCode(qrCodeEl, {
+      text,
+      width: 160,
+      height: 160,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  }
+
+  function openQr(){
+    qrPanel.classList.add("open");
+    qrToggle.setAttribute("aria-expanded", "true");
+    if (!qrText.value) qrText.value = window.location.href;
+
+    // if library hasn't loaded yet (slow connections), retry once shortly
+    if (ensureQrLibReady()) {
+      makeQr(qrText.value);
+    } else {
+      setTimeout(() => {
+        if (ensureQrLibReady()) makeQr(qrText.value);
+      }, 250);
+    }
+  }
+
+  function closeQr(){
+    qrPanel.classList.remove("open");
+    qrToggle.setAttribute("aria-expanded", "false");
+  }
+
+  qrToggle.addEventListener("click", () => {
+    const isOpen = qrPanel.classList.contains("open");
+    if (isOpen) closeQr();
+    else openQr();
+  });
+
+  qrMake.addEventListener("click", () => {
+    if (ensureQrLibReady()) makeQr(qrText.value);
+  });
+
+  qrText.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (ensureQrLibReady()) makeQr(qrText.value);
+    }
+    if (e.key === "Escape") {
+      closeQr();
+      qrToggle.focus();
+    }
+  });
+
+  // close panel when clicking outside
+  document.addEventListener("click", (e) => {
+    const clickedInside = qrPanel.contains(e.target) || qrToggle.contains(e.target);
+    if (!clickedInside && qrPanel.classList.contains("open")) closeQr();
+  });
+
+  // escape closes panel
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && qrPanel.classList.contains("open")) {
+      closeQr();
+      qrToggle.focus();
+    }
+  });
+</script>
+</body>
+</html>

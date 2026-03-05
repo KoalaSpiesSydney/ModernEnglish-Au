@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Further Practice – Write from Dictation | Modern English Australia</title>
+
+<style>
+:root {
+  --bg:#f5f5f5;
+  --card:#2a2a2a;
+  --ink:#1e1e1e;
+  --muted:#bbbbbb;
+  --accent:#ff7a1a;
+  --line:#3a3a3a;
+  --success:#27ae60;
+  --error:#e74c3c;
+}
+
+/* ===== Base ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body {
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  line-height:1.75;
+}
+
+/* ===== Header ===== */
+header {
+  background:var(--card);
+  color:var(--accent);
+  text-align:center;
+  padding:1.2rem 0;
+  font-size:1.5rem;
+  font-weight:bold;
+  letter-spacing:2px;
+  border-bottom:1px solid var(--line);
+}
+header span {
+  color:#f5f5f5;
+  font-weight:300;
+  display:block;
+  font-size:1rem;
+  letter-spacing:3px;
+}
+
+/* ===== Main ===== */
+main {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:2rem 1rem 3rem;
+  text-align:center;
+}
+
+h1 {
+  color:var(--accent);
+  margin-bottom:.75rem;
+  font-size:clamp(1.4rem,4.5vw,2rem);
+}
+h2 {
+  font-style:italic;
+  color:#e30c8a;
+  margin-top:.5rem;
+  font-size:clamp(2rem,4vw,2.6rem);
+}
+h3 {
+  color:var(--ink);
+  margin:1rem 0 1.5rem;
+  font-size:1.1rem;
+  max-width:750px;
+}
+
+/* ===== Audio Card List ===== */
+.audio-list {
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
+  width:100%;
+  max-width:700px;
+}
+.audio-slot {
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  padding:1.2rem 1.5rem;
+  text-align:left;
+}
+.audio-slot strong {
+  display:block;
+  margin-bottom:.5rem;
+  color:var(--accent);
+}
+.audio-slot audio {
+  width:100%;
+  margin-bottom:.8rem;
+}
+.response {
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:.75rem;
+  font-size:1rem;
+  font-family:inherit;
+  resize:vertical;
+  min-height:70px;
+  margin-bottom:.8rem;
+}
+.response:focus {outline:none;border-color:var(--accent);}
+.feedback {font-size:.95rem;margin-top:.25rem;}
+.correct{color:var(--success);}
+.incorrect{color:var(--error);}
+
+/* ===== Buttons ===== */
+button, .btn {
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  border:none;
+  border-radius:45px;
+  padding:.7rem 1.2rem;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,0.25);
+  transition:all .25s ease;
+}
+button:hover, .btn:hover {
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+button:active, .btn:active {transform:translateY(0);}
+.links {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:1rem;
+  margin-top:2.5rem;
+}
+
+/* ===== Footer ===== */
+footer {
+  border-top:1px solid var(--line);
+  background:var(--card);
+  color:var(--muted);
+  font-size:.9rem;
+  text-align:center;
+  padding:1rem;
+}
+</style>
+</head>
+
+<body>
+<header>
+  MODERN ENGLISH AUSTRALIA
+  <span>Koala Spies Sydney</span>
+</header>
+
+<main>
+  <h2>Love or Money</h2>
+  <h1>Write from Dictation – Further Practice</h1>
+  <h3>
+    WRITE THE QUESTIONS EXACTLY AS YOU HEAR THEM.<br>
+    *Use contractions (they are → they're)<br>
+    **Use punctuation (e.g....,?).<br>
+    After you have written all the answers, discuss them with a partner.
+  </h3>
+
+  <div class="audio-list">
+    <div class="audio-slot" data-answer="When on a first date, who should pay the bill?">
+      <strong>Audio 1:</strong>
+      <audio controls src="1When.mp3"></audio>
+      <textarea class="response" placeholder="Type the question as you hear it here..."></textarea>
+      <button class="check-btn">Check Answer</button>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="audio-slot" data-answer="If a restaurant makes a mistake, should the meal be on the house?">
+      <strong>Audio 2:</strong>
+      <audio controls src="2If.mp3"></audio>
+      <textarea class="response" placeholder="Type the question as you hear it here..."></textarea>
+      <button class="check-btn">Check Answer</button>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="audio-slot" data-answer="Should a date cost an arm and a leg?">
+      <strong>Audio 3:</strong>
+      <audio controls src="3Should.mp3"></audio>
+      <textarea class="response" placeholder="Type the question as you hear it here..."></textarea>
+      <button class="check-btn">Check Answer</button>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="audio-slot" data-answer="Does a wedding need to break the bank in your culture?">
+      <strong>Audio 4:</strong>
+      <audio controls src="4Does.mp3"></audio>
+      <textarea class="response" placeholder="Type the question as you hear it here..."></textarea>
+      <button class="check-btn">Check Answer</button>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="audio-slot" data-answer="Would you date someone just because they're rolling in money?">
+      <strong>Audio 5:</strong>
+      <audio controls src="5Would.mp3"></audio>
+      <textarea class="response" placeholder="Type the question as you hear it here..."></textarea>
+      <button class="check-btn">Check Answer</button>
+      <div class="feedback"></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2.5rem;">NOW ASK A PARTNER THESE QUESTIONS AND HAVE A DISCUSSION</h3>
+
+  <div class="links">
+    <button id="reset">🔁 Try Again</button>
+    <a href="1moneydating.html" class="btn">⬅ Back to Matching Game</a>
+  </div>
+</main>
+
+<footer>
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
+
+<script>
+document.querySelectorAll(".check-btn").forEach(button=>{
+  button.addEventListener("click",()=>{
+    const slot=button.closest(".audio-slot");
+    const input=slot.querySelector(".response").value.trim();
+    const correct=slot.dataset.answer.trim();
+    const feedback=slot.querySelector(".feedback");
+    if(!input){
+      feedback.innerHTML='<span class="incorrect">⚠ Please type your answer first.</span>';
+      return;
+    }
+    if(normalize(input)===normalize(correct)){
+      feedback.innerHTML='<span class="correct">✔ Correct!</span>';
+    }else{
+      feedback.innerHTML='<span class="incorrect">✖ Try again.</span>';
+    }
+  });
+});
+document.getElementById("reset").addEventListener("click",()=>{
+  document.querySelectorAll(".response").forEach(r=>r.value="");
+  document.querySelectorAll(".feedback").forEach(f=>f.innerHTML="");
+});
+function normalize(str){
+  return str.toLowerCase()
+            .replace(/[^\w\s]|_/g,"")
+            .replace(/\s+/g," ")
+            .trim();
+}
+</script>
+</body>
+</html>
