@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Academic English – Write Sentences from Dictation | Modern English Australia</title>
+
 <style>
 :root{
   --bg:#f5f5f5;
@@ -17,26 +18,80 @@
   --success:#1db954;
   --error:#e74c3c;
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
+
 body{
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   background:var(--bg);
   color:var(--ink);
   line-height:1.75;
 }
+
+/* HEADER */
+
 header{
   background:var(--ink);
   color:#fff;
-  padding:1.25rem;
+  padding:1rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+}
+
+.brand{
   text-align:center;
+  flex:1;
   font-weight:600;
   letter-spacing:.5px;
 }
+
+.qr-area{
+  position:absolute;
+  left:10px;
+  top:10px;
+}
+
+.qr-btn{
+  background:var(--accent);
+  border:none;
+  color:#fff;
+  padding:.35rem .7rem;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:.85rem;
+}
+
+#qrcode{
+  background:#fff;
+  padding:6px;
+  border-radius:6px;
+  margin-top:6px;
+  display:none;
+}
+
+.home-btn{
+  position:absolute;
+  right:12px;
+  top:12px;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  padding:.45rem .8rem;
+  border-radius:8px;
+  font-weight:600;
+  font-size:.85rem;
+}
+
+/* MAIN */
+
 main{
   max-width:900px;
   margin:2rem auto;
   padding:1rem;
 }
+
 section{
   background:var(--card);
   border-radius:var(--radius);
@@ -44,18 +99,22 @@ section{
   padding:2rem;
   margin-bottom:2rem;
 }
+
 h1,h2{
   color:var(--accent);
   text-align:center;
   margin-bottom:1rem;
 }
+
 p{margin-bottom:1rem}
+
 audio{
   width:100%;
   max-width:600px;
   margin-top:.3rem;
   margin-bottom:1rem;
 }
+
 textarea{
   width:100%;
   max-width:600px;
@@ -67,6 +126,7 @@ textarea{
   font-family:inherit;
   font-size:1rem;
 }
+
 button{
   background:var(--accent);
   color:#fff;
@@ -75,31 +135,35 @@ button{
   padding:.5rem 1.2rem;
   cursor:pointer;
   font-weight:600;
-  transition:opacity .3s;
 }
-button:hover{opacity:.9}
+
 .feedback{
   margin-top:.4rem;
   font-weight:500;
 }
+
 .correct{color:var(--success);}
 .incorrect{color:var(--error);}
+
 .answer{
   margin-top:.3rem;
   font-style:italic;
   display:none;
 }
+
 .score-box{
   text-align:center;
   font-weight:600;
   margin-top:1.5rem;
 }
+
 .nav-buttons{
   display:flex;
   justify-content:center;
   gap:1rem;
   margin:2rem 0;
 }
+
 .nav-buttons a{
   background:var(--accent);
   color:#fff;
@@ -107,9 +171,8 @@ button:hover{opacity:.9}
   border-radius:var(--radius);
   text-decoration:none;
   font-weight:600;
-  transition:opacity .3s;
 }
-.nav-buttons a:hover{opacity:.9}
+
 footer{
   text-align:center;
   color:var(--muted);
@@ -117,38 +180,82 @@ footer{
   padding:1rem;
   font-size:.9rem;
 }
+
 @media(max-width:600px){
   section{padding:1.2rem}
   textarea{min-height:80px}
 }
 </style>
+
+<!-- QR LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 </head>
 
 <body>
-<header>Modern English Australia · Koala Spies Sydney</header>
+
+<header>
+
+<div class="qr-area">
+<button class="qr-btn" onclick="toggleQR()">QR</button>
+<div id="qrcode"></div>
+</div>
+
+<div class="brand">
+Modern English Australia · Koala Spies Sydney
+</div>
+
+<a class="home-btn" href="http://modernenglish.au/IELTSPTEPLUS.html">Home</a>
+
+</header>
 
 <main>
+
 <section>
-  <h1>Academic English – Write Sentences from Dictation</h1>
-  <p>Listen carefully to each recording and type what you hear in academic English.  
-  When you finish typing, click “Check” to see if your answer matches the original sentence.  
-  Each correct answer earns one point.</p>
 
-  <h2>Write Sentences from Dictation (1 – 8)</h2>
-  <div id="exercise-list"></div>
+<h1>Academic English – Write Sentences from Dictation</h1>
 
-  <div class="score-box" id="scoreBox">Score: 0 / 8</div>
+<p>
+Listen carefully to each recording and type what you hear in academic English.
+When you finish typing, click “Check” to see if your answer matches the original sentence.
+Each correct answer earns one point.
+</p>
+
+<h2>Write Sentences from Dictation (1 – 8)</h2>
+
+<div id="exercise-list"></div>
+
+<div class="score-box" id="scoreBox">Score: 0 / 8</div>
+
 </section>
 
 <div class="nav-buttons">
-  <a href="Casualvsacademic.html">Further Study</a>
-  <a href="eltspteaustralianexaminertutor.com">Home</a>
+<a href="Casualvsacademic.html">Further Study</a>
+<a href="eltspteaustralianexaminertutor.com">Home</a>
 </div>
+
 </main>
 
-<footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</footer>
+<footer>
+© Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
 
 <script>
+
+function toggleQR(){
+  const box = document.getElementById("qrcode");
+
+  if(box.innerHTML===""){
+      new QRCode(box,{
+        text:window.location.href,
+        width:100,
+        height:100
+      });
+  }
+
+  box.style.display = box.style.display === "none" ? "block" : "none";
+}
+
 const sentences = [
 "The committee presented its final recommendations on cultural preservation.",
 "Data from multiple regions revealed considerable variation in ceramic density.",
@@ -175,8 +282,9 @@ const container = document.getElementById('exercise-list');
 let score = 0;
 
 sentences.forEach((text, i) => {
+
   const block = document.createElement('div');
-  block.classList.add('item');
+
   block.innerHTML = `
     <p><strong>${i+1}.</strong></p>
     <audio controls src="${audioFiles[i]}"></audio>
@@ -186,6 +294,7 @@ sentences.forEach((text, i) => {
     <div class="answer">${text}</div>
     <hr style="margin:1rem 0;border:none;border-top:1px solid var(--line)">
   `;
+
   container.appendChild(block);
 
   const btn = block.querySelector('button');
@@ -194,28 +303,40 @@ sentences.forEach((text, i) => {
   const answer = block.querySelector('.answer');
 
   btn.addEventListener('click', () => {
+
     const user = textarea.value.trim().toLowerCase();
     const correct = text.trim().toLowerCase();
-    if (!user) {
-      feedback.textContent = "Please enter your answer.";
-      feedback.className = "feedback";
+
+    if(!user){
+      feedback.textContent="Please enter your answer.";
       return;
     }
-    if (user === correct) {
-      feedback.textContent = "✅ Correct!";
-      feedback.className = "feedback correct";
-      if (!answer.classList.contains("revealed")) {
+
+    if(user===correct){
+
+      feedback.textContent="Correct!";
+      feedback.className="feedback correct";
+
+      if(!answer.classList.contains("revealed")){
         score++;
-        document.getElementById('scoreBox').textContent = `Score: ${score} / 8`;
+        document.getElementById('scoreBox').textContent=`Score: ${score} / 8`;
         answer.classList.add("revealed");
       }
-    } else {
-      feedback.textContent = "❌ Incorrect. See the correct sentence below.";
-      feedback.className = "feedback incorrect";
+
+    }else{
+
+      feedback.textContent="Incorrect. See the correct sentence below.";
+      feedback.className="feedback incorrect";
+
     }
-    answer.style.display = "block";
+
+    answer.style.display="block";
+
   });
+
 });
+
 </script>
+
 </body>
 </html>
