@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,6 +89,100 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+    }
+
+    /* ===== QR area (top-left) ===== */
+    .brandrow{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .qr-wrap{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex:0 0 auto;
+    }
+
+    .qr-btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.18);
+      background:transparent;
+      color:#fff;
+      border-radius:10px;
+      padding:.45rem .7rem;
+      font-weight:800;
+      cursor:pointer;
+      line-height:1;
+      white-space:nowrap;
+    }
+    .qr-btn:hover{ opacity:.92; }
+
+    .qr-panel{
+      display:none;
+      margin-top:10px;
+      padding:10px;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:12px;
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(6px);
+    }
+    .qr-panel.open{ display:block; }
+
+    .qr-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .qr-input{
+      flex:1 1 260px;
+      min-width: 220px;
+      padding:.55rem .7rem;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.20);
+      background: rgba(0,0,0,.25);
+      color:#fff;
+      outline:none;
+      font: inherit;
+    }
+    .qr-input:focus{ box-shadow: 0 0 0 3px rgba(255,122,26,.25); border-color: rgba(255,122,26,.7); }
+
+    .qr-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .qr-mini{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.18);
+      background:#fff;
+      color:var(--ink);
+      border-radius:10px;
+      padding:.55rem .8rem;
+      font-weight:800;
+      cursor:pointer;
+      line-height:1;
+    }
+    .qr-mini.primary{
+      background: var(--accent);
+      border-color: var(--accent);
+      color:#fff;
+    }
+    .qr-mini:hover{ opacity:.92; }
+
+    #qrOut{
+      margin-top:10px;
+      background:#fff;
+      border-radius:12px;
+      padding:10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
     }
 
     .actions{
@@ -398,11 +493,20 @@
     @media (min-width: 700px){
       .topbar{
         flex-direction:row;
-        align-items:center;
+        align-items:flex-start;
         justify-content:space-between;
         gap:12px;
         padding: 12px 20px;
       }
+
+      /* keep QR + brand aligned left on desktop */
+      .brandrow{ align-items:center; }
+
+      /* QR panel can float under the left side */
+      .qr-panel{
+        width:min(520px, 100%);
+      }
+
       section{ padding: 1.6rem; }
       main{ margin: 1.5rem auto; padding: 0 1.25rem 2.5rem; }
       .brand strong{ font-size: clamp(14px, 2.2vw, 16px); }
@@ -417,14 +521,38 @@
 <body>
   <header>
     <div class="topbar">
-      <div class="brand">
-        <strong>Modern English Australia</strong>
-        <span>Koala Spies Sydney</span>
+
+      <!-- LEFT: QR + Brand (QR is top-left) -->
+      <div class="brandrow">
+        <div class="qr-wrap">
+          <button class="qr-btn" id="qrToggle" type="button" aria-expanded="false" aria-controls="qrPanel">
+            QR
+          </button>
+        </div>
+
+        <div class="brand">
+          <strong>Modern English Australia</strong>
+          <span>Koala Spies Sydney</span>
+
+          <!-- QR panel opens under the brand, still left aligned -->
+          <div class="qr-panel" id="qrPanel">
+            <div class="qr-row">
+              <input class="qr-input" id="qrText" type="text" inputmode="url"
+                     placeholder="Paste a URL (or leave blank to use this page)" aria-label="QR code URL" />
+              <div class="qr-actions">
+                <button class="qr-mini primary" id="qrMake" type="button">Generate</button>
+                <button class="qr-mini" id="qrClear" type="button">Clear</button>
+              </div>
+            </div>
+            <div id="qrOut" aria-label="Generated QR code"></div>
+          </div>
+        </div>
       </div>
 
+      <!-- RIGHT: Nav -->
       <nav class="actions" aria-label="Page navigation">
-        <a class="nav-link back" href="https://koalaspiessydney.github.io/ModernEnglishAU/MEAtests.html">← Back to Tests & Practices</a>
-        <a class="nav-link" href="https://koalaspiessydney.github.io/ModernEnglishAU/">Home</a>
+        <a class="nav-link back" href="http://modernenglish.au/IELTSPTEPLUS.html">← Back to Tests & Practices</a>
+        <a class="nav-link" href="http://modernenglish.au">Home</a>
       </nav>
     </div>
   </header>
@@ -680,14 +808,67 @@
     </section>
 
     <div class="nav-buttons" aria-label="Footer navigation">
-      <a href="https://koalaspiessydney.github.io/ModernEnglishAU/MEAtests.html">Tests & Practices</a>
-      <a href="https://koalaspiessydney.github.io/ModernEnglishAU/">Home</a>
+      <a href="http://modernenglish.au/IELTSPTEPLUS.html">Tests & Practices</a>
+      <a href="http://modernenglish.au">Home</a>
     </div>
   </main>
 
   <footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</footer>
 
+  <!-- QRCode.js (client-side) -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
   <script>
+    /* ============================================================
+       QR GENERATOR (top-left)
+       ============================================================ */
+    const qrToggle = document.getElementById("qrToggle");
+    const qrPanel  = document.getElementById("qrPanel");
+    const qrText   = document.getElementById("qrText");
+    const qrMake   = document.getElementById("qrMake");
+    const qrClear  = document.getElementById("qrClear");
+    const qrOut    = document.getElementById("qrOut");
+
+    let qr;
+
+    function makeQR(value){
+      const text = (value && value.trim()) ? value.trim() : window.location.href;
+
+      qrOut.innerHTML = "";
+      qr = new QRCode(qrOut, {
+        text,
+        width: 160,
+        height: 160,
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    }
+
+    qrToggle.addEventListener("click", ()=>{
+      const open = qrPanel.classList.toggle("open");
+      qrToggle.setAttribute("aria-expanded", open ? "true" : "false");
+
+      if(open){
+        if(!qrText.value.trim()) qrText.value = window.location.href;
+        if(!qrOut.hasChildNodes()) makeQR(qrText.value);
+        qrText.focus();
+      }
+    });
+
+    qrMake.addEventListener("click", ()=> makeQR(qrText.value));
+
+    qrText.addEventListener("keydown", (e)=>{
+      if(e.key === "Enter"){
+        e.preventDefault();
+        makeQR(qrText.value);
+      }
+    });
+
+    qrClear.addEventListener("click", ()=>{
+      qrText.value = "";
+      qrOut.innerHTML = "";
+      qrText.focus();
+    });
+
     /* ============================================================
        TRANSCRIPTS (Repeat Sentence / Dictation-style checking)
        ============================================================ */
@@ -910,3 +1091,4 @@
   </script>
 </body>
 </html>
+```
