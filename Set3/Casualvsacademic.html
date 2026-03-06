@@ -22,6 +22,7 @@
   --shadow:0 10px 24px rgba(0,0,0,.10);
   --max:1100px;
 }
+
 /* Background image behind the game */
 body::before{
   content:"";
@@ -44,16 +45,26 @@ body{
   flex-direction:column;
 }
 
-/* Top bar + footer */
+/* ===== Top bar + footer ===== */
 .topbar{
   background:var(--dark);
   color:#fff;
-  text-align:center;
   padding:1rem;
   font-weight:700;
   letter-spacing:.08em;
   border-bottom:2px solid var(--line);
+
+  /* ensures true left + centered title on all devices */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
 }
+.topbar-title{
+  text-align:center;
+  padding:0 3.2rem; /* space so the title doesn't sit under the QR */
+}
+
 footer{
   margin-top:auto;
   background:var(--dark);
@@ -64,7 +75,38 @@ footer{
   border-top:2px solid var(--line);
 }
 
-/* Page container */
+/* ===== QR (top-left) ===== */
+.qr-area-left{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  z-index:5;
+}
+.qr-btn{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.25);
+  background:transparent;
+  color:#fff;
+  padding:.45rem .7rem;
+  border-radius:999px;
+  font-weight:800;
+  cursor:pointer;
+  line-height:1;
+}
+.qr-btn:focus-visible{outline:3px solid rgba(255,255,255,.25); outline-offset:3px}
+#qrcodeLeft{
+  background:#fff;
+  padding:6px;
+  border-radius:10px;
+  margin-top:8px;
+  display:none; /* shown when you click QR */
+}
+
+/* ===== Page container ===== */
 .page{
   width:min(var(--max), 100%);
   margin:0 auto;
@@ -160,7 +202,6 @@ button:focus-visible{outline:3px solid rgba(0,0,0,.15); outline-offset:3px}
   line-height:1.25;
   overflow:hidden;
 }
-
 .front{
   background:linear-gradient(180deg, #fff, #fbfbfb);
   color:var(--muted);
@@ -254,17 +295,33 @@ button:focus-visible{outline:3px solid rgba(0,0,0,.15); outline-offset:3px}
 }
 .nav-buttons a:hover{opacity:.92}
 
-/* Phone comfort: keep 4 cols but reduce height and text a touch */
+/* Phone comfort */
 @media (max-width: 520px){
   .page{padding:1rem .75rem 2rem}
   #game{gap:.5rem}
   .card{aspect-ratio: 1.55 / 1}
+
+  /* QR stays left + usable */
+  .qr-area-left{left:10px}
+  .topbar-title{padding:0 2.9rem}
+  .qr-btn{padding:.4rem .6rem; font-weight:900}
 }
 </style>
+
+<!-- QR LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 
 <body>
-  <div class="topbar">MODERN ENGLISH AUSTRALIA · Koala Spies Sydney</div>
+  <div class="topbar">
+    <!-- QR generator (left) -->
+    <div class="qr-area-left">
+      <button class="qr-btn" type="button" onclick="toggleQRLeft()">QR</button>
+      <div id="qrcodeLeft" aria-label="QR code"></div>
+    </div>
+
+    <div class="topbar-title">MODERN ENGLISH AUSTRALIA · Koala Spies Sydney</div>
+  </div>
 
   <div class="page">
     <h1>Casual ↔ Academic Matching + Gap-Fill</h1>
@@ -298,14 +355,28 @@ button:focus-visible{outline:3px solid rgba(0,0,0,.15); outline-offset:3px}
     </section>
 
     <div class="nav-buttons">
-      
-      <a href="http://modernenglish.au">Home</a>
+      <a href="http://modernenglish.au/Microlessons&Games.html">Home</a>
     </div>
   </div>
 
   <footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</footer>
 
 <script>
+/* ===== QR (left) ===== */
+function toggleQRLeft(){
+  const box = document.getElementById("qrcodeLeft");
+
+  if(box.innerHTML === ""){
+    new QRCode(box, {
+      text: window.location.href,
+      width: 110,
+      height: 110
+    });
+  }
+
+  box.style.display = (box.style.display === "none" || box.style.display === "") ? "block" : "none";
+}
+
 /* ==== PART 1: MATCHING GAME (4 x 4 = 16 cards) ==== */
 const pairs = [
   ["Before that, there were important changes.","There had been significant developments."],
@@ -340,7 +411,6 @@ const pairs = [
 
 let flipped = [];
 let matched = [];
-
 const board = document.getElementById('game');
 
 function shuffle(a){
@@ -450,5 +520,4 @@ function checkAnswers(){
 }
 </script>
 </body>
-
 </html>
