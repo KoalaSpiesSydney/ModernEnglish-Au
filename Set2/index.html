@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PTE Repeat Sentence & Write from Dictation – Set 2 | Modern English Australia</title>
+
+  <style>
+    /* =========================
+       RESET + TOKENS
+       ========================= */
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    img{ max-width:100%; height:auto; display:block; }
+
+    :root{
+      --bg:#f5f5f5;
+      --panel:#ffffff;
+      --ink:#1e1e1e;
+      --muted:#666;
+      --accent:#ff7a1a;
+      --line:#d9d9d9;
+
+      --ok:#1db954;
+      --err:#e74c3c;
+
+      --radius:10px;         /* Rise-like */
+      --max: 1000px;
+      --focus: 0 0 0 3px rgba(255,122,26,.18);
+    }
+
+    /* =========================
+       BASE
+       ========================= */
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.65;
+    }
+
+    main{
+      max-width:var(--max);
+      margin: 1rem auto;
+      padding: 0 1rem 2rem;
+    }
+
+    /* =========================
+       HEADER (mobile-first)
+       ========================= */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background:var(--ink);
+      color:#fff;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    .topbar{
+      max-width:var(--max);
+      margin:0 auto;
+      padding: 12px 16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+
+    .brand strong{
+      font-size: 15px;
+      letter-spacing:.02em;
+      color:#fff;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand span{
+      font-size:12px;
+      color:rgba(255,255,255,.75);
+      letter-spacing:.02em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+
+    .nav-link{
+      color:#fff;
+      font-weight:600;
+      text-decoration:none;
+    }
+    .nav-link:hover{ text-decoration: underline; }
+    .nav-link.back{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    /* =========================
+       RISE-STYLE PANELS
+       ========================= */
+    section{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding: 1.25rem;
+      margin: 1rem 0;
+      box-shadow:none;
+    }
+
+    section + section{ margin-top: 1.25rem; }
+
+    .panel-title{
+      text-align:center;
+      color:var(--accent);
+      line-height:1.25;
+      margin-bottom:.35rem;
+      font-weight:800;
+    }
+
+    .panel-subtitle{
+      text-align:center;
+      color:var(--muted);
+      margin-bottom:.9rem;
+      font-size:.95rem;
+    }
+
+    .divider{
+      height:1px;
+      background:var(--line);
+      margin: .9rem 0 1rem;
+    }
+
+    p{ margin: .75rem 0; }
+
+    ol{
+      list-style:decimal;
+      padding-left: 1.25rem;
+    }
+
+    li{ margin: 1.05rem 0; }
+
+    audio{
+      width:100%;
+      max-width:650px;
+      margin-top:.35rem;
+      display:block;
+    }
+
+    hr{
+      border:0;
+      border-top:1px solid var(--line);
+      margin: 1.2rem 0;
+    }
+
+    .center{ text-align:center; }
+
+    /* =========================
+       BUTTONS (rectangular 10px)
+       ========================= */
+    .btn{
+      appearance:none;
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:.65rem 1rem;
+      font-weight:700;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.35rem;
+      text-decoration:none;
+      transition:background .2s ease, border-color .2s ease, opacity .2s ease;
+      line-height:1;
+      background:#fff;
+      color:var(--ink);
+    }
+
+    .btn:hover{ opacity:.92; }
+
+    .btn-primary{
+      background:var(--accent);
+      border-color:var(--accent);
+      color:#fff;
+    }
+
+    .btn-ghost{
+      background:#fff;
+      color:var(--ink);
+    }
+
+    /* =========================
+       LESSON THUMB
+       ========================= */
+    .lesson-thumb{
+      width: min(190px, 70vw);
+      margin: 1rem auto .5rem;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+    }
+
+    /* =========================
+       ANSWER UI
+       ========================= */
+    .answer-wrap{
+      margin-top:.75rem;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding: 1rem;
+      background:#fafafa;
+    }
+
+    .answer-label{
+      font-weight:800;
+      font-size:.95rem;
+      margin-bottom:.45rem;
+    }
+
+    .answer-row{
+      display:flex;
+      gap:.6rem;
+      flex-wrap:wrap;
+      align-items:stretch;
+    }
+
+    textarea.answer-input{
+      flex:1 1 320px;
+      width:100%;
+      min-height:54px;
+      padding:.7rem .8rem;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      outline:none;
+      font: inherit;
+      resize:vertical;
+      background:#fff;
+    }
+
+    textarea.answer-input:focus{
+      border-color: rgba(255,122,26,.7);
+      box-shadow: var(--focus);
+    }
+
+    .feedback{
+      margin-top:.7rem;
+      padding:.75rem .9rem;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:#fff;
+    }
+
+    .feedback.ok{
+      border-color: rgba(29,185,84,.35);
+      background: rgba(29,185,84,.08);
+    }
+
+    .feedback.err{
+      border-color: rgba(231,76,60,.35);
+      background: rgba(231,76,60,.08);
+    }
+
+    .feedback-title{
+      font-weight:900;
+      margin-bottom:.25rem;
+    }
+
+    .small{
+      font-size:.92rem;
+      color: var(--muted);
+    }
+
+    .correction{
+      margin-top:.6rem;
+      padding:.75rem .9rem;
+      border-radius:var(--radius);
+      border:1px dashed var(--line);
+      background:#fff;
+    }
+
+    .correction strong{
+      display:block;
+      margin-bottom:.25rem;
+    }
+
+    .diff{
+      margin-top:.5rem;
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+    }
+
+    .pill{
+      display:inline-block;
+      padding:.2rem .6rem;
+      border-radius:999px;
+      font-size:.86rem;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+    .pill.missing{ border-color: rgba(231,76,60,.45); background: rgba(231,76,60,.08); }
+    .pill.extra{ border-color: rgba(63,111,143,.45); background: rgba(63,111,143,.08); }
+
+    /* =========================
+       GAP FILL
+       ========================= */
+    .gap-input{
+      display:inline-block;
+      width: min(260px, 100%);
+      padding:.65rem .8rem;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      outline:none;
+      font: inherit;
+      margin:.2rem .3rem;
+      background:#fff;
+    }
+
+    .gap-input:focus{
+      border-color: rgba(255,122,26,.7);
+      box-shadow: var(--focus);
+    }
+
+    .gap-input.ok{
+      border-color: rgba(29,185,84,.55);
+      box-shadow: 0 0 0 3px rgba(29,185,84,.12);
+    }
+
+    .gap-input.err{
+      border-color: rgba(231,76,60,.55);
+      box-shadow: 0 0 0 3px rgba(231,76,60,.12);
+    }
+
+    .gap-actions{
+      display:flex;
+      gap:.6rem;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top: 1rem;
+    }
+
+    /* =========================
+       LINKS + FOOTER NAV
+       ========================= */
+    a{
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:700;
+    }
+    a:hover{ text-decoration:underline; }
+
+    .nav-buttons{
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      margin:1.5rem 0 0;
+      flex-wrap:wrap;
+    }
+
+    .nav-buttons a{
+      background:var(--accent);
+      color:#fff;
+      padding:.65rem 1.2rem;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid var(--accent);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .nav-buttons a:hover{ opacity:.92; }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      border-top:1px solid var(--line);
+      padding:1rem;
+      font-size:.9rem;
+      background: #fff;
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+    @media (min-width: 700px){
+      .topbar{
+        flex-direction:row;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        padding: 12px 20px;
+      }
+      section{ padding: 1.6rem; }
+      main{ margin: 1.5rem auto; padding: 0 1.25rem 2.5rem; }
+      .brand strong{ font-size: clamp(14px, 2.2vw, 16px); }
+    }
+
+    @media (min-width: 1024px){
+      section{ padding: 2rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <strong>Modern English Australia</strong>
+        <span>Koala Spies Sydney</span>
+      </div>
+
+      <nav class="actions" aria-label="Page navigation">
+        <a class="nav-link back" href="https://koalaspiessydney.github.io/ModernEnglishAU/MEAtests.html">← Back to Tests & Practices</a>
+        <a class="nav-link" href="https://koalaspiessydney.github.io/ModernEnglishAU/">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h1 class="panel-title">Write from Dictation Challenge – Set 2</h1>
+      <div class="panel-subtitle">Short daily practice builds accuracy faster than long sessions.</div>
+      <div class="divider"></div>
+
+      <p>
+        Here is a set of 12 write-from-dictation sentences that can also be used for repeat-sentence practice.
+        If write-from-dictation is still difficult, practise slowly with pauses until it becomes easy, then increase speed.
+      </p>
+
+      <p>
+        <strong>PTE Tip:</strong> Don’t over-practice repeat sentence. It requires intense concentration.
+        Five focused minutes is better than an hour of unfocused repetition.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2 class="panel-title" style="font-size:1.15rem;">Prelesson – Understanding though, through, thorough & thought</h2>
+      <p>
+        This set tests pronunciation and collocations for <em>though</em>, <em>through</em>, <em>throughout</em>,
+        <em>thorough</em>, <em>thoroughly</em> and <em>thought</em>. If you’re not yet advanced, study the hints and vocab list first.
+      </p>
+
+      <a href="throughlesson.html" aria-label="Open hints and vocab list">
+        <img class="lesson-thumb" src="vocab-lesson.png" alt="Hints and vocab lesson thumbnail" />
+      </a>
+
+      <p class="center"><a href="throughlesson.html">Hints and Vocab List →</a></p>
+    </section>
+
+    <section>
+      <h2 class="panel-title">Write from Dictation Sentences (1 – 10)</h2>
+      <div class="panel-subtitle">Punctuation is ignored when checking. Aim for word accuracy.</div>
+      <div class="divider"></div>
+
+      <ol>
+        <li>
+          <audio controls src="subblock_please-make-your-way-through-t.mp3"></audio>
+          <div class="answer-wrap" data-item="rs1">
+            <div class="answer-label">Type what you hear:</div>
+            <div class="answer-row">
+              <textarea class="answer-input" placeholder="Type the full sentence here…"></textarea>
+              <button class="btn btn-primary" data-action="check" type="button">Check</button>
+              <button class="btn btn-ghost" data-action="show" type="button">Show answer</button>
+            </div>
+            <div class="feedback" hidden></div>
+            <div class="correction" hidden></div>
+          </div>
+        </li>
+
+        <li>
+          <audio controls src="subblock_she-enjoyed-the-lecture-thoug-1.mp3"></audio>
+          <div class="answer-wrap" data-item="rs2">
+            <div class="answer-label">Type what you hear:</div>
+            <div class="answer-row">
+              <textarea class="answer-input" placeholder="Type the full sentence here…"></textarea>
+              <button class="btn btn-primary" data-action="check" type="button">Check</button>
+              <button class="btn btn-ghost" data-action="show" type="button">Show answer</button>
+            </div>
+            <div class="feedback" hidden></div>
+            <div class="correction" hidden></div>
+          </div>
+        </li>
+
+        <li>
+          <audio controls src="subblock_you-must-be-quiet-when-passing-1.mp3"></audio>
+          <div class="answer-wrap" data-item="rs3">
+            <div class="answer-label">Type what you hear:</div>
+            <div class="answer-row">
+              <textarea class="answer-input" placeholder="Type the full sentence here…"></textarea>
+              <button class="btn btn-primary" data-action="check" type="button">Check</button>
+              <button class="btn btn-ghost" data-action="show" type="button">Show answer</button>
+            </div>
+            <div class="feedback" hidden></div>
+            <div class="correction" hidden></div>
+          </div>
+        </li>
+
+        <li>
+          <audio controls src="subblock_artifacts-were-displayed-throu-1.mp3"></audio>
+          <div class="answer-wrap" data-item="rs4">
+            <div class="answer-label">Type what you hear:</div>
+            <div class="answer-row">
+              <textarea class="answer-input" placeholder="Type the full sentence here…"></textarea>
+              <button class="btn btn-primary" data-action="check" type="button">Check</button>
+              <button class="btn btn-ghost" data-action="show" type="button">Show answer</button>
+            </div>
+            <div class="feedback" hidden></div>
+            <div class="correction" hidden></div>
+          </div>
+        </li>
+
+        <li>
+          <audio controls src="subblock_this-innovative-design-challen.mp3"></audio>
+          <div class="answer-wrap" data-item="rs5">
+            <div class="answer-label">Type what you hear:</div>
+            <div class="answer-row">
+              <textarea class="answer-input" placeholder="Type the full sentence here…"></textarea>
+              <button class="btn btn-primary" data-action="check" type="button">Check</button>
+              <button class="btn btn-ghost" data-action="show" type="button">Show answer</button>
+            </div>
+            <div class="feedback" hidden></div>
+            <div class="correction" hidden></div>
+          </div>
+        </li>
+
+        <li>
+          <audio controls src="subblock_please-keep-your-phones-turned-1.mp3"></audio>
+          <div class="answer-wrap" data-item="rs6">
+            <div class="answer-label">Type what you hear:</div>
+            <div class="answer-row">
+              <textarea class="answer-input" placeholder="Type the full sentence here…"></textarea>
+              <button class="btn btn-primary" data-action="check" type="button">Check</button>
+              <button class="btn btn-ghost" data-action="show" type="button">Show answer</button>
+            </div>
+            <div class="feedback" hidden></div>
+            <div class="correction" hidden></div>
+          </div>
+        </li>
+
+        <li>
+          <audio controls src="subblock_the-archaeologist-conducted-a-1.mp3"></audio>
+          <div class="answer-wrap" data-item="rs7">
+            <div class="answer-label">Type what you hear:</div>
+            <div class="answer-row">
+              <textarea class="answer-input" placeholder="Type the full sentence here…"></textarea>
+              <button class="btn btn-primary" data-action="check" type="button">Check</button>
+              <button class="btn btn-ghost" data-action="show" type="button">Show answer</button>
+            </div>
+            <div class="feedback" hidden></div>
+            <div class="correction" hidden></div>
+          </div>
+        </li>
+
+        <li>
+          <audio controls src="subblock_through-rigorous-experimentati.mp3"></audio>
+          <div class="answer-wrap" data-item="rs8">
+            <div class="answer-label">Type what you hear:</div>
+            <div class="answer-row">
+              <textarea class="answer-input" placeholder="Type the full sentence here…"></textarea>
+              <button class="btn btn-primary" data-action="check" type="button">Check</button>
+              <button class="btn btn-ghost" data-action="show" type="button">Show answer</button>
+            </div>
+            <div class="feedback" hidden></div>
+            <div class="correction" hidden></div>
+          </div>
+        </li>
+
+        <li>
+          <audio controls src="subblock_you-must-be-quiet-when-passing-1.mp3"></audio>
+          <div class="answer-wrap" data-item="rs9">
+            <div class="answer-label">Type what you hear:</div>
+            <div class="answer-row">
+              <textarea class="answer-input" placeholder="Type the full sentence here…"></textarea>
+              <button class="btn btn-primary" data-action="check" type="button">Check</button>
+              <button class="btn btn-ghost" data-action="show" type="button">Show answer</button>
+            </div>
+            <div class="feedback" hidden></div>
+            <div class="correction" hidden></div>
+          </div>
+        </li>
+
+        <li>
+          <audio controls src="subblock_the-reesearchers-thorough-ana1-1.mp3"></audio>
+          <div class="answer-wrap" data-item="rs10">
+            <div class="answer-label">Type what you hear:</div>
+            <div class="answer-row">
+              <textarea class="answer-input" placeholder="Type the full sentence here…"></textarea>
+              <button class="btn btn-primary" data-action="check" type="button">Check</button>
+              <button class="btn btn-ghost" data-action="show" type="button">Show answer</button>
+            </div>
+            <div class="feedback" hidden></div>
+            <div class="correction" hidden></div>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="gap1">
+      <h2 class="panel-title">Bonus Activity 1 – Listen and fill in the gaps</h2>
+      <div class="divider"></div>
+
+      <p><strong>Choose from the following and put them in the gaps:</strong></p>
+      <p class="small">
+        thorough // thoroughly // through // throughout // though // thought<br>
+        (You may use any of the above more than once)
+      </p>
+
+      <p>
+        Welcome to Spanish 101.
+        1. <input class="gap-input" type="text" data-answer="throughout" aria-label="Gap 1">
+        the course you will gain a
+        2. <input class="gap-input" type="text" data-answer="thorough" aria-label="Gap 2">
+        understanding of basic Spanish grammar in Latin America,
+        3. <input class="gap-input" type="text" data-answer="though" aria-label="Gap 3">
+        we will not have time to cover all the variations in Spain or Castellano as it is often referred to.
+        The main
+        4. <input class="gap-input" type="text" data-answer="thought" aria-label="Gap 4">
+        behind this reasoning is that there are more Latin American speakers of Spanish, and even
+        5. <input class="gap-input" type="text" data-answer="though" aria-label="Gap 5">
+        there are differences in vernacular, they are less severe than those in Spain.
+      </p>
+
+      <p><strong>Listen and check.</strong></p>
+      <audio controls src="WelcometoSpanish.mp3"></audio>
+
+      <div class="gap-actions">
+        <button type="button" class="btn btn-primary" onclick="checkGaps('gap1')">Submit</button>
+        <button type="button" class="btn btn-ghost" onclick="showAnswers('gap1')">Show answers</button>
+      </div>
+
+      <div id="gap1-feedback" class="feedback" hidden></div>
+    </section>
+
+    <section id="gap2">
+      <h2 class="panel-title">Bonus Activity 2 – Listen and fill in the gaps</h2>
+      <div class="divider"></div>
+
+      <p><strong>Choose from the following and put them in the gaps:</strong></p>
+      <p class="small">
+        thorough // thoroughly // through // throughout // though // thought<br>
+        (You may use any of the above more than once)
+      </p>
+
+      <p>
+        Europe often considers itself the home of free
+        1. <input class="gap-input" type="text" data-answer="thought" aria-label="Gap 1">,
+        from the origins of democracy in ancient Greece to the progressive movements that emerged after World War II.
+        However, many other societies in Asia
+        2. <input class="gap-input" type="text" data-answer="throughout" aria-label="Gap 2">
+        history have exhibited remarkable progress and innovation.
+        Ancient India, with its rich philosophical traditions; China, with its diverse schools of
+        3. <input class="gap-input" type="text" data-answer="thought" aria-label="Gap 3">
+        such as Confucianism and Taoism; and the Islamic Golden Age all serve as prime examples.
+        Historians need to undertake more
+        4. <input class="gap-input" type="text" data-answer="thorough" aria-label="Gap 4">
+        research into these civilizations to gain a comprehensive understanding.
+      </p>
+
+      <audio controls src="Europefreethough.mp3"></audio>
+
+      <div class="gap-actions">
+        <button type="button" class="btn btn-primary" onclick="checkGaps('gap2')">Submit</button>
+        <button type="button" class="btn btn-ghost" onclick="showAnswers('gap2')">Show answers</button>
+      </div>
+
+      <div id="gap2-feedback" class="feedback" hidden></div>
+    </section>
+
+    <div class="nav-buttons" aria-label="Footer navigation">
+      <a href="https://koalaspiessydney.github.io/ModernEnglishAU/MEAtests.html">Tests & Practices</a>
+      <a href="https://koalaspiessydney.github.io/ModernEnglishAU/">Home</a>
+    </div>
+  </main>
+
+  <footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</footer>
+
+  <script>
+    /* ============================================================
+       TRANSCRIPTS (Repeat Sentence / Dictation-style checking)
+       ============================================================ */
+    const ANSWER_KEY = {
+      rs1:  "Please make your way through the registration process at the main hall.",
+      rs2:  "She enjoyed the lecture though it was quite long.",
+      rs3:  "You must be quiet when passing through the reading area.",
+      rs4:  "Artifacts were displayed throughout the museum to demonstrate the use of tools.",
+      rs5:  "This innovative design challenge provides food for thought and inspiration.",
+      rs6:  "Please keep your phones turned off throughout the lecture.",
+      rs7:  "The archaeologist conducted a thorough excavation of the ancient site.",
+      rs8:  "Professors will have done their review by the end of the week.",
+      rs9:  "You must be quiet when passing through the reading area.",
+      rs10: "The researcher's thorough analysis of the data provided valuable insights."
+    };
+
+    /* ===== Helpers ===== */
+    function normalize(str){
+      return (str || "")
+        .toLowerCase()
+        .replace(/[’']/g,"'")
+        .replace(/[^a-z0-9\s']/g," ")
+        .replace(/\s+/g," ")
+        .trim();
+    }
+
+    function words(str){
+      const n = normalize(str);
+      return n ? n.split(" ") : [];
+    }
+
+    /* Simple similarity: word-level overlap with light weighting */
+    function similarity(user, correct){
+      const u = words(user);
+      const c = words(correct);
+      if(!c.length && !u.length) return 1;
+      if(!c.length) return 0;
+
+      const cCounts = new Map();
+      for(const w of c) cCounts.set(w, (cCounts.get(w)||0)+1);
+
+      let hits = 0;
+      for(const w of u){
+        const k = cCounts.get(w) || 0;
+        if(k>0){
+          hits++;
+          cCounts.set(w, k-1);
+        }
+      }
+      const precision = u.length ? hits / u.length : 0;
+      const recall = hits / c.length;
+      return (precision*0.45 + recall*0.55);
+    }
+
+    function diffPills(user, correct){
+      const u = words(user);
+      const c = words(correct);
+
+      const uCounts = new Map();
+      const cCounts = new Map();
+      for(const w of u) uCounts.set(w, (uCounts.get(w)||0)+1);
+      for(const w of c) cCounts.set(w, (cCounts.get(w)||0)+1);
+
+      const missing = [];
+      for(const [w, n] of cCounts.entries()){
+        const have = uCounts.get(w)||0;
+        if(have < n){
+          for(let i=0;i<(n-have);i++) missing.push(w);
+        }
+      }
+
+      const extra = [];
+      for(const [w, n] of uCounts.entries()){
+        const need = cCounts.get(w)||0;
+        if(n > need){
+          for(let i=0;i<(n-need);i++) extra.push(w);
+        }
+      }
+
+      return { missing, extra };
+    }
+
+    /* ===== Repeat Sentence Wiring ===== */
+    document.querySelectorAll(".answer-wrap").forEach(wrap=>{
+      const key = wrap.dataset.item;
+      const input = wrap.querySelector(".answer-input");
+      const fb = wrap.querySelector(".feedback");
+      const corr = wrap.querySelector(".correction");
+
+      wrap.addEventListener("click", (e)=>{
+        const btn = e.target.closest("button");
+        if(!btn) return;
+
+        const action = btn.dataset.action;
+        const correct = ANSWER_KEY[key];
+
+        if(!correct){
+          fb.hidden = false;
+          fb.className = "feedback err";
+          fb.innerHTML = `
+            <div class="feedback-title">Answer key missing</div>
+            <div class="small">Add the transcript for <strong>${key}</strong> inside <code>ANSWER_KEY</code>.</div>
+          `;
+          corr.hidden = true;
+          return;
+        }
+
+        if(action === "show"){
+          corr.hidden = false;
+          corr.innerHTML = `
+            <strong>Correct answer:</strong>
+            <div>${correct}</div>
+          `;
+          return;
+        }
+
+        if(action === "check"){
+          const userText = input.value.trim();
+          const score = similarity(userText, correct);
+          const pct = Math.round(score*100);
+          const exact = normalize(userText) === normalize(correct);
+          const {missing, extra} = diffPills(userText, correct);
+
+          fb.hidden = false;
+          fb.className = "feedback " + (exact || pct>=90 ? "ok" : "err");
+
+          const title = exact ? "Perfect" : (pct>=90 ? "Very close" : (pct>=70 ? "Good attempt" : "Needs correction"));
+
+          fb.innerHTML = `
+            <div class="feedback-title">${title}</div>
+            <div class="small">Match score: <strong>${pct}%</strong> (punctuation ignored)</div>
+            ${
+              (missing.length || extra.length) ? `
+              <div class="diff">
+                ${missing.slice(0,12).map(w=>`<span class="pill missing">missing: ${w}</span>`).join("")}
+                ${extra.slice(0,12).map(w=>`<span class="pill extra">extra: ${w}</span>`).join("")}
+                ${(missing.length>12 || extra.length>12) ? `<span class="pill">+ more…</span>` : ""}
+              </div>` : `<div class="small">No missing/extra words detected.</div>`
+            }
+          `;
+
+          if(!exact){
+            corr.hidden = false;
+            corr.innerHTML = `
+              <strong>Correction:</strong>
+              <div>${correct}</div>
+            `;
+          }else{
+            corr.hidden = true;
+          }
+        }
+      });
+    });
+
+    /* ============================================================
+       GAP FILL
+       ============================================================ */
+    function checkGaps(sectionId){
+      const section = document.getElementById(sectionId);
+      if(!section){
+        console.warn("Gap section not found:", sectionId, "Add id='" + sectionId + "' to the <section>.");
+        return;
+      }
+
+      const inputs = section.querySelectorAll('input[data-answer]');
+      const feedback = document.getElementById(sectionId + "-feedback");
+
+      let correct = 0;
+      let total = 0;
+
+      inputs.forEach(input=>{
+        total++;
+        const user = normalize(input.value);
+        const ans = normalize(input.dataset.answer);
+
+        input.classList.remove("ok","err");
+
+        if(user && user === ans){
+          correct++;
+          input.classList.add("ok");
+        }else{
+          input.classList.add("err");
+        }
+      });
+
+      if(feedback){
+        feedback.hidden = false;
+        feedback.className = "feedback " + (correct === total ? "ok" : "err");
+        feedback.innerHTML = `
+          <div class="feedback-title">${correct === total ? "Perfect" : "Score"}</div>
+          <div class="small">You got <strong>${correct} / ${total}</strong> correct.</div>
+        `;
+      }
+    }
+
+    function showAnswers(sectionId){
+      const section = document.getElementById(sectionId);
+      if(!section){
+        console.warn("Gap section not found:", sectionId, "Add id='" + sectionId + "' to the <section>.");
+        return;
+      }
+
+      const inputs = section.querySelectorAll('input[data-answer]');
+      const feedback = document.getElementById(sectionId + "-feedback");
+
+      inputs.forEach(input=>{
+        input.value = input.dataset.answer || "";
+        input.classList.remove("ok","err");
+      });
+
+      if(feedback){
+        feedback.hidden = false;
+        feedback.className = "feedback ok";
+        feedback.innerHTML = `
+          <div class="feedback-title">Answers shown</div>
+          <div class="small">Now hide them and try again.</div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

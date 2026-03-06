@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hints & Vocab – Thorough / Through / Though / Thought | Modern English Australia</title>
+
+<style>
+/* =========================
+   RESET + TOKENS
+   ========================= */
+*{ box-sizing:border-box; margin:0; padding:0; }
+img{ max-width:100%; height:auto; display:block; }
+
+:root{
+  --bg:#f6f7f5;
+  --card:#ffffff;
+
+  --ink:#111111;
+  --charcoal:#1e1e1e;
+  --muted:#5f6a66;
+
+  --line:rgba(0,0,0,.12);
+  --teal:#0f6f6a;
+
+  /* match your main page naming */
+  --accent: var(--teal);
+
+  --radius:18px;
+  --shadow:0 10px 30px rgba(0,0,0,.10);
+
+  --max:920px;
+
+  /* used by button system */
+  --soft:#f2f2f2;
+}
+
+/* =========================
+   HEADER (IDENTICAL STYLE: text links, no borders)
+   ========================= */
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:var(--charcoal);
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.topbar{
+  max-width:var(--max);
+  margin:0 auto;
+  padding: 12px 16px;
+  display:flex;
+  flex-direction:column;     /* mobile-first */
+  gap:10px;
+}
+
+.brand{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+
+.brand strong{
+  font-size:15px;
+  letter-spacing:.02em;
+  color:#fff;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.brand span{
+  font-size:12px;
+  color:rgba(255,255,255,.75);
+  letter-spacing:.02em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+/* plain header links (no border / no button box) */
+.nav-link{
+  color:#fff;
+  font-weight:600;
+  text-decoration:none;
+  padding:0;
+  border:none;
+  background:none;
+}
+
+.nav-link:hover{ text-decoration:underline; }
+
+.nav-link.back{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* upgrade on larger screens */
+@media (min-width: 700px){
+  .topbar{
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    padding: 12px clamp(16px, 4vw, 28px);
+    gap:12px;
+  }
+  .brand strong{ font-size: clamp(14px, 2.2vw, 16px); }
+  .actions{ justify-content:flex-end; }
+}
+
+/* =========================
+   PAGE BASE
+   ========================= */
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.75;
+}
+
+main{
+  max-width:900px;
+  margin: 1rem auto;
+  padding: 0 1rem 2rem;
+}
+
+section{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding: 1.2rem;
+  margin: 1rem 0;
+}
+
+@media (min-width: 900px){
+  section{ padding: 2rem; }
+  main{ margin: 1.5rem auto; }
+}
+
+h1,h2,h3{
+  color:var(--accent);
+  text-align:center;
+  margin-bottom:.75rem;
+  line-height:1.25;
+}
+
+p{ margin:.6rem 0; }
+.small{ color:var(--muted); font-size:.95rem; }
+.center{ text-align:center; }
+
+.hero-img{
+  max-width:300px;
+  width:100%;
+  margin:1rem auto 0;
+  border-radius:14px;
+  border:1px solid var(--line);
+}
+
+audio{
+  width:100%;
+  max-width:650px;
+  display:block;
+  margin:.5rem auto 0;
+}
+
+.card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1rem;
+  background:#fff;
+  margin-top:1rem;
+}
+
+/* =========================
+   BUTTONS (for page content only)
+   ========================= */
+.btn{
+  appearance:none;
+  border:none;
+  border-radius:999px;
+  padding:.65rem 1rem;
+  font-weight:700;
+  cursor:pointer;
+  transition: transform .05s ease, opacity .2s ease;
+  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.4rem;
+  text-decoration:none;
+}
+
+.btn:active{ transform: translateY(1px); }
+.btn:hover{ opacity:.92; }
+
+.btn-primary{ background: var(--accent); color:#fff; } 
+.btn-ghost{ background: var(--soft); color: var(--ink); border:1px solid var(--line); }
+
+.bottom-nav{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin: 1.25rem 0 0;
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  border-top:1px solid var(--line);
+  padding:1rem;
+  font-size:.9rem;
+  background:#fff;
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <strong>Modern English Australia</strong>
+      <span>Koala Spies Sydney · Hints & Vocab</span>
+    </div>
+
+    <nav class="actions" aria-label="Page navigation">
+      <a class="nav-link back" href="index.html">← Back to Sets</a>
+      <a class="nav-link" href="https://koalaspiessydney.github.io/ModernEnglishAU/">Home</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section>
+    <h1>Hints & Vocab</h1>
+    <p class="center small">Thorough · Through · Though · Thought</p>
+    <img class="hero-img" src="pronunciaton.png" alt="Pronunciation guide" />
+  </section>
+
+  <section>
+    <h2>Thorough</h2>
+    <p class="center"><strong>Meaning:</strong> complete (adjective) · <strong>thoroughly</strong> (adverb)</p>
+    <p class="center small">Pronunciation note: “tho / rough”</p>
+
+    <div class="card">
+      <p class="center"><strong>US</strong></p>
+      <audio controls src="thoroughusa.mp3"></audio>
+
+      <p class="center" style="margin-top:1rem;"><strong>UK</strong></p>
+      <audio controls src="thoroughuk.mp3"></audio>
+
+      <p class="center" style="margin-top:1rem;"><strong>AUS</strong></p>
+      <audio controls src="thoroughau.mp3"></audio>
+    </div>
+
+    <h3 style="margin-top:1.25rem;">Common collocations (PTE + academic English)</h3>
+
+    <div class="card">
+      <p class="center">a thorough analysis</p>
+      <audio controls src="subblock_a-thorough-analysis.mp3"></audio>
+
+      <p class="center" style="margin-top:1rem;">a thorough examination</p>
+      <audio controls src="subblock_thorough-examination.mp3"></audio>
+
+      <p class="center" style="margin-top:1rem;">a thorough understanding</p>
+      <audio controls src="subblock_a-thorough-understanding.mp3"></audio>
+
+      <p class="center" style="margin-top:1rem;">a thorough assessment</p>
+      <audio controls src="subblock_a-thorough-assessment.mp3"></audio>
+    </div>
+  </section>
+
+  <section>
+    <h2>Through</h2>
+    <p class="center"><strong>Meaning:</strong> from beginning to end, during a process (preposition)</p>
+    <p class="center small">“Throughout” is a more emphasised version (common in academic English).</p>
+
+    <div class="card">
+      <p class="center"><strong>US: through</strong></p>
+      <audio controls src="through.mp3"></audio>
+
+      <p class="center" style="margin-top:1rem;">She looked through the window as he walked through the door.</p>
+      <audio controls src="she-looked-through-the-window.mp3"></audio>
+
+      <p class="center" style="margin-top:1rem;"><strong>AUS: throughout</strong></p>
+      <audio controls src="throughout.mp3"></audio>
+
+      <p class="center" style="margin-top:1rem;">The students took notes throughout the lecture.</p>
+      <audio controls src="the-students-took-notes-throu.mp3"></audio>
+    </div>
+  </section>
+
+  <section>
+    <h2>Though / Although / Even though</h2>
+
+    <div class="card">
+      <p class="center"><strong>US: though</strong></p>
+      <audio controls src="subblock_though.mp3"></audio>
+
+      <p class="center" style="margin-top:1rem;"><strong>UK: although</strong></p>
+      <audio controls src="subblock_although.mp3"></audio>
+
+      <p class="center" style="margin-top:1rem;"><strong>AU: even though</strong></p>
+      <audio controls src="even-though.mp3"></audio>
+    </div>
+  </section>
+
+  <section>
+    <h2>Thought</h2>
+    <p class="center"><strong>Meaning:</strong> past of <em>think</em> (verb) OR a <em>thought</em> (noun)</p>
+
+    <div class="card">
+      <p><strong>Deep thought:</strong> He was lost in deep thought.</p>
+      <audio controls src="subblock_he-was-lost-in-deep-thought.mp3"></audio>
+
+      <p style="margin-top:1rem;"><strong>Thought process:</strong> Her thought process was logical and clear.</p>
+      <audio controls src="subblock_her-thought-process-was-logica.mp3"></audio>
+
+      <p style="margin-top:1rem;"><strong>First thought:</strong> My first thought was to call you.</p>
+      <p><strong>Second thought:</strong> On second thought, I decided to stay home.</p>
+      <p><strong>Train of thought:</strong> I lost my train of thought during the meeting.</p>
+      <p><strong>Food for thought:</strong> His comments provided much food for thought.</p>
+      <p><strong>School of thought:</strong> There are various schools of thought on this issue.</p>
+      <p><strong>Free thought:</strong> Free thought is essential for innovation.</p>
+    </div>
+
+    <p class="center" style="margin-top:1.25rem;">
+      When you’re ready, go back to the challenge page.
+    </p>
+
+    <div class="bottom-nav">
+      <a class="btn btn-primary" href="index.html">Go to practice</a>
+      <a class="btn btn-ghost" href="javascript:history.back()">Back</a>
+    </div>
+  </section>
+</main>
+
+<footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</footer>
+</body>
+</html>
