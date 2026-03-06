@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hints & Vocab – Thorough / Through / Though / Thought | Modern English Australia</title>
+<title>Vocab & Pron – Thorough / Through / Though / Thought | Modern English Australia</title>
 
 <style>
 /* =========================
@@ -52,8 +52,23 @@ header{
   margin:0 auto;
   padding: 12px 16px;
   display:flex;
-  flex-direction:column;     /* mobile-first */
+  flex-direction:column;
   gap:10px;
+}
+
+/* left side = QR + brand */
+.left-head{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-width:0;
+}
+
+.brand-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
 }
 
 .brand{
@@ -79,6 +94,105 @@ header{
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+}
+
+/* QR button/panel */
+.qr-wrap{
+  flex:0 0 auto;
+}
+
+.qr-btn{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.18);
+  background:transparent;
+  color:#fff;
+  border-radius:10px;
+  padding:.5rem .7rem;
+  font-weight:700;
+  cursor:pointer;
+  line-height:1;
+  white-space:nowrap;
+}
+.qr-btn:hover{ opacity:.92; }
+
+.qr-panel{
+  display:none;
+  width:100%;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  background:rgba(255,255,255,.05);
+  padding:.8rem;
+}
+
+.qr-panel.open{ display:block; }
+
+.qr-controls{
+  display:flex;
+  gap:.6rem;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.qr-input{
+  flex:1 1 240px;
+  min-width:0;
+  padding:.7rem .85rem;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font:inherit;
+  outline:none;
+}
+.qr-input::placeholder{ color:rgba(255,255,255,.65); }
+
+.qr-input:focus{
+  border-color:rgba(15,111,106,.95);
+  box-shadow:0 0 0 3px rgba(15,111,106,.22);
+}
+
+.qr-actions{
+  display:flex;
+  gap:.5rem;
+  flex-wrap:wrap;
+}
+
+.qr-mini{
+  appearance:none;
+  border:none;
+  border-radius:10px;
+  padding:.65rem .9rem;
+  font-weight:700;
+  cursor:pointer;
+  line-height:1;
+}
+
+.qr-mini.primary{
+  background:var(--accent);
+  color:#fff;
+}
+
+.qr-mini.ghost{
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+.qr-output{
+  margin-top:.75rem;
+  display:flex;
+  justify-content:flex-start;
+}
+
+#qrBox{
+  background:#fff;
+  padding:10px;
+  border-radius:12px;
+  display:inline-flex;
+  min-width:180px;
+  min-height:180px;
+  align-items:center;
+  justify-content:center;
 }
 
 .actions{
@@ -110,13 +224,20 @@ header{
 @media (min-width: 700px){
   .topbar{
     flex-direction:row;
-    align-items:center;
+    align-items:flex-start;
     justify-content:space-between;
     padding: 12px clamp(16px, 4vw, 28px);
     gap:12px;
   }
+  .left-head{
+    flex:1 1 auto;
+    max-width:560px;
+  }
   .brand strong{ font-size: clamp(14px, 2.2vw, 16px); }
-  .actions{ justify-content:flex-end; }
+  .actions{
+    justify-content:flex-end;
+    padding-top:.35rem;
+  }
 }
 
 /* =========================
@@ -229,9 +350,36 @@ footer{
 <body>
 <header>
   <div class="topbar">
-    <div class="brand">
-      <strong>Modern English Australia</strong>
-      <span>Koala Spies Sydney · Hints & Vocab</span>
+    <div class="left-head">
+      <div class="brand-row">
+        <div class="qr-wrap">
+          <button class="qr-btn" id="qrToggle" type="button" aria-expanded="false" aria-controls="qrPanel">QR</button>
+        </div>
+
+        <div class="brand">
+          <strong>Modern English Australia</strong>
+          <span>Koala Spies Sydney · Hints & Vocab</span>
+        </div>
+      </div>
+
+      <div class="qr-panel" id="qrPanel">
+        <div class="qr-controls">
+          <input
+            class="qr-input"
+            id="qrInput"
+            type="text"
+            placeholder="Paste a URL or leave blank to use this page"
+            aria-label="QR code URL"
+          />
+          <div class="qr-actions">
+            <button class="qr-mini primary" id="makeQR" type="button">Generate</button>
+            <button class="qr-mini ghost" id="clearQR" type="button">Clear</button>
+          </div>
+        </div>
+        <div class="qr-output">
+          <div id="qrBox" aria-label="Generated QR code"></div>
+        </div>
+      </div>
     </div>
 
     <nav class="actions" aria-label="Page navigation">
@@ -341,11 +489,64 @@ footer{
 
     <div class="bottom-nav">
       <a class="btn btn-primary" href="index.html">Go to practice</a>
-      <a class="btn btn-ghost" href="javascript:history.back()">Back</a>
     </div>
   </section>
 </main>
 
 <footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+const qrToggle = document.getElementById("qrToggle");
+const qrPanel = document.getElementById("qrPanel");
+const qrInput = document.getElementById("qrInput");
+const makeQRBtn = document.getElementById("makeQR");
+const clearQRBtn = document.getElementById("clearQR");
+const qrBox = document.getElementById("qrBox");
+
+let qrInstance = null;
+
+function buildQR(value){
+  const text = (value || "").trim() || window.location.href;
+  qrBox.innerHTML = "";
+  qrInstance = new QRCode(qrBox, {
+    text: text,
+    width: 160,
+    height: 160,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+}
+
+qrToggle.addEventListener("click", () => {
+  const isOpen = qrPanel.classList.toggle("open");
+  qrToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+  if(isOpen){
+    if(!qrInput.value.trim()){
+      qrInput.value = window.location.href;
+    }
+    if(!qrBox.hasChildNodes()){
+      buildQR(qrInput.value);
+    }
+  }
+});
+
+makeQRBtn.addEventListener("click", () => {
+  buildQR(qrInput.value);
+});
+
+qrInput.addEventListener("keydown", (e) => {
+  if(e.key === "Enter"){
+    e.preventDefault();
+    buildQR(qrInput.value);
+  }
+});
+
+clearQRBtn.addEventListener("click", () => {
+  qrInput.value = "";
+  qrBox.innerHTML = "";
+});
+</script>
 </body>
 </html>
+```
