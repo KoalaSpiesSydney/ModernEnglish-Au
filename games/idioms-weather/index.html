@@ -1,8 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Weather Idioms Matching Game – Modern English AU</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +18,8 @@
   --muted:#bbbbbb;
   --accent:#2e0e5b;
   --line:#484141;
+  --ok:#1f7a3f;
+  --bad:#a32525;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -28,6 +31,7 @@ body{
   display:flex;
   flex-direction:column;
   min-height:100vh;
+  min-height:100dvh;
 }
 
 /* ===== Header ===== */
@@ -52,8 +56,8 @@ header span{
 /* ===== QR + HOME ===== */
 .qr-toggle{
   position:fixed;
-  left:14px;
-  top:14px;
+  left:max(14px, env(safe-area-inset-left));
+  top:max(14px, env(safe-area-inset-top));
   z-index:9999;
   width:46px;
   height:46px;
@@ -69,7 +73,7 @@ header span{
 }
 .qr-panel{
   position:fixed;
-  left:14px;
+  left:max(14px, env(safe-area-inset-left));
   top:70px;
   z-index:9999;
   width:240px;
@@ -107,8 +111,8 @@ header span{
 }
 .home-btn{
   position:fixed;
-  right:14px;
-  top:14px;
+  right:max(14px, env(safe-area-inset-right));
+  top:max(14px, env(safe-area-inset-top));
   z-index:9999;
   padding:.7rem 1rem;
   border-radius:14px;
@@ -126,7 +130,7 @@ header span{
   .qr-toggle:hover{ background:#ffffff; }
 }
 
-/* ===== Video background (fixes) ===== */
+/* ===== Video background ===== */
 .bg-video{
   position:fixed;
   inset:0;
@@ -134,8 +138,8 @@ header span{
   width:100%;
   height:100%;
   object-fit:cover;
-  pointer-events:none; /* important */
-  background:#000;     /* prevents “blank white” during load */
+  pointer-events:none;
+  background:#000;
 }
 .bg-overlay{
   position:fixed;
@@ -144,7 +148,6 @@ header span{
   background:rgba(245,245,245,.78);
 }
 
-/* tiny debug (only shows if video fails) */
 .video-debug{
   position:fixed;
   left:14px;
@@ -165,7 +168,7 @@ header span{
 main{
   flex:1;
   text-align:center;
-  padding:2rem 1rem 3rem;
+  padding:2rem 1rem calc(3rem + env(safe-area-inset-bottom));
   width:100%;
   max-width:1200px;
   margin:0 auto;
@@ -175,12 +178,12 @@ h1{
   color:var(--accent);
   letter-spacing:2px;
   margin-top:1rem;
-  font-size:clamp(1.4rem,2.5vw,2rem);
+  font-size:clamp(1.35rem,2.2vw,1.9rem);
   font-weight:700;
 }
 
 p{
-  max-width:720px;
+  max-width:680px;
   margin:.5rem auto 1.2rem;
   opacity:.9;
 }
@@ -213,10 +216,9 @@ button.btn:hover{
 /* ===== Game Grid ===== */
 #game{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:14px;
-  width:90%;
-  max-width:900px;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+  width:min(100%, 420px);
   margin:0 auto;
 }
 
@@ -224,23 +226,25 @@ button.btn:hover{
   background:#671321;
   border:2px solid var(--accent);
   border-radius:16px;
-  padding:20px;
-  min-height:100px;
+  padding:12px;
+  min-height:82px;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   cursor:pointer;
-  font-size:1rem;
+  font-size:.88rem;
+  line-height:1.25;
   color:#fff;
   transition:background .3s,color .3s,transform .2s;
   box-shadow:0 3px 6px rgba(0,0,0,.12);
+  word-break:break-word;
 }
 
 .card.flipped{
   background:var(--accent);
   color:#000;
-  transform:scale(1.05);
+  transform:scale(1.04);
 }
 
 .card.matched{
@@ -253,6 +257,138 @@ button.btn:hover{
   font-size:1.05rem;
   font-weight:600;
   min-height:1.6em;
+}
+
+/* ===== Dictation Section ===== */
+.dictation-wrap{
+  width:min(100%, 920px);
+  margin:3rem auto 0;
+  text-align:center;
+}
+
+.dictation-wrap h2{
+  text-align:center;
+  color:var(--accent);
+  letter-spacing:1px;
+  margin-bottom:.4rem;
+  font-size:clamp(1.25rem,2vw,1.7rem);
+}
+
+.dictation-intro{
+  text-align:center;
+  max-width:300px;
+  margin:0 auto 1.5rem;
+}
+
+.dictation-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+}
+
+
+.dictation-card{
+  padding:6px 0;
+  border:none;
+  background:transparent;
+  box-shadow:none;
+  text-align:center;
+}
+
+.dictation-card h3{
+  color:var(--accent);
+  margin-bottom:.8rem;
+  font-size:1.05rem;
+}
+
+.dictation-audio{
+  display:block;
+  width:min(100%, 360px);
+  margin:0 auto 1rem;
+}
+
+.dictation-input{
+  width:100%;
+  max-width:520px;
+  min-height:110px;
+  margin:0 auto;
+  display:block;
+  resize:vertical;
+  border:2px solid rgba(46,14,91,.18);
+  border-radius:12px;
+  padding:.9rem 1rem;
+  font:inherit;
+  color:var(--ink);
+  background:#fff;
+  outline:none;
+  text-align:left;
+}
+
+.dictation-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(46,14,91,.10);
+}
+
+.dictation-actions{
+  display:flex;
+  justify-content:center;
+  gap:.7rem;
+  flex-wrap:wrap;
+  margin-top:.9rem;
+}
+
+.dictation-btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.7rem 1.1rem;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+  transition:all .2s ease;
+  font-family:inherit;
+}
+.dictation-btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+
+.dictation-feedback{
+  min-height:1.5em;
+  margin-top:.8rem;
+  font-weight:700;
+  text-align:center;
+}
+
+.dictation-feedback.correct{
+  color:var(--ok);
+}
+
+.dictation-feedback.incorrect{
+  color:var(--bad);
+}
+
+.dictation-teacher-notes{
+  width:min(100%, 720px);
+  margin:1.2rem auto 0;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:1rem 1.1rem;
+  text-align:left;
+}
+
+.dictation-teacher-notes summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:.5rem;
+}
+
+.dictation-teacher-notes ol{
+  margin:.8rem 0 0 1.2rem;
+  line-height:1.7;
 }
 
 /* ===== Links ===== */
@@ -283,30 +419,60 @@ footer{
   background:var(--card);
   color:var(--muted);
   text-align:center;
-  padding:1rem 0;
+  padding:1rem 0 calc(1rem + env(safe-area-inset-bottom));
   border-top:1px solid var(--line);
   font-size:.9rem;
 }
 
-/* ===== Mobile ===== */
-@media(max-width:600px){
-  .card{
-    min-height:80px;
-    font-size:1.1rem;
-    padding:12px;
+/* ===== Tablet ===== */
+@media (max-width:900px){
+  #game{
+    width:min(100%, 390px);
+    gap:10px;
   }
-  #game{gap:10px}
+  .card{
+    min-height:76px;
+    font-size:.82rem;
+    padding:10px;
+  }
+}
+
+/* ===== Smaller screens ===== */
+@media(max-width:700px){
+  .dictation-card{
+    padding:14px;
+  }
+  .dictation-input{
+    min-height:96px;
+  }
+}
+
+/* ===== Phones / iPhones ===== */
+@media(max-width:600px){
+  main{
+    padding:1.5rem .8rem calc(2.4rem + env(safe-area-inset-bottom));
+  }
+  #game{
+    width:min(100%, 312px);
+    gap:8px;
+  }
+  .card{
+    min-height:68px;
+    font-size:.75rem;
+    padding:8px;
+    border-radius:14px;
+  }
+  .qr-toggle,
+  .home-btn{
+    transform:scale(.95);
+    transform-origin:top;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== Background video (fixed) =====
-  1) Put the file in the SAME folder as this HTML
-  2) Use EXACT filename here (case sensitive on GitHub)
-  3) Best format: MP4 (H.264 video + AAC audio), no weird characters in filename
--->
 <video
   class="bg-video"
   id="bgVideo"
@@ -323,7 +489,6 @@ footer{
 
 <div class="video-debug" id="videoDebug"></div>
 
-<!-- ===== QR + Home ===== -->
 <button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR">QR</button>
 <div class="qr-panel" id="qrPanel" aria-label="QR code panel">
   <div class="qr-title">Open this page on your phone</div>
@@ -342,7 +507,7 @@ footer{
   <h1>Weather Idioms Matching Game</h1>
   <p>
     Flip two cards to match each idiom with its meaning.
-    Each round uses <strong>20 idioms</strong> selected from the full set.
+    Each round uses <strong>9 cards</strong> selected from the full set.
   </p>
 
   <div class="controls">
@@ -351,6 +516,75 @@ footer{
 
   <div id="game"></div>
   <div id="status"></div>
+
+  <section class="dictation-wrap" aria-labelledby="dictationTitle">
+    <h2 id="dictationTitle">Write from Dictation</h2>
+    <p class="dictation-intro">
+      Listen to each sentence and type exactly what you hear.
+    </p>
+
+    <div class="dictation-grid">
+
+      <article class="dictation-card" data-answer="What is something you do every day, rain or shine?">
+        <h3>Sentence 1</h3>
+        <audio controls preload="metadata" class="dictation-audio">
+          <source src="dictation1.mp3" type="audio/mpeg">
+        </audio>
+        <textarea class="dictation-input" rows="3" placeholder="Type the sentence here..." aria-label="Write from dictation sentence 1"></textarea>
+        <div class="dictation-actions">
+          <button type="button" class="dictation-btn submit-btn">Submit</button>
+        </div>
+        <div class="dictation-feedback"></div>
+      </article>
+
+      <article class="dictation-card" data-answer="Who is somebody that you consider a ray of sunshine?">
+        <h3>Sentence 2</h3>
+        <audio controls preload="metadata" class="dictation-audio">
+          <source src="dictation2.mp3" type="audio/mpeg">
+        </audio>
+        <textarea class="dictation-input" rows="3" placeholder="Type the sentence here..." aria-label="Write from dictation sentence 2"></textarea>
+        <div class="dictation-actions">
+          <button type="button" class="dictation-btn submit-btn">Submit</button>
+        </div>
+        <div class="dictation-feedback"></div>
+      </article>
+
+      <article class="dictation-card" data-answer="What is a good way to break the ice when you meet new people?">
+        <h3>Sentence 3</h3>
+        <audio controls preload="metadata" class="dictation-audio">
+          <source src="dictation3.mp3" type="audio/mpeg">
+        </audio>
+        <textarea class="dictation-input" rows="3" placeholder="Type the sentence here..." aria-label="Write from dictation sentence 3"></textarea>
+        <div class="dictation-actions">
+          <button type="button" class="dictation-btn submit-btn">Submit</button>
+        </div>
+        <div class="dictation-feedback"></div>
+      </article>
+
+      <article class="dictation-card" data-answer="Do you believe that every cloud has a silver lining?">
+        <h3>Sentence 4</h3>
+        <audio controls preload="metadata" class="dictation-audio">
+          <source src="dictation4.mp3" type="audio/mpeg">
+        </audio>
+        <textarea class="dictation-input" rows="3" placeholder="Type the sentence here..." aria-label="Write from dictation sentence 4"></textarea>
+        <div class="dictation-actions">
+          <button type="button" class="dictation-btn submit-btn">Submit</button>
+        </div>
+        <div class="dictation-feedback"></div>
+      </article>
+
+    </div>
+
+    <details class="dictation-teacher-notes">
+      <summary>Teacher Notes / Answer Key</summary>
+      <ol>
+        <li>What is something you do every day, rain or shine?</li>
+        <li>Who is somebody that you consider a ray of sunshine?</li>
+        <li>What is a good way to break the ice when you meet new people?</li>
+        <li>Do you believe that every cloud has a silver lining?</li>
+      </ol>
+    </details>
+  </section>
 
   <div class="links">
     <a href="ESLgames.html" class="btn">Home</a>
@@ -361,13 +595,9 @@ footer{
   © Modern English AU · All Rights Reserved
 </footer>
 
-<!-- QRCode.js -->
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
 <script>
-/* ============================================================
-   QR GENERATOR (Top Left)
-   ============================================================ */
 (function(){
   const toggle = document.getElementById("qrToggle");
   const panel = document.getElementById("qrPanel");
@@ -380,8 +610,8 @@ footer{
   function make(){
     const url = window.location.href;
     urlLabel.textContent = url;
-
     box.innerHTML = "";
+
     new QRCode(box, {
       text: url,
       width: 200,
@@ -407,9 +637,6 @@ footer{
 </script>
 
 <script>
-/* ============================================================
-   VIDEO DEBUG (helps you instantly see why it fails)
-   ============================================================ */
 (function(){
   const v = document.getElementById("bgVideo");
   const dbg = document.getElementById("videoDebug");
@@ -425,9 +652,8 @@ footer{
     show(err ? ("code " + err.code + " (file/codec issue)") : "unknown error");
   });
 
-  // If it still doesn't play (autoplay policies/codec), this will catch it.
   setTimeout(() => {
-    const canPlay = v.readyState >= 2;   // HAVE_CURRENT_DATA
+    const canPlay = v.readyState >= 2;
     const isPlaying = !v.paused && !v.ended && v.currentTime > 0;
 
     if(!canPlay){
@@ -443,7 +669,6 @@ footer{
 </script>
 
 <script>
-/* ===== WEATHER IDIOMS BANK (25) ===== */
 const WEATHER_IDIOMS = [
   ["Under the weather","Feeling sick or unwell"],
   ["A storm in a teacup","A big reaction to something small"],
@@ -472,15 +697,11 @@ const WEATHER_IDIOMS = [
   ["As right as rain","Completely fine or healthy again"]
 ];
 
-const PAIRS_PER_ROUND = 20;
-
-/* Pastel starting colours */
 const pastelColors = [
   "#f8cdda","#fce1e4","#e0f2fe","#e8f5e9","#fff3cd",
   "#ede7f6","#e1f5fe","#f3e5f5","#f1f8e9","#fffde7"
 ];
 
-/* Strong match colours */
 const matchColors = [
   "#27ae60","#2980b9","#8e44ad","#f39c12","#e67e22",
   "#16a085","#c0392b","#1abc9c","#d35400","#9b59b6"
@@ -490,79 +711,158 @@ const game = document.getElementById("game");
 const statusEl = document.getElementById("status");
 const newRoundBtn = document.getElementById("newRoundBtn");
 
-let first=null, second=null, lock=false, matched=0, colorMap={};
+let first = null;
+let second = null;
+let lock = false;
+let matched = 0;
+let colorMap = {};
 
 function shuffle(arr){
-  const a=[...arr];
-  for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
 }
 
 function buildRound(){
-  game.innerHTML="";
-  statusEl.textContent="";
-  first=second=null;lock=false;matched=0;colorMap={};
+  game.innerHTML = "";
+  statusEl.textContent = "";
+  first = null;
+  second = null;
+  lock = false;
+  matched = 0;
+  colorMap = {};
 
-  const roundPairs = shuffle(WEATHER_IDIOMS).slice(0,PAIRS_PER_ROUND);
-  const cards = shuffle(roundPairs.flatMap(([i,m])=>[
-    {text:i,pair:i},{text:m,pair:i}
-  ]));
+  const shuffled = shuffle(WEATHER_IDIOMS);
+  const fullPairs = shuffled.slice(0, 4);
+  const spareOne = shuffled[4];
 
-  cards.forEach((data,idx)=>{
-    const div=document.createElement("div");
-    div.className="card";
-    div.textContent="";
-    div.dataset.text=data.text;
-    div.dataset.pair=data.pair;
+  const cards = shuffle([
+    ...fullPairs.flatMap(([i, m]) => [
+      {text:i, pair:i, kind:"pair"},
+      {text:m, pair:i, kind:"pair"}
+    ]),
+    {text:spareOne[0], pair:"free-" + spareOne[0], kind:"free"}
+  ]);
+
+  cards.forEach((data, idx) => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.textContent = "";
+    div.dataset.text = data.text;
+    div.dataset.pair = data.pair;
+    div.dataset.kind = data.kind;
     div.style.background = pastelColors[idx % pastelColors.length];
     game.appendChild(div);
 
-    div.addEventListener("click",()=>{
-      if(lock||div.classList.contains("flipped")||div.classList.contains("matched")) return;
+    div.addEventListener("click", () => {
+      if(lock || div.classList.contains("flipped") || div.classList.contains("matched")) return;
 
       div.classList.add("flipped");
-      div.textContent=data.text;
+      div.textContent = data.text;
 
-      if(!first){ first=div; return; }
+      if(data.kind === "free"){
+        setTimeout(() => {
+          div.classList.remove("flipped");
+          div.textContent = "";
+        }, 700);
+        return;
+      }
 
-      second=div;
-      lock=true;
+      if(!first){
+        first = div;
+        return;
+      }
 
-      setTimeout(()=>{
-        if(first.dataset.pair===second.dataset.pair){
+      second = div;
+      lock = true;
+
+      setTimeout(() => {
+        if(
+          second &&
+          first.dataset.kind === "pair" &&
+          second.dataset.kind === "pair" &&
+          first.dataset.pair === second.dataset.pair
+        ){
           if(!colorMap[first.dataset.pair]){
-            const idx=Object.keys(colorMap).length;
-            colorMap[first.dataset.pair]=matchColors[idx%matchColors.length];
+            const idx = Object.keys(colorMap).length;
+            colorMap[first.dataset.pair] = matchColors[idx % matchColors.length];
           }
-          const c=colorMap[first.dataset.pair];
-          [first,second].forEach(card=>{
+          const c = colorMap[first.dataset.pair];
+
+          [first, second].forEach(card => {
             card.classList.remove("flipped");
             card.classList.add("matched");
-            card.style.background=c;
+            card.style.background = c;
           });
+
           matched++;
-          if(matched===roundPairs.length){
-            statusEl.textContent="Excellent work — all idioms matched.";
+          if(matched === 4){
+            statusEl.textContent = "Excellent work — all matches found.";
           }
         }else{
-          [first,second].forEach(card=>{
-            card.classList.remove("flipped");
-            card.textContent="";
+          [first, second].forEach(card => {
+            if(card){
+              card.classList.remove("flipped");
+              card.textContent = "";
+            }
           });
         }
-        first=second=null;
-        lock=false;
-      },700);
+
+        first = null;
+        second = null;
+        lock = false;
+      }, 700);
     });
   });
 }
 
-newRoundBtn.addEventListener("click",buildRound);
+newRoundBtn.addEventListener("click", buildRound);
 buildRound();
+</script>
+
+<script>
+function normalizeText(str){
+  return str
+    .toLowerCase()
+    .replace(/[‘’]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/[.,!?;:]+$/g, "");
+}
+
+document.querySelectorAll(".dictation-card").forEach(card => {
+  const answer = card.dataset.answer;
+  const input = card.querySelector(".dictation-input");
+  const submitBtn = card.querySelector(".submit-btn");
+  const feedback = card.querySelector(".dictation-feedback");
+
+  submitBtn.addEventListener("click", () => {
+    const typed = normalizeText(input.value);
+    const correct = normalizeText(answer);
+
+    feedback.classList.remove("correct", "incorrect");
+
+    if(!typed){
+      feedback.textContent = "Please type your answer first.";
+      feedback.classList.add("incorrect");
+      return;
+    }
+
+    if(typed === correct){
+      feedback.textContent = "Correct";
+      feedback.classList.add("correct");
+    }else{
+      feedback.textContent = "Incorrect";
+      feedback.classList.add("incorrect");
+    }
+  });
+});
 </script>
 
 </body>
 </html>
+```
