@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Expressions with Get – Matching Game | Modern English AU</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f5f5f5;
+  --card:#2a2a2a;
+  --ink:#1e1e1e;
+  --muted:#bbbbbb;
+  --accent:#2e0e5b;
+  --line:#484141;
+  --ok:#1f7a3f;
+  --bad:#a32525;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:"Newsreader", Georgia, serif;
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+}
+
+/* ===== GIF background ===== */
+.bg-gif{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:url("getexpressions.gif") center / cover no-repeat;
+}
+.bg-overlay{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:rgba(245,245,245,.78);
+}
+
+/* ===== Header ===== */
+header{
+  background:#f7f4f4;
+  color:var(--accent);
+  text-align:center;
+  padding:1.4rem 0 1rem;
+  letter-spacing:2px;
+  font-weight:700;
+  font-size:1.2rem;
+}
+header span{
+  display:block;
+  color:#302d2d;
+  font-weight:300;
+  font-size:.6rem;
+  letter-spacing:3px;
+  margin-top:1px;
+}
+
+/* ===== QR + HOME ===== */
+.qr-toggle{
+  position:fixed;
+  left:max(14px, env(safe-area-inset-left));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(255,255,255,.92);
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.qr-panel{
+  position:fixed;
+  left:max(14px, env(safe-area-inset-left));
+  top:70px;
+  z-index:9999;
+  width:240px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  display:none;
+}
+.qr-panel .qr-title{
+  font-weight:800;
+  color:#111;
+  margin:0 0 8px;
+  font-size:.95rem;
+  letter-spacing:.5px;
+}
+.qr-panel .qr-url{
+  font-size:.72rem;
+  color:rgba(0,0,0,.65);
+  word-break:break-all;
+  margin:8px 0 0;
+  line-height:1.35;
+}
+.qr-code{
+  width:200px;
+  height:200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.10);
+}
+.home-btn{
+  position:fixed;
+  right:max(14px, env(safe-area-inset-right));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  padding:.7rem 1rem;
+  border-radius:14px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  color:#111;
+  text-decoration:none;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+@media (hover:hover){
+  .home-btn:hover{ background:#ffffff; }
+  .qr-toggle:hover{ background:#ffffff; }
+}
+
+/* ===== Main ===== */
+main{
+  flex:1;
+  text-align:center;
+  padding:2rem 1rem calc(3rem + env(safe-area-inset-bottom));
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+h1{
+  color:var(--accent);
+  letter-spacing:2px;
+  margin-top:1rem;
+  font-size:clamp(1.35rem,2.2vw,1.9rem);
+  font-weight:700;
+}
+
+p{
+  max-width:760px;
+  margin:.5rem auto 1.2rem;
+  opacity:.92;
+}
+
+/* ===== Controls ===== */
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:.8rem;
+  margin-bottom:1.2rem;
+}
+
+button.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.75rem 1.4rem;
+  border-radius:45px;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  font-family:inherit;
+}
+button.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+
+/* ===== Game Grid ===== */
+#game{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+  width:min(100%, 420px);
+  margin:0 auto;
+}
+
+.card{
+  background:#671321;
+  border:2px solid var(--accent);
+  border-radius:16px;
+  padding:12px;
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  font-size:.88rem;
+  line-height:1.25;
+  color:#fff;
+  transition:background .3s,color .3s,transform .2s;
+  box-shadow:0 3px 6px rgba(0,0,0,.12);
+  word-break:break-word;
+}
+
+.card.flipped{
+  background:var(--accent);
+  color:#000;
+  transform:scale(1.04);
+}
+
+.card.matched{
+  color:#000;
+  cursor:default;
+}
+
+#status{
+  margin-top:1.2rem;
+  font-size:1.05rem;
+  font-weight:600;
+  min-height:1.6em;
+}
+
+/* ===== Teacher Notes ===== */
+.notes{
+  width:min(100%, 760px);
+  margin:2.2rem auto 0;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:1rem 1.1rem;
+  text-align:left;
+}
+.notes summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:.5rem;
+}
+.notes ul{
+  margin:.8rem 0 0 1.2rem;
+  line-height:1.7;
+}
+.notes li{
+  margin-bottom:.35rem;
+}
+
+/* ===== Gap Fill / write from dictation section ===== */
+.gapfill-wrap{
+  width:min(100%, 760px);
+  margin:2.2rem auto 0;
+  text-align:center;
+}
+
+.gapfill-wrap h2{
+  color:var(--accent);
+  margin-bottom:.35rem;
+  font-size:clamp(1.2rem,2vw,1.6rem);
+}
+
+.gapfill-intro{
+  max-width:700px;
+  margin:0 auto 1.2rem;
+}
+
+.gapfill-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+
+.gapfill-item{
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+}
+
+.gapfill-item p{
+  margin:0 auto .85rem;
+  max-width:680px;
+}
+
+.gapfill-audio{
+  display:block;
+  margin:8px auto 10px;
+  width:min(100%, 320px);
+}
+
+.gapfill-input{
+  display:block;
+  width:min(100%, 280px);
+  margin:0 auto;
+  padding:.7rem .9rem;
+  border:2px solid rgba(46,14,91,.18);
+  border-radius:10px;
+  font:inherit;
+  outline:none;
+  text-align:center;
+}
+
+.gapfill-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(46,14,91,.10);
+}
+
+.gapfill-actions{
+  display:flex;
+  justify-content:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+  margin-top:.8rem;
+}
+
+.gapfill-btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.65rem 1rem;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-family:inherit;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+  transition:all .2s ease;
+}
+.gapfill-btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+
+.gapfill-feedback{
+  min-height:1.5em;
+  margin-top:.75rem;
+  font-weight:700;
+  text-align:center;
+}
+.gapfill-feedback.correct{ color:var(--ok); }
+.gapfill-feedback.incorrect{ color:var(--bad); }
+
+.gapfill-answer{
+  display:none;
+  margin-top:.65rem;
+  font-weight:700;
+  color:var(--accent);
+  text-align:center;
+}
+.gapfill-answer.show{
+  display:block;
+}
+
+/* ===== Links ===== */
+.links{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  margin-top:2rem;
+}
+
+a.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  text-decoration:none;
+  padding:.8rem 1.4rem;
+  border-radius:45px;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+}
+a.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--card);
+  color:var(--muted);
+  text-align:center;
+  padding:1rem 0 calc(1rem + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);
+  font-size:.9rem;
+}
+
+/* ===== Tablet ===== */
+@media (max-width:900px){
+  #game{
+    width:min(100%, 390px);
+    gap:10px;
+  }
+  .card{
+    min-height:76px;
+    font-size:.82rem;
+    padding:10px;
+  }
+}
+
+/* ===== Phones / iPhones ===== */
+@media(max-width:600px){
+  main{
+    padding:1.5rem .8rem calc(2.4rem + env(safe-area-inset-bottom));
+  }
+  #game{
+    width:min(100%, 312px);
+    gap:8px;
+  }
+  .card{
+    min-height:68px;
+    font-size:.75rem;
+    padding:8px;
+    border-radius:14px;
+  }
+  .qr-toggle,
+  .home-btn{
+    transform:scale(.95);
+    transform-origin:top;
+  }
+  .gapfill-input{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-gif"></div>
+<div class="bg-overlay"></div>
+
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR">QR</button>
+<div class="qr-panel" id="qrPanel" aria-label="QR code panel">
+  <div class="qr-title">Open this page on your phone</div>
+  <div class="qr-code" id="qrCode"></div>
+  <div class="qr-url" id="qrUrl"></div>
+</div>
+
+<a class="home-btn" href="http://modernenglish.au/Microlessons&Games.html">Home</a>
+
+<header>
+  MODERN ENGLISH AU
+  <span>Koala Spies Sydney</span>
+</header>
+
+<main>
+  <h1>Expressions with Get – Matching Game</h1>
+  <p>
+    Flip two cards to match each expression with its meaning.
+    Each round uses <strong>9 cards</strong> selected from the full set.
+  </p>
+
+  <div class="controls">
+    <button class="btn" id="newRoundBtn">New Round</button>
+  </div>
+
+  <div id="game"></div>
+  <div id="status"></div>
+
+  <details class="notes">
+    <summary>Teacher Notes / Full Expression List</summary>
+    <ul>
+      <li><strong>get the impression (that…)</strong> – believe something based on clues</li>
+      <li><strong>get the chance to…</strong> – have an opportunity</li>
+      <li><strong>get the hang of something</strong> – learn how to do something well</li>
+      <li><strong>get permission to…</strong> – receive approval</li>
+      <li><strong>get the point</strong> – understand the main idea</li>
+      <li><strong>get the joke</strong> – understand the humour</li>
+      <li><strong>get the most out of something</strong> – use something effectively</li>
+      <li><strong>get something done</strong> – arrange for something to be completed</li>
+      <li><strong>get someone’s attention</strong> – make someone notice</li>
+      <li><strong>get something straight</strong> – clarify information</li>
+      <li><strong>get ahead</strong> – make progress, succeed</li>
+      <li><strong>get around to (doing)</strong> – finally do something you delayed</li>
+      <li><strong>get away with (something)</strong> – avoid punishment</li>
+      <li><strong>get through to (someone)</strong> – make someone understand</li>
+      <li><strong>get over with (something)</strong> – finish something unpleasant</li>
+      <li><strong>get by on (something)</strong> – survive with limited resources</li>
+      <li><strong>get into (something)</strong> – become interested or involved</li>
+      <li><strong>get out of (doing something)</strong> – avoid doing something</li>
+      <li><strong>get back at (someone)</strong> – take revenge</li>
+      <li><strong>get across (an idea)</strong> – communicate clearly</li>
+    </ul>
+  </details>
+
+  <section class="gapfill-wrap" aria-labelledby="gapfillTitle">
+    <h2 id="gapfillTitle">Gap Fill Practice</h2>
+    <p class="gapfill-intro">
+      Complete each sentence with the correct <strong>get</strong> phrase.
+    </p>
+
+    <div class="gapfill-list">
+
+      <article class="gapfill-item" data-answer="get away with it">
+        <p>1) Have you ever committed a crime? Did you ______?</p>
+        <audio controls class="gapfill-audio">
+          <source src="get1.mp3" type="audio/mpeg">
+        </audio>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get away with it</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="get over it">
+        <p>2) Have you ever had your heart broken? Did you ______?</p>
+        <audio controls class="gapfill-audio">
+          <source src="get2.mp3" type="audio/mpeg">
+        </audio>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get over it</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="get by on">
+        <p>3) How much money do you ______ each day?</p>
+        <audio controls class="gapfill-audio">
+          <source src="get3.mp3" type="audio/mpeg">
+        </audio>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get by on</div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="links">
+    <a href="http://modernenglish.au/Microlessons%26Games.html" class="btn">Home</a>
+  </div>
+</main>
+
+<footer>
+  © Modern English AU · All Rights Reserved
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script>
+(function(){
+  const toggle = document.getElementById("qrToggle");
+  const panel = document.getElementById("qrPanel");
+  const box = document.getElementById("qrCode");
+  const urlLabel = document.getElementById("qrUrl");
+  if(!toggle || !panel || !box || !urlLabel) return;
+
+  let made = false;
+
+  function make(){
+    const url = window.location.href;
+    urlLabel.textContent = url;
+    box.innerHTML = "";
+
+    new QRCode(box, {
+      text: url,
+      width: 200,
+      height: 200,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+
+    made = true;
+  }
+
+  toggle.addEventListener("click", () => {
+    const open = panel.style.display === "block";
+    panel.style.display = open ? "none" : "block";
+    if(!open && !made) make();
+  });
+
+  document.addEventListener("click", (e) => {
+    if(panel.style.display !== "block") return;
+    const inside = panel.contains(e.target) || toggle.contains(e.target);
+    if(!inside) panel.style.display = "none";
+  });
+})();
+</script>
+
+<script>
+const GET_EXPRESSIONS = [
+  ["get the impression (that…)", "believe something based on clues"],
+  ["get the chance to…", "have an opportunity"],
+  ["get the hang of something", "learn how to do something well"],
+  ["get permission to…", "receive approval"],
+  ["get the point", "understand the main idea"],
+  ["get the joke", "understand the humour"],
+  ["get the most out of something", "use something effectively"],
+  ["get something done", "arrange for something to be completed"],
+  ["get someone’s attention", "make someone notice"],
+  ["get something straight", "clarify information"],
+  ["get ahead", "make progress, succeed"],
+  ["get around to (doing)", "finally do something you delayed"],
+  ["get away with (something)", "avoid punishment"],
+  ["get through to (someone)", "make someone understand"],
+  ["get over with (something)", "finish something unpleasant"],
+  ["get by on (something)", "survive with limited resources"],
+  ["get into (something)", "become interested or involved"],
+  ["get out of (doing something)", "avoid doing something"],
+  ["get back at (someone)", "take revenge"],
+  ["get across (an idea)", "communicate clearly"]
+];
+
+const pastelColors = [
+  "#f8cdda","#fce1e4","#e0f2fe","#e8f5e9","#fff3cd",
+  "#ede7f6","#e1f5fe","#f3e5f5","#f1f8e9","#fffde7"
+];
+
+const matchColors = [
+  "#27ae60","#2980b9","#8e44ad","#f39c12","#e67e22",
+  "#16a085","#c0392b","#1abc9c","#d35400","#9b59b6"
+];
+
+const game = document.getElementById("game");
+const statusEl = document.getElementById("status");
+const newRoundBtn = document.getElementById("newRoundBtn");
+
+let first = null;
+let second = null;
+let lock = false;
+let matched = 0;
+let colorMap = {};
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildRound(){
+  game.innerHTML = "";
+  statusEl.textContent = "";
+  first = null;
+  second = null;
+  lock = false;
+  matched = 0;
+  colorMap = {};
+
+  const shuffled = shuffle(GET_EXPRESSIONS);
+  const fullPairs = shuffled.slice(0, 4);
+  const spareOne = shuffled[4];
+
+  const cards = shuffle([
+    ...fullPairs.flatMap(([expression, meaning]) => [
+      {text: expression, pair: expression, kind:"pair"},
+      {text: meaning, pair: expression, kind:"pair"}
+    ]),
+    {text: spareOne[0], pair: "free-" + spareOne[0], kind:"free"}
+  ]);
+
+  cards.forEach((data, idx) => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.textContent = "";
+    div.dataset.text = data.text;
+    div.dataset.pair = data.pair;
+    div.dataset.kind = data.kind;
+    div.style.background = pastelColors[idx % pastelColors.length];
+    game.appendChild(div);
+
+    div.addEventListener("click", () => {
+      if(lock || div.classList.contains("flipped") || div.classList.contains("matched")) return;
+
+      div.classList.add("flipped");
+      div.textContent = data.text;
+
+      if(data.kind === "free"){
+        setTimeout(() => {
+          div.classList.remove("flipped");
+          div.textContent = "";
+        }, 700);
+        return;
+      }
+
+      if(!first){
+        first = div;
+        return;
+      }
+
+      second = div;
+      lock = true;
+
+      setTimeout(() => {
+        if(
+          second &&
+          first.dataset.kind === "pair" &&
+          second.dataset.kind === "pair" &&
+          first.dataset.pair === second.dataset.pair
+        ){
+          if(!colorMap[first.dataset.pair]){
+            const idx = Object.keys(colorMap).length;
+            colorMap[first.dataset.pair] = matchColors[idx % matchColors.length];
+          }
+          const c = colorMap[first.dataset.pair];
+
+          [first, second].forEach(card => {
+            card.classList.remove("flipped");
+            card.classList.add("matched");
+            card.style.background = c;
+          });
+
+          matched++;
+          if(matched === 4){
+            statusEl.textContent = "Excellent work — all matches found.";
+          }
+        }else{
+          [first, second].forEach(card => {
+            if(card){
+              card.classList.remove("flipped");
+              card.textContent = "";
+            }
+          });
+        }
+
+        first = null;
+        second = null;
+        lock = false;
+      }, 700);
+    });
+  });
+}
+
+newRoundBtn.addEventListener("click", buildRound);
+buildRound();
+</script>
+
+<script>
+function normalizeText(str){
+  return str
+    .toLowerCase()
+    .replace(/[‘’]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/[.,!?;:]+$/g, "");
+}
+
+document.querySelectorAll(".gapfill-item").forEach(item => {
+  const answer = item.dataset.answer;
+  const input = item.querySelector(".gapfill-input");
+  const submitBtn = item.querySelector(".gap-submit");
+  const revealBtn = item.querySelector(".gap-reveal");
+  const feedback = item.querySelector(".gapfill-feedback");
+  const answerBox = item.querySelector(".gapfill-answer");
+
+  submitBtn.addEventListener("click", () => {
+    const typed = normalizeText(input.value);
+    const correct = normalizeText(answer);
+
+    feedback.classList.remove("correct", "incorrect");
+
+    if(!typed){
+      feedback.textContent = "Please type your answer first.";
+      feedback.classList.add("incorrect");
+      return;
+    }
+
+    if(typed === correct){
+      feedback.textContent = "Correct";
+      feedback.classList.add("correct");
+    }else{
+      feedback.textContent = "Incorrect";
+      feedback.classList.add("incorrect");
+    }
+  });
+
+  revealBtn.addEventListener("click", () => {
+    answerBox.classList.toggle("show");
+  });
+});
+</script>
+
+</body>
+</html>
