@@ -82,7 +82,6 @@
     .brand{ display:flex; flex-direction:column; gap:2px; min-width:0; }
 
     .brand-top{
-      color: var(--header-ink);
       letter-spacing: 3px;
       font-weight: 800;
       text-transform: uppercase;
@@ -92,21 +91,42 @@
       overflow-wrap:anywhere;
       word-break:break-word;
       text-decoration: none;
+      background: linear-gradient(
+        100deg,
+        #f8fafc 0%,
+        #f8fafc 20%,
+        #ffffff 35%,
+        #a5c4fd 45%,
+        #ffffff 55%,
+        #f8fafc 70%,
+        #f8fafc 100%
+      );
+      background-size: 250% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3.5s linear infinite;
     }
-    .brand-top:hover{ color:#ffffff; }
+    .brand-top:hover{ animation-duration: 1.2s; }
+
+    @keyframes shimmer {
+      0%   { background-position: 200% center; }
+      100% { background-position: -50% center; }
+    }
 
     .kss-font{
       font-family: var(--sans);
       font-weight: 700;
       font-size: 12px;
       letter-spacing: 4px;
-      color: rgba(248,250,252,.92);
+      color: #fde047;
       max-width:100%;
       overflow-wrap:anywhere;
       word-break:break-word;
       text-decoration:none;
+      transition: color .15s;
     }
-    .kss-font:hover{ color:#ffffff; }
+    .kss-font:hover{ color: #fef08a; }
 
     nav{
       display:flex;
@@ -335,7 +355,6 @@
     <nav aria-label="Primary">
       <a href="Microlessons&Games.html">MicroLessons&amp;Games</a>
       <a href="IELTSPTEPLUS.html">IELTS/PTE+</a>
-      <a href="index.html" class="active">Home</a>
     </nav>
   </div>
 </header>
