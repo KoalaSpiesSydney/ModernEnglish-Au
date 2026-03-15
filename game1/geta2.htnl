@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Expressions with Get – Matching Game (A1) | Modern English AU</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f5f5f5;
+  --card:#2a2a2a;
+  --ink:#1e1e1e;
+  --muted:#bbbbbb;
+  --accent:#2e0e5b;
+  --line:#484141;
+  --ok:#1f7a3f;
+  --bad:#a32525;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:"Newsreader", Georgia, serif;
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+}
+
+/* ===== GIF background ===== */
+.bg-gif{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:url("getexpressions.gif") center / cover no-repeat;
+}
+.bg-overlay{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:rgba(245,245,245,.78);
+}
+
+/* ===== Header ===== */
+header{
+  background:#f7f4f4;
+  color:var(--accent);
+  text-align:center;
+  padding:1.4rem 0 1rem;
+  letter-spacing:2px;
+  font-weight:700;
+  font-size:1.2rem;
+}
+header span{
+  display:block;
+  color:#302d2d;
+  font-weight:300;
+  font-size:.6rem;
+  letter-spacing:3px;
+  margin-top:1px;
+}
+
+/* ===== QR + HOME ===== */
+.qr-toggle{
+  position:fixed;
+  left:max(14px, env(safe-area-inset-left));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(255,255,255,.92);
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  font-family:inherit;
+  font-size:.85rem;
+}
+.qr-panel{
+  position:fixed;
+  left:max(14px, env(safe-area-inset-left));
+  top:70px;
+  z-index:9999;
+  width:240px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  display:none;
+}
+.qr-panel .qr-title{
+  font-weight:800;
+  color:#111;
+  margin:0 0 8px;
+  font-size:.95rem;
+  letter-spacing:.5px;
+}
+.qr-panel .qr-url{
+  font-size:.72rem;
+  color:rgba(0,0,0,.65);
+  word-break:break-all;
+  margin:8px 0 0;
+  line-height:1.35;
+}
+.qr-code{
+  width:200px;
+  height:200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.10);
+}
+.home-btn{
+  position:fixed;
+  right:max(14px, env(safe-area-inset-right));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  padding:.7rem 1rem;
+  border-radius:14px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  color:#111;
+  text-decoration:none;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  font-family:inherit;
+  font-size:.85rem;
+}
+@media(hover:hover){
+  .home-btn:hover{ background:#ffffff; }
+  .qr-toggle:hover{ background:#ffffff; }
+}
+
+/* ===== Level badge ===== */
+.level-badge{
+  display:inline-block;
+  background:#27ae60;
+  color:#fff;
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:2px;
+  padding:3px 10px;
+  border-radius:999px;
+  margin-bottom:.5rem;
+  font-family:"Newsreader",Georgia,serif;
+}
+
+/* ===== Main ===== */
+main{
+  flex:1;
+  text-align:center;
+  padding:2rem 1rem calc(3rem + env(safe-area-inset-bottom));
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+h1{
+  color:var(--accent);
+  letter-spacing:2px;
+  margin-top:.5rem;
+  font-size:clamp(1.35rem,2.2vw,1.9rem);
+  font-weight:700;
+}
+
+p{
+  max-width:760px;
+  margin:.5rem auto 1.2rem;
+  opacity:.92;
+}
+
+/* ===== Round counter ===== */
+.round-info{
+  font-size:.85rem;
+  color:var(--muted);
+  margin-bottom:.8rem;
+  letter-spacing:.5px;
+  font-weight:600;
+}
+
+/* ===== Controls ===== */
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:.8rem;
+  margin-bottom:1.2rem;
+  flex-wrap:wrap;
+}
+
+button.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.75rem 1.4rem;
+  border-radius:45px;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  font-family:inherit;
+  font-size:1rem;
+}
+button.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+
+/* ===== Game Grid — 3 cols, 3 pairs = 6 cards ===== */
+#game{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+  width:min(100%, 480px);
+  margin:0 auto;
+}
+
+.card{
+  background:#671321;
+  border:2px solid var(--accent);
+  border-radius:16px;
+  padding:12px;
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  font-size:.92rem;
+  line-height:1.3;
+  color:#fff;
+  transition:background .3s,color .3s,transform .2s;
+  box-shadow:0 3px 6px rgba(0,0,0,.12);
+  word-break:break-word;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.card.flipped{
+  background:var(--accent);
+  color:#fff;
+  transform:scale(1.04);
+}
+
+.card.matched{
+  cursor:default;
+  transform:none;
+}
+
+/* Wrong shake */
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
+.card.shake{ animation:shake .35s ease; }
+
+#status{
+  margin-top:1.2rem;
+  font-size:1.05rem;
+  font-weight:600;
+  min-height:1.6em;
+  color:var(--accent);
+}
+
+/* ===== Score bar ===== */
+.score-bar{
+  display:flex;
+  justify-content:center;
+  gap:1.5rem;
+  margin:.6rem 0 0;
+  font-size:.88rem;
+  font-weight:700;
+  color:var(--muted);
+}
+.score-bar span{ color:var(--ink); }
+
+/* ===== Teacher Notes ===== */
+.notes{
+  width:min(100%, 760px);
+  margin:2.2rem auto 0;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:1rem 1.1rem;
+  text-align:left;
+}
+.notes summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:.5rem;
+  font-size:1rem;
+}
+.notes ul{
+  margin:.8rem 0 0 1.2rem;
+  line-height:1.7;
+}
+.notes li{ margin-bottom:.35rem; }
+
+/* ===== Gap Fill ===== */
+.gapfill-wrap{
+  width:min(100%, 760px);
+  margin:2.2rem auto 0;
+  text-align:center;
+}
+.gapfill-wrap h2{
+  color:var(--accent);
+  margin-bottom:.35rem;
+  font-size:clamp(1.2rem,2vw,1.6rem);
+}
+.gapfill-intro{
+  max-width:700px;
+  margin:0 auto 1.2rem;
+}
+.gapfill-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.gapfill-item{
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+}
+.gapfill-item p{ margin:0 auto .85rem; max-width:680px; }
+/* TTS speak button */
+.speak-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  margin:6px auto 10px;
+  padding:.55rem 1.1rem;
+  border-radius:999px;
+  border:2px solid var(--accent);
+  background:transparent;
+  color:var(--accent);
+  font-family:inherit;
+  font-size:.9rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .2s ease;
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+.speak-btn:hover{
+  background:var(--accent);
+  color:#fff;
+  transform:translateY(-2px);
+}
+.speak-btn.speaking{
+  background:var(--accent);
+  color:#fff;
+  animation:pulse-btn 1s ease infinite;
+}
+@keyframes pulse-btn{
+  0%,100%{ box-shadow:0 0 0 0 rgba(46,14,91,.4); }
+  50%{ box-shadow:0 0 0 8px rgba(46,14,91,0); }
+}
+.speak-btn svg{ flex-shrink:0; }
+
+/* Voice selector bar */
+.voice-bar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  margin-bottom:1rem;
+  flex-wrap:wrap;
+  font-size:.88rem;
+  color:var(--muted);
+  font-weight:600;
+}
+.voice-select{
+  padding:.4rem .7rem;
+  border-radius:8px;
+  border:1.5px solid rgba(46,14,91,.2);
+  font:inherit;
+  font-size:.88rem;
+  color:var(--ink);
+  background:#fff;
+  cursor:pointer;
+  outline:none;
+}
+.voice-select:focus{ border-color:var(--accent); }
+.gapfill-input{
+  display:block;
+  width:min(100%, 280px);
+  margin:0 auto;
+  padding:.7rem .9rem;
+  border:2px solid rgba(46,14,91,.18);
+  border-radius:10px;
+  font:inherit;
+  outline:none;
+  text-align:center;
+}
+.gapfill-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(46,14,91,.10);
+}
+.gapfill-actions{
+  display:flex;
+  justify-content:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+  margin-top:.8rem;
+}
+.gapfill-btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.65rem 1rem;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-family:inherit;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+  transition:all .2s ease;
+  font-size:.95rem;
+}
+.gapfill-btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+.gapfill-feedback{
+  min-height:1.5em;
+  margin-top:.75rem;
+  font-weight:700;
+  text-align:center;
+}
+.gapfill-feedback.correct{ color:var(--ok); }
+.gapfill-feedback.incorrect{ color:var(--bad); }
+.gapfill-answer{
+  display:none;
+  margin-top:.65rem;
+  font-weight:700;
+  color:var(--accent);
+  text-align:center;
+}
+.gapfill-answer.show{ display:block; }
+
+/* ===== Links ===== */
+.links{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  margin-top:2rem;
+  flex-wrap:wrap;
+}
+a.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  text-decoration:none;
+  padding:.8rem 1.4rem;
+  border-radius:45px;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  font-family:inherit;
+}
+a.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--card);
+  color:var(--muted);
+  text-align:center;
+  padding:1rem 0 calc(1rem + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);
+  font-size:.9rem;
+}
+
+/* ===== Tablet ===== */
+@media(max-width:900px){
+  #game{ width:min(100%, 420px); gap:10px; }
+  .card{ min-height:76px; font-size:.85rem; padding:10px; }
+}
+
+/* ===== Phones ===== */
+@media(max-width:600px){
+  main{ padding:1.5rem .8rem calc(2.4rem + env(safe-area-inset-bottom)); }
+  #game{ width:min(100%, 330px); gap:8px; }
+  .card{ min-height:70px; font-size:.78rem; padding:8px; border-radius:14px; }
+  .qr-toggle, .home-btn{ transform:scale(.95); transform-origin:top; }
+  .gapfill-input{ width:100%; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-gif"></div>
+<div class="bg-overlay"></div>
+
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR">QR</button>
+<div class="qr-panel" id="qrPanel" aria-label="QR code panel">
+  <div class="qr-title">Open this page on your phone</div>
+  <div class="qr-code" id="qrCode"></div>
+  <div class="qr-url" id="qrUrl"></div>
+</div>
+
+<a class="home-btn" href="http://modernenglish.au/Microlessons&Games.html">Home</a>
+
+<header>
+  MODERN ENGLISH AU
+  <span>Koala Spies Sydney</span>
+</header>
+
+<main>
+  <div class="level-badge">A1 BEGINNER</div>
+  <h1>Expressions with Get – Matching Game</h1>
+  <p>
+    Flip two cards to match each <strong>get</strong> expression with its meaning.
+    Each round picks <strong>3 new pairs</strong> from a big list — play again and again!
+  </p>
+
+  <div class="round-info" id="roundInfo">Round 1</div>
+
+  <div class="score-bar">
+    <div>Matches: <span id="scoreMatched">0</span> / 3</div>
+    <div>Rounds played: <span id="scoreRounds">0</span></div>
+  </div>
+
+  <div class="controls" style="margin-top:1rem">
+    <button class="btn" id="newRoundBtn">New Round ↻</button>
+  </div>
+
+  <div id="game"></div>
+  <div id="status"></div>
+
+  <!-- Teacher notes with full A1 pool -->
+  <details class="notes">
+    <summary>Teacher Notes / Full Expression List (A1)</summary>
+    <ul>
+      <li><strong>get up</strong> – leave your bed in the morning</li>
+      <li><strong>get dressed</strong> – put your clothes on</li>
+      <li><strong>get ready</strong> – prepare yourself to go somewhere</li>
+      <li><strong>get home</strong> – arrive at your house</li>
+      <li><strong>get to school</strong> – arrive at school</li>
+      <li><strong>get on the bus</strong> – step onto a bus</li>
+      <li><strong>get off the bus</strong> – step off a bus</li>
+      <li><strong>get in the car</strong> – go inside a car</li>
+      <li><strong>get out of the car</strong> – leave a car</li>
+      <li><strong>get a drink</strong> – go and buy or take a drink</li>
+      <li><strong>get some food</strong> – go and buy or take food</li>
+      <li><strong>get a sandwich</strong> – go and buy a sandwich</li>
+      <li><strong>get hungry</strong> – start to feel hunger</li>
+      <li><strong>get thirsty</strong> – start to feel thirst</li>
+      <li><strong>get tired</strong> – start to feel tired</li>
+      <li><strong>get cold</strong> – start to feel cold</li>
+      <li><strong>get hot</strong> – start to feel hot</li>
+      <li><strong>get sick</strong> – become ill</li>
+      <li><strong>get better</strong> – recover from an illness</li>
+      <li><strong>get worse</strong> – become more ill or more bad</li>
+      <li><strong>get help</strong> – find someone to assist you</li>
+      <li><strong>get a job</strong> – find work</li>
+      <li><strong>get paid</strong> – receive money for work</li>
+      <li><strong>get a present</strong> – receive a gift</li>
+      <li><strong>get a letter</strong> – receive a letter in the mail</li>
+      <li><strong>get a message</strong> – receive a text or note</li>
+      <li><strong>get married</strong> – become someone's husband or wife</li>
+      <li><strong>get lost</strong> – not know where you are</li>
+      <li><strong>get angry</strong> – start to feel anger</li>
+      <li><strong>get excited</strong> – start to feel excitement</li>
+      <li><strong>get bored</strong> – start to feel bored</li>
+      <li><strong>get scared</strong> – start to feel fear</li>
+      <li><strong>get confused</strong> – start to feel confused</li>
+      <li><strong>get a good grade</strong> – receive a high mark at school</li>
+      <li><strong>get permission</strong> – receive approval to do something</li>
+      <li><strong>get an answer</strong> – receive a reply to a question</li>
+      <li><strong>get some rest</strong> – have a time to relax and sleep</li>
+      <li><strong>get some exercise</strong> – do some physical activity</li>
+      <li><strong>get a haircut</strong> – have someone cut your hair</li>
+      <li><strong>get changed</strong> – put on different clothes</li>
+    </ul>
+  </details>
+
+  <!-- Gap Fill Practice -->
+  <section class="gapfill-wrap" aria-labelledby="gapfillTitle">
+    <h2 id="gapfillTitle">Write from Dictation</h2>
+    <p class="gapfill-intro">
+      Press <strong>▶ Listen</strong> to hear the sentence. Type the missing <strong>get</strong> phrase, then press Submit.
+    </p>
+
+    <!-- Voice selector -->
+    <div class="voice-bar">
+      <span>Voice:</span>
+      <select class="voice-select" id="voiceSelect">
+        <option value="">Loading voices…</option>
+      </select>
+      <span id="voiceStatus" style="font-size:.8rem;color:var(--muted)"></span>
+    </div>
+
+    <div class="gapfill-list">
+
+      <article class="gapfill-item" data-answer="get up"
+               data-sentence="I get up at 7 o'clock every morning.">
+        <p>1) I ______ at 7 o'clock every morning.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to sentence 1">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/>
+          </svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get up</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="get dressed"
+               data-sentence="After my shower, I get dressed and have breakfast.">
+        <p>2) After my shower, I ______ and have breakfast.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to sentence 2">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/>
+          </svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get dressed</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="get home"
+               data-sentence="I usually get home at about 6 in the evening.">
+        <p>3) I usually ______ at about 6 in the evening.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to sentence 3">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/>
+          </svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get home</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="get hungry"
+               data-sentence="I always get hungry before lunch.">
+        <p>4) I always ______ before lunch.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to sentence 4">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/>
+          </svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get hungry</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="get better"
+               data-sentence="I was sick last week, but I got better quickly.">
+        <p>5) I was sick last week, but I ______ quickly.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to sentence 5">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/>
+          </svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get better</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="get lost"
+               data-sentence="I didn't know the city, so I got lost.">
+        <p>6) I didn't know the city, so I ______.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to sentence 6">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/>
+          </svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get lost</div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="links">
+    <a href="http://modernenglish.au/Microlessons%26Games.html" class="btn">Home</a>
+  </div>
+</main>
+
+<footer>
+  © Modern English AU · All Rights Reserved
+</footer>
+
+<!-- QR library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<!-- QR panel logic -->
+<script>
+(function(){
+  const toggle  = document.getElementById("qrToggle");
+  const panel   = document.getElementById("qrPanel");
+  const box     = document.getElementById("qrCode");
+  const urlLabel= document.getElementById("qrUrl");
+  if(!toggle||!panel||!box||!urlLabel) return;
+  let made = false;
+  function make(){
+    const url = window.location.href;
+    urlLabel.textContent = url;
+    box.innerHTML = "";
+    new QRCode(box,{ text:url, width:200, height:200, correctLevel:QRCode.CorrectLevel.M });
+    made = true;
+  }
+  toggle.addEventListener("click",()=>{
+    const open = panel.style.display === "block";
+    panel.style.display = open ? "none" : "block";
+    if(!open && !made) make();
+  });
+  document.addEventListener("click",(e)=>{
+    if(panel.style.display !== "block") return;
+    if(!panel.contains(e.target) && !toggle.contains(e.target)) panel.style.display = "none";
+  });
+})();
+</script>
+
+<!-- Matching game -->
+<script>
+// ── Full A1 pool: 40 pairs ──────────────────────────────────────────
+const GET_EXPRESSIONS = [
+  ["get up",           "leave your bed in the morning"],
+  ["get dressed",      "put your clothes on"],
+  ["get ready",        "prepare yourself to go out"],
+  ["get home",         "arrive at your house"],
+  ["get to school",    "arrive at school"],
+  ["get on the bus",   "step onto a bus"],
+  ["get off the bus",  "step off a bus"],
+  ["get in the car",   "go inside a car"],
+  ["get out of the car","leave a car"],
+  ["get a drink",      "go and take a drink"],
+  ["get some food",    "go and take some food"],
+  ["get a sandwich",   "go and buy a sandwich"],
+  ["get hungry",       "start to feel hunger"],
+  ["get thirsty",      "start to feel thirst"],
+  ["get tired",        "start to feel tired"],
+  ["get cold",         "start to feel cold"],
+  ["get hot",          "start to feel hot"],
+  ["get sick",         "become ill"],
+  ["get better",       "recover from an illness"],
+  ["get worse",        "become more ill"],
+  ["get help",         "find someone to assist you"],
+  ["get a job",        "find work"],
+  ["get paid",         "receive money for work"],
+  ["get a present",    "receive a gift"],
+  ["get a letter",     "receive a letter in the mail"],
+  ["get a message",    "receive a text or note"],
+  ["get married",      "become someone's husband or wife"],
+  ["get lost",         "not know where you are"],
+  ["get angry",        "start to feel anger"],
+  ["get excited",      "start to feel excitement"],
+  ["get bored",        "start to feel bored"],
+  ["get scared",       "start to feel fear"],
+  ["get confused",     "start to feel confused"],
+  ["get a good grade", "receive a high mark at school"],
+  ["get permission",   "receive approval to do something"],
+  ["get an answer",    "receive a reply to a question"],
+  ["get some rest",    "have a time to relax and sleep"],
+  ["get some exercise","do some physical activity"],
+  ["get a haircut",    "have someone cut your hair"],
+  ["get changed",      "put on different clothes"]
+];
+
+// Bright match colours (one per pair)
+const matchColors = [
+  "#27ae60","#2980b9","#8e44ad","#f39c12","#e67e22",
+  "#16a085","#c0392b","#1abc9c","#d35400","#9b59b6"
+];
+
+// Soft unflipped tones
+const pastelColors = [
+  "#f8cdda","#fce1e4","#e0f2fe","#e8f5e9","#fff3cd",
+  "#ede7f6","#e1f5fe","#f3e5f5","#f1f8e9","#fffde7",
+  "#fde8d8","#e8f0fe"
+];
+
+const gameEl      = document.getElementById("game");
+const statusEl    = document.getElementById("status");
+const newRoundBtn = document.getElementById("newRoundBtn");
+const roundInfo   = document.getElementById("roundInfo");
+const scoreMatchedEl = document.getElementById("scoreMatched");
+const scoreRoundsEl  = document.getElementById("scoreRounds");
+
+let first = null, second = null, lock = false;
+let matched = 0;
+let roundCount = 0;
+let usedPairs = new Set(); // track used pairs for variety
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length-1; i > 0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function pickPairs(n){
+  // Prefer unused pairs; reset when pool exhausted
+  const unused = GET_EXPRESSIONS.filter((_,i) => !usedPairs.has(i));
+  let pool = unused.length >= n ? unused : GET_EXPRESSIONS;
+  if(pool === GET_EXPRESSIONS) usedPairs.clear();
+
+  const shuffled = shuffle(pool.map((_,i) => pool === GET_EXPRESSIONS ? i : GET_EXPRESSIONS.indexOf(pool[i])));
+  const chosen = shuffled.slice(0, n);
+  chosen.forEach(i => usedPairs.add(i));
+  return chosen.map(i => GET_EXPRESSIONS[i]);
+}
+
+function buildRound(){
+  gameEl.innerHTML = "";
+  statusEl.textContent = "";
+  first = null; second = null; lock = false; matched = 0;
+
+  roundCount++;
+  roundInfo.textContent = "Round " + roundCount;
+  scoreRoundsEl.textContent = roundCount;
+  scoreMatchedEl.textContent = "0";
+
+  // Pick 3 pairs → 6 cards total
+  const pairs = pickPairs(3);
+
+  const cards = shuffle(
+    pairs.flatMap(([expr, meaning]) => [
+      { text: expr,    pair: expr, role: "expression" },
+      { text: meaning, pair: expr, role: "meaning"    }
+    ])
+  );
+
+  cards.forEach((data, idx) => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.dataset.pair = data.pair;
+    div.dataset.role = data.role;
+    // Each card starts face-down (no text, colour only)
+    div.style.background = "#671321";
+    gameEl.appendChild(div);
+
+    div.addEventListener("click", () => onCardClick(div, data, idx));
+  });
+}
+
+function onCardClick(div, data, idx){
+  if(lock || div.classList.contains("flipped") || div.classList.contains("matched")) return;
+
+  flip(div, data.text, idx);
+
+  if(!first){ first = div; return; }
+
+  second = div;
+  lock = true;
+
+  if(first.dataset.pair === second.dataset.pair && first !== second){
+    // ✅ Match
+    const color = matchColors[matched % matchColors.length];
+    setTimeout(()=>{
+      [first, second].forEach(c => {
+        c.classList.remove("flipped");
+        c.classList.add("matched");
+        c.style.background = color;
+        c.style.color = "#fff";
+      });
+      matched++;
+      scoreMatchedEl.textContent = matched;
+
+      if(matched === 3){
+        statusEl.textContent = "🎉 All matched! Press New Round to play again.";
+      }
+      first = null; second = null; lock = false;
+    }, 500);
+  } else {
+    // ❌ No match — shake and flip back
+    setTimeout(()=>{
+      [first, second].forEach(c => {
+        c.classList.add("shake");
+        setTimeout(()=> c.classList.remove("shake"), 360);
+        c.classList.remove("flipped");
+        c.textContent = "";
+        c.style.background = "#671321";
+        c.style.color = "#fff";
+      });
+      first = null; second = null; lock = false;
+    }, 700);
+  }
+}
+
+function flip(div, text, idx){
+  div.classList.add("flipped");
+  div.textContent = text;
+  div.style.background = var_accent();
+  div.style.color = "#fff";
+}
+
+function var_accent(){ return "#2e0e5b"; }
+
+newRoundBtn.addEventListener("click", buildRound);
+buildRound();
+</script>
+
+<!-- TTS + Gap fill logic -->
+<script>
+/* ═══════════════════════════════════════════════
+   TEXT-TO-SPEECH ENGINE (Web Speech API)
+   ═══════════════════════════════════════════════ */
+const voiceSelect  = document.getElementById("voiceSelect");
+const voiceStatus  = document.getElementById("voiceStatus");
+let voices         = [];
+let selectedVoice  = null;
+let currentUtter   = null;
+let activeSpeakBtn = null;
+
+function populateVoices(){
+  voices = window.speechSynthesis.getVoices();
+  if(!voices.length) return;
+
+  voiceSelect.innerHTML = "";
+
+  // Priority order: en-AU → en-GB → en-US → any English
+  const priority = ["AU","GB","NZ","US","CA","IE"];
+  const english  = voices.filter(v => v.lang.startsWith("en"));
+
+  // Sort by priority region
+  english.sort((a,b)=>{
+    const ai = priority.findIndex(r => a.lang.includes(r));
+    const bi = priority.findIndex(r => b.lang.includes(r));
+    return (ai===-1?99:ai) - (bi===-1?99:bi);
+  });
+
+  const pool = english.length ? english : voices;
+
+  pool.forEach((v, i) => {
+    const opt = document.createElement("option");
+    opt.value  = i;
+    // Friendly label: show name + region flag hint
+    const region = v.lang.split("-")[1] || "";
+    const flag   = { AU:"🇦🇺", GB:"🇬🇧", US:"🇺🇸", NZ:"🇳🇿", CA:"🇨🇦", IE:"🇮🇪" }[region] || "🌐";
+    opt.textContent = `${flag} ${v.name} (${v.lang})`;
+    voiceSelect.appendChild(opt);
+  });
+
+  // Default: first Australian English, or first English
+  const auIdx = pool.findIndex(v => v.lang.includes("AU"));
+  voiceSelect.selectedIndex = auIdx >= 0 ? auIdx : 0;
+  setVoice();
+
+  // Status hint
+  const chosen = pool[voiceSelect.selectedIndex];
+  if(chosen && chosen.lang.includes("AU")){
+    voiceStatus.textContent = "✓ Australian English detected";
+  } else {
+    voiceStatus.textContent = "Tip: change device language to English (AU) for Australian accent";
+  }
+}
+
+function setVoice(){
+  const pool    = voices.filter(v => v.lang.startsWith("en"));
+  const usePool = pool.length ? pool : voices;
+  selectedVoice = usePool[parseInt(voiceSelect.value)] || null;
+}
+
+voiceSelect.addEventListener("change", setVoice);
+
+// Voices load asynchronously in some browsers
+if(typeof speechSynthesis !== "undefined"){
+  populateVoices();
+  speechSynthesis.onvoiceschanged = populateVoices;
+} else {
+  voiceSelect.innerHTML = "<option>Not supported in this browser</option>";
+  voiceStatus.textContent = "Use Chrome, Edge, or Safari for TTS";
+}
+
+function speak(text, btn){
+  if(typeof speechSynthesis === "undefined") return;
+
+  // Stop anything currently playing
+  speechSynthesis.cancel();
+  if(activeSpeakBtn){
+    activeSpeakBtn.classList.remove("speaking");
+    activeSpeakBtn.innerHTML = speakerIcon() + " Listen";
+  }
+
+  // If same button clicked again → just stop
+  if(activeSpeakBtn === btn){
+    activeSpeakBtn = null;
+    return;
+  }
+
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate  = 0.88;   // slightly slower — good for ESL
+  utter.pitch = 1.0;
+  utter.volume= 1.0;
+
+  if(selectedVoice) utter.voice = selectedVoice;
+
+  utter.onstart = () => {
+    btn.classList.add("speaking");
+    btn.innerHTML = speakerIcon() + " Speaking…";
+    activeSpeakBtn = btn;
+  };
+  utter.onend = utter.onerror = () => {
+    btn.classList.remove("speaking");
+    btn.innerHTML = speakerIcon() + " Listen";
+    if(activeSpeakBtn === btn) activeSpeakBtn = null;
+  };
+
+  currentUtter = utter;
+  speechSynthesis.speak(utter);
+}
+
+function speakerIcon(){
+  return `<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0">
+    <path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/>
+  </svg>`;
+}
+
+/* ═══════════════════════════════════════════════
+   GAP FILL LOGIC
+   ═══════════════════════════════════════════════ */
+function normalizeText(str){
+  return str
+    .toLowerCase()
+    .replace(/['']/g,"'")
+    .replace(/[""]/g,'"')
+    .replace(/\s+/g," ")
+    .trim()
+    .replace(/[.,!?;:]+$/g,"");
+}
+
+document.querySelectorAll(".gapfill-item").forEach(item => {
+  const answer    = item.dataset.answer;
+  const sentence  = item.dataset.sentence;
+  const input     = item.querySelector(".gapfill-input");
+  const submitBtn = item.querySelector(".gap-submit");
+  const revealBtn = item.querySelector(".gap-reveal");
+  const speakBtn  = item.querySelector(".speak-btn");
+  const feedback  = item.querySelector(".gapfill-feedback");
+  const answerBox = item.querySelector(".gapfill-answer");
+
+  // Speak button
+  if(speakBtn && sentence){
+    speakBtn.addEventListener("click", () => speak(sentence, speakBtn));
+  }
+
+  // Submit
+  submitBtn.addEventListener("click", () => {
+    const typed   = normalizeText(input.value);
+    const correct = normalizeText(answer);
+    feedback.classList.remove("correct","incorrect");
+    if(!typed){
+      feedback.textContent = "Please type your answer first.";
+      feedback.classList.add("incorrect");
+      return;
+    }
+    if(typed === correct){
+      feedback.textContent = "✓ Correct!";
+      feedback.classList.add("correct");
+    } else {
+      feedback.textContent = "✗ Try again.";
+      feedback.classList.add("incorrect");
+    }
+  });
+
+  input.addEventListener("keydown", e => {
+    if(e.key === "Enter") submitBtn.click();
+  });
+
+  // Reveal
+  revealBtn.addEventListener("click", () => {
+    answerBox.classList.toggle("show");
+  });
+});
+</script>
+
+</body>
+</html>
