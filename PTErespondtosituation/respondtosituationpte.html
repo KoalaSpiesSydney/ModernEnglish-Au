@@ -4,1470 +4,921 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>PTE Respond to Situation – Modern English Australia</title>
-
   <style>
-    :root{
-      --bg:#f5f7fa;
-      --ink:#1a1f36;
-      --muted:#030f1e;
-      --shadow: 0 6px 18px rgba(26,31,54,.10), 0 2px 6px rgba(26,31,54,.06);
-      --radius:10px;
-      --max:860px;
-
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      --sans: "Helvetica Neue", Arial, sans-serif;
-
-      --focus: 0 0 0 3px rgba(3,3,79,.18);
-      --accent:#03034f;
-      --accent-2:#080118;
-
-      --fs-body: 16px;
-      --fs-lead: 15.5px;
-      --fs-h1: clamp(26px, 2.6vw, 30px);
-      --fs-h2: 17px;
-      --fs-hint: 13.5px;
-      --fs-chip: 13px;
-      --fs-label: 12.5px;
-      --fs-prompt: 16.5px;
-      --lh-tight: 1.15;
-      --lh-body: 1.55;
-
-      --muted-2: rgba(110,122,138,.92);
-
-      /* Task type tag colours */
-      --tag-requesting:   #dbeafe; --tag-requesting-ink:   #1e40af;
-      --tag-complaining:  #fee2e2; --tag-complaining-ink:  #991b1b;
-      --tag-advising:     #fef9c3; --tag-advising-ink:     #713f12;
-      --tag-apologising:  #fce7f3; --tag-apologising-ink:  #9d174d;
-      --tag-suggesting:   #dcfce7; --tag-suggesting-ink:   #14532d;
-      --tag-explaining:   #ede9fe; --tag-explaining-ink:   #4c1d95;
+    :root {
+      --bg:#f5f7fa; --ink:#1a1f36; --muted:#030f1e;
+      --shadow:0 6px 18px rgba(26,31,54,.10),0 2px 6px rgba(26,31,54,.06);
+      --radius:10px; --max:900px;
+      --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      --sans:"Helvetica Neue",Arial,sans-serif;
+      --focus:0 0 0 3px rgba(3,3,79,.18);
+      --accent:#03034f; --accent2:#080118;
+      --fs-body:16px; --fs-h1:clamp(22px,2.6vw,30px); --fs-h2:17px;
+      --fs-hint:13.5px; --fs-label:12.5px; --fs-prompt:clamp(15px,2vw,17px);
+      --lh-tight:1.15; --lh-body:1.55;
+      --muted2:rgba(110,122,138,.92);
+      --tag-requesting:#dbeafe;   --tag-requesting-ink:#1e40af;
+      --tag-complaining:#fee2e2;  --tag-complaining-ink:#991b1b;
+      --tag-advising:#fef9c3;     --tag-advising-ink:#713f12;
+      --tag-apologising:#fce7f3;  --tag-apologising-ink:#9d174d;
+      --tag-suggesting:#dcfce7;   --tag-suggesting-ink:#14532d;
+      --tag-explaining:#ede9fe;   --tag-explaining-ink:#4c1d95;
     }
-
-    *{box-sizing:border-box}
+    *,*::before,*::after{box-sizing:border-box}
     html,body{height:100%}
+    body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:var(--fs-body);line-height:var(--lh-body);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
 
-    body{
-      margin:0;
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--ink);
-      font-size: var(--fs-body);
-      line-height: var(--lh-body);
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
+    /* ── header ── */
+    header{position:sticky;top:0;z-index:10;background:rgba(30,31,33,.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+    .topbar{max-width:calc(var(--max) + 32px);margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .brand{display:flex;flex-direction:column;gap:2px;color:#fff;flex-shrink:0}
+    .brand .title{font-weight:800;font-size:14px;white-space:nowrap}
+    .brand .sub{color:rgba(255,255,255,.72);font-size:12px;white-space:nowrap}
+    .topmeta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+    .chipBtn{cursor:pointer;appearance:none;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);color:rgba(255,255,255,.92);font:inherit;padding:7px 11px;border-radius:999px;font-weight:700;font-size:12px;white-space:nowrap;transition:border-color .15s}
+    .chipBtn:hover{border-color:rgba(255,255,255,.28)}
+    .qrChipBtn{display:inline-flex;align-items:center;gap:6px}
 
-    /* ===== Background video layer ===== */
-    .bg-video-wrap{
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .bg-video{
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.03);
-      filter: blur(2px) saturate(1.05) brightness(.72);
-      opacity: 0.20;
-    }
-    .bg-overlay{
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background:
-        radial-gradient(1200px 700px at 20% 10%, rgba(3,3,79,.12), transparent 60%),
-        radial-gradient(1000px 700px at 80% 30%, rgba(0,0,0,.16), transparent 55%),
-        linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.08) 40%, rgba(0,0,0,.18));
-    }
+    /* ── main ── */
+    main{flex:1;max-width:var(--max);margin:16px auto 40px;padding:0 16px;width:100%}
+    .hero{padding:12px 0 8px}
+    h1{margin:0 0 8px;font-size:var(--fs-h1);line-height:var(--lh-tight);font-weight:800}
+    .hero p{margin:0 0 10px;font-size:15px;line-height:1.6;color:rgba(26,31,54,.85)}
 
-    /* ===== Header ===== */
-    header{
-      position: sticky;
-      top:0;
-      z-index:10;
-      background: rgba(30,31,33,.90);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .topbar{
-      max-width: calc(var(--max) + 32px);
-      margin:0 auto;
-      padding: 12px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      min-width: 260px;
-      color:#fff;
-    }
-    .brand .title{
-      font-weight: 800;
-      letter-spacing: .2px;
-      font-size: 14px;
-    }
-    .brand .sub{
-      color: rgba(255,255,255,.78);
-      font-size: 12.5px;
-    }
-    .topmeta{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .chipBtn{
-      cursor:pointer;
-      appearance:none;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.92);
-      font: inherit;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-weight: 750;
-      font-size: var(--fs-chip);
-    }
-    .chipBtn:hover{border-color: rgba(255,255,255,.22);}
+    .controlBar{margin-top:12px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:999px;box-shadow:var(--shadow);padding:9px 14px;display:inline-flex;width:fit-content;max-width:100%;align-items:center;gap:10px}
+    .controlBar strong{font-weight:900}
 
-    /* ===== Main layout ===== */
-    main{
-      flex:1;
-      max-width: var(--max);
-      margin: 18px auto 34px;
-      padding: 0 16px;
-      width:100%;
-    }
+    /* ── task tag ── */
+    .taskTag{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+    .taskTag-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+    .tag-requesting{background:var(--tag-requesting);color:var(--tag-requesting-ink)}.tag-requesting .taskTag-dot{background:var(--tag-requesting-ink)}
+    .tag-complaining{background:var(--tag-complaining);color:var(--tag-complaining-ink)}.tag-complaining .taskTag-dot{background:var(--tag-complaining-ink)}
+    .tag-advising{background:var(--tag-advising);color:var(--tag-advising-ink)}.tag-advising .taskTag-dot{background:var(--tag-advising-ink)}
+    .tag-apologising{background:var(--tag-apologising);color:var(--tag-apologising-ink)}.tag-apologising .taskTag-dot{background:var(--tag-apologising-ink)}
+    .tag-suggesting{background:var(--tag-suggesting);color:var(--tag-suggesting-ink)}.tag-suggesting .taskTag-dot{background:var(--tag-suggesting-ink)}
+    .tag-explaining{background:var(--tag-explaining);color:var(--tag-explaining-ink)}.tag-explaining .taskTag-dot{background:var(--tag-explaining-ink)}
 
-    .hero{padding: 14px 0 10px}
-    h1{
-      margin:0 0 8px;
-      font-size: var(--fs-h1);
-      line-height: var(--lh-tight);
-      letter-spacing: -0.2px;
-      font-weight: 800;
-    }
-    .lead{
-      margin:0;
-      font-size: var(--fs-lead);
-      line-height: 1.6;
-      color: var(--muted-2);
-      max-width: 70ch;
-    }
+    /* ── panels ── */
+    .panel{margin-top:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .panelHeader{padding:14px 18px 12px;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .panelHeader h2{margin:0;font-size:var(--fs-h2);line-height:1.25;font-weight:800}
+    .panelHeader .hint{margin:5px 0 0;color:var(--muted2);font-size:var(--fs-hint)}
+    .panelBody{padding:14px 18px 18px}
 
-    /* ===== Situation counter ===== */
-    .controlBar{
-      margin-top: 12px;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(6px);
-      border: 1px solid transparent;
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-      padding: 10px 14px;
-      display:inline-flex;
-      width: fit-content;
-      max-width: 100%;
-      align-items:center;
-      gap:10px;
-      opacity: .96;
-    }
-    .controlBar strong{ font-weight: 900; }
+    /* ── prompt ── */
+    .prompt{background:rgba(249,250,251,.92);border:1px solid rgba(0,0,0,.07);border-radius:12px;padding:14px;font-size:var(--fs-prompt);line-height:1.65;box-shadow:0 2px 10px rgba(26,31,54,.06)}
+    #promptText{font-weight:520;color:rgba(26,31,54,.95)}
 
-    /* ===== Task type tag ===== */
-    .taskTag {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 11px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .02em;
-      text-transform: uppercase;
-    }
-    .taskTag-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .tag-requesting  { background: var(--tag-requesting);  color: var(--tag-requesting-ink); }
-    .tag-requesting  .taskTag-dot { background: var(--tag-requesting-ink); }
-    .tag-complaining { background: var(--tag-complaining); color: var(--tag-complaining-ink); }
-    .tag-complaining .taskTag-dot { background: var(--tag-complaining-ink); }
-    .tag-advising    { background: var(--tag-advising);    color: var(--tag-advising-ink); }
-    .tag-advising    .taskTag-dot { background: var(--tag-advising-ink); }
-    .tag-apologising { background: var(--tag-apologising); color: var(--tag-apologising-ink); }
-    .tag-apologising .taskTag-dot { background: var(--tag-apologising-ink); }
-    .tag-suggesting  { background: var(--tag-suggesting);  color: var(--tag-suggesting-ink); }
-    .tag-suggesting  .taskTag-dot { background: var(--tag-suggesting-ink); }
-    .tag-explaining  { background: var(--tag-explaining);  color: var(--tag-explaining-ink); }
-    .tag-explaining  .taskTag-dot { background: var(--tag-explaining-ink); }
+    /* ── status banner ── */
+    .statusBanner{margin-top:12px;padding:10px 14px;border-radius:10px;font-size:14px;font-weight:600;display:none}
+    .statusBanner.show{display:block}
+    .statusBanner.info{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+    .statusBanner.warn{background:#fffbeb;color:#92400e;border:1px solid #fde68a}
+    .statusBanner.go{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+    .statusBanner.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
 
-    /* ===== Panels ===== */
-    .panel{
-      margin-top: 14px;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(6px);
-      border: 1px solid transparent;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .panelHeader{
-      padding: 16px 18px 12px;
-      border-bottom: 1px solid rgba(0,0,0,.06);
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .panelHeader h2{
-      margin:0;
-      font-size: var(--fs-h2);
-      line-height: 1.25;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-    }
-    .panelHeader .hint{
-      margin:6px 0 0;
-      color: var(--muted-2);
-      font-size: var(--fs-hint);
-    }
-    .panelBody{padding: 16px 18px 18px}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
 
-    /* ===== Prompt block ===== */
-    .prompt{
-      background: rgba(249,250,251,.90);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(0,0,0,.07);
-      border-radius: 12px;
-      padding: 14px;
-      font-size: var(--fs-prompt);
-      line-height: 1.65;
-      box-shadow: 0 2px 10px rgba(26,31,54,.06);
-    }
-    #promptText{
-      font-weight: 520;
-      color: rgba(26,31,54,.95);
-      white-space: normal;
-      word-break: normal;
-    }
+    /* ── buttons ── */
+    button{border:1px solid rgba(0,0,0,.10);background:#fff;color:var(--ink);border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer;transition:transform .06s,background .15s,box-shadow .15s;font:inherit;font-size:14px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+    button:hover{box-shadow:0 2px 12px rgba(26,31,54,.10)}
+    button:active{transform:translateY(1px)}
+    button:focus{outline:none;box-shadow:var(--focus)}
+    button:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+    button.primary{background:var(--accent);color:#fff;font-weight:900;border-color:transparent}
+    button.primary:hover{background:var(--accent2)}
+    button.active-mic{background:#dc2626;color:#fff;border-color:transparent}
+    button.active-mic:hover{background:#b91c1c}
 
-    .row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-top: 12px;
-    }
+    /* ── timer ── */
+    .timerWrap{margin-top:14px}
+    .timerBar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .timerClock{display:flex;align-items:center;flex:1 1 auto;min-width:90px}
+    .time{font-family:var(--mono);font-size:clamp(16px,2.2vw,20px);font-weight:900;letter-spacing:.5px;padding:5px 10px;border-radius:12px;background:rgba(255,255,255,.85);box-shadow:0 2px 10px rgba(26,31,54,.06)}
+    .timerActions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .timerMeta{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+    .progressLine{flex:0 0 160px;height:6px;background:rgba(0,0,0,.06);border-radius:10px;overflow:hidden}
+    .bar{height:100%;width:0%;background:var(--accent);border-radius:10px;transition:width .2s linear}
+    .sub{margin:0;font-size:var(--fs-label);color:var(--muted2);line-height:1.25}
 
-    /* ===== Buttons ===== */
-    button{
-      border:1px solid rgba(0,0,0,.10);
-      background:#fff;
-      color:var(--ink);
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-weight: 800;
-      letter-spacing: .01em;
-      cursor:pointer;
-      transition: transform .06s ease, background .15s ease, box-shadow .15s ease;
-      font: inherit;
-    }
-    button:hover{ box-shadow: 0 2px 12px rgba(26,31,54,.10); }
-    button:active{transform: translateY(1px)}
-    button:focus{outline:none; box-shadow: var(--focus)}
-    button[disabled]{opacity:.55; cursor:not-allowed; transform:none; box-shadow:none}
+    /* ── textarea ── */
+    textarea{width:100%;min-height:180px;resize:vertical;border:1px solid rgba(0,0,0,.10);border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.65;background:#fff;box-shadow:0 2px 10px rgba(26,31,54,.06);font-family:var(--sans)}
+    textarea:focus{outline:none;box-shadow:var(--focus)}
+    .note{font-size:var(--fs-label);color:var(--muted2);margin:10px 0 0}
+    .kbd{font-family:var(--mono);border:1px solid rgba(0,0,0,.12);border-bottom-width:2px;padding:2px 6px;border-radius:8px;background:#fff;font-size:12px;color:#334155}
 
-    button.primary{
-      background: var(--accent);
-      color:#fff;
-      font-weight: 900;
-      border-color: transparent;
-    }
-    button.primary:hover{ background: var(--accent-2); }
+    /* ── checklist ── */
+    .checklistIntro{font-size:14px;color:var(--muted2);margin:0 0 14px;line-height:1.55}
+    .checklistItems{display:flex;flex-direction:column;gap:10px}
+    .checkItem{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;border-radius:12px;border:1.5px solid rgba(0,0,0,.07);background:#fff;cursor:pointer;transition:border-color .15s,background .15s;user-select:none;touch-action:manipulation}
+    .checkItem:hover{border-color:rgba(3,3,79,.18);background:rgba(249,250,255,.9)}
+    .checkItem.checked{border-color:#16a34a;background:#f0fdf4}
+    .checkBox{width:24px;height:24px;border-radius:6px;border:2px solid rgba(0,0,0,.18);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;margin-top:1px}
+    .checkItem.checked .checkBox{background:#16a34a;border-color:#16a34a}
+    .checkMark{display:none;color:#fff;font-size:13px;font-weight:900;line-height:1}
+    .checkItem.checked .checkMark{display:block}
+    .checkLabel{flex:1}
+    .checkLabel strong{display:block;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+    .checkLabel span{font-size:13px;color:var(--muted2);line-height:1.45}
+    .checkItem.checked .checkLabel strong{color:#15803d}
+    .checklistProgress{margin-top:14px;display:flex;align-items:center;gap:12px}
+    .checklistProgressBar{flex:1;height:6px;background:rgba(0,0,0,.07);border-radius:10px;overflow:hidden}
+    .checklistProgressFill{height:100%;width:0%;background:#16a34a;border-radius:10px;transition:width .3s}
+    .checklistProgressLabel{font-size:13px;font-weight:700;color:var(--muted2);min-width:40px;text-align:right}
+    .checklistProgressLabel.complete{color:#15803d}
+    .checklistReset{margin-top:12px;font-size:13px;color:var(--muted2);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;font-weight:600;box-shadow:none}
+    .checklistReset:hover{color:var(--ink);box-shadow:none}
 
-    /* ===== Timer bar ===== */
-    .timerWrap{
-      margin-top: 12px;
-      padding-top: 8px;
-      border: 0;
-      background: transparent;
-    }
-    .timerBar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .timerClock{
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      flex: 1 1 auto;
-      min-width: 140px;
-    }
-    .time{
-      font-family: var(--mono);
-      font-size: 17px;
-      font-weight: 900;
-      letter-spacing: .5px;
-      margin:0;
-      padding: 5px 10px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.85);
-      box-shadow: 0 2px 10px rgba(26,31,54,.06);
-    }
-    .timerActions{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      flex: 0 0 auto;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .timerActions button{ padding: 9px 12px; border-radius: 12px; }
+    /* ── template pill ── */
+    .templatePillBtn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.10);box-shadow:0 2px 10px rgba(26,31,54,.10);font-weight:900}
+    .templatePillBtn:hover{box-shadow:0 4px 14px rgba(26,31,54,.12)}
+    .pillCaret{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid rgba(3,15,30,.45);transition:transform .15s}
+    .templatePillBtn[aria-expanded="true"] .pillCaret{transform:rotate(180deg)}
 
-    .timerMeta{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-top: 10px;
-      flex-wrap:wrap;
-    }
-    .progressLine{
-      flex: 0 0 160px;
-      height: 6px;
-      background: rgba(0,0,0,.06);
-      border-radius: 10px;
-      overflow:hidden;
-    }
-    .bar{
-      height:100%;
-      width:0%;
-      background: var(--accent);
-      border-radius: 10px;
-      transition: width .2s linear;
-    }
-    .sub{
-      margin:0;
-      font-size: var(--fs-label);
-      color: var(--muted-2);
-      line-height: 1.25;
-    }
+    /* ── overlays ── */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:50}
 
-    /* ===== Textarea ===== */
-    textarea{
-      width:100%;
-      min-height: 220px;
-      resize: vertical;
-      border:1px solid rgba(0,0,0,.10);
-      border-radius: 12px;
-      padding: 12px 14px;
-      font-size: 16px;
-      line-height: 1.65;
-      background:#fff;
-      box-shadow: 0 2px 10px rgba(26,31,54,.06);
-    }
-    textarea:focus{ outline:none; box-shadow: var(--focus); }
+    /* ── side panel ── */
+    .sidePanel{position:fixed;top:0;right:0;height:100%;width:min(420px,92vw);background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-left:1px solid rgba(220,225,231,.9);box-shadow:-12px 0 30px rgba(0,0,0,.18);z-index:60;transform:translateX(102%);transition:transform .22s ease;display:flex;flex-direction:column}
+    .sidePanel.open{transform:translateX(0)}
+    .sideHeader{padding:16px 16px 12px;border-bottom:1px solid rgba(220,225,231,.9);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .sideKicker{font-size:12px;color:var(--muted);letter-spacing:.2px}
+    .sideHeader h3{margin:2px 0 0;font-size:18px;line-height:1.25;font-weight:900;color:var(--ink)}
+    .iconBtn{border:1px solid rgba(220,225,231,.9);background:#fff;color:var(--ink);width:36px;height:36px;border-radius:12px;font-size:20px;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+    .sideBody{padding:14px 16px 16px;overflow:auto;color:rgba(26,31,54,.92);line-height:1.6}
+    .sideBody p{margin:0 0 12px;font-size:15.5px}
+    .sideCallout{border:1px solid rgba(220,225,231,.95);background:rgba(249,250,251,.9);border-radius:12px;padding:12px;font-size:13.5px;color:var(--muted)}
+    .sideFooter{padding:12px 16px 16px;border-top:1px solid rgba(220,225,231,.9);display:flex;justify-content:flex-end;gap:10px}
 
-    .note{
-      font-size: var(--fs-label);
-      color: var(--muted-2);
-      margin: 10px 0 0;
-    }
+    /* ── template window ── */
+    .tplWindow{position:fixed;left:50%;top:50%;transform:translateX(-50%) translateY(-50%) scale(.96);width:min(720px,calc(100vw - 32px));max-height:90vh;overflow-y:auto;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border:1px solid rgba(0,0,0,.08);border-radius:16px;box-shadow:0 22px 60px rgba(0,0,0,.22);z-index:80;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
+    .tplWindow.open{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(-50%) scale(1)}
+    .tplHead{padding:14px 16px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(0,0,0,.08)}
+    .tplKicker{font-size:12px;color:rgba(3,15,30,.70);letter-spacing:.02em}
+    .tplHead h3{margin:2px 0 0;font-size:18px;line-height:1.25;font-weight:900;color:var(--ink)}
+    .tplClose{border:1px solid rgba(0,0,0,.10);background:rgba(255,255,255,.92);width:38px;height:38px;border-radius:12px;font-size:22px;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+    .tplBody{padding:14px 16px 16px}
+    .tplCode{margin:0;padding:12px;border-radius:14px;background:rgba(249,250,251,.98);border:1px solid rgba(0,0,0,.08);white-space:pre-wrap;font-family:var(--mono);font-size:13.5px;line-height:1.5;color:#111827}
+    .tplActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 
-    .kbd{
-      font-family: var(--mono);
-      border:1px solid rgba(0,0,0,.12);
-      border-bottom-width:2px;
-      padding:2px 6px;
-      border-radius: 8px;
-      background:#fff;
-      font-size:12px;
-      color:#334155;
-      box-shadow: 0 1px 6px rgba(26,31,54,.08);
-    }
+    /* ── QR modal ── */
+    .qrModal{position:fixed;left:50%;top:50%;transform:translateX(-50%) translateY(-50%) scale(.94);width:min(400px,calc(100vw - 24px));background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;box-shadow:0 24px 64px rgba(0,0,0,.24);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;overflow:hidden}
+    .qrModal.open{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(-50%) scale(1)}
+    .qrModalHead{padding:16px 18px 14px;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .qrModalKicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:3px}
+    .qrModalTitle{font-size:17px;font-weight:800;color:var(--ink);margin:0}
+    .qrModalBody{padding:18px 18px 22px}
+    .qrInputRow{display:flex;gap:8px;margin-bottom:10px}
+    .qrInput{flex:1;min-width:0;border:1px solid rgba(0,0,0,.12);border-radius:10px;padding:10px 12px;font-size:14px;font-family:var(--sans);background:#fafafa;color:var(--ink)}
+    .qrInput:focus{outline:none;box-shadow:var(--focus)}
+    .qrInput::placeholder{color:rgba(110,122,138,.7)}
+    .qrGenBtn{padding:10px 14px;font-size:13px;font-weight:800;border-radius:10px;border:1px solid transparent;background:var(--accent);color:#fff;cursor:pointer;white-space:nowrap;flex-shrink:0}
+    .qrGenBtn:hover{background:var(--accent2)}
+    .qrCurrentPageBtn{font-size:12px;color:var(--muted2);text-decoration:underline;background:none;border:none;cursor:pointer;padding:0;font-weight:600;box-shadow:none;margin-bottom:16px;display:inline-block}
+    .qrCurrentPageBtn:hover{color:var(--ink)}
+    .qrCanvasWrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+    #qrCanvas{border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.10);max-width:100%;image-rendering:pixelated}
+    .qrUrlLabel{font-size:12px;color:var(--muted2);word-break:break-all;text-align:center;max-width:300px;line-height:1.4}
+    .qrActions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+    .qrEmpty{text-align:center;color:var(--muted2);font-size:14px;padding:16px 0}
 
-    /* ===== Self-check checklist ===== */
-    .checklistPanel {
-      margin-top: 14px;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(6px);
-      border: 1px solid transparent;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .checklistPanel.hidden { display: none; }
-
-    .checklistIntro {
-      font-size: 14px;
-      color: var(--muted-2);
-      margin: 0 0 14px;
-      line-height: 1.55;
-    }
-
-    .checklistItems {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .checkItem {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 13px 14px;
-      border-radius: 12px;
-      border: 1.5px solid rgba(0,0,0,.07);
-      background: #fff;
-      cursor: pointer;
-      transition: border-color .15s, background .15s;
-      user-select: none;
-    }
-    .checkItem:hover { border-color: rgba(3,3,79,.18); background: rgba(249,250,255,.9); }
-    .checkItem.checked { border-color: #16a34a; background: #f0fdf4; }
-
-    .checkBox {
-      width: 22px;
-      height: 22px;
-      border-radius: 6px;
-      border: 2px solid rgba(0,0,0,.18);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .15s, border-color .15s;
-      margin-top: 1px;
-    }
-    .checkItem.checked .checkBox {
-      background: #16a34a;
-      border-color: #16a34a;
-    }
-    .checkMark {
-      display: none;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 900;
-      line-height: 1;
-    }
-    .checkItem.checked .checkMark { display: block; }
-
-    .checkLabel {
-      flex: 1;
-    }
-    .checkLabel strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 2px;
-    }
-    .checkLabel span {
-      font-size: 13px;
-      color: var(--muted-2);
-      line-height: 1.45;
-    }
-    .checkItem.checked .checkLabel strong { color: #15803d; }
-
-    .checklistProgress {
-      margin-top: 14px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .checklistProgressBar {
-      flex: 1;
-      height: 6px;
-      background: rgba(0,0,0,.07);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .checklistProgressFill {
-      height: 100%;
-      width: 0%;
-      background: #16a34a;
-      border-radius: 10px;
-      transition: width .3s ease;
-    }
-    .checklistProgressLabel {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--muted-2);
-      min-width: 40px;
-      text-align: right;
-    }
-    .checklistProgressLabel.complete { color: #15803d; }
-
-    .checklistReset {
-      margin-top: 12px;
-      font-size: 13px;
-      color: var(--muted-2);
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      text-decoration: underline;
-      font-weight: 600;
-      box-shadow: none;
-    }
-    .checklistReset:hover { color: var(--ink); box-shadow: none; }
-
-    /* ===== Footer ===== */
-    footer{
-      background:#1e1f21;
-      color: rgba(255,255,255,.78);
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-    .footerWrap{
-      max-width: calc(var(--max) + 32px);
-      margin:0 auto;
-      padding: 14px 16px;
-      display:flex;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      font-size: 13px;
-    }
+    /* ── footer ── */
+    footer{background:#1e1f21;color:rgba(255,255,255,.78);border-top:1px solid rgba(255,255,255,.08)}
+    .footerWrap{max-width:calc(var(--max) + 32px);margin:0 auto;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;font-size:13px}
     .footerWrap strong{color:#fff}
-    .footerLinks{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
-    }
-    .footerLinks a{
-      color: rgba(255,255,255,.85);
-      text-decoration:none;
-      border-bottom: 1px solid rgba(255,255,255,.18);
-    }
-    .footerLinks a:hover{border-bottom-color: rgba(255,255,255,.55)}
+    .footerLinks{display:flex;gap:10px;flex-wrap:wrap}
+    .footerLinks a{color:rgba(255,255,255,.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.18)}
+    .footerLinks a:hover{border-bottom-color:rgba(255,255,255,.55)}
 
-    /* ===== Slide-in help panel ===== */
-    .sideOverlay{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.38);
-      z-index: 50;
+    /* ── responsive ── */
+    @media(min-width:1280px){
+      :root{--max:1040px;--fs-prompt:18px}
+      .topbar{padding:12px 24px} main{padding:0 24px;margin-top:22px}
+      .brand .title{font-size:15px} .brand .sub{font-size:13px}
+      .time{font-size:22px} textarea{min-height:200px}
     }
-    .sidePanel{
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100%;
-      width: min(420px, 92vw);
-      background: rgba(255,255,255,.96);
-      backdrop-filter: blur(10px);
-      border-left: 1px solid rgba(220,225,231,.9);
-      box-shadow: -12px 0 30px rgba(0,0,0,.18);
-      z-index: 60;
-      transform: translateX(102%);
-      transition: transform .22s ease;
-      display:flex;
-      flex-direction:column;
+    @media(max-width:767px){
+      :root{--fs-body:15px;--fs-prompt:15px;--fs-h2:16px}
+      .topbar{padding:8px 12px} .brand .sub{display:none}
+      main{padding:0 12px;margin-top:14px}
+      .panelBody{padding:12px 14px 16px} .panelHeader{padding:12px 14px 10px}
+      .progressLine{flex:0 0 120px} textarea{min-height:150px}
     }
-    .sidePanel.open{ transform: translateX(0); }
-    .sideHeader{
-      padding: 16px 16px 12px;
-      border-bottom: 1px solid rgba(220,225,231,.9);
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .sideKicker{
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: .2px;
-    }
-    .sideHeader h3{
-      margin: 2px 0 0;
-      font-size: 18px;
-      line-height: 1.25;
-      font-weight: 900;
-      color: var(--ink);
-    }
-    .iconBtn{
-      border: 1px solid rgba(220,225,231,.9);
-      background: #fff;
-      color: var(--ink);
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      font-size: 20px;
-      line-height: 1;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-    }
-    .sideBody{
-      padding: 14px 16px 16px;
-      overflow:auto;
-      color: rgba(26,31,54,.92);
-      line-height: 1.6;
-    }
-    .sideBody p{ margin: 0 0 12px; font-size: 15.5px; }
-    .sideCallout{
-      border: 1px solid rgba(220,225,231,.95);
-      background: rgba(249,250,251,.9);
-      border-radius: 12px;
-      padding: 12px;
-      font-size: 13.5px;
-      color: var(--muted);
-    }
-    .sideFooter{
-      padding: 12px 16px 16px;
-      border-top: 1px solid rgba(220,225,231,.9);
-      display:flex;
-      justify-content:flex-end;
-      gap:10px;
-    }
-
-    /* ===== Template pill window ===== */
-    .templatePillBtn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(0,0,0,.10);
-      box-shadow: 0 2px 10px rgba(26,31,54,.10);
-      font-weight: 900;
-      letter-spacing: .01em;
-    }
-    .templatePillBtn:hover{ box-shadow: 0 4px 14px rgba(26,31,54,.12); }
-
-    .pillCaret{
-      margin-left: 2px;
-      width: 0; height: 0;
-      border-left:6px solid transparent;
-      border-right:6px solid transparent;
-      border-top:7px solid rgba(3,15,30,.45);
-      transition: transform .15s ease;
-    }
-    .templatePillBtn[aria-expanded="true"] .pillCaret{ transform: rotate(180deg); }
-
-    .tplOverlay{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.36);
-      z-index: 70;
-    }
-
-    .tplWindow{
-      position: fixed;
-      left: 50%;
-      top: 18%;
-      width: min(720px, calc(100vw - 32px));
-      background: rgba(255,255,255,.96);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(0,0,0,.08);
-      border-radius: 16px;
-      box-shadow: 0 22px 60px rgba(0,0,0,.20);
-      z-index: 80;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateX(-50%) translateY(8px);
-      transition: opacity .18s ease, transform .18s ease;
-    }
-    .tplWindow.open{
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .tplHead{
-      padding: 14px 16px 12px;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      border-bottom: 1px solid rgba(0,0,0,.08);
-    }
-    .tplKicker{
-      font-size: 12px;
-      color: rgba(3,15,30,.70);
-      letter-spacing: .02em;
-    }
-    .tplHead h3{
-      margin: 2px 0 0;
-      font-size: 18px;
-      line-height: 1.25;
-      font-weight: 900;
-      color: var(--ink);
-    }
-    .tplClose{
-      border: 1px solid rgba(0,0,0,.10);
-      background: rgba(255,255,255,.92);
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      font-size: 22px;
-      line-height: 1;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-    }
-    .tplClose:hover{ box-shadow: 0 2px 10px rgba(26,31,54,.10); }
-
-    .tplBody{ padding: 14px 16px 16px; }
-
-    .tplCode{
-      margin: 0;
-      padding: 12px 12px;
-      border-radius: 14px;
-      background: rgba(249,250,251,.98);
-      border: 1px solid rgba(0,0,0,.08);
-      box-shadow: 0 1px 10px rgba(26,31,54,.06);
-      white-space: pre-wrap;
-      font-family: var(--mono);
-      font-size: 13.5px;
-      line-height: 1.5;
-      color: #111827;
-    }
-
-    .tplActions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 12px;
-    }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 520px){
-      .timerBar{ justify-content:flex-start; }
-      .timerClock{ flex: 1 1 100%; }
-      .timerActions{ width: 100%; justify-content:flex-start; }
-      .sidePanel{ width: 100vw; border-left:none; }
-      .tplWindow{ top: 10%; }
+    @media(max-width:480px){
+      :root{--fs-body:15px;--fs-prompt:14.5px;--fs-h2:15px}
+      .topbar{padding:7px 10px;gap:6px} .brand .title{font-size:13px}
+      main{padding:0 10px;margin-top:12px} h1{font-size:20px}
+      .timerBar{flex-direction:column;align-items:flex-start;gap:10px}
+      .timerClock,.timerActions{width:100%}
+      .timerActions button{flex:1 1 auto;text-align:center}
+      .progressLine{flex:1 1 100%}
+      .panelBody{padding:10px 12px 14px} .panelHeader{padding:10px 12px 8px}
+      textarea{min-height:140px;font-size:15px}
+      .sidePanel{width:100vw;border-left:none}
+      .qrInputRow{flex-wrap:wrap} .qrInput,.qrGenBtn{width:100%}
     }
   </style>
 </head>
-
 <body>
-  <div class="bg-video-wrap" aria-hidden="true">
-    <video class="bg-video" autoplay muted loop playsinline preload="auto">
-      <source src="businesslady.mp4" type="video/mp4">
-    </video>
+
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="title">Modern English Australia</div>
+      <div class="sub">Koala Spies Sydney · PTE Respond to Situation</div>
+    </div>
+    <div class="topmeta">
+      <button class="chipBtn qrChipBtn" id="btnQR" aria-haspopup="dialog" aria-controls="qrModal" aria-expanded="false">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <rect x=".5" y=".5" width="5" height="5" rx=".5" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="8.5" y=".5" width="5" height="5" rx=".5" stroke="currentColor" stroke-width="1.3"/>
+          <rect x=".5" y="8.5" width="5" height="5" rx=".5" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="2" y="2" width="2" height="2" fill="currentColor"/>
+          <rect x="10" y="2" width="2" height="2" fill="currentColor"/>
+          <rect x="2" y="10" width="2" height="2" fill="currentColor"/>
+          <rect x="8.5" y="8.5" width="2" height="2" fill="currentColor"/>
+          <rect x="11.5" y="8.5" width="2" height="2" fill="currentColor"/>
+          <rect x="8.5" y="11.5" width="2" height="2" fill="currentColor"/>
+          <rect x="11.5" y="11.5" width="2" height="2" fill="currentColor"/>
+        </svg>
+        QR Code
+      </button>
+      <button class="chipBtn" id="btnHelp" aria-haspopup="dialog" aria-controls="helpPanel" aria-expanded="false">Listening settings</button>
+    </div>
   </div>
-  <div class="bg-overlay" aria-hidden="true"></div>
+</header>
 
-  <header>
-    <div class="topbar">
-      <div class="brand">
-        <div class="title">Modern English Australia</div>
-        <div class="sub">Koala Spies Sydney · PTE Respond to Situation – Practice</div>
+<main>
+  <div class="hero">
+    <h1>Respond to situation</h1>
+    <p>Respond politely and clearly to the situation. Include:<br><br>
+      1) A short introduction saying why you are contacting the person.<br>
+      2) The key details of the problem, request, or situation.<br>
+      3) A clear action you want (solution, advice, permission, next steps).<br>
+      4) A polite closing showing appreciation or willingness to cooperate.</p>
+    <h1>How to practise</h1>
+    <p>Press <strong>Start</strong>. The audio prompt plays once automatically. After it finishes, you have 10 seconds to get ready — then a beep signals your 40-second response window. Use speech-to-text or type your answer. Press <strong>Repeat prompt</strong> to redo the same situation, or <strong>Next</strong> to move on.</p>
+    <div class="controlBar">Situation: <strong><span id="sitCounter">1</span> / <span id="sitTotal">6</span></strong></div>
+  </div>
+
+  <!-- Situation -->
+  <section class="panel">
+    <div class="panelHeader">
+      <div>
+        <h2>Situation</h2>
+        <div class="hint">Listen to the prompt, then respond using the structure above.</div>
       </div>
-      <div class="topmeta">
-        <button class="chipBtn" id="btnHelp" type="button" aria-haspopup="dialog" aria-controls="helpPanel" aria-expanded="false">
-          Listening settings
-        </button>
+      <div id="taskTagWrap"></div>
+    </div>
+    <div class="panelBody">
+      <div class="prompt"><div id="promptText"></div></div>
+
+      <!-- Status banner replaces old sub-label; more visible -->
+      <div class="statusBanner info show" id="statusBanner">Press <strong>Start</strong> to play the audio prompt.</div>
+
+      <div class="timerWrap">
+        <div class="timerBar">
+          <div class="timerClock"><span class="time" id="countLabel">00:00</span></div>
+          <div class="timerActions">
+            <button class="primary" id="btnStart">&#9654; Start</button>
+            <button id="btnTryAgain" disabled>Repeat prompt</button>
+            <button id="btnNext" disabled>Next &#8594;</button>
+          </div>
+        </div>
+        <div class="timerMeta">
+          <div class="progressLine"><div class="bar" id="bar"></div></div>
+        </div>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <div class="hero">
-      <h1>Respond to situation</h1>
-
-      <p>
-        Respond politely and clearly to the situation. Include:
-        <br><br>
-        1) A short introduction saying why you are contacting the person.
-        <br>
-        2) The key details of the problem, request, or situation.
-        <br>
-        3) A clear action you want (solution, advice, permission, information, next steps).
-        <br>
-        4) A polite closing showing appreciation or willingness to cooperate.
-      </p>
-
-      <h1>How to Practice with this Page</h1>
-
-      <p>Press "Start". The prompt will play once. Ten seconds after the audio finishes, you will hear a beep. Then you have 40 seconds to respond.</p>
-      <p>Use speech-to-text to see what you said and self-correct. It clears when you press "Repeat prompt" or "Next" (copy it out first if you want to keep it).</p>
-
-      <div class="controlBar" aria-label="Session status">
-        Situation: <strong><span id="sitCounter">1</span>/<span id="sitTotal">6</span></strong>
+  <!-- Answer -->
+  <section class="panel">
+    <div class="panelHeader">
+      <div>
+        <h2>Your answer</h2>
+        <div class="hint">Type here, or use the microphone button for speech-to-text (Chrome / Edge).</div>
       </div>
     </div>
-
-    <!-- Situation panel -->
-    <section class="panel" aria-label="Situation">
-      <div class="panelHeader">
-        <div>
-          <h2>Situation</h2>
-          <div class="hint" id="situationHint">Follow the task type (e.g., explaining, complaining). Use clear workplace language.</div>
-        </div>
-        <!-- Task type tag rendered here -->
-        <div id="taskTagWrap"></div>
+    <div class="panelBody">
+      <div class="row">
+        <button id="btnMic" disabled>&#127908; Start speaking</button>
+        <button id="btnClearAnswer" style="font-size:13px;padding:8px 12px">Clear</button>
       </div>
-
-      <div class="panelBody">
-        <div class="prompt" id="promptBox">
-          <div id="promptText"></div>
-        </div>
-
-        <div class="timerWrap" role="status" aria-live="polite">
-          <div class="timerBar">
-            <div class="timerClock" aria-label="Time remaining">
-              <span class="time" id="countLabel">00:00</span>
-            </div>
-
-            <div class="timerActions">
-              <button class="primary" id="btnStart" type="button">Start</button>
-              <button id="btnTryAgain" type="button">Repeat prompt</button>
-              <button id="btnNext" type="button">Next</button>
-            </div>
-          </div>
-
-          <div class="timerMeta">
-            <div class="progressLine" aria-hidden="true"><div class="bar" id="bar"></div></div>
-            <div class="sub" id="subLabel">Press "Start" to play the prompt and begin.</div>
-          </div>
-        </div>
-
-        <p class="note">Tip: Use "Repeat prompt" to practise the same situation again. Use "Next" to move on.</p>
+      <p class="note" id="sttNote" style="min-height:18px"></p>
+      <div class="row" style="margin-top:10px">
+        <textarea id="answerBox" placeholder="Your response will appear here as you speak, or type it directly…"></textarea>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Answer panel -->
-    <section class="panel" aria-label="Answer">
-      <div class="panelHeader">
-        <div>
-          <h2>Your answer</h2>
-          <div class="hint">Type, or use speech-to-text (Chrome/Edge usually support it).</div>
+  <!-- Self-check -->
+  <section class="panel">
+    <div class="panelHeader">
+      <div>
+        <h2>Self-check</h2>
+        <div class="hint">After responding, tick each element you included.</div>
+      </div>
+    </div>
+    <div class="panelBody">
+      <p class="checklistIntro">Did your response cover all four required elements?</p>
+      <div class="checklistItems">
+        <div class="checkItem" role="checkbox" aria-checked="false" tabindex="0">
+          <div class="checkBox"><span class="checkMark">&#10003;</span></div>
+          <div class="checkLabel"><strong>Introduction</strong><span>Did you briefly say why you are contacting the person?</span></div>
+        </div>
+        <div class="checkItem" role="checkbox" aria-checked="false" tabindex="0">
+          <div class="checkBox"><span class="checkMark">&#10003;</span></div>
+          <div class="checkLabel"><strong>Key details</strong><span>Did you explain the problem, request, or situation clearly?</span></div>
+        </div>
+        <div class="checkItem" role="checkbox" aria-checked="false" tabindex="0">
+          <div class="checkBox"><span class="checkMark">&#10003;</span></div>
+          <div class="checkLabel"><strong>Clear action</strong><span>Did you state what you want — a solution, advice, permission, or next step?</span></div>
+        </div>
+        <div class="checkItem" role="checkbox" aria-checked="false" tabindex="0">
+          <div class="checkBox"><span class="checkMark">&#10003;</span></div>
+          <div class="checkLabel"><strong>Polite closing</strong><span>Did you close politely, showing appreciation or willingness to cooperate?</span></div>
         </div>
       </div>
-
-      <div class="panelBody">
-        <div class="row">
-          <button id="btnMic" type="button" disabled>Start speaking (speech-to-text)</button>
-        </div>
-        <p class="note" id="sttNote"></p>
-
-        <div class="row" style="margin-top:10px">
-          <textarea id="answerBox" placeholder="Type your response here…"></textarea>
-        </div>
+      <div class="checklistProgress">
+        <div class="checklistProgressBar"><div class="checklistProgressFill" id="checklistFill"></div></div>
+        <div class="checklistProgressLabel" id="checklistScore">0 / 4</div>
       </div>
-    </section>
+      <button class="checklistReset" id="btnChecklistReset">Reset checklist</button>
+    </div>
+  </section>
 
-    <!-- Self-check checklist panel (always visible) -->
-    <section class="checklistPanel panel" id="checklistPanel" aria-label="Self-check">
-      <div class="panelHeader">
-        <div>
-          <h2>Self-check</h2>
-          <div class="hint">After you respond, tick each element you included. Be honest — this helps you improve.</div>
-        </div>
-      </div>
-      <div class="panelBody">
-        <p class="checklistIntro">Did your response include all four required elements?</p>
-        <div class="checklistItems" id="checklistItems">
-          <div class="checkItem" data-idx="0" role="checkbox" aria-checked="false" tabindex="0">
-            <div class="checkBox"><span class="checkMark">✓</span></div>
-            <div class="checkLabel">
-              <strong>Introduction</strong>
-              <span>Did you briefly introduce why you are contacting the person?</span>
-            </div>
-          </div>
-          <div class="checkItem" data-idx="1" role="checkbox" aria-checked="false" tabindex="0">
-            <div class="checkBox"><span class="checkMark">✓</span></div>
-            <div class="checkLabel">
-              <strong>Key details</strong>
-              <span>Did you explain the problem, request, or situation clearly?</span>
-            </div>
-          </div>
-          <div class="checkItem" data-idx="2" role="checkbox" aria-checked="false" tabindex="0">
-            <div class="checkBox"><span class="checkMark">✓</span></div>
-            <div class="checkLabel">
-              <strong>Clear action</strong>
-              <span>Did you state what you want — a solution, advice, permission, or next step?</span>
-            </div>
-          </div>
-          <div class="checkItem" data-idx="3" role="checkbox" aria-checked="false" tabindex="0">
-            <div class="checkBox"><span class="checkMark">✓</span></div>
-            <div class="checkLabel">
-              <strong>Polite closing</strong>
-              <span>Did you close politely, showing appreciation or willingness to cooperate?</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="checklistProgress">
-          <div class="checklistProgressBar">
-            <div class="checklistProgressFill" id="checklistFill"></div>
-          </div>
-          <div class="checklistProgressLabel" id="checklistScore">0 / 4</div>
-        </div>
-
-        <button class="checklistReset" id="btnChecklistReset" type="button">Reset checklist</button>
-      </div>
-    </section>
-
-    <!-- Template panel -->
-    <section class="panel" aria-label="Template" style="margin-top:14px;">
-      <div class="panelHeader">
-        <div>
-          <h2>Template</h2>
-          <div class="hint">Optional: open the hint window and insert a template response.</div>
-        </div>
-      </div>
-
-      <div class="panelBody">
-        <button id="btnTemplatePill" type="button" class="templatePillBtn" aria-haspopup="dialog" aria-controls="templateWindow" aria-expanded="false">
-          HINT / USE A TEMPLATE
-          <span class="pillCaret" aria-hidden="true"></span>
-        </button>
-
-        <template id="templateText">
-Hi… , I'd just like to explain/ complain/ ask for advice/ request/ suggest that/about …
-You see, (what happened) …, and in that case I'd like (what you want to happen) …
+  <!-- Template -->
+  <section class="panel">
+    <div class="panelHeader">
+      <div><h2>Template</h2><div class="hint">Use as a starting point if you get stuck.</div></div>
+    </div>
+    <div class="panelBody">
+      <button id="btnTemplatePill" class="templatePillBtn" aria-haspopup="dialog" aria-controls="templateWindow" aria-expanded="false">
+        HINT / USE A TEMPLATE <span class="pillCaret" aria-hidden="true"></span>
+      </button>
+      <template id="templateText">
+Hi [name], I'd just like to explain / complain / ask for advice / request / suggest that …
+You see, [what happened] …, and in that case I'd like [what you want to happen] …
 Thanks so much for your attention on the matter.
-        </template>
-
-        <p class="note">Shortcut: <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> inserts the template.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footerWrap">
-      <div><strong>Koala Spies Sydney</strong> · Modern English Australia · All Rights Reserved</div>
-      <div class="footerLinks">
-        <a href="#" onclick="return false;">Home</a>
-        <a href="#" onclick="return false;">PTE</a>
-        <a href="#" onclick="return false;">Contact</a>
-      </div>
-    </div>
-  </footer>
-
-  <div class="sideOverlay" id="helpOverlay" hidden></div>
-
-  <aside class="sidePanel" id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" aria-hidden="true">
-    <div class="sideHeader">
-      <div>
-        <div class="sideKicker">Help</div>
-        <h3 id="helpTitle">Listening settings</h3>
-      </div>
-      <button class="iconBtn" id="btnHelpClose" type="button" aria-label="Close panel">×</button>
-    </div>
-    <div class="sideBody">
-      <p>
-        To keep the listening activities in the correct native accent, change your device language and voice settings to
-        English (Australia/UK) and turn off any personalised or adaptive speech features. This stops your phone or laptop
-        from switching to your own accent and ensures all audio and dictation stay in the native model your teacher intends.
-      </p>
-      <div class="sideCallout">
-        If speech-to-text accuracy drops, double-check your browser microphone permissions and the selected input device.
-      </div>
-    </div>
-    <div class="sideFooter">
-      <button id="btnHelpDone" class="primary" type="button">Done</button>
-    </div>
-  </aside>
-
-  <div class="tplOverlay" id="tplOverlay" hidden></div>
-
-  <aside class="tplWindow" id="templateWindow" role="dialog" aria-modal="true" aria-labelledby="tplTitle" aria-hidden="true">
-    <div class="tplHead">
-      <div>
-        <div class="tplKicker">Hint</div>
-        <h3 id="tplTitle">Template response</h3>
-      </div>
-      <button class="tplClose" id="btnTplClose" type="button" aria-label="Close template">×</button>
-    </div>
-    <div class="tplBody">
-      <pre class="tplCode" id="tplCode"></pre>
-      <div class="tplActions">
-        <button id="btnTplInsert" class="primary" type="button">Insert into answer</button>
-        <button id="btnTplCopy" type="button">Copy</button>
-      </div>
+      </template>
       <p class="note">Shortcut: <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> inserts the template.</p>
     </div>
-  </aside>
+  </section>
+</main>
 
-  <audio id="promptAudio" preload="auto"></audio>
+<footer>
+  <div class="footerWrap">
+    <div><strong>Koala Spies Sydney</strong> · Modern English Australia · All Rights Reserved</div>
+    <div class="footerLinks">
+      <a href="#" onclick="return false">Home</a>
+      <a href="#" onclick="return false">PTE</a>
+      <a href="#" onclick="return false">Contact</a>
+    </div>
+  </div>
+</footer>
 
-  <script>
+<!-- Overlays -->
+<div class="overlay" id="helpOverlay" hidden></div>
+<div class="overlay" id="tplOverlay"  hidden></div>
+<div class="overlay" id="qrOverlay"   hidden></div>
+
+<!-- Help panel -->
+<aside class="sidePanel" id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" aria-hidden="true">
+  <div class="sideHeader">
+    <div><div class="sideKicker">Help</div><h3 id="helpTitle">Listening settings</h3></div>
+    <button class="iconBtn" id="btnHelpClose" aria-label="Close">&#215;</button>
+  </div>
+  <div class="sideBody">
+    <p>To keep the listening activities in the correct native accent, change your device language and voice settings to English (Australia/UK) and turn off any personalised or adaptive speech features.</p>
+    <div class="sideCallout">If speech-to-text accuracy drops, check your browser microphone permissions and selected input device.</div>
+  </div>
+  <div class="sideFooter"><button id="btnHelpDone" class="primary">Done</button></div>
+</aside>
+
+<!-- Template window -->
+<aside class="tplWindow" id="templateWindow" role="dialog" aria-modal="true" aria-labelledby="tplTitle" aria-hidden="true">
+  <div class="tplHead">
+    <div><div class="tplKicker">Hint</div><h3 id="tplTitle">Template response</h3></div>
+    <button class="tplClose" id="btnTplClose" aria-label="Close">&#215;</button>
+  </div>
+  <div class="tplBody">
+    <pre class="tplCode" id="tplCode"></pre>
+    <div class="tplActions">
+      <button id="btnTplInsert" class="primary">Insert into answer</button>
+      <button id="btnTplCopy">Copy</button>
+    </div>
+    <p class="note">Shortcut: <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> inserts the template.</p>
+  </div>
+</aside>
+
+<!-- QR modal -->
+<div class="qrModal" id="qrModal" role="dialog" aria-modal="true" aria-labelledby="qrTitle" aria-hidden="true">
+  <div class="qrModalHead">
+    <div><div class="qrModalKicker">Share this page</div><p class="qrModalTitle" id="qrTitle">QR Code Generator</p></div>
+    <button class="iconBtn" id="btnQRClose" aria-label="Close">&#215;</button>
+  </div>
+  <div class="qrModalBody">
+    <div class="qrInputRow">
+      <input class="qrInput" id="qrInput" type="url" placeholder="https://yoursite.com/pte-practice" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <button class="qrGenBtn" id="btnQRGenerate">Generate</button>
+    </div>
+    <button class="qrCurrentPageBtn" id="btnQRThisPage">&#8594; Use current page URL</button>
+    <div class="qrCanvasWrap">
+      <div class="qrEmpty" id="qrEmpty">Enter a URL above and press Generate.</div>
+      <canvas id="qrCanvas" width="220" height="220" style="display:none"></canvas>
+      <div class="qrUrlLabel" id="qrUrlLabel" style="display:none"></div>
+      <div class="qrActions" id="qrActions" style="display:none">
+        <button id="btnQRDownload" class="primary" style="font-size:13px">Download PNG</button>
+        <button id="btnQRCopy" style="font-size:13px">Copy image</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ INLINE QR ENCODER (no deps) ═══════════════ -->
+<script>
+(function(w){"use strict";
+var M=0;
+var PP=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,132],[6,34,60,86,112,136],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]];
+var ET=new Array(256),LT=new Array(256);
+for(var i=0;i<8;i++)ET[i]=1<<i;
+for(var i=8;i<256;i++)ET[i]=ET[i-4]^ET[i-5]^ET[i-6]^ET[i-8];
+for(var i=0;i<255;i++)LT[ET[i]]=i;
+function ge(a){while(a<0)a+=255;while(a>=256)a-=255;return ET[a]}
+function gl(a){return LT[a]}
+function Poly(n,s){var o=0;while(o<n.length&&n[o]==0)o++;this.n=new Array(n.length-o+s);for(var i=0;i<n.length-o;i++)this.n[i]=n[i+o]}
+Poly.prototype={g:function(i){return this.n[i]},l:function(){return this.n.length},
+mul:function(e){var r=new Array(this.l()+e.l()-1);for(var i=0;i<this.l();i++)for(var j=0;j<e.l();j++)r[i+j]^=ge(gl(this.g(i))+gl(e.g(j)));return new Poly(r,0)},
+mod:function(e){if(this.l()-e.l()<0)return this;var r=gl(this.g(0))-gl(e.g(0)),n=[];for(var i=0;i<this.l();i++)n[i]=this.g(i);for(var i=0;i<e.l();i++)n[i]^=ge(gl(e.g(i))+r);return new Poly(n,0).mod(e)}};
+function ep(a){var b=new Poly([1],0);for(var i=0;i<a;i++)b=b.mul(new Poly([1,ge(i)],0));return b}
+function bd(a){var d=0;while(a!=0){d++;a>>>=1}return d}
+function bti(a){var d=a<<10;while(bd(d)-bd(1335)>=0)d^=1335<<bd(d)-bd(1335);return(a<<10|d)^21522}
+function lib(t){if(t<10)return 8;if(t<27)return 16;return 16}
+var RST=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16]];
+function getRSB(tv){var d=RST[(tv-1)*4+M];if(!d)throw 0;var b=[];for(var i=0;i<d.length/3;i++)for(var j=0;j<d[i*3];j++)b.push({t:d[i*3+1],d:d[i*3+2]});return b}
+function BB(){this.b=[];this.l=0}
+BB.prototype={put:function(n,l){for(var i=0;i<l;i++)this.pb(((n>>>(l-i-1))&1)==1)},pb:function(b){var p=Math.floor(this.l/8);if(this.b.length<=p)this.b.push(0);if(b)this.b[p]|=0x80>>>(this.l%8);this.l++}};
+function msk(p,r,c){switch(p){case 0:return(r+c)%2==0;case 1:return r%2==0;case 2:return c%3==0;case 3:return(r+c)%3==0;case 4:return(Math.floor(r/2)+Math.floor(c/3))%2==0;case 5:return r*c%2+r*c%3==0;case 6:return(r*c%2+r*c%3)%2==0;case 7:return(r*c%3+(r+c)%2)%2==0}}
+function lp(q){var m=q.mc,l=0;
+for(var r=0;r<m;r++)for(var c=0;c<m;c++){var s=0,d=q.d(r,c);for(var x=-1;x<=1;x++)for(var y=-1;y<=1;y++){if(r+x<0||m<=r+x||c+y<0||m<=c+y||x==0&&y==0)continue;if(d==q.d(r+x,c+y))s++}if(s>5)l+=s-2}
+for(var r=0;r<m-1;r++)for(var c=0;c<m-1;c++){var n=0;if(q.d(r,c))n++;if(q.d(r+1,c))n++;if(q.d(r,c+1))n++;if(q.d(r+1,c+1))n++;if(n==0||n==4)l+=3}
+var dk=0;for(var r=0;r<m;r++)for(var c=0;c<m;c++)if(q.d(r,c))dk++;
+l+=Math.abs(100*dk/m/m-50)/5*10;return l}
+function QR(tv){this.tn=tv;this.mc=tv*4+17;this.mod=[];for(var r=0;r<this.mc;r++){this.mod[r]=[];for(var c=0;c<this.mc;c++)this.mod[r][c]=null}}
+QR.prototype={d:function(r,c){return this.mod[r][c]},
+make:function(text){var best=0,bl=0;for(var i=0;i<8;i++){this._make(text,true,i);var l=lp(this);if(i==0||bl>l){bl=l;best=i}}this._make(text,false,best)},
+_make:function(text,t,mp){
+this.mod=[];for(var r=0;r<this.mc;r++){this.mod[r]=[];for(var c=0;c<this.mc;c++)this.mod[r][c]=null}
+this._probe(0,0);this._probe(this.mc-7,0);this._probe(0,this.mc-7);
+var p=PP[this.tn-1];for(var i=0;i<p.length;i++)for(var j=0;j<p.length;j++){var pr=p[i],pc=p[j];if(this.mod[pr][pc]!=null)continue;for(var dr=-2;dr<=2;dr++)for(var dc=-2;dc<=2;dc++){if(dr==-2||dr==2||dc==-2||dc==2||dr==0&&dc==0)this.mod[pr+dr][pc+dc]=true;else this.mod[pr+dr][pc+dc]=false}}
+for(var r=8;r<this.mc-8;r++)if(this.mod[r][6]==null)this.mod[r][6]=(r%2==0);
+for(var c=8;c<this.mc-8;c++)if(this.mod[6][c]==null)this.mod[6][c]=(c%2==0);
+var bi=bti((M<<3)|mp);
+for(var i=0;i<15;i++){var mv=(!t&&((bi>>i)&1)==1);if(i<6)this.mod[i][8]=mv;else if(i<8)this.mod[i+1][8]=mv;else this.mod[this.mc-15+i][8]=mv}
+for(var i=0;i<15;i++){var mv=(!t&&((bi>>i)&1)==1);if(i<8)this.mod[8][this.mc-i-1]=mv;else if(i<9)this.mod[8][15-i]=mv;else this.mod[8][15-i-1]=mv}
+this.mod[this.mc-8][8]=!t;
+var data=this._data(text);this._map(data,mp)},
+_probe:function(r,c){for(var dr=-1;dr<=7;dr++){if(r+dr<=-1||this.mc<=r+dr)continue;for(var dc=-1;dc<=7;dc++){if(c+dc<=-1||this.mc<=c+dc)continue;if((0<=dr&&dr<=6&&(dc==0||dc==6))||(0<=dc&&dc<=6&&(dr==0||dr==6))||(2<=dr&&dr<=4&&2<=dc&&dc<=4))this.mod[r+dr][c+dc]=true;else this.mod[r+dr][c+dc]=false}}},
+_data:function(text){var rsb=getRSB(this.tn),buf=new BB();buf.put(4,4);buf.put(text.length,lib(this.tn));for(var i=0;i<text.length;i++)buf.put(text.charCodeAt(i),8);
+var tc=0;for(var i=0;i<rsb.length;i++)tc+=rsb[i].d;tc*=8;
+if(buf.l+4<=tc)buf.put(0,4);while(buf.l%8!=0)buf.pb(false);
+while(buf.l<tc){buf.put(236,8);if(buf.l>=tc)break;buf.put(17,8)}
+var off=0,mdc=0,mec=0,dcd=[],ecd=[];
+for(var r=0;r<rsb.length;r++){var dc=rsb[r].d,ec=rsb[r].t-dc;mdc=Math.max(mdc,dc);mec=Math.max(mec,ec);dcd[r]=[];for(var i=0;i<dc;i++)dcd[r][i]=0xff&buf.b[i+off];off+=dc;var rp=ep(ec),raw=new Poly(dcd[r],rp.l()-1),modp=raw.mod(rp);ecd[r]=[];for(var i=0;i<rp.l()-1;i++){var mi=i+modp.l()-ecd[r].length;ecd[r][i]=(mi>=0)?modp.g(mi):0}}
+var total=0;for(var i=0;i<rsb.length;i++)total+=rsb[i].t;
+var data=new Array(total),idx=0;
+for(var i=0;i<mdc;i++)for(var r=0;r<rsb.length;r++)if(i<dcd[r].length)data[idx++]=dcd[r][i];
+for(var i=0;i<mec;i++)for(var r=0;r<rsb.length;r++)if(i<ecd[r].length)data[idx++]=ecd[r][i];
+return data},
+_map:function(data,mp){var inc=-1,r=this.mc-1,bi=7,by=0;
+for(var c=this.mc-1;c>0;c-=2){if(c==6)c--;while(true){for(var dr=0;dr<2;dr++){if(this.mod[r][c-dr]==null){var dk=by<data.length&&((data[by]>>>bi)&1)==1;if(msk(mp,r,c-dr))dk=!dk;this.mod[r][c-dr]=dk;bi--;if(bi==-1){by++;bi=7}}}r+=inc;if(r<0||this.mc<=r){r-=inc;inc=-inc;break}}}}};
+
+w.drawQRToCanvas=function(text,canvas,size){
+  size=size||240;
+  var q,found=false;
+  for(var t=1;t<=40&&!found;t++){try{var qq=new QR(t);qq.make(text);q=qq;found=true}catch(e){}}
+  if(!found)throw new Error('too long');
+  var mc=q.mc,cs=size/mc,ctx=canvas.getContext('2d');
+  canvas.width=size;canvas.height=size;
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,size,size);
+  ctx.fillStyle='#000';
+  for(var r=0;r<mc;r++)for(var c=0;c<mc;c++)if(q.d(r,c))ctx.fillRect(Math.round(c*cs),Math.round(r*cs),Math.ceil(cs),Math.ceil(cs));
+};
+}(window));
+</script>
+
+<!-- ═══════════════ MAIN APP LOGIC ═══════════════ -->
+<script>
 (() => {
-  const PREP_SECONDS  = 10;
-  const SPEAK_SECONDS = 40;
-
-  // Task types + colour classes
-  const TASK_TYPES = {
-    requesting:  'Requesting',
-    complaining: 'Complaining',
-    advising:    'Asking for advice',
-    apologising: 'Apologising',
-    suggesting:  'Suggesting',
-    explaining:  'Explaining',
+  /* ── data ── */
+  const TYPES = {
+    requesting:'Requesting', complaining:'Complaining', advising:'Asking for advice',
+    apologising:'Apologising', suggesting:'Suggesting', explaining:'Explaining'
   };
-
-  const SITUATIONS = [
-    {
-      n: 1,
-      audio: "situation1.mp3",
-      taskType: "explaining",
-      text: "You arrive at work and discover that an important meeting has been moved forward by two hours. Your manager asks you to update the team immediately so everyone can adjust their plans. Explain what you would say to the team in this situation."
-    },
-    {
-      n: 2,
-      audio: "situation2.mp3",
-      taskType: "complaining",
-      text: "You recently bought a new pair of headphones online, but they arrived damaged and don't work properly. You contact customer service to explain the issue and request a replacement or refund. Describe what you would say to the customer service representative."
-    },
-    {
-      n: 3,
-      audio: "situation3.mp3",
-      taskType: "advising",
-      text: "You've just been offered two job opportunities—one with a higher salary but longer hours, and another with better work-life balance but lower pay. You're unsure which to choose and decide to speak with a trusted mentor. Explain what you would say to ask for their advice."
-    },
-    {
-      n: 4,
-      audio: "situation4.mp3",
-      taskType: "requesting",
-      text: "You've been working on a major project for several weeks and now need to take two days off for a personal matter. You decide to speak with your manager to request this time off without disrupting the team's progress. Explain what you would say to your manager."
-    },
-    {
-      n: 5,
-      audio: "situation5.mp3",
-      taskType: "suggesting",
-      text: "Your team has been facing delays in completing a project due to unclear communication. You believe that holding a short daily meeting could help everyone stay aligned and address issues quickly. Explain what you would say to your manager to suggest this idea."
-    },
-    {
-      n: 6,
-      audio: "situation6.mp3",
-      taskType: "apologising",
-      text: "You missed an important deadline because of a scheduling error on your part. Your manager asks for an explanation and wants to know how you'll prevent it from happening again. Explain what you would say to apologise and take responsibility."
-    }
+  const SITS = [
+    { n:1, audio:'situation1.mp3', taskType:'explaining',
+      text:'You arrive at work and discover that an important meeting has been moved forward by two hours. Your manager asks you to update the team immediately so everyone can adjust their plans. Explain what you would say to the team in this situation.' },
+    { n:2, audio:'situation2.mp3', taskType:'complaining',
+      text:"You recently bought a new pair of headphones online, but they arrived damaged and don't work properly. You contact customer service to explain the issue and request a replacement or refund. Describe what you would say to the customer service representative." },
+    { n:3, audio:'situation3.mp3', taskType:'advising',
+      text:"You've just been offered two job opportunities — one with a higher salary but longer hours, and another with better work-life balance but lower pay. You're unsure which to choose and decide to speak with a trusted mentor. Explain what you would say to ask for their advice." },
+    { n:4, audio:'situation4.mp3', taskType:'requesting',
+      text:"You've been working on a major project for several weeks and now need to take two days off for a personal matter. You decide to speak with your manager to request this time off without disrupting the team's progress. Explain what you would say to your manager." },
+    { n:5, audio:'situation5.mp3', taskType:'suggesting',
+      text:'Your team has been facing delays in completing a project due to unclear communication. You believe that holding a short daily meeting could help everyone stay aligned and address issues quickly. Explain what you would say to your manager to suggest this idea.' },
+    { n:6, audio:'situation6.mp3', taskType:'apologising',
+      text:'You missed an important deadline because of a scheduling error on your part. Your manager asks for an explanation and wants to know how you will prevent it from happening again. Explain what you would say to apologise and take responsibility.' },
   ];
 
-  // ── Elements ──────────────────────────────────────────────
-  const countLabel   = document.getElementById('countLabel');
-  const subLabel     = document.getElementById('subLabel');
-  const bar          = document.getElementById('bar');
-  const sitCounter   = document.getElementById('sitCounter');
-  const sitTotal     = document.getElementById('sitTotal');
-  const promptTextEl = document.getElementById('promptText');
-  const taskTagWrap  = document.getElementById('taskTagWrap');
-  const answerBox    = document.getElementById('answerBox');
-  const btnStart     = document.getElementById('btnStart');
-  const btnTryAgain  = document.getElementById('btnTryAgain');
-  const btnNext      = document.getElementById('btnNext');
-  const btnMic       = document.getElementById('btnMic');
-  const sttNote      = document.getElementById('sttNote');
-  const audioEl      = document.getElementById('promptAudio');
+  /* ── elements ── */
+  const $ = id => document.getElementById(id);
+  const countLabel   = $('countLabel');
+  const barEl        = $('bar');
+  const sitCounter   = $('sitCounter');
+  const sitTotal     = $('sitTotal');
+  const promptTextEl = $('promptText');
+  const taskTagWrap  = $('taskTagWrap');
+  const answerBox    = $('answerBox');
+  const btnStart     = $('btnStart');
+  const btnTryAgain  = $('btnTryAgain');
+  const btnNext      = $('btnNext');
+  const btnMic       = $('btnMic');
+  const btnClear     = $('btnClearAnswer');
+  const sttNote      = $('sttNote');
+  const banner       = $('statusBanner');
 
-  // ── Helpers ───────────────────────────────────────────────
-  const pad2  = (n) => String(n).padStart(2,'0');
-  const mmss  = (sec) => `${pad2(Math.floor(sec/60))}:${pad2(sec%60)}`;
-  const setStatusText = (text) => { subLabel.textContent = text; };
-
-  function setTime(sec, totalSec){
-    countLabel.textContent = mmss(Math.max(0, sec));
-    if (!totalSec || totalSec <= 0){ bar.style.width = "0%"; return; }
-    const pct = Math.max(0, Math.min(100, ((totalSec - sec) / totalSec) * 100));
-    bar.style.width = pct.toFixed(1) + "%";
+  /* ── banner helper ── */
+  function showBanner(msg, type = 'info') {
+    banner.innerHTML = msg;
+    banner.className = `statusBanner ${type} show`;
   }
 
-  // ── Task type tag ─────────────────────────────────────────
-  function renderTaskTag(taskType){
-    if (!taskType || !TASK_TYPES[taskType]){
-      taskTagWrap.innerHTML = '';
-      return;
-    }
-    const label = TASK_TYPES[taskType];
-    taskTagWrap.innerHTML = `
-      <span class="taskTag tag-${taskType}">
-        <span class="taskTag-dot"></span>
-        ${label}
-      </span>`;
+  /* ── timer helpers ── */
+  const pad2 = n => String(n).padStart(2,'0');
+  const mmss = s => `${pad2(Math.floor(s/60))}:${pad2(s%60)}`;
+  function setTime(s, tot) {
+    countLabel.textContent = mmss(Math.max(0, s));
+    barEl.style.width = (!tot || tot <= 0) ? '0%'
+      : Math.max(0, Math.min(100, (tot - s) / tot * 100)).toFixed(1) + '%';
   }
 
-  // ── Beep ──────────────────────────────────────────────────
-  let audioCtx;
-  function ensureAudioContext(){
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    return audioCtx;
-  }
-  function beep(durationMs = 180, frequency = 880){
-    const ctx = ensureAudioContext();
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.type = "sine";
-    o.frequency.value = frequency;
-    const now = ctx.currentTime;
-    g.gain.setValueAtTime(0.0001, now);
-    g.gain.exponentialRampToValueAtTime(0.20, now + 0.01);
-    g.gain.exponentialRampToValueAtTime(0.0001, now + durationMs/1000);
-    o.connect(g);
-    g.connect(ctx.destination);
-    o.start(now);
-    o.stop(now + durationMs/1000 + 0.02);
-  }
-
-  // ── Prompt audio ──────────────────────────────────────────
-  function stopPromptAudio(){
-    audioEl.pause();
-    audioEl.currentTime = 0;
-    audioEl.onended = null;
-    audioEl.onerror = null;
-  }
-  function preloadPromptAudio(index){
-    audioEl.src = SITUATIONS[index].audio;
-    audioEl.load();
-  }
-  function playPromptAudio(index){
-    return new Promise((resolve) => {
-      stopPromptAudio();
-      audioEl.src = SITUATIONS[index].audio;
-      const cleanup = () => { audioEl.onended = null; audioEl.onerror = null; };
-      audioEl.onended = () => { cleanup(); resolve(true); };
-      audioEl.onerror = () => { cleanup(); resolve(false); };
-      audioEl.play().catch(() => { cleanup(); resolve(false); });
-    });
-  }
-
-  // ── Timer engine ──────────────────────────────────────────
-  let tickTimer = null;
-  let remaining = 0;
-  let total     = 0;
-
-  function clearTick(){
-    if (tickTimer){ clearInterval(tickTimer); tickTimer = null; }
-  }
-  function lockUI(running){
-    btnStart.disabled    = running;
-    btnTryAgain.disabled = running;
-    btnNext.disabled     = running;
-  }
-  function runCountdown(seconds, labelText, onDone){
-    remaining = seconds;
-    total     = seconds;
-    setStatusText(labelText);
-    setTime(remaining, total);
+  let tick = null;
+  function clearTick() { if (tick) { clearInterval(tick); tick = null; } }
+  function countdown(sec, onTick, onDone) {
+    let rem = sec;
+    setTime(rem, sec);
     clearTick();
-    tickTimer = setInterval(() => {
-      remaining -= 1;
-      if (remaining <= 0){
-        clearTick();
-        setTime(0, total);
-        if (typeof onDone === "function") onDone();
-      } else {
-        setTime(remaining, total);
-      }
+    tick = setInterval(() => {
+      rem--;
+      setTime(rem, sec);
+      if (onTick) onTick(rem);
+      if (rem <= 0) { clearTick(); if (onDone) onDone(); }
     }, 1000);
   }
 
-  // ── Speech-to-text ────────────────────────────────────────
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let recognition = null;
-  let sttAvailable = false;
-  let sttRunning   = false;
+  /* ── beep ── */
+  let audioCtx;
+  function beep(hz = 880, ms = 200) {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.value = hz;
+      const t = audioCtx.currentTime;
+      g.gain.setValueAtTime(0.001, t);
+      g.gain.exponentialRampToValueAtTime(0.25, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.001, t + ms / 1000);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(t); o.stop(t + ms / 1000 + 0.05);
+    } catch(e) {}
+  }
 
-  function stripLive(){
-    answerBox.value = answerBox.value.replace(/\s*\[live\][\s\S]*?\[\/live\]\s*/g, "").trimEnd();
+  /* ── audio playback ── */
+  // We create a fresh Audio object each time to avoid state issues
+  let currentAudio = null;
+
+  function stopCurrentAudio() {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.src = '';
+      currentAudio = null;
+    }
   }
-  function clearSTTTranscript({ clearAll = true } = {}){
-    stripLive();
-    if (clearAll) answerBox.value = "";
+
+  function playMp3(src) {
+    return new Promise((resolve) => {
+      stopCurrentAudio();
+      const audio = new Audio();
+      currentAudio = audio;
+
+      audio.addEventListener('ended', () => resolve('ended'), { once: true });
+      audio.addEventListener('error', (e) => resolve('error'), { once: true });
+
+      // Set src AFTER attaching listeners
+      audio.src = src;
+
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          // Autoplay blocked or file missing
+          resolve('error');
+        });
+      }
+    });
   }
-  function initSTT(){
-    if (!SpeechRecognition){
-      sttAvailable = false;
+
+  /* ── STT ── */
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let rec = null, sttOk = false, sttOn = false;
+
+  function stripLive() {
+    answerBox.value = answerBox.value.replace(/\s*\[live\][\s\S]*?\[\/live\]\s*/g, '').trimEnd();
+  }
+
+  function initSTT() {
+    if (!SR) {
+      sttOk = false;
       btnMic.disabled = true;
-      sttNote.textContent = "Speech-to-text not available in this browser. Use typing instead.";
+      sttNote.textContent = 'Speech-to-text not supported in this browser. Use Chrome or Edge.';
       return;
     }
-    sttAvailable = true;
-    btnMic.disabled = false;
-    sttNote.textContent = "Speech-to-text ready. Allow microphone access when prompted.";
-    recognition = new SpeechRecognition();
-    recognition.lang = "en-AU";
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    let finalText = "";
-    recognition.onstart = () => { finalText = ""; stripLive(); };
-    recognition.onresult = (event) => {
-      let interim = "";
-      for (let i = event.resultIndex; i < event.results.length; i++){
-        const txt = event.results[i][0].transcript;
-        if (event.results[i].isFinal) finalText += txt.trim() + " ";
-        else interim += txt;
+    sttOk = true;
+    sttNote.textContent = 'Microphone ready. Allow access when prompted.';
+    rec = new SR();
+    rec.lang = 'en-AU';
+    rec.continuous = true;
+    rec.interimResults = true;
+
+    let finalText = '';
+
+    rec.onstart = () => { finalText = ''; stripLive(); };
+
+    rec.onresult = (e) => {
+      let interim = '';
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const t = e.results[i][0].transcript;
+        if (e.results[i].isFinal) finalText += t.trim() + ' ';
+        else interim += t;
       }
-      const base = answerBox.value.replace(/\s*\[live\][\s\S]*?\[\/live\]\s*/g, "").trimEnd();
-      const live = interim ? `\n\n[live]\n${interim.trim()}\n[/live]` : "";
-      answerBox.value = (base + (base ? " " : "") + finalText).trim() + live;
+      const base = answerBox.value.replace(/\s*\[live\][\s\S]*?\[\/live\]\s*/g, '').trimEnd();
+      answerBox.value = (base + (base ? ' ' : '') + finalText).trim()
+        + (interim ? `\n\n[live]\n${interim.trim()}\n[/live]` : '');
     };
-    recognition.onerror = () => { stopSTT(); };
-    recognition.onend   = () => {
-      if (sttRunning){
-        sttRunning = false;
-        btnMic.textContent = "Start speaking (speech-to-text)";
+
+    rec.onerror = () => stopSTT();
+    rec.onend = () => {
+      if (sttOn) {
+        sttOn = false;
+        btnMic.textContent = '🎙 Start speaking';
+        btnMic.classList.remove('active-mic');
         stripLive();
       }
     };
   }
-  function startSTT(silent=false){
-    if (!sttAvailable || !recognition || sttRunning) return;
-    try{
-      recognition.start();
-      sttRunning = true;
-      btnMic.textContent = "Stop speaking (speech-to-text)";
-      if (!silent) answerBox.focus();
-    } catch(e){}
+
+  function startSTT() {
+    if (!sttOk || !rec || sttOn) return;
+    try {
+      rec.start();
+      sttOn = true;
+      btnMic.textContent = '⏹ Stop speaking';
+      btnMic.classList.add('active-mic');
+    } catch(e) {}
   }
-  function stopSTT(){
-    if (!sttAvailable || !recognition) return;
-    try{ recognition.stop(); } catch(e){}
-    sttRunning = false;
-    btnMic.textContent = "Start speaking (speech-to-text)";
+
+  function stopSTT() {
+    if (!sttOk || !rec) return;
+    try { rec.stop(); } catch(e) {}
+    sttOn = false;
+    btnMic.textContent = '🎙 Start speaking';
+    btnMic.classList.remove('active-mic');
     stripLive();
   }
 
-  // ── Self-check checklist ──────────────────────────────────
-  function resetChecklist(){
-    document.querySelectorAll('.checkItem').forEach((item) => {
-      item.classList.remove('checked');
-      item.setAttribute('aria-checked', 'false');
+  /* ── checklist ── */
+  function resetChecklist() {
+    document.querySelectorAll('.checkItem').forEach(el => {
+      el.classList.remove('checked');
+      el.setAttribute('aria-checked', 'false');
     });
-    updateChecklistProgress();
+    updateCheck();
   }
-
-  function updateChecklistProgress(){
-    const items   = document.querySelectorAll('.checkItem');
-    const checked = document.querySelectorAll('.checkItem.checked').length;
-    const pct     = (checked / items.length) * 100;
-    document.getElementById('checklistFill').style.width = pct + '%';
-    const scoreEl = document.getElementById('checklistScore');
-    scoreEl.textContent = checked + ' / ' + items.length;
-    scoreEl.classList.toggle('complete', checked === items.length);
+  function updateCheck() {
+    const all = document.querySelectorAll('.checkItem');
+    const n = document.querySelectorAll('.checkItem.checked').length;
+    $('checklistFill').style.width = (n / all.length * 100) + '%';
+    const s = $('checklistScore');
+    s.textContent = n + ' / ' + all.length;
+    s.classList.toggle('complete', n === all.length);
   }
-
-  function toggleCheckItem(item){
-    const isChecked = item.classList.contains('checked');
-    item.classList.toggle('checked', !isChecked);
-    item.setAttribute('aria-checked', String(!isChecked));
-    updateChecklistProgress();
+  function toggleCheck(el) {
+    const c = el.classList.contains('checked');
+    el.classList.toggle('checked', !c);
+    el.setAttribute('aria-checked', String(!c));
+    updateCheck();
   }
-
-  document.querySelectorAll('.checkItem').forEach((item) => {
-    item.addEventListener('click', () => toggleCheckItem(item));
-    item.addEventListener('keydown', (e) => {
-      if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); toggleCheckItem(item); }
+  document.querySelectorAll('.checkItem').forEach(el => {
+    el.addEventListener('click', () => toggleCheck(el));
+    el.addEventListener('keydown', e => {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleCheck(el); }
     });
   });
+  $('btnChecklistReset').addEventListener('click', resetChecklist);
 
-  document.getElementById('btnChecklistReset').addEventListener('click', resetChecklist);
+  /* ── task tag ── */
+  function renderTag(type) {
+    taskTagWrap.innerHTML = (!type || !TYPES[type]) ? ''
+      : `<span class="taskTag tag-${type}"><span class="taskTag-dot"></span>${TYPES[type]}</span>`;
+  }
 
-  // ── Attempt runner ────────────────────────────────────────
+  /* ── core state ── */
   let idx = 0;
+  let running = false;
 
-  async function runAttempt(){
-    clearSTTTranscript({ clearAll: true });
+  function lockButtons(isRunning) {
+    running = isRunning;
+    btnStart.disabled    = isRunning;
+    btnTryAgain.disabled = isRunning;
+    btnNext.disabled     = isRunning;
+  }
+
+  function clearAnswer() {
     stopSTT();
+    stripLive();
+    answerBox.value = '';
+  }
+
+  /* ── main attempt flow ── */
+  async function runAttempt() {
+    clearAnswer();
+    resetChecklist();
+    stopCurrentAudio();
     clearTick();
-    lockUI(true);
-
-    try { ensureAudioContext().resume?.(); } catch(e){}
-
-    setStatusText("Playing the prompt…");
+    lockButtons(true);
     setTime(0, 0);
 
-    const ok = await playPromptAudio(idx);
-    if (!ok){
-      lockUI(false);
-      setStatusText("Audio failed to play. Check the mp3 path and run this page from a web server (not file://).");
-      setTime(0, 0);
+    const sit = SITS[idx];
+
+    // STEP 1 — play audio
+    showBanner('&#128266; Playing the audio prompt…', 'info');
+
+    const result = await playMp3(sit.audio);
+
+    if (result === 'error') {
+      showBanner('&#10060; Audio file not found. Make sure <strong>' + sit.audio + '</strong> is in the same folder as this HTML file, and open via a web server (not file://).', 'err');
+      lockButtons(false);
       return;
     }
 
-    runCountdown(
-      PREP_SECONDS,
-      "Get ready. Beep in 10 seconds.",
-      () => {
-        beep();
-        runCountdown(
-          SPEAK_SECONDS,
-          "Respond now (40 seconds). Speak or type.",
-          () => {
-            setStatusText("Time is up. Use "Repeat prompt" to try again, or "Next" to continue.");
-            setTime(0, 0);
-            lockUI(false);
-            stopSTT();
-            clearSTTTranscript({ clearAll: true });
-          }
-        );
-        if (sttAvailable) startSTT(true);
-      }
-    );
-  }
+    // STEP 2 — 10-second prep countdown
+    showBanner('&#9200; Get ready… responding starts in <span id="prepCount">10</span> seconds.', 'warn');
+    await new Promise(resolve => {
+      countdown(10,
+        rem => { const el = document.getElementById('prepCount'); if (el) el.textContent = rem; },
+        resolve
+      );
+    });
 
-  function resetInternal(){
-    stopPromptAudio();
+    // STEP 3 — beep + 40-second response window
+    beep();
+    if (sttOk) startSTT();
+    showBanner('&#127908; Respond now! Time remaining: <span id="speakCount">40</span> seconds.', 'go');
+
+    await new Promise(resolve => {
+      countdown(40,
+        rem => { const el = document.getElementById('speakCount'); if (el) el.textContent = rem; },
+        resolve
+      );
+    });
+
+    // STEP 4 — time's up
     stopSTT();
-    clearTick();
-    lockUI(false);
-    clearSTTTranscript({ clearAll: true });
-    setStatusText("Press "Start" to play the prompt and begin.");
+    beep(440, 300);
+    showBanner('&#9989; Time&#39;s up! Check your answer below, then tick the self-check boxes. Press <strong>Repeat prompt</strong> to try again or <strong>Next</strong> for a new situation.', 'info');
     setTime(0, 0);
+    lockButtons(false);
   }
 
-  function renderSituation(){
-    const s = SITUATIONS[idx];
-    sitCounter.textContent  = String(s.n);
-    sitTotal.textContent    = String(SITUATIONS.length);
+  /* ── render situation ── */
+  function renderSit() {
+    const s = SITS[idx];
+    sitCounter.textContent = String(s.n);
+    sitTotal.textContent   = String(SITS.length);
     promptTextEl.textContent = s.text;
-    renderTaskTag(s.taskType);
-    resetInternal();
-    resetChecklist();
-    preloadPromptAudio(idx);
+    renderTag(s.taskType);
+    stopCurrentAudio();
+    clearTick();
+    setTime(0, 0);
+    showBanner('Press <strong>Start</strong> to play the audio prompt.', 'info');
+    lockButtons(false);
   }
 
-  function nextSituation(){
-    clearSTTTranscript({ clearAll: true });
-    idx = (idx + 1) % SITUATIONS.length;
-    renderSituation();
-  }
+  /* ── button events ── */
+  btnStart.addEventListener('click', () => { if (!running) runAttempt(); });
 
-  function tryAgain(){
-    clearSTTTranscript({ clearAll: true });
+  btnTryAgain.addEventListener('click', () => {
+    if (running) return;
+    clearAnswer();
     resetChecklist();
-    if (btnStart.disabled) return;
     runAttempt();
-  }
-
-  // ── Template pill window ──────────────────────────────────
-  const btnTemplatePill  = document.getElementById('btnTemplatePill');
-  const tplOverlay       = document.getElementById('tplOverlay');
-  const templateWindow   = document.getElementById('templateWindow');
-  const btnTplClose      = document.getElementById('btnTplClose');
-  const btnTplInsert     = document.getElementById('btnTplInsert');
-  const btnTplCopy       = document.getElementById('btnTplCopy');
-  const tplCode          = document.getElementById('tplCode');
-  const tplSource        = document.getElementById('templateText');
-  const TEMPLATE         = (tplSource?.content?.textContent || tplSource?.textContent || "").trim();
-  if (tplCode) tplCode.textContent = TEMPLATE;
-
-  function openTemplateWindow(){
-    if (!templateWindow || !tplOverlay || !btnTemplatePill) return;
-    tplOverlay.hidden = false;
-    templateWindow.classList.add('open');
-    templateWindow.setAttribute('aria-hidden', 'false');
-    btnTemplatePill.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-    btnTplClose?.focus?.();
-  }
-  function closeTemplateWindow(){
-    if (!templateWindow || !tplOverlay || !btnTemplatePill) return;
-    templateWindow.classList.remove('open');
-    templateWindow.setAttribute('aria-hidden', 'true');
-    btnTemplatePill.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-    setTimeout(() => { tplOverlay.hidden = true; }, 180);
-    btnTemplatePill.focus();
-  }
-
-  btnTemplatePill?.addEventListener('click', () => {
-    templateWindow?.classList.contains('open') ? closeTemplateWindow() : openTemplateWindow();
-  });
-  tplOverlay?.addEventListener('click', closeTemplateWindow);
-  btnTplClose?.addEventListener('click', closeTemplateWindow);
-  btnTplInsert?.addEventListener('click', () => {
-    const current = answerBox.value.trim();
-    answerBox.value = current ? (current + "\n\n" + TEMPLATE) : TEMPLATE;
-    answerBox.focus();
-    closeTemplateWindow();
-  });
-  btnTplCopy?.addEventListener('click', async () => {
-    try{
-      await navigator.clipboard.writeText(TEMPLATE);
-      setStatusText("Template copied.");
-      setTimeout(() => setStatusText("Press "Start" to play the prompt and begin."), 900);
-    } catch(e){}
   });
 
-  // ── Help side panel ───────────────────────────────────────
-  const btnHelp     = document.getElementById('btnHelp');
-  const helpPanel   = document.getElementById('helpPanel');
-  const helpOverlay = document.getElementById('helpOverlay');
-  const btnHelpClose = document.getElementById('btnHelpClose');
-  const btnHelpDone  = document.getElementById('btnHelpDone');
+  btnNext.addEventListener('click', () => {
+    if (running) return;
+    clearAnswer();
+    resetChecklist();
+    idx = (idx + 1) % SITS.length;
+    renderSit();
+  });
 
-  function openHelp(){
-    if (!helpPanel || !helpOverlay || !btnHelp) return;
-    helpOverlay.hidden = false;
-    helpPanel.classList.add('open');
-    helpPanel.setAttribute('aria-hidden', 'false');
-    btnHelp.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-    btnHelpClose?.focus?.();
-  }
-  function closeHelp(){
-    if (!helpPanel || !helpOverlay || !btnHelp) return;
-    helpPanel.classList.remove('open');
-    helpPanel.setAttribute('aria-hidden', 'true');
-    btnHelp.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-    setTimeout(() => { helpOverlay.hidden = true; }, 220);
-    btnHelp.focus();
-  }
-
-  btnHelp?.addEventListener('click', openHelp);
-  helpOverlay?.addEventListener('click', closeHelp);
-  btnHelpClose?.addEventListener('click', closeHelp);
-  btnHelpDone?.addEventListener('click', closeHelp);
-
-  // ── Main button events ────────────────────────────────────
-  btnStart.addEventListener('click', runAttempt);
-  btnTryAgain.addEventListener('click', tryAgain);
-  btnNext.addEventListener('click', nextSituation);
   btnMic.addEventListener('click', () => {
-    if (!sttAvailable) return;
-    sttRunning ? stopSTT() : startSTT(false);
+    if (!sttOk) return;
+    sttOn ? stopSTT() : startSTT();
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape'){
-      if (helpPanel?.classList.contains('open')) closeHelp();
-      if (templateWindow?.classList.contains('open')) closeTemplateWindow();
+  btnClear.addEventListener('click', () => {
+    clearAnswer();
+  });
+
+  /* ── template ── */
+  const TPL = ($('templateText')?.content?.textContent || $('templateText')?.textContent || '').trim();
+  if ($('tplCode')) $('tplCode').textContent = TPL;
+
+  function openTpl()  { $('tplOverlay').hidden=false; $('templateWindow').classList.add('open'); $('templateWindow').setAttribute('aria-hidden','false'); $('btnTemplatePill').setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; $('btnTplClose')?.focus(); }
+  function closeTpl() { $('templateWindow').classList.remove('open'); $('templateWindow').setAttribute('aria-hidden','true'); $('btnTemplatePill').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(()=>{ $('tplOverlay').hidden=true; },180); $('btnTemplatePill').focus(); }
+
+  $('btnTemplatePill').addEventListener('click', () => $('templateWindow').classList.contains('open') ? closeTpl() : openTpl());
+  $('tplOverlay').addEventListener('click', closeTpl);
+  $('btnTplClose').addEventListener('click', closeTpl);
+  $('btnTplInsert').addEventListener('click', () => {
+    const c = answerBox.value.trim();
+    answerBox.value = c ? (c + '\n\n' + TPL) : TPL;
+    answerBox.focus(); closeTpl();
+  });
+  $('btnTplCopy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(TPL); showBanner('Template copied to clipboard.', 'go'); setTimeout(()=>showBanner('Press <strong>Start</strong> to play the audio prompt.','info'),1200); } catch(e) {}
+  });
+
+  /* ── help panel ── */
+  function openHelp()  { $('helpOverlay').hidden=false; $('helpPanel').classList.add('open'); $('helpPanel').setAttribute('aria-hidden','false'); $('btnHelp').setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; $('btnHelpClose')?.focus(); }
+  function closeHelp() { $('helpPanel').classList.remove('open'); $('helpPanel').setAttribute('aria-hidden','true'); $('btnHelp').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(()=>{ $('helpOverlay').hidden=true; },220); $('btnHelp').focus(); }
+
+  $('btnHelp').addEventListener('click', openHelp);
+  $('helpOverlay').addEventListener('click', closeHelp);
+  $('btnHelpClose').addEventListener('click', closeHelp);
+  $('btnHelpDone').addEventListener('click', closeHelp);
+
+  /* ── QR ── */
+  function openQR()  { $('qrOverlay').hidden=false; $('qrModal').classList.add('open'); $('qrModal').setAttribute('aria-hidden','false'); $('btnQR').setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; $('qrInput').focus(); }
+  function closeQR() { $('qrModal').classList.remove('open'); $('qrModal').setAttribute('aria-hidden','true'); $('btnQR').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(()=>{ $('qrOverlay').hidden=true; },200); $('btnQR').focus(); }
+  function genQR() {
+    const url = $('qrInput').value.trim();
+    if (!url) { $('qrEmpty').textContent='Please enter a URL first.'; $('qrEmpty').style.display=''; $('qrCanvas').style.display='none'; $('qrUrlLabel').style.display='none'; $('qrActions').style.display='none'; return; }
+    try {
+      window.drawQRToCanvas(url, $('qrCanvas'), 240);
+      $('qrCanvas').style.display='block'; $('qrEmpty').style.display='none';
+      $('qrUrlLabel').textContent=url; $('qrUrlLabel').style.display='';
+      $('qrActions').style.display='flex';
+    } catch(e) { $('qrEmpty').textContent='Could not generate — URL may be too long.'; $('qrEmpty').style.display=''; $('qrCanvas').style.display='none'; $('qrUrlLabel').style.display='none'; $('qrActions').style.display='none'; }
+  }
+  $('btnQR').addEventListener('click', openQR);
+  $('qrOverlay').addEventListener('click', closeQR);
+  $('btnQRClose').addEventListener('click', closeQR);
+  $('btnQRGenerate').addEventListener('click', genQR);
+  $('qrInput').addEventListener('keydown', e => { if (e.key==='Enter') genQR(); });
+  $('btnQRThisPage').addEventListener('click', () => { $('qrInput').value = window.location.href; genQR(); });
+  $('btnQRDownload').addEventListener('click', () => { const a=document.createElement('a'); a.download='qr-code.png'; a.href=$('qrCanvas').toDataURL('image/png'); a.click(); });
+  $('btnQRCopy').addEventListener('click', async () => {
+    try { $('qrCanvas').toBlob(async blob=>{ await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]); $('btnQRCopy').textContent='Copied!'; setTimeout(()=>{ $('btnQRCopy').textContent='Copy image'; },1500); },'image/png'); }
+    catch(e) { $('btnQRCopy').textContent='Not supported'; setTimeout(()=>{ $('btnQRCopy').textContent='Copy image'; },1500); }
+  });
+
+  /* ── keyboard shortcuts ── */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if ($('helpPanel').classList.contains('open'))     closeHelp();
+      if ($('templateWindow').classList.contains('open')) closeTpl();
+      if ($('qrModal').classList.contains('open'))       closeQR();
     }
-    if (e.ctrlKey && e.key === "Enter"){
+    if (e.ctrlKey && e.key === 'Enter') {
       e.preventDefault();
-      const current = answerBox.value.trim();
-      answerBox.value = current ? (current + "\n\n" + TEMPLATE) : TEMPLATE;
+      const c = answerBox.value.trim();
+      answerBox.value = c ? (c + '\n\n' + TPL) : TPL;
       answerBox.focus();
     }
   });
 
-  // ── Init ──────────────────────────────────────────────────
+  /* ── enable mic button once STT is ready ── */
+  function enableMic() {
+    if (sttOk) btnMic.disabled = false;
+  }
+
+  /* ── init ── */
   initSTT();
-  renderSituation();
+  enableMic();
+  renderSit();
 })();
-  </script>
+</script>
 </body>
 </html>
