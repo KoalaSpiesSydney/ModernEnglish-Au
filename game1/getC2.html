@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>GET – Collocations &amp; Phrasal Verbs (C2) | Modern English AU</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f5f5f5;
+  --card:#2a2a2a;
+  --ink:#1e1e1e;
+  --muted:#bbbbbb;
+  --accent:#1a0a3b;
+  --accent-light:#3d1c8a;
+  --line:#484141;
+  --ok:#1f7a3f;
+  --bad:#a32525;
+  --gold:#b8860b;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:"Newsreader",Georgia,serif;
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+}
+
+/* ===== GIF background ===== */
+.bg-gif{
+  position:fixed;inset:0;z-index:-2;
+  background:url("getexpressions.gif") center / cover no-repeat;
+}
+.bg-overlay{
+  position:fixed;inset:0;z-index:-1;
+  background:rgba(245,245,245,.82);
+}
+
+/* ===== Header ===== */
+header{
+  background:#f7f4f4;
+  color:var(--accent);
+  text-align:center;
+  padding:1.4rem 0 1rem;
+  letter-spacing:2px;
+  font-weight:700;
+  font-size:1.2rem;
+}
+header span{
+  display:block;color:#302d2d;font-weight:300;
+  font-size:.6rem;letter-spacing:3px;margin-top:1px;
+}
+
+/* ===== QR + HOME ===== */
+.qr-toggle{
+  position:fixed;
+  left:max(14px,env(safe-area-inset-left));
+  top:max(14px,env(safe-area-inset-top));
+  z-index:9999;width:46px;height:46px;
+  border-radius:12px;border:1px solid rgba(0,0,0,.12);
+  background:rgba(255,255,255,.92);color:#111;
+  font-weight:900;cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  font-family:inherit;font-size:.85rem;
+}
+.qr-panel{
+  position:fixed;
+  left:max(14px,env(safe-area-inset-left));top:70px;
+  z-index:9999;width:240px;
+  background:rgba(255,255,255,.96);border:1px solid rgba(0,0,0,.12);
+  border-radius:16px;padding:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);display:none;
+}
+.qr-panel .qr-title{font-weight:800;color:#111;margin:0 0 8px;font-size:.95rem;letter-spacing:.5px;}
+.qr-panel .qr-url{font-size:.72rem;color:rgba(0,0,0,.65);word-break:break-all;margin:8px 0 0;line-height:1.35;}
+.qr-code{
+  width:200px;height:200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;border-radius:12px;border:1px solid rgba(0,0,0,.10);
+}
+.home-btn{
+  position:fixed;
+  right:max(14px,env(safe-area-inset-right));
+  top:max(14px,env(safe-area-inset-top));
+  z-index:9999;padding:.7rem 1rem;border-radius:14px;
+  background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.12);
+  color:#111;text-decoration:none;font-weight:800;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  font-family:inherit;font-size:.85rem;
+}
+@media(hover:hover){
+  .home-btn:hover{background:#fff;}
+  .qr-toggle:hover{background:#fff;}
+}
+
+/* ===== Level badge ===== */
+.level-badge{
+  display:inline-block;
+  background:linear-gradient(135deg,#1a0a3b,#6b21a8);
+  color:#fff;font-size:.7rem;font-weight:800;
+  letter-spacing:2px;padding:4px 14px;
+  border-radius:999px;margin-bottom:.5rem;
+  font-family:"Newsreader",Georgia,serif;
+  box-shadow:0 2px 8px rgba(26,10,59,.35);
+}
+
+/* ===== Main ===== */
+main{
+  flex:1;text-align:center;
+  padding:2rem 1rem calc(3rem + env(safe-area-inset-bottom));
+  width:100%;max-width:1200px;margin:0 auto;
+}
+
+h1{
+  color:var(--accent);letter-spacing:2px;margin-top:.5rem;
+  font-size:clamp(1.35rem,2.2vw,1.9rem);font-weight:700;
+}
+p{max-width:760px;margin:.5rem auto 1.2rem;opacity:.92;}
+
+/* ===== Round / Score ===== */
+.round-info{font-size:.85rem;color:var(--muted);margin-bottom:.8rem;letter-spacing:.5px;font-weight:600;}
+.score-bar{
+  display:flex;justify-content:center;gap:1.5rem;
+  margin:.6rem 0 0;font-size:.88rem;font-weight:700;color:var(--muted);
+}
+.score-bar span{color:var(--ink);}
+
+/* ===== Category filter ===== */
+.filter-bar{
+  display:flex;justify-content:center;gap:.55rem;
+  flex-wrap:wrap;margin:.9rem 0 1.1rem;
+}
+.filter-btn{
+  padding:.42rem .9rem;border-radius:999px;
+  border:1.5px solid rgba(26,10,59,.25);
+  background:transparent;color:var(--accent);
+  font-family:inherit;font-size:.82rem;font-weight:700;
+  cursor:pointer;transition:all .2s;
+}
+.filter-btn:hover,.filter-btn.active{
+  background:var(--accent);color:#fff;border-color:var(--accent);
+}
+
+/* ===== Controls ===== */
+.controls{display:flex;justify-content:center;gap:.8rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+button.btn{
+  background:var(--accent);color:#fff;font-weight:600;
+  padding:.75rem 1.4rem;border-radius:45px;border:none;
+  cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s;font-family:inherit;font-size:1rem;
+}
+button.btn:hover{background:linear-gradient(90deg,var(--accent),#7c3aed);transform:translateY(-2px);}
+
+/* ===== Game Grid — 3×3 = 9 cards ===== */
+#game{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  width:min(100%,520px);
+  margin:0 auto;
+}
+.card{
+  background:#2e0e5b;
+  border:2px solid var(--accent);
+  border-radius:16px;padding:12px;min-height:86px;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;cursor:pointer;
+  font-size:.88rem;line-height:1.3;color:#fff;
+  transition:background .3s,color .3s,transform .2s;
+  box-shadow:0 3px 6px rgba(0,0,0,.15);
+  word-break:break-word;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+/* Expression card flipped — dark purple */
+.card.flipped[data-role="expr"]{
+  background:#1a0a3b;
+  color:#e9d5ff;
+  transform:scale(1.04);
+  border-color:#7c3aed;
+}
+/* Definition card flipped — light purple */
+.card.flipped[data-role="def"]{
+  background:#ede9fe;
+  color:#2e0e5b;
+  transform:scale(1.04);
+  border-color:#7c3aed;
+}
+.card.matched{cursor:default;transform:none;}
+.card.odd-found{
+  cursor:default;transform:none;
+  background:#b45309 !important;
+  border-color:#92400e !important;
+  color:#fff !important;
+  font-size:.78rem;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}80%{transform:translateX(4px)}
+}
+.card.shake{animation:shake .35s ease;}
+
+#status{margin-top:1.2rem;font-size:1.05rem;font-weight:600;min-height:1.6em;color:var(--accent);}
+
+/* ===== Teacher Notes ===== */
+.notes{
+  width:min(100%,820px);margin:2.2rem auto 0;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);border-radius:14px;
+  padding:1rem 1.2rem;text-align:left;
+}
+.notes summary{cursor:pointer;font-weight:700;color:var(--accent);margin-bottom:.5rem;font-size:1rem;}
+
+/* Category sections inside notes */
+.notes-section{margin-top:1.1rem;}
+.notes-section h3{
+  color:var(--accent-light);font-size:.95rem;
+  font-weight:800;letter-spacing:.5px;
+  text-transform:uppercase;margin-bottom:.5rem;
+  border-bottom:1px solid rgba(26,10,59,.12);padding-bottom:.3rem;
+}
+.notes-section ul{margin:.4rem 0 0 1.2rem;line-height:1.75;}
+.notes-section li{margin-bottom:.3rem;font-size:.95rem;}
+.notes-section li code{
+  background:rgba(26,10,59,.08);border-radius:4px;
+  padding:1px 5px;font-family:monospace;font-size:.88rem;color:var(--accent);
+}
+
+/* Word order table */
+.wo-table{
+  width:100%;border-collapse:collapse;margin:.7rem 0;font-size:.88rem;
+}
+.wo-table th{
+  background:rgba(26,10,59,.08);color:var(--accent);
+  padding:.45rem .6rem;text-align:left;font-weight:800;
+  border-bottom:2px solid rgba(26,10,59,.15);
+}
+.wo-table td{
+  padding:.4rem .6rem;border-bottom:1px solid rgba(0,0,0,.07);
+  vertical-align:top;line-height:1.5;
+}
+.wo-table tr:last-child td{border-bottom:none;}
+.wo-table .sep{
+  background:rgba(26,10,59,.04);font-weight:700;
+  color:var(--accent-light);font-size:.8rem;letter-spacing:.5px;
+}
+.tag{
+  display:inline-block;font-size:.7rem;font-weight:800;
+  padding:1px 7px;border-radius:999px;vertical-align:middle;
+  letter-spacing:.5px;margin-left:4px;
+}
+.tag-sep{background:#fde68a;color:#78350f;}
+.tag-ins{background:#bbf7d0;color:#14532d;}
+.tag-int{background:#e0e7ff;color:#3730a3;}
+
+/* ===== Gap Fill / Dictation ===== */
+.gapfill-wrap{width:min(100%,820px);margin:2.2rem auto 0;text-align:center;}
+.gapfill-wrap h2{color:var(--accent);margin-bottom:.35rem;font-size:clamp(1.2rem,2vw,1.6rem);}
+.gapfill-intro{max-width:700px;margin:0 auto 1.2rem;}
+.gapfill-list{display:grid;grid-template-columns:1fr;gap:12px;}
+.gapfill-item{
+  background:rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;padding:14px;text-align:center;
+}
+.gapfill-item p{margin:0 auto .85rem;max-width:700px;}
+.speak-btn{
+  display:inline-flex;align-items:center;gap:.45rem;
+  margin:4px auto 10px;padding:.5rem 1.1rem;
+  border-radius:999px;border:2px solid var(--accent);
+  background:transparent;color:var(--accent);
+  font-family:inherit;font-size:.88rem;font-weight:700;
+  cursor:pointer;transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+.speak-btn:hover{background:var(--accent);color:#fff;transform:translateY(-2px);}
+.speak-btn.speaking{background:var(--accent);color:#fff;animation:pulse-btn 1s ease infinite;}
+@keyframes pulse-btn{
+  0%,100%{box-shadow:0 0 0 0 rgba(26,10,59,.4);}
+  50%{box-shadow:0 0 0 8px rgba(26,10,59,0);}
+}
+.gapfill-input{
+  display:block;width:min(100%,300px);margin:0 auto;
+  padding:.7rem .9rem;border:2px solid rgba(26,10,59,.18);
+  border-radius:10px;font:inherit;outline:none;text-align:center;
+}
+.gapfill-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,10,59,.10);}
+.gapfill-actions{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:.8rem;}
+.gapfill-btn{
+  background:var(--accent);color:#fff;font-weight:600;
+  padding:.65rem 1rem;border-radius:999px;border:none;cursor:pointer;
+  font-family:inherit;box-shadow:0 2px 6px rgba(0,0,0,.18);
+  transition:all .2s;font-size:.92rem;
+}
+.gapfill-btn:hover{background:linear-gradient(90deg,var(--accent),#7c3aed);transform:translateY(-2px);}
+.gapfill-feedback{min-height:1.5em;margin-top:.75rem;font-weight:700;text-align:center;}
+.gapfill-feedback.correct{color:var(--ok);}
+.gapfill-feedback.incorrect{color:var(--bad);}
+.gapfill-answer{display:none;margin-top:.65rem;font-weight:700;color:var(--accent);text-align:center;}
+.gapfill-answer.show{display:block;}
+
+/* Voice bar */
+.voice-bar{
+  display:flex;align-items:center;justify-content:center;
+  gap:.6rem;margin-bottom:1rem;flex-wrap:wrap;
+  font-size:.88rem;color:var(--muted);font-weight:600;
+}
+.voice-select{
+  padding:.4rem .7rem;border-radius:8px;
+  border:1.5px solid rgba(26,10,59,.2);
+  font:inherit;font-size:.88rem;color:var(--ink);
+  background:#fff;cursor:pointer;outline:none;
+}
+.voice-select:focus{border-color:var(--accent);}
+
+/* ===== Links ===== */
+.links{display:flex;justify-content:center;gap:1rem;margin-top:2rem;flex-wrap:wrap;}
+a.btn{
+  background:var(--accent);color:#fff;font-weight:600;
+  text-decoration:none;padding:.8rem 1.4rem;border-radius:45px;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);transition:all .25s;font-family:inherit;
+}
+a.btn:hover{background:linear-gradient(90deg,var(--accent),#7c3aed);transform:translateY(-2px);}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--card);color:var(--muted);text-align:center;
+  padding:1rem 0 calc(1rem + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);font-size:.9rem;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — desktop · tablet · phone
+   ═══════════════════════════════════════════ */
+
+/* ── Large desktop / projector ≥ 1280px ── */
+@media(min-width:1280px){
+  main{max-width:1100px;padding:2.2rem 2rem calc(3.5rem + env(safe-area-inset-bottom));}
+  h1{font-size:2rem;}
+  #game{width:min(100%,580px);gap:14px;}
+  .card{min-height:96px;font-size:.95rem;padding:14px;}
+  .notes{width:min(100%,920px);}
+  .gapfill-wrap{width:min(100%,920px);}
+  .wo-table{font-size:.92rem;}
+}
+
+/* ── Tablet landscape 768–1279px ── */
+@media(max-width:1279px) and (min-width:768px){
+  main{padding:1.8rem 1.4rem calc(3rem + env(safe-area-inset-bottom));}
+  #game{width:min(100%,500px);gap:11px;}
+  .card{min-height:82px;font-size:.87rem;padding:11px;}
+  .filter-btn{font-size:.8rem;padding:.38rem .8rem;}
+  .wo-table{font-size:.84rem;}
+  .wo-table th,.wo-table td{padding:.38rem .5rem;}
+}
+
+/* ── Tablet portrait 600–767px ── */
+@media(max-width:767px) and (min-width:600px){
+  main{padding:1.5rem 1rem calc(2.8rem + env(safe-area-inset-bottom));}
+  h1{font-size:1.5rem;}
+  #game{width:min(100%,460px);gap:10px;}
+  .card{min-height:76px;font-size:.82rem;padding:10px;}
+  .score-bar{gap:.9rem;font-size:.82rem;flex-wrap:wrap;justify-content:center;}
+  .filter-bar{gap:.4rem;}
+  .filter-btn{font-size:.76rem;padding:.32rem .7rem;}
+  .notes{padding:.9rem 1rem;}
+  .notes-section li{font-size:.88rem;}
+  /* Collapse word-order table to key cols only */
+  .wo-table .hide-tablet{display:none;}
+  .wo-table{font-size:.78rem;}
+  .wo-table th,.wo-table td{padding:.32rem .4rem;}
+  .gapfill-item p{font-size:.95rem;}
+  .gapfill-input{width:min(100%,260px);}
+  .speak-btn{font-size:.82rem;padding:.45rem .9rem;}
+}
+
+/* ── Large phone / phablet 480–599px ── */
+@media(max-width:599px) and (min-width:480px){
+  main{padding:1.4rem .9rem calc(2.5rem + env(safe-area-inset-bottom));}
+  h1{font-size:1.35rem;letter-spacing:1px;}
+  p{font-size:.93rem;}
+  #game{width:100%;gap:9px;}
+  .card{min-height:74px;font-size:.79rem;padding:9px;border-radius:14px;}
+  .score-bar{flex-direction:column;align-items:center;gap:.3rem;font-size:.82rem;}
+  .filter-bar{gap:.35rem;}
+  .filter-btn{font-size:.74rem;padding:.3rem .65rem;}
+  .wo-table .hide-tablet,.wo-table .hide-phone{display:none;}
+  .wo-table{font-size:.74rem;}
+  .wo-table th,.wo-table td{padding:.28rem .35rem;}
+  .gapfill-input{width:100%;}
+  .gapfill-item p{font-size:.92rem;}
+  .speak-btn{font-size:.8rem;}
+  .qr-toggle,.home-btn{transform:scale(.95);transform-origin:top;}
+  /* Prevent home/QR buttons overlapping header text on smaller phones */
+  header{padding-top:3.5rem;}
+}
+
+/* ── Phone ≤ 479px (iPhone SE, small Android) ── */
+@media(max-width:479px){
+  main{padding:1.2rem .75rem calc(2.2rem + env(safe-area-inset-bottom));}
+  h1{font-size:1.2rem;letter-spacing:1px;}
+  p{font-size:.9rem;}
+  #game{width:100%;gap:7px;}
+  .card{
+    min-height:68px;font-size:.73rem;
+    padding:7px 6px;border-radius:12px;
+    line-height:1.25;
+  }
+  .score-bar{flex-direction:column;align-items:center;gap:.3rem;font-size:.8rem;}
+  .round-info{font-size:.78rem;}
+  .filter-bar{gap:.3rem;}
+  .filter-btn{font-size:.71rem;padding:.28rem .55rem;}
+  button.btn{padding:.7rem 1.1rem;font-size:.92rem;}
+  .notes{padding:.8rem .85rem;}
+  .notes summary{font-size:.92rem;}
+  .notes-section h3{font-size:.82rem;}
+  .notes-section li{font-size:.82rem;}
+  /* Hide all but first two table cols on very small screens */
+  .wo-table .hide-tablet,.wo-table .hide-phone{display:none;}
+  .wo-table{font-size:.7rem;}
+  .wo-table th,.wo-table td{padding:.24rem .28rem;}
+  .gapfill-wrap h2{font-size:1.1rem;}
+  .gapfill-item{padding:10px;}
+  .gapfill-item p{font-size:.88rem;}
+  .gapfill-input{width:100%;font-size:.9rem;}
+  .gapfill-btn{font-size:.84rem;padding:.55rem .85rem;}
+  .speak-btn{font-size:.76rem;padding:.4rem .8rem;width:100%;justify-content:center;}
+  .voice-bar{font-size:.78rem;}
+  .voice-select{font-size:.78rem;}
+  .qr-toggle,.home-btn{transform:scale(.92);transform-origin:top;}
+  header{padding-top:3.8rem;}
+  /* Stack gapfill action buttons */
+  .gapfill-actions{flex-direction:column;align-items:center;}
+  .gapfill-actions .gapfill-btn{width:100%;max-width:220px;}
+}
+
+/* ── Touch devices: larger tap targets ── */
+@media(hover:none) and (pointer:coarse){
+  .card{min-height:80px;}
+  .filter-btn{min-height:38px;}
+  button.btn{min-height:46px;}
+  .gapfill-btn{min-height:42px;}
+  .speak-btn{min-height:40px;}
+  .home-btn,.qr-toggle{min-width:44px;min-height:44px;}
+}
+
+/* ── Reduced motion ── */
+@media(prefers-reduced-motion:reduce){
+  .card,.filter-btn,button.btn,a.btn,.speak-btn,.gapfill-btn{transition:none;}
+  @keyframes shake{0%,100%{transform:none}}
+  @keyframes pulse-btn{0%,100%{box-shadow:none}}
+}
+</style>
+</head>
+
+<body>
+<div class="bg-gif"></div>
+<div class="bg-overlay"></div>
+
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR">QR</button>
+<div class="qr-panel" id="qrPanel" aria-label="QR code panel">
+  <div class="qr-title">Open on your phone</div>
+  <div class="qr-code" id="qrCode"></div>
+  <div class="qr-url" id="qrUrl"></div>
+</div>
+
+<a class="home-btn" href="http://modernenglish.au/Microlessons&Games.html">Home</a>
+
+<header>
+  MODERN ENGLISH AU
+  <span>Koala Spies Sydney</span>
+</header>
+
+<main>
+  <div class="level-badge">C2 MASTERY</div>
+  <h1>GET – Collocations &amp; Phrasal Verbs</h1>
+  <p>
+    Match each <strong>get</strong> expression or phrasal verb with its precise meaning.
+    Each round draws <strong>4 pairs</strong> from a pool of 60+ — but watch out: there is always
+    <strong>one extra expression</strong> on the board that has no matching definition.
+    Find and identify the odd one out to complete the round.
+  </p>
+
+  <div class="round-info" id="roundInfo">Round 1</div>
+  <div class="score-bar">
+    <div>Matches: <span id="scoreMatched">0</span> / 4</div>
+    <div>Odd one out: <span id="scoreOdd">?</span></div>
+    <div>Rounds played: <span id="scoreRounds">0</span></div>
+  </div>
+
+  <!-- Category filter -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="collocation">Collocations</button>
+    <button class="filter-btn" data-cat="phrasal">Phrasal Verbs</button>
+    <button class="filter-btn" data-cat="get-out">get out</button>
+    <button class="filter-btn" data-cat="get-down">get down</button>
+    <button class="filter-btn" data-cat="get-up">get up</button>
+    <button class="filter-btn" data-cat="get-over">get over</button>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="newRoundBtn">New Round ↻</button>
+  </div>
+
+  <div id="game"></div>
+  <div id="status"></div>
+
+  <!-- ══════════════ TEACHER NOTES ══════════════ -->
+  <details class="notes">
+    <summary>Teacher Notes – Full Expression List &amp; Phrasal Verb Word Order</summary>
+
+    <!-- WORD ORDER SECTION -->
+    <div class="notes-section">
+      <h3>Phrasal Verb Word Order Rules</h3>
+      <p style="font-size:.9rem;margin:.4rem 0 .8rem;opacity:.9;">
+        Phrasal verbs with <em>get</em> fall into three types. Word order matters — especially with pronoun objects.
+      </p>
+      <table class="wo-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Structure</th>
+            <th class="hide-tablet">Noun object</th>
+            <th class="hide-tablet">Pronoun object</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sep"><td colspan="5">SEPARABLE PHRASAL VERBS <span class="tag tag-sep">SEP</span> — particle can move</td></tr>
+          <tr>
+            <td>get … across</td>
+            <td>get + obj + across <em>or</em> get across + obj</td>
+            <td class="hide-tablet">Both positions OK</td>
+            <td class="hide-tablet">Must separate: <em>get it across</em></td>
+            <td><em>She got her point across.</em> / <em>She got it across.</em></td>
+          </tr>
+          <tr>
+            <td>get … down</td>
+            <td>get + obj + down <em>or</em> get down + obj</td>
+            <td class="hide-tablet">Both positions OK</td>
+            <td class="hide-tablet">Must separate: <em>get it down</em></td>
+            <td><em>Get the report down on paper.</em> / <em>Get it down.</em></td>
+          </tr>
+          <tr>
+            <td>get … out</td>
+            <td>get + obj + out <em>or</em> get out + obj</td>
+            <td class="hide-tablet">Both positions OK</td>
+            <td class="hide-tablet">Must separate: <em>get it out</em></td>
+            <td><em>She got the secret out.</em> / <em>She got it out.</em></td>
+          </tr>
+          <tr>
+            <td>get … over</td>
+            <td>get + obj + over <em>or</em> get over + obj (rare)</td>
+            <td class="hide-tablet">Separation preferred</td>
+            <td class="hide-tablet">Must separate: <em>get it over with</em></td>
+            <td><em>Let's get this meeting over with.</em> / <em>Get it over with.</em></td>
+          </tr>
+          <tr>
+            <td>get … up</td>
+            <td>get + obj + up <em>or</em> get up + obj</td>
+            <td class="hide-tablet">Both positions OK</td>
+            <td class="hide-tablet">Must separate: <em>get them up</em></td>
+            <td><em>Get the children up.</em> / <em>Get them up.</em></td>
+          </tr>
+          <tr class="sep"><td colspan="5">INSEPARABLE PHRASAL VERBS <span class="tag tag-ins">INS</span> — object always follows particle</td></tr>
+          <tr>
+            <td>get over (sth)</td>
+            <td>get over + obj only</td>
+            <td class="hide-tablet">Always after particle</td>
+            <td class="hide-tablet">Always after particle: <em>get over it</em></td>
+            <td><em>She can't get over his rudeness.</em> / <em>She can't get over it.</em></td>
+          </tr>
+          <tr>
+            <td>get out of (sth)</td>
+            <td>get out of + obj only</td>
+            <td class="hide-tablet">Always after particle</td>
+            <td class="hide-tablet">Always after particle: <em>get out of it</em></td>
+            <td><em>He got out of doing the dishes.</em> / <em>He got out of it.</em></td>
+          </tr>
+          <tr>
+            <td>get down to (sth)</td>
+            <td>get down to + obj only</td>
+            <td class="hide-tablet">Always after particle</td>
+            <td class="hide-tablet">Always after particle: <em>get down to it</em></td>
+            <td><em>We need to get down to work.</em> / <em>Get down to it.</em></td>
+          </tr>
+          <tr>
+            <td>get up to (sth)</td>
+            <td>get up to + obj only</td>
+            <td class="hide-tablet">Always after particle</td>
+            <td class="hide-tablet">Always after particle: <em>get up to it</em></td>
+            <td><em>What are you getting up to?</em></td>
+          </tr>
+          <tr class="sep"><td colspan="5">INTRANSITIVE PHRASAL VERBS <span class="tag tag-int">INT</span> — no object possible</td></tr>
+          <tr>
+            <td>get out</td>
+            <td>Subject + get out (no object)</td>
+            <td class="hide-tablet">—</td>
+            <td class="hide-tablet">—</td>
+            <td><em>The secret got out.</em> / <em>Get out!</em></td>
+          </tr>
+          <tr>
+            <td>get up</td>
+            <td>Subject + get up (no object)</td>
+            <td class="hide-tablet">—</td>
+            <td class="hide-tablet">—</td>
+            <td><em>She gets up at six.</em></td>
+          </tr>
+          <tr>
+            <td>get down</td>
+            <td>Subject + get down (no object)</td>
+            <td class="hide-tablet">—</td>
+            <td class="hide-tablet">—</td>
+            <td><em>Get down! (duck!)</em></td>
+          </tr>
+          <tr>
+            <td>get over</td>
+            <td>Subject + get over (intransitive idiom)</td>
+            <td class="hide-tablet">—</td>
+            <td class="hide-tablet">—</td>
+            <td><em>I can't get over it! (shocked)</em></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:.82rem;color:#555;margin-top:.5rem;">
+        ⚠ Note: many phrasal verbs have both separable transitive AND intransitive uses depending on meaning (e.g. <em>get out</em> = leave [INT] vs <em>get the truth out</em> [SEP]). Context is key.
+      </p>
+    </div>
+
+    <!-- GET OUT -->
+    <div class="notes-section">
+      <h3>get out — multiple meanings</h3>
+      <ul>
+        <li><strong>get out</strong> (INT) – leave a place or situation: <em>Get out of my house!</em></li>
+        <li><strong>get out</strong> (INT) – (of a secret) become known: <em>The news got out before we were ready.</em></li>
+        <li><strong>get out of sth</strong> (INS) – avoid a responsibility or obligation: <em>He always gets out of doing the washing up.</em></li>
+        <li><strong>get sth out</strong> (SEP) – extract or produce something: <em>She finally got the truth out of him.</em></li>
+        <li><strong>get sth out of sth</strong> (INS) – derive benefit or satisfaction: <em>What do you get out of learning a language?</em></li>
+        <li><strong>get out of hand</strong> (fixed) – lose control: <em>The situation got out of hand quickly.</em></li>
+        <li><strong>get out of your depth</strong> (fixed) – be in a situation too difficult to manage: <em>He got out of his depth in the negotiation.</em></li>
+      </ul>
+    </div>
+
+    <!-- GET DOWN -->
+    <div class="notes-section">
+      <h3>get down — multiple meanings</h3>
+      <ul>
+        <li><strong>get down</strong> (INT) – physically lower yourself: <em>Get down — there's a sniper!</em></li>
+        <li><strong>get down</strong> (INT, informal) – dance / have a good time: <em>She really knows how to get down.</em></li>
+        <li><strong>get sb down</strong> (SEP) – depress or demoralise someone: <em>The constant rain is getting me down.</em></li>
+        <li><strong>get sth down</strong> (SEP) – write or record something: <em>Get these figures down before you forget them.</em></li>
+        <li><strong>get sth down</strong> (SEP) – swallow something difficult: <em>He couldn't get the tablets down.</em></li>
+        <li><strong>get down to sth</strong> (INS) – begin to focus seriously on a task: <em>Right, let's get down to business.</em></li>
+        <li><strong>get down to the wire</strong> (fixed) – reach a deadline with little time left: <em>The deal went right down to the wire.</em></li>
+      </ul>
+    </div>
+
+    <!-- GET UP -->
+    <div class="notes-section">
+      <h3>get up — multiple meanings</h3>
+      <ul>
+        <li><strong>get up</strong> (INT) – rise from bed: <em>I got up at six to catch the train.</em></li>
+        <li><strong>get up</strong> (INT) – stand up: <em>She got up and left the room.</em></li>
+        <li><strong>get sb up</strong> (SEP) – wake or rouse someone: <em>Can you get the kids up at seven?</em></li>
+        <li><strong>get sth up</strong> (SEP) – organise or put together: <em>They got up a petition within hours.</em></li>
+        <li><strong>get up to sth</strong> (INS) – be involved in something (often mischievous): <em>What have you been getting up to?</em></li>
+        <li><strong>get up to speed</strong> (fixed) – become fully informed or competent: <em>It took her a week to get up to speed.</em></li>
+        <li><strong>get up someone's nose</strong> (fixed) – irritate someone intensely: <em>His constant interruptions really get up my nose.</em></li>
+        <li><strong>get up steam</strong> (fixed) – build energy or momentum: <em>The movement is slowly getting up steam.</em></li>
+      </ul>
+    </div>
+
+    <!-- GET OVER -->
+    <div class="notes-section">
+      <h3>get over — multiple meanings</h3>
+      <ul>
+        <li><strong>get over sth</strong> (INS) – recover from illness, loss or shock: <em>It took months to get over the breakup.</em></li>
+        <li><strong>get over sth</strong> (INS) – overcome an obstacle or difficulty: <em>We'll get over this problem somehow.</em></li>
+        <li><strong>get sth over (with)</strong> (SEP) – finish something unpleasant: <em>Let's just get the presentation over with.</em></li>
+        <li><strong>get sth over to sb</strong> (SEP) – communicate something successfully: <em>She struggled to get her meaning over to the board.</em></li>
+        <li><strong>can't get over sth</strong> (fixed, INT) – be astonished by something: <em>I can't get over how much he's changed.</em></li>
+        <li><strong>get over yourself</strong> (fixed) – stop being arrogant or self-pitying: <em>Oh, get over yourself — it wasn't that bad.</em></li>
+      </ul>
+    </div>
+
+    <!-- C2 COLLOCATIONS -->
+    <div class="notes-section">
+      <h3>C2 Collocations with GET</h3>
+      <ul>
+        <li><strong>get the upper hand</strong> – gain a position of advantage over someone</li>
+        <li><strong>get wind of something</strong> – hear a rumour about something secret</li>
+        <li><strong>get to grips with something</strong> – begin to understand or deal with something difficult</li>
+        <li><strong>get a grip (on oneself)</strong> – regain self-control</li>
+        <li><strong>get the ball rolling</strong> – initiate a process or activity</li>
+        <li><strong>get cold feet</strong> – lose courage or confidence at the last moment</li>
+        <li><strong>get your wires crossed</strong> – misunderstand each other due to miscommunication</li>
+        <li><strong>get your act together</strong> – organise yourself and behave more effectively</li>
+        <li><strong>get carried away</strong> – become overly excited and lose judgement</li>
+        <li><strong>get your own back</strong> – take revenge on someone</li>
+        <li><strong>get the better of someone</strong> – defeat or overcome someone</li>
+        <li><strong>get a raw deal</strong> – receive unfair or poor treatment</li>
+        <li><strong>get a word in edgeways</strong> – manage to speak when others dominate conversation</li>
+        <li><strong>get the sack</strong> – be dismissed from a job</li>
+        <li><strong>get the green light</strong> – receive permission or approval to proceed</li>
+        <li><strong>get under someone's skin</strong> – irritate or affect someone deeply</li>
+        <li><strong>get a handle on something</strong> – begin to understand or control something</li>
+        <li><strong>get the wrong end of the stick</strong> – completely misunderstand a situation</li>
+        <li><strong>get off to a flying start</strong> – begin something very successfully</li>
+        <li><strong>get your bearings</strong> – orientate yourself in a new or unfamiliar situation</li>
+      </ul>
+    </div>
+
+    <!-- OTHER PHRASAL VERBS -->
+    <div class="notes-section">
+      <h3>Other Phrasal Verbs with GET (C2)</h3>
+      <ul>
+        <li><strong>get ahead of oneself</strong> – act or think too far in advance of current events</li>
+        <li><strong>get around</strong> – travel widely; or become widely known (of news)</li>
+        <li><strong>get around to doing sth</strong> – eventually find the time to do something delayed</li>
+        <li><strong>get at sb</strong> – criticise or imply something indirectly</li>
+        <li><strong>get at sth</strong> – reach or access something; or imply a meaning</li>
+        <li><strong>get away with sth</strong> – escape blame or punishment for wrongdoing</li>
+        <li><strong>get back at sb</strong> – retaliate against someone who has wronged you</li>
+        <li><strong>get back to sb</strong> – contact someone again with further information</li>
+        <li><strong>get by</strong> – manage to survive with limited resources</li>
+        <li><strong>get in on sth</strong> – become involved in a profitable or interesting activity</li>
+        <li><strong>get into sth</strong> – become deeply interested or involved in something</li>
+        <li><strong>get off</strong> – escape punishment; or begin a journey</li>
+        <li><strong>get on</strong> – make progress; have a good relationship with someone</li>
+        <li><strong>get onto sb</strong> – contact someone to deal with a matter</li>
+        <li><strong>get out of bed on the wrong side</strong> – start the day in a bad mood</li>
+        <li><strong>get round sb</strong> – persuade someone by flattery or charm</li>
+        <li><strong>get round to sth</strong> – find time to do something after delay</li>
+        <li><strong>get through (to sb)</strong> – make contact; or succeed in being understood</li>
+        <li><strong>get through sth</strong> – survive or complete a difficult experience</li>
+        <li><strong>get together</strong> – meet informally; or organise a plan</li>
+        <li><strong>get with it</strong> – become aware of current trends or a situation</li>
+      </ul>
+    </div>
+
+  </details>
+
+  <!-- ══════════════ DICTATION ══════════════ -->
+  <section class="gapfill-wrap" aria-labelledby="gapfillTitle">
+    <h2 id="gapfillTitle">Write from Dictation</h2>
+    <p class="gapfill-intro">
+      Press <strong>▶ Listen</strong> to hear the sentence. Write the missing <strong>get</strong> expression, then submit.
+      Focus on meaning in context — C2 expressions often have more than one plausible answer.
+    </p>
+
+    <div class="voice-bar">
+      <span>Voice:</span>
+      <select class="voice-select" id="voiceSelect">
+        <option value="">Loading voices…</option>
+      </select>
+      <span id="voiceStatus" style="font-size:.8rem;color:var(--muted)"></span>
+    </div>
+
+    <div class="gapfill-list">
+
+      <article class="gapfill-item"
+               data-answer="get wind of"
+               data-mp3="dictation_c2_1.mp3"
+               data-sentence="The press managed to get wind of the minister's resignation before the official announcement.">
+        <p>1) The press managed to ______ the minister's resignation before the official announcement.</p>
+        <button type="button" class="speak-btn">&#128264; Listen</button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get wind of</div>
+      </article>
+
+      <article class="gapfill-item"
+               data-answer="get to grips with"
+               data-mp3="dictation_c2_2.mp3"
+               data-sentence="New employees often struggle to get to grips with the company's internal systems.">
+        <p>2) New employees often struggle to ______ the company's internal systems.</p>
+        <button type="button" class="speak-btn">&#128264; Listen</button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get to grips with</div>
+      </article>
+
+      <article class="gapfill-item"
+               data-answer="get carried away"
+               data-mp3="dictation_c2_3.mp3"
+               data-sentence="The investors got carried away with the hype and failed to assess the real risks.">
+        <p>3) The investors ______ with the hype and failed to assess the real risks.</p>
+        <button type="button" class="speak-btn">&#128264; Listen</button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: got carried away</div>
+      </article>
+
+      <article class="gapfill-item"
+               data-answer="get down to"
+               data-mp3="dictation_c2_4.mp3"
+               data-sentence="After an hour of small talk, they finally got down to the real business of the meeting.">
+        <p>4) After an hour of small talk, they finally ______ the real business of the meeting.</p>
+        <button type="button" class="speak-btn">&#128264; Listen</button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: got down to</div>
+      </article>
+
+      <article class="gapfill-item"
+               data-answer="get the wrong end of the stick"
+               data-mp3="dictation_c2_5.mp3"
+               data-sentence="She completely got the wrong end of the stick and thought she had been fired.">
+        <p>5) She completely ______ and thought she had been fired.</p>
+        <button type="button" class="speak-btn">&#128264; Listen</button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: got the wrong end of the stick</div>
+      </article>
+
+      <article class="gapfill-item"
+               data-answer="get out of hand"
+               data-mp3="dictation_c2_6.mp3"
+               data-sentence="The debate got out of hand when several delegates started shouting over each other.">
+        <p>6) The debate ______ when several delegates started shouting over each other.</p>
+        <button type="button" class="speak-btn">&#128264; Listen</button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: got out of hand</div>
+      </article>
+
+      <article class="gapfill-item"
+               data-answer="get your wires crossed"
+               data-mp3="dictation_c2_7.mp3"
+               data-sentence="I think we got our wires crossed — I was told the meeting was on Thursday, not Tuesday.">
+        <p>7) I think we ______ — I was told the meeting was on Thursday, not Tuesday.</p>
+        <button type="button" class="speak-btn">&#128264; Listen</button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: got our wires crossed</div>
+      </article>
+
+      <article class="gapfill-item"
+               data-answer="get the upper hand"
+               data-mp3="dictation_c2_8.mp3"
+               data-sentence="By the third quarter, the opposition had clearly got the upper hand in the debate.">
+        <p>8) By the third quarter, the opposition had clearly ______ in the debate.</p>
+        <button type="button" class="speak-btn">&#128264; Listen</button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: got the upper hand</div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="links">
+    <a href="http://modernenglish.au/Microlessons%26Games.html" class="btn">Home</a>
+  </div>
+</main>
+
+<footer>© Modern English AU · All Rights Reserved</footer>
+
+<!-- QR library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<!-- QR panel -->
+<script>
+(function(){
+  const toggle=document.getElementById("qrToggle");
+  const panel=document.getElementById("qrPanel");
+  const box=document.getElementById("qrCode");
+  const urlLabel=document.getElementById("qrUrl");
+  if(!toggle||!panel||!box||!urlLabel)return;
+  let made=false;
+  function make(){
+    const url=window.location.href;
+    urlLabel.textContent=url;box.innerHTML="";
+    new QRCode(box,{text:url,width:200,height:200,correctLevel:QRCode.CorrectLevel.M});
+    made=true;
+  }
+  toggle.addEventListener("click",()=>{
+    const open=panel.style.display==="block";
+    panel.style.display=open?"none":"block";
+    if(!open&&!made)make();
+  });
+  document.addEventListener("click",(e)=>{
+    if(panel.style.display!=="block")return;
+    if(!panel.contains(e.target)&&!toggle.contains(e.target))panel.style.display="none";
+  });
+})();
+</script>
+
+<!-- ══════════════ MATCHING GAME ══════════════ -->
+<script>
+// ── Full C2 pool — 60 pairs, categorised ────────────────────────────
+const ALL_PAIRS = [
+
+  // ── COLLOCATIONS ────────────────────────────────────────────────
+  {cat:"collocation", expr:"get the upper hand",        def:"gain an advantage over someone"},
+  {cat:"collocation", expr:"get wind of something",     def:"hear a rumour of something secret"},
+  {cat:"collocation", expr:"get to grips with",         def:"start to understand or deal with"},
+  {cat:"collocation", expr:"get a grip on oneself",     def:"regain self-control"},
+  {cat:"collocation", expr:"get the ball rolling",      def:"initiate a process or activity"},
+  {cat:"collocation", expr:"get cold feet",             def:"lose courage at the last moment"},
+  {cat:"collocation", expr:"get your wires crossed",    def:"misunderstand each other"},
+  {cat:"collocation", expr:"get your act together",     def:"organise yourself more effectively"},
+  {cat:"collocation", expr:"get carried away",          def:"become overly excited and lose judgement"},
+  {cat:"collocation", expr:"get your own back",         def:"take revenge on someone"},
+  {cat:"collocation", expr:"get the better of someone", def:"defeat or overcome someone"},
+  {cat:"collocation", expr:"get a raw deal",            def:"receive unfair or poor treatment"},
+  {cat:"collocation", expr:"get a word in edgeways",    def:"speak when others dominate"},
+  {cat:"collocation", expr:"get the sack",              def:"be dismissed from a job"},
+  {cat:"collocation", expr:"get the green light",       def:"receive permission to proceed"},
+  {cat:"collocation", expr:"get under someone's skin",  def:"irritate or affect someone deeply"},
+  {cat:"collocation", expr:"get a handle on something", def:"begin to understand or control"},
+  {cat:"collocation", expr:"get the wrong end of the stick", def:"completely misunderstand a situation"},
+  {cat:"collocation", expr:"get off to a flying start", def:"begin something very successfully"},
+  {cat:"collocation", expr:"get your bearings",         def:"orientate yourself in a new situation"},
+
+  // ── PHRASAL — GET OUT ────────────────────────────────────────────
+  {cat:"get-out", expr:"get out (intransitive)",        def:"leave a place or situation"},
+  {cat:"get-out", expr:"get out (news)",                def:"(of a secret) become public"},
+  {cat:"get-out", expr:"get out of doing something",    def:"avoid an obligation"},
+  {cat:"get-out", expr:"get something out of someone",  def:"extract information or a confession"},
+  {cat:"get-out", expr:"get something out of something",def:"derive benefit or satisfaction from"},
+  {cat:"get-out", expr:"get out of hand",               def:"lose control completely"},
+  {cat:"get-out", expr:"get out of your depth",         def:"face a situation too difficult to manage"},
+
+  // ── PHRASAL — GET DOWN ───────────────────────────────────────────
+  {cat:"get-down", expr:"get down (physical)",          def:"lower your body for cover"},
+  {cat:"get-down", expr:"get down (informal)",          def:"dance and enjoy yourself freely"},
+  {cat:"get-down", expr:"get someone down",             def:"depress or demoralise someone"},
+  {cat:"get-down", expr:"get something down (written)", def:"write or record something quickly"},
+  {cat:"get-down", expr:"get something down (swallow)", def:"manage to swallow something"},
+  {cat:"get-down", expr:"get down to something",        def:"begin to focus seriously on a task"},
+  {cat:"get-down", expr:"get down to the wire",         def:"reach a deadline with almost no time"},
+
+  // ── PHRASAL — GET UP ─────────────────────────────────────────────
+  {cat:"get-up", expr:"get up (from bed)",              def:"rise from bed in the morning"},
+  {cat:"get-up", expr:"get up (stand)",                 def:"rise to a standing position"},
+  {cat:"get-up", expr:"get someone up",                 def:"wake or rouse another person"},
+  {cat:"get-up", expr:"get something up",               def:"organise or put something together"},
+  {cat:"get-up", expr:"get up to something",            def:"be involved in (often mischievous) activity"},
+  {cat:"get-up", expr:"get up to speed",                def:"become fully informed or competent"},
+  {cat:"get-up", expr:"get up someone's nose",          def:"intensely irritate someone"},
+  {cat:"get-up", expr:"get up steam",                   def:"build momentum or energy"},
+
+  // ── PHRASAL — GET OVER ───────────────────────────────────────────
+  {cat:"get-over", expr:"get over something (recover)", def:"recover from illness, loss or shock"},
+  {cat:"get-over", expr:"get over something (obstacle)",def:"overcome a difficulty or obstacle"},
+  {cat:"get-over", expr:"get something over with",      def:"finish something unpleasant quickly"},
+  {cat:"get-over", expr:"get something over to someone",def:"communicate something successfully"},
+  {cat:"get-over", expr:"can't get over something",     def:"be astonished or shocked by something"},
+  {cat:"get-over", expr:"get over yourself",            def:"stop being arrogant or self-pitying"},
+
+  // ── OTHER PHRASAL VERBS ──────────────────────────────────────────
+  {cat:"phrasal", expr:"get ahead of oneself",          def:"act or think too far ahead of events"},
+  {cat:"phrasal", expr:"get around (travel)",           def:"travel widely or move about"},
+  {cat:"phrasal", expr:"get around (news)",             def:"(of news) spread or become known"},
+  {cat:"phrasal", expr:"get around to doing",           def:"eventually find time for something delayed"},
+  {cat:"phrasal", expr:"get at someone",                def:"criticise someone indirectly"},
+  {cat:"phrasal", expr:"get at something",              def:"imply a meaning or access something"},
+  {cat:"phrasal", expr:"get away with something",       def:"escape blame or punishment"},
+  {cat:"phrasal", expr:"get back at someone",           def:"retaliate against someone who wronged you"},
+  {cat:"phrasal", expr:"get back to someone",           def:"contact someone again with more information"},
+  {cat:"phrasal", expr:"get by",                        def:"manage to survive with limited resources"},
+  {cat:"phrasal", expr:"get in on something",           def:"become involved in a profitable activity"},
+  {cat:"phrasal", expr:"get off",                       def:"escape punishment; or begin a journey"},
+  {cat:"phrasal", expr:"get on with someone",           def:"have a good relationship with someone"},
+  {cat:"phrasal", expr:"get onto someone",              def:"contact someone to deal with a matter"},
+  {cat:"phrasal", expr:"get round someone",             def:"persuade by flattery or charm"},
+  {cat:"phrasal", expr:"get through to someone",        def:"succeed in being understood"},
+  {cat:"phrasal", expr:"get through something",         def:"survive or complete a difficult experience"},
+  {cat:"phrasal", expr:"get together",                  def:"meet informally or plan together"},
+  {cat:"phrasal", expr:"get with it",                   def:"become aware of current trends"},
+];
+
+const matchColors = [
+  "#1d4ed8","#047857","#b45309","#be185d",
+  "#7c3aed","#0e7490","#c2410c","#15803d"
+];
+
+const gameEl         = document.getElementById("game");
+const statusEl       = document.getElementById("status");
+const newRoundBtn    = document.getElementById("newRoundBtn");
+const roundInfoEl    = document.getElementById("roundInfo");
+const scoreMatchedEl = document.getElementById("scoreMatched");
+const scoreOddEl     = document.getElementById("scoreOdd");
+const scoreRoundsEl  = document.getElementById("scoreRounds");
+
+let first=null,second=null,lock=false,matched=0,roundCount=0;
+let usedKeys = new Set();
+let activeCategory = "all";
+let oddKey = null;   // key of the odd-one-out expression this round
+let oddFound = false;
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function getPool(){
+  if(activeCategory==="all") return ALL_PAIRS;
+  if(activeCategory==="phrasal") return ALL_PAIRS.filter(p=>
+    ["phrasal","get-out","get-down","get-up","get-over"].includes(p.cat));
+  return ALL_PAIRS.filter(p=>p.cat===activeCategory);
+}
+
+function pickPairs(n){
+  const pool = getPool();
+  const unused = pool.filter(p=>!usedKeys.has(p.expr));
+  const src = unused.length>=n ? unused : pool;
+  if(src===pool) usedKeys.clear();
+  const chosen = shuffle(src).slice(0,n);
+  chosen.forEach(p=>usedKeys.add(p.expr));
+  return chosen;
+}
+
+function buildRound(){
+  gameEl.innerHTML="";statusEl.textContent="";
+  first=null;second=null;lock=false;matched=0;oddFound=false;
+  roundCount++;
+  roundInfoEl.textContent="Round "+roundCount;
+  scoreRoundsEl.textContent=roundCount;
+  scoreMatchedEl.textContent="0";
+  scoreOddEl.textContent="?";
+  scoreOddEl.style.color="";
+
+  // 4 pairs = 8 cards, plus 1 extra expression = 9 cards total
+  const pairs = pickPairs(4);
+
+  // Pick the odd-one-out expression from a different pool entry (not in pairs)
+  const pairKeys = new Set(pairs.map(p=>p.expr));
+  const pool = getPool();
+  const oddPool = pool.filter(p=>!pairKeys.has(p.expr));
+  const oddPair = shuffle(oddPool)[0];
+  oddKey = oddPair ? oddPair.expr : null;
+
+  // Build card data: 4 expr + 4 def + 1 odd expr = 9
+  const cards = shuffle([
+    ...pairs.flatMap(p=>[
+      {text:p.expr, key:p.expr, role:"expr", odd:false},
+      {text:p.def,  key:p.expr, role:"def",  odd:false}
+    ]),
+    // The odd expression card — no matching definition on the board
+    {text:oddPair ? oddPair.expr : "—", key:"__odd__", role:"expr", odd:true}
+  ]);
+
+  cards.forEach(data=>{
+    const div=document.createElement("div");
+    div.className="card";
+    div.dataset.key=data.key;
+    div.dataset.role=data.role;
+    div.dataset.odd=data.odd?"1":"0";
+    div.style.background="#2e0e5b";
+    gameEl.appendChild(div);
+    div.addEventListener("click",()=>onCardClick(div,data));
+  });
+}
+
+function checkRoundComplete(){
+  if(matched===4 && oddFound){
+    statusEl.textContent="✦ All matched and odd one out found! Press New Round to continue.";
+  } else if(matched===4 && !oddFound){
+    statusEl.textContent="✦ All pairs matched! Now find and click the odd one out.";
+  }
+}
+
+function onCardClick(div,data){
+  if(lock||div.classList.contains("flipped")||div.classList.contains("matched")||div.classList.contains("odd-found"))return;
+
+  div.classList.add("flipped");
+  div.textContent=data.text;
+  // background now handled by CSS [data-role] selectors
+
+  // ── Odd-one-out card clicked ──────────────────────────────────────
+  if(data.odd){
+    setTimeout(()=>{
+      div.classList.remove("flipped");
+      div.classList.add("odd-found");
+      div.style.background="#b45309";
+      div.style.color="#fff";
+      div.style.border="2px solid #92400e";
+      div.textContent=data.text+" ✕ odd one out";
+      oddFound=true;
+      scoreOddEl.textContent="✓ found";
+      scoreOddEl.style.color="#b45309";
+      checkRoundComplete();
+    },400);
+    // Reset first if it was selected before clicking odd
+    if(first){ first.classList.remove("flipped"); first.textContent=""; first.style.background="#3b1060"; first=null; lock=false; }
+    return;
+  }
+
+  // ── Normal pair logic ─────────────────────────────────────────────
+  if(!first){first=div;return;}
+  second=div;lock=true;
+
+  if(first.dataset.key===second.dataset.key&&first!==second){
+    const color=matchColors[matched%matchColors.length];
+    setTimeout(()=>{
+      [first,second].forEach(c=>{
+        c.classList.remove("flipped");c.classList.add("matched");
+        c.style.background=color;c.style.color="#fff";
+      });
+      matched++;scoreMatchedEl.textContent=matched;
+      checkRoundComplete();
+      first=null;second=null;lock=false;
+    },500);
+  } else {
+    setTimeout(()=>{
+      [first,second].forEach(c=>{
+        c.classList.add("shake");
+        setTimeout(()=>c.classList.remove("shake"),360);
+        c.classList.remove("flipped");
+        c.textContent="";c.style.background="#2e0e5b";c.style.color="#fff";
+      });
+      first=null;second=null;lock=false;
+    },750);
+  }
+}
+
+function var_accent(){return "#1a0a3b";}
+
+newRoundBtn.addEventListener("click",buildRound);
+
+// Category filter
+document.querySelectorAll(".filter-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    activeCategory=btn.dataset.cat;
+    usedKeys.clear();
+    roundCount=0;
+    buildRound();
+  });
+});
+
+buildRound();
+</script>
+
+<!-- ══════════════ TTS + GAP FILL ══════════════ -->
+<script>
+/*
+  AUDIO SYSTEM — mp3 first, browser TTS fallback
+  ────────────────────────────────────────────────
+  To add a recorded mp3 for any sentence:
+    1. Name the file to match the data-mp3 attribute on the article
+       e.g. data-mp3="dictation_c2_1.mp3"
+    2. Place the file in the same folder as this HTML file
+    3. The Listen button will play the mp3 automatically
+       and only fall back to browser TTS if the file is missing
+
+  Recommended naming: dictation_c2_1.mp3 through dictation_c2_8.mp3
+*/
+
+const voiceSelect = document.getElementById("voiceSelect");
+const voiceStatus = document.getElementById("voiceStatus");
+let voices=[], selectedVoice=null, activeSpeakBtn=null;
+let currentAudio = null;
+
+/* ── Voice loader ── */
+function populateVoices(){
+  voices=window.speechSynthesis.getVoices();
+  if(!voices.length)return;
+  voiceSelect.innerHTML="";
+  const priority=["AU","GB","NZ","US","CA","IE"];
+  const english=voices.filter(v=>v.lang.startsWith("en"));
+  english.sort((a,b)=>{
+    const ai=priority.findIndex(r=>a.lang.includes(r));
+    const bi=priority.findIndex(r=>b.lang.includes(r));
+    return(ai===-1?99:ai)-(bi===-1?99:bi);
+  });
+  const pool=english.length?english:voices;
+  pool.forEach((v,i)=>{
+    const opt=document.createElement("option");
+    opt.value=i;
+    const region=v.lang.split("-")[1]||"";
+    const flag={AU:"🇦🇺",GB:"🇬🇧",US:"🇺🇸",NZ:"🇳🇿",CA:"🇨🇦",IE:"🇮🇪"}[region]||"🌐";
+    opt.textContent=`${flag} ${v.name} (${v.lang})`;
+    voiceSelect.appendChild(opt);
+  });
+  const auIdx=pool.findIndex(v=>v.lang.includes("AU"));
+  voiceSelect.selectedIndex=auIdx>=0?auIdx:0;
+  setVoice();
+  const chosen=pool[voiceSelect.selectedIndex];
+  voiceStatus.textContent=chosen&&chosen.lang.includes("AU")
+    ?"✓ Australian English detected"
+    :"Tip: set device language to English (AU) for Australian accent";
+}
+function setVoice(){
+  const pool=voices.filter(v=>v.lang.startsWith("en"));
+  const use=pool.length?pool:voices;
+  selectedVoice=use[parseInt(voiceSelect.value)]||null;
+}
+voiceSelect.addEventListener("change",setVoice);
+if(typeof speechSynthesis!=="undefined"){
+  populateVoices();
+  speechSynthesis.onvoiceschanged=populateVoices;
+}else{
+  voiceSelect.innerHTML="<option>Not supported</option>";
+  voiceStatus.textContent="Use Chrome, Edge, or Safari for TTS";
+}
+
+/* ── Stop all audio ── */
+function stopAll(btn){
+  // Stop mp3
+  if(currentAudio){
+    currentAudio.pause();
+    currentAudio.src="";
+    currentAudio=null;
+  }
+  // Stop TTS
+  if(typeof speechSynthesis!=="undefined") speechSynthesis.cancel();
+  // Reset active button
+  if(activeSpeakBtn && activeSpeakBtn!==btn){
+    activeSpeakBtn.classList.remove("speaking");
+    activeSpeakBtn.innerHTML=speakerHTML();
+  }
+}
+
+function speakerHTML(){ return "🔈 Listen"; }
+
+/* ── Main speak function: tries mp3 first, falls back to TTS ── */
+function speak(mp3src, ttsText, btn){
+  // If same button clicked again → stop
+  if(activeSpeakBtn===btn){
+    stopAll(null);
+    activeSpeakBtn=null;
+    btn.classList.remove("speaking");
+    btn.innerHTML=speakerHTML();
+    return;
+  }
+
+  stopAll(btn);
+
+  // Try mp3 first
+  if(mp3src){
+    const audio=new Audio();
+    currentAudio=audio;
+
+    audio.addEventListener("canplaythrough",()=>{
+      btn.classList.add("speaking");
+      btn.innerHTML="🔈 Speaking…";
+      activeSpeakBtn=btn;
+      audio.play().catch(()=>{
+        // mp3 play failed — fall back to TTS
+        currentAudio=null;
+        useTTS(ttsText,btn);
+      });
+    },{once:true});
+
+    audio.addEventListener("ended",()=>{
+      btn.classList.remove("speaking");
+      btn.innerHTML=speakerHTML();
+      if(activeSpeakBtn===btn) activeSpeakBtn=null;
+      currentAudio=null;
+    },{once:true});
+
+    audio.addEventListener("error",()=>{
+      // File not found or unplayable → fall back to TTS silently
+      currentAudio=null;
+      useTTS(ttsText,btn);
+    },{once:true});
+
+    audio.src=mp3src;
+    audio.load();
+    return;
+  }
+
+  // No mp3 specified → go straight to TTS
+  useTTS(ttsText,btn);
+}
+
+function useTTS(text,btn){
+  if(typeof speechSynthesis==="undefined") return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.rate=0.85; u.pitch=1.0; u.volume=1.0;
+  if(selectedVoice) u.voice=selectedVoice;
+  u.onstart=()=>{
+    btn.classList.add("speaking");
+    btn.innerHTML="🔈 Speaking…";
+    activeSpeakBtn=btn;
+  };
+  u.onend=u.onerror=()=>{
+    btn.classList.remove("speaking");
+    btn.innerHTML=speakerHTML();
+    if(activeSpeakBtn===btn) activeSpeakBtn=null;
+  };
+  speechSynthesis.speak(u);
+}
+
+/* ── Normalise for comparison ── */
+function norm(s){
+  return s.toLowerCase()
+    .replace(/['']/g,"'").replace(/[""]/g,'"')
+    .replace(/\s+/g," ").trim()
+    .replace(/[.,!?;:]+$/g,"");
+}
+
+/* ── Wire up each gap fill item ── */
+document.querySelectorAll(".gapfill-item").forEach(item=>{
+  const sentence  = item.dataset.sentence;
+  const mp3src    = item.dataset.mp3 || null;   // e.g. "dictation_c2_1.mp3"
+  const answer    = item.dataset.answer;
+  const input     = item.querySelector(".gapfill-input");
+  const submitBtn = item.querySelector(".gap-submit");
+  const revealBtn = item.querySelector(".gap-reveal");
+  const speakBtn  = item.querySelector(".speak-btn");
+  const feedback  = item.querySelector(".gapfill-feedback");
+  const answerBox = item.querySelector(".gapfill-answer");
+
+  if(speakBtn) speakBtn.addEventListener("click",()=>speak(mp3src,sentence,speakBtn));
+
+  submitBtn.addEventListener("click",()=>{
+    const typed=norm(input.value);
+    feedback.classList.remove("correct","incorrect");
+    if(!typed){feedback.textContent="Please type your answer.";feedback.classList.add("incorrect");return;}
+    const variants=[norm(answer)];
+    if(answer.startsWith("get ")) variants.push(norm("got "+answer.slice(4)));
+    if(variants.some(v=>typed===v||typed.includes(v)||v.includes(typed))){
+      feedback.textContent="✓ Correct!";feedback.classList.add("correct");
+    }else{
+      feedback.textContent="✗ Not quite — check the revealed answer for accepted forms.";feedback.classList.add("incorrect");
+    }
+  });
+
+  input.addEventListener("keydown",e=>{if(e.key==="Enter")submitBtn.click();});
+  revealBtn.addEventListener("click",()=>answerBox.classList.toggle("show"));
+});
+</script>
+
+</body>
+</html>
