@@ -5,34 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Modern English Australia · Koala Spies Sydney</title>
 
-  <!-- Rise-like: clean sans + readable serif option -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Rise-ish blue/black/off-white */
       --bg: #f6f8fb;
       --surface: #ffffff;
-      --ink: #0f172a;          /* blue-black */
-      --muted: #475569;        /* slate */
+      --ink: #0f172a;
+      --muted: #475569;
       --line: rgba(15,23,42,.10);
-
-      --accent: #2563eb;       /* blue */
-      --accent-2: #1e40af;     /* deeper blue */
+      --accent: #2563eb;
+      --accent-2: #1e40af;
       --link: #1d4ed8;
-
       --header: #0b1220;
       --header-ink: #f8fafc;
-
       --max: 1120px;
-
-      /* Fonts */
       --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       --serif: "Source Serif 4", Georgia, serif;
-
-      /* iOS safe-area helpers */
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -51,7 +42,7 @@
       overflow-x:hidden;
     }
 
-    img{ max-width:100%; height:auto; display:block; }
+    img,video{ max-width:100%; height:auto; display:block; }
 
     a{
       color: var(--link);
@@ -71,7 +62,7 @@
       padding-inline: clamp(12px, 3vw, 20px);
     }
 
-    /* HEADER */
+    /* ── HEADER ── */
     header{
       background: var(--header);
       color: var(--header-ink);
@@ -88,12 +79,7 @@
       min-width:0;
     }
 
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      min-width:0;
-    }
+    .brand{ display:flex; flex-direction:column; gap:2px; min-width:0; }
 
     .brand-top{
       color: var(--header-ink);
@@ -105,7 +91,7 @@
       max-width:100%;
       overflow-wrap:anywhere;
       word-break:break-word;
-      text-decoration: none; /* keep brand clean */
+      text-decoration: none;
     }
     .brand-top:hover{ color:#ffffff; }
 
@@ -122,7 +108,6 @@
     }
     .kss-font:hover{ color:#ffffff; }
 
-    /* NAV: clickable text only (no buttons) */
     nav{
       display:flex;
       align-items:center;
@@ -138,34 +123,51 @@
       font-weight: 700;
       letter-spacing: .2px;
       text-decoration: none;
-      padding: 0;                 /* remove “button” feel */
       border: 0;
       background: transparent;
       opacity: .92;
       white-space: nowrap;
       transition: opacity .12s ease, transform .12s ease;
     }
+    nav a:hover{ opacity:1; transform:translateY(-1px); text-decoration:underline; text-underline-offset:5px; }
+    nav a.active{ opacity:1; text-decoration:underline; text-underline-offset:5px; }
 
-    nav a:hover{
-      opacity: 1;
-      transform: translateY(-1px);
-      text-decoration: underline;
-      text-underline-offset: 5px;
+    /* ── HERO VIDEO ── */
+    .video-wrap{
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 18px;
+      border-radius: 12px;
+      overflow: hidden;
+      /* Subtle shadow so video floats off the page */
+      box-shadow: 0 12px 40px rgba(15,23,42,.18), 0 2px 8px rgba(15,23,42,.10);
+      background: #0b1220; /* fallback while video loads */
     }
 
-    nav a.active{
-      opacity: 1;
-      text-decoration: underline;
-      text-underline-offset: 5px;
+    .video-wrap video{
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
     }
 
-    /* SECTION */
+    /* Thin blue accent line under video */
+    .video-wrap::after{
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #60a5fa, var(--accent));
+      opacity: .7;
+    }
+
+    /* ── SECTIONS ── */
     .section{
       padding: 48px 0;
       border-bottom: 1px solid var(--line);
     }
 
-    /* TWO COLUMNS */
     .two-col{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
@@ -174,42 +176,21 @@
     }
     .two-col > *{ min-width:0; }
 
-    /* TYPE */
-    h1,h2,h3{
-      margin:0 0 12px;
-      line-height:1.2;
-      font-family: var(--serif);
-      color: var(--ink);
-    }
-
+    /* ── TYPE ── */
+    h1,h2,h3{ margin:0 0 12px; line-height:1.2; font-family:var(--serif); color:var(--ink); }
     h1{ font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem); }
     h2{ font-size: clamp(1.3rem, 1.05rem + 1vw, 1.95rem); margin-top: 18px; }
-    h3{ font-size: 1.05rem; margin-top: 14px; font-family: var(--sans); color: var(--muted); font-weight: 700; }
+    h3{ font-size:1.05rem; margin-top:14px; font-family:var(--sans); color:var(--muted); font-weight:700; }
 
-    p{
-      margin:0 0 14px;
-      font-family: var(--sans);
-    }
+    p{ margin:0 0 14px; font-family:var(--sans); }
 
-    ul{ margin:10px 0 16px; padding-left: 18px; }
+    ul{ margin:10px 0 16px; padding-left:18px; }
     li{ margin:8px 0; }
 
-    /* BLOCKS */
-    .block{
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
-      margin-top: 18px;
-      text-align:left;
-    }
+    .block{ padding-top:18px; border-top:1px solid var(--line); margin-top:18px; text-align:left; }
+    .section-divider{ border:0; height:1px; margin:26px 0; background:var(--line); }
 
-    .section-divider{
-      border:0;
-      height:1px;
-      margin: 26px 0;
-      background: var(--line);
-    }
-
-    /* ANIMATED PHRASE (kept, but toned to blue) */
+    /* ── ANIMATED PHRASE ── */
     .animated-phrase{
       display:inline-block;
       position:relative;
@@ -219,14 +200,11 @@
       animation: slide-across 450ms ease-out both;
       font-family: var(--serif);
     }
-
     .animated-phrase::after{
       content:"";
       position:absolute;
-      left:0;
-      bottom:-6px;
-      width:100%;
-      height:3px;
+      left:0; bottom:-6px;
+      width:100%; height:3px;
       background: linear-gradient(90deg, transparent, rgba(37,99,235,.95), transparent);
       opacity:.55;
     }
@@ -236,30 +214,58 @@
       to{ transform:translateX(0); opacity:1; }
     }
 
-    /* “Buttons” removed: any old .actions become plain link rows */
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top: 14px;
-    }
+    .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; }
 
-    /* ensure anything with .btn/.plain-link looks like normal text link */
     .btn, .btn.primary, .btn.secondary, .btn.plain-link{
-      all: unset;
-      font-family: var(--sans);
-      color: var(--link);
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      font-weight: 700;
-      display: inline;
+      all:unset;
+      font-family:var(--sans);
+      color:var(--link);
+      cursor:pointer;
+      text-decoration:underline;
+      text-underline-offset:3px;
+      font-weight:700;
+      display:inline;
     }
-    .btn:hover, .btn.primary:hover, .btn.secondary:hover, .btn.plain-link:hover{
-      color: var(--accent-2);
+    .btn:hover{ color:var(--accent-2); }
+
+    /* ── FEATURE CARDS (new: replaces plain list) ── */
+    .feature-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0 18px;
     }
 
-    /* FOOTER */
+    .feature-card{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--ink);
+      font-family: var(--sans);
+    }
+
+    .feature-card-icon{
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .feature-card strong{
+      display: block;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+
+    .feature-card span{
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    /* ── FOOTER ── */
     footer{
       background: var(--header);
       color: var(--header-ink);
@@ -275,49 +281,44 @@
       gap:14px;
       flex-wrap:wrap;
       text-align:center;
-      font-family: var(--sans);
-      font-size: .95rem;
+      font-family:var(--sans);
+      font-size:.95rem;
     }
 
     .footer-links{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      justify-content:center;
-      width:100%;
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:center; width:100%;
     }
 
     .footer-links a{
-      color: rgba(248,250,252,.92);
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      opacity: .92;
+      color:rgba(248,250,252,.92);
+      text-decoration:underline;
+      text-underline-offset:4px;
+      padding:0; border:0; background:transparent; opacity:.92;
     }
     .footer-links a:hover{ opacity:1; color:#ffffff; }
 
-    /* RESPONSIVE */
-    @media (max-width:980px){
+    /* ── RESPONSIVE ── */
+    @media(max-width:980px){
       .two-col{ grid-template-columns:1fr; gap:28px; }
       nav{ justify-content:flex-start; }
       nav a{ white-space:normal; }
+      .feature-grid{ grid-template-columns:1fr 1fr; }
     }
 
-    @media (max-width:720px){
-      .header-inner{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:12px;
-      }
-
+    @media(max-width:720px){
+      .header-inner{ flex-direction:column; align-items:flex-start; gap:12px; }
       .brand-top{ letter-spacing:2px; }
       nav{ width:100%; justify-content:flex-start; gap:10px; }
       .animated-phrase{ white-space:normal; }
+      .video-wrap{ max-width:100%; }
+      .feature-grid{ grid-template-columns:1fr; }
     }
 
-    @media (prefers-reduced-motion: reduce){
+    @media(max-width:400px){
+      .feature-grid{ grid-template-columns:1fr; }
+    }
+
+    @media(prefers-reduced-motion:reduce){
       .animated-phrase{ animation:none; }
     }
   </style>
@@ -325,22 +326,18 @@
 
 <body>
 <header>
-
-     <div class="wrap header-inner">
+  <div class="wrap header-inner">
     <div class="brand">
       <a href="index.html" class="brand-top">Modern English Au</a>
       <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-font">Koala Spies Sydney</a>
     </div>
 
     <nav aria-label="Primary">
-      <a id="qrToggle" href="#" aria-controls="qrWrap" aria-expanded="false">QR</a>
       <a href="Microlessons&Games.html">MicroLessons&amp;Games</a>
       <a href="IELTSPTEPLUS.html">IELTS/PTE+</a>
-      <a href="index.html">Home</a>
+      <a href="index.html" class="active">Home</a>
     </nav>
   </div>
-
-
 </header>
 
 <section class="section">
@@ -349,24 +346,35 @@
     <!-- LEFT COLUMN -->
     <div>
       <h1>Language is the road map of a culture.</h1>
-
       <h1><span class="animated-phrase">meaningful english</span></h1>
 
       <p>
         Welcome to my UX and Learning Design portfolio. I bring together experience in adult education,
         English examining, freelance writing, and media production. I teach, I code, I use AI ethically
-        and I design—building learning experiences that are clear, engaging, and purposeful.
+        and I design — building learning experiences that are clear, engaging, and purposeful.
       </p>
 
       <p>
-        I also teach the teacher to code and create their own interactive activities—
+        I also teach the teacher to code and create their own interactive activities —
         <i>no more Kraphoots!</i>
       </p>
 
-      <img src= "ModernEnglishAU.mp4" alt="Amritsar" width="500" loading="lazy" decoding="async">
+      <!-- ── AUTO-PLAYING HERO VIDEO ── -->
+      <div class="video-wrap">
+        <video
+          src="ModernEnglishAU.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          aria-label="Modern English Australia intro video">
+          <!-- Fallback for very old browsers -->
+          Your browser doesn't support HTML5 video.
+        </video>
+      </div>
 
-      <p class="muted" style="font-weight:700; margin-top:16px;">
-        EdTech Designer • UX Designer • Creative Educator
+      <p class="muted" style="font-weight:700; margin-top:20px;">
+        EdTech Designer&nbsp;·&nbsp;UX Designer&nbsp;·&nbsp;Creative Educator
       </p>
 
       <div class="actions">
@@ -380,36 +388,46 @@
         <h2 style="margin-top:0;">Bespoke Learning Tools</h2>
       </div>
 
-      <ul>
-        <li>Interactive learning games</li>
-        <li>Listening &amp; pronunciation tools</li>
-        <li>Drag-and-drop activities</li>
-        <li>Grammar and vocabulary systems</li>
-        <li>Audio-visual classroom content</li>
-        <li>Tests with automated reporting tools</li>
-        <li>Creative tools to expand the possibilities in the classroom</li>
-      </ul>
+      <!-- Feature cards replacing the plain list -->
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="feature-card-icon">🎮</span>
+          <strong>Interactive games</strong>
+          <span>Drag-and-drop, vocabulary and grammar systems</span>
+        </div>
+        <div class="feature-card">
+          <span class="feature-card-icon">🎧</span>
+          <strong>Listening &amp; pronunciation</strong>
+          <span>Audio tools and accent training activities</span>
+        </div>
+        <div class="feature-card">
+          <span class="feature-card-icon">📊</span>
+          <strong>Automated testing</strong>
+          <span>Tests with built-in reporting and scoring</span>
+        </div>
+        <div class="feature-card">
+          <span class="feature-card-icon">🎬</span>
+          <strong>Audio-visual content</strong>
+          <span>Creative tools that expand classroom possibilities</span>
+        </div>
+      </div>
 
       <hr class="section-divider">
 
       <h2 style="margin-top:0;">Test for immigration or specific language points</h2>
-      <p>IELTS, PTE and Cambridge mini tests, including write from dictation, academic language, reading, writing and listening.</p>
-
+      <p>IELTS, PTE and Cambridge mini tests — write from dictation, academic language, reading, writing and listening.</p>
       <a href="IELTSPTEPLUS.html">IELTS PTE +</a>
 
       <hr class="section-divider">
 
       <h2 style="margin-top:0;">Micro Lessons for Classroom Teaching, Self-Study, and Skill Development</h2>
-      <p>10 minute and 20 minute lessons on grammar points with games and worksheets.</p>
-
+      <p>10 and 20 minute lessons on grammar points with games and worksheets.</p>
       <a href="MicroLessons&Games.html">MicroLessons &amp; Games for ESL</a>
 
       <hr class="section-divider">
 
-      <div id="micro-lessons">
-        <div class="actions">
-          <a class="btn" href="contact.html">Contact me today</a>
-        </div>
+      <div class="actions">
+        <a class="btn" href="contact.html">Contact me today</a>
       </div>
     </div>
 
