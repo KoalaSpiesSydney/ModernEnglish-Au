@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Have, Make & Do – Matching Game (A1/A2) | Modern English AU</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f5f5f5;
+  --card:#2a2a2a;
+  --ink:#1e1e1e;
+  --muted:#bbbbbb;
+  --accent:#0a3d62;
+  --line:#484141;
+  --ok:#1f7a3f;
+  --bad:#a32525;
+  --unflipped:#1a3a5c;
+  --flipped:#0a3d62;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:"Newsreader", Georgia, serif;
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+}
+
+/* ===== Background ===== */
+.bg-gif{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:url("havemakedo.gif") center / cover no-repeat;
+  background-color:#dce8f5;
+}
+.bg-overlay{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:rgba(240,246,252,.80);
+}
+
+/* ===== Header ===== */
+header{
+  background:#f0f4f8;
+  color:var(--accent);
+  text-align:center;
+  padding:1.4rem 0 1rem;
+  letter-spacing:2px;
+  font-weight:700;
+  font-size:1.2rem;
+  border-bottom:2px solid #cdd9e5;
+}
+header span{
+  display:block;
+  color:#302d2d;
+  font-weight:300;
+  font-size:.6rem;
+  letter-spacing:3px;
+  margin-top:1px;
+}
+
+/* ===== QR + HOME ===== */
+.qr-toggle{
+  position:fixed;
+  left:max(14px, env(safe-area-inset-left));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(255,255,255,.92);
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  font-family:inherit;
+  font-size:.85rem;
+}
+.qr-panel{
+  position:fixed;
+  left:max(14px, env(safe-area-inset-left));
+  top:70px;
+  z-index:9999;
+  width:240px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  display:none;
+}
+.qr-panel .qr-title{
+  font-weight:800;
+  color:#111;
+  margin:0 0 8px;
+  font-size:.95rem;
+  letter-spacing:.5px;
+}
+.qr-panel .qr-url{
+  font-size:.72rem;
+  color:rgba(0,0,0,.65);
+  word-break:break-all;
+  margin:8px 0 0;
+  line-height:1.35;
+}
+.qr-code{
+  width:200px;
+  height:200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.10);
+}
+.home-btn{
+  position:fixed;
+  right:max(14px, env(safe-area-inset-right));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  padding:.7rem 1rem;
+  border-radius:14px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  color:#111;
+  text-decoration:none;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  font-family:inherit;
+  font-size:.85rem;
+}
+@media(hover:hover){
+  .home-btn:hover{ background:#ffffff; }
+  .qr-toggle:hover{ background:#ffffff; }
+}
+
+/* ===== Verb legend badges ===== */
+.verb-legend{
+  display:flex;
+  justify-content:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+  margin:.8rem auto .3rem;
+}
+.verb-badge{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:1.5px;
+  padding:4px 14px;
+  border-radius:999px;
+  font-family:"Newsreader",Georgia,serif;
+  background:var(--accent);
+  color:#fff;
+}
+
+/* ===== Level badge ===== */
+.level-badge{
+  display:inline-block;
+  background:#27ae60;
+  color:#fff;
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:2px;
+  padding:3px 10px;
+  border-radius:999px;
+  margin-bottom:.4rem;
+  font-family:"Newsreader",Georgia,serif;
+}
+
+/* ===== Filter bar ===== */
+.filter-bar{
+  display:flex;
+  justify-content:center;
+  gap:.5rem;
+  flex-wrap:wrap;
+  margin:.6rem 0 .4rem;
+}
+.filter-btn{
+  padding:.42rem .95rem;
+  border-radius:999px;
+  border:2px solid transparent;
+  font-family:inherit;
+  font-size:.82rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.filter-btn.all{ background:#0a3d62; color:#fff; border-color:#0a3d62; }
+.filter-btn.have{ background:#fff; color:var(--accent); border-color:var(--accent); }
+.filter-btn.make{ background:#fff; color:var(--accent); border-color:var(--accent); }
+.filter-btn.do  { background:#fff; color:var(--accent); border-color:var(--accent); }
+.filter-btn.active.have{ background:var(--accent); color:#fff; }
+.filter-btn.active.make{ background:var(--accent); color:#fff; }
+.filter-btn.active.do  { background:var(--accent); color:#fff; }
+
+/* ===== Main ===== */
+main{
+  flex:1;
+  text-align:center;
+  padding:2rem 1rem calc(3rem + env(safe-area-inset-bottom));
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+h1{
+  color:var(--accent);
+  letter-spacing:2px;
+  margin-top:.5rem;
+  font-size:clamp(1.3rem,2.2vw,1.85rem);
+  font-weight:700;
+}
+
+p{
+  max-width:760px;
+  margin:.5rem auto 1rem;
+  opacity:.92;
+}
+
+/* ===== Round counter ===== */
+.round-info{
+  font-size:.85rem;
+  color:var(--muted);
+  margin-bottom:.6rem;
+  letter-spacing:.5px;
+  font-weight:600;
+}
+
+/* ===== Controls ===== */
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:.8rem;
+  margin-bottom:1rem;
+  flex-wrap:wrap;
+}
+button.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.75rem 1.4rem;
+  border-radius:45px;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  font-family:inherit;
+  font-size:1rem;
+}
+button.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#2196f3);
+  transform:translateY(-2px);
+}
+
+/* ===== Score bar ===== */
+.score-bar{
+  display:flex;
+  justify-content:center;
+  gap:1.5rem;
+  margin:.4rem 0 .8rem;
+  font-size:.88rem;
+  font-weight:700;
+  color:var(--muted);
+}
+.score-bar span{ color:var(--ink); }
+
+/* ===== Game Grid ===== */
+#game{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:10px;
+  width:min(100%, 780px);
+  margin:0 auto;
+}
+
+/* Card base — unflipped */
+.card{
+  background:var(--unflipped);
+  border:2px solid var(--accent);
+  border-radius:14px;
+  padding:10px 8px;
+  min-height:74px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  font-size:.82rem;
+  line-height:1.3;
+  color:#fff;
+  transition:background .3s, color .3s, transform .2s, border-color .2s;
+  box-shadow:0 3px 6px rgba(0,0,0,.14);
+  word-break:break-word;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  position:relative;
+}
+
+/* Card number badge — top-left corner */
+.card .card-num{
+  position:absolute;
+  top:5px;
+  left:7px;
+  font-size:.65rem;
+  font-weight:800;
+  line-height:1;
+  color:rgba(255,255,255,.55);
+  letter-spacing:.5px;
+  pointer-events:none;
+}
+
+.card.flipped{
+  transform:scale(1.04);
+}
+.card.matched{
+  cursor:default;
+  transform:none;
+}
+
+/* Wrong shake */
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
+.card.shake{ animation:shake .35s ease; }
+
+#status{
+  margin-top:1rem;
+  font-size:1.05rem;
+  font-weight:600;
+  min-height:1.6em;
+  color:var(--accent);
+}
+
+/* ===== Teacher Notes ===== */
+.notes{
+  width:min(100%, 800px);
+  margin:2rem auto 0;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:1rem 1.2rem;
+  text-align:left;
+}
+.notes summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:.5rem;
+  font-size:1rem;
+}
+.notes h3{
+  margin:1rem 0 .3rem;
+  font-size:.95rem;
+  letter-spacing:.5px;
+}
+.notes h3.have-h{ color:var(--accent); }
+.notes h3.make-h{ color:var(--accent); }
+.notes h3.do-h  { color:var(--accent); }
+.notes ul{
+  margin:0 0 .5rem 1.2rem;
+  line-height:1.75;
+}
+.notes li{ margin-bottom:.2rem; }
+
+/* ===== Gap Fill ===== */
+.gapfill-wrap{
+  width:min(100%, 800px);
+  margin:2.2rem auto 0;
+  text-align:center;
+}
+.gapfill-wrap h2{
+  color:var(--accent);
+  margin-bottom:.35rem;
+  font-size:clamp(1.2rem,2vw,1.6rem);
+}
+.gapfill-intro{
+  max-width:700px;
+  margin:0 auto 1.2rem;
+}
+.gapfill-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.gapfill-item{
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+}
+.gapfill-item p{ margin:0 auto .85rem; max-width:680px; }
+
+/* verb accent strip */
+.gapfill-item.gf-have{ border-left:4px solid var(--accent); }
+.gapfill-item.gf-make{ border-left:4px solid var(--accent); }
+.gapfill-item.gf-do  { border-left:4px solid var(--accent); }
+
+.speak-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  margin:4px auto 10px;
+  padding:.5rem 1rem;
+  border-radius:999px;
+  border:2px solid var(--accent);
+  background:transparent;
+  color:var(--accent);
+  font-family:inherit;
+  font-size:.88rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .2s ease;
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+.speak-btn:hover{ background:var(--accent); color:#fff; transform:translateY(-2px); }
+.speak-btn.speaking{
+  background:var(--accent); color:#fff;
+  animation:pulse-btn 1s ease infinite;
+}
+@keyframes pulse-btn{
+  0%,100%{ box-shadow:0 0 0 0 rgba(10,61,98,.4); }
+  50%     { box-shadow:0 0 0 8px rgba(10,61,98,0); }
+}
+.speak-btn svg{ flex-shrink:0; }
+
+.voice-bar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  margin-bottom:1rem;
+  flex-wrap:wrap;
+  font-size:.88rem;
+  color:var(--muted);
+  font-weight:600;
+}
+.voice-select{
+  padding:.4rem .7rem;
+  border-radius:8px;
+  border:1.5px solid rgba(10,61,98,.2);
+  font:inherit;
+  font-size:.88rem;
+  color:var(--ink);
+  background:#fff;
+  cursor:pointer;
+  outline:none;
+}
+.voice-select:focus{ border-color:var(--accent); }
+
+.gapfill-input{
+  display:block;
+  width:min(100%, 300px);
+  margin:0 auto;
+  padding:.7rem .9rem;
+  border:2px solid rgba(10,61,98,.18);
+  border-radius:10px;
+  font:inherit;
+  outline:none;
+  text-align:center;
+}
+.gapfill-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(10,61,98,.10);
+}
+.gapfill-actions{
+  display:flex;
+  justify-content:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+  margin-top:.8rem;
+}
+.gapfill-btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.6rem .95rem;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-family:inherit;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+  transition:all .2s ease;
+  font-size:.92rem;
+}
+.gapfill-btn:hover{
+  background:linear-gradient(90deg,var(--accent),#2196f3);
+  transform:translateY(-2px);
+}
+.gapfill-feedback{
+  min-height:1.5em;
+  margin-top:.7rem;
+  font-weight:700;
+  text-align:center;
+}
+.gapfill-feedback.correct { color:var(--ok);  }
+.gapfill-feedback.incorrect{ color:var(--bad); }
+.gapfill-answer{
+  display:none;
+  margin-top:.6rem;
+  font-weight:700;
+  color:var(--accent);
+  text-align:center;
+}
+.gapfill-answer.show{ display:block; }
+
+/* ===== Links ===== */
+.links{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  margin-top:2rem;
+  flex-wrap:wrap;
+}
+a.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  text-decoration:none;
+  padding:.8rem 1.4rem;
+  border-radius:45px;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  font-family:inherit;
+}
+a.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#2196f3);
+  transform:translateY(-2px);
+}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--card);
+  color:var(--muted);
+  text-align:center;
+  padding:1rem 0 calc(1rem + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);
+  font-size:.9rem;
+}
+
+/* ===== Responsive ===== */
+/* Desktop >900px: 4 cols */
+@media(min-width:901px){
+  #game{ grid-template-columns:repeat(4,1fr); width:min(100%,780px); gap:10px; }
+  .card{ min-height:74px; font-size:.82rem; padding:10px 8px; }
+}
+/* Tablet 601–900px: 3 cols */
+@media(max-width:900px){
+  #game{ grid-template-columns:repeat(3,1fr); width:min(100%,560px); gap:9px; }
+  .card{ min-height:78px; font-size:.80rem; padding:9px 7px; }
+}
+/* Phone ≤600px: 2 cols */
+@media(max-width:600px){
+  main{ padding:1.5rem .8rem calc(2.4rem + env(safe-area-inset-bottom)); }
+  #game{ grid-template-columns:repeat(2,1fr); width:min(100%,370px); gap:8px; }
+  .card{ min-height:82px; font-size:.76rem; padding:8px 6px; border-radius:12px; }
+  .qr-toggle,.home-btn{ transform:scale(.95); transform-origin:top; }
+  .gapfill-input{ width:100%; }
+}
+/* Very small ≤360px */
+@media(max-width:360px){
+  #game{ width:100%; gap:6px; }
+  .card{ min-height:74px; font-size:.72rem; padding:6px 5px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-gif"></div>
+<div class="bg-overlay"></div>
+
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR">QR</button>
+<div class="qr-panel" id="qrPanel" aria-label="QR code panel">
+  <div class="qr-title">Open this page on your phone</div>
+  <div class="qr-code" id="qrCode"></div>
+  <div class="qr-url" id="qrUrl"></div>
+</div>
+
+<a class="home-btn" href="http://modernenglish.au/Microlessons&Games.html">Home</a>
+
+<header>
+  MODERN ENGLISH AU
+  <span>Koala Spies Sydney</span>
+</header>
+
+<main>
+  <div class="level-badge">A1–A2 BEGINNER</div>
+  <h1>Have, Make &amp; Do – Matching Game</h1>
+  <p>
+    Flip two cards to match each expression with its meaning.
+    Each round picks <strong>6 new pairs</strong> from the pool — mix all three verbs or focus on one!
+  </p>
+
+  <!-- Verb colour legend -->
+  <div class="verb-legend">
+    <span class="verb-badge have">HAVE</span>
+    <span class="verb-badge make">MAKE</span>
+    <span class="verb-badge do">DO</span>
+  </div>
+
+  <!-- Filter buttons -->
+  <div class="filter-bar">
+    <button class="filter-btn all active" data-filter="all">All three</button>
+    <button class="filter-btn have" data-filter="have">Have only</button>
+    <button class="filter-btn make" data-filter="make">Make only</button>
+    <button class="filter-btn do"   data-filter="do">Do only</button>
+  </div>
+
+  <div class="round-info" id="roundInfo">Round 1</div>
+
+  <div class="score-bar">
+    <div>Matches: <span id="scoreMatched">0</span> / 6</div>
+    <div>Rounds played: <span id="scoreRounds">0</span></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="newRoundBtn">New Round ↻</button>
+  </div>
+
+  <div id="game"></div>
+  <div id="status"></div>
+
+  <!-- Teacher Notes -->
+  <details class="notes">
+    <summary>Teacher Notes / Full Expression List (A1–A2)</summary>
+
+    <h3 class="have-h">▸ HAVE expressions</h3>
+    <ul>
+      <li><strong>have breakfast</strong> – eat your morning meal</li>
+      <li><strong>have lunch</strong> – eat your midday meal</li>
+      <li><strong>have dinner</strong> – eat your evening meal</li>
+      <li><strong>have a drink</strong> – drink something</li>
+      <li><strong>have a shower</strong> – wash your body under running water</li>
+      <li><strong>have a bath</strong> – wash your body in a bathtub</li>
+      <li><strong>have a rest</strong> – stop and relax for a while</li>
+      <li><strong>have a nap</strong> – sleep for a short time during the day</li>
+      <li><strong>have a dream</strong> – experience images and stories while sleeping</li>
+      <li><strong>have a headache</strong> – feel pain in your head</li>
+      <li><strong>have a cold</strong> – be ill with a runny nose and sore throat</li>
+      <li><strong>have a party</strong> – celebrate with friends and music</li>
+      <li><strong>have a meeting</strong> – come together to talk about something</li>
+      <li><strong>have a conversation</strong> – talk with another person</li>
+      <li><strong>have fun</strong> – enjoy yourself</li>
+      <li><strong>have a look</strong> – use your eyes to see something</li>
+      <li><strong>have a go</strong> – try something</li>
+      <li><strong>have an argument</strong> – disagree and speak angrily with someone</li>
+      <li><strong>have a baby</strong> – give birth to a child</li>
+      <li><strong>have time</strong> – be free to do something</li>
+    </ul>
+
+    <h3 class="make-h">▸ MAKE expressions</h3>
+    <ul>
+      <li><strong>make breakfast</strong> – prepare the morning meal</li>
+      <li><strong>make lunch</strong> – prepare the midday meal</li>
+      <li><strong>make dinner</strong> – prepare the evening meal</li>
+      <li><strong>make a sandwich</strong> – prepare a sandwich to eat</li>
+      <li><strong>make a cup of tea</strong> – prepare tea in a cup</li>
+      <li><strong>make a phone call</strong> – call someone on the telephone</li>
+      <li><strong>make a mistake</strong> – do something wrong by accident</li>
+      <li><strong>make a decision</strong> – choose what to do</li>
+      <li><strong>make a plan</strong> – think about what you will do</li>
+      <li><strong>make a list</strong> – write a number of things you need to do or buy</li>
+      <li><strong>make noise</strong> – produce a loud sound</li>
+      <li><strong>make friends</strong> – meet someone and become their friend</li>
+      <li><strong>make money</strong> – earn money from work</li>
+      <li><strong>make progress</strong> – improve or move forward</li>
+      <li><strong>make an effort</strong> – try hard to do something</li>
+      <li><strong>make a bed</strong> – tidy the sheets and pillows after sleeping</li>
+      <li><strong>make a promise</strong> – say you will definitely do something</li>
+      <li><strong>make a joke</strong> – say something funny</li>
+      <li><strong>make an appointment</strong> – arrange a time to see someone</li>
+      <li><strong>make a wish</strong> – hope for something to happen</li>
+    </ul>
+
+    <h3 class="do-h">▸ DO expressions</h3>
+    <ul>
+      <li><strong>do homework</strong> – complete school work at home</li>
+      <li><strong>do exercise</strong> – be physically active to stay healthy</li>
+      <li><strong>do the dishes</strong> – wash the plates and cups after eating</li>
+      <li><strong>do the laundry</strong> – wash your clothes</li>
+      <li><strong>do the shopping</strong> – go to buy food and other things</li>
+      <li><strong>do the cleaning</strong> – clean the house or room</li>
+      <li><strong>do your best</strong> – try as hard as you can</li>
+      <li><strong>do a course</strong> – study a subject for a period of time</li>
+      <li><strong>do a job</strong> – complete a piece of work</li>
+      <li><strong>do sport</strong> – play or practise a physical activity</li>
+      <li><strong>do research</strong> – look for information about a topic</li>
+      <li><strong>do a favour</strong> – help someone with something they need</li>
+      <li><strong>do yoga</strong> – practise the exercise and stretching activity</li>
+      <li><strong>do business</strong> – work in trade or commerce</li>
+      <li><strong>do damage</strong> – cause harm to something</li>
+      <li><strong>do well</strong> – perform in a good way</li>
+      <li><strong>do badly</strong> – perform in a poor way</li>
+      <li><strong>do nothing</strong> – not be busy; relax without activity</li>
+      <li><strong>do someone a favour</strong> – help another person</li>
+      <li><strong>do the ironing</strong> – press clothes to remove wrinkles</li>
+    </ul>
+  </details>
+
+  <!-- Gap Fill Practice -->
+  <section class="gapfill-wrap" aria-labelledby="gapfillTitle">
+    <h2 id="gapfillTitle">Write from Dictation</h2>
+    <p class="gapfill-intro">
+      Press <strong>▶ Listen</strong> to hear the sentence. Type the missing expression using <strong>have</strong>, <strong>make</strong>, or <strong>do</strong>, then press Submit.
+    </p>
+
+    <div class="voice-bar">
+      <span>Voice:</span>
+      <select class="voice-select" id="voiceSelect">
+        <option value="">Loading voices…</option>
+      </select>
+      <span id="voiceStatus" style="font-size:.8rem;color:var(--muted)"></span>
+    </div>
+
+    <div class="gapfill-list">
+
+      <article class="gapfill-item gf-have"
+               data-answer="have breakfast"
+               data-sentence="I always have breakfast before I go to work.">
+        <p>1) I always ______ before I go to work.</p>
+        <button type="button" class="speak-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: have breakfast</div>
+      </article>
+
+      <article class="gapfill-item gf-make"
+               data-answer="make a mistake"
+               data-sentence="Everyone makes a mistake sometimes. Don't worry!">
+        <p>2) Everyone ______ sometimes. Don't worry!</p>
+        <button type="button" class="speak-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: make a mistake (or: makes a mistake)</div>
+      </article>
+
+      <article class="gapfill-item gf-do"
+               data-answer="do homework"
+               data-sentence="I do homework after dinner every evening.">
+        <p>3) I ______ after dinner every evening.</p>
+        <button type="button" class="speak-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: do homework</div>
+      </article>
+
+      <article class="gapfill-item gf-have"
+               data-answer="have a shower"
+               data-sentence="I have a shower every morning before work.">
+        <p>4) I ______ every morning before work.</p>
+        <button type="button" class="speak-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: have a shower</div>
+      </article>
+
+      <article class="gapfill-item gf-make"
+               data-answer="make a decision"
+               data-sentence="It's hard to make a decision when you have many options.">
+        <p>5) It's hard to ______ when you have many options.</p>
+        <button type="button" class="speak-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: make a decision</div>
+      </article>
+
+      <article class="gapfill-item gf-do"
+               data-answer="do the dishes"
+               data-sentence="Can you please do the dishes after dinner tonight?">
+        <p>6) Can you please ______ after dinner tonight?</p>
+        <button type="button" class="speak-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: do the dishes</div>
+      </article>
+
+      <article class="gapfill-item gf-have"
+               data-answer="have fun"
+               data-sentence="I always have fun when I go to the beach.">
+        <p>7) I always ______ when I go to the beach.</p>
+        <button type="button" class="speak-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: have fun</div>
+      </article>
+
+      <article class="gapfill-item gf-make"
+               data-answer="make friends"
+               data-sentence="It's easy to make friends when you join a club.">
+        <p>8) It's easy to ______ when you join a club.</p>
+        <button type="button" class="speak-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: make friends</div>
+      </article>
+
+      <article class="gapfill-item gf-do"
+               data-answer="do your best"
+               data-sentence="Don't worry about the test — just do your best.">
+        <p>9) Don't worry about the test — just ______.</p>
+        <button type="button" class="speak-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: do your best</div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="links">
+    <a href="http://modernenglish.au/Microlessons%26Games.html" class="btn">Home</a>
+  </div>
+</main>
+
+<footer>
+  © Modern English AU · All Rights Reserved
+</footer>
+
+<!-- QR library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<!-- QR panel logic -->
+<script>
+(function(){
+  const toggle   = document.getElementById("qrToggle");
+  const panel    = document.getElementById("qrPanel");
+  const box      = document.getElementById("qrCode");
+  const urlLabel = document.getElementById("qrUrl");
+  if(!toggle||!panel||!box||!urlLabel) return;
+  let made = false;
+  function make(){
+    const url = window.location.href;
+    urlLabel.textContent = url;
+    box.innerHTML = "";
+    new QRCode(box,{ text:url, width:200, height:200, correctLevel:QRCode.CorrectLevel.M });
+    made = true;
+  }
+  toggle.addEventListener("click",()=>{
+    const open = panel.style.display === "block";
+    panel.style.display = open ? "none" : "block";
+    if(!open && !made) make();
+  });
+  document.addEventListener("click",(e)=>{
+    if(panel.style.display !== "block") return;
+    if(!panel.contains(e.target) && !toggle.contains(e.target)) panel.style.display = "none";
+  });
+})();
+</script>
+
+<!-- Matching game -->
+<script>
+// ── Expression pool: have / make / do ──────────────────────────────
+const POOL = {
+  have: [
+    ["have breakfast",      "eat your morning meal"],
+    ["have lunch",          "eat your midday meal"],
+    ["have dinner",         "eat your evening meal"],
+    ["have a drink",        "drink something"],
+    ["have a shower",       "wash under running water"],
+    ["have a bath",         "wash in a bathtub"],
+    ["have a rest",         "stop and relax for a while"],
+    ["have a nap",          "sleep for a short time in the day"],
+    ["have a headache",     "feel pain in your head"],
+    ["have a cold",         "be ill with a runny nose"],
+    ["have a party",        "celebrate with friends"],
+    ["have a meeting",      "come together to talk about something"],
+    ["have a conversation", "talk with another person"],
+    ["have fun",            "enjoy yourself"],
+    ["have a look",         "use your eyes to see something"],
+    ["have a go",           "try something"],
+    ["have an argument",    "disagree and speak angrily with someone"],
+    ["have a baby",         "give birth to a child"],
+    ["have time",           "be free to do something"],
+    ["have a dream",        "experience images while sleeping"],
+  ],
+  make: [
+    ["make breakfast",         "prepare the morning meal"],
+    ["make lunch",             "prepare the midday meal"],
+    ["make dinner",            "prepare the evening meal"],
+    ["make a sandwich",        "prepare a sandwich to eat"],
+    ["make a cup of tea",      "prepare tea in a cup"],
+    ["make a phone call",      "call someone on the telephone"],
+    ["make a mistake",         "do something wrong by accident"],
+    ["make a decision",        "choose what to do"],
+    ["make a plan",            "think about what you will do"],
+    ["make a list",            "write things you need to do or buy"],
+    ["make noise",             "produce a loud sound"],
+    ["make friends",           "meet someone and become their friend"],
+    ["make money",             "earn money from work"],
+    ["make progress",          "improve or move forward"],
+    ["make an effort",         "try hard to do something"],
+    ["make a bed",             "tidy the sheets after sleeping"],
+    ["make a promise",         "say you will definitely do something"],
+    ["make a joke",            "say something funny"],
+    ["make an appointment",    "arrange a time to see someone"],
+    ["make a wish",            "hope for something to happen"],
+  ],
+  do: [
+    ["do homework",          "complete school work at home"],
+    ["do exercise",          "be physically active to stay healthy"],
+    ["do the dishes",        "wash the plates and cups after eating"],
+    ["do the laundry",       "wash your clothes"],
+    ["do the shopping",      "go to buy food and other things"],
+    ["do the cleaning",      "clean the house or room"],
+    ["do your best",         "try as hard as you can"],
+    ["do a course",          "study a subject for a period of time"],
+    ["do sport",             "play or practise a physical activity"],
+    ["do research",          "look for information about a topic"],
+    ["do a favour",          "help someone with something they need"],
+    ["do yoga",              "practise the stretching exercise"],
+    ["do business",          "work in trade or commerce"],
+    ["do damage",            "cause harm to something"],
+    ["do well",              "perform in a good way"],
+    ["do badly",             "perform in a poor way"],
+    ["do nothing",           "relax without any activity"],
+    ["do the ironing",       "press clothes to remove wrinkles"],
+    ["do a job",             "complete a piece of work"],
+    ["do your homework",     "prepare by finding information first"],
+  ]
+};
+
+// Colours for matched pairs (up to 10 pairs — we use 6)
+const matchColors = [
+  "#b5451b","#0a6b3c","#1a3a7a","#d4870a","#6a1fa0",
+  "#1a7a7a","#7a1a3a","#3a6a1a","#c0392b","#1a4a7a"
+];
+
+const PAIRS_PER_ROUND = 6;
+
+const gameEl         = document.getElementById("game");
+const statusEl       = document.getElementById("status");
+const newRoundBtn    = document.getElementById("newRoundBtn");
+const roundInfo      = document.getElementById("roundInfo");
+const scoreMatchedEl = document.getElementById("scoreMatched");
+const scoreRoundsEl  = document.getElementById("scoreRounds");
+
+let first = null, second = null, lock = false;
+let matched = 0, roundCount = 0;
+let activeFilter = "all";
+// Track used pairs per verb
+const usedIdx = { have: new Set(), make: new Set(), do: new Set() };
+
+// ── Filter buttons ──────────────────────────────────────────────────
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeFilter = btn.dataset.filter;
+    buildRound();
+  });
+});
+
+// ── Helpers ─────────────────────────────────────────────────────────
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length-1; i > 0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function pickFromVerb(verb, n){
+  const pool = POOL[verb];
+  const used = usedIdx[verb];
+  let avail  = pool.map((_,i)=>i).filter(i=>!used.has(i));
+  if(avail.length < n){ used.clear(); avail = pool.map((_,i)=>i); }
+  const chosen = shuffle(avail).slice(0,n);
+  chosen.forEach(i=>used.add(i));
+  return chosen.map(i => ({ verb, expr: pool[i][0], meaning: pool[i][1] }));
+}
+
+function pickPairs(n){
+  if(activeFilter !== "all"){
+    return pickFromVerb(activeFilter, n);
+  }
+  // Mix: 2 have + 2 make + 2 do (for 6 pairs)
+  const perVerb = Math.floor(n/3);
+  const remainder = n - perVerb*3;
+  const verbs = shuffle(["have","make","do"]);
+  let pairs = [];
+  verbs.forEach((v,i) => {
+    const count = i < remainder ? perVerb+1 : perVerb;
+    pairs = pairs.concat(pickFromVerb(v, count));
+  });
+  return shuffle(pairs);
+}
+
+// ── Build round ──────────────────────────────────────────────────────
+function buildRound(){
+  gameEl.innerHTML = "";
+  statusEl.textContent = "";
+  first = null; second = null; lock = false; matched = 0;
+  roundCount++;
+  roundInfo.textContent   = "Round " + roundCount;
+  scoreRoundsEl.textContent = roundCount;
+  scoreMatchedEl.textContent = "0";
+
+  const pairs = pickPairs(PAIRS_PER_ROUND);
+
+  const cards = shuffle(
+    pairs.flatMap(p => [
+      { text: p.expr,    pair: p.expr, verb: p.verb, role:"expression" },
+      { text: p.meaning, pair: p.expr, verb: p.verb, role:"meaning"    }
+    ])
+  );
+
+  cards.forEach((data, idx) => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.dataset.pair = data.pair;
+    div.dataset.verb = data.verb;
+    div.style.background  = "#1a3a5c";
+    div.style.borderColor = "#0a3d62";
+
+    // Number badge
+    const num = document.createElement("span");
+    num.className = "card-num";
+    num.textContent = idx + 1;
+    div.appendChild(num);
+
+    gameEl.appendChild(div);
+    div.addEventListener("click", () => onCardClick(div, data));
+  });
+}
+
+// ── Card interaction ─────────────────────────────────────────────────
+function onCardClick(div, data){
+  if(lock || div.classList.contains("flipped") || div.classList.contains("matched")) return;
+  flip(div, data);
+  if(!first){ first = div; return; }
+  second = div; lock = true;
+
+  if(first.dataset.pair === second.dataset.pair && first !== second){
+    // ✅ Match
+    const color = matchColors[matched % matchColors.length];
+    setTimeout(()=>{
+      [first,second].forEach(c=>{
+        c.classList.remove("flipped");
+        c.classList.add("matched");
+        c.style.background  = color;
+        c.style.borderColor = color;
+        c.style.color       = "#fff";
+      });
+      matched++;
+      scoreMatchedEl.textContent = matched;
+      if(matched === PAIRS_PER_ROUND){
+        statusEl.textContent = "🎉 All matched! Press New Round to play again.";
+      }
+      first=null; second=null; lock=false;
+    },500);
+  } else {
+    // ❌ No match
+    setTimeout(()=>{
+      [first,second].forEach(c=>{
+        c.classList.add("shake");
+        setTimeout(()=>c.classList.remove("shake"),360);
+        c.classList.remove("flipped");
+        c.style.background  = "#1a3a5c";
+        c.style.borderColor = "#0a3d62";
+        c.style.color       = "#fff";
+        // Remove text but keep number badge
+        const num = c.querySelector(".card-num");
+        c.textContent = "";
+        if(num) c.appendChild(num);
+      });
+      first=null; second=null; lock=false;
+    },700);
+  }
+}
+
+function flip(div, data){
+  div.classList.add("flipped");
+  const num = div.querySelector(".card-num");
+  div.textContent = data.text;
+  if(num) div.appendChild(num);
+  div.style.background  = "#0a3d62";
+  div.style.borderColor = "#0a3d62";
+  div.style.color       = "#fff";
+}
+
+newRoundBtn.addEventListener("click", buildRound);
+buildRound();
+</script>
+
+<!-- TTS + Gap fill -->
+<script>
+const voiceSelect  = document.getElementById("voiceSelect");
+const voiceStatus  = document.getElementById("voiceStatus");
+let voices         = [];
+let selectedVoice  = null;
+let activeSpeakBtn = null;
+
+function populateVoices(){
+  voices = window.speechSynthesis.getVoices();
+  if(!voices.length) return;
+  voiceSelect.innerHTML = "";
+  const priority = ["AU","GB","NZ","US","CA","IE"];
+  const english  = voices.filter(v=>v.lang.startsWith("en"));
+  english.sort((a,b)=>{
+    const ai=priority.findIndex(r=>a.lang.includes(r));
+    const bi=priority.findIndex(r=>b.lang.includes(r));
+    return (ai===-1?99:ai)-(bi===-1?99:bi);
+  });
+  const pool = english.length ? english : voices;
+  pool.forEach((v,i)=>{
+    const opt = document.createElement("option");
+    opt.value = i;
+    const region = v.lang.split("-")[1]||"";
+    const flag = {AU:"🇦🇺",GB:"🇬🇧",US:"🇺🇸",NZ:"🇳🇿",CA:"🇨🇦",IE:"🇮🇪"}[region]||"🌐";
+    opt.textContent = `${flag} ${v.name} (${v.lang})`;
+    voiceSelect.appendChild(opt);
+  });
+  const auIdx = pool.findIndex(v=>v.lang.includes("AU"));
+  voiceSelect.selectedIndex = auIdx>=0 ? auIdx : 0;
+  setVoice();
+  const chosen = pool[voiceSelect.selectedIndex];
+  voiceStatus.textContent = chosen && chosen.lang.includes("AU")
+    ? "✓ Australian English detected"
+    : "Tip: set device language to English (AU) for Australian accent";
+}
+function setVoice(){
+  const pool = voices.filter(v=>v.lang.startsWith("en"));
+  const use  = pool.length ? pool : voices;
+  selectedVoice = use[parseInt(voiceSelect.value)]||null;
+}
+voiceSelect.addEventListener("change",setVoice);
+if(typeof speechSynthesis!=="undefined"){
+  populateVoices();
+  speechSynthesis.onvoiceschanged = populateVoices;
+} else {
+  voiceSelect.innerHTML="<option>Not supported in this browser</option>";
+  voiceStatus.textContent="Use Chrome, Edge, or Safari for TTS";
+}
+
+function speakerIcon(){
+  return `<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>`;
+}
+
+function speak(text, btn){
+  if(typeof speechSynthesis==="undefined") return;
+  speechSynthesis.cancel();
+  if(activeSpeakBtn){
+    activeSpeakBtn.classList.remove("speaking");
+    activeSpeakBtn.innerHTML = speakerIcon()+" Listen";
+  }
+  if(activeSpeakBtn===btn){ activeSpeakBtn=null; return; }
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate=0.88; utter.pitch=1.0; utter.volume=1.0;
+  if(selectedVoice) utter.voice=selectedVoice;
+  utter.onstart=()=>{
+    btn.classList.add("speaking");
+    btn.innerHTML=speakerIcon()+" Speaking…";
+    activeSpeakBtn=btn;
+  };
+  utter.onend=utter.onerror=()=>{
+    btn.classList.remove("speaking");
+    btn.innerHTML=speakerIcon()+" Listen";
+    if(activeSpeakBtn===btn) activeSpeakBtn=null;
+  };
+  speechSynthesis.speak(utter);
+}
+
+function normalizeText(str){
+  return str.toLowerCase()
+    .replace(/['']/g,"'").replace(/[""]/g,'"')
+    .replace(/\s+/g," ").trim()
+    .replace(/[.,!?;:]+$/g,"");
+}
+
+document.querySelectorAll(".gapfill-item").forEach(item=>{
+  const answer    = item.dataset.answer;
+  const sentence  = item.dataset.sentence;
+  const input     = item.querySelector(".gapfill-input");
+  const submitBtn = item.querySelector(".gap-submit");
+  const revealBtn = item.querySelector(".gap-reveal");
+  const speakBtn  = item.querySelector(".speak-btn");
+  const feedback  = item.querySelector(".gapfill-feedback");
+  const answerBox = item.querySelector(".gapfill-answer");
+
+  if(speakBtn && sentence){
+    speakBtn.addEventListener("click",()=>speak(sentence,speakBtn));
+  }
+  submitBtn.addEventListener("click",()=>{
+    const typed   = normalizeText(input.value);
+    // Accept any of the alternative answers split by '/'
+    const answers = answer.split("/").map(a=>normalizeText(a.trim()));
+    feedback.classList.remove("correct","incorrect");
+    if(!typed){ feedback.textContent="Please type your answer first."; feedback.classList.add("incorrect"); return; }
+    if(answers.includes(typed)){
+      feedback.textContent="✓ Correct!"; feedback.classList.add("correct");
+    } else {
+      feedback.textContent="✗ Try again."; feedback.classList.add("incorrect");
+    }
+  });
+  input.addEventListener("keydown",e=>{ if(e.key==="Enter") submitBtn.click(); });
+  revealBtn.addEventListener("click",()=>answerBox.classList.toggle("show"));
+});
+</script>
+
+</body>
+</html>
