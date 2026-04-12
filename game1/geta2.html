@@ -221,27 +221,27 @@ button.btn:hover{
   transform:translateY(-2px);
 }
 
-/* ===== Game Grid — 3 cols, 3 pairs = 6 cards ===== */
+/* ===== Game Grid — 4 cols desktop, 6 pairs = 12 cards ===== */
 #game{
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:12px;
-  width:min(100%, 480px);
+  grid-template-columns:repeat(4, 1fr);
+  gap:10px;
+  width:min(100%, 760px);
   margin:0 auto;
 }
 
 .card{
   background:#671321;
   border:2px solid var(--accent);
-  border-radius:16px;
-  padding:12px;
-  min-height:82px;
+  border-radius:14px;
+  padding:10px 8px;
+  min-height:72px;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   cursor:pointer;
-  font-size:.92rem;
+  font-size:.82rem;
   line-height:1.3;
   color:#fff;
   transition:background .3s,color .3s,transform .2s;
@@ -491,19 +491,43 @@ footer{
   font-size:.9rem;
 }
 
-/* ===== Tablet ===== */
-@media(max-width:900px){
-  #game{ width:min(100%, 420px); gap:10px; }
-  .card{ min-height:76px; font-size:.85rem; padding:10px; }
+/* ===== Desktop / large tablet (>900px): 4 columns ===== */
+@media(min-width:901px){
+  #game{
+    grid-template-columns:repeat(4, 1fr);
+    width:min(100%, 760px);
+    gap:10px;
+  }
+  .card{ min-height:72px; font-size:.82rem; padding:10px 8px; }
 }
 
-/* ===== Phones ===== */
+/* ===== Tablet (601–900px): 3 columns ===== */
+@media(max-width:900px){
+  #game{
+    grid-template-columns:repeat(3, 1fr);
+    width:min(100%, 540px);
+    gap:9px;
+  }
+  .card{ min-height:76px; font-size:.80rem; padding:9px 7px; }
+}
+
+/* ===== Phones (≤600px): 2 columns ===== */
 @media(max-width:600px){
   main{ padding:1.5rem .8rem calc(2.4rem + env(safe-area-inset-bottom)); }
-  #game{ width:min(100%, 330px); gap:8px; }
-  .card{ min-height:70px; font-size:.78rem; padding:8px; border-radius:14px; }
+  #game{
+    grid-template-columns:repeat(2, 1fr);
+    width:min(100%, 360px);
+    gap:8px;
+  }
+  .card{ min-height:80px; font-size:.76rem; padding:8px 6px; border-radius:12px; }
   .qr-toggle, .home-btn{ transform:scale(.95); transform-origin:top; }
   .gapfill-input{ width:100%; }
+}
+
+/* ===== Very small phones (≤360px): 2 columns, compact ===== */
+@media(max-width:360px){
+  #game{ width:100%; gap:6px; }
+  .card{ min-height:72px; font-size:.72rem; padding:6px 5px; }
 }
 </style>
 </head>
@@ -532,13 +556,13 @@ footer{
   <h1>Expressions with Get – Matching Game</h1>
   <p>
     Flip two cards to match each <strong>get</strong> expression with its meaning.
-    Each round picks <strong>3 new pairs</strong> from a big list — play again and again!
+    Each round picks <strong>6 new pairs</strong> from a big list — play again and again!
   </p>
 
   <div class="round-info" id="roundInfo">Round 1</div>
 
   <div class="score-bar">
-    <div>Matches: <span id="scoreMatched">0</span> / 3</div>
+    <div>Matches: <span id="scoreMatched">0</span> / 6</div>
     <div>Rounds played: <span id="scoreRounds">0</span></div>
   </div>
 
@@ -811,18 +835,13 @@ const GET_EXPRESSIONS = [
   ["get changed",      "put on different clothes"]
 ];
 
-// Bright match colours (one per pair)
+// Bright match colours (one per pair — now 6 needed)
 const matchColors = [
-  "#27ae60","#2980b9","#8e44ad","#f39c12","#e67e22",
-  "#16a085","#c0392b","#1abc9c","#d35400","#9b59b6"
+  "#27ae60","#2980b9","#8e44ad","#f39c12","#e67e22","#16a085",
+  "#c0392b","#1abc9c","#d35400","#9b59b6"
 ];
 
-// Soft unflipped tones
-const pastelColors = [
-  "#f8cdda","#fce1e4","#e0f2fe","#e8f5e9","#fff3cd",
-  "#ede7f6","#e1f5fe","#f3e5f5","#f1f8e9","#fffde7",
-  "#fde8d8","#e8f0fe"
-];
+const PAIRS_PER_ROUND = 6; // 6 pairs = 12 cards
 
 const gameEl      = document.getElementById("game");
 const statusEl    = document.getElementById("status");
@@ -834,7 +853,7 @@ const scoreRoundsEl  = document.getElementById("scoreRounds");
 let first = null, second = null, lock = false;
 let matched = 0;
 let roundCount = 0;
-let usedPairs = new Set(); // track used pairs for variety
+let usedPairs = new Set();
 
 function shuffle(arr){
   const a = [...arr];
@@ -846,12 +865,15 @@ function shuffle(arr){
 }
 
 function pickPairs(n){
-  // Prefer unused pairs; reset when pool exhausted
   const unused = GET_EXPRESSIONS.filter((_,i) => !usedPairs.has(i));
   let pool = unused.length >= n ? unused : GET_EXPRESSIONS;
   if(pool === GET_EXPRESSIONS) usedPairs.clear();
 
-  const shuffled = shuffle(pool.map((_,i) => pool === GET_EXPRESSIONS ? i : GET_EXPRESSIONS.indexOf(pool[i])));
+  const indices = pool === GET_EXPRESSIONS
+    ? GET_EXPRESSIONS.map((_,i) => i)
+    : GET_EXPRESSIONS.map((_,i) => i).filter(i => !usedPairs.has(i));
+
+  const shuffled = shuffle(indices);
   const chosen = shuffled.slice(0, n);
   chosen.forEach(i => usedPairs.add(i));
   return chosen.map(i => GET_EXPRESSIONS[i]);
@@ -867,8 +889,8 @@ function buildRound(){
   scoreRoundsEl.textContent = roundCount;
   scoreMatchedEl.textContent = "0";
 
-  // Pick 3 pairs → 6 cards total
-  const pairs = pickPairs(3);
+  // Pick 6 pairs → 12 cards total
+  const pairs = pickPairs(PAIRS_PER_ROUND);
 
   const cards = shuffle(
     pairs.flatMap(([expr, meaning]) => [
@@ -882,7 +904,6 @@ function buildRound(){
     div.className = "card";
     div.dataset.pair = data.pair;
     div.dataset.role = data.role;
-    // Each card starts face-down (no text, colour only)
     div.style.background = "#671321";
     gameEl.appendChild(div);
 
@@ -893,7 +914,7 @@ function buildRound(){
 function onCardClick(div, data, idx){
   if(lock || div.classList.contains("flipped") || div.classList.contains("matched")) return;
 
-  flip(div, data.text, idx);
+  flip(div, data.text);
 
   if(!first){ first = div; return; }
 
@@ -913,7 +934,7 @@ function onCardClick(div, data, idx){
       matched++;
       scoreMatchedEl.textContent = matched;
 
-      if(matched === 3){
+      if(matched === PAIRS_PER_ROUND){
         statusEl.textContent = "🎉 All matched! Press New Round to play again.";
       }
       first = null; second = null; lock = false;
@@ -934,14 +955,12 @@ function onCardClick(div, data, idx){
   }
 }
 
-function flip(div, text, idx){
+function flip(div, text){
   div.classList.add("flipped");
   div.textContent = text;
-  div.style.background = var_accent();
+  div.style.background = "#2e0e5b";
   div.style.color = "#fff";
 }
-
-function var_accent(){ return "#2e0e5b"; }
 
 newRoundBtn.addEventListener("click", buildRound);
 buildRound();
@@ -965,11 +984,9 @@ function populateVoices(){
 
   voiceSelect.innerHTML = "";
 
-  // Priority order: en-AU → en-GB → en-US → any English
   const priority = ["AU","GB","NZ","US","CA","IE"];
   const english  = voices.filter(v => v.lang.startsWith("en"));
 
-  // Sort by priority region
   english.sort((a,b)=>{
     const ai = priority.findIndex(r => a.lang.includes(r));
     const bi = priority.findIndex(r => b.lang.includes(r));
@@ -981,19 +998,16 @@ function populateVoices(){
   pool.forEach((v, i) => {
     const opt = document.createElement("option");
     opt.value  = i;
-    // Friendly label: show name + region flag hint
     const region = v.lang.split("-")[1] || "";
     const flag   = { AU:"🇦🇺", GB:"🇬🇧", US:"🇺🇸", NZ:"🇳🇿", CA:"🇨🇦", IE:"🇮🇪" }[region] || "🌐";
     opt.textContent = `${flag} ${v.name} (${v.lang})`;
     voiceSelect.appendChild(opt);
   });
 
-  // Default: first Australian English, or first English
   const auIdx = pool.findIndex(v => v.lang.includes("AU"));
   voiceSelect.selectedIndex = auIdx >= 0 ? auIdx : 0;
   setVoice();
 
-  // Status hint
   const chosen = pool[voiceSelect.selectedIndex];
   if(chosen && chosen.lang.includes("AU")){
     voiceStatus.textContent = "✓ Australian English detected";
@@ -1010,7 +1024,6 @@ function setVoice(){
 
 voiceSelect.addEventListener("change", setVoice);
 
-// Voices load asynchronously in some browsers
 if(typeof speechSynthesis !== "undefined"){
   populateVoices();
   speechSynthesis.onvoiceschanged = populateVoices;
@@ -1022,21 +1035,19 @@ if(typeof speechSynthesis !== "undefined"){
 function speak(text, btn){
   if(typeof speechSynthesis === "undefined") return;
 
-  // Stop anything currently playing
   speechSynthesis.cancel();
   if(activeSpeakBtn){
     activeSpeakBtn.classList.remove("speaking");
     activeSpeakBtn.innerHTML = speakerIcon() + " Listen";
   }
 
-  // If same button clicked again → just stop
   if(activeSpeakBtn === btn){
     activeSpeakBtn = null;
     return;
   }
 
   const utter = new SpeechSynthesisUtterance(text);
-  utter.rate  = 0.88;   // slightly slower — good for ESL
+  utter.rate  = 0.88;
   utter.pitch = 1.0;
   utter.volume= 1.0;
 
@@ -1086,12 +1097,10 @@ document.querySelectorAll(".gapfill-item").forEach(item => {
   const feedback  = item.querySelector(".gapfill-feedback");
   const answerBox = item.querySelector(".gapfill-answer");
 
-  // Speak button
   if(speakBtn && sentence){
     speakBtn.addEventListener("click", () => speak(sentence, speakBtn));
   }
 
-  // Submit
   submitBtn.addEventListener("click", () => {
     const typed   = normalizeText(input.value);
     const correct = normalizeText(answer);
@@ -1114,7 +1123,6 @@ document.querySelectorAll(".gapfill-item").forEach(item => {
     if(e.key === "Enter") submitBtn.click();
   });
 
-  // Reveal
   revealBtn.addEventListener("click", () => {
     answerBox.classList.toggle("show");
   });
@@ -1123,3 +1131,4 @@ document.querySelectorAll(".gapfill-item").forEach(item => {
 
 </body>
 </html>
+
