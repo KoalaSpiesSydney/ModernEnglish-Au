@@ -126,10 +126,12 @@ body {
     .video-wrap { position: relative; width: 100%; max-width: 480px; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(15,23,42,.16), 0 4px 12px rgba(15,23,42,.10); background: #0b1220; margin: 24px 0; }
     .video-wrap video { width: 100%; height: auto; display: block; }
     .video-wrap::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), #60a5fa, var(--accent)); }
-video {
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%, black 60%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, black 40%, black 60%, transparent);
+
+    video {
+  opacity: 0.5;
 }
+
+
 
     /* Feature list — plain, no cards */
     .feature-list { list-style: none; padding: 0; margin: 0 0 4px; }
@@ -212,34 +214,22 @@ video {
 
         <ul class="feature-list">
           <li>
-            <a href="MicroLessons&amp;Games.html">🎮 Interactive games</a>
+            <a href="interactivegames.html">🎮 Interactive games</a>
             <span class="feat-desc">Drag-and-drop, vocabulary and grammar systems</span>
           </li>
           <li>
-            <span class="feat-label">🎧 Listening &amp; pronunciation</span>
+            <a href="listening&pron.html">🎧 Listening &amp; pronunciation</a>
             <span class="feat-desc">Audio tools and accent training activities</span>
           </li>
           <li>
-            <a href="IELTSPTEPLUS.html">📊 Automated testing</a>
+            <a href="automatedtesting.html">📊 Automated testing</a>
             <span class="feat-desc">Tests with built-in reporting and scoring</span>
           </li>
           <li>
-            <span class="feat-label">🎬 Audio-visual content</span>
+            <a href="audiovisualcontent.html">🎬 Audio-visual content </a>
             <span class="feat-desc">Creative tools that expand classroom possibilities</span>
           </li>
         </ul>
-
-        <hr class="divider">
-
-        <h2>Test for immigration or specific language points</h2>
-        <p>IELTS, PTE and Cambridge mini tests — write from dictation, academic language, reading, writing and listening.</p>
-        <a href="IELTSPTEPLUS.html" class="text-link">IELTS PTE + →</a>
-
-        <hr class="divider">
-
-        <h2>Micro Lessons for Classroom Teaching, Self-Study &amp; Skill Development</h2>
-        <p>10 and 20 minute lessons on grammar points with games and worksheets.</p>
-        <a href="MicroLessons&amp;Games.html" class="text-link">MicroLessons &amp; Games for ESL →</a>
 
         <hr class="divider">
 
@@ -263,4 +253,5 @@ video {
 
 </body>
 </html>
+
 
