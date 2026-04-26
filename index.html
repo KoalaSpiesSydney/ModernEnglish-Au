@@ -9,15 +9,46 @@
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f0f4fa; --surface: #ffffff; --ink: #0f172a; --muted: #475569;
-      --line: rgba(15,23,42,.10); --accent: #2563eb; --accent-2: #1e40af;
-      --link: #1d4ed8; --header: #1c1c1c; --header-ink: #f8fafc;
-      --max: 1160px;
-      --sans: "Source Sans 3", system-ui, sans-serif;
-      --serif: "Source Serif 4", Georgia, serif;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
+  --bg: #fffce6; /* pale lemon base */
+  --surface: #ffffff;
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: rgba(15,23,42,.10);
+  --accent: #2563eb;
+  --accent-2: #1e40af;
+  --link: #1d4ed8;
+  --header: #1c1c1c;
+  --header-ink: #f8fafc;
+  --max: 1160px;
+  --sans: "Source Sans 3", system-ui, sans-serif;
+  --serif: "Source Serif 4", Georgia, serif;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* SHIMMERING LEMON BACKGROUND */
+body {
+  font-size: 18px;
+  color: var(--ink);
+  line-height: 1.78;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(circle at top,
+      #fffce6 0%,
+      #f7f5ea 40%,
+      #f0f4fa 100%);
+  background-size: 140% 140%;
+  animation: bg-shimmer 12s ease-in-out infinite alternate;
+}
+
+@keyframes bg-shimmer {
+  0%   { background-position: 50% 0%; }
+  100% { background-position: 50% 100%; }
+}
+
+  
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body { font-family: var(--sans); font-size: 18px; background: var(--bg); color: var(--ink); line-height: 1.78; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
@@ -38,6 +69,8 @@
       background: linear-gradient(90deg, transparent 0%, rgba(37,99,235,.55) 20%, #60a5fa 50%, rgba(37,99,235,.55) 80%, transparent 100%);
       animation: bar-pulse 5s ease-in-out infinite alternate;
     }
+
+
     @keyframes grid-drift { 0% { transform: translate(0,0); } 100% { transform: translate(48px,48px); } }
     @keyframes bar-pulse  { 0% { opacity: .4; } 100% { opacity: .9; } }
     .header-inner { position: relative; z-index: 1; display: flex; align-items: center; padding-block: 26px 30px; }
@@ -93,6 +126,10 @@
     .video-wrap { position: relative; width: 100%; max-width: 480px; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(15,23,42,.16), 0 4px 12px rgba(15,23,42,.10); background: #0b1220; margin: 24px 0; }
     .video-wrap video { width: 100%; height: auto; display: block; }
     .video-wrap::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), #60a5fa, var(--accent)); }
+video {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%, black 60%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 40%, black 60%, transparent);
+}
 
     /* Feature list — plain, no cards */
     .feature-list { list-style: none; padding: 0; margin: 0 0 4px; }
