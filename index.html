@@ -4,468 +4,239 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Modern English Australia · Koala Spies Sydney</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg: #f6f8fb;
-      --surface: #ffffff;
-      --ink: #0f172a;
-      --muted: #475569;
-      --line: rgba(15,23,42,.10);
-      --accent: #2563eb;
-      --accent-2: #1e40af;
-      --link: #1d4ed8;
-      --header: #0b1220;
-      --header-ink: #f8fafc;
-      --max: 1120px;
-      --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    :root {
+      --bg: #f0f4fa; --surface: #ffffff; --ink: #0f172a; --muted: #475569;
+      --line: rgba(15,23,42,.10); --accent: #2563eb; --accent-2: #1e40af;
+      --link: #1d4ed8; --header: #1c1c1c; --header-ink: #f8fafc;
+      --max: 1160px;
+      --sans: "Source Sans 3", system-ui, sans-serif;
       --serif: "Source Serif 4", Georgia, serif;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body { font-family: var(--sans); font-size: 18px; background: var(--bg); color: var(--ink); line-height: 1.78; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; -webkit-tap-highlight-color: transparent; }
+    a:hover { color: var(--accent-2); }
+    .wrap { max-width: var(--max); margin: 0 auto; padding-inline: clamp(16px, 4vw, 36px); }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-
-    body{
-      margin:0;
-      font-family: var(--sans);
-      font-size: 19px;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.75;
-      -webkit-text-size-adjust: 100%;
-      overflow-x:hidden;
+    /* HEADER */
+    header { position: relative; background: var(--header); color: var(--header-ink); overflow: hidden; padding-top: var(--safe-top); }
+    header::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 48px 48px; animation: grid-drift 24s linear infinite; pointer-events: none;
     }
-
-    img,video{ max-width:100%; height:auto; display:block; }
-
-    a{
-      color: var(--link);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      -webkit-tap-highlight-color: transparent;
+    header::after {
+      content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(37,99,235,.55) 20%, #60a5fa 50%, rgba(37,99,235,.55) 80%, transparent 100%);
+      animation: bar-pulse 5s ease-in-out infinite alternate;
     }
-    a:hover{ color: var(--accent-2); }
-    a:active{ opacity:.9; }
-
-    .muted{ color: var(--muted); }
-    .small{ font-size:.95rem; }
-
-    .wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding-inline: clamp(12px, 3vw, 20px);
-    }
-
-    /* ── HEADER ── */
-    header{
-      background: var(--header);
-      color: var(--header-ink);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      padding-top: var(--safe-top);
-    }
-
-    .header-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding-block: 36px;
-      min-width:0;
-    }
-
-    .brand{ display:flex; flex-direction:column; gap:2px; min-width:0; }
-
-    .brand-top{
-      letter-spacing: 5px;
-      font-weight: 800;
-      text-transform: uppercase;
-      font-size: clamp(1.45rem, 1.1rem + 1.25vw, 2.1rem);
-      line-height: 1.05;
-      max-width:100%;
-      overflow-wrap:anywhere;
-      word-break:break-word;
-      text-decoration: none;
-      background: linear-gradient(
-        100deg,
-        #f8fafc 0%,
-        #f8fafc 20%,
-        #ffffff 35%,
-        #a5c4fd 45%,
-        #ffffff 55%,
-        #f8fafc 70%,
-        #f8fafc 100%
-      );
-      background-size: 250% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+    @keyframes grid-drift { 0% { transform: translate(0,0); } 100% { transform: translate(48px,48px); } }
+    @keyframes bar-pulse  { 0% { opacity: .4; } 100% { opacity: .9; } }
+    .header-inner { position: relative; z-index: 1; display: flex; align-items: center; padding-block: 26px 30px; }
+    .brand { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+    .brand-top {
+      font-family: var(--serif); font-weight: 800; font-size: clamp(2rem, 1.2rem + 3.2vw, 3.6rem);
+      letter-spacing: 3px; text-transform: uppercase; line-height: 1.0; text-decoration: none; display: inline-block;
+      background: linear-gradient(100deg, #f8fafc 0%, #f8fafc 18%, #ffffff 30%, #a5c4fd 42%, #ffffff 52%, #f8fafc 68%, #f8fafc 100%);
+      background-size: 250% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
       animation: shimmer 3.5s linear infinite;
     }
-    .brand-top:hover{ animation-duration: 1.2s; }
-
-    @keyframes shimmer {
-      0%   { background-position: 200% center; }
-      100% { background-position: -50% center; }
+    .brand-top:hover { animation-duration: 1.2s; }
+    @keyframes shimmer { 0% { background-position: 200% center; } 100% { background-position: -50% center; } }
+    .kss-label {
+      display: inline-block; font-family: var(--sans); font-weight: 700; font-size: clamp(0.68rem, 0.58rem + 0.4vw, 0.82rem);
+      letter-spacing: 5px; text-transform: uppercase; color: #fde047; text-decoration: none; transition: color .15s, letter-spacing .2s;
     }
+    .kss-label:hover { color: #fef08a; letter-spacing: 6px; }
 
-    .kss-font{
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 4px;
-      color: #fde047;
-      max-width:100%;
-      overflow-wrap:anywhere;
-      word-break:break-word;
-      text-decoration:none;
-      transition: color .15s;
+    /* MAIN */
+    .section { padding: 56px 0 64px; }
+    .two-col { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: start; }
+    .two-col > * { min-width: 0; }
+
+    /* Headline animation */
+    .hero-headline { font-family: "UnifrakturMaguntia", "MedievalSharp", cursive; font-weight: 400; font-style: normal; font-size: clamp(2.8rem, 1.4rem + 5.8vw, 6rem); line-height: 1.1; margin-bottom: 20px; overflow: hidden; letter-spacing: 1px; }
+    .hero-word { display: inline-block; opacity: 0; transform: translateY(38px); animation: word-rise 0.65s cubic-bezier(.22,.68,0,1.2) forwards; }
+    .hero-word:nth-child(1) {
+      animation-delay: 0.05s;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(101,76,40,.55);
+      background: linear-gradient(160deg, rgba(120,90,45,.7) 0%, rgba(80,55,25,.35) 40%, rgba(140,105,55,.6) 70%, rgba(70,50,20,.3) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: sepia(0.3);
     }
-    .kss-font:hover{ color: #fef08a; }
-
-    nav{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      min-width:0;
-      font-family: var(--sans);
-    }
-
-    nav a{
-      color: rgba(248,250,252,.92);
-      font-weight: 700;
-      letter-spacing: .2px;
-      text-decoration: none;
-      border: 0;
-      background: transparent;
-      opacity: .92;
-      white-space: nowrap;
-      transition: opacity .12s ease, transform .12s ease;
-    }
-    nav a:hover{ opacity:1; transform:translateY(-1px); text-decoration:underline; text-underline-offset:5px; }
-    nav a.active{ opacity:1; text-decoration:underline; text-underline-offset:5px; }
-
-    /* ── HERO VIDEO ── */
-    .video-wrap{
+    .hero-word:nth-child(2) {
+      animation-delay: 0.22s;
       position: relative;
-      width: 100%;
-      max-width: 500px;
-      margin-top: 18px;
-      border-radius: 12px;
-      overflow: hidden;
-      /* Subtle shadow so video floats off the page */
-      box-shadow: 0 12px 40px rgba(15,23,42,.18), 0 2px 8px rgba(15,23,42,.10);
-      background: #0b1220; /* fallback while video loads */
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(80,55,25,.5);
+      background: linear-gradient(160deg, rgba(110,80,35,.65) 0%, rgba(75,52,22,.32) 45%, rgba(130,95,48,.58) 72%, rgba(65,44,18,.28) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: sepia(0.3);
     }
-
-    .video-wrap video{
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 12px;
+    .hero-word:nth-child(2)::after {
+      content: ""; position: absolute; bottom: 5px; left: 0; right: 0; height: 2px; border-radius: 1px;
+      background: linear-gradient(90deg, transparent, rgba(101,76,40,.4), rgba(140,105,55,.55), rgba(101,76,40,.4), transparent);
+      transform: scaleX(0); transform-origin: left;
+      animation: line-expand 0.5s 0.72s ease-out forwards;
     }
+    @keyframes word-rise  { to { opacity: 1; transform: translateY(0); } }
+    @keyframes line-expand { to { transform: scaleX(1); } }
 
-    /* Thin blue accent line under video */
-    .video-wrap::after{
-      content: "";
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), #60a5fa, var(--accent));
-      opacity: .7;
-    }
+    /* Typography */
+    h2 { font-family: var(--serif); font-size: clamp(1.35rem, 1.05rem + 1.1vw, 2rem); font-weight: 700; color: var(--ink); line-height: 1.2; margin: 0 0 10px; }
+    h3 { font-family: var(--sans); font-size: 0.82rem; font-weight: 700; color: var(--muted); letter-spacing: 2.5px; text-transform: uppercase; margin: 0 0 14px; }
+    p  { margin-bottom: 16px; }
+    .intro-text { font-size: 1.05rem; line-height: 1.82; }
+    .role-line  { font-family: var(--sans); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
+    .divider    { border: 0; height: 1px; background: var(--line); margin: 28px 0; }
 
-    /* ── SECTIONS ── */
-    .section{
-      padding: 48px 0;
-      border-bottom: 1px solid var(--line);
-    }
+    .text-link { font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--link); text-decoration: underline; text-underline-offset: 3px; transition: color .15s; }
+    .text-link:hover { color: var(--accent-2); }
+    .cta-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--link); text-decoration: underline; text-underline-offset: 3px; transition: color .15s, gap .15s; }
+    .cta-link::after { content: "→"; }
+    .cta-link:hover  { color: var(--accent-2); gap: 10px; }
 
-    .two-col{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 44px;
-      align-items:start;
-    }
-    .two-col > *{ min-width:0; }
+    /* Video */
+    .video-wrap { position: relative; width: 100%; max-width: 480px; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(15,23,42,.16), 0 4px 12px rgba(15,23,42,.10); background: #0b1220; margin: 24px 0; }
+    .video-wrap video { width: 100%; height: auto; display: block; }
+    .video-wrap::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), #60a5fa, var(--accent)); }
 
-    /* ── TYPE ── */
-    h1,h2,h3{ margin:0 0 12px; line-height:1.2; font-family:var(--serif); color:var(--ink); }
-    h1{ font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem); }
-    h2{ font-size: clamp(1.3rem, 1.05rem + 1vw, 1.95rem); margin-top: 18px; }
-    h3{ font-size:1.05rem; margin-top:14px; font-family:var(--sans); color:var(--muted); font-weight:700; }
+    /* Feature list — plain, no cards */
+    .feature-list { list-style: none; padding: 0; margin: 0 0 4px; }
+    .feature-list li { padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 0.97rem; }
+    .feature-list li:last-child { border-bottom: 0; }
+    .feature-list a { font-weight: 700; color: var(--link); text-decoration: none; }
+    .feature-list a:hover { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
+    .feat-label { font-weight: 700; color: var(--ink); }
+    .feat-desc  { display: block; font-size: 0.88rem; color: var(--muted); margin-top: 2px; }
 
-    p{ margin:0 0 14px; font-family:var(--sans); }
+    .right-col { padding-top: 6px; }
+    .right-col h2 { margin-top: 0; }
 
-    ul{ margin:10px 0 16px; padding-left:18px; }
-    li{ margin:8px 0; }
+    /* FOOTER */
+    footer { background: var(--header); color: var(--header-ink); border-top: 1px solid rgba(255,255,255,.08); padding: 20px 0 calc(20px + var(--safe-bottom)); }
+    .footer-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; text-align: center; font-family: var(--sans); font-size: 0.87rem; color: rgba(248,250,252,.60); }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; width: 100%; margin-top: 6px; }
+    .footer-links a { color: rgba(248,250,252,.75); text-decoration: underline; text-underline-offset: 4px; font-size: 0.87rem; transition: color .15s; }
+    .footer-links a:hover { color: #fff; }
 
-    .block{ padding-top:18px; border-top:1px solid var(--line); margin-top:18px; text-align:left; }
-    .section-divider{ border:0; height:1px; margin:26px 0; background:var(--line); }
-
-    /* ── ANIMATED PHRASE ── */
-    .animated-phrase{
-      display:inline-block;
-      position:relative;
-      color: var(--accent);
-      font-weight: 800;
-      white-space:nowrap;
-      animation: slide-across 450ms ease-out both;
-      font-family: var(--serif);
-    }
-    .animated-phrase::after{
-      content:"";
-      position:absolute;
-      left:0; bottom:-6px;
-      width:100%; height:3px;
-      background: linear-gradient(90deg, transparent, rgba(37,99,235,.95), transparent);
-      opacity:.55;
-    }
-
-    @keyframes slide-across{
-      from{ transform:translateX(-24px); opacity:0; }
-      to{ transform:translateX(0); opacity:1; }
-    }
-
-    .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; }
-
-    .btn, .btn.primary, .btn.secondary, .btn.plain-link{
-      all:unset;
-      font-family:var(--sans);
-      color:var(--link);
-      cursor:pointer;
-      text-decoration:underline;
-      text-underline-offset:3px;
-      font-weight:700;
-      display:inline;
-    }
-    .btn:hover{ color:var(--accent-2); }
-
-    /* ── FEATURE CARDS (new: replaces plain list) ── */
-    .feature-grid{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin: 14px 0 18px;
-    }
-
-    .feature-card{
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: var(--ink);
-      font-family: var(--sans);
-    }
-
-    .feature-card-icon{
-      font-size: 1.25rem;
-      margin-bottom: 6px;
-      display: block;
-    }
-
-    .feature-card strong{
-      display: block;
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 2px;
-    }
-
-    .feature-card span{
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    /* ── FOOTER ── */
-    footer{
-      background: var(--header);
-      color: var(--header-ink);
-      border-top:1px solid rgba(255,255,255,.10);
-      padding:18px 0;
-      padding-bottom: calc(18px + var(--safe-bottom));
-    }
-
-    .footer-inner{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:14px;
-      flex-wrap:wrap;
-      text-align:center;
-      font-family:var(--sans);
-      font-size:.95rem;
-    }
-
-    .footer-links{
-      display:flex; gap:12px; flex-wrap:wrap; justify-content:center; width:100%;
-    }
-
-    .footer-links a{
-      color:rgba(248,250,252,.92);
-      text-decoration:underline;
-      text-underline-offset:4px;
-      padding:0; border:0; background:transparent; opacity:.92;
-    }
-    .footer-links a:hover{ opacity:1; color:#ffffff; }
-
-    /* ── RESPONSIVE ── */
-    @media(max-width:980px){
-      .two-col{ grid-template-columns:1fr; gap:28px; }
-      nav{ justify-content:flex-start; }
-      nav a{ white-space:normal; }
-      .feature-grid{ grid-template-columns:1fr 1fr; }
-    }
-
-    @media(max-width:720px){
-      .header-inner{ flex-direction:column; align-items:flex-start; gap:12px; }
-      .brand-top{ letter-spacing:2px; }
-      nav{ width:100%; justify-content:flex-start; gap:10px; }
-      .animated-phrase{ white-space:normal; }
-      .video-wrap{ max-width:100%; }
-      .feature-grid{ grid-template-columns:1fr; }
-    }
-
-    @media(max-width:400px){
-      .feature-grid{ grid-template-columns:1fr; }
-    }
-
-    @media(prefers-reduced-motion:reduce){
-      .animated-phrase{ animation:none; }
+    /* RESPONSIVE */
+    @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; gap: 36px; } }
+    @media (max-width: 540px) { .header-inner { padding-block: 20px 24px; } .video-wrap { max-width: 100%; } }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-word { animation: none; opacity: 1; transform: none; }
+      .hero-word:nth-child(2)::after { animation: none; transform: scaleX(1); }
+      .brand-top { animation: none; }
+      header::before, header::after { animation: none; }
     }
   </style>
 </head>
-
 <body>
-<header>
-  <div class="wrap header-inner">
-    <div class="brand">
-      <a href="index.html" class="brand-top">Modern English Au</a>
-      <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-font">Koala Spies Sydney</a>
 
+<header>
+  <div class="wrap">
+    <div class="header-inner">
+      <div class="brand">
+        <a href="index.html" class="brand-top">Modern English Au</a>
+        <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-label">Koala Spies Sydney</a>
+      </div>
+    </div>
   </div>
 </header>
 
-<section class="section">
-  <div class="wrap two-col">
+<main>
+  <section class="section">
+    <div class="wrap two-col">
 
-    <!-- LEFT COLUMN -->
-    <div>
-      <h1><span class="animated-phrase">meaningful english</span></h1>
+      <!-- LEFT COLUMN -->
+      <div>
+        <h3>UX &amp; Learning Design Portfolio</h3>
 
-      <p>
-        Welcome to my UX and Learning Design portfolio. I bring together experience in adult education,
-        English examining, freelance writing, and media production. I teach, I code, I use AI ethically
-        and I design — building learning experiences that are clear, engaging, and purposeful.
-      </p>
-
-   
-
-      <!-- ── AUTO-PLAYING HERO VIDEO ── -->
-      <div class="video-wrap">
-        <video
-          src="ModernEnglishAU.mp4"
-          autoplay
-          muted
-          loop
-          playsinline
-          aria-label="Modern English Australia intro video">
-          <!-- Fallback for very old browsers -->
-          Your browser doesn't support HTML5 video.
-        </video>
-      </div>
-
-      <p class="muted" style="font-weight:700; margin-top:20px;">
-        EdTech Designer&nbsp;·&nbsp;UX Designer&nbsp;·&nbsp;Creative Educator
-      </p>
-
-      <div class="actions">
-        <a class="btn" href="https://koalaspiessydney.github.io/KoalaSpiesSyd/about.html">More about me</a>
-      </div>
-    </div>
-
-    <!-- RIGHT COLUMN -->
-    <div>
-      <div class="block" style="margin-top:0; padding-top:0; border-top:0;">
-        <h2 style="margin-top:0;">Bespoke Learning Tools</h2>
-      </div>
-
-      <!-- Feature cards replacing the plain list -->
-      <div class="feature-grid">
-        < a href= "http://modernenglish.au/Microlessons&Games.html" class= "feature-card">
-        <div class="<div class="feature-grid">
-
-  <a href="http://modernenglish.au/Microlessons&Games.html" class="feature-card">
-    <span class="feature-card-icon">🎮</span>
-    <strong>Interactive games</strong>
-    <span>Drag-and-drop, vocabulary and grammar systems</span>
-  </a>
-
-  <a href="#" class="feature-card">
-    <span class="feature-card-icon">🎧</span>
-    <strong>Listening &amp; pronunciation</strong>
-    <span>Audio tools and accent training activities</span>
-  </a>
-
-  <a href="http://modernenglish.au/IELTSPTEPLUS.html" class="feature-card">
-    <span class="feature-card-icon">📊</span>
-    <strong>Automated testing</strong>
-    <span>Tests with built-in reporting and scoring</span>
-  </a>
-
-  <a href="#" class="feature-card">
-    <span class="feature-card-icon">🎬</span>
-    <strong>Audio-visual content</strong>
-    <span>Creative tools that expand classroom possibilities</span>
-  </a>
-
-</div>
-  <strong>Automated testing</strong>
-  <span>Tests with built-in reporting and scoring</span>
-</a>
-
-        <div class="feature-card">
-          <span class="feature-card-icon">🎬</span>
-          <strong>Audio-visual content</strong>
-          <span>Creative tools that expand classroom possibilities</span>
+        <div class="hero-headline" aria-label="meaningful English">
+          <span class="hero-word">meaningful&nbsp;</span><span class="hero-word">English</span>
         </div>
+
+        <p class="role-line">EdTech Designer&nbsp;·&nbsp;UX Designer&nbsp;·&nbsp;Creative Educator</p>
+
+        <p class="intro-text">
+          Welcome to my UX and Learning Design portfolio. I bring together experience in adult
+          education, English examining, freelance writing, and media production. I teach, I code,
+          I use AI ethically and I design — building learning experiences that are clear,
+          engaging, and purposeful.
+        </p>
+
+        <div class="video-wrap">
+          <video src="ModernEnglishAU.mp4" autoplay muted loop playsinline aria-label="Modern English Australia intro video">
+            Your browser doesn't support HTML5 video.
+          </video>
+        </div>
+
+        <a class="cta-link" href="https://koalaspiessydney.github.io/KoalaSpiesSyd/about.html">More about me</a>
       </div>
 
-      <hr class="section-divider">
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
 
-      <h2 style="margin-top:0;">Test for immigration or specific language points</h2>
-      <p>IELTS, PTE and Cambridge mini tests — write from dictation, academic language, reading, writing and listening.</p>
-      <a href="IELTSPTEPLUS.html">IELTS PTE +</a>
+        <h2>Bespoke Learning Tools</h2>
+        <p style="color:var(--muted); font-size:.95rem; margin-bottom:4px;">Designed for ESL classrooms, self-study, and professional development.</p>
 
-      <hr class="section-divider">
+        <ul class="feature-list">
+          <li>
+            <a href="MicroLessons&amp;Games.html">🎮 Interactive games</a>
+            <span class="feat-desc">Drag-and-drop, vocabulary and grammar systems</span>
+          </li>
+          <li>
+            <span class="feat-label">🎧 Listening &amp; pronunciation</span>
+            <span class="feat-desc">Audio tools and accent training activities</span>
+          </li>
+          <li>
+            <a href="IELTSPTEPLUS.html">📊 Automated testing</a>
+            <span class="feat-desc">Tests with built-in reporting and scoring</span>
+          </li>
+          <li>
+            <span class="feat-label">🎬 Audio-visual content</span>
+            <span class="feat-desc">Creative tools that expand classroom possibilities</span>
+          </li>
+        </ul>
 
-      <h2 style="margin-top:0;">Micro Lessons for Classroom Teaching, Self-Study, and Skill Development</h2>
-      <p>10 and 20 minute lessons on grammar points with games and worksheets.</p>
-      <a href="MicroLessons&Games.html">MicroLessons &amp; Games for ESL</a>
+        <hr class="divider">
 
-      <hr class="section-divider">
+        <h2>Test for immigration or specific language points</h2>
+        <p>IELTS, PTE and Cambridge mini tests — write from dictation, academic language, reading, writing and listening.</p>
+        <a href="IELTSPTEPLUS.html" class="text-link">IELTS PTE + →</a>
 
-      <div class="actions">
-        <a class="btn" href="contact.html">Contact me today</a>
+        <hr class="divider">
+
+        <h2>Micro Lessons for Classroom Teaching, Self-Study &amp; Skill Development</h2>
+        <p>10 and 20 minute lessons on grammar points with games and worksheets.</p>
+        <a href="MicroLessons&amp;Games.html" class="text-link">MicroLessons &amp; Games for ESL →</a>
+
+        <hr class="divider">
+
+        <a class="cta-link" href="contact.html">Contact me today</a>
+
       </div>
+
     </div>
-
-  </div>
-</section>
+  </section>
+</main>
 
 <footer>
   <div class="wrap footer-inner">
     <div>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</div>
     <div class="footer-links">
-      <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">KOALA SPIES SYDNEY</a>
+      <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">Koala Spies Sydney</a>
       <a href="contact.html">Contact</a>
     </div>
   </div>
