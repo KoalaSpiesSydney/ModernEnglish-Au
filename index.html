@@ -14,9 +14,9 @@
   --ink: #0f172a;
   --muted: #475569;
   --line: rgba(15,23,42,.10);
-  --accent: #2563eb;
-  --accent-2: #1e40af;
-  --link: #1d4ed8;
+  --accent: #0e2861;
+  --accent-2: hsl(226, 65%, 24%);
+  --link: #3968ea;
   --header: #1c1c1c;
   --header-ink: #f8fafc;
   --max: 1160px;
@@ -102,7 +102,7 @@ body {
     .hero-word:nth-child(2) { animation-delay: 0.22s; color: var(--accent); position: relative; }
     .hero-word:nth-child(2)::after {
       content: ""; position: absolute; bottom: 5px; left: 0; right: 0; height: 4px; border-radius: 2px;
-      background: linear-gradient(90deg, #3b82f6, #93c5fd); transform: scaleX(0); transform-origin: left;
+      background: linear-gradient(90deg, #041e47, #93c5fd); transform: scaleX(0); transform-origin: left;
       animation: line-expand 0.5s 0.72s ease-out forwards;
     }
     @keyframes word-rise  { to { opacity: 1; transform: translateY(0); } }
@@ -196,11 +196,6 @@ body {
           engaging, and purposeful.
         </p>
 
-        <div class="video-wrap">
-          <video src="ModernEnglishAU.mp4" autoplay muted loop playsinline aria-label="Modern English Australia intro video">
-            Your browser doesn't support HTML5 video.
-          </video>
-        </div>
 
         <a class="cta-link" href="https://koalaspiessydney.github.io/KoalaSpiesSyd/about.html">More about me</a>
       </div>
@@ -209,20 +204,32 @@ body {
       <div class="right-col">
 
         <h2>Bespoke Learning Tools</h2>
-        <p style="color:var(--muted); font-size:.95rem; margin-bottom:4px;">Designed for ESL classrooms, self-study, and professional development.</p>
+        <p style="color:var(--muted); font-size:.95rem; margin-bottom:4px;"></p>
 
         <ul class="feature-list">
           <li>
-            <a href="interactivegames.html">🎮 Interactive games</a>
+            <a href="interactivegames.html"> Vocab Games</a>
             <span class="feat-desc">Drag-and-drop, vocabulary and grammar systems</span>
           </li>
           <li>
-            <a href="automatedtesting.html">📊 Automated testing</a>
+            <a href="automatedtesting.html">Testing</a>
             <span class="feat-desc">Tests with built-in reporting and scoring</span>
           </li>
           <li>
-            <a href="audiovisualcontent.html">🎬 Audio-visual content </a>
-            <span class="feat-desc">Creative tools that expand classroom possibilities</span>
+            <a href="audiovisualcontent.html">Courses </a>
+            <span class="feat-desc">A series of lesson to encourage students to expand their academic vocabulary in English by understanding of words of Greek & Latin origin</span>
+          </li>
+            <li>
+            <a href="audiovisualcontent.html">Learning through Music </a>
+            <span class="feat-desc">A song to help...</span>
+          </li>
+            <li>
+            <a href="automatedtesting.html">Study Tour Presentation</a>
+            <span class="feat-desc">Tests with built-in reporting and scoring</span>
+          </li>
+          <li>
+            <a href="audiovisualcontent.html">Onboarding </a>
+            <span class="feat-desc">Coming soon</span>
           </li>
         </ul>
 
@@ -248,5 +255,4 @@ body {
 
 </body>
 </html>
-
 
