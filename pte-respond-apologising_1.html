@@ -291,7 +291,7 @@
       3) Responsibility and a fix — what you will do to put it right, and by when.<br>
       4) A polite closing — reassurance it will not happen again, or thanks for their understanding.</p>
     <h1>How to practise</h1>
-    <p>Press <strong>Start</strong>. The audio prompt plays once automatically. After it finishes, you have 10 seconds to get ready — then a beep signals your 40-second response window. Use speech-to-text or type your answer. Press <strong>Repeat prompt</strong> to redo the same situation, or <strong>Next</strong> to move on.</p>
+    <p>Press <strong>Start</strong>. The situation is read aloud once by the built-in voice — no audio files needed. After it finishes, you have 10 seconds to get ready — then a beep signals your 40-second response window. Use speech-to-text or type your answer. Press <strong>Repeat prompt</strong> to redo the same situation, or <strong>Next</strong> to move on. Pick the voice and speed under <strong>Listening settings</strong>.</p>
     <div class="controlBar">Situation: <strong><span id="sitCounter">1</span> / <span id="sitTotal">6</span></strong></div>
   </div>
   <!-- Situation -->
@@ -307,7 +307,7 @@
       <div class="prompt" id="promptWrap"><div id="promptText"></div></div>
       <button class="promptToggle" id="btnHidePrompt">Hide the text (listening practice)</button>
       <!-- Status banner -->
-      <div class="statusBanner info show" id="statusBanner">Press <strong>Start</strong> to play the audio prompt.</div>
+      <div class="statusBanner info show" id="statusBanner">Press <strong>Start</strong> to hear the situation.</div>
       <div class="timerWrap">
         <div class="timerBar">
           <div class="timerClock"><span class="time" id="countLabel">00:00</span></div>
@@ -463,10 +463,18 @@ Thanks for being so understanding, and please let me know if there's anything el
     <button class="iconBtn" id="btnHelpClose" aria-label="Close">&#215;</button>
   </div>
   <div class="sideBody">
-    <p>To keep the listening activities in the correct native accent, change your device language and voice settings to English (Australia/UK) and turn off any personalised or adaptive speech features.</p>
-    <div class="sideCallout" style="margin-bottom:12px">
-      <strong>Audio files:</strong> this page plays <code>apology1.mp3</code> through <code>apology6.mp3</code>. Put those six files in the same folder as this HTML file, and open the page over a web server (not <code>file://</code>) so the browser will load them.
+    <div class="sideField">
+      <label for="voiceSelect">Prompt voice</label>
+      <select id="voiceSelect"></select>
     </div>
+    <div class="sideField">
+      <label for="rateRange">Speaking speed — <span class="rateVal" id="rateVal">0.95×</span></label>
+      <input type="range" id="rateRange" min="0.6" max="1.3" step="0.05" value="0.95" />
+    </div>
+    <div class="row" style="margin-top:0">
+      <button id="btnTestVoice">&#128266; Test voice</button>
+    </div>
+    <p style="margin-top:14px">Choose an Australian or British English voice so the listening practice matches the accent used in the test. If the list is short, install extra voices in your device's language settings and reload the page.</p>
     <div class="sideCallout">If speech-to-text accuracy drops, check your browser microphone permissions and selected input device. Chrome and Edge give the best results.</div>
   </div>
   <div class="sideFooter"><button id="btnHelpDone" class="primary">Done</button></div>
@@ -588,17 +596,17 @@ w.drawQRToCanvas=function(text,canvas,size){
     apologising:'Apologising', suggesting:'Suggesting', explaining:'Explaining'
   };
   const SITS = [
-    { n:1, audio:'apology1.mp3', taskType:'apologising', channel:'In person',
+    { n:1, taskType:'apologising', channel:'In person',
       text:'You missed an important team deadline because you wrote the wrong date in your calendar, and a colleague had to finish your section at the last minute. Your manager asks you to explain. Describe what you would say to apologise and take responsibility.' },
-    { n:2, audio:'apology2.mp3', taskType:'apologising', channel:'Phone call',
+    { n:2, taskType:'apologising', channel:'Phone call',
       text:"You completely forgot a close friend's birthday dinner last night, and they had saved you a seat. You call them the next morning to apologise and make it up to them. Explain what you would say." },
-    { n:3, audio:'apology3.mp3', taskType:'apologising', channel:'Email',
+    { n:3, taskType:'apologising', channel:'Email',
       text:'You sent a client the wrong version of a report, and it contained figures that had not been checked. They have already forwarded it to their own team. You write to apologise and correct the mistake. Describe what you would write in your email.' },
-    { n:4, audio:'apology4.mp3', taskType:'apologising', channel:'In person',
+    { n:4, taskType:'apologising', channel:'In person',
       text:"You reversed out of your driveway and scraped your neighbour's car, leaving a long mark along the door. Nobody saw it happen, but you decide to knock on their door straight away. Explain what you would say to apologise." },
-    { n:5, audio:'apology5.mp3', taskType:'apologising', channel:'Phone call',
+    { n:5, taskType:'apologising', channel:'Phone call',
       text:'A colleague asked you to pass on an urgent message, but it slipped your mind, and as a result they missed an important meeting with a client. You call them to apologise. Explain what you would say.' },
-    { n:6, audio:'apology6.mp3', taskType:'apologising', channel:'Customer call',
+    { n:6, taskType:'apologising', channel:'Customer call',
       text:"You work in customer service, and a customer's order arrived damaged for the second time because of a packing error at your warehouse. You call the customer to apologise on behalf of the company and offer a solution. Explain what you would say." },
   ];
   /* ── elements ── */
@@ -662,31 +670,84 @@ w.drawQRToCanvas=function(text,canvas,size){
       o.start(t); o.stop(t + ms / 1000 + 0.05);
     } catch(e) {}
   }
-  /* ── audio playback (mp3) ── */
-  // A fresh Audio object each time avoids stale-state issues
-  let currentAudio = null;
-  function stopCurrentAudio() {
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio.src = '';
-      currentAudio = null;
+  /* ── built-in voice (speech synthesis) ── */
+  const synth = window.speechSynthesis || null;
+  let voices = [], chosenVoice = null, rate = 0.95;
+  const voiceSelect = $('voiceSelect');
+  function voiceScore(v) {
+    const l = (v.lang || '').toLowerCase().replace('_','-');
+    if (l.startsWith('en-au')) return 4;
+    if (l.startsWith('en-nz')) return 3;
+    if (l.startsWith('en-gb')) return 2;
+    if (l.startsWith('en'))    return 1;
+    return 0;
+  }
+  function loadVoices() {
+    if (!synth) return;
+    const all = synth.getVoices() || [];
+    voices = all.filter(v => (v.lang || '').toLowerCase().startsWith('en'))
+                .sort((a,b) => voiceScore(b) - voiceScore(a) || a.name.localeCompare(b.name));
+    if (!voices.length) voices = all.slice();
+    voiceSelect.innerHTML = '';
+    voices.forEach((v, i) => {
+      const o = document.createElement('option');
+      o.value = String(i);
+      o.textContent = `${v.name} (${v.lang})`;
+      voiceSelect.appendChild(o);
+    });
+    if (voices.length) {
+      const keep = chosenVoice ? voices.findIndex(v => v.name === chosenVoice.name) : -1;
+      const pick = keep >= 0 ? keep : 0;
+      chosenVoice = voices[pick];
+      voiceSelect.value = String(pick);
+    } else {
+      const o = document.createElement('option');
+      o.textContent = 'No voices available';
+      voiceSelect.appendChild(o);
+      voiceSelect.disabled = true;
     }
   }
-  function playMp3(src) {
-    return new Promise((resolve) => {
-      stopCurrentAudio();
-      const audio = new Audio();
-      currentAudio = audio;
-      audio.addEventListener('ended', () => resolve('ended'), { once: true });
-      audio.addEventListener('error', () => resolve('error'), { once: true });
-      // Set src AFTER attaching listeners
-      audio.src = src;
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => resolve('error')); // autoplay blocked or file missing
-      }
+  if (synth) {
+    loadVoices();
+    if (typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = loadVoices;
+    setTimeout(loadVoices, 400);
+    setTimeout(loadVoices, 1200);
+  }
+  voiceSelect.addEventListener('change', () => {
+    const i = parseInt(voiceSelect.value, 10);
+    if (!isNaN(i) && voices[i]) chosenVoice = voices[i];
+  });
+  $('rateRange').addEventListener('input', e => {
+    rate = parseFloat(e.target.value);
+    $('rateVal').textContent = rate.toFixed(2) + '×';
+  });
+  function stopSpeaking() { try { if (synth) synth.cancel(); } catch(e) {} }
+  function speak(text) {
+    return new Promise(resolve => {
+      if (!synth || typeof SpeechSynthesisUtterance === 'undefined') { resolve('error'); return; }
+      stopSpeaking();
+      let settled = false;
+      const finish = r => { if (!settled) { settled = true; clearInterval(keepAlive); clearTimeout(watchdog); resolve(r); } };
+      const u = new SpeechSynthesisUtterance(text);
+      if (chosenVoice) u.voice = chosenVoice;
+      u.lang  = chosenVoice ? chosenVoice.lang : 'en-AU';
+      u.rate  = rate;
+      u.pitch = 1;
+      u.onend   = () => finish('ended');
+      u.onerror = () => finish('error');
+      // Chrome stops long utterances after ~15s unless nudged
+      const keepAlive = setInterval(() => {
+        if (synth.speaking && !synth.paused) { try { synth.pause(); synth.resume(); } catch(e) {} }
+      }, 9000);
+      // Safety net in case onend never fires
+      const words = text.split(/\s+/).length;
+      const watchdog = setTimeout(() => finish('ended'), (words / (2.4 * rate)) * 1000 + 12000);
+      try { synth.speak(u); } catch(e) { finish('error'); }
     });
   }
+  $('btnTestVoice').addEventListener('click', () => {
+    speak('Hello. This is the voice that will read each situation aloud.');
+  });
   /* ── STT ── */
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   let rec = null, sttOk = false, sttOn = false;
@@ -807,16 +868,16 @@ w.drawQRToCanvas=function(text,canvas,size){
   async function runAttempt() {
     clearAnswer();
     resetChecklist();
-    stopCurrentAudio();
+    stopSpeaking();
     clearTick();
     lockButtons(true);
     setTime(0, 0);
     const sit = SITS[idx];
-    // STEP 1 — play audio
-    showBanner('&#128266; Playing the audio prompt…', 'info');
-    const result = await playMp3(sit.audio);
+    // STEP 1 — read the situation aloud with the built-in voice
+    showBanner('&#128266; Listen to the situation…', 'info');
+    const result = await speak(sit.text);
     if (result === 'error') {
-      showBanner('&#10060; Audio file not found. Make sure <strong>' + sit.audio + '</strong> is in the same folder as this HTML file, and open the page via a web server (not file://).', 'err');
+      showBanner('&#10060; This browser could not play the voice. Read the situation on screen instead, then press <strong>Start</strong> again — or try Chrome or Edge.', 'err');
       lockButtons(false);
       return;
     }
@@ -858,10 +919,10 @@ w.drawQRToCanvas=function(text,canvas,size){
     sitTotal.textContent   = String(SITS.length);
     promptTextEl.textContent = s.text;
     renderTag(s.taskType, s.channel);
-    stopCurrentAudio();
+    stopSpeaking();
     clearTick();
     setTime(0, 0);
-    showBanner('Press <strong>Start</strong> to play the audio prompt.', 'info');
+    showBanner('Press <strong>Start</strong> to hear the situation.', 'info');
     lockButtons(false);
   }
   /* ── button events ── */
@@ -900,11 +961,11 @@ w.drawQRToCanvas=function(text,canvas,size){
     answerBox.focus(); closeTpl();
   });
   $('btnTplCopy').addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(TPL); showBanner('Template copied to clipboard.', 'go'); setTimeout(()=>showBanner('Press <strong>Start</strong> to play the audio prompt.','info'),1200); } catch(e) {}
+    try { await navigator.clipboard.writeText(TPL); showBanner('Template copied to clipboard.', 'go'); setTimeout(()=>showBanner('Press <strong>Start</strong> to hear the situation.','info'),1200); } catch(e) {}
   });
   /* ── help panel ── */
   function openHelp()  { $('helpOverlay').hidden=false; $('helpPanel').classList.add('open'); $('helpPanel').setAttribute('aria-hidden','false'); $('btnHelp').setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; $('btnHelpClose')?.focus(); }
-  function closeHelp() { $('helpPanel').classList.remove('open'); $('helpPanel').setAttribute('aria-hidden','true'); $('btnHelp').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(()=>{ $('helpOverlay').hidden=true; },220); $('btnHelp').focus(); }
+  function closeHelp() { stopSpeaking(); $('helpPanel').classList.remove('open'); $('helpPanel').setAttribute('aria-hidden','true'); $('btnHelp').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(()=>{ $('helpOverlay').hidden=true; },220); $('btnHelp').focus(); }
   $('btnHelp').addEventListener('click', openHelp);
   $('helpOverlay').addEventListener('click', closeHelp);
   $('btnHelpClose').addEventListener('click', closeHelp);
@@ -947,8 +1008,8 @@ w.drawQRToCanvas=function(text,canvas,size){
       answerBox.focus();
     }
   });
-  /* ── stop the audio if the page is closed ── */
-  window.addEventListener('beforeunload', stopCurrentAudio);
+  /* ── stop the voice if the page is closed ── */
+  window.addEventListener('beforeunload', stopSpeaking);
   /* ── enable mic button once STT is ready ── */
   function enableMic() {
     if (sttOk) btnMic.disabled = false;
