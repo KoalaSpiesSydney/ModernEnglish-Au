@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PTE Respond to Situation – Apologising – Modern English Australia</title>
+  <style>
+    :root {
+      --bg:#f5f7fa; --ink:#1a1f36; --muted:#030f1e;
+      --shadow:0 6px 18px rgba(26,31,54,.10),0 2px 6px rgba(26,31,54,.06);
+      --radius:10px; --max:900px;
+      --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      --sans:"Helvetica Neue",Arial,sans-serif;
+      --focus:0 0 0 3px rgba(3,3,79,.18);
+      --accent:#03034f; --accent2:#080118;
+      --fs-body:16px; --fs-h1:clamp(22px,2.6vw,30px); --fs-h2:17px;
+      --fs-hint:13.5px; --fs-label:12.5px; --fs-prompt:clamp(15px,2vw,17px);
+      --lh-tight:1.15; --lh-body:1.55;
+      --muted2:rgba(110,122,138,.92);
+      --tag-requesting:#dbeafe;   --tag-requesting-ink:#1e40af;
+      --tag-complaining:#fee2e2;  --tag-complaining-ink:#991b1b;
+      --tag-advising:#fef9c3;     --tag-advising-ink:#713f12;
+      --tag-apologising:#fce7f3;  --tag-apologising-ink:#9d174d;
+      --tag-suggesting:#dcfce7;   --tag-suggesting-ink:#14532d;
+      --tag-explaining:#ede9fe;   --tag-explaining-ink:#4c1d95;
+      --tag-channel:#e5e7eb;      --tag-channel-ink:#374151;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:var(--fs-body);line-height:var(--lh-body);min-height:100vh;min-height:100dvh;overflow-x:hidden;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+    /* ── header ── */
+    header{position:sticky;top:0;z-index:10;background:rgba(30,31,33,.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+    .topbar{max-width:calc(var(--max) + 32px);margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+    .brand{display:flex;flex-direction:column;gap:2px;color:#fff;flex:1 1 auto;min-width:0}
+    .brand .title{font-weight:800;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand .sub{color:rgba(255,255,255,.72);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .topmeta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+    .chipBtn{cursor:pointer;appearance:none;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);color:rgba(255,255,255,.92);font:inherit;padding:7px 11px;border-radius:999px;font-weight:700;font-size:12px;white-space:nowrap;transition:border-color .15s;display:inline-flex;align-items:center;gap:6px;min-height:36px;flex-shrink:0}
+    .chipBtn:hover{border-color:rgba(255,255,255,.28)}
+    .chipBtn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(255,255,255,.30)}
+    .qrChipBtn{order:-1}            /* keeps the QR button in the top-left corner */
+    .chipLabelShort{display:none}
+    /* ── main ── */
+    main{flex:1;max-width:var(--max);margin:16px auto 40px;padding:0 16px;width:100%}
+    .hero{padding:12px 0 8px}
+    h1{margin:0 0 8px;font-size:var(--fs-h1);line-height:var(--lh-tight);font-weight:800}
+    .hero p{margin:0 0 10px;font-size:15px;line-height:1.6;color:rgba(26,31,54,.85)}
+    .controlBar{margin-top:12px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:999px;box-shadow:var(--shadow);padding:9px 14px;display:inline-flex;width:fit-content;max-width:100%;align-items:center;gap:10px}
+    .controlBar strong{font-weight:900}
+    /* ── task tag ── */
+    .tagRow{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+    .taskTag{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+    .taskTag-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+    .tag-requesting{background:var(--tag-requesting);color:var(--tag-requesting-ink)}.tag-requesting .taskTag-dot{background:var(--tag-requesting-ink)}
+    .tag-complaining{background:var(--tag-complaining);color:var(--tag-complaining-ink)}.tag-complaining .taskTag-dot{background:var(--tag-complaining-ink)}
+    .tag-advising{background:var(--tag-advising);color:var(--tag-advising-ink)}.tag-advising .taskTag-dot{background:var(--tag-advising-ink)}
+    .tag-apologising{background:var(--tag-apologising);color:var(--tag-apologising-ink)}.tag-apologising .taskTag-dot{background:var(--tag-apologising-ink)}
+    .tag-suggesting{background:var(--tag-suggesting);color:var(--tag-suggesting-ink)}.tag-suggesting .taskTag-dot{background:var(--tag-suggesting-ink)}
+    .tag-explaining{background:var(--tag-explaining);color:var(--tag-explaining-ink)}.tag-explaining .taskTag-dot{background:var(--tag-explaining-ink)}
+    .tag-channel{background:var(--tag-channel);color:var(--tag-channel-ink)}.tag-channel .taskTag-dot{background:var(--tag-channel-ink)}
+    /* ── panels ── */
+    .panel{margin-top:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .panelHeader{padding:14px 18px 12px;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .panelHeader h2{margin:0;font-size:var(--fs-h2);line-height:1.25;font-weight:800}
+    .panelHeader .hint{margin:5px 0 0;color:var(--muted2);font-size:var(--fs-hint)}
+    .panelBody{padding:14px 18px 18px}
+    /* ── prompt ── */
+    .prompt{background:rgba(249,250,251,.92);border:1px solid rgba(0,0,0,.07);border-radius:12px;padding:14px;font-size:var(--fs-prompt);line-height:1.65;box-shadow:0 2px 10px rgba(26,31,54,.06)}
+    #promptText{font-weight:520;color:rgba(26,31,54,.95)}
+    .promptHidden #promptText{filter:blur(5px);user-select:none}
+    .promptToggle{margin-top:10px;font-size:13px;color:var(--muted2);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;font-weight:600;box-shadow:none}
+    .promptToggle:hover{color:var(--ink);box-shadow:none}
+    /* ── status banner ── */
+    .statusBanner{margin-top:12px;padding:10px 14px;border-radius:10px;font-size:14px;font-weight:600;display:none}
+    .statusBanner.show{display:block}
+    .statusBanner.info{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+    .statusBanner.warn{background:#fffbeb;color:#92400e;border:1px solid #fde68a}
+    .statusBanner.go{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+    .statusBanner.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+    /* ── buttons ── */
+    button{border:1px solid rgba(0,0,0,.10);background:#fff;color:var(--ink);border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer;transition:transform .06s,background .15s,box-shadow .15s;font:inherit;font-size:14px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+    button:hover{box-shadow:0 2px 12px rgba(26,31,54,.10)}
+    button:active{transform:translateY(1px)}
+    button:focus{outline:none;box-shadow:var(--focus)}
+    button:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+    button.primary{background:var(--accent);color:#fff;font-weight:900;border-color:transparent}
+    button.primary:hover{background:var(--accent2)}
+    button.active-mic{background:#dc2626;color:#fff;border-color:transparent}
+    button.active-mic:hover{background:#b91c1c}
+    /* ── timer ── */
+    .timerWrap{margin-top:14px}
+    .timerBar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .timerClock{display:flex;align-items:center;flex:1 1 auto;min-width:90px}
+    .time{font-family:var(--mono);font-size:clamp(16px,2.2vw,20px);font-weight:900;letter-spacing:.5px;padding:5px 10px;border-radius:12px;background:rgba(255,255,255,.85);box-shadow:0 2px 10px rgba(26,31,54,.06)}
+    .timerActions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .timerMeta{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+    .progressLine{flex:0 0 160px;height:6px;background:rgba(0,0,0,.06);border-radius:10px;overflow:hidden}
+    .bar{height:100%;width:0%;background:var(--accent);border-radius:10px;transition:width .2s linear}
+    .sub{margin:0;font-size:var(--fs-label);color:var(--muted2);line-height:1.25}
+    /* ── textarea ── */
+    textarea{width:100%;min-height:180px;resize:vertical;border:1px solid rgba(0,0,0,.10);border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.65;background:#fff;box-shadow:0 2px 10px rgba(26,31,54,.06);font-family:var(--sans)}
+    textarea:focus{outline:none;box-shadow:var(--focus)}
+    .note{font-size:var(--fs-label);color:var(--muted2);margin:10px 0 0}
+    .kbd{font-family:var(--mono);border:1px solid rgba(0,0,0,.12);border-bottom-width:2px;padding:2px 6px;border-radius:8px;background:#fff;font-size:12px;color:#334155}
+    /* ── checklist ── */
+    .checklistIntro{font-size:14px;color:var(--muted2);margin:0 0 14px;line-height:1.55}
+    .checklistItems{display:flex;flex-direction:column;gap:10px}
+    .checkItem{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;border-radius:12px;border:1.5px solid rgba(0,0,0,.07);background:#fff;cursor:pointer;transition:border-color .15s,background .15s;user-select:none;touch-action:manipulation}
+    .checkItem:hover{border-color:rgba(3,3,79,.18);background:rgba(249,250,255,.9)}
+    .checkItem.checked{border-color:#16a34a;background:#f0fdf4}
+    .checkBox{width:24px;height:24px;border-radius:6px;border:2px solid rgba(0,0,0,.18);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;margin-top:1px}
+    .checkItem.checked .checkBox{background:#16a34a;border-color:#16a34a}
+    .checkMark{display:none;color:#fff;font-size:13px;font-weight:900;line-height:1}
+    .checkItem.checked .checkMark{display:block}
+    .checkLabel{flex:1}
+    .checkLabel strong{display:block;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+    .checkLabel span{font-size:13px;color:var(--muted2);line-height:1.45}
+    .checkItem.checked .checkLabel strong{color:#15803d}
+    .checklistProgress{margin-top:14px;display:flex;align-items:center;gap:12px}
+    .checklistProgressBar{flex:1;height:6px;background:rgba(0,0,0,.07);border-radius:10px;overflow:hidden}
+    .checklistProgressFill{height:100%;width:0%;background:#16a34a;border-radius:10px;transition:width .3s}
+    .checklistProgressLabel{font-size:13px;font-weight:700;color:var(--muted2);min-width:40px;text-align:right}
+    .checklistProgressLabel.complete{color:#15803d}
+    .checklistReset{margin-top:12px;font-size:13px;color:var(--muted2);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline;font-weight:600;box-shadow:none}
+    .checklistReset:hover{color:var(--ink);box-shadow:none}
+    /* ── phrase bank ── */
+    .phraseGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+    .phraseCard{border:1px solid rgba(0,0,0,.07);border-radius:12px;padding:12px 14px;background:#fff}
+    .phraseCard h3{margin:0 0 8px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--tag-apologising-ink)}
+    .phraseCard ul{margin:0;padding-left:18px}
+    .phraseCard li{font-size:13.5px;line-height:1.5;margin-bottom:6px;color:rgba(26,31,54,.88)}
+    .phraseCard li:last-child{margin-bottom:0}
+    /* ── template pill ── */
+    .templatePillBtn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.10);box-shadow:0 2px 10px rgba(26,31,54,.10);font-weight:900}
+    .templatePillBtn:hover{box-shadow:0 4px 14px rgba(26,31,54,.12)}
+    .pillCaret{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid rgba(3,15,30,.45);transition:transform .15s}
+    .templatePillBtn[aria-expanded="true"] .pillCaret{transform:rotate(180deg)}
+    /* ── overlays ── */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:50}
+    /* ── side panel ── */
+    .sidePanel{position:fixed;top:0;right:0;height:100%;height:100dvh;width:min(420px,92vw);background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-left:1px solid rgba(220,225,231,.9);box-shadow:-12px 0 30px rgba(0,0,0,.18);z-index:60;transform:translateX(102%);transition:transform .22s ease;display:flex;flex-direction:column}
+    .sidePanel.open{transform:translateX(0)}
+    .sideHeader{padding:16px 16px 12px;border-bottom:1px solid rgba(220,225,231,.9);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .sideKicker{font-size:12px;color:var(--muted);letter-spacing:.2px}
+    .sideHeader h3{margin:2px 0 0;font-size:18px;line-height:1.25;font-weight:900;color:var(--ink)}
+    .iconBtn{border:1px solid rgba(220,225,231,.9);background:#fff;color:var(--ink);width:36px;height:36px;border-radius:12px;font-size:20px;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+    .sideBody{padding:14px 16px 16px;overflow:auto;color:rgba(26,31,54,.92);line-height:1.6}
+    .sideBody p{margin:0 0 12px;font-size:15.5px}
+    .sideField{margin:0 0 14px}
+    .sideField label{display:block;font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--muted2);margin-bottom:6px}
+    .sideField select,.sideField input[type=range]{width:100%}
+    .sideField select{border:1px solid rgba(0,0,0,.12);border-radius:10px;padding:9px 10px;font:inherit;font-size:14px;background:#fff;color:var(--ink)}
+    .sideField select:focus{outline:none;box-shadow:var(--focus)}
+    .rateVal{font-family:var(--mono);font-size:13px;font-weight:800;color:var(--ink)}
+    .sideCallout{border:1px solid rgba(220,225,231,.95);background:rgba(249,250,251,.9);border-radius:12px;padding:12px;font-size:13.5px;color:var(--muted)}
+    .sideFooter{padding:12px 16px 16px;border-top:1px solid rgba(220,225,231,.9);display:flex;justify-content:flex-end;gap:10px}
+    /* ── template window ── */
+    .tplWindow{position:fixed;left:50%;top:50%;transform:translateX(-50%) translateY(-50%) scale(.96);width:min(720px,calc(100vw - 32px));max-height:90vh;max-height:90dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border:1px solid rgba(0,0,0,.08);border-radius:16px;box-shadow:0 22px 60px rgba(0,0,0,.22);z-index:80;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
+    .tplWindow.open{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(-50%) scale(1)}
+    .tplHead{padding:14px 16px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(0,0,0,.08)}
+    .tplKicker{font-size:12px;color:rgba(3,15,30,.70);letter-spacing:.02em}
+    .tplHead h3{margin:2px 0 0;font-size:18px;line-height:1.25;font-weight:900;color:var(--ink)}
+    .tplClose{border:1px solid rgba(0,0,0,.10);background:rgba(255,255,255,.92);width:38px;height:38px;border-radius:12px;font-size:22px;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+    .tplBody{padding:14px 16px 16px}
+    .tplCode{margin:0;padding:12px;border-radius:14px;background:rgba(249,250,251,.98);border:1px solid rgba(0,0,0,.08);white-space:pre-wrap;font-family:var(--mono);font-size:13.5px;line-height:1.5;color:#111827}
+    .tplActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    /* ── QR modal ── */
+    .qrModal{position:fixed;left:50%;top:50%;transform:translateX(-50%) translateY(-50%) scale(.94);width:min(400px,calc(100vw - 24px));max-height:92vh;max-height:92dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;box-shadow:0 24px 64px rgba(0,0,0,.24);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;overflow:hidden}
+    .qrModal.open{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(-50%) scale(1)}
+    .qrModalHead{padding:16px 18px 14px;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .qrModalKicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:3px}
+    .qrModalTitle{font-size:17px;font-weight:800;color:var(--ink);margin:0}
+    .qrModalBody{padding:18px 18px 22px}
+    .qrInputRow{display:flex;gap:8px;margin-bottom:10px}
+    .qrInput{flex:1;min-width:0;border:1px solid rgba(0,0,0,.12);border-radius:10px;padding:10px 12px;font-size:14px;font-family:var(--sans);background:#fafafa;color:var(--ink)}
+    .qrInput:focus{outline:none;box-shadow:var(--focus)}
+    .qrInput::placeholder{color:rgba(110,122,138,.7)}
+    .qrGenBtn{padding:10px 14px;font-size:13px;font-weight:800;border-radius:10px;border:1px solid transparent;background:var(--accent);color:#fff;cursor:pointer;white-space:nowrap;flex-shrink:0}
+    .qrGenBtn:hover{background:var(--accent2)}
+    .qrCurrentPageBtn{font-size:12px;color:var(--muted2);text-decoration:underline;background:none;border:none;cursor:pointer;padding:0;font-weight:600;box-shadow:none;margin-bottom:16px;display:inline-block}
+    .qrCurrentPageBtn:hover{color:var(--ink)}
+    .qrCanvasWrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+    #qrCanvas{border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.10);max-width:100%;image-rendering:pixelated}
+    .qrUrlLabel{font-size:12px;color:var(--muted2);word-break:break-all;text-align:center;max-width:300px;line-height:1.4}
+    .qrActions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+    .qrEmpty{text-align:center;color:var(--muted2);font-size:14px;padding:16px 0}
+    /* ── footer ── */
+    footer{background:#1e1f21;color:rgba(255,255,255,.78);border-top:1px solid rgba(255,255,255,.08)}
+    .footerWrap{max-width:calc(var(--max) + 32px);margin:0 auto;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;font-size:13px}
+    .footerWrap strong{color:#fff}
+    .footerLinks{display:flex;gap:10px;flex-wrap:wrap}
+    .footerLinks a{color:rgba(255,255,255,.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.18)}
+    .footerLinks a:hover{border-bottom-color:rgba(255,255,255,.55)}
+    /* ── responsive ── */
+    @media(min-width:1280px){
+      :root{--max:1040px;--fs-prompt:18px}
+      .topbar{padding:12px 24px} main{padding:0 24px;margin-top:22px}
+      .brand .title{font-size:15px} .brand .sub{font-size:13px}
+      .time{font-size:22px} textarea{min-height:200px}
+    }
+    @media(max-width:767px){
+      :root{--fs-body:15px;--fs-prompt:15px;--fs-h2:16px}
+      .topbar{padding:8px 12px} .brand .sub{display:none}
+      main{padding:0 12px;margin-top:14px}
+      .panelBody{padding:12px 14px 16px} .panelHeader{padding:12px 14px 10px}
+      .progressLine{flex:0 0 120px} textarea{min-height:150px}
+    }
+    @media(max-width:480px){
+      :root{--fs-body:15px;--fs-prompt:14.5px;--fs-h2:15px}
+      .topbar{padding:7px 10px;gap:6px} .brand .title{font-size:13px}
+      main{padding:0 10px;margin-top:12px} h1{font-size:20px}
+      .timerBar{flex-direction:column;align-items:flex-start;gap:10px}
+      .timerClock,.timerActions{width:100%}
+      .timerActions button{flex:1 1 auto;text-align:center}
+      .progressLine{flex:1 1 100%}
+      .panelBody{padding:10px 12px 14px} .panelHeader{padding:10px 12px 8px}
+      textarea{min-height:140px;font-size:15px}
+      .sidePanel{width:100vw;border-left:none}
+      .qrInputRow{flex-wrap:wrap} .qrInput,.qrGenBtn{width:100%}
+    }
+    /* ── narrow phones: shrink the header chips before anything can overflow ── */
+    @media(max-width:700px){
+      #btnHelp .chipLabel{display:none}
+      #btnHelp .chipLabelShort{display:inline}
+    }
+    @media(max-width:430px){
+      .qrLabel{display:none}
+      .qrChipBtn{padding:7px 9px}
+      .brand .title{letter-spacing:-.1px}
+    }
+    /* ── tablets: keep the practice controls on one comfortable line ── */
+    @media(min-width:768px) and (max-width:1279px){
+      :root{--max:820px}
+      .timerActions button{flex:0 0 auto}
+    }
+    /* ── touch devices: 44px minimum tap targets ── */
+    @media(pointer:coarse){
+      button{min-height:44px}
+      .chipBtn{min-height:40px}
+      .iconBtn,.tplClose{min-width:44px;min-height:44px}
+      .checkItem{padding:15px 14px}
+      .qrGenBtn{min-height:44px}
+      .checklistReset,.promptToggle,.qrCurrentPageBtn{min-height:auto}
+    }
+    /* ── short landscape screens: let tall panels scroll instead of clipping ── */
+    @media(max-height:520px) and (orientation:landscape){
+      .sideBody{padding-bottom:10px}
+      .tplWindow{max-height:94vh}
+      .qrModal{max-height:94vh}
+      .qrModalBody{padding:12px 16px 16px}
+      #qrCanvas{width:150px;height:150px}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <button class="chipBtn qrChipBtn" id="btnQR" aria-haspopup="dialog" aria-controls="qrModal" aria-expanded="false" aria-label="QR code generator">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <rect x=".5" y=".5" width="5" height="5" rx=".5" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="8.5" y=".5" width="5" height="5" rx=".5" stroke="currentColor" stroke-width="1.3"/>
+          <rect x=".5" y="8.5" width="5" height="5" rx=".5" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="2" y="2" width="2" height="2" fill="currentColor"/>
+          <rect x="10" y="2" width="2" height="2" fill="currentColor"/>
+          <rect x="2" y="10" width="2" height="2" fill="currentColor"/>
+          <rect x="8.5" y="8.5" width="2" height="2" fill="currentColor"/>
+          <rect x="11.5" y="8.5" width="2" height="2" fill="currentColor"/>
+          <rect x="8.5" y="11.5" width="2" height="2" fill="currentColor"/>
+          <rect x="11.5" y="11.5" width="2" height="2" fill="currentColor"/>
+        </svg>
+      <span class="qrLabel">QR Code</span>
+    </button>
+    <div class="brand">
+      <div class="title">Modern English Australia</div>
+      <div class="sub">Koala Spies Sydney · PTE Respond to Situation</div>
+    </div>
+    <div class="topmeta">
+      <button class="chipBtn" id="btnHelp" aria-haspopup="dialog" aria-controls="helpPanel" aria-expanded="false">
+        <span class="chipLabel">Listening settings</span><span class="chipLabelShort">Settings</span>
+      </button>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="hero">
+    <h1>Respond to situation — apologising</h1>
+    <p>Every situation on this page asks you to <strong>apologise and put something right</strong>. Respond politely and clearly. Include:<br><br>
+      1) A clear apology at the start — say sorry and name what you are apologising for.<br>
+      2) A brief explanation of what happened, without making excuses.<br>
+      3) Responsibility and a fix — what you will do to put it right, and by when.<br>
+      4) A polite closing — reassurance it will not happen again, or thanks for their understanding.</p>
+    <h1>How to practise</h1>
+    <p>Press <strong>Start</strong>. The recording plays once automatically. After it finishes, you have 10 seconds to get ready — then a beep signals your 40-second response window. Use speech-to-text or type your answer. Press <strong>Repeat prompt</strong> to redo the same situation, or <strong>Next</strong> to move on.</p>
+    <div class="controlBar">Situation: <strong><span id="sitCounter">1</span> / <span id="sitTotal">6</span></strong></div>
+  </div>
+  <!-- Situation -->
+  <section class="panel">
+    <div class="panelHeader">
+      <div>
+        <h2>Situation</h2>
+        <div class="hint">Listen to the prompt, then respond using the structure above.</div>
+      </div>
+      <div class="tagRow" id="taskTagWrap"></div>
+    </div>
+    <div class="panelBody">
+      <div class="prompt" id="promptWrap"><div id="promptText"></div></div>
+      <button class="promptToggle" id="btnHidePrompt">Hide the text (listening practice)</button>
+      <!-- Status banner -->
+      <div class="statusBanner info show" id="statusBanner">Press <strong>Start</strong> to play the audio prompt.</div>
+      <div class="timerWrap">
+        <div class="timerBar">
+          <div class="timerClock"><span class="time" id="countLabel">00:00</span></div>
+          <div class="timerActions">
+            <button class="primary" id="btnStart">&#9654; Start</button>
+            <button id="btnTryAgain" disabled>Repeat prompt</button>
+            <button id="btnNext" disabled>Next &#8594;</button>
+          </div>
+        </div>
+        <div class="timerMeta">
+          <div class="progressLine"><div class="bar" id="bar"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Answer -->
+  <section class="panel">
+    <div class="panelHeader">
+      <div>
+        <h2>Your answer</h2>
+        <div class="hint">Type here, or use the microphone button for speech-to-text (Chrome / Edge).</div>
+      </div>
+    </div>
+    <div class="panelBody">
+      <div class="row">
+        <button id="btnMic" disabled>&#127908; Start speaking</button>
+        <button id="btnClearAnswer" style="font-size:13px;padding:8px 12px">Clear</button>
+      </div>
+      <p class="note" id="sttNote" style="min-height:18px"></p>
+      <div class="row" style="margin-top:10px">
+        <textarea id="answerBox" placeholder="Your response will appear here as you speak, or type it directly…"></textarea>
+      </div>
+    </div>
+  </section>
+  <!-- Self-check -->
+  <section class="panel">
+    <div class="panelHeader">
+      <div>
+        <h2>Self-check</h2>
+        <div class="hint">After responding, tick each element you included.</div>
+      </div>
+    </div>
+    <div class="panelBody">
+      <p class="checklistIntro">Did your apology cover all four required elements?</p>
+      <div class="checklistItems">
+        <div class="checkItem" role="checkbox" aria-checked="false" tabindex="0">
+          <div class="checkBox"><span class="checkMark">&#10003;</span></div>
+          <div class="checkLabel"><strong>Clear apology</strong><span>Did you say sorry early, and name exactly what you are apologising for?</span></div>
+        </div>
+        <div class="checkItem" role="checkbox" aria-checked="false" tabindex="0">
+          <div class="checkBox"><span class="checkMark">&#10003;</span></div>
+          <div class="checkLabel"><strong>Brief explanation</strong><span>Did you explain what happened in a sentence or two, without piling up excuses?</span></div>
+        </div>
+        <div class="checkItem" role="checkbox" aria-checked="false" tabindex="0">
+          <div class="checkBox"><span class="checkMark">&#10003;</span></div>
+          <div class="checkLabel"><strong>Responsibility and a fix</strong><span>Did you take responsibility and offer a specific way to put it right, with a timeframe?</span></div>
+        </div>
+        <div class="checkItem" role="checkbox" aria-checked="false" tabindex="0">
+          <div class="checkBox"><span class="checkMark">&#10003;</span></div>
+          <div class="checkLabel"><strong>Polite closing</strong><span>Did you close well — reassurance it won't happen again, or thanks for their understanding?</span></div>
+        </div>
+      </div>
+      <div class="checklistProgress">
+        <div class="checklistProgressBar"><div class="checklistProgressFill" id="checklistFill"></div></div>
+        <div class="checklistProgressLabel" id="checklistScore">0 / 4</div>
+      </div>
+      <button class="checklistReset" id="btnChecklistReset">Reset checklist</button>
+    </div>
+  </section>
+  <!-- Phrase bank -->
+  <section class="panel">
+    <div class="panelHeader">
+      <div><h2>Useful language for apologising</h2><div class="hint">Sincere and specific — the tone examiners expect.</div></div>
+    </div>
+    <div class="panelBody">
+      <div class="phraseGrid">
+        <div class="phraseCard">
+          <h3>Saying sorry</h3>
+          <ul>
+            <li>I'm really sorry about what happened yesterday.</li>
+            <li>I want to apologise for missing the deadline.</li>
+            <li>I owe you an apology, and I won't make excuses.</li>
+            <li>I'm very sorry for the inconvenience this has caused.</li>
+          </ul>
+        </div>
+        <div class="phraseCard">
+          <h3>Explaining briefly</h3>
+          <ul>
+            <li>What happened was that I misread the schedule.</li>
+            <li>I'd written the wrong date in my calendar.</li>
+            <li>There was a mix-up with the files on my end.</li>
+            <li>That's an explanation, not an excuse.</li>
+          </ul>
+        </div>
+        <div class="phraseCard">
+          <h3>Taking responsibility</h3>
+          <ul>
+            <li>It was my mistake, and I take full responsibility.</li>
+            <li>I should have checked before sending it.</li>
+            <li>To put it right, I'll … by Friday.</li>
+            <li>I've already started fixing it.</li>
+          </ul>
+        </div>
+        <div class="phraseCard">
+          <h3>Reassuring and closing</h3>
+          <ul>
+            <li>I'll set a reminder so it doesn't happen again.</li>
+            <li>Please let me know if there's anything else I can do.</li>
+            <li>Thanks for being so understanding about it.</li>
+            <li>I really appreciate your patience.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Template -->
+  <section class="panel">
+    <div class="panelHeader">
+      <div><h2>Template</h2><div class="hint">Use as a starting point if you get stuck.</div></div>
+    </div>
+    <div class="panelBody">
+      <button id="btnTemplatePill" class="templatePillBtn" aria-haspopup="dialog" aria-controls="templateWindow" aria-expanded="false">
+        HINT / USE A TEMPLATE <span class="pillCaret" aria-hidden="true"></span>
+      </button>
+      <template id="templateText">
+Hi [name], I'm really sorry about [what happened] — I wanted to apologise properly.
+What happened was [brief explanation], and I know that [effect it had on them]. That's an explanation, not an excuse — it was my mistake.
+To put it right, I'll [what you will do], and I can have it done by [day]. I'll also [how you'll stop it happening again].
+Thanks for being so understanding, and please let me know if there's anything else I can do.
+      </template>
+      <p class="note">Shortcut: <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> inserts the template.</p>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="footerWrap">
+    <div><strong>Koala Spies Sydney</strong> · Modern English Australia · All Rights Reserved</div>
+    <div class="footerLinks">
+      <a href="#" onclick="return false">Home</a>
+      <a href="#" onclick="return false">PTE</a>
+      <a href="#" onclick="return false">Contact</a>
+    </div>
+  </div>
+</footer>
+<!-- Overlays -->
+<div class="overlay" id="helpOverlay" hidden></div>
+<div class="overlay" id="tplOverlay"  hidden></div>
+<div class="overlay" id="qrOverlay"   hidden></div>
+<!-- Help panel -->
+<aside class="sidePanel" id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpTitle" aria-hidden="true">
+  <div class="sideHeader">
+    <div><div class="sideKicker">Help</div><h3 id="helpTitle">Listening settings</h3></div>
+    <button class="iconBtn" id="btnHelpClose" aria-label="Close">&#215;</button>
+  </div>
+  <div class="sideBody">
+    <p>To keep the listening activities in the correct native accent, change your device language and voice settings to English (Australia/UK) and turn off any personalised or adaptive speech features.</p>
+    <div class="row" style="margin-top:0;margin-bottom:12px">
+      <button id="btnCheckAudio">&#128269; Check audio files</button>
+    </div>
+    <div id="audioReport" class="sideCallout" style="margin-bottom:12px;display:none"></div>
+    <div class="sideCallout" style="margin-bottom:12px">
+      <strong>Audio:</strong> this page plays <code>apology1.mp3</code> through <code>apology6.mp3</code> from the same folder as this HTML file. Those six recordings are the only audio it uses. Open the page through a web server or GitHub Pages — some browsers refuse audio on a <code>file://</code> path.
+    </div>
+    <div class="sideCallout">If speech-to-text accuracy drops, check your browser microphone permissions and selected input device. Chrome and Edge give the best results.</div>
+  </div>
+  <div class="sideFooter"><button id="btnHelpDone" class="primary">Done</button></div>
+</aside>
+<!-- Template window -->
+<aside class="tplWindow" id="templateWindow" role="dialog" aria-modal="true" aria-labelledby="tplTitle" aria-hidden="true">
+  <div class="tplHead">
+    <div><div class="tplKicker">Hint</div><h3 id="tplTitle">Template response</h3></div>
+    <button class="tplClose" id="btnTplClose" aria-label="Close">&#215;</button>
+  </div>
+  <div class="tplBody">
+    <pre class="tplCode" id="tplCode"></pre>
+    <div class="tplActions">
+      <button id="btnTplInsert" class="primary">Insert into answer</button>
+      <button id="btnTplCopy">Copy</button>
+    </div>
+    <p class="note">Shortcut: <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> inserts the template.</p>
+  </div>
+</aside>
+<!-- QR modal -->
+<div class="qrModal" id="qrModal" role="dialog" aria-modal="true" aria-labelledby="qrTitle" aria-hidden="true">
+  <div class="qrModalHead">
+    <div><div class="qrModalKicker">Share this page</div><p class="qrModalTitle" id="qrTitle">QR Code Generator</p></div>
+    <button class="iconBtn" id="btnQRClose" aria-label="Close">&#215;</button>
+  </div>
+  <div class="qrModalBody">
+    <div class="qrInputRow">
+      <input class="qrInput" id="qrInput" type="url" placeholder="https://yoursite.com/pte-practice" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <button class="qrGenBtn" id="btnQRGenerate">Generate</button>
+    </div>
+    <button class="qrCurrentPageBtn" id="btnQRThisPage">&#8594; Use current page URL</button>
+    <div class="qrCanvasWrap">
+      <div class="qrEmpty" id="qrEmpty">Enter a URL above and press Generate.</div>
+      <canvas id="qrCanvas" width="220" height="220" style="display:none"></canvas>
+      <div class="qrUrlLabel" id="qrUrlLabel" style="display:none"></div>
+      <div class="qrActions" id="qrActions" style="display:none">
+        <button id="btnQRDownload" class="primary" style="font-size:13px">Download PNG</button>
+        <button id="btnQRCopy" style="font-size:13px">Copy image</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══════════════ INLINE QR ENCODER (no deps) ═══════════════ -->
+<script>
+(function(w){"use strict";
+var M=0;
+var PP=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,132],[6,34,60,86,112,136],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]];
+var ET=new Array(256),LT=new Array(256);
+for(var i=0;i<8;i++)ET[i]=1<<i;
+for(var i=8;i<256;i++)ET[i]=ET[i-4]^ET[i-5]^ET[i-6]^ET[i-8];
+for(var i=0;i<255;i++)LT[ET[i]]=i;
+function ge(a){while(a<0)a+=255;while(a>=256)a-=255;return ET[a]}
+function gl(a){return LT[a]}
+function Poly(n,s){var o=0;while(o<n.length&&n[o]==0)o++;this.n=new Array(n.length-o+s);for(var i=0;i<n.length-o;i++)this.n[i]=n[i+o]}
+Poly.prototype={g:function(i){return this.n[i]},l:function(){return this.n.length},
+mul:function(e){var r=new Array(this.l()+e.l()-1);for(var i=0;i<this.l();i++)for(var j=0;j<e.l();j++)r[i+j]^=ge(gl(this.g(i))+gl(e.g(j)));return new Poly(r,0)},
+mod:function(e){if(this.l()-e.l()<0)return this;var r=gl(this.g(0))-gl(e.g(0)),n=[];for(var i=0;i<this.l();i++)n[i]=this.g(i);for(var i=0;i<e.l();i++)n[i]^=ge(gl(e.g(i))+r);return new Poly(n,0).mod(e)}};
+function ep(a){var b=new Poly([1],0);for(var i=0;i<a;i++)b=b.mul(new Poly([1,ge(i)],0));return b}
+function bd(a){var d=0;while(a!=0){d++;a>>>=1}return d}
+function bti(a){var d=a<<10;while(bd(d)-bd(1335)>=0)d^=1335<<bd(d)-bd(1335);return(a<<10|d)^21522}
+function lib(t){if(t<10)return 8;if(t<27)return 16;return 16}
+var RST=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16]];
+function getRSB(tv){var d=RST[(tv-1)*4+M];if(!d)throw 0;var b=[];for(var i=0;i<d.length/3;i++)for(var j=0;j<d[i*3];j++)b.push({t:d[i*3+1],d:d[i*3+2]});return b}
+function BB(){this.b=[];this.l=0}
+BB.prototype={put:function(n,l){for(var i=0;i<l;i++)this.pb(((n>>>(l-i-1))&1)==1)},pb:function(b){var p=Math.floor(this.l/8);if(this.b.length<=p)this.b.push(0);if(b)this.b[p]|=0x80>>>(this.l%8);this.l++}};
+function msk(p,r,c){switch(p){case 0:return(r+c)%2==0;case 1:return r%2==0;case 2:return c%3==0;case 3:return(r+c)%3==0;case 4:return(Math.floor(r/2)+Math.floor(c/3))%2==0;case 5:return r*c%2+r*c%3==0;case 6:return(r*c%2+r*c%3)%2==0;case 7:return(r*c%3+(r+c)%2)%2==0}}
+function lp(q){var m=q.mc,l=0;
+for(var r=0;r<m;r++)for(var c=0;c<m;c++){var s=0,d=q.d(r,c);for(var x=-1;x<=1;x++)for(var y=-1;y<=1;y++){if(r+x<0||m<=r+x||c+y<0||m<=c+y||x==0&&y==0)continue;if(d==q.d(r+x,c+y))s++}if(s>5)l+=s-2}
+for(var r=0;r<m-1;r++)for(var c=0;c<m-1;c++){var n=0;if(q.d(r,c))n++;if(q.d(r+1,c))n++;if(q.d(r,c+1))n++;if(q.d(r+1,c+1))n++;if(n==0||n==4)l+=3}
+var dk=0;for(var r=0;r<m;r++)for(var c=0;c<m;c++)if(q.d(r,c))dk++;
+l+=Math.abs(100*dk/m/m-50)/5*10;return l}
+function QR(tv){this.tn=tv;this.mc=tv*4+17;this.mod=[];for(var r=0;r<this.mc;r++){this.mod[r]=[];for(var c=0;c<this.mc;c++)this.mod[r][c]=null}}
+QR.prototype={d:function(r,c){return this.mod[r][c]},
+make:function(text){var best=0,bl=0;for(var i=0;i<8;i++){this._make(text,true,i);var l=lp(this);if(i==0||bl>l){bl=l;best=i}}this._make(text,false,best)},
+_make:function(text,t,mp){
+this.mod=[];for(var r=0;r<this.mc;r++){this.mod[r]=[];for(var c=0;c<this.mc;c++)this.mod[r][c]=null}
+this._probe(0,0);this._probe(this.mc-7,0);this._probe(0,this.mc-7);
+var p=PP[this.tn-1];for(var i=0;i<p.length;i++)for(var j=0;j<p.length;j++){var pr=p[i],pc=p[j];if(this.mod[pr][pc]!=null)continue;for(var dr=-2;dr<=2;dr++)for(var dc=-2;dc<=2;dc++){if(dr==-2||dr==2||dc==-2||dc==2||dr==0&&dc==0)this.mod[pr+dr][pc+dc]=true;else this.mod[pr+dr][pc+dc]=false}}
+for(var r=8;r<this.mc-8;r++)if(this.mod[r][6]==null)this.mod[r][6]=(r%2==0);
+for(var c=8;c<this.mc-8;c++)if(this.mod[6][c]==null)this.mod[6][c]=(c%2==0);
+var bi=bti((M<<3)|mp);
+for(var i=0;i<15;i++){var mv=(!t&&((bi>>i)&1)==1);if(i<6)this.mod[i][8]=mv;else if(i<8)this.mod[i+1][8]=mv;else this.mod[this.mc-15+i][8]=mv}
+for(var i=0;i<15;i++){var mv=(!t&&((bi>>i)&1)==1);if(i<8)this.mod[8][this.mc-i-1]=mv;else if(i<9)this.mod[8][15-i]=mv;else this.mod[8][15-i-1]=mv}
+this.mod[this.mc-8][8]=!t;
+var data=this._data(text);this._map(data,mp)},
+_probe:function(r,c){for(var dr=-1;dr<=7;dr++){if(r+dr<=-1||this.mc<=r+dr)continue;for(var dc=-1;dc<=7;dc++){if(c+dc<=-1||this.mc<=c+dc)continue;if((0<=dr&&dr<=6&&(dc==0||dc==6))||(0<=dc&&dc<=6&&(dr==0||dr==6))||(2<=dr&&dr<=4&&2<=dc&&dc<=4))this.mod[r+dr][c+dc]=true;else this.mod[r+dr][c+dc]=false}}},
+_data:function(text){var rsb=getRSB(this.tn),buf=new BB();buf.put(4,4);buf.put(text.length,lib(this.tn));for(var i=0;i<text.length;i++)buf.put(text.charCodeAt(i),8);
+var tc=0;for(var i=0;i<rsb.length;i++)tc+=rsb[i].d;tc*=8;
+if(buf.l+4<=tc)buf.put(0,4);while(buf.l%8!=0)buf.pb(false);
+while(buf.l<tc){buf.put(236,8);if(buf.l>=tc)break;buf.put(17,8)}
+var off=0,mdc=0,mec=0,dcd=[],ecd=[];
+for(var r=0;r<rsb.length;r++){var dc=rsb[r].d,ec=rsb[r].t-dc;mdc=Math.max(mdc,dc);mec=Math.max(mec,ec);dcd[r]=[];for(var i=0;i<dc;i++)dcd[r][i]=0xff&buf.b[i+off];off+=dc;var rp=ep(ec),raw=new Poly(dcd[r],rp.l()-1),modp=raw.mod(rp);ecd[r]=[];for(var i=0;i<rp.l()-1;i++){var mi=i+modp.l()-ecd[r].length;ecd[r][i]=(mi>=0)?modp.g(mi):0}}
+var total=0;for(var i=0;i<rsb.length;i++)total+=rsb[i].t;
+var data=new Array(total),idx=0;
+for(var i=0;i<mdc;i++)for(var r=0;r<rsb.length;r++)if(i<dcd[r].length)data[idx++]=dcd[r][i];
+for(var i=0;i<mec;i++)for(var r=0;r<rsb.length;r++)if(i<ecd[r].length)data[idx++]=ecd[r][i];
+return data},
+_map:function(data,mp){var inc=-1,r=this.mc-1,bi=7,by=0;
+for(var c=this.mc-1;c>0;c-=2){if(c==6)c--;while(true){for(var dr=0;dr<2;dr++){if(this.mod[r][c-dr]==null){var dk=by<data.length&&((data[by]>>>bi)&1)==1;if(msk(mp,r,c-dr))dk=!dk;this.mod[r][c-dr]=dk;bi--;if(bi==-1){by++;bi=7}}}r+=inc;if(r<0||this.mc<=r){r-=inc;inc=-inc;break}}}}};
+w.drawQRToCanvas=function(text,canvas,size){
+  size=size||240;
+  var q,found=false;
+  for(var t=1;t<=40&&!found;t++){try{var qq=new QR(t);qq.make(text);q=qq;found=true}catch(e){}}
+  if(!found)throw new Error('too long');
+  var mc=q.mc,cs=size/mc,ctx=canvas.getContext('2d');
+  canvas.width=size;canvas.height=size;
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,size,size);
+  ctx.fillStyle='#000';
+  for(var r=0;r<mc;r++)for(var c=0;c<mc;c++)if(q.d(r,c))ctx.fillRect(Math.round(c*cs),Math.round(r*cs),Math.ceil(cs),Math.ceil(cs));
+};
+}(window));
+</script>
+<!-- ═══════════════ MAIN APP LOGIC ═══════════════ -->
+<script>
+(() => {
+  /* ── data ── */
+  const TYPES = {
+    requesting:'Requesting', complaining:'Complaining', advising:'Asking for advice',
+    apologising:'Apologising', suggesting:'Suggesting', explaining:'Explaining'
+  };
+  const SITS = [
+    { n:1, audio:'apology1.mp3', taskType:'apologising', channel:'In person',
+      text:'You missed an important team deadline because you wrote the wrong date in your calendar, and a colleague had to finish your section at the last minute. Your manager asks you to explain. Describe what you would say to apologise and take responsibility.' },
+    { n:2, audio:'apology2.mp3', taskType:'apologising', channel:'Phone call',
+      text:"You completely forgot a close friend's birthday dinner last night, and they had saved you a seat. You call them the next morning to apologise and make it up to them. Explain what you would say." },
+    { n:3, audio:'apology3.mp3', taskType:'apologising', channel:'Email',
+      text:'You sent a client the wrong version of a report, and it contained figures that had not been checked. They have already forwarded it to their own team. You write to apologise and correct the mistake. Describe what you would write in your email.' },
+    { n:4, audio:'apology4.mp3', taskType:'apologising', channel:'In person',
+      text:"You reversed out of your driveway and scraped your neighbour's car, leaving a long mark along the door. Nobody saw it happen, but you decide to knock on their door straight away. Explain what you would say to apologise." },
+    { n:5, audio:'apology5.mp3', taskType:'apologising', channel:'Phone call',
+      text:'A colleague asked you to pass on an urgent message, but it slipped your mind, and as a result they missed an important meeting with a client. You call them to apologise. Explain what you would say.' },
+    { n:6, audio:'apology6.mp3', taskType:'apologising', channel:'Customer call',
+      text:"You work in customer service, and a customer's order arrived damaged for the second time because of a packing error at your warehouse. You call the customer to apologise on behalf of the company and offer a solution. Explain what you would say." },
+  ];
+  /* ── elements ── */
+  const $ = id => document.getElementById(id);
+  const countLabel   = $('countLabel');
+  const barEl        = $('bar');
+  const sitCounter   = $('sitCounter');
+  const sitTotal     = $('sitTotal');
+  const promptTextEl = $('promptText');
+  const promptWrap   = $('promptWrap');
+  const taskTagWrap  = $('taskTagWrap');
+  const answerBox    = $('answerBox');
+  const btnStart     = $('btnStart');
+  const btnTryAgain  = $('btnTryAgain');
+  const btnNext      = $('btnNext');
+  const btnMic       = $('btnMic');
+  const btnClear     = $('btnClearAnswer');
+  const sttNote      = $('sttNote');
+  const banner       = $('statusBanner');
+  const btnHidePrompt= $('btnHidePrompt');
+  /* ── banner helper ── */
+  function showBanner(msg, type = 'info') {
+    banner.innerHTML = msg;
+    banner.className = `statusBanner ${type} show`;
+  }
+  /* ── timer helpers ── */
+  const pad2 = n => String(n).padStart(2,'0');
+  const mmss = s => `${pad2(Math.floor(s/60))}:${pad2(s%60)}`;
+  function setTime(s, tot) {
+    countLabel.textContent = mmss(Math.max(0, s));
+    barEl.style.width = (!tot || tot <= 0) ? '0%'
+      : Math.max(0, Math.min(100, (tot - s) / tot * 100)).toFixed(1) + '%';
+  }
+  let tick = null;
+  function clearTick() { if (tick) { clearInterval(tick); tick = null; } }
+  function countdown(sec, onTick, onDone) {
+    let rem = sec;
+    setTime(rem, sec);
+    clearTick();
+    tick = setInterval(() => {
+      rem--;
+      setTime(rem, sec);
+      if (onTick) onTick(rem);
+      if (rem <= 0) { clearTick(); if (onDone) onDone(); }
+    }, 1000);
+  }
+  /* ── beep ── */
+  let audioCtx;
+  function beep(hz = 880, ms = 200) {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.value = hz;
+      const t = audioCtx.currentTime;
+      g.gain.setValueAtTime(0.001, t);
+      g.gain.exponentialRampToValueAtTime(0.25, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.001, t + ms / 1000);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(t); o.stop(t + ms / 1000 + 0.05);
+    } catch(e) {}
+  }
+  /* ── recorded audio (mp3) ── */
+  let currentAudio = null;
+  function stopCurrentAudio() {
+    if (currentAudio) { currentAudio.pause(); currentAudio.src = ''; currentAudio = null; }
+  }
+  function playMp3(src) {
+    return new Promise(resolve => {
+      stopCurrentAudio();
+      const audio = new Audio();
+      currentAudio = audio;
+      audio.addEventListener('ended', () => resolve('ended'), { once: true });
+      audio.addEventListener('error', () => resolve('error'), { once: true });
+      audio.src = src;                       // set src AFTER attaching listeners
+      const play = audio.play();
+      if (play !== undefined) play.catch(() => resolve('error'));
+    });
+  }
+  /* ── audio self-test, used by the Check audio files button ── */
+  function probeAudio(src) {
+    return new Promise(resolve => {
+      const a = new Audio();
+      const done = r => resolve(r);
+      a.addEventListener('canplaythrough', () => done('ok'), { once: true });
+      a.addEventListener('loadedmetadata', () => done('ok'), { once: true });
+      a.addEventListener('error', () => done('missing'), { once: true });
+      a.preload = 'metadata';
+      a.src = src;
+      a.load();
+      setTimeout(() => done('slow'), 8000);
+    });
+  }
+  /* ── STT ── */
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let rec = null, sttOk = false, sttOn = false;
+  function stripLive() {
+    answerBox.value = answerBox.value.replace(/\s*\[live\][\s\S]*?\[\/live\]\s*/g, '').trimEnd();
+  }
+  function initSTT() {
+    if (!SR) {
+      sttOk = false;
+      btnMic.disabled = true;
+      sttNote.textContent = 'Speech-to-text not supported in this browser. Use Chrome or Edge.';
+      return;
+    }
+    sttOk = true;
+    sttNote.textContent = 'Microphone ready. Allow access when prompted.';
+    rec = new SR();
+    rec.lang = 'en-AU';
+    rec.continuous = true;
+    rec.interimResults = true;
+    let finalText = '';
+    rec.onstart = () => { finalText = ''; stripLive(); };
+    rec.onresult = (e) => {
+      let interim = '';
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const t = e.results[i][0].transcript;
+        if (e.results[i].isFinal) finalText += t.trim() + ' ';
+        else interim += t;
+      }
+      const base = answerBox.value.replace(/\s*\[live\][\s\S]*?\[\/live\]\s*/g, '').trimEnd();
+      answerBox.value = (base + (base ? ' ' : '') + finalText).trim()
+        + (interim ? `\n\n[live]\n${interim.trim()}\n[/live]` : '');
+    };
+    rec.onerror = () => stopSTT();
+    rec.onend = () => {
+      if (sttOn) {
+        sttOn = false;
+        btnMic.textContent = '🎙 Start speaking';
+        btnMic.classList.remove('active-mic');
+        stripLive();
+      }
+    };
+  }
+  function startSTT() {
+    if (!sttOk || !rec || sttOn) return;
+    try {
+      rec.start();
+      sttOn = true;
+      btnMic.textContent = '⏹ Stop speaking';
+      btnMic.classList.add('active-mic');
+    } catch(e) {}
+  }
+  function stopSTT() {
+    if (!sttOk || !rec) return;
+    try { rec.stop(); } catch(e) {}
+    sttOn = false;
+    btnMic.textContent = '🎙 Start speaking';
+    btnMic.classList.remove('active-mic');
+    stripLive();
+  }
+  /* ── checklist ── */
+  function resetChecklist() {
+    document.querySelectorAll('.checkItem').forEach(el => {
+      el.classList.remove('checked');
+      el.setAttribute('aria-checked', 'false');
+    });
+    updateCheck();
+  }
+  function updateCheck() {
+    const all = document.querySelectorAll('.checkItem');
+    const n = document.querySelectorAll('.checkItem.checked').length;
+    $('checklistFill').style.width = (n / all.length * 100) + '%';
+    const s = $('checklistScore');
+    s.textContent = n + ' / ' + all.length;
+    s.classList.toggle('complete', n === all.length);
+  }
+  function toggleCheck(el) {
+    const c = el.classList.contains('checked');
+    el.classList.toggle('checked', !c);
+    el.setAttribute('aria-checked', String(!c));
+    updateCheck();
+  }
+  document.querySelectorAll('.checkItem').forEach(el => {
+    el.addEventListener('click', () => toggleCheck(el));
+    el.addEventListener('keydown', e => {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleCheck(el); }
+    });
+  });
+  $('btnChecklistReset').addEventListener('click', resetChecklist);
+  /* ── tags ── */
+  function renderTag(type, channel) {
+    let html = '';
+    if (type && TYPES[type]) html += `<span class="taskTag tag-${type}"><span class="taskTag-dot"></span>${TYPES[type]}</span>`;
+    if (channel) html += `<span class="taskTag tag-channel"><span class="taskTag-dot"></span>${channel}</span>`;
+    taskTagWrap.innerHTML = html;
+  }
+  /* ── hide prompt text ── */
+  let promptHidden = false;
+  btnHidePrompt.addEventListener('click', () => {
+    promptHidden = !promptHidden;
+    promptWrap.classList.toggle('promptHidden', promptHidden);
+    btnHidePrompt.textContent = promptHidden ? 'Show the text' : 'Hide the text (listening practice)';
+  });
+  /* ── core state ── */
+  let idx = 0;
+  let running = false;
+  function lockButtons(isRunning) {
+    running = isRunning;
+    btnStart.disabled    = isRunning;
+    btnTryAgain.disabled = isRunning;
+    btnNext.disabled     = isRunning;
+  }
+  function clearAnswer() {
+    stopSTT();
+    stripLive();
+    answerBox.value = '';
+  }
+  /* ── main attempt flow ── */
+  async function runAttempt() {
+    clearAnswer();
+    resetChecklist();
+    stopCurrentAudio();
+    clearTick();
+    lockButtons(true);
+    setTime(0, 0);
+    const sit = SITS[idx];
+    // STEP 1 — play the recording
+    showBanner('&#128266; Playing the audio prompt…', 'info');
+    const result = await playMp3(sit.audio);
+    if (result === 'error') {
+      const tried = new URL(sit.audio, window.location.href).href;
+      showBanner('&#10060; Could not play <strong>' + sit.audio + '</strong>.<br>The page looked for it here:<br><code style="word-break:break-all">' + tried + '</code><br>Check that the file is in that exact place, and that its real name is <strong>' + sit.audio + '</strong> — not ' + sit.audio + '.mp3 (Windows hides extensions by default). Open <strong>Listening settings &rarr; Check audio files</strong> to test all six.', 'err');
+      lockButtons(false);
+      return;
+    }
+    // STEP 2 — 10-second prep countdown
+    showBanner('&#9200; Get ready… responding starts in <span id="prepCount">10</span> <span id="prepUnit">seconds</span>.', 'warn');
+    await new Promise(resolve => {
+      countdown(10,
+        rem => {
+          const el = document.getElementById('prepCount'); if (el) el.textContent = Math.max(rem, 0);
+          const u = document.getElementById('prepUnit'); if (u) u.textContent = rem === 1 ? 'second' : 'seconds';
+        },
+        resolve
+      );
+    });
+    // STEP 3 — beep + 40-second response window
+    beep();
+    if (sttOk) startSTT();
+    showBanner('&#127908; Respond now! Time remaining: <span id="speakCount">40</span> <span id="speakUnit">seconds</span>.', 'go');
+    await new Promise(resolve => {
+      countdown(40,
+        rem => {
+          const el = document.getElementById('speakCount'); if (el) el.textContent = Math.max(rem, 0);
+          const u = document.getElementById('speakUnit'); if (u) u.textContent = rem === 1 ? 'second' : 'seconds';
+        },
+        resolve
+      );
+    });
+    // STEP 4 — time's up
+    stopSTT();
+    beep(440, 300);
+    showBanner('&#9989; Time&#39;s up! Check your answer below, then tick the self-check boxes. Press <strong>Repeat prompt</strong> to try again or <strong>Next</strong> for a new situation.', 'info');
+    setTime(0, 0);
+    lockButtons(false);
+  }
+  /* ── render situation ── */
+  function renderSit() {
+    const s = SITS[idx];
+    sitCounter.textContent = String(s.n);
+    sitTotal.textContent   = String(SITS.length);
+    promptTextEl.textContent = s.text;
+    renderTag(s.taskType, s.channel);
+    stopCurrentAudio();
+    clearTick();
+    setTime(0, 0);
+    showBanner('Press <strong>Start</strong> to play the audio prompt.', 'info');
+    lockButtons(false);
+  }
+  /* ── button events ── */
+  btnStart.addEventListener('click', () => { if (!running) runAttempt(); });
+  btnTryAgain.addEventListener('click', () => {
+    if (running) return;
+    clearAnswer();
+    resetChecklist();
+    runAttempt();
+  });
+  btnNext.addEventListener('click', () => {
+    if (running) return;
+    clearAnswer();
+    resetChecklist();
+    idx = (idx + 1) % SITS.length;
+    renderSit();
+  });
+  btnMic.addEventListener('click', () => {
+    if (!sttOk) return;
+    sttOn ? stopSTT() : startSTT();
+  });
+  btnClear.addEventListener('click', () => {
+    clearAnswer();
+  });
+  /* ── template ── */
+  const TPL = ($('templateText')?.content?.textContent || $('templateText')?.textContent || '').trim();
+  if ($('tplCode')) $('tplCode').textContent = TPL;
+  function openTpl()  { $('tplOverlay').hidden=false; $('templateWindow').classList.add('open'); $('templateWindow').setAttribute('aria-hidden','false'); $('btnTemplatePill').setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; $('btnTplClose')?.focus(); }
+  function closeTpl() { $('templateWindow').classList.remove('open'); $('templateWindow').setAttribute('aria-hidden','true'); $('btnTemplatePill').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(()=>{ $('tplOverlay').hidden=true; },180); $('btnTemplatePill').focus(); }
+  $('btnTemplatePill').addEventListener('click', () => $('templateWindow').classList.contains('open') ? closeTpl() : openTpl());
+  $('tplOverlay').addEventListener('click', closeTpl);
+  $('btnTplClose').addEventListener('click', closeTpl);
+  $('btnTplInsert').addEventListener('click', () => {
+    const c = answerBox.value.trim();
+    answerBox.value = c ? (c + '\n\n' + TPL) : TPL;
+    answerBox.focus(); closeTpl();
+  });
+  $('btnTplCopy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(TPL); showBanner('Template copied to clipboard.', 'go'); setTimeout(()=>showBanner('Press <strong>Start</strong> to play the audio prompt.','info'),1200); } catch(e) {}
+  });
+  /* ── help panel ── */
+  function openHelp()  { $('helpOverlay').hidden=false; $('helpPanel').classList.add('open'); $('helpPanel').setAttribute('aria-hidden','false'); $('btnHelp').setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; $('btnHelpClose')?.focus(); }
+  function closeHelp() { $('helpPanel').classList.remove('open'); $('helpPanel').setAttribute('aria-hidden','true'); $('btnHelp').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(()=>{ $('helpOverlay').hidden=true; },220); $('btnHelp').focus(); }
+  $('btnCheckAudio').addEventListener('click', async () => {
+    const box = $('audioReport'), btn = $('btnCheckAudio');
+    btn.disabled = true; btn.textContent = 'Checking…';
+    box.style.display = ''; box.innerHTML = 'Testing six files…';
+    const rows = [];
+    for (const sit of SITS) {
+      const r = await probeAudio(sit.audio);
+      const mark = r === 'ok' ? '&#9989;' : (r === 'slow' ? '&#9203;' : '&#10060;');
+      const word = r === 'ok' ? 'found' : (r === 'slow' ? 'slow to load' : 'NOT FOUND');
+      rows.push(mark + ' <code>' + sit.audio + '</code> — ' + word);
+    }
+    const folder = new URL('.', window.location.href).href;
+    box.innerHTML = '<strong>Looking in:</strong><br><code style="word-break:break-all">' + folder + '</code><br><br>'
+      + rows.join('<br>')
+      + '<br><br>Any file marked NOT FOUND is either missing from that folder, or its real name differs — most often <code>name.mp3.mp3</code> with Windows hiding extensions, or a capital letter (GitHub Pages is case-sensitive).';
+    btn.disabled = false; btn.textContent = '\uD83D\uDD0D Check audio files';
+  });
+  $('btnHelp').addEventListener('click', openHelp);
+  $('helpOverlay').addEventListener('click', closeHelp);
+  $('btnHelpClose').addEventListener('click', closeHelp);
+  $('btnHelpDone').addEventListener('click', closeHelp);
+  /* ── QR ── */
+  function openQR()  { $('qrOverlay').hidden=false; $('qrModal').classList.add('open'); $('qrModal').setAttribute('aria-hidden','false'); $('btnQR').setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; $('qrInput').focus(); }
+  function closeQR() { $('qrModal').classList.remove('open'); $('qrModal').setAttribute('aria-hidden','true'); $('btnQR').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(()=>{ $('qrOverlay').hidden=true; },200); $('btnQR').focus(); }
+  function genQR() {
+    const url = $('qrInput').value.trim();
+    if (!url) { $('qrEmpty').textContent='Please enter a URL first.'; $('qrEmpty').style.display=''; $('qrCanvas').style.display='none'; $('qrUrlLabel').style.display='none'; $('qrActions').style.display='none'; return; }
+    try {
+      window.drawQRToCanvas(url, $('qrCanvas'), 240);
+      $('qrCanvas').style.display='block'; $('qrEmpty').style.display='none';
+      $('qrUrlLabel').textContent=url; $('qrUrlLabel').style.display='';
+      $('qrActions').style.display='flex';
+    } catch(e) { $('qrEmpty').textContent='Could not generate — URL may be too long.'; $('qrEmpty').style.display=''; $('qrCanvas').style.display='none'; $('qrUrlLabel').style.display='none'; $('qrActions').style.display='none'; }
+  }
+  $('btnQR').addEventListener('click', openQR);
+  $('qrOverlay').addEventListener('click', closeQR);
+  $('btnQRClose').addEventListener('click', closeQR);
+  $('btnQRGenerate').addEventListener('click', genQR);
+  $('qrInput').addEventListener('keydown', e => { if (e.key==='Enter') genQR(); });
+  $('btnQRThisPage').addEventListener('click', () => { $('qrInput').value = window.location.href; genQR(); });
+  $('btnQRDownload').addEventListener('click', () => { const a=document.createElement('a'); a.download='qr-code.png'; a.href=$('qrCanvas').toDataURL('image/png'); a.click(); });
+  $('btnQRCopy').addEventListener('click', async () => {
+    try { $('qrCanvas').toBlob(async blob=>{ await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]); $('btnQRCopy').textContent='Copied!'; setTimeout(()=>{ $('btnQRCopy').textContent='Copy image'; },1500); },'image/png'); }
+    catch(e) { $('btnQRCopy').textContent='Not supported'; setTimeout(()=>{ $('btnQRCopy').textContent='Copy image'; },1500); }
+  });
+  /* ── keyboard shortcuts ── */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if ($('helpPanel').classList.contains('open'))     closeHelp();
+      if ($('templateWindow').classList.contains('open')) closeTpl();
+      if ($('qrModal').classList.contains('open'))       closeQR();
+    }
+    if (e.ctrlKey && e.key === 'Enter') {
+      e.preventDefault();
+      const c = answerBox.value.trim();
+      answerBox.value = c ? (c + '\n\n' + TPL) : TPL;
+      answerBox.focus();
+    }
+  });
+  /* ── stop the voice if the page is closed ── */
+  window.addEventListener('beforeunload', stopCurrentAudio);
+  /* ── enable mic button once STT is ready ── */
+  function enableMic() {
+    if (sttOk) btnMic.disabled = false;
+  }
+  /* ── init ── */
+  initSTT();
+  enableMic();
+  renderSit();
+})();
+</script>
+</body>
+</html>
