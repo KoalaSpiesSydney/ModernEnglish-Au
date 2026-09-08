@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thought · Though · Through · Thorough – The Lesson | Modern English Australia</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Silent-film type: Limelight = 1920s title cards · Special Elite = typewriter intertitle · Bitter = readable slab body -->
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Bevan&family=Special+Elite&family=Bitter:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* ═══ KODAK / 16mm FILM PALETTE — change any colour here and it updates everywhere ═══ */
+  --bg:#e6d9bd;          /* aged film base / paper */
+  --paper:#fbf3e2;       /* warm off-white card surface */
+  --tint:#f3e2c2;        /* light amber wash (hovers, tips) */
+  --card:#241c14;        /* dark sepia — header, footer, score bar */
+  --ink:#2b2118;         /* warm near-black text */
+  --muted:#c2ae8c;       /* faded caption text */
+  --accent:#c8781f;      /* Kodak amber */
+  --accent-2:#e3a21c;    /* Kodak yellow (gradient partner) */
+  --h2:#a8412b;          /* faded Kodachrome red */
+  --line:#4a382a;        /* sepia rule */
+  --edge:#d8c6a4;        /* soft border on light surfaces */
+  --grey:#6b5b45;        /* warm grey for notes */
+  --success:#6f8f4a;     /* faded film green */
+  --error:#a9382c;       /* faded film red */
+  --brand-font:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;   /* header + copyright only */
+  --display-font:'Limelight','Bevan',Georgia,serif;                       /* big titles — 1920s cinema marquee */
+  /* Prefer a heavier wood-type poster look? Swap the line above for this one:
+     --display-font:'Bevan','Limelight',Georgia,serif;   */
+  --accent-font:'Special Elite','Courier New',monospace;                   /* labels, buttons — typewriter intertitle */
+  --body-font:'Bitter',Georgia,'Times New Roman',serif;                    /* everything you actually read */
+  --headline:#33302c;                                                      /* charcoal for headings & labels */
+}
+
+/* ===== Base ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ═══════════════════════════════════════════════════════════════
+   BACKGROUND VIDEO  ·  opacity = how strong the film looks
+   ═══════════════════════════════════════════════════════════════ */
+.bg-video{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0.5;           /* ← turn this up/down to taste (0 = invisible, 1 = full) */
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SAY-IT-ALOUD BAR  ·  the browser's own voice reads the word
+   ═══════════════════════════════════════════════════════════════ */
+.say-intro{
+  font-family:var(--accent-font);
+  font-size:.85rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--h2);
+  margin-bottom:.6rem;
+}
+.say-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.6rem;
+  justify-content:center;
+  margin:0 auto 2rem;
+  max-width:700px;
+}
+.say{
+  font-family:var(--body-font);
+  font-size:1.05rem;
+  font-weight:600;
+  background:var(--paper);
+  color:var(--headline);
+  border:2px solid var(--accent);
+  border-radius:5px;
+  padding:.45rem 1.1rem;
+  cursor:pointer;
+  box-shadow:none;
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+}
+.say:hover{ background:var(--tint); transform:translateY(-2px); }
+.say.speaking{ background:var(--accent-2); border-color:var(--accent-2); }
+
+/* ═══════════════════════════════════════════════════════════════
+   POP-UP INSTRUCTION CARD
+   ═══════════════════════════════════════════════════════════════ */
+.overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  background:rgba(14,10,6,.55);
+  z-index:50;
+}
+.overlay.open{ display:flex; }
+.dialog{
+  width:100%;
+  max-width:640px;
+  max-height:86vh;
+  overflow:auto;
+  text-align:left;
+  background:var(--paper);
+  border:3px double var(--line);
+  border-radius:8px;
+  padding:1.6rem 1.8rem 1.4rem;
+  box-shadow:0 18px 50px rgba(0,0,0,.5);
+}
+.dialog h4{
+  font-family:var(--display-font);
+  font-weight:400;
+  color:var(--headline);
+  font-size:clamp(1.3rem,3.5vw,1.7rem);
+  text-align:center;
+  margin:0 0 .1rem;
+  letter-spacing:1px;
+}
+.dialog .kicker{
+  font-family:var(--accent-font);
+  text-align:center;
+  color:var(--h2);
+  font-size:.8rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:1.1rem;
+}
+.dialog p{ margin:0 0 .8rem; }
+.dialog .lead{ font-weight:600; }
+.dialog .row{ display:flex; justify-content:center; margin-top:1.3rem; }
+.help-link{
+  font-family:var(--accent-font);
+  background:none;
+  border:none;
+  color:var(--headline);
+  text-decoration:underline;
+  text-underline-offset:4px;
+  font-weight:700;
+  cursor:pointer;
+  padding:0;
+  font-size:inherit;
+  box-shadow:none;
+}
+.help-link:hover{ background:none; transform:none; }
+
+body {
+  font-family:var(--body-font);
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  line-height:1.75;
+}
+
+/* ===== Header (branding – keeps the original house font) ===== */
+header, footer {
+  font-family:var(--brand-font);
+}
+header {
+  background:var(--card);
+  color:var(--accent);
+  text-align:center;
+  padding:1.2rem 0;
+  font-size:1.5rem;
+  font-weight:bold;
+  letter-spacing:2px;
+  border-bottom:1px solid var(--line);
+}
+header span {
+  color:var(--paper);
+  font-weight:300;
+  display:block;
+  font-size:1rem;
+  letter-spacing:3px;
+}
+
+/* ===== Main ===== */
+main {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:2rem 1rem 3rem;
+  text-align:center;
+  width:100%;
+}
+h1 {
+  font-family:var(--display-font);
+  font-weight:400;
+  color:var(--headline);
+  letter-spacing:1px;
+  margin-bottom:.75rem;
+  font-size:clamp(1.4rem,4.5vw,2rem);
+}
+h2 {
+  font-family:var(--display-font);
+  font-weight:400;
+  color:var(--h2);
+  letter-spacing:1px;
+  margin-top:.5rem;
+  font-size:clamp(2rem,4vw,2.6rem);
+}
+h3 {
+  color:var(--ink);
+  margin:1rem 0 1.5rem;
+  font-size:1.1rem;
+  max-width:750px;
+}
+h4 {
+  font-family:var(--display-font);
+  font-weight:400;
+  color:var(--headline);
+  font-size:1.15rem;
+  margin-bottom:.3rem;
+}
+
+.wrap{width:100%;max-width:760px;text-align:left;}
+.section-head{
+  font-family:var(--display-font);
+  color:var(--headline);
+  font-size:1.2rem;
+  font-weight:400;
+  margin:2.5rem 0 1rem;
+  border-bottom:2px solid var(--accent);
+  padding-bottom:.3rem;
+}
+
+/* ===== Word cards ===== */
+.word-card {
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-left:6px solid var(--accent);
+  border-radius:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  padding:1.2rem 1.4rem;
+  margin-bottom:1.2rem;
+}
+.word-card .word{
+  cursor:pointer;
+  font-family:var(--display-font);
+  font-weight:400;
+  font-size:1.5rem;
+  color:var(--headline);
+  letter-spacing:.5px;
+  display:block;
+}
+.phon{
+  color:var(--grey);
+  font-size:.95rem;
+  display:block;
+  margin-bottom:.5rem;
+}
+.phon b{color:var(--ink);}
+.means{font-weight:600;margin-bottom:.4rem;}
+.ex{margin:0 0 0 1.1rem;}
+.ex li{margin-bottom:.2rem;}
+.ex b{color:var(--success);}
+.tip{
+  background:var(--tint);
+  border-radius:10px;
+  padding:.5rem .8rem;
+  margin-top:.7rem;
+  font-size:.93rem;
+}
+.tip b{color:var(--headline);}
+
+/* ===== Table ===== */
+.table-wrap{width:100%;overflow-x:auto;}
+table{
+  border-collapse:collapse;
+  width:100%;
+  background:var(--paper);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  font-size:.97rem;
+}
+th{
+  font-family:var(--accent-font);
+  background:var(--card);
+  color:var(--accent-2);
+  text-align:left;
+  padding:.7rem .9rem;
+  font-size:.95rem;
+  letter-spacing:1px;
+}
+td{
+  padding:.7rem .9rem;
+  border-top:1px solid var(--edge);
+  vertical-align:top;
+}
+td b{color:var(--headline);}
+
+/* ===== Pairs ===== */
+.pair{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:1rem 1.2rem;
+  margin-bottom:1rem;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+.pair p{margin-bottom:.3rem;}
+.pair .a{color:var(--success);font-weight:600;}
+.pair .b{color:var(--h2);font-weight:600;}
+.pair .note{color:var(--grey);font-style:italic;font-size:.92rem;}
+
+/* ===== Quick check ===== */
+.q-card {
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  padding:1rem 1.2rem;
+  margin-bottom:1rem;
+}
+.q-text{font-size:1.05rem;margin-bottom:.7rem;}
+.gap{
+  display:inline-block;
+  min-width:100px;
+  border-bottom:2px solid var(--accent);
+  text-align:center;
+  font-weight:700;
+  color:var(--headline);
+}
+.gap.filled{border-bottom-color:var(--success);color:var(--success);}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;}
+.chip {
+  background:var(--paper);
+  color:var(--ink);
+  border:2px solid var(--accent);
+  border-radius:45px;
+  padding:.4rem 1rem;
+  font-size:1rem;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:none;
+  font-family:var(--body-font);
+}
+.chip:hover{background:var(--tint);transform:translateY(-2px);}
+.chip.right{background:var(--success);border-color:var(--success);color:var(--paper);}
+.chip.wrong{background:var(--paper);border-color:var(--error);color:var(--error);opacity:.6;text-decoration:line-through;}
+.chip:disabled{cursor:default;transform:none;}
+.feedback{font-size:.95rem;margin-top:.6rem;}
+.correct{color:var(--success);}
+.incorrect{color:var(--error);}
+.why{display:block;color:var(--grey);font-size:.9rem;font-style:italic;}
+
+/* ===== Buttons ===== */
+button, .btn {
+  font-family:var(--accent-font);
+  background:var(--muted);
+  color:var(--paper);
+  font-weight:600;
+  border:none;
+  border-radius:5px;
+  padding:.7rem 1.2rem;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,0.25);
+  transition:all .25s ease;
+  font-family:inherit;
+  text-decoration:none;
+  display:inline-block;
+}
+button:hover, .btn:hover {
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform:translateY(-2px);
+}
+button:active, .btn:active {transform:translateY(0);}
+.links {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:1rem;
+  margin-top:2.5rem;
+}
+
+/* ===== Footer ===== */
+footer {
+  border-top:1px solid var(--line);
+  background:var(--card);
+  color:var(--muted);
+  font-size:.9rem;
+  text-align:center;
+  padding:1rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     ▶▶▶  BACKGROUND VIDEO — YOUR FILE GOES HERE  ◀◀◀
+     Put the video file in the SAME FOLDER as this page.
+     FILE NAME: thbg.mp4   ← change the name on the line below if different
+     (A video file should end in .mp4 — .mp3 is an audio extension. The
+      second line below is a safety net in case yours really is named .mp3.)
+     To remove the video completely, delete this whole <video> block.
+     Brightness of the film: see ".bg-video { opacity }" in the CSS above.
+     This film runs silently and simply loops behind the lesson.
+     ══════════════════════════════════════════════════════════════════════ -->
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="thbg.mp4" type="video/mp4">
+  <source src="thbg.mp3" type="video/mp4">
+</video>
+
+
+<header>
+  MODERN ENGLISH AUSTRALIA
+  <span>Koala Spies Sydney</span>
+</header>
+
+<main>
+  <h2>Thought · Though · Through · Thorough</h2>
+  <h1>The Lesson – Four Words That Look the Same</h1>
+  <h3>Four words that look the same ·
+    <button type="button" class="help-link" id="helpOpen">How to use this page</button></h3>
+
+  <div class="say-intro">🔊 Click a word to hear how it sounds</div>
+  <div class="say-bar" id="sayBar">
+    <button type="button" class="say" data-say="thought">🔊 thought</button>
+    <button type="button" class="say" data-say="though">🔊 though</button>
+    <button type="button" class="say" data-say="through">🔊 through</button>
+    <button type="button" class="say" data-say="thorough">🔊 thorough</button>
+  </div>
+
+  <div class="wrap">
+
+    <div class="section-head">1. The four words</div>
+
+    <div class="word-card">
+      <span class="word">thought</span>
+      <span class="phon"><b>/θɔːt/</b> – one syllable. It rhymes with <i>bought, sport, caught</i>.</span>
+      <p class="means">The past of <i>think</i> — or a noun meaning <i>an idea</i>.</p>
+      <ul class="ex">
+        <li>I <b>thought</b> the shop closed at 6pm. <i>(past of think)</i></li>
+        <li>She <b>thought</b> about it for a week. <i>(past of think)</i></li>
+        <li>That's an interesting <b>thought</b>. <i>(noun = idea)</i></li>
+        <li>What are your <b>thoughts</b> on the plan? <i>(plural noun)</i></li>
+      </ul>
+      <div class="tip"><b>Test it:</b> can you replace it with <i>believed</i> or <i>idea</i>? Then it's <b>thought</b>.</div>
+    </div>
+
+    <div class="word-card">
+      <span class="word">though</span>
+      <span class="phon"><b>/ðəʊ/</b> – one syllable. It rhymes with <i>go, no, slow</i>.</span>
+      <p class="means">Despite / although / but. It <b>contrasts two parts of a sentence</b>.</p>
+      <ul class="ex">
+        <li><b>Though</b> it was raining, we went to the beach.</li>
+        <li>Even <b>though</b> he lied, people believed him.</li>
+        <li>It's expensive. It's good quality, <b>though</b>. <i>(at the end = however)</i></li>
+      </ul>
+      <div class="tip"><b>Test it:</b> can you replace it with <i>although</i> or <i>however</i>? Then it's <b>though</b>. It is the only one of the four that joins two ideas.</div>
+    </div>
+
+    <div class="word-card">
+      <span class="word">through</span>
+      <span class="phon"><b>/θruː/</b> – one syllable. It rhymes with <i>blue, do, new</i>.</span>
+      <p class="means">In one side and out the other. From A to B. In idioms, it can also mean <i>finished</i>.</p>
+      <ul class="ex">
+        <li>The train went <b>through</b> the tunnel. <i>(in and out)</i></li>
+        <li>We walked <b>through</b> the park to the station. <i>(A to B)</i></li>
+        <li>I'm <b>through</b> with you. It's over. <i>(finished)</i></li>
+        <li>I went <b>through</b> my bag but couldn't find my keys. <i>(searched it)</i></li>
+        <li>I can see <b>through</b> his lies. <i>(I understand the truth)</i></li>
+      </ul>
+      <div class="tip"><b>Test it:</b> can you draw an arrow going in one side and out the other? Then it's <b>through</b>.</div>
+    </div>
+
+    <div class="word-card">
+      <span class="word">thorough</span>
+      <span class="phon"><b>/ˈθʌrə/</b> – TWO syllables: <i>THUH-ruh</i>. This is the only long one.</span>
+      <p class="means">Complete and careful — nothing is missed. It is an <b>adjective</b>.</p>
+      <ul class="ex">
+        <li>You've done a <b>thorough</b> job. <i>(nothing was left out)</i></li>
+        <li>The police made a <b>thorough</b> search of the house.</li>
+        <li>She's very <b>thorough</b>. She checks every detail.</li>
+        <li>You've made a <b>thorough</b> mess! <i>(a complete one — it can be negative too)</i></li>
+      </ul>
+      <div class="tip"><b>Test it:</b> can you replace it with <i>complete</i> or <i>careful</i>? Then it's <b>thorough</b>. If you can hear two syllables, it's this word.</div>
+    </div>
+
+    <div class="section-head">2. Two extra family members</div>
+
+    <div class="word-card">
+      <span class="word">throughout</span>
+      <span class="phon"><b>/θruːˈaʊt/</b> – through + out.</span>
+      <p class="means">In <b>every part</b> of a place, or from the <b>beginning to the end</b> of a period of time.</p>
+      <ul class="ex">
+        <li>Cockatoos live <b>throughout</b> Australia. <i>(in every part of it)</i></li>
+        <li><b>Throughout</b> his life, he exercised every morning. <i>(start to finish)</i></li>
+        <li>It rained <b>throughout</b> the night.</li>
+      </ul>
+    </div>
+
+    <div class="word-card">
+      <span class="word">thoroughly</span>
+      <span class="phon"><b>/ˈθʌrəli/</b> – three syllables: <i>THUH-ruh-lee</i>.</span>
+      <p class="means">The <b>adverb</b> of <i>thorough</i> = completely, properly.</p>
+      <ul class="ex">
+        <li>Wash your hands <b>thoroughly</b>.</li>
+        <li>I <b>thoroughly</b> enjoyed that film.</li>
+        <li>I was <b>thoroughly</b> confused by the instructions.</li>
+      </ul>
+    </div>
+
+    <div class="section-head">3. Everything on one page</div>
+
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th>Word</th><th>Sounds like</th><th>Job in the sentence</th><th>Swap it for…</th>
+        </tr>
+        <tr>
+          <td><b>thought</b></td><td>sport</td><td>verb (past of think) / noun</td><td>believed · idea</td>
+        </tr>
+        <tr>
+          <td><b>though</b></td><td>go</td><td>joins two contrasting ideas</td><td>although · however</td>
+        </tr>
+        <tr>
+          <td><b>through</b></td><td>blue</td><td>preposition of movement</td><td>in and out · from A to B · finished</td>
+        </tr>
+        <tr>
+          <td><b>thorough</b></td><td>THUH-ruh</td><td>adjective (describes a noun)</td><td>complete · careful</td>
+        </tr>
+        <tr>
+          <td><b>throughout</b></td><td>through-OUT</td><td>preposition of place / time</td><td>in every part of · all through</td>
+        </tr>
+        <tr>
+          <td><b>thoroughly</b></td><td>THUH-ruh-lee</td><td>adverb (describes a verb)</td><td>completely · properly</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section-head">4. Spot the difference</div>
+
+    <div class="pair">
+      <p class="a">We walked <b>through</b> the park.</p>
+      <p class="b">We walked <b>throughout</b> the park.</p>
+      <p class="note">The first one: we entered on one side and left on the other. The second one: we covered every part of it.</p>
+    </div>
+
+    <div class="pair">
+      <p class="a">I <b>thought</b> it was closed.</p>
+      <p class="b"><b>Though</b> it was closed, we waited.</p>
+      <p class="note">The first is a verb (past of think). The second joins two contrasting ideas.</p>
+    </div>
+
+    <div class="pair">
+      <p class="a">She read <b>through</b> the report.</p>
+      <p class="b">She gave the report a <b>thorough</b> read.</p>
+      <p class="note">Same idea, different grammar: <i>through</i> follows the verb; <i>thorough</i> describes the noun.</p>
+    </div>
+
+    <div class="pair">
+      <p class="a">I'm <b>through</b> with this job.</p>
+      <p class="b">I'm <b>thorough</b> with this job.</p>
+      <p class="note">The first means I have finished. The second means I am careful and complete. One letter, a very different meeting with your boss.</p>
+    </div>
+
+    <div class="section-head">5. Quick check – 6 sentences</div>
+
+    <div id="quick"></div>
+
+    <p style="margin-top:1rem;font-weight:600;">Score: <span id="score" style="color:var(--headline)">0</span> / 6</p>
+
+  </div>
+
+  <h3 style="margin-top:2.5rem;">READY? NOW PLAY THE 50-QUESTION GAME.</h3>
+
+  <div class="links">
+    <a href="2thoughgame.html" class="btn"> Go to the Word Choice Game</a>
+    <a href="3thoughmatching.html" class="btn"> Matching Game</a>
+      <a href="index.html" class="btn"> More Games</a>
+    <button id="reset"> Reset the quick check</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       POP-UP INSTRUCTION CARD — opens by itself when the page loads.
+       Edit the wording below; the "Start reading →" link re-opens it.
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="overlay" id="helpOverlay" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="dialog">
+      <h4 id="helpTitle">How to Use This Page</h4>
+      <div class="kicker">Level B1–B2</div>
+      <p class="lead">Four words that look almost the same — and do four completely different jobs.</p>
+      <p>Listen first: click <strong>thought · though · through · thorough</strong> at the top of the page and hear each one read aloud. Say them back. <em>Thought</em> rhymes with <em>sport</em>, <em>though</em> with <em>go</em>, <em>through</em> with <em>blue</em>, and <em>thorough</em> has two syllables.</p>
+      <p>Then read the four cards. Each one gives you a test you can use: if you can swap the word for <em>although</em>, it is <em>though</em>; for <em>complete</em>, it is <em>thorough</em>.</p>
+      <p>Do the six-question check at the bottom, then play the two games.</p>
+      <p>You can open this card again at any time with the <strong>How to use this page</strong> link.</p>
+      <div class="row">
+        <button type="button" id="helpClose">Start reading →</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
+
+<script>
+const CORE = ["thought","though","through","thorough"];
+const QUICK = [
+  {s:"I went ____ the tunnel.", a:"through", o:CORE, w:"In one side and out the other."},
+  {s:"I ____ you were Japanese, not Korean.", a:"thought", o:CORE, w:"Past simple of ‘think’."},
+  {s:"It's perfect. You've done a ____ job.", a:"thorough", o:CORE, w:"Adjective = complete, nothing missed."},
+  {s:"I went to the beach even ____ it was rainy.", a:"though", o:CORE, w:"It contrasts the rain with going anyway."},
+  {s:"Cockatoos live ____ Australia.", a:"throughout", o:["throughout","through","though","thorough"], w:"In every part of the country."},
+  {s:"I ____ enjoyed that.", a:"thoroughly", o:["thoroughly","thorough","through","thought"], w:"The adverb = completely."}
+];
+
+let score = 0;
+const scoreEl = document.getElementById("score");
+const quickEl = document.getElementById("quick");
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function build(){
+  quickEl.innerHTML = "";
+  score = 0;
+  scoreEl.textContent = "0";
+  QUICK.forEach((q,i)=>{
+    const card = document.createElement("div");
+    card.className = "q-card";
+
+    const text = document.createElement("div");
+    text.className = "q-text";
+    const parts = q.s.split("____");
+    text.appendChild(document.createTextNode((i+1) + ". " + parts[0]));
+    const gap = document.createElement("span");
+    gap.className = "gap";
+    gap.innerHTML = "&nbsp;?&nbsp;";
+    text.appendChild(gap);
+    text.appendChild(document.createTextNode(parts[1] || ""));
+    card.appendChild(text);
+
+    const chips = document.createElement("div");
+    chips.className = "chips";
+    const fb = document.createElement("div");
+    fb.className = "feedback";
+    let firstTry = true, done = false;
+
+    shuffle(q.o).forEach(word=>{
+      const chip = document.createElement("button");
+      chip.className = "chip";
+      chip.textContent = word;
+      chip.addEventListener("click",()=>{
+        if(done) return;
+        if(word === q.a){
+          done = true;
+          chip.classList.add("right");
+          gap.textContent = word;
+          gap.classList.add("filled");
+          chips.querySelectorAll(".chip").forEach(c=>c.disabled = true);
+          if(firstTry){ score++; scoreEl.textContent = score; }
+          fb.innerHTML = '<span class="correct">✔ Correct!</span><span class="why">' + q.w + '</span>';
+        } else {
+          firstTry = false;
+          chip.classList.add("wrong");
+          chip.disabled = true;
+          fb.innerHTML = '<span class="incorrect">✖ Not quite – try again.</span>';
+        }
+      });
+      chips.appendChild(chip);
+    });
+
+    card.appendChild(chips);
+    card.appendChild(fb);
+    quickEl.appendChild(card);
+  });
+}
+
+document.getElementById("reset").addEventListener("click",build);
+build();
+</script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   SAY IT ALOUD — uses the voice built into the browser.
+   Nothing to install, no internet service, works offline in
+   Chrome, Edge and Safari. Change RATE for a slower reading.
+   ═══════════════════════════════════════════════════════════════ */
+const SPEECH_RATE = 0.85;          // 1 = normal speed, 0.7 = slow
+const SPEECH_LANGS = ['en-AU', 'en-GB', 'en-US'];   // preferred accents, in order
+
+var sayWord = function(){};
+
+(function(){
+  const bar = document.getElementById('sayBar');
+  const intro = document.querySelector('.say-intro');
+  const synth = window.speechSynthesis;
+
+  if (!synth){
+    if (intro) intro.textContent = 'This browser cannot read words aloud — try Chrome, Edge or Safari.';
+    return;
+  }
+
+  let voice = null;
+  function pickVoice(){
+    const all = synth.getVoices().filter(function(v){ return /^en/i.test(v.lang); });
+    for (let i = 0; i < SPEECH_LANGS.length; i++){
+      const want = SPEECH_LANGS[i].replace('-', '[-_]');
+      const hit = all.filter(function(v){ return new RegExp('^' + want, 'i').test(v.lang); })[0];
+      if (hit){ voice = hit; return; }
+    }
+    voice = all[0] || null;
+  }
+  pickVoice();
+  synth.addEventListener('voiceschanged', pickVoice);
+
+  sayWord = function(word, btn){
+    synth.cancel();
+    const u = new SpeechSynthesisUtterance(word);
+    if (voice) u.voice = voice;
+    u.lang = (voice && voice.lang) || SPEECH_LANGS[0];
+    u.rate = SPEECH_RATE;
+    if (btn){
+      u.onstart = function(){ btn.classList.add('speaking'); };
+      u.onend = u.onerror = function(){ btn.classList.remove('speaking'); };
+    }
+    synth.speak(u);
+  };
+
+  if (bar){
+    bar.addEventListener('click', function(e){
+      const b = e.target.closest('.say');
+      if (b) sayWord(b.dataset.say, b);
+    });
+  }
+
+  /* the big headword on every word card reads itself aloud too */
+  document.querySelectorAll('.word-card .word').forEach(function(el){
+    el.title = 'Click to hear this word';
+    el.addEventListener('click', function(){ sayWord(el.textContent.trim(), null); });
+  });
+})();
+
+/* ─── POP-UP INSTRUCTION CARD ─────────────────────────────────── */
+function initHelp(){
+  const overlay  = document.getElementById('helpOverlay');
+  const openBtn  = document.getElementById('helpOpen');
+  const closeBtn = document.getElementById('helpClose');
+  if (!overlay) return;
+
+  function open(){
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function close(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (openBtn) openBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+  });
+
+  open();   // the card greets every visitor
+}
+
+if (document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initHelp);
+} else {
+  initHelp();
+}
+</script>
+</body>
+</html>
