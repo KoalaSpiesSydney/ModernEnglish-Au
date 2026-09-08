@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Thought · Though · Through · Thorough Matching Game – Modern English Australia</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Silent-film type: Limelight = 1920s title cards · Special Elite = typewriter intertitle · Bitter = readable slab body -->
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Bevan&family=Special+Elite&family=Bitter:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* ═══ KODAK / 16mm FILM PALETTE — change any colour here and it updates everywhere ═══ */
+    --bg:#e6d9bd;          /* aged film base / paper */
+    --paper:#fbf3e2;       /* warm off-white card surface */
+    --tint:#f3e2c2;        /* light amber wash (hovers, tips) */
+    --card:#241c14;        /* dark sepia — header, footer, score bar */
+    --ink:#2b2118;         /* warm near-black text */
+    --muted:#c2ae8c;       /* faded caption text */
+    --accent:#c8781f;      /* Kodak amber */
+    --accent-2:#e3a21c;    /* Kodak yellow (gradient partner) */
+    --h2:#a8412b;          /* faded Kodachrome red */
+    --line:#4a382a;        /* sepia rule */
+    --edge:#d8c6a4;        /* soft border on light surfaces */
+    --grey:#6b5b45;        /* warm grey for notes */
+    --success:#6f8f4a;     /* faded film green */
+    --error:#a9382c;       /* faded film red */
+    --felt:#3b332a;        /* face-down card (unexposed film) */
+    --brand-font:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;   /* header + copyright only */
+    --display-font:'Limelight','Bevan',Georgia,serif;                       /* big titles — 1920s cinema marquee */
+    /* Prefer a heavier wood-type poster look? Swap the line above for this one:
+       --display-font:'Bevan','Limelight',Georgia,serif;   */
+    --accent-font:'Special Elite','Courier New',monospace;                   /* labels, buttons — typewriter intertitle */
+    --body-font:'Bitter',Georgia,'Times New Roman',serif;                    /* everything you actually read */
+    --headline:#33302c;                                                      /* charcoal for headings & labels */
+  }
+
+  *{ box-sizing:border-box; }
+
+  /* Background video */
+  .bg-video{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0.5;           /* ← turn this up/down to taste (0 = invisible, 1 = full) */
+    z-index:-1;
+    pointer-events:none;
+  }
+
+  body {
+    margin:0;
+    font-family:var(--body-font);
+    background:var(--bg);
+    color:var(--ink);
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+  }
+
+  /* ===== Header (branding – keeps the original house font) ===== */
+  header, footer {
+    font-family:var(--brand-font);
+  }
+  header {
+    position:relative;
+    background:var(--card);
+    color:var(--accent);
+    text-align:center;
+    padding:1.15rem 0;
+    font-size:1.5rem;
+    font-weight:bold;
+    letter-spacing:2px;
+    border-bottom:1px solid var(--line);
+    /* safer on iPhones with notch */
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right:max(12px, env(safe-area-inset-right));
+  }
+  header span {
+    color:var(--paper);
+    font-weight:300;
+    display:block;
+    font-size:1rem;
+    letter-spacing:3px;
+  }
+
+  /* ===== QR (top-left) ===== */
+  .qr-wrap{
+    position:absolute;
+    top:10px;
+    left:10px;
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    z-index:5;
+  }
+  .qr-toggle, .qr-input, .qr-make, .qr-panel label, .qr-help{
+    font-family:var(--brand-font);
+  }
+  .qr-toggle{
+    appearance:none;
+    border:1px solid var(--line);
+    background:rgba(0,0,0,.25);
+    color:var(--paper);
+    padding:.55rem .8rem;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:700;
+    letter-spacing:.5px;
+    line-height:1;
+    transition:transform .15s ease, opacity .15s ease;
+    backdrop-filter: blur(6px);
+  }
+  .qr-toggle:hover{ opacity:.95; transform:translateY(-1px); }
+  .qr-toggle:active{ transform:translateY(0); }
+
+  .qr-panel{
+    width:min(260px, calc(100vw - 24px));
+    background:rgba(42,42,42,.92);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px;
+    box-shadow:0 10px 24px rgba(0,0,0,.28);
+    display:none;
+  }
+  .qr-panel.open{ display:block; }
+  .qr-panel label{
+    display:block;
+    color:var(--paper);
+    font-size:.85rem;
+    margin:0 0 6px;
+    opacity:.9;
+    letter-spacing:.3px;
+    text-align:left;
+  }
+  .qr-row{
+    display:flex;
+    gap:8px;
+  }
+  .qr-input{
+    flex:1;
+    padding:.55rem .65rem;
+    border-radius:10px;
+    border:1px solid #5a5a5a;
+    background:#111;
+    color:var(--paper);
+    outline:none;
+  }
+  .qr-input:focus{ border-color: var(--accent); }
+  .qr-make{
+    border:none;
+    border-radius:10px;
+    padding:.55rem .75rem;
+    cursor:pointer;
+    font-weight:800;
+    background:var(--accent);
+    color:var(--card);
+  }
+  .qr-make:active{ transform:translateY(1px); }
+
+  .qr-canvas{
+    margin-top:10px;
+    background:var(--paper);
+    border-radius:12px;
+    padding:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .qr-help{
+    margin-top:8px;
+    font-size:.8rem;
+    color:var(--paper);
+    opacity:.85;
+    text-align:left;
+  }
+
+  /* Make sure header text stays readable on small screens */
+  @media (max-width:520px){
+    header{ padding-top:1.35rem; padding-bottom:1rem; font-size:1.25rem; }
+    header span{ font-size:.9rem; }
+    .qr-wrap{ top:8px; left:8px; gap:8px; }
+    .qr-toggle{ padding:.5rem .7rem; border-radius:11px; }
+  }
+
+  /* ===== Main ===== */
+  main {
+    flex:1;
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+  }
+
+  h1 {
+    font-family:var(--display-font);
+    font-weight:400;
+    color:var(--headline);
+    letter-spacing:2px;
+    margin-top:1rem;
+    font-size:clamp(1.4rem,2.5vw,2rem);
+  }
+
+  p {
+    max-width:700px;
+    margin:0.5rem auto 1.5rem auto;
+    opacity:0.9;
+  }
+
+  /* ===== Game Grid ===== */
+  #game {
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));   /* 3 x 3 = 9 tiles */
+    gap:14px;
+    width:90%;
+    max-width:760px;
+    margin:0 auto;
+  }
+
+  .card {
+    background:var(--felt);
+    border:2px solid var(--accent);
+    border-radius:16px;
+    padding:16px;
+    text-align:center;
+    cursor:pointer;
+    transition:background .25s, color .25s, transform .2s;
+    min-height:130px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:.95rem;
+    line-height:1.45;
+    box-shadow:0 3px 6px rgba(0,0,0,0.1);
+    user-select:none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .card.flipped {
+    background:var(--accent-2);
+    color:var(--ink);
+    transform:scale(1.03);
+  }
+
+  .card.matched {
+    color:var(--ink);
+    cursor:default;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     HOW-TO-PLAY POP-UP  (the film and its sound run while it is open)
+     ═══════════════════════════════════════════════════════════════ */
+  .overlay{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:1rem;
+    background:rgba(14,10,6,.55);   /* see-through, so the film shows behind */
+    z-index:50;
+  }
+  .overlay.open{ display:flex; }
+  .dialog{
+    width:100%;
+    max-width:640px;
+    max-height:86vh;
+    overflow:auto;
+    text-align:left;
+    background:var(--paper);
+    border:3px double var(--line);
+    border-radius:18px;
+    padding:1.6rem 1.8rem 1.4rem;
+    box-shadow:0 18px 50px rgba(0,0,0,.5);
+  }
+  .dialog h2{
+    font-family:var(--display-font);
+    font-weight:400;
+    color:var(--headline);
+    font-size:clamp(1.3rem,3.5vw,1.7rem);
+    text-align:center;
+    margin:0 0 .1rem;
+    letter-spacing:1px;
+  }
+  .dialog .kicker{
+    font-family:var(--accent-font);
+    text-align:center;
+    color:var(--h2);
+    font-size:.8rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:1.1rem;
+  }
+  .dialog p{ max-width:none; margin:0 0 .8rem; opacity:1; }
+  .dialog .lead{ font-weight:600; }
+  .swatch{
+    display:inline-block;
+    width:.95em;
+    height:.95em;
+    border-radius:3px;
+    border:1px solid var(--line);
+    vertical-align:-1px;
+    margin-right:.15em;
+  }
+  .swatch.black{ background:#101215; }
+  .swatch.grey { background:#4e545d; }
+  .dialog .row{
+    display:flex;
+    gap:.8rem;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:1.3rem;
+  }
+  .dialog button{
+    font-family:var(--accent-font);
+    background:var(--accent);
+    color:var(--paper);
+    border:none;
+    border-radius:5px;
+    padding:.7rem 1.3rem;
+    font-size:.95rem;
+    cursor:pointer;
+    box-shadow:0 2px 6px rgba(0,0,0,.25);
+    transition:all .25s ease;
+  }
+  .dialog button:hover{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); transform:translateY(-2px); }
+  .dialog button.ghost{
+    background:var(--paper);
+    color:var(--headline);
+    border:2px solid var(--accent);
+    box-shadow:none;
+  }
+  .dialog button.ghost:hover{ background:var(--tint); }
+  .help-link{
+    font-family:var(--accent-font);
+    background:none;
+    border:none;
+    color:var(--headline);
+    text-decoration:underline;
+    text-underline-offset:4px;
+    font-weight:700;
+    cursor:pointer;
+    padding:0;
+  }
+
+  /* the odd tile out — the question with no partner on the board */
+  .card.lonely {
+    background:var(--paper);
+    color:var(--headline);
+    border:2px dashed var(--h2);
+    cursor:default;
+  }
+
+  /* the word on a meaning card */
+  .card b{ font-family:var(--display-font); font-weight:400; display:block; letter-spacing:1px; text-transform:uppercase; }
+
+  #status {
+    font-family:var(--accent-font);
+    margin-top:18px;
+    font-size:1.05rem;
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  /* Reset link */
+  .reset-row{
+    margin-top:10px;
+    font-family:inherit;
+  }
+  .reset-row a{
+    font-family:var(--accent-font);
+    color:var(--headline);
+    text-decoration:underline;
+    text-underline-offset:4px;
+    font-weight:700;
+  }
+  .reset-row a:hover{ opacity:.9; }
+
+  /* ===== Links ===== */
+  .links {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:1rem;
+    margin-top:2rem;
+  }
+
+  a.btn {
+    font-family:var(--accent-font);
+    background:var(--accent);
+    color:var(--paper);
+    font-weight:600;
+    text-decoration:none;
+    padding:.8rem 1.4rem;
+    border-radius:5px;
+    border:none;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    transition:all .25s ease;
+  }
+
+  a.btn:hover {
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    transform:translateY(-2px);
+  }
+
+  a.btn:active { transform:translateY(0); }
+
+  /* ===== Footer ===== */
+  footer {
+    width:100%;
+    text-align:center;
+    background:var(--card);
+    color:var(--muted);
+    padding:1rem 0;
+    border-top:1px solid var(--line);
+    font-size:0.9rem;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right:max(12px, env(safe-area-inset-right));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  /* Responsive grid */
+  @media (max-width:900px){
+    #game{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width:600px){
+    #game{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; }
+    .card { min-height:110px; font-size:.9rem; padding:10px; }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .card, a.btn, .qr-toggle{ transition:none; }
+  }
+</style>
+</head>
+
+<body>
+<!-- ══════════════════════════════════════════════════════════════════════
+     ▶▶▶  BACKGROUND VIDEO — YOUR FILE GOES HERE  ◀◀◀
+     Put the video file in the SAME FOLDER as this page.
+     FILE NAME: thbg.mp4   ← change the name on the line below if different
+     (A video file should end in .mp4 — .mp3 is an audio extension. The
+      second line below is a safety net in case yours really is named .mp3.)
+     To remove the video completely, delete this whole <video> block.
+     Brightness of the film: see ".bg-video { opacity }" in the CSS above.
+     Sound: the short script just under this block plays the first 15 seconds.
+     ══════════════════════════════════════════════════════════════════════ -->
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="thbg.mp4" type="video/mp4">
+  <source src="thbg.mp3" type="video/mp4">
+</video>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   ▶▶▶  BACKGROUND FILM + SOUND — THE SETTINGS ARE RIGHT HERE  ◀◀◀
+   The film and its sound start on their own with the "How to Play" pop-up.
+   They stop at whichever comes first: SOUND_SECONDS, the end of the clip,
+   or the moment the student presses "Start the game".
+   ══════════════════════════════════════════════════════════════════════ */
+const SOUND_SECONDS  = 15;    // ← how many seconds of sound to play
+const STOP_VIDEO_TOO = true;  // ← true: the picture freezes when the sound ends
+                              //   false: the picture keeps looping, silently
+const SOUND_VOLUME   = 0.8;   // ← 0 to 1
+
+const Film = (function(){
+  const v = document.querySelector('.bg-video');
+  let cutoff = null, fade = null, playing = false;
+
+  function stop(){
+    clearTimeout(cutoff); clearInterval(fade);
+    if (!v) return;
+    playing = false;
+    let vol = v.volume;
+    fade = setInterval(function(){
+      vol = Math.max(0, vol - 0.1);
+      v.volume = vol;
+      if (vol <= 0){
+        clearInterval(fade);
+        v.muted = true;
+        if (STOP_VIDEO_TOO) v.pause();
+      }
+    }, 80);
+  }
+
+  /* How long to let it run: SOUND_SECONDS, or the end of the clip if that
+     comes first — whichever is shorter. */
+  function runFor(){
+    let secs = SOUND_SECONDS;
+    if (isFinite(v.duration) && v.duration > 0){
+      secs = Math.min(secs, Math.max(0, v.duration - v.currentTime));
+    }
+    return secs * 1000;
+  }
+
+  /* returns a promise that resolves true if the sound is actually running */
+  function start(){
+    if (!v) return Promise.resolve(false);
+    clearTimeout(cutoff); clearInterval(fade);
+    v.muted = false;
+    v.volume = SOUND_VOLUME;
+    const p = v.play();
+    const attempt = (p && p.then) ? p : Promise.resolve();
+    return attempt.then(function(){
+      playing = true;
+      cutoff = setTimeout(stop, runFor());
+      /* if the clip's length wasn't known yet, work it out and re-time */
+      if (!isFinite(v.duration)){
+        v.addEventListener('loadedmetadata', function(){
+          if (playing){ clearTimeout(cutoff); cutoff = setTimeout(stop, runFor()); }
+        }, { once: true });
+      }
+      return true;
+    }).catch(function(){
+      /* the browser is holding the sound back until someone interacts */
+      v.muted = true;
+      v.play().catch(function(){});
+      return false;
+    });
+  }
+
+  return { start: start, stop: stop, isPlaying: function(){ return playing; } };
+})();
+
+/* ─── HOW-TO-PLAY POP-UP ─────────────────────────────────────────────── */
+/* the pop-up markup sits further down the page, so wait for it to exist */
+function initHelp(){
+  const overlay  = document.getElementById('helpOverlay');
+  const openBtn  = document.getElementById('helpOpen');
+  const closeBtn = document.getElementById('helpClose');
+  if (!overlay) return;
+
+  const GESTURES = ['pointerdown', 'keydown', 'touchstart'];
+  let armed = false;
+
+  /* Some browsers refuse to play sound until the visitor has interacted with
+     the page. If that happens, the film keeps rolling silently and the sound
+     joins in at their very first click, tap or key — except when that click
+     is 'Start the game', because then they are leaving anyway. */
+  function onFirstGesture(e){
+    if (closeBtn.contains(e.target) || e.target === overlay) return;
+    disarm();
+    Film.start();
+  }
+  function arm(){
+    if (armed) return;
+    armed = true;
+    GESTURES.forEach(function(ev){ document.addEventListener(ev, onFirstGesture, true); });
+  }
+  function disarm(){
+    armed = false;
+    GESTURES.forEach(function(ev){ document.removeEventListener(ev, onFirstGesture, true); });
+  }
+
+  function open(){
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    Film.start().then(function(ok){ if (!ok) arm(); });
+  }
+
+  function close(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    disarm();
+    Film.stop();
+  }
+
+  openBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+  });
+
+  open();   // the pop-up greets every visitor
+}
+
+if (document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initHelp);
+} else {
+  initHelp();
+}
+</script>
+
+  <!-- ===== Header ===== -->
+  <header>
+    <!-- QR generator (top-left) -->
+    <div class="qr-wrap" aria-label="QR code tools">
+      <button class="qr-toggle" id="qrToggle" type="button" aria-expanded="false" aria-controls="qrPanel">
+        QR
+      </button>
+
+      <div class="qr-panel" id="qrPanel" role="dialog" aria-label="QR code generator">
+        <label for="qrText">QR link (defaults to this page URL)</label>
+        <div class="qr-row">
+          <input class="qr-input" id="qrText" type="text" inputmode="url" autocomplete="off" />
+          <button class="qr-make" id="qrMake" type="button">Make</button>
+        </div>
+
+        <div class="qr-canvas" aria-label="QR code preview">
+          <div id="qrCode"></div>
+        </div>
+
+        <div class="qr-help">
+          Tip: paste any URL, click Make, then scan.
+        </div>
+      </div>
+    </div>
+
+    MODERN ENGLISH AUSTRALIA
+    <span>Koala Spies Sydney</span>
+  </header>
+
+  <!-- ===== Game Section ===== -->
+  <main>
+    <h1>Thought · Though · Through · Thorough Matching Game</h1>
+    <p>Nine tiles · four pairs · one unanswered question ·
+      <button type="button" class="help-link" id="helpOpen">How to play</button></p>
+
+    <div id="game" aria-label="Matching game grid"></div>
+    <div id="status" aria-live="polite"></div>
+    <div class="reset-row">
+      <a href="#" id="resetLink">New round</a>
+    </div>
+
+    <div class="links">
+      <a href="1thoughlesson.html" class="btn">Lesson</a>
+      <a href="index.html" class="btn">Home</a>
+    </div>
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       HOW-TO-PLAY POP-UP — opens by itself when the page loads.
+       The film and its sound run for as long as this is open (up to
+       SOUND_SECONDS, set in the script under the video block).
+       Edit the wording below and it changes everywhere.
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="overlay" id="helpOverlay" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="dialog">
+      <h2 id="helpTitle">How to Play</h2>
+      <div class="kicker">Level B1–B2</div>
+
+      <p class="lead">Nine tiles: four matching pairs and one question with no partner.</p>
+      <p>Flip two tiles to match each sentence with the word that fills the gap — and the job that word is doing.</p>
+      <p>The <span class="swatch black"></span><strong>black</strong> tiles are the definitions;
+         the <span class="swatch grey"></span><strong>grey</strong> tiles are the gap-fill sentences.</p>
+      <p>When the four pairs are done, the odd tile turns over on its own: that one is for you and your
+         partner to answer out loud.</p>
+      <p>New sentences every time you reset.</p>
+
+      <div class="row">
+        <button type="button" id="helpClose">Start the game →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+  </footer>
+
+  <!-- QRCode.js (client-side) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+
+<script>
+  /* Each pair = [ sentence with a gap , the word + the job it is doing ] */
+  const pairs = [
+    ["I went ______ the tunnel.", "THROUGH<br>in one side and out the other"],
+    ["We walked ______ the park from A to B.", "THROUGH<br>from one point to another"],
+    ["He slept ______ the alarm.", "THROUGH<br>idiom: the noise didn't wake him"],
+    ["I'm ______ with you. It's over.", "THROUGH<br>idiom: finished with someone"],
+    ["I went ______ my bag but couldn't find my keys.", "THROUGH<br>idiom: searched it carefully"],
+    ["I can see ______ his lies.", "THROUGH<br>idiom: I know he isn't honest"],
+
+    ["I ______ you were Japanese, not Korean.", "THOUGHT<br>past simple of ‘think’"],
+    ["That's an interesting ______.", "THOUGHT<br>a noun: an idea"],
+    ["What are your ______ on the topic?", "THOUGHTS<br>plural noun: ideas, opinions"],
+
+    ["Even ______ it was raining, we went out.", "THOUGH<br>despite / although"],
+    ["______ she got good grades, she didn't go to university.", "THOUGH<br>it contrasts two ideas"],
+    ["It's expensive. It's good quality, ______.", "THOUGH<br>at the end = however"],
+
+    ["You've done a ______ job. Nothing is missing.", "THOROUGH<br>adjective: complete and careful"],
+    ["The police did a ______ search of the house.", "THOROUGH<br>adjective before a noun"],
+    ["I ______ enjoyed that film.", "THOROUGHLY<br>adverb: completely"],
+    ["Wash your hands ______ before you cook.", "THOROUGHLY<br>adverb after a verb"],
+
+    ["Cockatoos live ______ Australia.", "THROUGHOUT<br>in every part of a place"],
+    ["______ his life, he exercised every morning.", "THROUGHOUT<br>from the start to the end of a time"]
+  ];
+
+  /* ─── FACE-DOWN TILE SHADES ───────────────────────────────────────────
+     The two kinds of tile are told apart by tone, like a film negative:
+       · DEFINITION tiles (the word + its job)  → blacks
+       · GAP-FILL tiles  (the sentence)         → greys, slates, charcoals
+     Within each kind every tile gets its own shade, so the grid still reads
+     as a mosaic. The shade never says WHICH pair a tile belongs to — only
+     whether you are looking at a sentence or a definition. Swap any hex.  */
+  const definitionShades = [
+    "#0d0f11","#16181b","#101215","#1c1f22",
+    "#0a0c0e","#191c1f","#131518","#202326"
+  ];
+  const gapfillShades = [
+    "#3a4048","#4e545d","#434951","#575d66",
+    "#3d434b","#525860","#464c55","#5b616a"
+  ];
+
+  /* ─── MATCHED-PAIR SHADES ─────────────────────────────────────────────
+     Each solved pair takes the next shade in this list — light greys,
+     warm greys and slates, so pairs are told apart by TONE, like a
+     black-and-white film. Text flips to cream or ink automatically,
+     whichever is easier to read on the shade.                            */
+  const matchColors = [
+    "#d3d7db","#4f555e","#a9a49a","#3f444b","#b9bcc0",
+    "#5c6068","#cfcbc2","#6e6a63","#9aa1a8","#565b63"
+  ];
+
+  /* Put cream or ink on the tile — whichever is genuinely easier to read.
+     (Proper WCAG contrast, not a guess, so any hex you swap in stays legible.) */
+  function relativeLuminance(hex){
+    const n = parseInt(hex.slice(1), 16);
+    const parts = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(function(v){
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * parts[0] + 0.7152 * parts[1] + 0.0722 * parts[2];
+  }
+  function contrast(a, b){
+    const x = relativeLuminance(a), y = relativeLuminance(b);
+    return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+  }
+  function readableInk(hex){
+    const INK = "#2b2118", PAPER = "#fbf3e2";   // must match --ink and --paper
+    return contrast(hex, INK) >= contrast(hex, PAPER) ? "var(--ink)" : "var(--paper)";
+  }
+
+  const game = document.getElementById("game");
+  const statusEl = document.getElementById("status");
+  const resetLink = document.getElementById("resetLink");
+
+  /* 3x3 = 9 tiles: 4 matching pairs (8 tiles) + 1 gap-fill sentence whose
+     definition is NOT on the board — the unanswered question. */
+  const GRID_PAIRS = 4;
+
+  let first = null, second = null, lock = false, matchedPairs = 0;
+  let colorMap = {};
+  let currentRoundPairs = [];
+
+  function shuffle(arr){
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  /* one extra pair is drawn — only its SENTENCE goes on the board */
+  function pickPairs(){
+    const copy = pairs.slice();
+    shuffle(copy);
+    return copy.slice(0, GRID_PAIRS + 1);
+  }
+
+  function buildCards(roundPairs){
+    const matching = roundPairs.slice(0, GRID_PAIRS);
+    const spare    = roundPairs[GRID_PAIRS];          // the unanswered question
+
+    const cards = matching.flatMap(([sentence, meaning]) => [
+      { text: sentence, pair: sentence, kind: "gapfill" },
+      { text: meaning,  pair: sentence, kind: "definition" }
+    ]);
+    cards.push({
+      text: spare[0],
+      pair: spare[0] + " ::no-partner",   // can never match anything
+      kind: "gapfill",
+      lonely: true,
+      answer: spare[1]
+    });
+    shuffle(cards);
+    return cards;
+  }
+
+  function setStatus(){
+    statusEl.textContent = matchedPairs === GRID_PAIRS
+      ? "All four pairs matched. One question is left unanswered — which word fills that gap, and why? Tell your partner, then press ‘New round’."
+      : "Matched: " + matchedPairs + " / " + GRID_PAIRS;
+  }
+
+  /* when the four pairs are done, turn the odd tile over and mark it */
+  function revealLonely(){
+    const tile = game.querySelector(".card:not(.matched)");
+    if (!tile) return;
+    tile.classList.remove("flipped");
+    tile.classList.add("lonely");
+    tile.style.background = "";
+    tile.innerHTML = tile.dataset.text;
+    tile.setAttribute("aria-label", "Unanswered question: " + tile.dataset.text);
+  }
+
+  function renderGame(){
+    game.innerHTML = "";
+    first = null; second = null; lock = false; matchedPairs = 0;
+    colorMap = {};
+    setStatus();
+
+    currentRoundPairs = pickPairs();
+    const cards = buildCards(currentRoundPairs);
+
+    let usedDef = 0, usedGap = 0;   // so each kind works through its own shade list
+
+    cards.forEach(data => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.textContent = "";
+      const shade = data.kind === "definition"
+        ? definitionShades[usedDef++ % definitionShades.length]
+        : gapfillShades[usedGap++ % gapfillShades.length];
+      div.style.background = shade;
+      div.dataset.shade = shade;
+      div.dataset.pair = data.pair;
+      div.dataset.text = data.text;
+      div.setAttribute("role", "button");
+      div.setAttribute("tabindex", "0");
+      div.setAttribute("aria-label", "Hidden card");
+
+      function show(){
+        // the meaning cards carry a <br>, so the word sits on its own line in bold
+        if (data.text.includes("<br>")) {
+          const bits = data.text.split("<br>");
+          div.innerHTML = "<span><b>" + bits[0] + "</b>" + bits[1] + "</span>";
+          div.setAttribute("aria-label", bits[0] + ": " + bits[1]);
+        } else {
+          div.textContent = data.text;
+          div.setAttribute("aria-label", data.text);
+        }
+      }
+
+      function hide(){
+        div.innerHTML = "";
+        div.setAttribute("aria-label", "Hidden card");
+      }
+
+      function flip(){
+        if (lock || div.classList.contains("flipped") ||
+            div.classList.contains("matched") || div.classList.contains("lonely")) return;
+
+        div.classList.add("flipped");
+        div.style.background = "";   // let the .flipped colour show through
+        show();
+
+        if (!first) {
+          first = div;
+          return;
+        }
+
+        second = div;
+        lock = true;
+
+        setTimeout(() => {
+          if (first.dataset.pair === second.dataset.pair) {
+            if (!colorMap[first.dataset.pair]) {
+              const used = Object.keys(colorMap).length;
+              colorMap[first.dataset.pair] = matchColors[used % matchColors.length];
+            }
+            const c = colorMap[first.dataset.pair];
+
+            [first, second].forEach(card => {
+              card.classList.remove("flipped");
+              card.classList.add("matched");
+              card.style.background = c;
+              card.style.color = readableInk(c);
+            });
+
+            matchedPairs++;
+            setStatus();
+            if (matchedPairs === GRID_PAIRS) revealLonely();
+          } else {
+            [first, second].forEach(card => {
+              card.classList.remove("flipped");
+              card.style.background = card.dataset.shade;   // back to its own grey
+              card.innerHTML = "";
+              card.setAttribute("aria-label", "Hidden card");
+            });
+          }
+
+          first = null;
+          second = null;
+          lock = false;
+        }, 1400);
+      }
+
+      div.addEventListener("click", flip);
+      div.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          flip();
+        }
+      });
+
+      game.appendChild(div);
+    });
+  }
+
+  resetLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    renderGame();
+  });
+
+  renderGame();
+
+  /* ===== QR generator logic ===== */
+  const qrToggle = document.getElementById("qrToggle");
+  const qrPanel  = document.getElementById("qrPanel");
+  const qrText   = document.getElementById("qrText");
+  const qrMake   = document.getElementById("qrMake");
+  const qrCodeEl = document.getElementById("qrCode");
+
+  let qrInstance = null;
+
+  function ensureQrLibReady(){
+    return typeof window.QRCode !== "undefined";
+  }
+
+  function makeQr(value){
+    const text = (value && value.trim()) ? value.trim() : window.location.href;
+
+    // clear old
+    qrCodeEl.innerHTML = "";
+    qrInstance = new QRCode(qrCodeEl, {
+      text,
+      width: 160,
+      height: 160,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  }
+
+  function openQr(){
+    qrPanel.classList.add("open");
+    qrToggle.setAttribute("aria-expanded", "true");
+    if (!qrText.value) qrText.value = window.location.href;
+
+    // if library hasn't loaded yet (slow connections), retry once shortly
+    if (ensureQrLibReady()) {
+      makeQr(qrText.value);
+    } else {
+      setTimeout(() => {
+        if (ensureQrLibReady()) makeQr(qrText.value);
+      }, 250);
+    }
+  }
+
+  function closeQr(){
+    qrPanel.classList.remove("open");
+    qrToggle.setAttribute("aria-expanded", "false");
+  }
+
+  qrToggle.addEventListener("click", () => {
+    const isOpen = qrPanel.classList.contains("open");
+    if (isOpen) closeQr();
+    else openQr();
+  });
+
+  qrMake.addEventListener("click", () => {
+    if (ensureQrLibReady()) makeQr(qrText.value);
+  });
+
+  qrText.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (ensureQrLibReady()) makeQr(qrText.value);
+    }
+    if (e.key === "Escape") {
+      closeQr();
+      qrToggle.focus();
+    }
+  });
+
+  // close panel when clicking outside
+  document.addEventListener("click", (e) => {
+    const clickedInside = qrPanel.contains(e.target) || qrToggle.contains(e.target);
+    if (!clickedInside && qrPanel.classList.contains("open")) closeQr();
+  });
+
+  // escape closes panel
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && qrPanel.classList.contains("open")) {
+      closeQr();
+      qrToggle.focus();
+    }
+  });
+</script>
+</body>
+</html>
