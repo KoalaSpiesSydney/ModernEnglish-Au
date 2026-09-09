@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IELTS General Reading – Full Practice Test 1 | Modern English Australia · Koala Spies Sydney</title>
+<style>
+  :root{
+    --ink:#132132;
+    --sub:#5b6b7c;
+    --line:#dde3ea;
+    --card:#ffffff;
+    --bg:#f4f7fa;
+    --accent:#1d5fb8;
+    --accent-dark:#123c78;
+    --good:#1f7a4c;
+    --bad:#b3301f;
+    --pill-bg:#eef2f7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  header.site{
+    background:var(--accent-dark);
+    color:#fff;
+    padding:14px 20px;
+    position:relative;
+  }
+  header.site .brand{
+    max-width:1000px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  header.site .brand-left{display:flex; align-items:center; gap:14px;}
+  header.site .brand-name{font-weight:700; font-size:15px; letter-spacing:.2px;}
+  header.site .brand-sub{font-size:13px; color:#cfe0f5;}
+
+  .qr-widget{position:relative;}
+  .qr-btn{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.35);
+    color:#fff;
+    font-size:12.5px;
+    font-weight:600;
+    padding:6px 12px;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  .qr-btn:hover{background:rgba(255,255,255,.22);}
+  .qr-btn svg{width:14px; height:14px; flex-shrink:0;}
+  .qr-panel{
+    display:none;
+    position:absolute;
+    top:calc(100% + 10px);
+    left:0;
+    background:#fff;
+    color:var(--ink);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px;
+    width:200px;
+    box-shadow:0 10px 26px rgba(0,0,0,.18);
+    z-index:50;
+  }
+  .qr-panel.show{display:block;}
+  .qr-panel .qr-title{font-size:12.5px; font-weight:700; margin-bottom:8px; color:var(--sub);}
+  .qr-panel .qr-code-holder{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-bottom:10px;
+  }
+  .qr-panel .qr-code-holder svg{width:150px; height:150px;}
+  .qr-panel .qr-actions{display:flex; flex-direction:column; gap:8px;}
+  .qr-panel button{
+    font-size:12.5px;
+    padding:7px 10px;
+    border-radius:6px;
+    border:1px solid var(--line);
+    background:var(--pill-bg);
+    cursor:pointer;
+    color:var(--ink);
+  }
+  .qr-panel button:hover{background:#e4eaf1;}
+  .qr-panel .qr-copied{font-size:11.5px; color:var(--good); font-weight:600; text-align:center; height:14px;}
+
+  .wrap{max-width:1000px; margin:0 auto; padding:22px 18px 60px;}
+
+  .test-head{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 22px;
+    margin-bottom:22px;
+  }
+  .test-head h1{margin:0 0 6px; font-size:22px;}
+  .test-head p.tag{margin:0 0 14px; color:var(--sub); font-size:14px;}
+  .meta-row{display:flex; gap:22px; flex-wrap:wrap; align-items:center;}
+  .timer-box{
+    background:var(--pill-bg);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:8px 14px;
+    font-variant-numeric:tabular-nums;
+    font-size:15px;
+    font-weight:600;
+  }
+  .timer-box.warn{color:var(--bad); border-color:#f3c1ba; background:#fdecea;}
+  .meta-row span.label{color:var(--sub); font-weight:400; font-size:13px; margin-right:6px;}
+  .btn{
+    border:none;
+    border-radius:7px;
+    padding:9px 16px;
+    font-size:14px;
+    cursor:pointer;
+    font-weight:600;
+  }
+  .btn-primary{background:var(--accent); color:#fff;}
+  .btn-primary:hover{background:var(--accent-dark);}
+  .btn-secondary{background:#fff; border:1px solid var(--line); color:var(--ink);}
+  .btn-secondary:hover{background:var(--pill-bg);}
+
+  section.part{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:22px 22px 26px;
+    margin-bottom:24px;
+  }
+  .part-label{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.4px;
+    padding:4px 10px;
+    border-radius:999px;
+    margin-bottom:10px;
+  }
+  .part h2{margin:4px 0 4px; font-size:19px;}
+  .part .instructions{color:var(--sub); font-size:14px; margin-bottom:16px;}
+
+  .passage{
+    border:1px solid var(--line);
+    background:#fbfcfe;
+    border-radius:8px;
+    padding:18px 20px;
+    margin-bottom:20px;
+    max-width:72ch;
+  }
+  .passage h3{margin-top:0; font-size:17px;}
+  .passage .byline{font-style:italic; color:var(--sub); font-size:14px; margin-top:-8px; margin-bottom:14px;}
+  .passage p{margin:0 0 12px; font-size:15px;}
+  .passage .sec-letter{font-weight:700;}
+
+  .part-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:24px;
+    align-items:start;
+  }
+  @media (min-width:760px){
+    .part-grid{
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    }
+    .passage-col{
+      position:sticky;
+      top:14px;
+      max-height:calc(100vh - 28px);
+      overflow-y:auto;
+      padding-right:6px;
+    }
+    .passage{max-width:none;}
+  }
+
+  .qgroup{margin:22px 0;}
+  .qgroup h4{font-size:15px; margin:0 0 4px;}
+  .qgroup .sub{color:var(--sub); font-size:13.5px; margin:0 0 12px;}
+  .q-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:10px 0;
+    font-size:14.5px;
+  }
+  .q-row .qnum{
+    min-width:26px;
+    font-weight:700;
+    color:var(--accent-dark);
+  }
+  .q-row select, .q-row input[type=text]{
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:6px 8px;
+    font-size:14px;
+    font-family:inherit;
+  }
+  .q-row input[type=text]{width:180px;}
+  .mc-block{margin:14px 0; font-size:14.5px;}
+  .mc-block .stem{font-weight:600; margin-bottom:8px;}
+  .mc-block label{display:block; margin:4px 0 4px 0; cursor:pointer;}
+  .mc-block input{margin-right:8px;}
+  .result-mark{font-weight:700; margin-left:4px;}
+  .result-mark.correct{color:var(--good);}
+  .result-mark.incorrect{color:var(--bad);}
+  .correct-answer-hint{font-size:13px; color:var(--sub); margin-left:6px;}
+
+  .phrase-bank{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:6px 18px;
+    background:var(--pill-bg);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 16px;
+    margin:12px 0 16px;
+    font-size:14px;
+  }
+
+  .source-pill-wrap{margin-top:16px;}
+  .source-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--pill-bg);
+    border:1px solid var(--line);
+    color:var(--sub);
+    font-size:12.5px;
+    padding:6px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .source-pill:hover{background:#e4eaf1;}
+  .source-pill .chev{transition:transform .15s ease;}
+  .source-pill.open .chev{transform:rotate(180deg);}
+  .source-detail{
+    display:none;
+    margin-top:10px;
+    font-size:13px;
+    color:var(--sub);
+    background:#fbfcfe;
+    border:1px dashed var(--line);
+    border-radius:8px;
+    padding:12px 14px;
+    max-width:72ch;
+  }
+  .source-detail.show{display:block;}
+
+  .score-panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 22px;
+    margin-bottom:26px;
+    box-shadow:0 6px 18px rgba(20,40,70,.08);
+  }
+  .score-panel .actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+  .score-result{font-size:16px; font-weight:700; margin-left:auto;}
+  .score-result.pass{color:var(--good);}
+  .banner-timeup{
+    display:none;
+    background:#fdecea;
+    border:1px solid #f3c1ba;
+    color:var(--bad);
+    padding:10px 16px;
+    border-radius:8px;
+    font-weight:600;
+    margin-bottom:18px;
+  }
+  .banner-timeup.show{display:block;}
+
+  footer.site{
+    text-align:center;
+    color:var(--sub);
+    font-size:12.5px;
+    padding:26px 10px 40px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="brand">
+    <div class="brand-left">
+      <div class="qr-widget">
+        <button class="qr-btn" id="qrToggleBtn" onclick="toggleQrPanel()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="14" y2="21"/><line x1="21" y1="14" x2="21" y2="21"/><line x1="17.5" y1="14" x2="17.5" y2="17.5"/><line x1="14" y1="17.5" x2="21" y2="17.5"/></svg>
+          <span>QR</span>
+        </button>
+        <div class="qr-panel" id="qrPanel">
+          <div class="qr-title">Scan or share this page</div>
+          <div class="qr-code-holder" id="qrCodeHolder"></div>
+          <div class="qr-actions">
+            <button onclick="copyPageLink()">Copy link</button>
+            <div class="qr-copied" id="qrCopiedMsg"></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="brand-name">Modern English Australia</div>
+        <div class="brand-sub">Koala Spies Sydney · IELTS General Reading (Full Test 1)</div>
+      </div>
+    </div>
+    <div class="brand-sub">Auto-Scored · Timed · Instant Feedback</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="test-head">
+    <h1>IELTS General Reading — Full Practice Test 1</h1>
+    <p class="tag">Three reading passages, 40 questions. Answer every question, then submit to see your score and the correct answers.</p>
+    <div class="meta-row">
+      <div class="timer-box" id="timerBox"><span class="label">Time remaining</span><span id="timerDisplay">60:00</span></div>
+      <button class="btn btn-secondary" id="startBtn">Start / restart timer</button>
+    </div>
+  </div>
+
+  <div class="banner-timeup" id="timeUpBanner">⏰ Time's up! You can still finish and submit to see your score, but in a real test your time would now be over.</div>
+
+  <!-- ================= SECTION 1 ================= -->
+  <section class="part">
+    <span class="part-label">SECTION 1 · Questions 1–14</span>
+    <h2>Reading Section 1</h2>
+    <p class="instructions">Read the text below and answer Questions 1–6.</p>
+
+    <div class="part-grid">
+    <div class="passage-col">
+    <div class="passage">
+      <h3>Consumer advice</h3>
+      <p class="byline">What to do if your delivery hasn't arrived</p>
+      <p>Most late parcels sent within Australia turn up within five business days of their expected delivery date. Before contacting Australia Post, it's worth working through a short checklist to see whether the item can be found closer to home.</p>
+      <ul>
+        <li>Track your item online — it may simply still be on its way.</li>
+        <li>Check for a card or notification in your letterbox, under your door, or by email or SMS, as this can mean the item is waiting for collection at a Post Office.</li>
+        <li>Ask whether someone else at your home or workplace, or your building's management or mailroom, accepted the item on your behalf.</li>
+        <li>Check whether the item has been left in a safe place, such as under or behind something near your door.</li>
+        <li>Check the address details you gave the sender, in case of a mistake.</li>
+        <li>Look for any known service disruptions affecting deliveries in your area.</li>
+      </ul>
+      <p>If your delivery still hasn't appeared, you can submit a formal enquiry, though how long you need to wait depends on the type of delivery. A domestic item can be queried once it is more than 10 business days overdue. International deliveries follow different timeframes: a Courier or Express item after one business day beyond its estimated delivery time, a Standard item after 10 business days, an Economy or Airmail item only after three months from posting, and a Registered Post item after 25 business days.</p>
+      <p>To submit an enquiry, personal customers need a free MyPost account and the item's tracking number to use the online missing or lost item form; business customers can log in to a dedicated support portal instead. If your enquiry concerns essential medication, contact Australia Post immediately rather than waiting for these timeframes. Once an enquiry is lodged, Australia Post may contact the sender, the delivery driver, the delivery centre, or, for international items, customs or an overseas mail authority, and will update you until the case is resolved or the item is delivered.</p>
+
+      <div class="source-pill-wrap">
+        <div class="source-pill" onclick="toggleSource(this,'src1')"><span>Sources</span><span class="chev">▾</span></div>
+        <div class="source-detail" id="src1">Adapted from Australia Post's official website, particularly the "Lost or late items" page (auspost.com.au/personal/receiving/parcel-deliveries/lost-late-items). Figures such as timeframes reflect information published by Australia Post at the time of writing and should be checked on auspost.com.au for the latest details.</div>
+      </div>
+    </div>
+    </div>
+    <div class="questions-col">
+
+    <div class="qgroup">
+      <h4>Questions 1–6</h4>
+      <p class="sub">Do the following statements agree with the information given in the text? Choose TRUE, FALSE or NOT GIVEN for each.</p>
+      <div class="q-row"><span class="qnum">1.</span> Most domestic parcels that are running late still arrive within five business days of the expected delivery date.
+        <select id="q1" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark1"></span></div>
+      <div class="q-row"><span class="qnum">2.</span> You should contact Australia Post before checking whether a neighbour or colleague has accepted the item for you.
+        <select id="q2" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark2"></span></div>
+      <div class="q-row"><span class="qnum">3.</span> A domestic item can only be queried once it is more than 30 days overdue.
+        <select id="q3" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark3"></span></div>
+      <div class="q-row"><span class="qnum">4.</span> International Courier and Express items can be queried sooner than international Standard items.
+        <select id="q4" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark4"></span></div>
+      <div class="q-row"><span class="qnum">5.</span> You need to create a MyPost account before you can submit an enquiry about a missing personal item.
+        <select id="q5" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark5"></span></div>
+      <div class="q-row"><span class="qnum">6.</span> Australia Post guarantees that lost items will be replaced free of charge within seven days.
+        <select id="q6" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark6"></span></div>
+    </div>
+    </div>
+    </div>
+
+    <p class="instructions" style="margin-top:28px;">Read the text below and answer Questions 7–14.</p>
+
+    <div class="part-grid">
+    <div class="passage-col">
+    <div class="passage">
+      <h3>Collecting a parcel</h3>
+      <p class="byline">Which collection option is right for you?</p>
+      <p><strong>A &nbsp;MyPost Account</strong><br>This free account lets you track deliveries, manage redirections and holds, and choose a preferred collection point for future parcels. It's required before you can use several other Australia Post services. However, you'll need to verify your identity when you first sign up, and account verification can take a little time.</p>
+      <p><strong>B &nbsp;AusPost App</strong><br>The app lets you track and manage all your parcels from your phone and sends legitimate delivery notifications, helping you avoid scam texts claiming to be from Australia Post. It works on both Android and iPhone. It cannot, however, redirect an item that has already been given to a courier for final delivery.</p>
+      <p><strong>C &nbsp;Parcel Lockers</strong><br>More than 1,500 of these free, secure lockers are available across Australia, accessible at any hour of the day or night. They suit parcels up to 16 kilograms, and a one-time code is sent by SMS or email once your item arrives. Larger items cannot be delivered this way, and you only have two business days to collect before it may be moved elsewhere.</p>
+      <p><strong>D &nbsp;Parcel Collect</strong><br>Available at any Post Office across the country, this service holds a parcel addressed to a nominated branch until you're ready to collect it in person, with photo identification. It suits parcels too large for a locker. Collected items are generally held for about ten days, and the branch's opening hours may not always suit a typical working day.</p>
+      <p><strong>E &nbsp;Missed Delivery Service</strong><br>If nobody is home to sign for a parcel and there's no safe place to leave it, your item is automatically taken to your nearest Post Office or a nearby Parcel Locker at no extra cost. You don't need to arrange anything yourself. However, you won't be able to choose which location it's taken to.</p>
+
+      <div class="source-pill-wrap">
+        <div class="source-pill" onclick="toggleSource(this,'src2')"><span>Sources</span><span class="chev">▾</span></div>
+        <div class="source-detail" id="src2">Adapted from Australia Post's official website: pages on MyPost, the AusPost app, Parcel Lockers, Parcel Collect, and missed-delivery redelivery.</div>
+      </div>
+    </div>
+    </div>
+    <div class="questions-col">
+
+    <div class="qgroup">
+      <h4>Questions 7–14</h4>
+      <p class="sub">Look at the five options for collecting a parcel, A–E. For which option are the following statements true? <em>You may use any letter more than once.</em></p>
+      <div class="q-row"><span class="qnum">7.</span> This service must be set up before some other Australia Post services can be used.
+        <select id="q7" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark7"></span></div>
+      <div class="q-row"><span class="qnum">8.</span> This option cannot be used for heavier parcels.
+        <select id="q8" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark8"></span></div>
+      <div class="q-row"><span class="qnum">9.</span> This service helps you recognise genuine communications from Australia Post.
+        <select id="q9" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark9"></span></div>
+      <div class="q-row"><span class="qnum">10.</span> You are not able to select where your parcel will be sent under this option.
+        <select id="q10" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark10"></span></div>
+      <div class="q-row"><span class="qnum">11.</span> Photo identification is required to collect your parcel under this option.
+        <select id="q11" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark11"></span></div>
+      <div class="q-row"><span class="qnum">12.</span> There is a time limit of two business days to pick up your item.
+        <select id="q12" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark12"></span></div>
+      <div class="q-row"><span class="qnum">13.</span> This option does not involve any extra cost to the customer.
+        <select id="q13" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark13"></span></div>
+      <div class="q-row"><span class="qnum">14.</span> Verifying your identity may take some time when you first register.
+        <select id="q14" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark14"></span></div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2 ================= -->
+  <section class="part">
+    <span class="part-label">SECTION 2 · Questions 15–27</span>
+    <h2>Reading Section 2</h2>
+    <p class="instructions">Read the text below and answer Questions 15–22.</p>
+
+    <div class="part-grid">
+    <div class="passage-col">
+    <div class="passage">
+      <h3>Construction Safety</h3>
+      <p>Construction remains one of the most hazardous industries to work in, with many serious accidents caused by falls, being struck by falling objects, or contact with machinery and electrical equipment. A wide range of simple measures can greatly reduce the risk of injury to workers and to visitors on site.</p>
+      <p>All workers and visitors on a construction site should wear appropriate personal protective equipment, or PPE, to reduce their exposure to hazards. Common PPE includes goggles, helmets, gloves, ear muffs or plugs, boots, and high-visibility vests and suits. Safety signs should also be placed around the site wherever necessary, so that workers and visitors recognise prohibition signs, mandatory signs, warning signs, safe condition signs, and firefighting equipment signs.</p>
+      <p>New workers should be given a site induction so that they become familiar with how the site operates, and toolbox talks should be held on a daily or more frequent basis to pass on further health and safety instructions. The site itself should be kept tidy, with debris, dust, loose nails and stagnant water cleared away daily to prevent slips and trips. Tools should also be organised and stored properly, with lights and power tools left unplugged, both to prevent damage to equipment and to make it easier for workers to find what they need.</p>
+      <p>Workers should always use the right equipment for a given task rather than improvising with the wrong tool, since misuse of equipment is a common cause of accidents. An emergency response plan should be in place to direct the workforce during incidents such as fire or hazardous material spills, with a dedicated team responsible for managing any crisis. Physical safeguards such as barriers and fences should be used to isolate people from especially hazardous areas, such as those with high-voltage electricity or toxic chemicals. Tools and equipment should be inspected regularly to check they are free of defects before work begins, and workers should be trained to report any problems or near misses to management as soon as they notice them.</p>
+
+      <div class="source-pill-wrap">
+        <div class="source-pill" onclick="toggleSource(this,'src3')"><span>Sources</span><span class="chev">▾</span></div>
+        <div class="source-detail" id="src3">Adapted from "10 Construction Site Safety Rules to Observe", Mitti (by SafetyCulture) (mitti.com/topics/construction-safety/10-construction-safety-rules).</div>
+      </div>
+    </div>
+    </div>
+    <div class="questions-col">
+
+    <div class="qgroup">
+      <h4>Questions 15–22</h4>
+      <p class="sub">Complete the notes below. Choose <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> from the text for each answer.</p>
+      <p class="sub"><strong>Construction Safety</strong> — PPE and signage</p>
+      <div class="q-row"><span class="qnum">15.</span> common items of PPE include gloves, ear protection, boots and <input type="text" id="q15" data-correct="high-visibility vests"> <span id="mark15"></span></div>
+      <div class="q-row"><span class="qnum">16.</span> workers should recognise several types of sign, including prohibition signs and <input type="text" id="q16" data-correct="warning signs"> <span id="mark16"></span></div>
+      <p class="sub"><strong>Site organisation</strong></p>
+      <div class="q-row"><span class="qnum">17.</span> new workers should be given a <input type="text" id="q17" data-correct="site induction"> so they understand how the site operates <span id="mark17"></span></div>
+      <div class="q-row"><span class="qnum">18.</span> <input type="text" id="q18" data-correct="toolbox talks"> should be held daily or more often to pass on safety instructions <span id="mark18"></span></div>
+      <div class="q-row"><span class="qnum">19.</span> the site should be cleared of debris, dust, loose nails and <input type="text" id="q19" data-correct="stagnant water"> every day <span id="mark19"></span></div>
+      <p class="sub"><strong>Tools and safety systems</strong></p>
+      <div class="q-row"><span class="qnum">20.</span> power tools should be left <input type="text" id="q20" data-correct="unplugged"> when not in use <span id="mark20"></span></div>
+      <div class="q-row"><span class="qnum">21.</span> an emergency response plan should include a dedicated team to manage a <input type="text" id="q21" data-correct="crisis"> <span id="mark21"></span></div>
+      <div class="q-row"><span class="qnum">22.</span> barriers and fences can be used to isolate people from areas with high-voltage electricity or <input type="text" id="q22" data-correct="toxic chemicals"> <span id="mark22"></span></div>
+    </div>
+    </div>
+    </div>
+
+    <p class="instructions" style="margin-top:28px;">Read the text below and answer Questions 23–27.</p>
+
+    <div class="part-grid">
+    <div class="passage-col">
+    <div class="passage">
+      <h3>Parental leave in the Australian Public Service</h3>
+      <p class="byline">What current entitlements look like, and why they may soon change</p>
+      <p>Leave for new parents working in the Commonwealth public service is currently set out in a piece of legislation usually referred to simply as the Act. Under the Act, an employee who becomes pregnant is entitled to 52 weeks of leave in total, of which the first 12 weeks are paid. The Act itself does not provide any leave for fathers, partners, or any other type of parent or carer.</p>
+      <p>To make up for this, individual government agencies commonly provide extra leave, both paid and unpaid, through their own enterprise agreements, so the exact entitlement an employee receives can vary depending on where they work. On average, agencies provide an additional 4.9 weeks of paid leave for birth mothers, bringing their total paid leave to 16.9 weeks, and an additional 3.2 weeks of paid leave for partners.</p>
+      <p>A recent review of the Act heard from a large number of employees and families about how these entitlements affect their working lives. While many described positive experiences of taking leave, others reported problems caused by leave being unavailable, too short, or subject to strict rules about how it could be taken. The review concluded that current paid leave levels are no longer competitive with those offered by many private sector employers or other parts of the public sector, particularly for partners, and recommended that paid leave be increased if the public service wants to remain an attractive place to work.</p>
+      <p>Alongside a longer period of paid leave, the review also recommended that leave be made more flexible, for example by allowing it to be taken in single days or at half pay for twice as long, rather than only in one continuous block. It further proposed that, in time, both parents should have equal and independent access to paid leave, instead of one parent's entitlement depending on whether the other parent also qualifies.</p>
+
+      <div class="source-pill-wrap">
+        <div class="source-pill" onclick="toggleSource(this,'src4')"><span>Sources</span><span class="chev">▾</span></div>
+        <div class="source-detail" id="src4">Adapted from "Chapter 4: Leave entitlements", Maternity Leave Act Review Report, Australian Public Service Commission (apsc.gov.au), with supporting figures from Chapter 2 of the same report.</div>
+      </div>
+    </div>
+    </div>
+    <div class="questions-col">
+
+    <div class="qgroup">
+      <h4>Questions 23–27</h4>
+      <p class="sub">Complete the sentences below. Choose <strong>NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the text for each answer.</p>
+      <div class="q-row">Under the Act, a pregnant employee is entitled to 52 weeks of leave, of which the first <span class="qnum">23.</span><input type="text" id="q23" data-correct="12 weeks"> are paid. <span id="mark23"></span></div>
+      <div class="q-row">The Act does not provide leave for fathers, partners, or any other type of <span class="qnum">24.</span><input type="text" id="q24" data-correct="parent or carer">. <span id="mark24"></span></div>
+      <div class="q-row">Extra paid and unpaid leave is arranged separately by individual agencies through <span class="qnum">25.</span><input type="text" id="q25" data-correct="enterprise agreements">. <span id="mark25"></span></div>
+      <div class="q-row">On average, agencies provide an additional <span class="qnum">26.</span><input type="text" id="q26" data-correct="3.2 weeks"> of paid leave for partners. <span id="mark26"></span></div>
+      <div class="q-row">The review found that current paid leave levels are no longer <span class="qnum">27.</span><input type="text" id="q27" data-correct="competitive"> with other employers. <span id="mark27"></span></div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3 ================= -->
+  <section class="part">
+    <span class="part-label">SECTION 3 · Questions 28–40</span>
+    <h2>Reading Section 3</h2>
+    <p class="instructions">Read the text below and answer Questions 28–40.</p>
+
+    <div class="part-grid">
+    <div class="passage-col">
+    <div class="passage">
+      <h3>The Eureka Stockade</h3>
+      <p class="byline">A rebellion of goldminers at Ballarat in 1854 became a defining moment in the development of Australian democracy</p>
+      <p><span class="sec-letter">A</span> In early 1851 the New South Wales government announced that gold had been found near Bathurst by prospector Edward Hargraves and several companions, and within months the Victorian government reported its own discoveries as well. The belief that ordinary people could dig their own fortune drew migrants from across the country and around the world. Between 1851 and 1860, Victoria's population grew from 76,000 to 540,000, an increase that placed enormous strain on a colonial government with limited finances and a budget already in deficit.</p>
+      <p><span class="sec-letter">B</span> To raise money, and to slow the flood of new arrivals to the diggings, New South Wales Governor Charles Fitzroy and Victorian Lieutenant-Governor Charles La Trobe imposed a licence fee of 30 shillings a month on every miner, regardless of how much gold they found — at the time, roughly twice the average weekly wage. This was a substantial sum for most miners, and it became a serious grievance once the easily accessible surface gold began to run out in 1852. In that year, the roughly 35,000 miners then on the Victorian goldfields were producing about 5 ounces of gold per head; by 1854, the number of miners had almost tripled while average production per miner had fallen to just 1.5 ounces, making the licence fee feel increasingly unjustified.</p>
+      <p><span class="sec-letter">C</span> From 1853 miners began holding large public 'monster meetings' to voice their frustration with the licensing system, accusing police of extorting money, accepting bribes and imprisoning people without proper process. Delegations that presented these complaints to Governor La Trobe found him largely unreceptive. Many of the miners were far from politically naive: some had taken part in the Chartist movement for political reform in Britain during the 1830s and 1840s, while others had been involved in the anti-authoritarian revolutions that swept across Europe in 1848. Meanwhile, police regularly carried out licence hunts, searching the goldfields for miners who had not paid their fees, which kept tensions on the diggings high.</p>
+      <p><span class="sec-letter">D</span> Matters came to a head in the early hours of 7 October 1854, when a Scottish miner named James Scobie was killed in an altercation at the Eureka Hotel in Ballarat. The hotel's proprietor, James Bentley, was accused of the killing, but a court of inquiry quickly exonerated him — in part because one of the officials on the court, police magistrate John D'Ewes, was later found to have taken bribes from Bentley. Many miners sensed a miscarriage of justice. When around 5,000 people gathered on 17 October to discuss the case and demand an appeal, a small group broke away afterwards and set fire to the hotel; those responsible were arrested, further inflaming feeling on the goldfields.</p>
+      <p><span class="sec-letter">E</span> Over the following weeks, miners elected delegates to represent their concerns, and on 27 November 1854 these delegates approached Victoria's newly arrived Governor, Charles Hotham, to demand the release of the men who had burned down Bentley's hotel. Hotham took offence at being presented with demands, dismissed the miners' grievances, and sent 150 additional soldiers to reinforce the police at Ballarat. Sensing that the authorities had no intention of compromising, the miners held a further meeting at Bakery Hill on 29 November, where a newly made flag was unfurled for the first time: a dark blue banner bearing a white cross and stars representing the Southern Cross constellation, traditionally said to have been sewn by three women on the goldfields. That flag would go on to become a lasting symbol of the Australian labour movement.</p>
+      <p><span class="sec-letter">F</span> When police announced another licence hunt for the following morning, the miners decided they had had enough. They gathered and marched to Bakery Hill, where an Irish miner named Peter Lalor emerged as their leader. Lalor led the crowd to the Eureka diggings, where men and women present knelt beneath the flag and swore an oath: 'We swear by the Southern Cross to stand truly by each other and fight to defend our rights and liberties.' Using timber taken from nearby mineshafts, the miners then built a rough protective barricade around their position, which became known as the Eureka Stockade.</p>
+      <p><span class="sec-letter">G</span> Over the next two days, those in and around the stockade carried out military drills in anticipation of a confrontation, prompting Robert Rede, the Commissioner of the Ballarat goldfields, to order an assault at first light on Sunday 3 December 1854. Almost 300 mounted and foot soldiers and police stormed the lightly guarded stockade that morning; the fighting was over within fifteen minutes, leaving at least twenty-two miners and five soldiers dead. Of the 113 miners subsequently arrested, thirteen were put on trial in Melbourne, and all thirteen were acquitted by juries clearly sympathetic to their cause. A Commission of Enquiry that followed recommended abolishing the licence fee in favour of an export duty and a nominal annual miner's right, replacing corrupt officials, and adding new elected seats to the colonial legislature — one of which was won by Peter Lalor himself. Decades later, former High Court judge Doc Evatt would declare that Australian democracy was born at Eureka.</p>
+
+      <div class="source-pill-wrap">
+        <div class="source-pill" onclick="toggleSource(this,'src5')"><span>Sources</span><span class="chev">▾</span></div>
+        <div class="source-detail" id="src5">Adapted primarily from "Eureka Stockade", Defining Moments, National Museum of Australia (nma.gov.au/defining-moments/resources/eureka-stockade), with additional detail on the Eureka Flag drawn from the Eureka Centre Ballarat (eurekacentreballarat.com.au) and the National Film and Sound Archive of Australia (nfsa.gov.au).</div>
+      </div>
+    </div>
+    </div>
+    <div class="questions-col">
+
+    <div class="qgroup">
+      <h4>Questions 28–31</h4>
+      <p class="sub">Choose the correct letter, A, B, C or D.</p>
+
+      <div class="mc-block">
+        <div class="stem">28. According to the writer, the discovery of gold created difficulties for the Victorian government because</div>
+        <label><input type="radio" name="q28" value="A">A. the population grew faster than services could be funded.</label>
+        <label><input type="radio" name="q28" value="B">B. investors withdrew their support for the colony.</label>
+        <label><input type="radio" name="q28" value="C">C. gold could not be transported safely to Melbourne.</label>
+        <label><input type="radio" name="q28" value="D">D. Britain refused to recognise the new goldfields.</label>
+        <span id="mark28"></span>
+      </div>
+
+      <div class="mc-block">
+        <div class="stem">29. Why did the licence fee become a source of resentment among miners?</div>
+        <label><input type="radio" name="q29" value="A">A. It was introduced without any warning to miners.</label>
+        <label><input type="radio" name="q29" value="B">B. It stayed the same even as gold became harder to find.</label>
+        <label><input type="radio" name="q29" value="C">C. It was collected exclusively from foreign miners.</label>
+        <label><input type="radio" name="q29" value="D">D. It was more expensive than fees charged in other colonies.</label>
+        <span id="mark29"></span>
+      </div>
+
+      <div class="mc-block">
+        <div class="stem">30. What does the writer suggest about many of the miners involved in the protests?</div>
+        <label><input type="radio" name="q30" value="A">A. They had little previous interest in political matters.</label>
+        <label><input type="radio" name="q30" value="B">B. They were mostly opposed to any form of organised protest.</label>
+        <label><input type="radio" name="q30" value="C">C. Some had earlier experience of political activism in Europe.</label>
+        <label><input type="radio" name="q30" value="D">D. Most were unaware of the risks of confronting the government.</label>
+        <span id="mark30"></span>
+      </div>
+
+      <div class="mc-block">
+        <div class="stem">31. What happened after the death of James Scobie at the Eureka Hotel?</div>
+        <label><input type="radio" name="q31" value="A">A. The hotel's owner was immediately convicted of murder.</label>
+        <label><input type="radio" name="q31" value="B">B. Miners accepted the official investigation's findings.</label>
+        <label><input type="radio" name="q31" value="C">C. Many miners felt the inquiry had been unfair.</label>
+        <label><input type="radio" name="q31" value="D">D. The government closed all hotels on the goldfields.</label>
+        <span id="mark31"></span>
+      </div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 32–36</h4>
+      <p class="sub">The text has seven sections, A–G. Which section contains the following information? <em>You may use any letter more than once.</em></p>
+      <div class="q-row"><span class="qnum">32.</span> a reference to the origins of the political beliefs held by some miners
+        <select id="q32" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark32"></span></div>
+      <div class="q-row"><span class="qnum">33.</span> a mention of specific figures showing declining gold yields
+        <select id="q33" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark33"></span></div>
+      <div class="q-row"><span class="qnum">34.</span> a description of an object that became a lasting national symbol
+        <select id="q34" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark34"></span></div>
+      <div class="q-row"><span class="qnum">35.</span> details of population growth during the gold rush period
+        <select id="q35" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark35"></span></div>
+      <div class="q-row"><span class="qnum">36.</span> a reference to changes made to address miners' complaints
+        <select id="q36" data-correct="G"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark36"></span></div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 37–40</h4>
+      <p class="sub">Complete the summary using <strong>ONE WORD ONLY</strong> from the text for each answer.</p>
+      <div class="q-row">On the morning of 30 November 1854, police carried out a licence <span class="qnum">37.</span><input type="text" id="q37" data-correct="hunt"> through the miners' camp, prompting them to march to Bakery Hill. <span id="mark37"></span></div>
+      <div class="q-row">There, Peter Lalor became their leader, and the miners swore an oath to defend their rights beneath the newly created <span class="qnum">38.</span><input type="text" id="q38" data-correct="flag">. <span id="mark38"></span></div>
+      <div class="q-row">Using timber gathered from nearby mineshafts, they built a protective <span class="qnum">39.</span><input type="text" id="q39" data-correct="stockade"> at the Eureka diggings. <span id="mark39"></span></div>
+      <div class="q-row">Early on the morning of 3 December, almost 300 mounted and foot troopers attacked; the fighting lasted only fifteen <span class="qnum">40.</span><input type="text" id="q40" data-correct="minutes">, leaving at least twenty-seven people dead. <span id="mark40"></span></div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <div class="score-panel">
+    <div class="actions">
+      <button class="btn btn-primary" onclick="submitTest()">Submit &amp; score</button>
+      <button class="btn btn-secondary" onclick="revealAnswers()">Reveal answers</button>
+      <button class="btn btn-secondary" onclick="resetTest()">Reset</button>
+      <span class="score-result" id="scoreResult"></span>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site">
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
+
+<script>
+  // ---------- Timer ----------
+  var TOTAL_SECONDS = 60 * 60; // standard IELTS Reading time limit for this full three-passage test
+  var remaining = TOTAL_SECONDS;
+  var timerInterval = null;
+
+  function formatTime(s){
+    var m = Math.floor(s/60);
+    var sec = s%60;
+    return (m<10?'0':'')+m+':' + (sec<10?'0':'')+sec;
+  }
+  function tick(){
+    remaining--;
+    var box = document.getElementById('timerBox');
+    document.getElementById('timerDisplay').textContent = formatTime(Math.max(remaining,0));
+    if(remaining <= 300){ box.classList.add('warn'); }
+    if(remaining <= 0){
+      clearInterval(timerInterval);
+      document.getElementById('timeUpBanner').classList.add('show');
+    }
+  }
+  function startTimer(){
+    clearInterval(timerInterval);
+    remaining = TOTAL_SECONDS;
+    document.getElementById('timerBox').classList.remove('warn');
+    document.getElementById('timeUpBanner').classList.remove('show');
+    document.getElementById('timerDisplay').textContent = formatTime(remaining);
+    timerInterval = setInterval(tick, 1000);
+  }
+  document.getElementById('startBtn').addEventListener('click', startTimer);
+  window.addEventListener('load', startTimer);
+
+  // ---------- Source pills ----------
+  function toggleSource(el, id){
+    var box = document.getElementById(id);
+    box.classList.toggle('show');
+    el.classList.toggle('open');
+  }
+
+  // ---------- Scoring ----------
+  var textAndSelectIds = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13',
+    'q14','q15','q16','q17','q18','q19','q20','q21','q22','q23','q24','q25','q26','q27',
+    'q32','q33','q34','q35','q36','q37','q38','q39','q40'];
+
+  var radioGroups = {
+    q28:'A', q29:'B', q30:'C', q31:'C'
+  };
+
+  var pairGroups = {};
+
+  function normalise(v){ return (v||'').trim().toLowerCase(); }
+
+  function scoreAll(reveal){
+    var total = 0, earned = 0;
+
+    textAndSelectIds.forEach(function(id){
+      var el = document.getElementById(id);
+      var correct = el.getAttribute('data-correct');
+      var mark = document.getElementById('mark'+id.slice(1));
+      total++;
+      var isRight = normalise(el.value) === normalise(correct);
+      if(isRight) earned++;
+      if(mark){
+        if(reveal){
+          mark.innerHTML = '<span class="correct-answer-hint">Answer: '+correct+'</span>';
+        } else {
+          mark.innerHTML = isRight
+            ? '<span class="result-mark correct">✓</span>'
+            : '<span class="result-mark incorrect">✗ ('+correct+')</span>';
+        }
+      }
+    });
+
+    Object.keys(radioGroups).forEach(function(name){
+      var correct = radioGroups[name];
+      var radios = document.getElementsByName(name);
+      var mark = document.getElementById('mark'+name.slice(1));
+      var chosen = null;
+      radios.forEach(function(r){ if(r.checked) chosen = r.value; });
+      total++;
+      var isRight = chosen === correct;
+      if(isRight) earned++;
+      if(mark){
+        if(reveal){
+          mark.innerHTML = '<span class="correct-answer-hint">Answer: '+correct+'</span>';
+        } else {
+          mark.innerHTML = isRight
+            ? '<span class="result-mark correct">✓</span>'
+            : '<span class="result-mark incorrect">✗ (correct: '+correct+')</span>';
+        }
+      }
+    });
+
+    Object.keys(pairGroups).forEach(function(key){
+      var group = pairGroups[key];
+      var vals = group.ids.map(function(id){ return document.getElementById(id).value; }).filter(Boolean);
+      var mark = document.getElementById('mark'+key);
+      var pts = group.correct.filter(function(c){ return vals.includes(c); }).length;
+      total += 2;
+      earned += pts;
+      if(mark){
+        if(reveal){
+          mark.innerHTML = '<span class="correct-answer-hint">Answer: '+group.correct.join(', ')+' (either order)</span>';
+        } else {
+          mark.innerHTML = pts === 2
+            ? '<span class="result-mark correct">✓✓</span>'
+            : '<span class="result-mark incorrect">'+pts+'/2 correct (answer: '+group.correct.join(', ')+')</span>';
+        }
+      }
+    });
+
+    return {earned: earned, total: total};
+  }
+
+  function submitTest(){
+    var res = scoreAll(false);
+    var out = document.getElementById('scoreResult');
+    out.textContent = 'Score: ' + res.earned + ' / ' + res.total;
+    out.className = 'score-result' + (res.earned >= res.total*0.75 ? ' pass' : '');
+  }
+
+  function revealAnswers(){
+    scoreAll(true);
+    var out = document.getElementById('scoreResult');
+    out.textContent = 'Answers revealed';
+    out.className = 'score-result';
+  }
+
+  function resetTest(){
+    textAndSelectIds.forEach(function(id){
+      document.getElementById(id).value = '';
+      var mark = document.getElementById('mark'+id.slice(1));
+      if(mark) mark.innerHTML = '';
+    });
+    Object.keys(radioGroups).forEach(function(name){
+      document.getElementsByName(name).forEach(function(r){ r.checked = false; });
+      var mark = document.getElementById('mark'+name.slice(1));
+      if(mark) mark.innerHTML = '';
+    });
+    Object.keys(pairGroups).forEach(function(key){
+      var group = pairGroups[key];
+      group.ids.forEach(function(id){ document.getElementById(id).value=''; });
+      var mark = document.getElementById('mark'+key);
+      if(mark) mark.innerHTML = '';
+    });
+    document.getElementById('scoreResult').textContent = '';
+    document.getElementById('scoreResult').className = 'score-result';
+    startTimer();
+  }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/2.0.4/qrcode.min.js"></script>
+
+<script>
+function toggleQrPanel(){
+  var panel = document.getElementById("qrPanel");
+  var justOpened = !panel.classList.contains("show");
+  panel.classList.toggle("show");
+  if(justOpened){
+    renderQrCode();
+  }
+}
+
+function renderQrCode(){
+  var holder = document.getElementById("qrCodeHolder");
+  if(holder.dataset.rendered === location.href) return;
+  holder.innerHTML = "";
+  try {
+    var qr = qrcode(0, "M");
+    qr.addData(location.href);
+    qr.make();
+    holder.innerHTML = qr.createSvgTag({cellSize:4, margin:2});
+    holder.dataset.rendered = location.href;
+  } catch(e){
+    holder.innerHTML = "<div style='font-size:11px;color:#b3301f;'>Could not generate QR code.</div>";
+  }
+}
+
+function copyPageLink(){
+  var msg = document.getElementById("qrCopiedMsg");
+  var finish = function(ok){
+    msg.textContent = ok ? "Copied!" : "Could not copy";
+    setTimeout(function(){ msg.textContent = ""; }, 1800);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(location.href).then(function(){ finish(true); }, function(){ finish(false); });
+  } else {
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = location.href;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      finish(true);
+    } catch(e){ finish(false); }
+  }
+}
+
+document.addEventListener("click", function(e){
+  var widget = document.querySelector(".qr-widget");
+  var panel = document.getElementById("qrPanel");
+  if(widget && panel && panel.classList.contains("show") && !widget.contains(e.target)){
+    panel.classList.remove("show");
+  }
+});
+</script>
+
+</body>
+</html>
+```
+
+Select all the code above, copy it, paste it into a plain text editor (Notepad, TextEdit, VS Code, etc.), and save the file as `IELTS_General_Full_Reading_Test_1.html`.
