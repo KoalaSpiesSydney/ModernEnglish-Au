@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IELTS Reading – Full Practice Test | Modern English Australia · Koala Spies Sydney</title>
+<style>
+  :root{
+    --ink:#132132;
+    --sub:#5b6b7c;
+    --line:#dde3ea;
+    --card:#ffffff;
+    --bg:#f4f7fa;
+    --accent:#1d5fb8;
+    --accent-dark:#123c78;
+    --good:#1f7a4c;
+    --bad:#b3301f;
+    --pill-bg:#eef2f7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  header.site{
+    background:var(--accent-dark);
+    color:#fff;
+    padding:14px 20px;
+  }
+  header.site .brand{
+    max-width:1000px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  header.site .brand-name{font-weight:700; font-size:15px; letter-spacing:.2px;}
+  header.site .brand-sub{font-size:13px; color:#cfe0f5;}
+
+  .wrap{max-width:1000px; margin:0 auto; padding:22px 18px 60px;}
+
+  .test-head{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 22px;
+    margin-bottom:22px;
+  }
+  .test-head h1{margin:0 0 6px; font-size:22px;}
+  .test-head p.tag{margin:0 0 14px; color:var(--sub); font-size:14px;}
+  .meta-row{display:flex; gap:22px; flex-wrap:wrap; align-items:center;}
+  .timer-box{
+    background:var(--pill-bg);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:8px 14px;
+    font-variant-numeric:tabular-nums;
+    font-size:15px;
+    font-weight:600;
+  }
+  .timer-box.warn{color:var(--bad); border-color:#f3c1ba; background:#fdecea;}
+  .meta-row span.label{color:var(--sub); font-weight:400; font-size:13px; margin-right:6px;}
+  .btn{
+    border:none;
+    border-radius:7px;
+    padding:9px 16px;
+    font-size:14px;
+    cursor:pointer;
+    font-weight:600;
+  }
+  .btn-primary{background:var(--accent); color:#fff;}
+  .btn-primary:hover{background:var(--accent-dark);}
+  .btn-secondary{background:#fff; border:1px solid var(--line); color:var(--ink);}
+  .btn-secondary:hover{background:var(--pill-bg);}
+
+  section.part{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:22px 22px 26px;
+    margin-bottom:24px;
+  }
+  .part-label{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.4px;
+    padding:4px 10px;
+    border-radius:999px;
+    margin-bottom:10px;
+  }
+  .part h2{margin:4px 0 4px; font-size:19px;}
+  .part .instructions{color:var(--sub); font-size:14px; margin-bottom:16px;}
+
+  .passage{
+    border:1px solid var(--line);
+    background:#fbfcfe;
+    border-radius:8px;
+    padding:18px 20px;
+    margin-bottom:20px;
+    max-width:72ch;
+  }
+  .passage h3{margin-top:0; font-size:17px;}
+  .passage .byline{font-style:italic; color:var(--sub); font-size:14px; margin-top:-8px; margin-bottom:14px;}
+  .passage p{margin:0 0 12px; font-size:15px;}
+  .passage .sec-letter{font-weight:700;}
+
+  .qgroup{margin:22px 0;}
+  .qgroup h4{font-size:15px; margin:0 0 4px;}
+  .qgroup .sub{color:var(--sub); font-size:13.5px; margin:0 0 12px;}
+  .q-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:10px 0;
+    font-size:14.5px;
+  }
+  .q-row .qnum{
+    min-width:26px;
+    font-weight:700;
+    color:var(--accent-dark);
+  }
+  .q-row select, .q-row input[type=text]{
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:6px 8px;
+    font-size:14px;
+    font-family:inherit;
+  }
+  .q-row input[type=text]{width:180px;}
+  .mc-block{margin:14px 0; font-size:14.5px;}
+  .mc-block .stem{font-weight:600; margin-bottom:8px;}
+  .mc-block label{display:block; margin:4px 0 4px 0; cursor:pointer;}
+  .mc-block input{margin-right:8px;}
+  .result-mark{font-weight:700; margin-left:4px;}
+  .result-mark.correct{color:var(--good);}
+  .result-mark.incorrect{color:var(--bad);}
+  .correct-answer-hint{font-size:13px; color:var(--sub); margin-left:6px;}
+
+  .phrase-bank{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:6px 18px;
+    background:var(--pill-bg);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 16px;
+    margin:12px 0 16px;
+    font-size:14px;
+  }
+
+  .source-pill-wrap{margin-top:16px;}
+  .source-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--pill-bg);
+    border:1px solid var(--line);
+    color:var(--sub);
+    font-size:12.5px;
+    padding:6px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .source-pill:hover{background:#e4eaf1;}
+  .source-pill .chev{transition:transform .15s ease;}
+  .source-pill.open .chev{transform:rotate(180deg);}
+  .source-detail{
+    display:none;
+    margin-top:10px;
+    font-size:13px;
+    color:var(--sub);
+    background:#fbfcfe;
+    border:1px dashed var(--line);
+    border-radius:8px;
+    padding:12px 14px;
+    max-width:72ch;
+  }
+  .source-detail.show{display:block;}
+
+  .score-panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 22px;
+    margin-bottom:26px;
+    box-shadow:0 6px 18px rgba(20,40,70,.08);
+  }
+  .score-panel .actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+  .score-result{font-size:16px; font-weight:700; margin-left:auto;}
+  .score-result.pass{color:var(--good);}
+  .banner-timeup{
+    display:none;
+    background:#fdecea;
+    border:1px solid #f3c1ba;
+    color:var(--bad);
+    padding:10px 16px;
+    border-radius:8px;
+    font-weight:600;
+    margin-bottom:18px;
+  }
+  .banner-timeup.show{display:block;}
+
+  footer.site{
+    text-align:center;
+    color:var(--sub);
+    font-size:12.5px;
+    padding:26px 10px 40px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="brand">
+    <div>
+      <div class="brand-name">Modern English Australia</div>
+      <div class="brand-sub">Koala Spies Sydney · IELTS Reading (Full Test)</div>
+    </div>
+    <div class="brand-sub">Auto-Scored · Timed · Instant Feedback</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="test-head">
+    <h1>IELTS General Reading — Full Practice Test</h1>
+    <p class="tag">Three reading passages, 40 questions. Answer every question, then submit to see your score and the correct answers.</p>
+    <div class="meta-row">
+      <div class="timer-box" id="timerBox"><span class="label">Time remaining</span><span id="timerDisplay">60:00</span></div>
+      <button class="btn btn-secondary" id="startBtn">Start / restart timer</button>
+    </div>
+  </div>
+
+  <div class="banner-timeup" id="timeUpBanner">⏰ Time's up! You can still finish and submit to see your score, but in a real test your time would now be over.</div>
+
+  <!-- ================= SECTION 1 ================= -->
+  <section class="part">
+    <span class="part-label">SECTION 1 · Questions 1–13</span>
+    <h2>Reading Passage 1</h2>
+    <p class="instructions">You should spend about 20 minutes on Questions 1–13, which are based on Reading Passage 1 below.</p>
+
+    <div class="passage">
+      <h3>The development of the Sydney Metro railway</h3>
+      <p>In the final decades of the twentieth century, Sydney's population expanded steadily, and by the early 2000s pressure on the city's transport system had become severe. The existing suburban rail network, much of it electrified since the early twentieth century, was reaching the limits of what it could carry, particularly on the lines converging on the central business district. Extra passengers could not simply be added to existing services, because the double-deck trains that formed the backbone of the network already ran close to their maximum frequency through the central corridor. Building new roads offered little relief, since congestion on Sydney's streets had also been worsening for years. A more radical solution was needed if the city's transport problems were to be solved.</p>
+      <p>Among those who first proposed such a solution was Ron Christie, the Co-ordinator-General of Rail, who in 2001 released a report titled the <em>Long-term Strategic Plan for Rail</em>. Christie recognised that simply extending the existing suburban network would not be enough, and he suggested that new "metro" lines, operating independently of the conventional network, would eventually be required to overcome the capacity constraints of the central city corridor. His report, however, was largely dismissed by the state government of the day as no more than a list of possible future projects, and no immediate action was taken.</p>
+      <p>The idea resurfaced repeatedly over the following decade, though early attempts to put it into practice proved difficult. In 2008 the government announced a North West Metro project to link the suburb of Rouse Hill with the city centre, but the scheme depended on money raised from the privatisation of the state's electricity network, and it was cancelled the following year when this funding could not be guaranteed. A scaled-down replacement, the CBD Metro, was then proposed, but its projected cost rose sharply within months, and it too was abandoned after the state's Premier lost office. It was not until the early 2010s, under a newly elected government, that a fresh plan for a metro network began to take shape, and only in 2015, once legislation permitting the privatisation of electricity assets had finally passed, that funding for the project was secured and the network was officially named Sydney Metro. A dedicated statutory authority to oversee construction and operation was established three years later.</p>
+      <p>Unlike the shallow trenches used to build early underground railways elsewhere in the world, the tunnels of the Sydney Metro were bored deep beneath the city using giant tunnel boring machines, which excavated and lined the tunnel walls in a single continuous process. The first stretch of new tunnel, a twin bore running between Bella Vista and Epping, extended for fifteen kilometres and was, at the time of its completion in 2016, the longest railway tunnel ever constructed in Australia. Because the tunnels lay far below street level, existing buildings, roads and utilities above could remain almost entirely undisturbed during construction, in marked contrast to methods that required the temporary removal of the road surface.</p>
+      <p>The first section of the Sydney Metro, running between Tallawong and Chatswood, opened to passengers on 26 May 2019. It was Australia's first fully automated railway, with driverless trains operating without a human driver on board. Thirteen stations served the initial thirty-six-kilometre route, and platform screen doors were installed to separate waiting passengers from the track. In its first full year of operation, more than fourteen million passenger journeys were recorded on the new line, a figure that would rise dramatically as the network expanded in subsequent years.</p>
+      <p>Even as the first line opened, work was already under way on a major extension. The City & Southwest project added a new twin-tunnel crossing beneath Sydney Harbour, together with new underground stations through the heart of the central business district, finally linking the metro to Sydenham in August 2024. A further stage then began converting part of the existing Bankstown line, more than a century old, to metro standards, fitting it with new signalling and platform screen doors so that it too could carry driverless trains. When this conversion is completed, the whole route will operate as a single automated line stretching sixty-six kilometres, controlled throughout by a communications-based signalling system capable of running trains at intervals of only a few minutes.</p>
+      <p>Despite this progress, planners recognised that further expansion would bring a fresh complication. Two additional lines, extending the network west to Parramatta and out to Sydney's new airport, are being built using a different electrical system, supplied at a much higher voltage than that used on the original line. This choice makes the new lines incompatible with the existing metro tracks, meaning trains cannot simply be transferred between them, and passengers travelling across the whole network will eventually need to change between what are, in effect, three separate metro systems running side by side beneath the same city.</p>
+
+      <div class="source-pill-wrap">
+        <div class="source-pill" onclick="toggleSource(this,'src1')"><span>Sources</span><span class="chev">▾</span></div>
+        <div class="source-detail" id="src1">Adapted from the Wikipedia article "Sydney Metro" (en.wikipedia.org/wiki/Sydney_Metro) and related Wikipedia pages on Sydney Metro West, Sydney Metro City &amp; Southwest, Sydney Metro Northwest, and Sydney Metro (2008 proposal). Rewritten and restructured as original practice-test material; not an excerpt from Wikipedia.</div>
+      </div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 1–6</h4>
+      <p class="sub">Complete the notes below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+      <p class="sub"><strong>The Sydney Metro railway</strong> — The problem</p>
+      <div class="q-row"><span class="qnum">1.</span> Sydney's <input type="text" id="q1" data-correct="population"> increased steadily in the late twentieth century <span id="mark1"></span></div>
+      <div class="q-row"><span class="qnum">2.</span> The city's double-deck trains already ran close to their maximum <input type="text" id="q2" data-correct="frequency"> <span id="mark2"></span></div>
+      <p class="sub"><strong>The proposed solution</strong></p>
+      <div class="q-row"><span class="qnum">3.</span> Ron Christie suggested building metro lines that would run independently of the existing <input type="text" id="q3" data-correct="network"> <span id="mark3"></span></div>
+      <div class="q-row"><span class="qnum">4.</span> Early attempts to build a metro depended on funding from the <input type="text" id="q4" data-correct="privatisation"> of the electricity network <span id="mark4"></span></div>
+      <div class="q-row"><span class="qnum">5.</span> A follow-up project was abandoned after its cost rose within a few <input type="text" id="q5" data-correct="months"> <span id="mark5"></span></div>
+      <p class="sub"><strong>The construction</strong></p>
+      <div class="q-row"><span class="qnum">6.</span> The first tunnels were dug deep underground using tunnel boring <input type="text" id="q6" data-correct="machines"> <span id="mark6"></span></div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 7–13</h4>
+      <p class="sub">Do the following statements agree with the information given in Reading Passage 1? Choose TRUE, FALSE or NOT GIVEN for each.</p>
+      <div class="q-row"><span class="qnum">7.</span> Some other Australian cities had built automated metro railways before Sydney's opened.
+        <select id="q7" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark7"></span></div>
+      <div class="q-row"><span class="qnum">8.</span> More passengers travelled on the new line in its first year than the operators had expected.
+        <select id="q8" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark8"></span></div>
+      <div class="q-row"><span class="qnum">9.</span> Building the tunnels deep underground meant that buildings on the surface did not need to be demolished.
+        <select id="q9" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark9"></span></div>
+      <div class="q-row"><span class="qnum">10.</span> The lines under construction to the west and to Sydney's airport will use a different power supply from the original metro line.
+        <select id="q10" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark10"></span></div>
+      <div class="q-row"><span class="qnum">11.</span> Trains will be able to travel between the new airport line and the original Sydney Metro line.
+        <select id="q11" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark11"></span></div>
+      <div class="q-row"><span class="qnum">12.</span> The section of track between Sydenham and Bankstown is a completely new railway line.
+        <select id="q12" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark12"></span></div>
+      <div class="q-row"><span class="qnum">13.</span> The City & Southwest extension cost more than had originally been budgeted.
+        <select id="q13" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark13"></span></div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2 ================= -->
+  <section class="part">
+    <span class="part-label">SECTION 2 · Questions 14–26</span>
+    <h2>Reading Passage 2</h2>
+    <p class="instructions">You should spend about 20 minutes on Questions 14–26, which are based on Reading Passage 2 below.</p>
+
+    <div class="passage">
+      <h3>Golf courses: history, property and the environment</h3>
+      <p><span class="sec-letter">A</span> Golf is among the oldest sports still played in a form resembling its historical version: it developed in Scotland in the fifteenth century, when shepherds and other rural workers are thought to have knocked stones into rabbit holes with sticks. By the eighteenth and nineteenth centuries, formal clubs had been established, and the game's rules, equipment and courses had become increasingly standardised. As the British Empire expanded, golf spread with it, and today more than 200 countries host at least one golf course.</p>
+      <p>However, a golf course is not simply a sporting facility. An eighteen-hole course typically covers well over 100 acres (40 hectares) of land, and because such large sites are usually located close to established suburbs, they have become some of the most valuable and closely watched pieces of urban real estate in the world. As city populations grow and land for housing becomes scarcer, the question of who golf courses truly serve, and what should ultimately become of the land beneath them, has become a matter of considerable debate.</p>
+      <p><span class="sec-letter">B</span> Nowhere is this more apparent than in cities where land values have risen sharply in recent decades. In Melbourne, Australia, several golf clubs occupying large tracts of residentially zoned land have discovered that their fairways are worth far more as housing sites than as sporting venues. In 2011, the Eastern Golf Club sold its long-standing course in the suburb of Doncaster to a property developer for $100 million, using the proceeds to build an entirely new course further from the city centre. Other clubs soon followed: Kingswood Golf Club sold its site for $125 million, and Kingston Links in Rowville was transformed into around 800 new homes. Analysts now estimate that some individual clubs are sitting on land worth several hundred million dollars, prompting some commentators to describe golf courses as among a city's greatest sources of untapped "land wealth".</p>
+      <p><span class="sec-letter">C</span> A similar pattern has emerged in the United States, where nearly 1,500 golf courses or country clubs have closed since 2014. In many cases, an ageing or under-used course is judged to represent a "higher and better use" once converted to housing: in Florida, for example, homes have replaced fairways at the former Hillcrest and Oak Tree courses, and similar projects are under way in California. Yet turning a disused course into a functioning neighbourhood is rarely straightforward. Contracts drawn up when a course was first built sometimes restrict the land to golfing use alone, and even where no such restriction exists, developers must usually overcome zoning objections and resistance from residents who bought their homes partly for the open, green outlook that a nearby course provided.</p>
+      <p><span class="sec-letter">D</span> Such resistance is not purely sentimental. Golf courses are frequently criticised for the intensity with which they consume natural resources. Maintaining the uniform green appearance expected of fairways and greens requires vast quantities of water: in the United States, the average eighteen-hole course uses around 312,000 gallons of water a day during the peak season, and the golf industry as a whole is estimated to consume roughly 1.5 billion gallons daily nationwide. In regions already prone to drought, such as California, this level of consumption has drawn particular criticism, with the state's courses together accounting for some 130 billion gallons of water every year. For much of the twentieth century, courses were also managed with heavy applications of fertiliser and pesticide, chemicals that could run off into nearby streams and groundwater.</p>
+      <p><span class="sec-letter">E</span> In response to such criticism, the golf industry has made significant changes to how courses are managed. Nationwide, golf facilities in the United States are now estimated to use around 31 percent less water than they did in 2005, largely because of more efficient irrigation systems and a shift towards drought-tolerant grass varieties. Many clubs have also joined conservation schemes such as the Audubon Cooperative Sanctuary Program, under which participating courses reduce the area of irrigated turf and set aside land for native vegetation. On average, a modern eighteen-hole course now includes more than 20 acres of natural woodland, grassland or wetland, providing a refuge for birds, insects and other wildlife in otherwise built-up suburban areas.</p>
+      <p><span class="sec-letter">F</span> This green cover can also make golf courses unexpectedly valuable to the wider city. One recent study measured land surface temperatures across a built-up American suburb during a heatwave, when air temperatures reached above 95 degrees Fahrenheit. Areas of housing, industry and roads recorded surface temperatures of between 95 and almost 99 degrees, while ordinary parkland measured around 91 degrees. Golf courses, by contrast, recorded an average surface temperature of just 87.8 degrees, only slightly higher than dedicated nature reserves. The researchers concluded that the dense grass cover and mature trees found on many courses can measurably reduce the "urban heat island" effect that makes cities uncomfortably warm in summer.</p>
+      <p><span class="sec-letter">G</span> Golf courses, then, occupy an unusually complicated position in the modern city: they are at once sporting venues, extremely valuable real estate, and, in many cases, some of the largest remaining areas of managed green space in the suburbs that surround them. Whether a given course survives as a golf course, is redeveloped into housing, or is preserved as public parkland will likely depend as much on its value as land and as habitat as on the popularity of the game itself.</p>
+
+      <div class="source-pill-wrap">
+        <div class="source-pill" onclick="toggleSource(this,'src2')"><span>Sources</span><span class="chev">▾</span></div>
+        <div class="source-detail" id="src2">Facts and figures drawn from publicly reported sources including the USGA and GCSAA Golf Course Environmental Profile research on water use, a USGA summary of environmental benefits (natural areas, land-surface-temperature study), and news reporting on golf course sales and redevelopment in Melbourne (Savills / realcommercial.com.au) and the United States (Planetizen, Club &amp; Resort Business, NEWS 8 San Diego). Rewritten as original practice-test material.</div>
+      </div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 14–17</h4>
+      <p class="sub">Reading Passage 2 has seven sections, A–G. Which section contains the following information? Write the correct letter, A–G. <em>You may use any letter more than once.</em></p>
+      <div class="q-row"><span class="qnum">14.</span> a mention of negative attitudes towards golf courses' use of natural resources
+        <select id="q14" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark14"></span></div>
+      <div class="q-row"><span class="qnum">15.</span> figures demonstrating the cooling effect of a certain type of green space
+        <select id="q15" data-correct="F"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark15"></span></div>
+      <div class="q-row"><span class="qnum">16.</span> examples of golf clubs that profited by selling their land for redevelopment
+        <select id="q16" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark16"></span></div>
+      <div class="q-row"><span class="qnum">17.</span> reference to obstacles that can prevent former golf courses from being redeveloped
+        <select id="q17" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark17"></span></div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 18–22</h4>
+      <p class="sub">Complete the summary below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.</p>
+      <p class="sub"><strong>Golf courses as real estate</strong></p>
+      <div class="q-row">Golf courses occupy large areas of valuable <span class="qnum">18.</span><input type="text" id="q18" data-correct="residential"> land, and as cities have grown, this has attracted attention from developers. <span id="mark18"></span></div>
+      <div class="q-row">In Melbourne, several clubs sold their courses for redevelopment: the Eastern Golf Club received $100 million for its site in Doncaster and used the money to build a new course further from the <span class="qnum">19.</span><input type="text" id="q19" data-correct="centre">. <span id="mark19"></span></div>
+      <div class="q-row">In the United States, nearly 1,500 courses have closed since 2014, and many are considered a "higher and better use" once converted into <span class="qnum">20.</span><input type="text" id="q20" data-correct="housing">. <span id="mark20"></span></div>
+      <div class="q-row">However, converting a former course into a new development is not always simple: some sites are restricted by <span class="qnum">21.</span><input type="text" id="q21" data-correct="contracts"> drawn up when the course was built, <span id="mark21"></span></div>
+      <div class="q-row">while others face resistance from nearby <span class="qnum">22.</span><input type="text" id="q22" data-correct="residents"> who value the open, green outlook. <span id="mark22"></span></div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 23 and 24</h4>
+      <p class="sub">Choose TWO letters, A–E. According to Section D, which TWO problems are associated with maintaining golf courses to a high standard?</p>
+      <div class="mc-block">
+        <label>A. They require large amounts of water.</label>
+        <label>B. They attract too few players to be financially viable.</label>
+        <label>C. Chemicals used on them can pollute water supplies.</label>
+        <label>D. They are usually located too far from cities.</label>
+        <label>E. They increase the risk of drought in nearby farmland.</label>
+      </div>
+      <div class="q-row"><span class="qnum">23.</span> <select id="q23"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
+        <span class="qnum">24.</span> <select id="q24"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark2324"></span></div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 25 and 26</h4>
+      <p class="sub">Choose TWO letters, A–E. Which TWO benefits of golf courses does the writer mention in Sections E and F?</p>
+      <div class="mc-block">
+        <label>A. They provide a habitat for wildlife.</label>
+        <label>B. They generate renewable energy for nearby homes.</label>
+        <label>C. They reduce surface temperatures compared with other urban land.</label>
+        <label>D. They lower the cost of water for local residents.</label>
+        <label>E. They increase the number of people playing golf.</label>
+      </div>
+      <div class="q-row"><span class="qnum">25.</span> <select id="q25"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
+        <span class="qnum">26.</span> <select id="q26"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark2526"></span></div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3 ================= -->
+  <section class="part">
+    <span class="part-label">SECTION 3 · Questions 27–40</span>
+    <h2>Reading Passage 3</h2>
+    <p class="instructions">You should spend about 20 minutes on Questions 27–40, which are based on Reading Passage 3 below.</p>
+
+    <div class="passage">
+      <h3>Uncovering the convict past</h3>
+      <p class="byline">Naomi Ashworth reviews Santilla Chingaipe's book about the Black men, women and children transported to Australia as convicts</p>
+      <p>Santilla Chingaipe's <em>Black Convicts</em> sets out to recover a chapter of Australian history that has been almost entirely forgotten: the presence, from the very earliest days of European settlement, of convicts of African descent. When the First Fleet sailed into Sydney Cove in 1788, at least fifteen of the convicts on board had been born in Africa or the Caribbean. Over the following half-century, transportation brought several hundred more, so that by 1840 the number of Black convicts sent to the Australian colonies had risen to almost five hundred. Chingaipe, a filmmaker and historian whose earlier documentary examined Australia's connections to the African diaspora, spent years tracing these individuals through archives scattered across three continents, and the book that resulted is both a work of patient scholarship and, in places, a genuinely gripping narrative.</p>
+      <p>What makes <em>Black Convicts</em> so compelling is the sheer specificity of the lives it recovers. There is David Stuurman, a Khoekhoe chief transported for leading resistance to Dutch and British colonisers at the Cape of Good Hope, who twice escaped from the colony before dying, still a prisoner, in Sydney. There is John Caesar, described in the colony's early records as unusually strong and defiant, who fled the settlement to become, by most accounts, Australia's first bushranger. There is Billy Blue, whose name survives today in a Sydney harbourside suburb, and William Cuffay, a London tailor and prominent political radical whose transportation for his role in a workers' uprising did nothing to dampen his enthusiasm for organising his fellow labourers once he arrived. Even the youngest subjects of the book, two Mauritian cousins transported as children after a plot against their mistress went wrong, are rendered with a novelist's eye for telling detail.</p>
+      <p>Yet Chingaipe is not simply interested in colourful biography. The uncomfortable argument that runs beneath every chapter is that the convict system which shaped early Australia cannot be properly understood in isolation from the history of slavery that preceded and, in Chingaipe's telling, financed it. She traces the fortunes made through Caribbean plantations back into the pockets of the merchants and officials who built the colonial economy, and she shows how ideas about race and labour that had been refined on slave ships and sugar estates were carried, largely unexamined, into the everyday running of the convict colonies. It is an argument that complicates any comfortable national story in which slavery is treated as something that happened elsewhere, to other people.</p>
+      <p>Chingaipe's authority as both historian and storyteller is evident throughout. Her prose resists the temptation to flatten these lives into simple parables of victimhood or heroism; instead she is careful to show, for instance, that some Black convicts and former convicts formed lasting bonds with Aboriginal communities, while others took part willingly in the forced removal of Aboriginal people from their land. This refusal to simplify is one of the book's great strengths, and it allows <em>Black Convicts</em> to go further than earlier, narrower accounts of individual figures, situating them instead within a genuinely global history of empire, labour and race.</p>
+      <p>If the book has a weakness, it lies in Chingaipe's evident determination to make her sources support the scale of her central claim. At certain points, sparse archival traces — a name in a shipping manifest, a fragment of court testimony — are asked to bear more interpretative weight than they can comfortably carry, and the result is the occasional generalisation that a more cautious historian might have qualified further. This is a minor complaint, however, set against the achievement of the book as a whole. <em>Black Convicts</em> restores to view a history that Australia has long preferred not to examine too closely, and it does so with a narrative energy that few works of serious historical scholarship can match.</p>
+
+      <div class="source-pill-wrap">
+        <div class="source-pill" onclick="toggleSource(this,'src3')"><span>Sources</span><span class="chev">▾</span></div>
+        <div class="source-detail" id="src3">This review is original text written for this test. Book facts drawn from the publisher's page for <em>Black Convicts: How Slavery Shaped Australia</em> by Santilla Chingaipe (Scribner Australia, 2024) at simonandschuster.com.au, and from the Wikipedia article "Black Convicts". The reviewer, review text, and any critical opinions expressed are invented for this practice test and are not a real published review.</div>
+      </div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 27–31</h4>
+      <p class="sub">Complete the summary using the list of phrases, A–J, below. Write the correct letter, A–J, for each answer.</p>
+      <p class="sub"><strong>The story told in Black Convicts</strong></p>
+      <div class="phrase-bank">
+        <div>A. armed uprising</div><div>B. lasting fame</div><div>C. commercial empire</div>
+        <div>D. everyday running</div><div>E. violent conflict</div><div>F. considerable wealth</div>
+        <div>G. official policy</div><div>H. forced removal</div><div>I. shared culture</div>
+        <div>J. scholarly debate</div>
+      </div>
+      <div class="q-row">At least fifteen convicts of African descent arrived in Australia with the First Fleet in 1788, and by 1840 almost five hundred had been transported. Chingaipe traces individuals such as David Stuurman, who led an <span class="qnum">27.</span>
+        <select id="q27" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select> against colonial rule at the Cape of Good Hope, <span id="mark27"></span></div>
+      <div class="q-row">and John Caesar, who achieved a kind of <span class="qnum">28.</span>
+        <select id="q28" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select> as Australia's first bushranger. <span id="mark28"></span></div>
+      <div class="q-row">Central to the book is the argument that the convict system was closely connected to an earlier <span class="qnum">29.</span>
+        <select id="q29" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select> built on slave labour, <span id="mark29"></span></div>
+      <div class="q-row">and that ideas developed under this system were carried, largely without question, into the <span class="qnum">30.</span>
+        <select id="q30" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select> of the convict colonies. <span id="mark30"></span></div>
+      <div class="q-row">Chingaipe avoids simple narratives, showing that some Black convicts formed close ties with Aboriginal Australians, while others took part in the <span class="qnum">31.</span>
+        <select id="q31" data-correct="H"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select> of Aboriginal people from their land. <span id="mark31"></span></div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 32–35</h4>
+      <p class="sub">Do the following statements agree with the claims of the writer in Reading Passage 3? Choose YES, NO or NOT GIVEN.</p>
+      <div class="q-row"><span class="qnum">32.</span> Chingaipe carried out extensive research for the book.
+        <select id="q32" data-correct="YES"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark32"></span></div>
+      <div class="q-row"><span class="qnum">33.</span> The individual stories in the book are told in a dry, academic style.
+        <select id="q33" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark33"></span></div>
+      <div class="q-row"><span class="qnum">34.</span> Chingaipe presents Black convicts uniformly as victims of the colonial system.
+        <select id="q34" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark34"></span></div>
+      <div class="q-row"><span class="qnum">35.</span> Chingaipe played a bigger role in the book's promotional documentary than in writing the book itself.
+        <select id="q35" data-correct="NOT GIVEN"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark35"></span></div>
+    </div>
+
+    <div class="qgroup">
+      <h4>Questions 36–40</h4>
+      <p class="sub">Choose the correct letter, A, B, C or D.</p>
+
+      <div class="mc-block">
+        <div class="stem">36. What is the reviewer's main purpose in the first paragraph?</div>
+        <label><input type="radio" name="q36" value="A">A. to summarise the historical argument made in the final chapter</label>
+        <label><input type="radio" name="q36" value="B">B. to give an account of how Chingaipe researched the book</label>
+        <label><input type="radio" name="q36" value="C">C. to introduce the scope and origins of the project described in the book</label>
+        <label><input type="radio" name="q36" value="D">D. to compare Chingaipe's methods with those of earlier historians</label>
+        <span id="mark36"></span>
+      </div>
+
+      <div class="mc-block">
+        <div class="stem">37. Why does the reviewer include specific examples such as David Stuurman and Billy Blue in the second paragraph?</div>
+        <label><input type="radio" name="q37" value="A">A. to demonstrate the range of individual stories the book brings back to life</label>
+        <label><input type="radio" name="q37" value="B">B. to argue that some of these figures deserve greater fame than they currently have</label>
+        <label><input type="radio" name="q37" value="C">C. to illustrate weaknesses in Chingaipe's use of archival evidence</label>
+        <label><input type="radio" name="q37" value="D">D. to compare the fates of convicts from different parts of the world</label>
+        <span id="mark37"></span>
+      </div>
+
+      <div class="mc-block">
+        <div class="stem">38. What point does the reviewer make about Chingaipe's central argument in the third paragraph?</div>
+        <label><input type="radio" name="q38" value="A">A. It has already been made by previous historians of the convict era.</label>
+        <label><input type="radio" name="q38" value="B">B. It challenges a simplified national narrative about slavery.</label>
+        <label><input type="radio" name="q38" value="C">C. It focuses too narrowly on the economic causes of colonisation.</label>
+        <label><input type="radio" name="q38" value="D">D. It fails to acknowledge the role of Aboriginal Australians.</label>
+        <span id="mark38"></span>
+      </div>
+
+      <div class="mc-block">
+        <div class="stem">39. What does the reviewer say about Chingaipe's approach to her subjects in the fourth paragraph?</div>
+        <label><input type="radio" name="q39" value="A">A. She occasionally exaggerates the achievements of individual convicts.</label>
+        <label><input type="radio" name="q39" value="B">B. She avoids presenting Black convicts in an overly simplistic way.</label>
+        <label><input type="radio" name="q39" value="C">C. She focuses mainly on the experiences of male convicts.</label>
+        <label><input type="radio" name="q39" value="D">D. She relies too heavily on the perspectives of colonial officials.</label>
+        <span id="mark39"></span>
+      </div>
+
+      <div class="mc-block">
+        <div class="stem">40. When the reviewer refers to a "weakness" in the book's final paragraph, she is making the point that</div>
+        <label><input type="radio" name="q40" value="A">A. Chingaipe fails to provide enough individual case studies.</label>
+        <label><input type="radio" name="q40" value="B">B. Chingaipe sometimes draws large conclusions from limited evidence.</label>
+        <label><input type="radio" name="q40" value="C">C. Chingaipe does not adequately explain the historical background.</label>
+        <label><input type="radio" name="q40" value="D">D. Chingaipe underestimates the scale of the convict system.</label>
+        <span id="mark40"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="score-panel">
+    <div class="actions">
+      <button class="btn btn-primary" onclick="submitTest()">Submit &amp; score</button>
+      <button class="btn btn-secondary" onclick="revealAnswers()">Reveal answers</button>
+      <button class="btn btn-secondary" onclick="resetTest()">Reset</button>
+      <span class="score-result" id="scoreResult"></span>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site">
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
+
+<script>
+  // ---------- Timer ----------
+  var TOTAL_SECONDS = 60 * 60; // standard IELTS Reading time limit for this full three-passage test
+  var remaining = TOTAL_SECONDS;
+  var timerInterval = null;
+
+  function formatTime(s){
+    var m = Math.floor(s/60);
+    var sec = s%60;
+    return (m<10?'0':'')+m+':' + (sec<10?'0':'')+sec;
+  }
+  function tick(){
+    remaining--;
+    var box = document.getElementById('timerBox');
+    document.getElementById('timerDisplay').textContent = formatTime(Math.max(remaining,0));
+    if(remaining <= 300){ box.classList.add('warn'); }
+    if(remaining <= 0){
+      clearInterval(timerInterval);
+      document.getElementById('timeUpBanner').classList.add('show');
+    }
+  }
+  function startTimer(){
+    clearInterval(timerInterval);
+    remaining = TOTAL_SECONDS;
+    document.getElementById('timerBox').classList.remove('warn');
+    document.getElementById('timeUpBanner').classList.remove('show');
+    document.getElementById('timerDisplay').textContent = formatTime(remaining);
+    timerInterval = setInterval(tick, 1000);
+  }
+  document.getElementById('startBtn').addEventListener('click', startTimer);
+  window.addEventListener('load', startTimer);
+
+  // ---------- Source pills ----------
+  function toggleSource(el, id){
+    var box = document.getElementById(id);
+    box.classList.toggle('show');
+    el.classList.toggle('open');
+  }
+
+  // ---------- Scoring ----------
+  var textAndSelectIds = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13',
+    'q14','q15','q16','q17','q18','q19','q20','q21','q22',
+    'q27','q28','q29','q30','q31','q32','q33','q34','q35'];
+
+  var radioGroups = {
+    q36:'C', q37:'A', q38:'B', q39:'B', q40:'B'
+  };
+
+  var pairGroups = {
+    '2324': { ids:['q23','q24'], correct:['A','C'] },
+    '2526': { ids:['q25','q26'], correct:['A','C'] }
+  };
+
+  function normalise(v){ return (v||'').trim().toLowerCase(); }
+
+  function scoreAll(reveal){
+    var total = 0, earned = 0;
+
+    textAndSelectIds.forEach(function(id){
+      var el = document.getElementById(id);
+      var correct = el.getAttribute('data-correct');
+      var mark = document.getElementById('mark'+id.slice(1));
+      total++;
+      var isRight = normalise(el.value) === normalise(correct);
+      if(isRight) earned++;
+      if(mark){
+        if(reveal){
+          mark.innerHTML = '<span class="correct-answer-hint">Answer: '+correct+'</span>';
+        } else {
+          mark.innerHTML = isRight
+            ? '<span class="result-mark correct">✓</span>'
+            : '<span class="result-mark incorrect">✗ ('+correct+')</span>';
+        }
+      }
+    });
+
+    Object.keys(radioGroups).forEach(function(name){
+      var correct = radioGroups[name];
+      var radios = document.getElementsByName(name);
+      var mark = document.getElementById('mark'+name.slice(1));
+      var chosen = null;
+      radios.forEach(function(r){ if(r.checked) chosen = r.value; });
+      total++;
+      var isRight = chosen === correct;
+      if(isRight) earned++;
+      if(mark){
+        if(reveal){
+          mark.innerHTML = '<span class="correct-answer-hint">Answer: '+correct+'</span>';
+        } else {
+          mark.innerHTML = isRight
+            ? '<span class="result-mark correct">✓</span>'
+            : '<span class="result-mark incorrect">✗ (correct: '+correct+')</span>';
+        }
+      }
+    });
+
+    Object.keys(pairGroups).forEach(function(key){
+      var group = pairGroups[key];
+      var vals = group.ids.map(function(id){ return document.getElementById(id).value; }).filter(Boolean);
+      var mark = document.getElementById('mark'+key);
+      var pts = group.correct.filter(function(c){ return vals.includes(c); }).length;
+      total += 2;
+      earned += pts;
+      if(mark){
+        if(reveal){
+          mark.innerHTML = '<span class="correct-answer-hint">Answer: '+group.correct.join(', ')+' (either order)</span>';
+        } else {
+          mark.innerHTML = pts === 2
+            ? '<span class="result-mark correct">✓✓</span>'
+            : '<span class="result-mark incorrect">'+pts+'/2 correct (answer: '+group.correct.join(', ')+')</span>';
+        }
+      }
+    });
+
+    return {earned: earned, total: total};
+  }
+
+  function submitTest(){
+    var res = scoreAll(false);
+    var out = document.getElementById('scoreResult');
+    out.textContent = 'Score: ' + res.earned + ' / ' + res.total;
+    out.className = 'score-result' + (res.earned >= res.total*0.75 ? ' pass' : '');
+  }
+
+  function revealAnswers(){
+    scoreAll(true);
+    var out = document.getElementById('scoreResult');
+    out.textContent = 'Answers revealed';
+    out.className = 'score-result';
+  }
+
+  function resetTest(){
+    textAndSelectIds.forEach(function(id){
+      document.getElementById(id).value = '';
+      var mark = document.getElementById('mark'+id.slice(1));
+      if(mark) mark.innerHTML = '';
+    });
+    Object.keys(radioGroups).forEach(function(name){
+      document.getElementsByName(name).forEach(function(r){ r.checked = false; });
+      var mark = document.getElementById('mark'+name.slice(1));
+      if(mark) mark.innerHTML = '';
+    });
+    ['q23','q24','q25','q26'].forEach(function(id){ document.getElementById(id).value=''; });
+    document.getElementById('mark2324').innerHTML = '';
+    document.getElementById('mark2526').innerHTML = '';
+    document.getElementById('scoreResult').textContent = '';
+    document.getElementById('scoreResult').className = 'score-result';
+    startTimer();
+  }
+</script>
+
+</body>
+</html>
