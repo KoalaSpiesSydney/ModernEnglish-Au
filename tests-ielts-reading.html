@@ -3,10 +3,65 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>IELTS General Reading Tests · Modern English Australia · Koala Spies Sydney</title>
+  <title>IELTS Reading Practice Tests | Modern English Australia</title>
+  <meta name="description" content="Free IELTS Reading practice: full Academic and General Training tests, plus mini drills for TFNG, matching headings and more. Auto-scored and timed." />
+  <link rel="canonical" href="https://modernenglish.au/tests-ielts-reading.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="IELTS Academic &amp; General Reading Tests · Modern English Australia" />
+  <meta property="og:description" content="Free, auto-scored IELTS Reading practice tests — full Academic and General Training tests, plus mini drills for individual question types." />
+  <meta property="og:url" content="https://modernenglish.au/tests-ielts-reading.html" />
+  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between IELTS Academic and General Training Reading?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both versions give you 60 minutes for 40 questions across three passages. IELTS Academic Reading uses longer, more complex texts adapted from books, journals and magazines. IELTS General Training Reading starts with shorter, everyday texts (notices, advertisements, workplace documents) in Sections 1 and 2, then moves to one longer, more Academic-style passage in Section 3."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How should I manage my time across the three reading passages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Aim for roughly 20 minutes per passage, including time to transfer your answers. If a question is taking too long, mark your best guess and move on — every question carries equal marks, so a hard question in Passage 3 is worth exactly the same as an easy one in Passage 1."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best strategy for True/False/Not Given questions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Locate the relevant part of the passage first using keywords from the question, then compare the statement word by word against what the text actually says. FALSE means the text directly contradicts the statement; NOT GIVEN means the text simply never addresses it, even if the statement sounds plausible."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does IELTS Reading penalise wrong answers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. There is no negative marking in IELTS Reading, so always write an answer for every question, even if you are only guessing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I improve my score using practice tests like these?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Practise under real timed conditions, then review every wrong answer by finding the exact sentence in the passage that supports the correct one. Tracking which question types (matching headings, TFNG, summary completion) cost you the most marks lets you target your revision instead of just repeating full tests."
+        }
+      }
+    ]
+  }
+  </script>
   <style>
     :root {
       --bg: #fffce6;
@@ -167,6 +222,57 @@
       display: inline-flex; align-items: center; gap: 4px;
     }
     .game-card:hover .game-card-arrow { gap: 8px; }
+    /* COMING SOON CARDS */
+    .game-card.is-coming-soon {
+      cursor: default;
+      opacity: .62;
+      border-style: dashed;
+    }
+    .game-card.is-coming-soon:hover {
+      box-shadow: none;
+      transform: none;
+      border-color: var(--line);
+    }
+    .game-card.is-coming-soon:hover::before { opacity: 0; }
+    .game-card.is-coming-soon .card-top-row {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px 10px; margin-bottom: 2px;
+    }
+    .game-card.is-coming-soon .game-card-label { padding-right: 0; }
+    .coming-soon-badge {
+      flex: 0 0 auto;
+      font-family: var(--sans); font-size: 0.66rem; font-weight: 700;
+      letter-spacing: 1.6px; text-transform: uppercase;
+      color: #fff; background: var(--muted);
+      padding: 4px 10px; border-radius: 999px;
+    }
+    /* TIPS / HACKS PILLS */
+    .hacks-section { max-width: 900px; margin: 0 auto; text-align: center; }
+    .tips-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin: 18px 0 0; }
+    .tips-pill {
+      cursor: pointer; font-family: var(--sans); font-size: 0.86rem; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--accent); background: var(--surface);
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: 9px 18px;
+      transition: border-color .15s, box-shadow .15s, color .15s, background .15s;
+    }
+    .tips-pill:hover { border-color: rgba(57,104,234,.35); box-shadow: 0 4px 14px rgba(15,23,42,.08); color: var(--link); }
+    .tips-pill.is-active { color: #fff; background: var(--accent); border-color: var(--accent); }
+    .tips-pill .chev { transition: transform .18s ease; font-size: 0.75em; }
+    .tips-pill.is-active .chev { transform: rotate(180deg); }
+    .tips-panel {
+      margin: 20px auto 0; background: var(--surface); border: 1px solid var(--line);
+      border-radius: 12px; padding: 22px clamp(20px, 3vw, 28px);
+      width: min(600px, 90vw); text-align: left;
+    }
+    .tips-panel[hidden] { display: none; }
+    .tips-panel h4 {
+      font-family: var(--serif); font-size: 1.05rem; font-weight: 700;
+      color: var(--ink); margin: 18px 0 6px;
+    }
+    .tips-panel h4:first-child { margin-top: 0; }
+    .tips-panel p { font-size: 0.96rem; color: var(--muted); margin-bottom: 0; }
     /* OTHER TEST PAGES */
     .page-nav { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 8px; }
     .page-nav a {
@@ -264,13 +370,88 @@
       </nav>
       <div class="one-col">
         <h3>Assessment</h3>
-        <div class="hero-headline" aria-label="ielts reading">
+        <h1 class="hero-headline" aria-label="ielts reading">
           <span class="hero-word">ielts&nbsp;</span><span class="hero-word">reading</span>
-        </div>
+        </h1>
         <p class="role-line">Auto-Scored &middot; Timed &middot; Instant Feedback</p>
         <p class="intro-text">
-          Mini IELTS General Training Reading tests, each built around one task type so students can drill the skill that is costing them marks. Every test is auto-scored and mobile-friendly &mdash; use one at the end of a lesson, or set a full set as a diagnostic.
+          Full-length IELTS Academic and General Training Reading tests, plus mini drills built around one task type so students can practise the skill that is costing them marks. Every test is auto-scored and mobile-friendly &mdash; use a mini test at the end of a lesson, or set a full test as a timed diagnostic.
         </p>
+        <div class="tips-row" id="topTipsRow" style="justify-content:flex-start;">
+          <button type="button" class="tips-pill" data-panel="panel-tips" aria-expanded="false">Tips <span class="chev">&#9662;</span></button>
+        </div>
+        <div class="tips-panel" id="panel-tips" hidden style="margin:20px 0 0;">
+          <h4>What's the difference between Academic and General Training Reading?</h4>
+          <p>Both give you 60 minutes for 40 questions across three passages. Academic Reading uses longer, denser texts adapted from books, journals and magazines. General Training starts with shorter, everyday texts — notices, advertisements, workplace documents — in Sections 1 and 2, then moves to one longer, more Academic-style passage in Section 3.</p>
+          <h4>How should I manage my time across three passages?</h4>
+          <p>Aim for roughly 20 minutes per passage, including time to note your answers. If a question is taking too long, mark your best guess and move on — every question carries equal marks, so a hard question in Passage 3 is worth exactly the same as an easy one in Passage 1.</p>
+          <h4>Does IELTS Reading penalise wrong answers?</h4>
+          <p>No. There is no negative marking, so always write an answer for every question, even if you're only guessing.</p>
+          <h4>How do I actually improve my score with practice tests?</h4>
+          <p>Practise under real timed conditions, then review every wrong answer by finding the exact sentence in the passage that supports the correct one. Tracking which question types — matching headings, TFNG, summary completion — cost you the most marks lets you target your revision instead of just repeating full tests.</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <h2 style="margin-bottom: 6px;">Full IELTS Academic Reading Tests</h2>
+      <p class="intro-text" style="margin-top:0;">Three passages, 40 questions, timed to the real 60-minute Academic Reading limit — auto-scored with instant feedback and full answer explanations.</p>
+      <div class="game-grid">
+        <a class="game-card" href="IELTS_Full_Reading_Test.html">
+          <span class="game-card-label">IELTS Academic &middot; Full Test 1</span>
+          <span class="game-card-title">Sydney Metro &middot; Golf Courses &middot; Black Convicts</span>
+          <p class="game-card-desc">60 minutes &middot; 40 questions &middot; note completion, TFNG, matching, multiple choice.</p>
+          <span class="game-card-arrow">Start <span>&rarr;</span></span>
+        </a>
+        <a class="game-card" href="IELTS_Full_Reading_Test_2.html">
+          <span class="game-card-label">IELTS Academic &middot; Full Test 2</span>
+          <span class="game-card-title">Homer's Odyssey &middot; The Macadamia &middot; Genius &amp; Autism</span>
+          <p class="game-card-desc">60 minutes &middot; 40 questions &middot; note completion, TFNG, matching, multiple choice.</p>
+          <span class="game-card-arrow">Start <span>&rarr;</span></span>
+        </a>
+        <div class="game-card is-coming-soon" aria-disabled="true">
+          <div class="card-top-row">
+            <span class="game-card-label">IELTS Academic</span>
+            <span class="coming-soon-badge">Coming soon</span>
+          </div>
+          <span class="game-card-title">Test 3</span>
+          <p class="game-card-desc">60 minutes &middot; 40 questions. In production.</p>
+        </div>
+        <div class="game-card is-coming-soon" aria-disabled="true">
+          <div class="card-top-row">
+            <span class="game-card-label">IELTS Academic</span>
+            <span class="coming-soon-badge">Coming soon</span>
+          </div>
+          <span class="game-card-title">Test 4</span>
+          <p class="game-card-desc">60 minutes &middot; 40 questions. In production.</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <h2 style="margin-bottom: 6px;">Full IELTS General Reading Tests</h2>
+      <p class="intro-text" style="margin-top:0;">Full three-passage General Training tests are on the way — timed to the real 60-minute limit and auto-scored, just like the Academic tests above.</p>
+      <div class="game-grid">
+        <div class="game-card is-coming-soon" aria-disabled="true">
+          <div class="card-top-row">
+            <span class="game-card-label">IELTS General</span>
+            <span class="coming-soon-badge">Coming soon</span>
+          </div>
+          <span class="game-card-title">Test 1</span>
+          <p class="game-card-desc">60 minutes &middot; 40 questions. In production.</p>
+        </div>
+        <div class="game-card is-coming-soon" aria-disabled="true">
+          <div class="card-top-row">
+            <span class="game-card-label">IELTS General</span>
+            <span class="coming-soon-badge">Coming soon</span>
+          </div>
+          <span class="game-card-title">Test 2</span>
+          <p class="game-card-desc">60 minutes &middot; 40 questions. In production.</p>
+        </div>
+        <div class="game-card is-coming-soon" aria-disabled="true">
+          <div class="card-top-row">
+            <span class="game-card-label">IELTS General</span>
+            <span class="coming-soon-badge">Coming soon</span>
+          </div>
+          <span class="game-card-title">Test 3</span>
+          <p class="game-card-desc">60 minutes &middot; 40 questions. In production.</p>
+        </div>
       </div>
       <hr class="divider">
       <h2 style="margin-bottom: 20px;">Mini IELTS General Reading Tests &mdash; Set 1</h2>
@@ -305,6 +486,51 @@
           <p class="game-card-desc">Multiple choice and complete paragraph tasks.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
+      </div>
+      <hr class="divider">
+      <div class="hacks-section">
+      <h2 style="margin-bottom: 6px;">Reading Strategy Hacks</h2>
+      <p class="intro-text" style="margin-top:0;">Quick, focused strategies for the question types that trip students up most.</p>
+      <div class="tips-row" id="hacksPillRow">
+        <button type="button" class="tips-pill" data-panel="panel-tfng" aria-expanded="false">TFNG hack <span class="chev">&#9662;</span></button>
+        <button type="button" class="tips-pill" data-panel="panel-mc" aria-expanded="false">Multiple choice hack <span class="chev">&#9662;</span></button>
+        <button type="button" class="tips-pill" data-panel="panel-summary" aria-expanded="false">Summary &amp; gap-fill hack <span class="chev">&#9662;</span></button>
+      </div>
+
+      <div class="tips-panel" id="panel-tfng" hidden>
+        <h4>Know exactly what each answer means</h4>
+        <p>TRUE means the passage confirms the statement. FALSE means the passage says the opposite. NOT GIVEN means the passage simply never mentions it — even if the statement sounds sensible or is probably true in real life. Don't use outside knowledge, only what's on the page.</p>
+        <h4>Don't chase NOT GIVEN forever</h4>
+        <p>This is where most students lose time. If you've located the right part of the passage, read it carefully, and the information genuinely isn't there, commit to NOT GIVEN and move on rather than re-reading the whole passage again.</p>
+        <h4>Watch the small words</h4>
+        <p>Words like "always", "only", "most", "some" and "never" can flip a statement from TRUE to FALSE on their own. Compare the statement to the passage word by word, not just topic by topic.</p>
+        <h4>Match meaning, not wording</h4>
+        <p>IELTS paraphrases the passage heavily in the statements, so hunting for the exact same words rarely works. Look for synonyms and reworded ideas instead, and remember the answers usually appear in the same order as the passage.</p>
+      </div>
+
+      <div class="tips-panel" id="panel-mc" hidden>
+        <h4>Answer it yourself before reading the options</h4>
+        <p>Read the question stem on its own, underline its keywords, and try to predict the answer in your own words first. This stops the wrong options from planting ideas in your head before you've understood the question.</p>
+        <h4>Scan for synonyms, not exact words</h4>
+        <p>Use your predicted answer and keywords to scan the passage for paraphrased matches, then read that section slowly and carefully — the real difficulty is usually packed into one or two sentences.</p>
+        <h4>Read every option before choosing</h4>
+        <p>Wrong options are often only partly true, or true somewhere else in the passage but not for this question. Check each option fully against the text rather than stopping at the first one that looks right.</p>
+        <h4>Eliminate deliberately</h4>
+        <p>If any part of an option contradicts the passage, the whole option is wrong. Cross out options you can rule out — it narrows your choice and helps you spot exact-word "distractors" the test uses to tempt you toward a wrong answer.</p>
+      </div>
+
+      <div class="tips-panel" id="panel-summary" hidden>
+        <h4>Check the word limit before anything else</h4>
+        <p>Instructions like "NO MORE THAN TWO WORDS" are strict — going over the limit makes an otherwise correct answer wrong. Note the limit before you start and check it again for every gap.</p>
+        <h4>Skim the whole summary first</h4>
+        <p>Read the summary all the way through before hunting for individual answers, so you understand its overall shape and can predict what type of information — a date, a place, a process — belongs in each gap.</p>
+        <h4>Let grammar guide you</h4>
+        <p>Look at the words immediately before and after each gap to work out whether you need a noun, verb, adjective or number. If your answer doesn't fit the grammar of the sentence, it's the wrong answer even if the meaning seems close.</p>
+        <h4>Use the passage's exact words</h4>
+        <p>If the task asks for words from the passage, copy them exactly as written — don't paraphrase your own answer in. If you're given a word bank instead, there are always extra words you won't need, so eliminate any that don't fit the grammar or meaning of the gap.</p>
+      </div>
+
+      <p style="font-size:0.78rem; color:var(--muted); margin:16px 0 0;">Strategies adapted from <a href="https://ieltsliz.com/" target="_blank" rel="noopener">IELTS Liz</a> and other public IELTS preparation resources.</p>
       </div>
       <hr class="divider">
       <h3>Other test pages</h3>
@@ -345,5 +571,33 @@
     </div>
   </div>
 </footer>
+<script>
+  (function () {
+    function wireGroup(containerSelector) {
+      var container = document.querySelector(containerSelector);
+      if (!container) return;
+      var pills = container.querySelectorAll('.tips-pill');
+      pills.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var wasOpen = btn.getAttribute('aria-expanded') === 'true';
+          pills.forEach(function (b) {
+            b.setAttribute('aria-expanded', 'false');
+            b.classList.remove('is-active');
+            var p = document.getElementById(b.getAttribute('data-panel'));
+            if (p) p.hidden = true;
+          });
+          if (!wasOpen) {
+            btn.setAttribute('aria-expanded', 'true');
+            btn.classList.add('is-active');
+            var target = document.getElementById(btn.getAttribute('data-panel'));
+            if (target) target.hidden = false;
+          }
+        });
+      });
+    }
+    wireGroup('#topTipsRow');
+    wireGroup('#hacksPillRow');
+  })();
+</script>
 </body>
 </html>
