@@ -1,10 +1,32 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-AU">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
-  <title>Vocab Games · Modern English Australia · Koala Spies Sydney</title>
+
+  <!-- ===== SEO ===== -->
+  <title>Free Online English Vocabulary Games for Class | Modern English Australia</title>
+  <meta name="description" content="Free online vocabulary games for English classes — idioms, collocations and 'get' expressions, written by a native speaker. Project them or play on a phone." />
+  <meta name="author" content="Modern English Australia" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
+  <link rel="canonical" href="https://modernenglish.au/vocabularygames.html" />
+  <link rel="alternate" type="application/rss+xml" title="Modern English Australia &#8212; Blog" href="https://modernenglish.au/feed.xml" />
+
+  <!-- Social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://modernenglish.au/vocabularygames.html" />
+  <meta property="og:site_name" content="Modern English Australia" />
+  <meta property="og:locale" content="en_AU" />
+  <meta property="og:title" content="Free Online English Vocabulary Games for Class" />
+  <meta property="og:description" content="Free online vocabulary games for English classes — idioms, collocations and 'get' expressions, written by a native speaker. Project them or play on a phone." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online English Vocabulary Games for Class" />
+  <meta name="twitter:description" content="Free online vocabulary games for English classes, written by a native speaker. Project them, play on a tablet or phone. No sign-up." />
+  <!-- TODO: add a 1200x630 image and uncomment:
+  <meta property="og:image" content="https://modernenglish.au/og-vocab-games.jpg" />
+  <meta name="twitter:image" content="https://modernenglish.au/og-vocab-games.jpg" /> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet">
@@ -123,7 +145,7 @@
 
     /* Typography */
     h2 { font-family: var(--serif); font-size: clamp(1.35rem, 1.05rem + 1.1vw, 2rem); font-weight: 700; color: var(--ink); line-height: 1.2; margin: 0 0 10px; }
-    h3 { font-family: var(--sans); font-size: 0.82rem; font-weight: 700; color: var(--muted); letter-spacing: 2.5px; text-transform: uppercase; margin: 0 0 14px; }
+    .eyebrow { font-family: var(--sans); font-size: 0.82rem; font-weight: 700; color: var(--muted); letter-spacing: 2.5px; text-transform: uppercase; margin: 0 0 14px; }
     p  { margin-bottom: 16px; }
     .role-line { font-family: var(--sans); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
     .intro-text { font-size: 1.05rem; line-height: 1.82; }
@@ -132,6 +154,159 @@
     .cta-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--link); text-decoration: underline; text-underline-offset: 3px; transition: color .15s, gap .15s; }
     .cta-link::after { content: "→"; }
     .cta-link:hover { color: var(--accent-2); gap: 10px; }
+
+    /* ============ BLOG PILL ============ */
+    .pill-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 28px 0 0; }
+    .eyebrow + .pill-row { margin-top: 4px; }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--sans); font-size: 0.92rem; font-weight: 700;
+      letter-spacing: 1.6px; text-transform: uppercase;
+      color: var(--header-ink); background: var(--header);
+      border: 1px solid rgba(15,23,42,.18);
+      border-radius: 999px; padding: 11px 22px;
+      cursor: pointer; text-decoration: none;
+      transition: transform .18s, box-shadow .18s, background .18s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pill:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(15,23,42,.18); background: var(--accent); color: var(--header-ink); }
+    .pill:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+    .pill .pill-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #fde047; box-shadow: 0 0 0 0 rgba(253,224,71,.55);
+      animation: dot-ping 2.2s ease-out infinite;
+    }
+    @keyframes dot-ping {
+      0%   { box-shadow: 0 0 0 0 rgba(253,224,71,.55); }
+      70%  { box-shadow: 0 0 0 8px rgba(253,224,71,0); }
+      100% { box-shadow: 0 0 0 0 rgba(253,224,71,0); }
+    }
+    .pill .pill-chev { font-size: 0.8rem; transition: transform .25s ease; }
+    .pill[aria-expanded="true"] .pill-chev { transform: rotate(180deg); }
+    .pill-hint { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+
+    /* ============ BLOG PANEL (reveal) ============ */
+    .blog-panel {
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows .45s cubic-bezier(.22,.68,0,1);
+    }
+    .blog-panel.is-open { grid-template-rows: 1fr; }
+    .blog-panel > .blog-panel-inner { overflow: hidden; min-height: 0; }
+    .blog-panel-pad { padding-top: 30px; }
+
+    /* Blog roll */
+    .blog-roll { margin: 0 0 34px; }
+    .blog-roll-title {
+      font-family: var(--sans); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted);
+      margin: 0 0 14px;
+    }
+    .blog-roll-list { list-style: none; border-top: 1px solid var(--line); }
+    .blog-roll-list li { border-bottom: 1px solid var(--line); }
+    .blog-roll-list a {
+      display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+      padding: 14px 4px; text-decoration: none; color: var(--ink);
+      transition: background .15s, padding-left .15s;
+    }
+    .blog-roll-list a:hover { background: rgba(57,104,234,.05); padding-left: 10px; color: var(--ink); }
+    .blog-roll-date {
+      font-family: var(--sans); font-size: 0.76rem; font-weight: 700;
+      letter-spacing: 1.6px; text-transform: uppercase; color: var(--link);
+      flex: 0 0 auto; min-width: 108px;
+    }
+    .blog-roll-name { font-family: var(--serif); font-weight: 700; font-size: 1.06rem; line-height: 1.3; }
+    .blog-roll-tag {
+      font-family: var(--sans); font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted);
+      border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px;
+      margin-left: auto; white-space: nowrap;
+    }
+
+    /* Blog post */
+    .post {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+      padding: clamp(22px, 4vw, 40px); max-width: 760px;
+      scroll-margin-top: 24px;
+    }
+    .post + .post { margin-top: 24px; }
+    .post-meta {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      font-family: var(--sans); font-size: 0.76rem; font-weight: 700;
+      letter-spacing: 1.8px; text-transform: uppercase; color: var(--link);
+      margin-bottom: 12px;
+    }
+    .post-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--muted); opacity: .6; }
+    .post-meta .post-read { color: var(--muted); }
+    .post-title {
+      font-family: var(--serif); font-weight: 800;
+      font-size: clamp(1.5rem, 1.15rem + 1.5vw, 2.3rem);
+      line-height: 1.14; margin: 0 0 8px; color: var(--ink);
+    }
+    .post-standfirst { font-size: 1.02rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+    .post-body p { margin-bottom: 16px; }
+    .post-body .post-h {
+      font-family: var(--serif); font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+      font-weight: 700; color: var(--ink); letter-spacing: 0; text-transform: none;
+      margin: 30px 0 10px; line-height: 1.25;
+    }
+    .post-body .lead { font-size: 1.06rem; }
+    .post-example {
+      font-family: var(--serif); font-size: 1.08rem; font-weight: 650; color: var(--accent);
+      border-left: 3px solid var(--link); background: rgba(57,104,234,.05);
+      border-radius: 0 8px 8px 0; padding: 12px 18px; margin: 0 0 16px;
+    }
+    .post-example.wrong { color: #9f1239; border-left-color: #e11d48; background: rgba(225,29,72,.05); }
+    .post-example.right { color: #14532d; border-left-color: #16a34a; background: rgba(22,163,74,.06); }
+    .post-pull {
+      font-family: var(--serif); font-weight: 700; font-style: italic;
+      font-size: clamp(1.12rem, 1rem + 0.7vw, 1.4rem); line-height: 1.4;
+      color: var(--accent); border-top: 2px solid var(--line); border-bottom: 2px solid var(--line);
+      padding: 20px 0; margin: 30px 0;
+    }
+    .post-body strong { font-weight: 700; }
+    .post-fn { font-size: 0.72em; font-weight: 700; text-decoration: none; vertical-align: super; padding-left: 2px; }
+    .post-refs { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .post-refs-title {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+    .post-refs p { font-size: 0.86rem; line-height: 1.6; color: var(--muted); margin-bottom: 0; }
+    .post-refs a { word-break: break-word; }
+    .post-sign {
+      margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line);
+      font-size: 0.9rem; color: var(--muted);
+    }
+    .post-top {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 18px;
+      font-family: var(--sans); font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 1.4px; text-transform: uppercase; color: var(--link);
+      text-decoration: none; cursor: pointer; background: none; border: 0; padding: 0;
+    }
+    .post-top:hover { color: var(--accent-2); }
+
+
+    /* FOLLOW / RSS */
+    .follow {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+      padding: 24px 26px; max-width: 760px; margin-top: 34px;
+    }
+    .follow h2 { font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem); margin-bottom: 6px; }
+    .follow p { font-size: 0.95rem; color: var(--muted); margin-bottom: 16px; }
+    .rss-link {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: var(--sans); font-weight: 700; font-size: 0.9rem;
+      letter-spacing: 1.4px; text-transform: uppercase;
+      color: var(--header-ink); background: #ea7a3c; border-radius: 999px;
+      padding: 10px 20px; text-decoration: none;
+      transition: transform .18s, box-shadow .18s, filter .18s;
+    }
+    .rss-link:hover { color: #fff; transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 8px 22px rgba(234,122,60,.35); }
+    .rss-link svg { width: 15px; height: 15px; fill: currentColor; flex: 0 0 auto; }
+    .follow-note { font-size: 0.82rem; color: var(--muted); margin: 14px 0 0; }
+    .follow-note a { font-weight: 600; }
+    .footer-links .rss-foot { display: inline-flex; align-items: center; gap: 6px; }
+    @media (prefers-reduced-motion: reduce) { .rss-link { transition: none; } }
 
     /* GAME CARDS GRID */
     .game-grid {
@@ -198,6 +373,9 @@
       .header-inner { padding-block: 20px 24px; }
       .game-grid { gap: 14px; }
       .game-card { padding: 18px 20px; }
+      .blog-roll-date { min-width: 100%; }
+      .blog-roll-tag { margin-left: 0; }
+      .pill { padding: 10px 18px; font-size: 0.86rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -207,6 +385,9 @@
       header::before, header::after { animation: none; }
       body { animation: none; }
       .game-card { transition: none; }
+      .blog-panel { transition: none; }
+      .pill { transition: none; }
+      .pill .pill-dot { animation: none; }
     }
   </style>
 
@@ -244,11 +425,11 @@
       </nav>
 
       <div class="one-col">
-        <h3>Interactive Learning</h3>
+        <p class="eyebrow">Interactive Learning</p>
 
-        <div class="hero-headline" aria-label="vocab games">
+        <h1 class="hero-headline">
           <span class="hero-word">vocab&nbsp;</span><span class="hero-word">games</span>
-        </div>
+        </h1>
 
         <p class="role-line">Drag &amp; Drop · Vocabulary · Grammar Systems</p>
 These vocabulary games were designed to reflect the connections of old-school board games or game shows. They can be projected onto a board or wall, played on a tablet in the middle of a table, or played individually on a phone.
@@ -264,14 +445,14 @@ Use them as icebreakers, warmers, revision activities, or homework to reinforce 
         <br>
 There is a QR code in the top-left corner of each game, so teachers can project the games while students play along on their phones.
         <p class="intro-text">
-        
+
         </p>
       </div>
 
       <hr class="divider">
 
       <!-- VOCAB GAMES -->
-      <h2 style="margin-bottom: 20px;">Vocab Games</h2>
+      <h2 id="games" style="margin-bottom: 20px;">Free Online Vocabulary Games for English Class</h2>
       <div class="game-grid">
 
         <a class="game-card" href="game1/geta2.html">
@@ -324,8 +505,8 @@ There is a QR code in the top-left corner of each game, so teachers can project 
           <p class="game-card-desc">Intermediate Though-Thought-Through-Thorough.</p>
           <span class="game-card-arrow">Play <span>→</span></span>
         </a>
-        
-        <a class="game-card" href="http://modernenglish.au/Set3/Casualvsacademic.html">
+
+        <a class="game-card" href="Set3/Casualvsacademic.html">
           <span class="game-card-label">Matching Game · C2</span>
           <span class="game-card-title">Casual vs Academic Language</span>
           <p class="game-card-desc">Distinguish between casual and formal academic register.</p>
@@ -343,6 +524,49 @@ There is a QR code in the top-left corner of each game, so teachers can project 
 
       <hr class="divider">
 
+      <!-- BLOG PILL -->
+      <div class="one-col">
+        <p class="eyebrow">From the Blog</p>
+        <div class="pill-row">
+          <button class="pill" id="blogToggle" type="button" aria-expanded="false" aria-controls="blogPanel">
+            <span class="pill-dot" aria-hidden="true"></span>
+            <span class="pill-text">Read the Blog</span>
+            <span class="pill-chev" aria-hidden="true">▾</span>
+          </button>
+          <span class="pill-hint">New post · 10 Sep 2026</span>
+        </div>
+      </div>
+
+      <!-- BLOG PANEL -->
+      <div class="blog-panel" id="blogPanel" role="region" aria-labelledby="blogToggle">
+        <div class="blog-panel-inner">
+          <div class="blog-panel-pad">
+
+            <div class="blog-roll one-col">
+              <p class="blog-roll-title">Latest posts</p>
+              <ul class="blog-roll-list">
+                <li>
+                  <a href="blog/kahoot-baamboozle-wordwall-funny-english.html">
+                    <span class="blog-roll-date">10 Sep 2026</span>
+                    <span class="blog-roll-name">Kahoot!, Baamboozle and Wordwall&#8217;s Funny English</span>
+                    <span class="blog-roll-tag">Ed-tech</span>
+                  </a>
+                </li>
+              </ul>
+              <p style="margin-top:18px;">
+                <a class="cta-link" href="blog.html">Read all posts</a>
+              </p>
+              <p class="follow-note" style="margin-top:14px;">
+                Follow by <a href="https://modernenglish.au/feed.xml">RSS</a> for new posts.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
       <a class="cta-link" href="contact.html">Get in touch about custom games</a>
 
     </div>
@@ -355,10 +579,104 @@ There is a QR code in the top-left corner of each game, so teachers can project 
     <div class="footer-links">
       <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">Koala Spies Sydney</a>
       <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
+      <a class="rss-foot" href="https://modernenglish.au/feed.xml"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9h-2.5A6.5 6.5 0 0 0 4 13.5V11z"/><path d="M4 4a16 16 0 0 1 16 16h-2.5A13.5 13.5 0 0 0 4 6.5V4z"/><circle cx="5.8" cy="18.2" r="2.2"/></svg> RSS</a>
     </div>
   </div>
 </footer>
 
+<!-- ===== Structured data: helps Google understand the page and the post ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "name": "Free Online English Vocabulary Games for Class",
+      "description": "Free online vocabulary games for English classes — idioms, collocations and 'get' expressions, written by a native speaker.",
+      "inLanguage": "en-AU",
+      "isPartOf": { "@type": "WebSite", "name": "Modern English Australia" },
+      "about": ["ESL vocabulary games", "English idiom games", "classroom games for English teachers"],
+      "hasPart": { "@type": "Blog", "@id": "https://modernenglish.au/blog.html", "name": "Modern English Australia Blog" }
+    },
+    {
+      "@type": "ItemList",
+      "name": "Vocabulary games",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Get Expressions (A2)", "url": "game1/geta2.html" },
+        { "@type": "ListItem", "position": 2, "name": "Have, Make or Do (A1–A2)", "url": "game1/have-make-do-matching-game.html" },
+        { "@type": "ListItem", "position": 3, "name": "Weather Idioms (B2)", "url": "games/idioms-weather/index.html" },
+        { "@type": "ListItem", "position": 4, "name": "Money Idioms (B2)", "url": "MoneyIdioms/index.html" },
+        { "@type": "ListItem", "position": 5, "name": "Ages & Stages in Life Idioms (B2)", "url": "game/agesandstagestest.html" },
+        { "@type": "ListItem", "position": 6, "name": "Get Expressions (B2)", "url": "game1/getB2.html" },
+        { "@type": "ListItem", "position": 7, "name": "Though-Thought-Through-Thorough (B2)", "url": "matchinggame/throughthoughtthough.html" },
+        { "@type": "ListItem", "position": 8, "name": "Casual vs Academic Language (C2)", "url": "Set3/Casualvsacademic.html" },
+        { "@type": "ListItem", "position": 9, "name": "Get Expressions (C2)", "url": "game1/getC2.html" }
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  var toggle = document.getElementById('blogToggle');
+  var panel  = document.getElementById('blogPanel');
+  if (!toggle || !panel) return;
+
+  var label = toggle.querySelector('.pill-text');
+  var dot   = toggle.querySelector('.pill-dot');
+
+  function openPanel(scroll) {
+    panel.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    if (label) label.textContent = 'Hide the Blog';
+    if (dot) dot.style.display = 'none';
+    if (scroll) {
+      window.setTimeout(function () {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 220);
+    }
+  }
+
+  function closePanel() {
+    panel.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    if (label) label.textContent = 'Read the Blog';
+    if (dot) dot.style.display = '';
+  }
+
+  toggle.addEventListener('click', function () {
+    if (panel.classList.contains('is-open')) { closePanel(); }
+    else { openPanel(true); }
+  });
+
+  // Deep link: /vocab.html#post-funny-english opens the blog automatically
+  function openFromHash() {
+    if (!window.location.hash) return;
+    var target = document.querySelector(window.location.hash);
+    if (target && panel.contains(target)) {
+      openPanel(false);
+      window.setTimeout(function () {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+
+  // "Back to blog roll"
+  var topBtns = panel.querySelectorAll('[data-scroll-top]');
+  Array.prototype.forEach.call(topBtns, function (btn) {
+    btn.addEventListener('click', function () {
+      var roll = panel.querySelector('.blog-roll');
+      if (roll) roll.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
+
