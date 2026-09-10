@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Modern English Australia — Blog</title>
+    <link>https://modernenglish.au/blog.html</link>
+    <atom:link href="https://modernenglish.au/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Notes on teaching English, classroom games, and the state of online ESL resources — from a native-speaker English teacher in Sydney.</description>
+    <language>en-AU</language>
+    <copyright>Koala Spies Sydney · Modern English Australia</copyright>
+    <lastBuildDate>Thu, 10 Sep 2026 09:00:00 +1000</lastBuildDate>
+    <pubDate>Thu, 10 Sep 2026 09:00:00 +1000</pubDate>
+    <generator>Hand-built</generator>
+    <ttl>1440</ttl>
+
+    <item>
+      <title>Kahoot!, Baamboozle and Wordwall's Funny English</title>
+      <link>https://modernenglish.au/blog/kahoot-baamboozle-wordwall-funny-english.html</link>
+      <guid isPermaLink="true">https://modernenglish.au/blog/kahoot-baamboozle-wordwall-funny-english.html</guid>
+      <pubDate>Thu, 10 Sep 2026 09:00:00 +1000</pubDate>
+      <dc:creator>Modern English Australia</dc:creator>
+      <category>Ed-tech</category>
+      <description>Kahoot!, Baamboozle and Wordwall are excellent platforms. The problem is that most of their activities are made by users — and a lot of them contain English mistakes that get taught to students as correct.</description>
+      <content:encoded><![CDATA[<div class="post-body"> <p class="lead">There is a strange phenomenon that happens when you teach English long enough.</p> <p>You open a perfectly innocent-looking classroom game.</p> <p>You click through the questions.</p> <p>Everything looks great.</p> <p>Then suddenly you see it:</p> <p class="post-example wrong">"She is having a headache."</p> <p>Or:</p> <p class="post-example wrong">"I am agree."</p> <p>And you sit there thinking, <strong>'Who made this?'</strong></p> <p>Welcome to the wonderful world of online teaching games.</p> <h3 class="post-h">The problem isn't the games</h3> <p>Let's get one thing straight: platforms such as Kahoot!, Baamboozle and Wordwall are fantastic teaching tools.</p> <p>They are quick, engaging and incredibly useful for teachers. They have transformed the way many classrooms approach revision, vocabulary and grammar.</p> <p>And they work. A 2026 study in <em>GLENS: Global English Insights Journal</em> put Wordwall and Baamboozle head to head with 86 vocational students in Gresik, Indonesia, across six sessions of job-related vocabulary. Both groups improved significantly (p &lt; .001): Wordwall from 61.25 to 76.48, Baamboozle from 60.87 to 80.36.<a class="post-fn" href="https://modernenglish.au/blog/kahoot-baamboozle-wordwall-funny-english.html#ref-1" id="fnref-1">[1]</a></p> <p>So the format does its job. It's what gets typed into it that doesn't.</p> <p>But a very large amount of the material available on these platforms is created by users, and the majority of people teaching English these days aren't native speakers, or aren't very good at English.</p> <p>In fact, a data search dug up some statistics for me showing that a large proportion of the teachers generating some of these games are from Brazil and Ukraine.</p> <p>And Kahoot! — which, incidentally, grew out of a research project at a Norwegian university — acknowledges the problem itself. In response to a teacher complaining about grammar mistakes in ready-made Kahoot! activities, the company explained that because so much content is user-generated, it has little control over it.</p> <p>The other problem is how awkward and clunky they are to make, and I know, because I've done it myself: got so sick of typing into little windows that I skipped the final check and had an embarrassing typo in front of my class.</p> <p>In other words, the person who created the quiz may have been an excellent teacher.</p> <p>Meanwhile, Wordwall is a UK-based company, which put out its first digital English games circa 2006 (what other software are you still using from that era?).</p> <p>Wordwall supports dozens of languages and has an enormous library of teacher-created resources. Its platform currently contains over 118 million activities created by users.</p> <p>That means you can find absolutely brilliant material. And absolute shitte.</p> <h3 class="post-h">The little mistakes that get passed on</h3> <p>Sometimes it's the little things like:</p> <p class="post-example wrong">"I did a mistake."</p> <p>instead of:</p> <p class="post-example right">"I made a mistake."</p> <p>And the non-native teachers making these mistakes, sometimes because they were taught wrong or they are doing a direct translation from their language, might not recognise them when they see it in a game. They may assume the mistake must be correct, and it reinforces their 'funny' English and that of all their students to come.</p> <h3 class="post-h">Missing articles and phrasal verbs</h3> <p>It's probably a bigger issue with missing articles or phrasal verbs, the kind of thing that might change English for the worse. What seems like a waste of time to get right, for students who don't have these in their language, is actually the core of English. An article — "it is on a desk" vs "it is on the desk" — makes English precise. "Get up", "stand up" makes it colourful.</p> <p>At least the careless native usually notices the mistake, and feels embarrassed in front of the class when they have to admit to it.</p> </div> <div class="post-refs"> <p class="post-refs-title">Reference</p> <p id="ref-1">[1] Umayah, E., &amp; Maruf, N. (2026). A Comparative Study of Two Game-Based Digital Platforms on Students' Vocabulary Mastery in EFL Classrooms. <em>GLENS: Global English Insights Journal, 3</em>(2), 188–203. <a href="https://doi.org/10.66314/glens.v3i2.672" rel="nofollow noopener" target="_blank">https://doi.org/10.66314/glens.v3i2.672</a></p> </div>]]></content:encoded>
+    </item>
+
+  </channel>
+</rss>
