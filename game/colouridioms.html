@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Colour Idioms Matching Game – Modern English Australia</title>
+<meta name="description" content="Free colour idioms matching game for intermediate and upper-intermediate English learners. Three levels, from everyday idioms to harder figurative ones. Auto-checked and mobile-friendly.">
+<style>
+  :root {
+    --bg:#f5f5f5;
+    --card:#2a2a2a;
+    --ink:#1e1e1e;
+    --muted:#bbbbbb;
+    --accent:#0e2861;
+    --accent-2:#1c4a9e;
+    --line:#3a3a3a;
+  }
+  *{ box-sizing:border-box; }
+  /* Background: colour.mp4 plays on top of an animated colour wash.
+     If the video file is missing, the wash simply shows through. */
+  .bg-wash{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+    opacity:.5;
+    background:
+      radial-gradient(60% 60% at 15% 20%, #ff6b6b55 0%, transparent 60%),
+      radial-gradient(55% 55% at 85% 15%, #ffd93d55 0%, transparent 60%),
+      radial-gradient(60% 60% at 80% 80%, #4d96ff55 0%, transparent 60%),
+      radial-gradient(55% 55% at 20% 85%, #6bcB7755 0%, transparent 60%),
+      linear-gradient(120deg, #ffffff 0%, #f3f6fb 100%);
+    background-size:200% 200%;
+    animation: wash 26s ease-in-out infinite alternate;
+  }
+  @keyframes wash {
+    0%   { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+  .bg-video{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0.5;
+    z-index:-1;
+    pointer-events:none;
+  }
+  body {
+    margin:0;
+    font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+  }
+  /* ===== Header ===== */
+  header {
+    position:relative;
+    background:linear-gradient(90deg,
+      #ffd1dc, #ffe3c2, #fff6b8, #d6f0c2, #bfe6f5, #ccd3f7, #e6ccf5, #ffd1dc);
+    background-size:800% 100%;
+    animation: hue-slide 28s linear infinite;
+    color:#0e2861;
+    text-shadow:
+      0 1px 0 rgba(255,255,255,.85),
+      0 3px 12px rgba(14,40,97,.30);
+    text-align:center;
+    padding:1.15rem 0;
+    font-size:1.5rem;
+    font-weight:bold;
+    letter-spacing:2px;
+    border-bottom:1px solid rgba(14,40,97,.18);
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right:max(12px, env(safe-area-inset-right));
+  }
+  @keyframes hue-slide {
+    0%   { background-position:0% 50%; }
+    100% { background-position:100% 50%; }
+  }
+  header span {
+    color:rgba(14,40,97,.72);
+    font-weight:300;
+    display:block;
+    font-size:1rem;
+    letter-spacing:3px;
+  }
+  /* ===== Sound toggle (top-right) ===== */
+  .snd-wrap{
+    position:absolute;
+    top:10px;
+    right:10px;
+    z-index:5;
+  }
+  .snd-toggle{
+    appearance:none;
+    border:1px solid rgba(14,40,97,.35);
+    background:rgba(14,40,97,.82);
+    color:#fff;
+    padding:.55rem .8rem;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:700;
+    letter-spacing:.5px;
+    line-height:1;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .snd-toggle:hover{ opacity:.95; transform:translateY(-1px); }
+  .snd-toggle:active{ transform:translateY(0); }
+  .snd-toggle svg{ width:16px; height:16px; fill:currentColor; }
+  .snd-toggle .snd-word{ font-size:.82rem; }
+  .snd-toggle[aria-pressed="false"]{ opacity:.65; }
+  /* ===== QR (top-left) ===== */
+  .qr-wrap{
+    position:absolute;
+    top:10px;
+    left:10px;
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    z-index:5;
+  }
+  .qr-toggle{
+    appearance:none;
+    border:1px solid rgba(14,40,97,.35);
+    background:rgba(14,40,97,.82);
+    color:#fff;
+    padding:.55rem .8rem;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:700;
+    letter-spacing:.5px;
+    line-height:1;
+    transition:transform .15s ease, opacity .15s ease;
+    backdrop-filter: blur(6px);
+  }
+  .qr-toggle:hover{ opacity:.95; transform:translateY(-1px); }
+  .qr-toggle:active{ transform:translateY(0); }
+  .qr-panel{
+    width:min(260px, calc(100vw - 24px));
+    background:rgba(42,42,42,.92);
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:10px;
+    box-shadow:0 10px 24px rgba(0,0,0,.28);
+    display:none;
+  }
+  .qr-panel.open{ display:block; }
+  .qr-panel label{
+    display:block;
+    color:#fff;
+    font-size:.85rem;
+    margin:0 0 6px;
+    opacity:.9;
+    letter-spacing:.3px;
+    text-align:left;
+  }
+  .qr-row{ display:flex; gap:8px; }
+  .qr-input{
+    flex:1;
+    padding:.55rem .65rem;
+    border-radius:5px;
+    border:1px solid #5a5a5a;
+    background:#111;
+    color:#fff;
+    outline:none;
+  }
+  .qr-input:focus{ border-color: var(--accent); }
+  .qr-make{
+    border:none;
+    border-radius:5px;
+    padding:.55rem .75rem;
+    cursor:pointer;
+    font-weight:800;
+    background:var(--accent);
+    color:#ffffff;
+  }
+  .qr-make:active{ transform:translateY(1px); }
+  .qr-canvas{
+    margin-top:10px;
+    background:#fff;
+    border-radius:5px;
+    padding:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .qr-help{
+    margin-top:8px;
+    font-size:.8rem;
+    color:#fff;
+    opacity:.85;
+    text-align:left;
+  }
+  @media (max-width:520px){
+    header{ padding-top:1.35rem; padding-bottom:1rem; font-size:1.25rem; }
+    header span{ font-size:.9rem; }
+    .qr-wrap{ top:8px; left:8px; gap:8px; }
+    .qr-toggle{ padding:.5rem .7rem; border-radius:11px; }
+    .snd-wrap{ top:8px; right:8px; }
+    .snd-toggle{ padding:.5rem .6rem; border-radius:11px; }
+    .snd-toggle .snd-word{ display:none; }
+  }
+  /* ===== Main ===== */
+  main {
+    flex:1;
+    text-align:center;
+    padding:2rem 1rem 3rem;
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  h1 {
+    color:var(--accent);
+    letter-spacing:2px;
+    margin-top:1rem;
+    font-size:clamp(1.4rem,2.5vw,2rem);
+  }
+  p {
+    max-width:700px;
+    margin:0.5rem auto 1.5rem auto;
+    opacity:0.9;
+  }
+  /* ===== Level bar ===== */
+  .levels{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0 auto 6px;
+  }
+  .level-btn{
+    appearance:none;
+    border:2px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    font-family:inherit;
+    font-weight:700;
+    font-size:.95rem;
+    padding:.55rem 1.1rem;
+    border-radius:9px;
+    cursor:pointer;
+    transition:background .2s, color .2s, border-color .2s, transform .15s;
+  }
+  .level-btn:hover{ transform:translateY(-1px); border-color:var(--accent); }
+  .level-btn[aria-pressed="true"]{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#ffffff;
+  }
+  .level-note{
+    font-size:.95rem;
+    opacity:.85;
+    margin:0 auto 1.2rem;
+    max-width:700px;
+    min-height:1.4em;
+  }
+  .progress{
+    font-weight:700;
+    letter-spacing:.5px;
+    margin-bottom:14px;
+    color:var(--ink);
+  }
+  /* ===== How to play tile ===== */
+  .how-scrim{
+    position:fixed;
+    inset:0;
+    background:rgba(14,40,97,.45);
+    backdrop-filter:blur(3px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:40;
+  }
+  .how-scrim[hidden]{ display:none; }
+  .how-tile{
+    background:#ffffff;
+    border:2px solid #c3cad2;
+    border-radius:5px;
+    box-shadow:0 18px 44px rgba(14,40,97,.28);
+    padding:clamp(22px, 4vw, 34px);
+    max-width:540px;
+    width:100%;
+    text-align:left;
+    max-height:calc(100vh - 40px);
+    overflow-y:auto;
+  }
+  .how-tile h2{
+    margin:0 0 4px;
+    color:var(--accent);
+    font-size:clamp(1.25rem, 1.1rem + 0.8vw, 1.6rem);
+    letter-spacing:1px;
+  }
+  .how-players{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    font-weight:700;
+    font-size:.82rem;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+    border-radius:999px;
+    padding:5px 14px;
+    margin-bottom:16px;
+  }
+  .how-tile ol{ margin:0 0 4px; padding-left:22px; }
+  .how-tile li{ margin-bottom:11px; line-height:1.6; }
+  .how-tile .how-count{
+    background:#eef2f8;
+    border-left:4px solid var(--accent);
+    border-radius:0 10px 10px 0;
+    padding:12px 16px;
+    margin:16px 0 20px;
+    font-size:.97rem;
+    line-height:1.6;
+  }
+  .how-start{
+    appearance:none;
+    border:none;
+    background:var(--accent);
+    color:#fff;
+    font-family:inherit;
+    font-weight:700;
+    font-size:1rem;
+    padding:.8rem 1.8rem;
+    border-radius:5px;
+    cursor:pointer;
+    box-shadow:0 2px 6px rgba(0,0,0,.25);
+    transition:all .25s ease;
+  }
+  .how-start:hover{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); transform:translateY(-2px); }
+  .how-start:active{ transform:translateY(0); }
+  .how-link{
+    background:none;
+    border:none;
+    font-family:inherit;
+    font-size:1rem;
+    font-weight:700;
+    color:var(--accent);
+    text-decoration:underline;
+    text-underline-offset:4px;
+    cursor:pointer;
+    padding:0;
+  }
+  .how-link:hover{ opacity:.85; }
+  /* ===== Game Grid ===== */
+  #game {
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap:14px;
+    width:90%;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .card {
+    background:#e2e6ea;
+    border:2px solid #c3cad2;
+    color:#1e1e1e;
+    border-radius:6px;
+    padding:20px;
+    text-align:center;
+    cursor:pointer;
+    transition:background .25s, color .25s, transform .2s;
+    min-height:110px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1rem;
+    box-shadow:0 3px 6px rgba(0,0,0,0.1);
+    user-select:none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .card:hover:not(.matched):not(.flipped){ background:#d3dae1; border-color:#aab4bf; }
+  .card.flipped {
+    background:var(--accent);
+    color:#ffffff;
+    border-color:#081b42;
+    transform:scale(1.03);
+  }
+  .card.matched {
+    cursor:default;
+    font-weight:600;
+  }
+  #status {
+    margin-top:18px;
+    font-size:1.05rem;
+    color:var(--ink);
+    font-weight:600;
+    min-height:1.6em;
+  }
+  .next-row{ margin-top:12px; min-height:2.6rem; }
+  .next-btn{
+    appearance:none;
+    border:none;
+    background:var(--accent);
+    color:#fff;
+    font-family:inherit;
+    font-weight:700;
+    font-size:1rem;
+    padding:.75rem 1.5rem;
+    border-radius:5px;
+    cursor:pointer;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    transition:all .25s ease;
+  }
+  .next-btn:hover{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); transform:translateY(-2px); }
+  .next-btn:active{ transform:translateY(0); }
+  .next-btn[hidden]{ display:none; }
+  /* Reset link */
+  .reset-row{ margin-top:10px; font-family:inherit; }
+  .reset-row a{
+    color:var(--accent);
+    text-decoration:underline;
+    text-underline-offset:4px;
+    font-weight:700;
+  }
+  .reset-row a:hover{ opacity:.9; }
+  /* ===== Links ===== */
+  .links {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:1rem;
+    margin-top:2rem;
+  }
+  a.btn {
+    background:var(--accent);
+    color:#fff;
+    font-weight:600;
+    text-decoration:none;
+    padding:.8rem 1.4rem;
+    border-radius: 5px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    transition:all .25s ease;
+  }
+  a.btn:hover {
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    transform:translateY(-2px);
+  }
+  a.btn:active { transform:translateY(0); }
+  /* ===== Footer ===== */
+  footer {
+    width:100%;
+    text-align:center;
+    background:var(--card);
+    color:var(--muted);
+    padding:1rem 0;
+    border-top:1px solid var(--line);
+    font-size:0.9rem;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right:max(12px, env(safe-area-inset-right));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  /* Responsive grid */
+  @media (max-width:900px){
+    #game{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width:600px){
+    #game{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; }
+    .card { min-height:90px; font-size:1.05rem; padding:12px; }
+    .level-btn{ font-size:.88rem; padding:.5rem .9rem; }
+  }
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .card, a.btn, .qr-toggle, .level-btn, .next-btn{ transition:none; }
+    .bg-wash{ animation:none; }
+    header{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-wash" aria-hidden="true"></div>
+<!-- Drop colour.mp4 into this folder and it plays here.
+     Until then the colour wash above shows instead. -->
+<video class="bg-video" autoplay muted loop playsinline aria-hidden="true">
+  <source src="colour.mp4" type="video/mp4">
+</video>
+
+<div class="how-scrim" id="howScrim" role="dialog" aria-modal="true" aria-labelledby="howTitle">
+  <div class="how-tile">
+    <h2 id="howTitle">How to play</h2>
+    <span class="how-players">1, 2 or 3 players</span>
+
+    <ol>
+      <li>It works like solitaire with a pack of cards. All the tiles start face down.</li>
+      <li>Turn over two tiles. If you have found an idiom and its matching meaning, they stay face up and the pair is yours &mdash; have another turn.</li>
+      <li>If they do not match, they turn back over and it is the next player&rsquo;s turn.</li>
+      <li>Play until every pair has been found.</li>
+    </ol>
+
+    <p class="how-count"><strong>Keep your own score.</strong> The counter on the board shows how many pairs have been found altogether, not how many each player has won &mdash; so remember your own total. Most pairs at the end wins.</p>
+
+    <p style="margin:0 0 20px; font-size:.95rem; opacity:.85;">Start at Level 1. Each level uses harder idioms and a bigger grid.</p>
+
+    <button type="button" class="how-start" id="howStart">Start playing</button>
+  </div>
+</div>
+
+<header>
+  <!-- QR generator (top-left) -->
+  <div class="qr-wrap" aria-label="QR code tools">
+    <button class="qr-toggle" id="qrToggle" type="button" aria-expanded="false" aria-controls="qrPanel">
+      QR
+    </button>
+    <div class="qr-panel" id="qrPanel" role="dialog" aria-label="QR code generator">
+      <label for="qrText">QR link (defaults to this page URL)</label>
+      <div class="qr-row">
+        <input class="qr-input" id="qrText" type="text" inputmode="url" autocomplete="off">
+        <button class="qr-make" id="qrMake" type="button">Make</button>
+      </div>
+      <div class="qr-canvas" aria-label="QR code preview">
+        <div id="qrCode"></div>
+      </div>
+      <div class="qr-help">
+        Tip: paste any URL, click Make, then scan.
+      </div>
+    </div>
+  </div>
+
+  <div class="snd-wrap">
+    <button class="snd-toggle" id="sndToggle" type="button" aria-pressed="true" aria-label="Sound on">
+      <svg id="sndIcon" viewBox="0 0 24 24" aria-hidden="true"></svg>
+      <span class="snd-word" id="sndWord">Sound</span>
+    </button>
+  </div>
+
+  MODERN ENGLISH AUSTRALIA
+  <span>Koala Spies Sydney</span>
+</header>
+
+<main>
+  <h1>Colour Idioms Matching Game</h1>
+  <p>Flip two cards to match each idiom with its meaning. Start at Level 1 and work up — the idioms get harder and the grid gets bigger.</p>
+
+  <div class="levels" role="group" aria-label="Choose a level">
+    <button type="button" class="level-btn" id="lvl1" data-level="0" aria-pressed="true">Level 1 · Easy</button>
+    <button type="button" class="level-btn" id="lvl2" data-level="1" aria-pressed="false">Level 2 · Medium</button>
+    <button type="button" class="level-btn" id="lvl3" data-level="2" aria-pressed="false">Level 3 · Harder</button>
+  </div>
+  <p class="level-note" id="levelNote"></p>
+
+  <div class="progress" id="progress" aria-live="polite"></div>
+
+  <div id="game"></div>
+
+  <div id="status" role="status" aria-live="polite"></div>
+
+  <div class="next-row">
+    <button type="button" class="next-btn" id="nextBtn" hidden></button>
+  </div>
+
+  <div class="reset-row">
+    <a href="#" id="resetLink">Shuffle this level again</a>
+    &nbsp;·&nbsp;
+    <button type="button" class="how-link" id="howOpen">How to play</button>
+  </div>
+
+  <div class="links">
+    <a href="../vocabularygames.html" class="btn">More vocab games</a>
+    <a href="../index.html" class="btn">Home</a>
+  </div>
+</main>
+
+<footer>
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+  /* ===== Sound: synthesised with the Web Audio API, so there are no
+     audio files to host and nothing to download. ===== */
+  var ctx = null, enabled = true;
+
+  try {
+    var saved = localStorage.getItem("colourIdiomsSound");
+    if (saved === "off") enabled = false;
+  } catch (e) { /* private mode — just default to on */ }
+
+  function audio(){
+    if (!ctx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      ctx = new AC();
+    }
+    if (ctx.state === "suspended") ctx.resume();
+    return ctx;
+  }
+
+  /* One note with a soft attack and decay, so it never clicks */
+  function note(freq, start, dur, peak, type){
+    var c = audio();
+    if (!c) return;
+    var osc = c.createOscillator();
+    var amp = c.createGain();
+    osc.type = type || "sine";
+    osc.frequency.setValueAtTime(freq, c.currentTime + start);
+    amp.gain.setValueAtTime(0.0001, c.currentTime + start);
+    amp.gain.exponentialRampToValueAtTime(peak, c.currentTime + start + 0.015);
+    amp.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + start + dur);
+    osc.connect(amp); amp.connect(c.destination);
+    osc.start(c.currentTime + start);
+    osc.stop(c.currentTime + start + dur + 0.02);
+  }
+
+  var Sound = {
+    get enabled(){ return enabled; },
+    set: function(on){
+      enabled = !!on;
+      try { localStorage.setItem("colourIdiomsSound", enabled ? "on" : "off"); } catch (e) {}
+      if (enabled) audio();
+    },
+    /* rising major third — a small "yes" */
+    correct: function(){
+      if (!enabled) return;
+      note(880.00, 0.00, 0.13, 0.16, "sine");
+      note(1318.51, 0.09, 0.20, 0.14, "sine");
+    },
+    /* low falling semitone — a gentle "not that one", never harsh */
+    wrong: function(){
+      if (!enabled) return;
+      note(233.08, 0.00, 0.16, 0.10, "triangle");
+      note(196.00, 0.11, 0.22, 0.09, "triangle");
+    },
+    /* C-E-G-C arpeggio with a held chord under it */
+    fanfare: function(big){
+      if (!enabled) return;
+      var seq = [523.25, 659.25, 783.99, 1046.50];
+      seq.forEach(function(f, i){ note(f, i * 0.11, 0.28, 0.15, "triangle"); });
+      if (big) {
+        note(523.25, 0.46, 0.90, 0.11, "sine");
+        note(659.25, 0.46, 0.90, 0.09, "sine");
+        note(783.99, 0.46, 0.90, 0.09, "sine");
+        note(1046.50, 0.46, 0.95, 0.08, "sine");
+        note(1567.98, 0.60, 0.70, 0.05, "sine");
+      }
+    }
+  };
+  window.ColourSound = Sound;
+
+  /* Toggle button */
+  var ON  = '<path d="M4 9v6h4l5 4V5L8 9H4zm11.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zm-2.5-9v2a7 7 0 0 1 0 14v2a9 9 0 0 0 0-18z"/>';
+  var OFF = '<path d="M4 9v6h4l5 4V5L8 9H4zm15.5 3l2.5-2.5-1.4-1.4L18 10.6 15.4 8 14 9.4l2.6 2.6L14 14.6l1.4 1.4 2.6-2.6 2.6 2.6 1.4-1.4L19.5 12z"/>';
+  var btn  = document.getElementById("sndToggle");
+  var icon = document.getElementById("sndIcon");
+  var word = document.getElementById("sndWord");
+
+  function paint(){
+    btn.setAttribute("aria-pressed", String(Sound.enabled));
+    btn.setAttribute("aria-label", Sound.enabled ? "Sound on" : "Sound off");
+    icon.innerHTML = Sound.enabled ? ON : OFF;
+    word.textContent = Sound.enabled ? "Sound" : "Muted";
+  }
+  paint();
+
+  btn.addEventListener("click", function(){
+    Sound.set(!Sound.enabled);
+    paint();
+    if (Sound.enabled) Sound.correct();
+  });
+})();
+
+(function(){
+  /* ===== Idiom bank, sorted by difficulty =====
+     Each entry: [idiom, meaning, colour the idiom names]
+     Level 1: everyday, fairly transparent  (B1)
+     Level 2: common but figurative         (B1+/B2)
+     Level 3: less transparent, idiomatic   (B2+)
+  */
+  const LEVELS = [
+    {
+      name: "Level 1 · Easy",
+      note: "Everyday colour idioms. Six pairs per round.",
+      gridPairs: 6,
+      pairs: [
+        ["Give the green light", "Give permission to begin", "#2e9e4f"],
+        ["Black and white", "Completely clear, with no doubt", "#333333"],
+        ["Once in a blue moon", "Very rarely", "#2f6fd0"],
+        ["A grey area", "Something unclear that the rules do not cover", "#8a8f98"],
+        ["Catch someone red-handed", "Catch someone in the act of doing wrong", "#cf2e2e"],
+        ["Green with envy", "Very jealous of someone", "#2e9e4f"],
+        ["Feel blue", "Feel sad or low", "#2f6fd0"],
+        ["Out of the blue", "Suddenly and without warning", "#2f6fd0"],
+        ["A white lie", "A small, harmless untruth", "#f2f2f2"],
+        ["Roll out the red carpet", "Give someone a special welcome", "#cf2e2e"]
+      ]
+    },
+    {
+      name: "Level 2 · Medium",
+      note: "Common idioms where the meaning is figurative. Eight pairs per round.",
+      gridPairs: 8,
+      pairs: [
+        ["See red", "Become suddenly very angry", "#cf2e2e"],
+        ["The black sheep", "The family member seen as the odd one out", "#333333"],
+        ["Red tape", "Official rules that slow everything down", "#cf2e2e"],
+        ["A blue-collar job", "Work that involves manual labour", "#2f6fd0"],
+        ["A white-collar job", "Office work done by professionals", "#f2f2f2"],
+        ["Have green fingers", "Be very good at growing plants", "#2e9e4f"],
+        ["Tickled pink", "Extremely pleased about something", "#f48fb1"],
+        ["In the pink", "In excellent health", "#f48fb1"],
+        ["Blacklist someone", "Put someone on a list of people to avoid", "#333333"],
+        ["A golden handshake", "A large payment given when someone leaves a job", "#d4a017"]
+      ]
+    },
+    {
+      name: "Level 3 · Harder",
+      note: "Idioms you cannot work out from the words alone. Ten pairs per round.",
+      gridPairs: 10,
+      pairs: [
+        ["A red herring", "A detail that distracts from the real issue", "#cf2e2e"],
+        ["Blue blood", "Noble or aristocratic family background", "#2f6fd0"],
+        ["A white elephant", "An expensive possession that is of no use", "#f2f2f2"],
+        ["The black market", "Illegal buying and selling of goods", "#333333"],
+        ["Yellow-bellied", "Lacking courage", "#e8c33a"],
+        ["Paint the town red", "Go out and celebrate in a lively way", "#cf2e2e"],
+        ["Whiter than white", "Completely honest and moral", "#f2f2f2"],
+        ["Green around the gills", "Looking as though you are about to be sick", "#2e9e4f"],
+        ["Every cloud has a silver lining", "Every bad situation has some good in it", "#9aa3ad"],
+        ["A red-letter day", "A day that is important and worth remembering", "#cf2e2e"]
+      ]
+    }
+  ];
+
+  const game      = document.getElementById("game");
+  const statusEl  = document.getElementById("status");
+  const progress  = document.getElementById("progress");
+  const levelNote = document.getElementById("levelNote");
+  const resetLink = document.getElementById("resetLink");
+  const nextBtn   = document.getElementById("nextBtn");
+  const levelBtns = Array.prototype.slice.call(document.querySelectorAll(".level-btn"));
+
+  let levelIndex = 0;
+  let first = null, second = null, lock = false, matchedPairs = 0, gridPairs = 6;
+
+  function shuffle(arr){
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function pickPairs(level){
+    const copy = level.pairs.slice();
+    shuffle(copy);
+    return copy.slice(0, level.gridPairs);
+  }
+
+  function buildCards(roundPairs){
+    const cards = roundPairs.flatMap(function(entry){
+      const idiom = entry[0], meaning = entry[1], colour = entry[2];
+      return [
+        { text: idiom,   pair: idiom, colour: colour },
+        { text: meaning, pair: idiom, colour: colour }
+      ];
+    });
+    shuffle(cards);
+    return cards;
+  }
+
+  function rgbOf(hex){
+    const h = hex.replace("#","");
+    return [parseInt(h.substring(0,2),16), parseInt(h.substring(2,4),16), parseInt(h.substring(4,6),16)];
+  }
+  /* Dark or light text, chosen from the background's luminance */
+  function inkFor(hex){
+    const c = rgbOf(hex);
+    const lum = (0.299*c[0] + 0.587*c[1] + 0.114*c[2]) / 255;
+    return lum > 0.6 ? "#1e1e1e" : "#ffffff";
+  }
+  /* A darker edge, so pale cards (white lie, white elephant) stay visible
+     against the light page instead of dissolving into it */
+  function edgeFor(hex){
+    const c = rgbOf(hex).map(function(v){ return Math.round(v * 0.62); });
+    return "rgb(" + c[0] + "," + c[1] + "," + c[2] + ")";
+  }
+
+  function updateProgress(){
+    progress.textContent = "Pairs matched: " + matchedPairs + " / " + gridPairs;
+  }
+
+  function setLevelButtons(){
+    levelBtns.forEach(function(btn){
+      btn.setAttribute("aria-pressed", String(Number(btn.dataset.level) === levelIndex));
+    });
+  }
+
+  function renderGame(){
+    const level = LEVELS[levelIndex];
+    gridPairs = level.gridPairs;
+
+    game.innerHTML = "";
+    statusEl.textContent = "";
+    nextBtn.hidden = true;
+    levelNote.textContent = level.note;
+    first = null; second = null; lock = false; matchedPairs = 0;
+    setLevelButtons();
+    updateProgress();
+
+    const cards = buildCards(pickPairs(level));
+
+    cards.forEach(function(data){
+      const div = document.createElement("div");
+      div.className = "card";
+      div.textContent = "";
+      div.dataset.pair = data.pair;
+      div.dataset.text = data.text;
+      div.dataset.colour = data.colour;
+      div.setAttribute("role", "button");
+      div.setAttribute("tabindex", "0");
+      div.setAttribute("aria-label", "Hidden card");
+
+      function flip(){
+        if (lock || div.classList.contains("flipped") || div.classList.contains("matched")) return;
+        div.classList.add("flipped");
+        div.textContent = data.text;
+        div.setAttribute("aria-label", data.text);
+
+        if (!first) { first = div; return; }
+
+        second = div;
+        lock = true;
+
+        setTimeout(function(){
+          if (first.dataset.pair === second.dataset.pair) {
+            const c = first.dataset.colour;
+            const ink = inkFor(c);
+            const edge = edgeFor(c);
+            [first, second].forEach(function(card){
+              card.classList.remove("flipped");
+              card.classList.add("matched");
+              card.style.background = c;
+              card.style.color = ink;
+              card.style.borderColor = edge;
+            });
+            matchedPairs++;
+            updateProgress();
+            if (matchedPairs !== gridPairs) ColourSound.correct();
+
+            if (matchedPairs === gridPairs) {
+              if (levelIndex < LEVELS.length - 1) {
+                ColourSound.fanfare(false);
+                statusEl.textContent = "Level complete. Ready for something harder?";
+                nextBtn.textContent = "Next level: " + LEVELS[levelIndex + 1].name.replace(" · ", " — ");
+                nextBtn.hidden = false;
+                nextBtn.focus();
+              } else {
+                ColourSound.fanfare(true);
+                statusEl.textContent = "Brilliant — you have finished all three levels.";
+                nextBtn.textContent = "Play Level 1 again";
+                nextBtn.hidden = false;
+                nextBtn.focus();
+              }
+            }
+          } else {
+            ColourSound.wrong();
+            first.classList.remove("flipped");
+            second.classList.remove("flipped");
+            first.textContent = "";
+            second.textContent = "";
+            first.setAttribute("aria-label", "Hidden card");
+            second.setAttribute("aria-label", "Hidden card");
+          }
+          first = null;
+          second = null;
+          lock = false;
+        }, 800);
+      }
+
+      div.addEventListener("click", flip);
+      div.addEventListener("keydown", function(e){
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); }
+      });
+      game.appendChild(div);
+    });
+  }
+
+  levelBtns.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      levelIndex = Number(btn.dataset.level);
+      renderGame();
+    });
+  });
+
+  nextBtn.addEventListener("click", function(){
+    levelIndex = (levelIndex < LEVELS.length - 1) ? levelIndex + 1 : 0;
+    renderGame();
+    game.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  resetLink.addEventListener("click", function(e){
+    e.preventDefault();
+    renderGame();
+  });
+
+  renderGame();
+
+  /* ===== How to play ===== */
+  (function(){
+    var scrim = document.getElementById("howScrim");
+    var start = document.getElementById("howStart");
+    var open  = document.getElementById("howOpen");
+    var last  = null;
+    function show(){
+      last = document.activeElement;
+      scrim.hidden = false;
+      start.focus();
+    }
+    function hide(){
+      scrim.hidden = true;
+      if (last && last.focus) last.focus();
+    }
+    start.addEventListener("click", hide);
+    open.addEventListener("click", show);
+    scrim.addEventListener("click", function(e){ if (e.target === scrim) hide(); });
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape" && !scrim.hidden) hide();
+    });
+    /* the tile is visible on load, so put the keyboard on Start straight away */
+    if (!scrim.hidden) start.focus();
+  })();
+
+  /* ===== QR generator logic ===== */
+  const qrToggle = document.getElementById("qrToggle");
+  const qrPanel  = document.getElementById("qrPanel");
+  const qrText   = document.getElementById("qrText");
+  const qrMake   = document.getElementById("qrMake");
+  const qrCodeEl = document.getElementById("qrCode");
+
+  function ensureQrLibReady(){
+    return typeof window.QRCode !== "undefined";
+  }
+  function makeQr(value){
+    const text = (value && value.trim()) ? value.trim() : window.location.href;
+    qrCodeEl.innerHTML = "";
+    new QRCode(qrCodeEl, {
+      text: text,
+      width: 160,
+      height: 160,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  }
+  function openQr(){
+    qrPanel.classList.add("open");
+    qrToggle.setAttribute("aria-expanded", "true");
+    if (!qrText.value) qrText.value = window.location.href;
+    if (ensureQrLibReady()) {
+      makeQr(qrText.value);
+    } else {
+      setTimeout(function(){ if (ensureQrLibReady()) makeQr(qrText.value); }, 250);
+    }
+  }
+  function closeQr(){
+    qrPanel.classList.remove("open");
+    qrToggle.setAttribute("aria-expanded", "false");
+  }
+  qrToggle.addEventListener("click", function(){
+    if (qrPanel.classList.contains("open")) closeQr();
+    else openQr();
+  });
+  qrMake.addEventListener("click", function(){
+    if (ensureQrLibReady()) makeQr(qrText.value);
+  });
+  qrText.addEventListener("keydown", function(e){
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (ensureQrLibReady()) makeQr(qrText.value);
+    }
+    if (e.key === "Escape") { closeQr(); qrToggle.focus(); }
+  });
+  document.addEventListener("click", function(e){
+    const clickedInside = qrPanel.contains(e.target) || qrToggle.contains(e.target);
+    if (!clickedInside && qrPanel.classList.contains("open")) closeQr();
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && qrPanel.classList.contains("open")) { closeQr(); qrToggle.focus(); }
+  });
+})();
+</script>
+</body>
+</html>
