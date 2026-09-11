@@ -361,6 +361,24 @@
     }
     .game-card:hover .game-card-arrow { gap: 8px; }
 
+    /* NEW badge — matches the yellow "new" signal used by the blog pill */
+    .game-card.is-new { border-color: rgba(253,224,71,.75); }
+    .game-card.is-new .game-card-label { padding-right: 66px; }
+    .new-badge {
+      position: absolute; top: 16px; right: 16px;
+      font-family: var(--sans); font-size: 0.63rem; font-weight: 800;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: #422006; background: #fde047;
+      padding: 4px 11px; border-radius: 999px;
+      box-shadow: 0 0 0 0 rgba(253,224,71,.65);
+      animation: new-ping 2.2s ease-out infinite;
+    }
+    @keyframes new-ping {
+      0%   { box-shadow: 0 0 0 0 rgba(253,224,71,.65); }
+      70%  { box-shadow: 0 0 0 10px rgba(253,224,71,0); }
+      100% { box-shadow: 0 0 0 0 rgba(253,224,71,0); }
+    }
+
     /* FOOTER */
     footer { background: var(--header); color: var(--header-ink); border-top: 1px solid rgba(255,255,255,.08); padding: 20px 0 calc(20px + var(--safe-bottom)); }
     .footer-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; text-align: center; font-family: var(--sans); font-size: 0.87rem; color: rgba(248,250,252,.60); }
@@ -373,6 +391,8 @@
       .header-inner { padding-block: 20px 24px; }
       .game-grid { gap: 14px; }
       .game-card { padding: 18px 20px; }
+      .game-card.is-new .game-card-label { padding-right: 60px; }
+      .new-badge { top: 12px; right: 12px; }
       .blog-roll-date { min-width: 100%; }
       .blog-roll-tag { margin-left: 0; }
       .pill { padding: 10px 18px; font-size: 0.86rem; }
@@ -388,6 +408,7 @@
       .blog-panel { transition: none; }
       .pill { transition: none; }
       .pill .pill-dot { animation: none; }
+      .new-badge { animation: none; }
     }
   </style>
 
@@ -475,6 +496,14 @@ There is a QR code in the top-left corner of each game, so teachers can project 
           <span class="game-card-arrow">Play <span>→</span></span>
         </a>
 
+        <a class="game-card is-new" href="game/colouridioms.html">
+          <span class="new-badge">New</span>
+          <span class="game-card-label">Matching Game · B1–B2</span>
+          <span class="game-card-title">Colour Idioms</span>
+          <p class="game-card-desc">Three levels of colour idioms, easy to harder. One, two or three players — keep your own score.</p>
+          <span class="game-card-arrow">Play <span>→</span></span>
+        </a>
+
         <a class="game-card" href="games/idioms-weather/index.html">
           <span class="game-card-label">Matching Game · B2</span>
           <span class="game-card-title">Weather Idioms</span>
@@ -539,7 +568,7 @@ There is a QR code in the top-left corner of each game, so teachers can project 
             <span class="pill-text">Read the Blog</span>
             <span class="pill-chev" aria-hidden="true">▾</span>
           </button>
-          <span class="pill-hint">New post · 10 Sep 2026</span>
+          <span class="pill-hint">New post · 11 Sep 2026</span>
         </div>
       </div>
 
@@ -551,6 +580,13 @@ There is a QR code in the top-left corner of each game, so teachers can project 
             <div class="blog-roll one-col">
               <p class="blog-roll-title">Latest posts</p>
               <ul class="blog-roll-list">
+                <li>
+                  <a href="blog/ielts-reading-changes-2026.html">
+                    <span class="blog-roll-date">11 Sep 2026</span>
+                    <span class="blog-roll-name">IELTS Reading Changes in 2026</span>
+                    <span class="blog-roll-tag">IELTS</span>
+                  </a>
+                </li>
                 <li>
                   <a href="blog/kahoot-baamboozle-wordwall-funny-english.html">
                     <span class="blog-roll-date">10 Sep 2026</span>
@@ -612,13 +648,14 @@ There is a QR code in the top-left corner of each game, so teachers can project 
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Get Expressions (A2)", "url": "game1/geta2.html" },
         { "@type": "ListItem", "position": 2, "name": "Have, Make or Do (A1–A2)", "url": "game1/have-make-do-matching-game.html" },
-        { "@type": "ListItem", "position": 3, "name": "Weather Idioms (B2)", "url": "games/idioms-weather/index.html" },
-        { "@type": "ListItem", "position": 4, "name": "Money Idioms (B2)", "url": "MoneyIdioms/index.html" },
-        { "@type": "ListItem", "position": 5, "name": "Ages & Stages in Life Idioms (B2)", "url": "game/agesandstagestest.html" },
-        { "@type": "ListItem", "position": 6, "name": "Get Expressions (B2)", "url": "game1/getB2.html" },
-        { "@type": "ListItem", "position": 7, "name": "Though-Thought-Through-Thorough (B2)", "url": "matchinggame/throughthoughtthough.html" },
-        { "@type": "ListItem", "position": 8, "name": "Casual vs Academic Language (C2)", "url": "Set3/Casualvsacademic.html" },
-        { "@type": "ListItem", "position": 9, "name": "Get Expressions (C2)", "url": "game1/getC2.html" }
+        { "@type": "ListItem", "position": 3, "name": "Colour Idioms (B1–B2)", "url": "game/colouridioms.html" },
+        { "@type": "ListItem", "position": 4, "name": "Weather Idioms (B2)", "url": "games/idioms-weather/index.html" },
+        { "@type": "ListItem", "position": 5, "name": "Money Idioms (B2)", "url": "MoneyIdioms/index.html" },
+        { "@type": "ListItem", "position": 6, "name": "Ages & Stages in Life Idioms (B2)", "url": "game/agesandstagestest.html" },
+        { "@type": "ListItem", "position": 7, "name": "Get Expressions (B2)", "url": "game1/getB2.html" },
+        { "@type": "ListItem", "position": 8, "name": "Though-Thought-Through-Thorough (B2)", "url": "matchinggame/throughthoughtthough.html" },
+        { "@type": "ListItem", "position": 9, "name": "Casual vs Academic Language (C2)", "url": "Set3/Casualvsacademic.html" },
+        { "@type": "ListItem", "position": 10, "name": "Get Expressions (C2)", "url": "game1/getC2.html" }
       ]
     }
   ]
