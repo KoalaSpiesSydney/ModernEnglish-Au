@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Have, Make & Do – Matching Game (A1/A2) | Modern English AU</title>
+<title>Have, Make & Do – Collocation Game (A1/A2) | Modern English AU</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -21,12 +21,22 @@
   --bad:#a32525;
   --unflipped:#1a3a5c;
   --flipped:#0a3d62;
+  --sel:#d4870a;
+  /* One colour per verb — used on the legend, the verb tiles and the
+     cleared cards, so a finished board is sorted by verb at a glance. */
+  --have:#1a3a7a;
+  --make:#b5451b;
+  --do:#0a6b3c;
+  /* Corner radius — one small value for everything you tap, a slightly
+     larger one for the big overlay panels. */
+  --r:5px;
+  --r-lg:10px;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  font-family:"Newsreader", Georgia, serif;
+  font-family:"Fredoka", "Trebuchet MS", system-ui, -apple-system, sans-serif;
   background:var(--bg);
   color:var(--ink);
   display:flex;
@@ -39,38 +49,185 @@ body{
 .bg-gif{
   position:fixed;
   inset:0;
-  z-index:-2;
+  z-index:-3;
   background:url("havemakedo.gif") center / cover no-repeat;
   background-color:#dce8f5;
+}
+.bg-video{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  pointer-events:none;
 }
 .bg-overlay{
   position:fixed;
   inset:0;
   z-index:-1;
-  background:rgba(240,246,252,.80);
+  background:rgba(240,246,252,.84);
+}
+@media(prefers-reduced-motion:reduce){
+  .bg-video{ display:none; }
 }
 
-/* ===== Header ===== */
-header{
-  background:#f0f4f8;
-  color:var(--accent);
+/* ===== Opening slide / instructions ===== */
+.slide{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));
+  background:rgba(10,61,98,.55);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+}
+.slide[hidden]{ display:none; }
+.slide-inner{
+  width:min(100%, 660px);
+  max-height:100%;
+  overflow-y:auto;
+  background:rgba(255,255,255,.97);
+  border-radius:var(--r-lg);
+  box-shadow:0 24px 60px rgba(0,0,0,.35);
+  padding:2rem 1.8rem 1.8rem;
   text-align:center;
-  padding:1.4rem 0 1rem;
-  letter-spacing:2px;
+}
+/* Swap for a supplied slide image: put <img class="slide-img" src="..."> inside .slide-inner */
+.slide-img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:var(--r);
+  margin-bottom:1.2rem;
+}
+.slide h2{
+  color:var(--accent);
+  font-size:clamp(1.35rem,3.2vw,1.9rem);
+  letter-spacing:1.5px;
+  margin-bottom:.2rem;
+  line-height:1.2;
+}
+.slide .slide-sub{
+  color:#5a6b7a;
+  font-size:.95rem;
+  letter-spacing:1px;
+  margin-bottom:1.2rem;
+}
+.slide ol{
+  text-align:left;
+  max-width:440px;
+  margin:0 auto 1.1rem;
+  padding-left:1.4rem;
+  line-height:1.85;
+  font-size:1.02rem;
+}
+.slide ol li::marker{ color:var(--accent); font-weight:700; }
+.slide .slide-eg{
+  background:#f0f4f8;
+  border-left:4px solid var(--accent);
+  border-radius:var(--r);
+  padding:.8rem 1rem;
+  max-width:440px;
+  margin:0 auto 1.3rem;
+  text-align:left;
+  font-size:.96rem;
+  line-height:1.6;
+}
+.slide .slide-eg strong{ color:var(--accent); }
+.slide-start{
+  background:var(--accent);
+  color:#fff;
+  font-family:inherit;
   font-weight:700;
-  font-size:1.2rem;
-  border-bottom:2px solid #cdd9e5;
+  font-size:1.1rem;
+  letter-spacing:1px;
+  padding:.85rem 2.6rem;
+  border:none;
+  border-radius:var(--r);
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(10,61,98,.35);
+  transition:all .25s ease;
+}
+.slide-start:hover{ background:linear-gradient(90deg,var(--accent),#2196f3); transform:translateY(-2px); }
+.slide-foot{
+  margin-top:1rem;
+  font-size:.85rem;
+  color:#7a8899;
+  letter-spacing:.5px;
+}
+
+/* ===== Winner screen ===== */
+.slide.win .slide-inner{ border-top:8px solid var(--ok); }
+.win-trophy{ font-size:2.6rem; line-height:1; margin-bottom:.3rem; }
+.win-stats{
+  display:flex;
+  justify-content:center;
+  gap:1.6rem;
+  flex-wrap:wrap;
+  margin:1rem auto 1.2rem;
+}
+.win-stat b{
+  display:block;
+  font-size:1.9rem;
+  line-height:1.1;
+  color:var(--accent);
+}
+.win-stat span{
+  font-size:.68rem;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:#7a8899;
+  font-weight:700;
+}
+.win-verbs{
+  display:flex;
+  justify-content:center;
+  gap:.5rem;
+  flex-wrap:wrap;
+  margin-bottom:1.2rem;
+}
+.win-verb{
+  border-radius:var(--r);
+  padding:5px 15px;
+  font-size:.86rem;
+  font-weight:800;
+  letter-spacing:.5px;
+  color:#fff;
+}
+.win-verb.have{ background:var(--have); }
+.win-verb.make{ background:var(--make); }
+.win-verb.do  { background:var(--do);   }
+@media(max-width:600px){
+  .win-trophy{ font-size:2rem; }
+  .win-stats{ gap:1.1rem; margin:.7rem auto .9rem; }
+  .win-stat b{ font-size:1.5rem; }
+}
+
+/* ===== Header — the site's branding block, in the deep blue with
+   light type. No links out; the game keeps you here. ===== */
+header{
+  background:var(--accent);
+  color:#fff;
+  text-align:center;
+  padding:1.3rem 1rem 1rem;
+  letter-spacing:3px;
+  font-weight:300;
+  font-size:1.15rem;
 }
 header span{
   display:block;
-  color:#302d2d;
+  color:rgba(255,255,255,.72);
   font-weight:300;
-  font-size:.6rem;
+  font-size:.62rem;
   letter-spacing:3px;
-  margin-top:1px;
+  margin-top:4px;
 }
 
-/* ===== QR + HOME ===== */
+/* ===== QR button — top left corner ===== */
 .qr-toggle{
   position:fixed;
   left:max(14px, env(safe-area-inset-left));
@@ -78,18 +235,22 @@ header span{
   z-index:9999;
   width:46px;
   height:46px;
-  border-radius:12px;
-  border:1px solid rgba(0,0,0,.12);
-  background:rgba(255,255,255,.92);
-  color:#111;
-  font-weight:900;
+  border-radius:var(--r);
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.94);
+  color:var(--accent);
+  font-weight:600;
   cursor:pointer;
-  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  box-shadow:0 6px 16px rgba(0,0,0,.18);
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
   font-family:inherit;
   font-size:.85rem;
+  transition:background .2s;
 }
+@media(hover:hover){ .qr-toggle:hover{ background:#fff; } }
+
+/* ===== QR panel ===== */
 .qr-panel{
   position:fixed;
   left:max(14px, env(safe-area-inset-left));
@@ -98,7 +259,7 @@ header span{
   width:240px;
   background:rgba(255,255,255,.96);
   border:1px solid rgba(0,0,0,.12);
-  border-radius:16px;
+  border-radius:var(--r-lg);
   padding:12px;
   box-shadow:0 12px 28px rgba(0,0,0,.18);
   display:none;
@@ -125,30 +286,8 @@ header span{
   align-items:center;
   justify-content:center;
   background:#fff;
-  border-radius:12px;
+  border-radius:var(--r);
   border:1px solid rgba(0,0,0,.10);
-}
-.home-btn{
-  position:fixed;
-  right:max(14px, env(safe-area-inset-right));
-  top:max(14px, env(safe-area-inset-top));
-  z-index:9999;
-  padding:.7rem 1rem;
-  border-radius:14px;
-  background:rgba(255,255,255,.92);
-  border:1px solid rgba(0,0,0,.12);
-  color:#111;
-  text-decoration:none;
-  font-weight:800;
-  box-shadow:0 6px 16px rgba(0,0,0,.12);
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-  font-family:inherit;
-  font-size:.85rem;
-}
-@media(hover:hover){
-  .home-btn:hover{ background:#ffffff; }
-  .qr-toggle:hover{ background:#ffffff; }
 }
 
 /* ===== Verb legend badges ===== */
@@ -165,11 +304,14 @@ header span{
   font-weight:800;
   letter-spacing:1.5px;
   padding:4px 14px;
-  border-radius:999px;
-  font-family:"Newsreader",Georgia,serif;
+  border-radius:var(--r);
+  font-family:inherit;
   background:var(--accent);
   color:#fff;
 }
+.verb-badge.have{ background:var(--have); }
+.verb-badge.make{ background:var(--make); }
+.verb-badge.do  { background:var(--do);   }
 
 /* ===== Level badge ===== */
 .level-badge{
@@ -180,9 +322,9 @@ header span{
   font-weight:800;
   letter-spacing:2px;
   padding:3px 10px;
-  border-radius:999px;
+  border-radius:var(--r);
   margin-bottom:.4rem;
-  font-family:"Newsreader",Georgia,serif;
+  font-family:inherit;
 }
 
 /* ===== Filter bar ===== */
@@ -195,8 +337,10 @@ header span{
 }
 .filter-btn{
   padding:.42rem .95rem;
-  border-radius:999px;
-  border:2px solid transparent;
+  border-radius:var(--r);
+  border:2px solid var(--accent);
+  background:#fff;
+  color:var(--accent);
   font-family:inherit;
   font-size:.82rem;
   font-weight:700;
@@ -204,13 +348,7 @@ header span{
   transition:all .2s;
   -webkit-tap-highlight-color:transparent;
 }
-.filter-btn.all{ background:#0a3d62; color:#fff; border-color:#0a3d62; }
-.filter-btn.have{ background:#fff; color:var(--accent); border-color:var(--accent); }
-.filter-btn.make{ background:#fff; color:var(--accent); border-color:var(--accent); }
-.filter-btn.do  { background:#fff; color:var(--accent); border-color:var(--accent); }
-.filter-btn.active.have{ background:var(--accent); color:#fff; }
-.filter-btn.active.make{ background:var(--accent); color:#fff; }
-.filter-btn.active.do  { background:var(--accent); color:#fff; }
+.filter-btn.active{ background:var(--accent); color:#fff; }
 
 /* ===== Main ===== */
 main{
@@ -239,7 +377,7 @@ p{
 /* ===== Round counter ===== */
 .round-info{
   font-size:.85rem;
-  color:var(--muted);
+  color:#7a8899;
   margin-bottom:.6rem;
   letter-spacing:.5px;
   font-weight:600;
@@ -258,7 +396,7 @@ button.btn{
   color:#fff;
   font-weight:600;
   padding:.75rem 1.4rem;
-  border-radius:45px;
+  border-radius:var(--r);
   border:none;
   cursor:pointer;
   box-shadow:0 2px 6px rgba(0,0,0,.25);
@@ -270,6 +408,13 @@ button.btn:hover{
   background:linear-gradient(90deg,var(--accent),#2196f3);
   transform:translateY(-2px);
 }
+button.btn.ghost{
+  background:#fff;
+  color:var(--accent);
+  border:2px solid var(--accent);
+  box-shadow:0 2px 6px rgba(0,0,0,.12);
+}
+button.btn.ghost:hover{ background:var(--accent); color:#fff; }
 
 /* ===== Score bar ===== */
 .score-bar{
@@ -279,44 +424,114 @@ button.btn:hover{
   margin:.4rem 0 .8rem;
   font-size:.88rem;
   font-weight:700;
-  color:var(--muted);
+  color:#7a8899;
+  flex-wrap:wrap;
 }
 .score-bar span{ color:var(--ink); }
+
+/* ===== Prompt line ===== */
+#prompt{
+  min-height:1.7em;
+  margin:.2rem 0 .8rem;
+  font-size:1.02rem;
+  font-weight:700;
+  color:var(--accent);
+  letter-spacing:.3px;
+}
+#prompt.warn{ color:var(--bad); }
 
 /* ===== Game Grid ===== */
 #game{
   display:grid;
-  grid-template-columns:repeat(4, 1fr);
+  grid-template-columns:repeat(5, 1fr);
   gap:10px;
-  width:min(100%, 780px);
+  width:min(100%, 960px);
   margin:0 auto;
 }
 
-/* Card base — unflipped */
-.card{
-  background:var(--unflipped);
-  border:2px solid var(--accent);
-  border-radius:14px;
-  padding:10px 8px;
-  min-height:74px;
+.tile{
+  position:relative;
+  /* Height follows the viewport so all 25 tiles stay on one screen on a
+     short window (laptop, iPad landscape) as well as a tall phone. */
+  min-height:clamp(46px, 8.4vh, 92px);
+  border:0;
+  padding:0;
+  background:transparent;
+  font-family:inherit;
+  cursor:pointer;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:transform .2s ease, opacity .3s ease;
+}
+.tile:focus-visible{ outline:3px solid var(--sel); outline-offset:3px; border-radius:var(--r); }
+.tile:hover:not(.done){ transform:translateY(-2px); }
+
+.face{
+  position:absolute;
+  inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  cursor:pointer;
-  font-size:.82rem;
-  line-height:1.3;
-  color:#fff;
-  transition:background .3s, color .3s, transform .2s, border-color .2s;
+  padding:10px 8px;
+  border:2px solid var(--accent);
+  border-radius:var(--r);
   box-shadow:0 3px 6px rgba(0,0,0,.14);
-  word-break:break-word;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-  position:relative;
+  font-size:.86rem;
+  line-height:1.25;
+  overflow-wrap:anywhere;
+  hyphens:auto;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transition:background .25s, color .25s, border-color .25s;
 }
 
-/* Card number badge — top-left corner */
-.card .card-num{
+/* Verb tiles — always face up, and they stay on the board all round
+   so there is always one within reach of a thumb. */
+.tile.verbtile .face{
+  background:#fff;
+  color:var(--accent);
+  border-width:3px;
+  border-color:var(--accent);
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  font-size:.95rem;
+}
+.tile.verbtile.v-have .face{ color:var(--have); border-color:var(--have); }
+.tile.verbtile.v-make .face{ color:var(--make); border-color:var(--make); }
+.tile.verbtile.v-do   .face{ color:var(--do);   border-color:var(--do);   }
+
+.tile.verbtile.selected .face{ color:#fff; box-shadow:0 0 0 4px rgba(212,135,10,.5); }
+.tile.verbtile.v-have.selected .face{ background:var(--have); }
+.tile.verbtile.v-make.selected .face{ background:var(--make); }
+.tile.verbtile.v-do.selected   .face{ background:var(--do);   }
+
+/* Word cards — flip to reveal */
+.tile.wordtile{ perspective:1000px; }
+.tile.wordtile .inner{
+  position:absolute;
+  inset:0;
+  transform-style:preserve-3d;
+  transition:transform .45s cubic-bezier(.4,.15,.2,1);
+}
+.tile.wordtile.flipped .inner{ transform:rotateY(180deg); }
+.tile.wordtile .back{
+  background:var(--unflipped);
+  color:rgba(255,255,255,.45);
+  font-size:1.5rem;
+  font-weight:700;
+}
+.tile.wordtile .front{
+  background:var(--flipped);
+  color:#fff;
+  font-weight:600;
+  transform:rotateY(180deg);
+}
+
+/* Card number badge */
+.card-num{
   position:absolute;
   top:5px;
   left:7px;
@@ -328,15 +543,7 @@ button.btn:hover{
   pointer-events:none;
 }
 
-.card.flipped{
-  transform:scale(1.04);
-}
-.card.matched{
-  cursor:default;
-  transform:none;
-}
-
-/* Wrong shake */
+/* Feedback */
 @keyframes shake{
   0%,100%{transform:translateX(0)}
   20%{transform:translateX(-6px)}
@@ -344,7 +551,51 @@ button.btn:hover{
   60%{transform:translateX(-4px)}
   80%{transform:translateX(4px)}
 }
-.card.shake{ animation:shake .35s ease; }
+.tile.shake{ animation:shake .35s ease; }
+.tile.wrong .front, .tile.verbtile.wrong .face{
+  background:var(--bad) !important;
+  border-color:var(--bad) !important;
+  color:#fff !important;
+}
+
+/* Cleared cards keep the full collocation on show, coloured by verb,
+   so the finished board reads as a sorted list of correct phrases. */
+.tile.done{ pointer-events:none; }
+.tile.done .face{ box-shadow:none; }
+.tile.wordtile.done .front{ font-weight:700; }
+.tile.wordtile.done.v-have .front{ background:var(--have); border-color:var(--have); }
+.tile.wordtile.done.v-make .front{ background:var(--make); border-color:var(--make); }
+.tile.wordtile.done.v-do   .front{ background:var(--do);   border-color:var(--do);   }
+
+/* ===== Made-collocations list ===== */
+.made{
+  width:min(100%, 860px);
+  margin:1.4rem auto 0;
+}
+.made h3{
+  font-size:.72rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#7a8899;
+  margin-bottom:.5rem;
+  font-weight:800;
+}
+.made-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  min-height:34px;
+}
+.made-chip{
+  background:rgba(255,255,255,.94);
+  border:2px solid var(--ok);
+  color:var(--ok);
+  border-radius:var(--r);
+  padding:5px 15px;
+  font-size:.92rem;
+  font-weight:700;
+}
 
 #status{
   margin-top:1rem;
@@ -360,7 +611,7 @@ button.btn:hover{
   margin:2rem auto 0;
   background:rgba(255,255,255,.92);
   border:1px solid rgba(0,0,0,.12);
-  border-radius:14px;
+  border-radius:var(--r);
   padding:1rem 1.2rem;
   text-align:left;
 }
@@ -375,15 +626,22 @@ button.btn:hover{
   margin:1rem 0 .3rem;
   font-size:.95rem;
   letter-spacing:.5px;
+  color:var(--accent);
 }
-.notes h3.have-h{ color:var(--accent); }
-.notes h3.make-h{ color:var(--accent); }
-.notes h3.do-h  { color:var(--accent); }
 .notes ul{
   margin:0 0 .5rem 1.2rem;
   line-height:1.75;
 }
 .notes li{ margin-bottom:.2rem; }
+.notes .note-box{
+  background:#f0f4f8;
+  border-left:4px solid var(--accent);
+  border-radius:var(--r);
+  padding:.7rem .9rem;
+  margin:.6rem 0 .2rem;
+  font-size:.92rem;
+  line-height:1.6;
+}
 
 /* ===== Gap Fill ===== */
 .gapfill-wrap{
@@ -408,16 +666,12 @@ button.btn:hover{
 .gapfill-item{
   background:rgba(255,255,255,.92);
   border:1px solid rgba(0,0,0,.12);
-  border-radius:14px;
+  border-radius:var(--r);
   padding:14px;
   text-align:center;
+  border-left:4px solid var(--accent);
 }
 .gapfill-item p{ margin:0 auto .85rem; max-width:680px; }
-
-/* verb accent strip */
-.gapfill-item.gf-have{ border-left:4px solid var(--accent); }
-.gapfill-item.gf-make{ border-left:4px solid var(--accent); }
-.gapfill-item.gf-do  { border-left:4px solid var(--accent); }
 
 .speak-btn{
   display:inline-flex;
@@ -425,7 +679,7 @@ button.btn:hover{
   gap:.45rem;
   margin:4px auto 10px;
   padding:.5rem 1rem;
-  border-radius:999px;
+  border-radius:var(--r);
   border:2px solid var(--accent);
   background:transparent;
   color:var(--accent);
@@ -455,12 +709,12 @@ button.btn:hover{
   margin-bottom:1rem;
   flex-wrap:wrap;
   font-size:.88rem;
-  color:var(--muted);
+  color:#7a8899;
   font-weight:600;
 }
 .voice-select{
   padding:.4rem .7rem;
-  border-radius:8px;
+  border-radius:var(--r);
   border:1.5px solid rgba(10,61,98,.2);
   font:inherit;
   font-size:.88rem;
@@ -477,7 +731,7 @@ button.btn:hover{
   margin:0 auto;
   padding:.7rem .9rem;
   border:2px solid rgba(10,61,98,.18);
-  border-radius:10px;
+  border-radius:var(--r);
   font:inherit;
   outline:none;
   text-align:center;
@@ -498,7 +752,7 @@ button.btn:hover{
   color:#fff;
   font-weight:600;
   padding:.6rem .95rem;
-  border-radius:999px;
+  border-radius:var(--r);
   border:none;
   cursor:pointer;
   font-family:inherit;
@@ -541,7 +795,7 @@ a.btn{
   font-weight:600;
   text-decoration:none;
   padding:.8rem 1.4rem;
-  border-radius:45px;
+  border-radius:var(--r);
   box-shadow:0 2px 6px rgba(0,0,0,.25);
   transition:all .25s ease;
   font-family:inherit;
@@ -561,57 +815,205 @@ footer{
   font-size:.9rem;
 }
 
-/* ===== Responsive ===== */
-/* Desktop >900px: 4 cols */
-@media(min-width:901px){
-  #game{ grid-template-columns:repeat(4,1fr); width:min(100%,780px); gap:10px; }
-  .card{ min-height:74px; font-size:.82rem; padding:10px 8px; }
+/* ===== Responsive =====
+   25 tiles stay in a 5-column grid at every width so the whole
+   board is visible on one screen — that's the point of the game. */
+/* Big screens and projectors — let the board grow so it reads from
+   the back of a classroom. */
+@media(min-width:1400px) and (min-height:1000px){
+  #game{ width:min(100%, 1240px); gap:14px; }
+  .tile{ min-height:clamp(60px, 9.4vh, 112px); }
+  .face{ font-size:1.05rem; border-radius:var(--r); }
+  .tile.verbtile .face{ font-size:1.2rem; letter-spacing:3px; }
+  .tile.wordtile .back{ font-size:1.9rem; }
+  .card-num{ font-size:.8rem; top:8px; left:10px; }
+  #prompt{ font-size:1.2rem; }
 }
-/* Tablet 601–900px: 3 cols */
-@media(max-width:900px){
-  #game{ grid-template-columns:repeat(3,1fr); width:min(100%,560px); gap:9px; }
-  .card{ min-height:78px; font-size:.80rem; padding:9px 7px; }
+
+@media(max-width:1000px){
+  #game{ gap:8px; width:min(100%,820px); }
+  .tile{ min-height:clamp(44px, 8vh, 84px); }
+  .face{ font-size:.8rem; padding:8px 5px; }
+  .tile.verbtile .face{ font-size:.88rem; letter-spacing:1.5px; }
 }
-/* Phone ≤600px: 2 cols */
+@media(max-width:820px){
+  #game{ gap:7px; }
+  .tile{ min-height:clamp(42px, 7.6vh, 76px); }
+  .face{ font-size:.74rem; padding:7px 4px; }
+  .tile.verbtile .face{ font-size:.8rem; letter-spacing:1px; border-width:2px; }
+}
 @media(max-width:600px){
-  main{ padding:1.5rem .8rem calc(2.4rem + env(safe-area-inset-bottom)); }
-  #game{ grid-template-columns:repeat(2,1fr); width:min(100%,370px); gap:8px; }
-  .card{ min-height:82px; font-size:.76rem; padding:8px 6px; border-radius:12px; }
-  .qr-toggle,.home-btn{ transform:scale(.95); transform-origin:top; }
+  /* Compress everything above the grid so all 16 tiles fit on one phone
+     screen — seeing the whole board at once is the point of the game.
+     The instructions live in the opening slide, so the intro text and the
+     legend are redundant here. */
+  header{ font-size:.9rem; padding:.95rem 3.8rem .7rem; letter-spacing:2px; }
+  main{ padding:.9rem .7rem calc(2.4rem + env(safe-area-inset-bottom)); }
+  main > .level-badge{ display:none; }
+  main > p{ display:none; }
+  .verb-legend{ display:none; }
+  h1{ font-size:1.05rem; letter-spacing:1px; margin-top:.1rem; }
+  .filter-bar{ gap:.3rem; margin:.5rem 0 .3rem; }
+  .filter-btn{ padding:.3rem .6rem; font-size:.72rem; border-width:2px; }
+  .round-info{ font-size:.72rem; margin-bottom:.25rem; }
+  .score-bar{ margin:.2rem 0 .45rem; }
+  .controls{ gap:.4rem; margin-bottom:.5rem; }
+  button.btn{ padding:.45rem .8rem; font-size:.8rem; }
+  #prompt{ font-size:.88rem; margin:.1rem 0 .5rem; min-height:1.5em; }
+  .made{ margin-top:1rem; }
+  #game{ gap:5px; }
+  .tile{ min-height:clamp(40px, 7vh, 62px); }
+  .face{ font-size:.6rem; padding:4px 2px; border-radius:var(--r); line-height:1.18; }
+  .tile.verbtile .face{ font-size:.64rem; letter-spacing:.5px; border-width:2px; }
+  .tile.wordtile .back{ font-size:1rem; }
+  .card-num{ font-size:.52rem; top:3px; left:4px; }
+  .qr-panel{ top:64px; width:min(240px, calc(100vw - 28px)); }
   .gapfill-input{ width:100%; }
+  .score-bar{ gap:.9rem; font-size:.8rem; }
+  .slide-inner{ padding:1.5rem 1.1rem 1.3rem; }
+  .slide ol{ font-size:.95rem; line-height:1.7; }
 }
-/* Very small ≤360px */
+/* Short windows — laptops, iPad in landscape, a half-height browser.
+   Trim everything above the grid; the instructions live in the opening
+   slide, so the intro paragraph and legend are not needed on screen. */
+@media(min-width:601px) and (max-height:860px){
+  main{ padding-top:.8rem; }
+  main > .level-badge{ display:none; }
+  main > p{ display:none; }
+  .verb-legend{ display:none; }
+  h1{ font-size:1.25rem; margin-top:.1rem; }
+  .filter-bar{ margin:.45rem 0 .25rem; }
+  .filter-btn{ padding:.32rem .8rem; font-size:.78rem; }
+  .round-info{ margin-bottom:.25rem; }
+  .score-bar{ margin:.2rem 0 .45rem; }
+  .controls{ margin-bottom:.5rem; gap:.6rem; }
+  button.btn{ padding:.5rem 1rem; font-size:.9rem; }
+  #prompt{ margin:.1rem 0 .5rem; min-height:1.5em; }
+}
+/* Short phones (SE-sized) — squeeze the last of the chrome. */
+@media(max-width:600px) and (max-height:700px){
+  header{ padding:.65rem 3.6rem .5rem; font-size:.82rem; }
+  h1{ font-size:.95rem; }
+  .round-info{ display:none; }
+  .controls{ margin-bottom:.35rem; }
+  button.btn{ padding:.35rem .7rem; font-size:.74rem; }
+  .filter-btn{ padding:.26rem .5rem; font-size:.68rem; }
+  #prompt{ font-size:.8rem; margin:.05rem 0 .35rem; }
+}
+
+/* Landscape phones — very little height. Everything shrinks hard so the
+   board still fits; the branding bar gives up most of its padding. */
+@media(max-height:500px){
+  header{ padding:.3rem 3.6rem .25rem; font-size:.72rem; letter-spacing:1.5px; }
+  header span{ display:none; }
+  main{ padding:.4rem .6rem .8rem; }
+  main > .level-badge, main > p, .verb-legend{ display:none; }
+  h1{ font-size:.9rem; letter-spacing:.5px; margin-top:0; }
+  .filter-bar{ margin:.3rem 0 .2rem; gap:.25rem; }
+  .filter-btn{ padding:.2rem .55rem; font-size:.66rem; border-width:1.5px; }
+  .round-info{ display:none; }
+  .score-bar{ margin:.15rem 0 .25rem; font-size:.7rem; gap:.8rem; }
+  .controls{ margin-bottom:.3rem; gap:.35rem; }
+  button.btn{ padding:.25rem .6rem; font-size:.7rem; }
+  #prompt{ font-size:.72rem; margin:0 0 .2rem; min-height:1.2em; }
+  #game{ gap:3px; }
+  .tile{ min-height:clamp(28px, 9vh, 60px); }
+  .face{ font-size:.6rem; padding:3px 2px; border-radius:var(--r); }
+  .tile.verbtile .face{ font-size:.64rem; letter-spacing:.5px; }
+  .tile.wordtile .back{ font-size:.95rem; }
+  .qr-toggle{ width:34px; height:34px; font-size:.7rem; }
+  .qr-panel{ top:46px; }
+  .slide-inner{ padding:1rem 1.1rem; }
+  .slide ol{ line-height:1.5; font-size:.85rem; margin-bottom:.6rem; }
+  .slide .slide-eg{ font-size:.82rem; padding:.5rem .7rem; margin-bottom:.7rem; }
+  .slide h2{ font-size:1.1rem; }
+}
+
 @media(max-width:360px){
-  #game{ width:100%; gap:6px; }
-  .card{ min-height:74px; font-size:.72rem; padding:6px 5px; }
+  main{ padding-left:.45rem; padding-right:.45rem; }
+  #game{ gap:4px; }
+  .tile{ min-height:clamp(38px, 6.6vh, 56px); }
+  .face{ font-size:.55rem; padding:3px 1px; }
+  .tile.verbtile .face{ font-size:.58rem; letter-spacing:0; }
 }
 </style>
 </head>
 <body>
 
 <div class="bg-gif"></div>
+<video class="bg-video" id="bgVideo" autoplay muted loop playsinline webkit-playsinline
+       preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1"
+       poster="havemakedo.gif">
+  <source src="bg.mp4" type="video/mp4">
+  <!-- Optional: add a WebM alongside the MP4 for older Android browsers
+       <source src="bg.webm" type="video/webm"> -->
+</video>
 <div class="bg-overlay"></div>
 
-<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR">QR</button>
+<!-- ===== Opening slide ===== -->
+<div class="slide" id="slide" role="dialog" aria-modal="true" aria-labelledby="slideTitle">
+  <div class="slide-inner">
+    <!-- To use your own artwork instead of the text below, drop an image in here:
+         <img class="slide-img" src="instructions.png" alt="How to play"> -->
+    <div class="level-badge">A1–A2 BEGINNER</div>
+    <h2 id="slideTitle">Have, Make &amp; Do</h2>
+    <div class="slide-sub">BUILD THE COLLOCATION</div>
+
+    <ol>
+      <li>Tap a <strong>verb tile</strong> — have, make or do. They stay on the board.</li>
+      <li>Turn over a <strong>numbered card</strong> to see the word.</li>
+      <li>If the two go together, you keep the card.</li>
+      <li>If they don't, the card turns back over — remember where it was!</li>
+    </ol>
+
+    <div class="slide-eg">
+      <strong>do</strong> + <strong>the dishes</strong> → ✓ we say “do the dishes”<br>
+      <strong>make</strong> + <strong>a shower</strong> → ✗ we say “have a shower”
+    </div>
+
+    <button class="slide-start" id="slideStart" type="button">Start playing</button>
+    <div class="slide-foot">Clear all 20 cards to finish the board.</div>
+  </div>
+</div>
+
+<!-- ===== Winner screen ===== -->
+<div class="slide win" id="winSlide" role="dialog" aria-modal="true" aria-labelledby="winTitle" hidden>
+  <div class="slide-inner">
+    <div class="win-trophy">🏆</div>
+    <h2 id="winTitle">Board cleared!</h2>
+    <div class="slide-sub" id="winSub">ALL 20 COLLOCATIONS</div>
+
+    <div class="win-stats">
+      <div class="win-stat"><b id="winScore">0</b><span>Score</span></div>
+      <div class="win-stat"><b id="winMisses">0</b><span>Mistakes</span></div>
+      <div class="win-stat"><b id="winRound">1</b><span>Round</span></div>
+    </div>
+
+    <div class="win-verbs" id="winVerbs"></div>
+
+    <button class="slide-start" id="winNext" type="button">Next board</button>
+    <div class="slide-foot" id="winFoot">Starting the next board shortly…</div>
+  </div>
+</div>
+
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR code">QR</button>
 <div class="qr-panel" id="qrPanel" aria-label="QR code panel">
   <div class="qr-title">Open this page on your phone</div>
   <div class="qr-code" id="qrCode"></div>
   <div class="qr-url" id="qrUrl"></div>
 </div>
 
-<a class="home-btn" href="http://modernenglish.au/Microlessons&Games.html">Home</a>
-
 <header>
-  MODERN ENGLISH AU
+  MODERN ENGLISH AUSTRALIA
   <span>Koala Spies Sydney</span>
 </header>
 
 <main>
   <div class="level-badge">A1–A2 BEGINNER</div>
-  <h1>Have, Make &amp; Do – Matching Game</h1>
+  <h1>Have, Make &amp; Do – Build the Collocation</h1>
   <p>
-    Flip two cards to match each expression with its meaning.
-    Each round picks <strong>6 new pairs</strong> from the pool — mix all three verbs or focus on one!
+    Choose a verb, then turn over a card. If the word goes with your verb, you keep it.
+    Each board has <strong>25 tiles</strong> — 5 verb tiles and 20 cards to clear.
   </p>
 
   <!-- Verb colour legend -->
@@ -621,33 +1023,51 @@ footer{
     <span class="verb-badge do">DO</span>
   </div>
 
-  <!-- Filter buttons -->
+  <!-- Verb mix buttons -->
   <div class="filter-bar">
-    <button class="filter-btn all active" data-filter="all">All three</button>
-    <button class="filter-btn have" data-filter="have">Have only</button>
-    <button class="filter-btn make" data-filter="make">Make only</button>
-    <button class="filter-btn do"   data-filter="do">Do only</button>
+    <button class="filter-btn active" data-mix="have,make,do">All three</button>
+    <button class="filter-btn" data-mix="have,make">Have + Make</button>
+    <button class="filter-btn" data-mix="have,do">Have + Do</button>
+    <button class="filter-btn" data-mix="make,do">Make + Do</button>
   </div>
 
   <div class="round-info" id="roundInfo">Round 1</div>
 
   <div class="score-bar">
-    <div>Matches: <span id="scoreMatched">0</span> / 6</div>
-    <div>Rounds played: <span id="scoreRounds">0</span></div>
+    <div>Matched: <span id="scoreMatched">0</span> / 20</div>
+    <div>Score: <span id="scorePoints">0</span></div>
+    <div>Mistakes: <span id="scoreMisses">0</span></div>
   </div>
 
   <div class="controls">
-    <button class="btn" id="newRoundBtn">New Round ↻</button>
+    <button class="btn" id="newRoundBtn">New Board ↻</button>
+    <button class="btn ghost" id="howToBtn" type="button">How to play</button>
+    <button class="btn ghost" id="soundBtn" type="button" aria-pressed="true">🔊 Sound on</button>
   </div>
+
+  <div id="prompt" role="status" aria-live="polite">Choose a verb to start.</div>
 
   <div id="game"></div>
   <div id="status"></div>
+
+  <div class="made">
+    <h3>Collocations you made</h3>
+    <div class="made-list" id="madeList"></div>
+  </div>
 
   <!-- Teacher Notes -->
   <details class="notes">
     <summary>Teacher Notes / Full Expression List (A1–A2)</summary>
 
-    <h3 class="have-h">▸ HAVE expressions</h3>
+    <div class="note-box">
+      <strong>A note on the card pool:</strong> the grid only uses words that go with
+      <em>one</em> of the three verbs. Words like <em>lunch, dinner, breakfast, coffee, money,
+      a plan, friends, a sandwich, an appointment, nothing</em> and <em>a test</em> work with
+      more than one verb, so a card showing them would be correct with two different answers.
+      They're kept in the reference list below for teaching, but they're out of the game.
+    </div>
+
+    <h3>▸ HAVE expressions</h3>
     <ul>
       <li><strong>have breakfast</strong> – eat your morning meal</li>
       <li><strong>have lunch</strong> – eat your midday meal</li>
@@ -656,67 +1076,91 @@ footer{
       <li><strong>have a shower</strong> – wash your body under running water</li>
       <li><strong>have a bath</strong> – wash your body in a bathtub</li>
       <li><strong>have a rest</strong> – stop and relax for a while</li>
+      <li><strong>have a break</strong> – stop working for a short time</li>
       <li><strong>have a nap</strong> – sleep for a short time during the day</li>
       <li><strong>have a dream</strong> – experience images and stories while sleeping</li>
       <li><strong>have a headache</strong> – feel pain in your head</li>
       <li><strong>have a cold</strong> – be ill with a runny nose and sore throat</li>
+      <li><strong>have a sore throat</strong> – feel pain when you swallow</li>
+      <li><strong>have a temperature</strong> – be hotter than normal because you are ill</li>
       <li><strong>have a party</strong> – celebrate with friends and music</li>
       <li><strong>have a meeting</strong> – come together to talk about something</li>
       <li><strong>have a conversation</strong> – talk with another person</li>
+      <li><strong>have a chat</strong> – talk in a friendly, informal way</li>
       <li><strong>have fun</strong> – enjoy yourself</li>
+      <li><strong>have a good time</strong> – enjoy an event or an occasion</li>
       <li><strong>have a look</strong> – use your eyes to see something</li>
       <li><strong>have a go</strong> – try something</li>
+      <li><strong>have a swim</strong> – swim for pleasure</li>
+      <li><strong>have a holiday</strong> – take time away from work or study</li>
       <li><strong>have an argument</strong> – disagree and speak angrily with someone</li>
       <li><strong>have a baby</strong> – give birth to a child</li>
+      <li><strong>have a brother / a sister</strong> – talk about your family</li>
+      <li><strong>have a pet</strong> – keep an animal at home</li>
+      <li><strong>have an idea</strong> – think of something you could do</li>
+      <li><strong>have a nightmare</strong> – have a frightening dream</li>
       <li><strong>have time</strong> – be free to do something</li>
     </ul>
 
-    <h3 class="make-h">▸ MAKE expressions</h3>
+    <h3>▸ MAKE expressions</h3>
     <ul>
       <li><strong>make breakfast</strong> – prepare the morning meal</li>
       <li><strong>make lunch</strong> – prepare the midday meal</li>
       <li><strong>make dinner</strong> – prepare the evening meal</li>
       <li><strong>make a sandwich</strong> – prepare a sandwich to eat</li>
+      <li><strong>make a cake</strong> – bake a cake</li>
       <li><strong>make a cup of tea</strong> – prepare tea in a cup</li>
       <li><strong>make a phone call</strong> – call someone on the telephone</li>
       <li><strong>make a mistake</strong> – do something wrong by accident</li>
       <li><strong>make a decision</strong> – choose what to do</li>
       <li><strong>make a plan</strong> – think about what you will do</li>
       <li><strong>make a list</strong> – write a number of things you need to do or buy</li>
-      <li><strong>make noise</strong> – produce a loud sound</li>
+      <li><strong>make a mess</strong> – make a place untidy or dirty</li>
+      <li><strong>make the bed</strong> – tidy the sheets and pillows after sleeping</li>
+      <li><strong>make noise / a sound</strong> – produce something you can hear</li>
       <li><strong>make friends</strong> – meet someone and become their friend</li>
       <li><strong>make money</strong> – earn money from work</li>
       <li><strong>make progress</strong> – improve or move forward</li>
       <li><strong>make an effort</strong> – try hard to do something</li>
-      <li><strong>make a bed</strong> – tidy the sheets and pillows after sleeping</li>
       <li><strong>make a promise</strong> – say you will definitely do something</li>
       <li><strong>make a joke</strong> – say something funny</li>
+      <li><strong>make an excuse</strong> – give a reason why you can't do something</li>
       <li><strong>make an appointment</strong> – arrange a time to see someone</li>
+      <li><strong>make a reservation</strong> – book a table or a room</li>
+      <li><strong>make a speech</strong> – talk formally to a group of people</li>
+      <li><strong>make a suggestion</strong> – say an idea for other people to consider</li>
+      <li><strong>make a difference</strong> – change a situation in an important way</li>
       <li><strong>make a wish</strong> – hope for something to happen</li>
+      <li><strong>make a snowman</strong> – build a figure out of snow</li>
+      <li><strong>make a birthday card</strong> – create a card by hand</li>
     </ul>
 
-    <h3 class="do-h">▸ DO expressions</h3>
+    <h3>▸ DO expressions</h3>
     <ul>
       <li><strong>do homework</strong> – complete school work at home</li>
       <li><strong>do exercise</strong> – be physically active to stay healthy</li>
       <li><strong>do the dishes</strong> – wash the plates and cups after eating</li>
-      <li><strong>do the laundry</strong> – wash your clothes</li>
+      <li><strong>do the washing up</strong> – wash the dishes after a meal</li>
+      <li><strong>do the laundry / the washing</strong> – wash your clothes</li>
       <li><strong>do the shopping</strong> – go to buy food and other things</li>
       <li><strong>do the cleaning</strong> – clean the house or room</li>
+      <li><strong>do the cooking</strong> – prepare the meals</li>
+      <li><strong>do the ironing</strong> – press clothes to remove wrinkles</li>
+      <li><strong>do the vacuuming</strong> – clean the floor with a vacuum cleaner</li>
+      <li><strong>do the gardening</strong> – look after the garden</li>
+      <li><strong>do the chores</strong> – do the regular jobs around the house</li>
       <li><strong>do your best</strong> – try as hard as you can</li>
       <li><strong>do a course</strong> – study a subject for a period of time</li>
       <li><strong>do a job</strong> – complete a piece of work</li>
       <li><strong>do sport</strong> – play or practise a physical activity</li>
-      <li><strong>do research</strong> – look for information about a topic</li>
-      <li><strong>do a favour</strong> – help someone with something they need</li>
       <li><strong>do yoga</strong> – practise the exercise and stretching activity</li>
+      <li><strong>do research</strong> – look for information about a topic</li>
+      <li><strong>do a puzzle</strong> – solve a crossword, jigsaw or similar</li>
+      <li><strong>do a favour</strong> – help someone with something they need</li>
       <li><strong>do business</strong> – work in trade or commerce</li>
       <li><strong>do damage</strong> – cause harm to something</li>
-      <li><strong>do well</strong> – perform in a good way</li>
-      <li><strong>do badly</strong> – perform in a poor way</li>
+      <li><strong>do well / badly</strong> – perform in a good or a poor way</li>
       <li><strong>do nothing</strong> – not be busy; relax without activity</li>
-      <li><strong>do someone a favour</strong> – help another person</li>
-      <li><strong>do the ironing</strong> – press clothes to remove wrinkles</li>
     </ul>
   </details>
 
@@ -732,12 +1176,12 @@ footer{
       <select class="voice-select" id="voiceSelect">
         <option value="">Loading voices…</option>
       </select>
-      <span id="voiceStatus" style="font-size:.8rem;color:var(--muted)"></span>
+      <span id="voiceStatus" style="font-size:.8rem;color:#7a8899"></span>
     </div>
 
     <div class="gapfill-list">
 
-      <article class="gapfill-item gf-have"
+      <article class="gapfill-item"
                data-answer="have breakfast"
                data-sentence="I always have breakfast before I go to work.">
         <p>1) I always ______ before I go to work.</p>
@@ -754,8 +1198,8 @@ footer{
         <div class="gapfill-answer">Answer: have breakfast</div>
       </article>
 
-      <article class="gapfill-item gf-make"
-               data-answer="make a mistake"
+      <article class="gapfill-item"
+               data-answer="make a mistake/makes a mistake"
                data-sentence="Everyone makes a mistake sometimes. Don't worry!">
         <p>2) Everyone ______ sometimes. Don't worry!</p>
         <button type="button" class="speak-btn">
@@ -771,8 +1215,8 @@ footer{
         <div class="gapfill-answer">Answer: make a mistake (or: makes a mistake)</div>
       </article>
 
-      <article class="gapfill-item gf-do"
-               data-answer="do homework"
+      <article class="gapfill-item"
+               data-answer="do homework/do my homework"
                data-sentence="I do homework after dinner every evening.">
         <p>3) I ______ after dinner every evening.</p>
         <button type="button" class="speak-btn">
@@ -788,7 +1232,7 @@ footer{
         <div class="gapfill-answer">Answer: do homework</div>
       </article>
 
-      <article class="gapfill-item gf-have"
+      <article class="gapfill-item"
                data-answer="have a shower"
                data-sentence="I have a shower every morning before work.">
         <p>4) I ______ every morning before work.</p>
@@ -805,7 +1249,7 @@ footer{
         <div class="gapfill-answer">Answer: have a shower</div>
       </article>
 
-      <article class="gapfill-item gf-make"
+      <article class="gapfill-item"
                data-answer="make a decision"
                data-sentence="It's hard to make a decision when you have many options.">
         <p>5) It's hard to ______ when you have many options.</p>
@@ -822,7 +1266,7 @@ footer{
         <div class="gapfill-answer">Answer: make a decision</div>
       </article>
 
-      <article class="gapfill-item gf-do"
+      <article class="gapfill-item"
                data-answer="do the dishes"
                data-sentence="Can you please do the dishes after dinner tonight?">
         <p>6) Can you please ______ after dinner tonight?</p>
@@ -839,7 +1283,7 @@ footer{
         <div class="gapfill-answer">Answer: do the dishes</div>
       </article>
 
-      <article class="gapfill-item gf-have"
+      <article class="gapfill-item"
                data-answer="have fun"
                data-sentence="I always have fun when I go to the beach.">
         <p>7) I always ______ when I go to the beach.</p>
@@ -856,7 +1300,7 @@ footer{
         <div class="gapfill-answer">Answer: have fun</div>
       </article>
 
-      <article class="gapfill-item gf-make"
+      <article class="gapfill-item"
                data-answer="make friends"
                data-sentence="It's easy to make friends when you join a club.">
         <p>8) It's easy to ______ when you join a club.</p>
@@ -873,8 +1317,8 @@ footer{
         <div class="gapfill-answer">Answer: make friends</div>
       </article>
 
-      <article class="gapfill-item gf-do"
-               data-answer="do your best"
+      <article class="gapfill-item"
+               data-answer="do your best/do my best"
                data-sentence="Don't worry about the test — just do your best.">
         <p>9) Don't worry about the test — just ______.</p>
         <button type="button" class="speak-btn">
@@ -933,240 +1377,41 @@ footer{
 })();
 </script>
 
-<!-- Matching game -->
+<!-- Background video: hide the element if bg.mp4 is missing so the GIF shows through -->
 <script>
-// ── Expression pool: have / make / do ──────────────────────────────
-const POOL = {
-  have: [
-    ["have breakfast",      "eat your morning meal"],
-    ["have lunch",          "eat your midday meal"],
-    ["have dinner",         "eat your evening meal"],
-    ["have a drink",        "drink something"],
-    ["have a shower",       "wash under running water"],
-    ["have a bath",         "wash in a bathtub"],
-    ["have a rest",         "stop and relax for a while"],
-    ["have a nap",          "sleep for a short time in the day"],
-    ["have a headache",     "feel pain in your head"],
-    ["have a cold",         "be ill with a runny nose"],
-    ["have a party",        "celebrate with friends"],
-    ["have a meeting",      "come together to talk about something"],
-    ["have a conversation", "talk with another person"],
-    ["have fun",            "enjoy yourself"],
-    ["have a look",         "use your eyes to see something"],
-    ["have a go",           "try something"],
-    ["have an argument",    "disagree and speak angrily with someone"],
-    ["have a baby",         "give birth to a child"],
-    ["have time",           "be free to do something"],
-    ["have a dream",        "experience images while sleeping"],
-  ],
-  make: [
-    ["make breakfast",         "prepare the morning meal"],
-    ["make lunch",             "prepare the midday meal"],
-    ["make dinner",            "prepare the evening meal"],
-    ["make a sandwich",        "prepare a sandwich to eat"],
-    ["make a cup of tea",      "prepare tea in a cup"],
-    ["make a phone call",      "call someone on the telephone"],
-    ["make a mistake",         "do something wrong by accident"],
-    ["make a decision",        "choose what to do"],
-    ["make a plan",            "think about what you will do"],
-    ["make a list",            "write things you need to do or buy"],
-    ["make noise",             "produce a loud sound"],
-    ["make friends",           "meet someone and become their friend"],
-    ["make money",             "earn money from work"],
-    ["make progress",          "improve or move forward"],
-    ["make an effort",         "try hard to do something"],
-    ["make a bed",             "tidy the sheets after sleeping"],
-    ["make a promise",         "say you will definitely do something"],
-    ["make a joke",            "say something funny"],
-    ["make an appointment",    "arrange a time to see someone"],
-    ["make a wish",            "hope for something to happen"],
-  ],
-  do: [
-    ["do homework",          "complete school work at home"],
-    ["do exercise",          "be physically active to stay healthy"],
-    ["do the dishes",        "wash the plates and cups after eating"],
-    ["do the laundry",       "wash your clothes"],
-    ["do the shopping",      "go to buy food and other things"],
-    ["do the cleaning",      "clean the house or room"],
-    ["do your best",         "try as hard as you can"],
-    ["do a course",          "study a subject for a period of time"],
-    ["do sport",             "play or practise a physical activity"],
-    ["do research",          "look for information about a topic"],
-    ["do a favour",          "help someone with something they need"],
-    ["do yoga",              "practise the stretching exercise"],
-    ["do business",          "work in trade or commerce"],
-    ["do damage",            "cause harm to something"],
-    ["do well",              "perform in a good way"],
-    ["do badly",             "perform in a poor way"],
-    ["do nothing",           "relax without any activity"],
-    ["do the ironing",       "press clothes to remove wrinkles"],
-    ["do a job",             "complete a piece of work"],
-    ["do your homework",     "prepare by finding information first"],
-  ]
-};
-
-// Colours for matched pairs (up to 10 pairs — we use 6)
-const matchColors = [
-  "#b5451b","#0a6b3c","#1a3a7a","#d4870a","#6a1fa0",
-  "#1a7a7a","#7a1a3a","#3a6a1a","#c0392b","#1a4a7a"
-];
-
-const PAIRS_PER_ROUND = 6;
-
-const gameEl         = document.getElementById("game");
-const statusEl       = document.getElementById("status");
-const newRoundBtn    = document.getElementById("newRoundBtn");
-const roundInfo      = document.getElementById("roundInfo");
-const scoreMatchedEl = document.getElementById("scoreMatched");
-const scoreRoundsEl  = document.getElementById("scoreRounds");
-
-let first = null, second = null, lock = false;
-let matched = 0, roundCount = 0;
-let activeFilter = "all";
-// Track used pairs per verb
-const usedIdx = { have: new Set(), make: new Set(), do: new Set() };
-
-// ── Filter buttons ──────────────────────────────────────────────────
-document.querySelectorAll(".filter-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    activeFilter = btn.dataset.filter;
-    buildRound();
-  });
-});
-
-// ── Helpers ─────────────────────────────────────────────────────────
-function shuffle(arr){
-  const a = [...arr];
-  for(let i = a.length-1; i > 0; i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i],a[j]] = [a[j],a[i]];
+(function(){
+  const v = document.getElementById("bgVideo");
+  if(!v) return;
+  // NETWORK_NO_SOURCE (3) means bg.mp4 is missing or unplayable — fall back to
+  // the GIF underneath. Checked immediately too, because the load can fail
+  // while the page is still parsing, before this script attaches its listeners.
+  function hideIfBroken(){
+    if(v.networkState === 3 || v.error) v.style.display = "none";
   }
-  return a;
-}
+  hideIfBroken();
+  setTimeout(hideIfBroken, 1500);
+  v.addEventListener("error", hideIfBroken, true);
+  const src = v.querySelector("source");
+  if(src) src.addEventListener("error", hideIfBroken);
 
-function pickFromVerb(verb, n){
-  const pool = POOL[verb];
-  const used = usedIdx[verb];
-  let avail  = pool.map((_,i)=>i).filter(i=>!used.has(i));
-  if(avail.length < n){ used.clear(); avail = pool.map((_,i)=>i); }
-  const chosen = shuffle(avail).slice(0,n);
-  chosen.forEach(i=>used.add(i));
-  return chosen.map(i => ({ verb, expr: pool[i][0], meaning: pool[i][1] }));
-}
+  // muted must be set as a property, not just the attribute, or iOS and
+  // some Android browsers refuse to autoplay.
+  v.muted = true;
+  v.defaultMuted = true;
 
-function pickPairs(n){
-  if(activeFilter !== "all"){
-    return pickFromVerb(activeFilter, n);
-  }
-  // Mix: 2 have + 2 make + 2 do (for 6 pairs)
-  const perVerb = Math.floor(n/3);
-  const remainder = n - perVerb*3;
-  const verbs = shuffle(["have","make","do"]);
-  let pairs = [];
-  verbs.forEach((v,i) => {
-    const count = i < remainder ? perVerb+1 : perVerb;
-    pairs = pairs.concat(pickFromVerb(v, count));
+  // Autoplay can still be refused (iOS Low Power Mode, data saver, strict
+  // settings). Retry on any first user gesture — the opening slide's
+  // "Start playing" button also calls this, which is the reliable one.
+  window.playBgVideo = function(){
+    if(v.style.display === "none") return;
+    const p = v.play();
+    if(p && p.catch) p.catch(()=>{});
+  };
+  window.playBgVideo();
+  ["touchstart","pointerdown","keydown"].forEach(evt=>{
+    document.addEventListener(evt, window.playBgVideo, {once:true, passive:true});
   });
-  return shuffle(pairs);
-}
-
-// ── Build round ──────────────────────────────────────────────────────
-function buildRound(){
-  gameEl.innerHTML = "";
-  statusEl.textContent = "";
-  first = null; second = null; lock = false; matched = 0;
-  roundCount++;
-  roundInfo.textContent   = "Round " + roundCount;
-  scoreRoundsEl.textContent = roundCount;
-  scoreMatchedEl.textContent = "0";
-
-  const pairs = pickPairs(PAIRS_PER_ROUND);
-
-  const cards = shuffle(
-    pairs.flatMap(p => [
-      { text: p.expr,    pair: p.expr, verb: p.verb, role:"expression" },
-      { text: p.meaning, pair: p.expr, verb: p.verb, role:"meaning"    }
-    ])
-  );
-
-  cards.forEach((data, idx) => {
-    const div = document.createElement("div");
-    div.className = "card";
-    div.dataset.pair = data.pair;
-    div.dataset.verb = data.verb;
-    div.style.background  = "#1a3a5c";
-    div.style.borderColor = "#0a3d62";
-
-    // Number badge
-    const num = document.createElement("span");
-    num.className = "card-num";
-    num.textContent = idx + 1;
-    div.appendChild(num);
-
-    gameEl.appendChild(div);
-    div.addEventListener("click", () => onCardClick(div, data));
-  });
-}
-
-// ── Card interaction ─────────────────────────────────────────────────
-function onCardClick(div, data){
-  if(lock || div.classList.contains("flipped") || div.classList.contains("matched")) return;
-  flip(div, data);
-  if(!first){ first = div; return; }
-  second = div; lock = true;
-
-  if(first.dataset.pair === second.dataset.pair && first !== second){
-    // ✅ Match
-    const color = matchColors[matched % matchColors.length];
-    setTimeout(()=>{
-      [first,second].forEach(c=>{
-        c.classList.remove("flipped");
-        c.classList.add("matched");
-        c.style.background  = color;
-        c.style.borderColor = color;
-        c.style.color       = "#fff";
-      });
-      matched++;
-      scoreMatchedEl.textContent = matched;
-      if(matched === PAIRS_PER_ROUND){
-        statusEl.textContent = "🎉 All matched! Press New Round to play again.";
-      }
-      first=null; second=null; lock=false;
-    },500);
-  } else {
-    // ❌ No match
-    setTimeout(()=>{
-      [first,second].forEach(c=>{
-        c.classList.add("shake");
-        setTimeout(()=>c.classList.remove("shake"),360);
-        c.classList.remove("flipped");
-        c.style.background  = "#1a3a5c";
-        c.style.borderColor = "#0a3d62";
-        c.style.color       = "#fff";
-        // Remove text but keep number badge
-        const num = c.querySelector(".card-num");
-        c.textContent = "";
-        if(num) c.appendChild(num);
-      });
-      first=null; second=null; lock=false;
-    },700);
-  }
-}
-
-function flip(div, data){
-  div.classList.add("flipped");
-  const num = div.querySelector(".card-num");
-  div.textContent = data.text;
-  if(num) div.appendChild(num);
-  div.style.background  = "#0a3d62";
-  div.style.borderColor = "#0a3d62";
-  div.style.color       = "#fff";
-}
-
-newRoundBtn.addEventListener("click", buildRound);
-buildRound();
+})();
 </script>
 
 <!-- TTS + Gap fill -->
@@ -1284,6 +1529,478 @@ document.querySelectorAll(".gapfill-item").forEach(item=>{
 });
 </script>
 
+<!-- ===== Collocation grid game ===== -->
+<script>
+(function(){
+"use strict";
+
+/* ── Word pool ───────────────────────────────────────────────────────
+   IMPORTANT: every word below goes with ONE of have / make / do only.
+   Do not add words that work with two verbs (lunch, dinner, breakfast,
+   coffee, money, a plan, friends, a sandwich, an appointment, nothing,
+   a test) — a card showing them would be correct with two answers.
+──────────────────────────────────────────────────────────────────── */
+const WORDS = {
+  have: ["a shower","a bath","a rest","a break","a nap","fun","a good time",
+         "a headache","a cold","a look","a chat","a swim","a holiday",
+         "a sore throat","a nightmare","a temperature","a brother","a pet",
+         "an idea","a party"],
+  make: ["a mistake","a decision","a mess","the bed","a cake","noise","a list",
+         "progress","an effort","a promise","a phone call","a wish","a speech",
+         "a joke","a reservation","an excuse","a difference","a snowman",
+         "a birthday card","a sound"],
+  do:   ["homework","the dishes","the washing up","the laundry","the shopping",
+         "the cleaning","the cooking","exercise","sport","yoga","business",
+         "a favour","your best","the ironing","the gardening","the washing",
+         "chores","research","a puzzle","the vacuuming"]
+};
+
+const VERB_TILES = 5;      // verb tiles — permanent, never used up
+const CARDS      = 20;     // word cards to clear  (5 + 20 = 25 tiles)
+const REVEAL_MS  = 1500;   // how long a wrong card stays face up
+const WIN_MS     = 7000;   // how long the winner screen stays up
+const VOLUME     = 0.42;   // overall volume of the game sounds (0–1)
+
+const gameEl     = document.getElementById("game");
+const promptEl   = document.getElementById("prompt");
+const statusEl   = document.getElementById("status");
+const madeEl     = document.getElementById("madeList");
+const roundInfo  = document.getElementById("roundInfo");
+const sMatched   = document.getElementById("scoreMatched");
+const sPoints    = document.getElementById("scorePoints");
+const sMisses    = document.getElementById("scoreMisses");
+
+let mix       = ["have","make","do"];
+let tiles     = [];
+let selected  = null;
+let lock      = false;
+let matched   = 0;
+let points    = 0;
+let misses    = 0;
+let roundNo   = 1;
+let soundOn   = true;
+
+// Track used words per verb so a board doesn't repeat until the pool runs out
+const usedIdx = { have:new Set(), make:new Set(), do:new Set() };
+
+function say(msg, warn){
+  promptEl.textContent = msg;
+  promptEl.className = warn ? "warn" : "";
+}
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1; i>0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function pickFromVerb(verb, n){
+  const pool = WORDS[verb];
+  const used = usedIdx[verb];
+  let avail = pool.map((_,i)=>i).filter(i=>!used.has(i));
+  if(avail.length < n){ used.clear(); avail = pool.map((_,i)=>i); }
+  const chosen = shuffle(avail).slice(0,n);
+  chosen.forEach(i=>used.add(i));
+  return chosen.map(i => ({ verb, word: pool[i] }));
+}
+
+function pickCards(){
+  // Spread the 20 cards evenly across the verbs in play
+  const per = Math.floor(CARDS / mix.length);
+  const rem = CARDS - per*mix.length;
+  const order = shuffle(mix);
+  let out = [];
+  order.forEach((v,i)=>{
+    out = out.concat(pickFromVerb(v, i < rem ? per+1 : per));
+  });
+  return shuffle(out);
+}
+
+function pickVerbTiles(){
+  // Every verb in play gets at least one tile; the spare tiles are
+  // duplicates, so there is always a verb within reach on a big board.
+  const list = mix.slice();
+  while(list.length < VERB_TILES) list.push(mix[Math.floor(Math.random()*mix.length)]);
+  return shuffle(list).slice(0, VERB_TILES);
+}
+
+/* ── Sound ────────────────────────────────────────────────────────────
+   All the audio is generated in the browser with the Web Audio API —
+   no files to upload, nothing to download, and no missing-file failure.
+   Browsers won't start audio without a user gesture, so the context is
+   created on the "Start playing" tap.
+   Tuning: NOTE holds the pitches; VOLUME above sets the overall level.
+──────────────────────────────────────────────────────────────────── */
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let actx = null, master = null;
+const liveNodes = [];
+
+const NOTE = { C4:261.63, E4:329.63, G4:392.00, A4:440.00, C5:523.25,
+               D5:587.33, E5:659.25, F5:698.46, G5:783.99, A5:880.00,
+               B5:987.77, C6:1046.50, D6:1174.66, E6:1318.51, G6:1567.98 };
+
+function audioReady(){
+  if(!AudioCtx || !soundOn) return false;
+  try{
+    if(!actx){
+      actx = new AudioCtx();
+      master = actx.createGain();
+      master.gain.value = VOLUME;
+      master.connect(actx.destination);
+    }
+    if(actx.state === "suspended") actx.resume().catch(()=>{});
+    return true;
+  }catch(e){ return false; }
+}
+
+/* One note: soft attack, exponential decay — no clicks, no harshness. */
+function tone(freq, delay, dur, opts){
+  opts = opts || {};
+  const t0 = actx.currentTime + delay;
+  const osc = actx.createOscillator();
+  const gain = actx.createGain();
+  osc.type = opts.type || "sine";
+  osc.frequency.setValueAtTime(freq, t0);
+  if(opts.glide) osc.frequency.exponentialRampToValueAtTime(opts.glide, t0 + dur);
+
+  const peak = opts.vol == null ? 0.32 : opts.vol;
+  gain.gain.setValueAtTime(0.0001, t0);
+  gain.gain.exponentialRampToValueAtTime(peak, t0 + (opts.attack || 0.015));
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+  osc.connect(gain); gain.connect(master);
+  osc.start(t0); osc.stop(t0 + dur + 0.03);
+  liveNodes.push(osc);
+  osc.onended = ()=>{ const i = liveNodes.indexOf(osc); if(i > -1) liveNodes.splice(i,1); };
+}
+
+function stopTheme(){          // silence anything still ringing
+  while(liveNodes.length){
+    const n = liveNodes.pop();
+    try{ n.stop(); }catch(e){}
+  }
+}
+
+/* Opening: a warm rising arpeggio, with a quiet octave underneath. */
+function playTheme(){
+  if(!audioReady()) return;
+  stopTheme();
+  [NOTE.C5, NOTE.E5, NOTE.G5, NOTE.C6].forEach((f,i)=>{
+    tone(f, i*0.11, 0.55, {type:"sine", vol:0.3});
+    tone(f/2, i*0.11, 0.6, {type:"triangle", vol:0.1});
+  });
+  tone(NOTE.G5, 0.46, 1.1, {type:"sine", vol:0.16});
+}
+
+/* Board cleared: a proper little fanfare. */
+function playWin(){
+  if(!audioReady()) return;
+  stopTheme();
+  const run = [NOTE.C5, NOTE.E5, NOTE.G5, NOTE.C6, NOTE.E6];
+  run.forEach((f,i)=>{
+    tone(f, i*0.10, 0.4, {type:"triangle", vol:0.26});
+    tone(f/2, i*0.10, 0.45, {type:"sine", vol:0.12});
+  });
+  // Held major chord to land on
+  [NOTE.C5, NOTE.E5, NOTE.G5, NOTE.C6].forEach(f=>{
+    tone(f, 0.55, 1.5, {type:"sine", vol:0.17, attack:0.05});
+  });
+  // Sparkle on top
+  [NOTE.G6, NOTE.E6, NOTE.C6, NOTE.G6].forEach((f,i)=>{
+    tone(f, 0.75 + i*0.09, 0.3, {type:"sine", vol:0.1});
+  });
+}
+
+/* Small feedback blips. */
+function playCorrect(){
+  if(!audioReady()) return;
+  tone(NOTE.A5, 0,    0.14, {type:"sine", vol:0.22});
+  tone(NOTE.E6, 0.09, 0.22, {type:"sine", vol:0.2});
+}
+function playWrong(){
+  if(!audioReady()) return;   // gentle, not a buzzer — they're beginners
+  tone(NOTE.E4, 0, 0.26, {type:"triangle", vol:0.16, glide:NOTE.C4});
+}
+
+function speakPhrase(text){
+  if(!soundOn || typeof speechSynthesis === "undefined") return;
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.85;
+    if(typeof selectedVoice !== "undefined" && selectedVoice) u.voice = selectedVoice;
+    else u.lang = "en-AU";
+    speechSynthesis.speak(u);
+  }catch(e){ /* speech is a nicety, never a blocker */ }
+}
+
+function buildRound(resetAll){
+  tiles = [];
+  let id = 0;
+  pickVerbTiles().forEach(v=>{
+    tiles.push({ id:id++, kind:"verb", verb:v, text:v, done:false });
+  });
+  pickCards().forEach(c=>{
+    tiles.push({ id:id++, kind:"word", verb:c.verb, text:c.word, done:false });
+  });
+  tiles = shuffle(tiles);
+
+  selected = null;
+  lock = false;
+  matched = 0;
+  if(resetAll){ points = 0; misses = 0; roundNo = 1; }
+
+  madeEl.innerHTML = "";
+  statusEl.textContent = "";
+  render();
+  updateScore();
+  say("Choose a verb to start.");
+}
+
+function render(){
+  gameEl.innerHTML = "";
+  let cardNo = 0;
+
+  tiles.forEach(t=>{
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.dataset.id = t.id;
+
+    if(t.kind === "verb"){
+      btn.className = "tile verbtile v-" + t.verb;
+      const face = document.createElement("span");
+      face.className = "face";
+      face.textContent = t.text;
+      btn.appendChild(face);
+      btn.setAttribute("aria-label", "verb " + t.text);
+    } else {
+      cardNo++;
+      t.num = cardNo;
+      btn.className = "tile wordtile v-" + t.verb;
+
+      const inner = document.createElement("span");
+      inner.className = "inner";
+
+      const back = document.createElement("span");
+      back.className = "face back";
+      back.textContent = "?";
+      const num = document.createElement("span");
+      num.className = "card-num";
+      num.textContent = cardNo;
+      back.appendChild(num);
+
+      const front = document.createElement("span");
+      front.className = "face front";
+      front.textContent = t.text;
+
+      inner.appendChild(back);
+      inner.appendChild(front);
+      btn.appendChild(inner);
+      btn.setAttribute("aria-label", "card " + cardNo + ", hidden word");
+    }
+
+    btn.addEventListener("click", ()=>onTap(t, btn));
+    t.el = btn;
+    gameEl.appendChild(btn);
+  });
+}
+
+function updateScore(){
+  sMatched.textContent = matched;
+  sPoints.textContent  = points;
+  sMisses.textContent  = misses;
+  roundInfo.textContent = "Round " + roundNo;
+}
+
+function clearSelection(){
+  if(selected) selected.el.classList.remove("selected");
+  selected = null;
+}
+
+function onTap(t, el){
+  if(lock || t.done) return;
+
+  /* ---- verb tile ---- */
+  if(t.kind === "verb"){
+    if(selected && selected.id === t.id){
+      clearSelection();
+      say("Choose a verb to start.");
+      return;
+    }
+    clearSelection();
+    selected = t;
+    el.classList.add("selected");
+    say("“" + t.text + "” — now turn over a card.");
+    return;
+  }
+
+  /* ---- word card ---- */
+  if(!selected){
+    say("Choose a verb first, then turn over a card.", true);
+    el.classList.add("shake");
+    setTimeout(()=>el.classList.remove("shake"), 380);
+    return;
+  }
+
+  const verbTile = selected;
+  const phrase   = verbTile.text + " " + t.text;
+  lock = true;
+  el.classList.add("flipped");
+  el.setAttribute("aria-label", "card " + t.num + ", " + t.text);
+
+  if(verbTile.verb === t.verb){
+    /* ✅ correct collocation */
+    playCorrect();
+    setTimeout(()=>speakPhrase(phrase), 300);   // blip first, then the phrase
+    say("✓ " + phrase);
+
+    const chip = document.createElement("span");
+    chip.className = "made-chip";
+    chip.textContent = phrase;
+    madeEl.appendChild(chip);
+
+    setTimeout(()=>{
+      // The card keeps the whole collocation on show, in its verb's colour.
+      t.done = true;
+      el.querySelector(".front").textContent = phrase;
+      el.classList.add("done");
+      el.setAttribute("aria-label", "matched, " + phrase);
+      // The verb tile is NOT used up — it stays live for the rest of the board.
+      verbTile.el.classList.remove("selected");
+      selected = null;
+      matched++;
+      points += 10;
+      updateScore();
+      lock = false;
+      if(matched === CARDS) finishRound();
+      else say("Choose a verb.");
+    }, 900);
+
+  } else {
+    /* ❌ wrong — show it, name the right verb, then hide it again */
+    playWrong();
+    misses++;
+    points = Math.max(0, points - 2);
+    updateScore();
+    say("✗ Not “" + phrase + "”. We say “" + t.verb + " " + t.text + "”.", true);
+
+    setTimeout(()=>{
+      el.classList.add("wrong","shake");
+      verbTile.el.classList.add("wrong","shake");
+      setTimeout(()=>{
+        el.classList.remove("shake");
+        verbTile.el.classList.remove("shake");
+      }, 380);
+    }, 260);
+
+    setTimeout(()=>{
+      el.classList.remove("wrong","flipped");
+      el.setAttribute("aria-label", "card " + t.num + ", hidden word");
+      verbTile.el.classList.remove("wrong");
+      clearSelection();
+      lock = false;
+      say("Remember where that one was. Choose a verb.");
+    }, REVEAL_MS);
+  }
+}
+
+const winSlide  = document.getElementById("winSlide");
+const winNext   = document.getElementById("winNext");
+const winVerbs  = document.getElementById("winVerbs");
+let winTimer    = null;
+
+function nextBoard(){
+  if(winTimer){ clearTimeout(winTimer); winTimer = null; }
+  winSlide.hidden = true;
+  roundNo++;
+  buildRound(false);
+}
+
+function finishRound(){
+  statusEl.textContent = "🎉 Board cleared! " + misses +
+    (misses === 1 ? " mistake" : " mistakes") + " so far.";
+  say("");
+  playWin();
+
+  document.getElementById("winScore").textContent  = points;
+  document.getElementById("winMisses").textContent = misses;
+  document.getElementById("winRound").textContent  = roundNo;
+  document.getElementById("winSub").textContent =
+    misses === 0 ? "PERFECT BOARD — NO MISTAKES" : "ALL " + CARDS + " COLLOCATIONS";
+
+  // How many of each verb they built this board
+  const counts = {};
+  tiles.filter(t=>t.kind === "word").forEach(t=>{ counts[t.verb] = (counts[t.verb]||0) + 1; });
+  winVerbs.innerHTML = "";
+  mix.forEach(v=>{
+    if(!counts[v]) return;
+    const s = document.createElement("span");
+    s.className = "win-verb " + v;
+    s.textContent = counts[v] + " × " + v;
+    winVerbs.appendChild(s);
+  });
+
+  winSlide.hidden = false;
+  winNext.focus();
+  winTimer = setTimeout(nextBoard, WIN_MS);
+}
+
+winNext.addEventListener("click", nextBoard);
+
+/* ---- controls ---- */
+document.querySelectorAll(".filter-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    mix = btn.dataset.mix.split(",");
+    stopTheme();
+    buildRound(true);
+  });
+});
+
+document.getElementById("newRoundBtn").addEventListener("click", ()=>{
+  stopTheme();
+  buildRound(false);
+});
+
+const soundBtn = document.getElementById("soundBtn");
+soundBtn.addEventListener("click", ()=>{
+  soundOn = !soundOn;
+  soundBtn.setAttribute("aria-pressed", String(soundOn));
+  soundBtn.textContent = soundOn ? "🔊 Sound on" : "🔇 Sound off";
+  if(!soundOn){
+    stopTheme();
+    if(typeof speechSynthesis !== "undefined") speechSynthesis.cancel();
+  }
+});
+
+/* ---- opening slide ---- */
+const slide      = document.getElementById("slide");
+const slideStart = document.getElementById("slideStart");
+const howToBtn   = document.getElementById("howToBtn");
+
+function openSlide(){ slide.hidden = false; slideStart.focus(); }
+function closeSlide(){ slide.hidden = true; }
+
+slideStart.addEventListener("click", ()=>{
+  closeSlide();
+  // A real tap — the only reliable moment to start media on iOS.
+  if(typeof window.playBgVideo === "function") window.playBgVideo();
+  playTheme();
+});
+howToBtn.addEventListener("click", openSlide);
+document.addEventListener("keydown", e=>{
+  if(e.key !== "Escape") return;
+  if(!slide.hidden) closeSlide();
+  else if(!winSlide.hidden) nextBoard();
+});
+
+buildRound(true);
+})();
+</script>
+
 </body>
 </html>
-
