@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Use of English · Test 2, Part 1 — Modern English Australia</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    /* ==========================================================
+       EXAM SKIN
+       Plain white panels, one sans-serif, teal accent, no
+       decoration — the look of a computer-based exam screen
+       rather than the main website.
+       ========================================================== */
+    :root{
+      --page:#f1f3f4;          /* the grey behind the paper */
+      --surface:#ffffff;
+      --ink:#333333;           /* exam screens use grey-black, not pure black */
+      --ink-strong:#1a1a1a;
+      --muted:#6b7378;
+      --line:#d5dade;
+      --line-soft:#e8ecee;
+      --accent:#00847d;        /* teal, darkened enough to read as text */
+      --accent-2:#006b65;
+      --accent-soft:#e3f4f3;
+      --bar:#2d3b45;           /* the dark chrome bar */
+      --bar-ink:#ffffff;
+      --good:#1b7a3d;
+      --good-bg:#eaf7ee;
+      --bad:#c0392b;
+      --bad-bg:#fdeeec;
+      --sans:"Source Sans 3","Source Sans Pro",Arial,"Helvetica Neue",Helvetica,sans-serif;
+      --max:1000px;
+      --radius:4px;
+    }
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family:var(--sans);
+      font-size:16px;
+      color:var(--ink);
+      line-height:1.6;
+      background:var(--page);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      -webkit-text-size-adjust:100%;
+    }
+
+    /* ===== EXAM CHROME ===== */
+    header{
+      background:var(--bar);
+      color:var(--bar-ink);
+      padding:10px 0;
+    }
+    .header-inner{
+      max-width:var(--max); margin:0 auto;
+      padding-inline:clamp(14px,3vw,24px);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+    }
+    .brand{ display:flex; flex-direction:column; gap:0; min-width:0; }
+    .brand .mea{
+      font-family:var(--sans); font-weight:600; font-size:.95rem;
+      letter-spacing:.02em; text-transform:none; line-height:1.3;
+      color:var(--bar-ink); text-decoration:none;
+    }
+    .brand .mea:hover{ text-decoration:underline; }
+    .brand .kss{
+      font-size:.72rem; font-weight:400; letter-spacing:.04em;
+      text-transform:none; color:rgba(255,255,255,.62); text-decoration:none;
+    }
+    .back-btn{
+      display:inline-flex; align-items:center; gap:7px;
+      padding:7px 14px; font-size:.86rem; font-weight:600;
+      color:var(--bar-ink); text-decoration:none;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.28);
+      border-radius:var(--radius); white-space:nowrap;
+    }
+    .back-btn:hover{ background:rgba(255,255,255,.2); }
+
+    /* the strip that names the task, like the bar across an exam screen */
+    .task-bar{
+      background:var(--surface);
+      border-bottom:1px solid var(--line);
+    }
+    .task-bar-inner{
+      max-width:var(--max); margin:0 auto;
+      padding:9px clamp(14px,3vw,24px);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+      font-size:.85rem; color:var(--muted);
+    }
+    .task-bar strong{ color:var(--ink-strong); font-weight:600; }
+    .task-progress{
+      height:4px; background:var(--line-soft);
+      max-width:var(--max); margin:0 auto;
+    }
+    .task-progress span{ display:block; height:100%; background:var(--accent); }
+
+    /* ===== MAIN ===== */
+    main{ flex:1 0 auto; padding-block:24px 36px; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding-inline:clamp(14px,3vw,24px); }
+
+    .kicker{
+      margin:0 0 2px; font-size:.78rem; font-weight:600;
+      letter-spacing:.06em; text-transform:none; color:var(--muted);
+    }
+    h1{
+      font-family:var(--sans); font-weight:600;
+      font-size:clamp(1.5rem,1.2rem + 1vw,2rem);
+      line-height:1.25; margin:0 0 14px; color:var(--ink-strong);
+    }
+
+    .rubric{
+      background:var(--surface); border:1px solid var(--line);
+      border-left:4px solid var(--accent); border-radius:var(--radius);
+      padding:14px 18px; margin:0 0 10px; font-size:.95rem;
+    }
+    .rubric p{ margin:0 0 6px; } .rubric p:last-child{ margin:0; }
+    .example{ font-size:.88rem; color:var(--muted); margin:0 0 20px; }
+
+    /* ===== THE TEXT PANEL ===== */
+    .text-card{
+      background:var(--surface); border:1px solid var(--line);
+      border-radius:var(--radius); box-shadow:none;
+      padding:24px 26px 20px; font-size:1rem; line-height:2.6;
+    }
+    .text-title{
+      font-family:var(--sans); font-size:1.05rem; font-weight:700;
+      line-height:1.3; margin:0 0 .6em; text-align:left; color:var(--ink-strong);
+    }
+    .text-card p{ margin:0 0 1em; } .text-card p:last-child{ margin-bottom:0; }
+
+    .gapno{
+      display:inline-block; min-width:1.5em;
+      font-weight:700; color:var(--accent); font-size:.88em;
+    }
+
+    /* ===== ACTIONS ===== */
+    .actions{ margin-top:20px; display:grid; gap:12px; }
+    .progress-line{ text-align:center; font-size:.88rem; color:var(--muted); margin:0; }
+    .btn-row{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+    .btn{
+      appearance:none; border:1px solid transparent; border-radius:var(--radius);
+      padding:11px 20px; font-family:inherit; font-size:1rem; font-weight:600;
+      cursor:pointer; min-height:44px;
+    }
+    .btn-primary{ background:var(--accent); color:#fff; }
+    .btn-primary:hover{ background:var(--accent-2); }
+    .btn-ghost{ background:#fff; color:var(--accent); border-color:var(--line); }
+    .btn-ghost:hover{ background:var(--accent-soft); border-color:var(--accent); }
+
+    .score-box{
+      text-align:center; padding:14px 16px; border-radius:var(--radius);
+      background:var(--surface); border:1px solid var(--line);
+      border-left:4px solid var(--accent);
+      font-weight:600; color:var(--ink-strong); display:none;
+    }
+    .score-box .sub{ display:block; font-weight:400; font-size:.9rem; color:var(--muted); margin-top:4px; }
+    .score-box.all-right{ border-left-color:var(--good); }
+
+    .explanations{
+      display:none; background:var(--surface); border:1px solid var(--line);
+      border-radius:var(--radius); padding:18px 20px;
+    }
+    .explanations h2{ font-family:var(--sans); font-weight:600; font-size:1.05rem; margin:0 0 12px; }
+    .exp-item{
+      padding:12px 14px; border-radius:var(--radius); background:#fafbfb;
+      border:1px solid var(--line-soft); margin-bottom:8px;
+    }
+    .exp-item:last-child{ margin-bottom:0; }
+    .exp-q{ font-weight:700; color:var(--ink-strong); margin-bottom:3px; font-size:.95rem; }
+    .exp-a{ margin:0; font-size:.94rem; color:var(--ink); }
+    .exp-a strong{ color:var(--ink-strong); }
+    .tag{
+      display:inline-block; padding:1px 8px; border-radius:2px; font-size:.7rem;
+      font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+      margin-left:8px; vertical-align:2px;
+    }
+    .tag-ok{ background:var(--good-bg); color:var(--good); border:1px solid rgba(27,122,61,.3); }
+    .tag-err{ background:var(--bad-bg); color:var(--bad); border:1px solid rgba(192,57,43,.3); }
+
+    /* ===== NAV + FOOTER ===== */
+    .nav-bar{
+      max-width:var(--max); margin:28px auto 0;
+      padding-inline:clamp(14px,3vw,24px);
+      display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    }
+    .nav-bar a{
+      flex:1 1 140px; text-align:center; min-height:44px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--surface); color:var(--accent);
+      border:1px solid var(--line); border-radius:var(--radius);
+      text-decoration:none; font-weight:600; font-size:.92rem; padding:10px 12px;
+    }
+    .nav-bar a:hover{ background:var(--accent-soft); border-color:var(--accent); }
+    .nav-bar a[aria-current="page"]{ background:var(--accent); color:#fff; border-color:var(--accent); }
+
+    footer{
+      background:var(--surface); color:var(--muted);
+      border-top:1px solid var(--line);
+      padding:16px 0 20px; margin-top:28px;
+      text-align:center; font-size:.85rem;
+    }
+    .footer-inner{ max-width:var(--max); margin:0 auto; padding-inline:clamp(14px,3vw,24px); }
+    .disclaimer{ display:block; margin-top:5px; font-size:.78rem; color:var(--muted); }
+
+    @media (max-width:600px){
+      .text-card{ padding:18px 16px; line-height:2.8; }
+      .btn{ width:100%; }
+      .nav-bar a{ flex:1 1 100%; }
+    }
+
+    /* ---- Part 1: the option dropdowns ---- */
+    select{
+      font-family:inherit; font-size:16px; min-height:44px;
+      padding:6px 8px; margin:0 3px;
+      border:1px solid #8a9298; border-radius:var(--radius);
+      background:#fff; color:var(--ink); max-width:100%;
+    }
+    select:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+    select:disabled{ background:#eef1f2; color:var(--muted); }
+    select.is-correct{ border:2px solid var(--good); background:var(--good-bg); }
+    select.is-wrong{ border:2px solid var(--bad); background:var(--bad-bg); }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <a class="mea" href="https://koalaspiessydney.github.io/ModernEnglishAU/index.html">Modern English Australia</a>
+      <a class="kss" href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">Koala Spies Sydney</a>
+    </div>
+    <a class="back-btn" href="CAEt2.html">← Back to Test 2</a>
+  </div>
+</header>
+
+<!-- exam chrome: where you are in the test -->
+<div class="task-bar">
+  <div class="task-bar-inner">
+    <span><strong>Part 1 of 4</strong> · Multiple-choice cloze</span>
+    <span>8 questions</span>
+  </div>
+</div>
+<div class="task-progress"><span style="width:25%"></span></div>
+
+<main>
+  <div class="wrap">
+
+    <p class="kicker">Use of English · Test 2</p>
+    <h1>Part 1 — Multiple-choice cloze</h1>
+
+    <div class="rubric">
+      <p>For questions <strong>1–8</strong>, read the text below and decide which answer
+         (<strong>A</strong>, <strong>B</strong>, <strong>C</strong> or <strong>D</strong>) best fits each gap.</p>
+      <p>Read the whole text once before you choose anything — the word before and after the gap is
+         usually what decides it.</p>
+    </div>
+    <p class="example"><strong>Example (0):</strong> A aspect &nbsp; B <u>part</u> &nbsp; C element &nbsp; D factor
+       — “a big <em>part</em> of” is the everyday phrase; the other three would need different wording
+       around them.</p>
+
+    <!-- ============================================================
+         THE TEXT
+         One continuous passage, as in the real paper.
+         ============================================================ -->
+    <div class="text-card">
+      <p class="text-title">Reality Television</p>
+
+      <p>
+        Reality television has become a big <span class="gapno">0</span>
+        <select disabled aria-label="Example gap, answered">
+          <option selected>part ✔</option>
+        </select>
+        of modern entertainment. These shows put ordinary people in unusual situations, creating
+        drama that audiences find <span class="gapno">1</span>
+        <select id="q1" aria-label="Gap 1">
+          <option value="">— choose —</option>
+          <option value="A">A roughly</option>
+          <option value="B">B closely</option>
+          <option value="C">C particularly</option>
+          <option value="D">D nearly</option>
+        </select>
+        compelling, and over the past two decades the genre has <span class="gapno">2</span>
+        <select id="q2" aria-label="Gap 2">
+          <option value="">— choose —</option>
+          <option value="A">A raised</option>
+          <option value="B">B risen</option>
+          <option value="C">C arisen</option>
+          <option value="D">D aroused</option>
+        </select>
+        in popularity at a remarkable rate.
+      </p>
+
+      <p>
+        Not everyone is convinced. Some critics argue that it rewards <span class="gapno">3</span>
+        <select id="q3" aria-label="Gap 3">
+          <option value="">— choose —</option>
+          <option value="A">A hazardous</option>
+          <option value="B">B perilous</option>
+          <option value="C">C risky</option>
+          <option value="D">D precarious</option>
+        </select>
+        behaviour, since participants are often <span class="gapno">4</span>
+        <select id="q4" aria-label="Gap 4">
+          <option value="">— choose —</option>
+          <option value="A">A reminded</option>
+          <option value="B">B encouraged</option>
+          <option value="C">C warned</option>
+          <option value="D">D refused</option>
+        </select>
+        to create conflict for the camera.
+      </p>
+
+      <p>
+        Others see the genre as a <span class="gapno">5</span>
+        <select id="q5" aria-label="Gap 5">
+          <option value="">— choose —</option>
+          <option value="A">A accelerator</option>
+          <option value="B">B catalyst</option>
+          <option value="C">C converter</option>
+          <option value="D">D reactor</option>
+        </select>
+        for change, pointing to programmes that have brought hidden social problems to a mass
+        audience. It has also <span class="gapno">6</span>
+        <select id="q6" aria-label="Gap 6">
+          <option value="">— choose —</option>
+          <option value="A">A opened</option>
+          <option value="B">B taken</option>
+          <option value="C">C brought</option>
+          <option value="D">D put</option>
+        </select>
+        up opportunities for fame to people who would never have been offered a screen test.
+      </p>
+
+      <p>
+        Despite the criticism, these shows continue to <span class="gapno">7</span>
+        <select id="q7" aria-label="Gap 7">
+          <option value="">— choose —</option>
+          <option value="A">A attract</option>
+          <option value="B">B invite</option>
+          <option value="C">C welcome</option>
+          <option value="D">D receive</option>
+        </select>
+        huge audiences, and after twenty-five years on our screens they are now an
+        <span class="gapno">8</span>
+        <select id="q8" aria-label="Gap 8">
+          <option value="">— choose —</option>
+          <option value="A">A entire</option>
+          <option value="B">B overall</option>
+          <option value="C">C absolute</option>
+          <option value="D">D integral</option>
+        </select>
+        part of popular culture.
+      </p>
+    </div>
+
+    <!-- ============================================================
+         ACTIONS
+         Two stages: "Check" marks the answers without giving them
+         away, so the student can think again.
+         ============================================================ -->
+    <div class="actions">
+      <p class="progress-line" id="progressLine">0 of 8 answered</p>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" id="checkBtn" type="button">Check my answers</button>
+        <button class="btn btn-ghost" id="revealBtn" type="button">Show answers &amp; explanations</button>
+        <button class="btn btn-ghost" id="resetBtn" type="button">Start again</button>
+      </div>
+
+      <div class="score-box" id="scoreBox"></div>
+
+      <div class="explanations" id="explanations">
+        <h2>Answers &amp; explanations</h2>
+        <div id="expList"></div>
+      </div>
+    </div>
+
+    <nav class="nav-bar">
+      <a href="CAEt2.html">Test 2 home</a>
+      <a href="CAEt2p1.html" aria-current="page">Part 1</a>
+      <a href="CAEt2p2.html">Part 2</a>
+      <a href="CAEt2p3.html">Part 3</a>
+      <a href="CAEt2p4.html">Part 4</a>
+    </nav>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    © Justine Kelly · Modern English Australia · Sydney<span class="disclaimer">Practice material. Not an official Cambridge paper, and not affiliated with or endorsed by Cambridge University Press &amp; Assessment.</span>
+  </div>
+</footer>
+
+<script>
+  /* ===== Answer key =====
+     Each entry explains why the other three fail, because a student who
+     picked D learns more from "why not D" than from "the answer is C". */
+  const answerKey = {
+    q1: { correct:"C", word:"particularly",
+          why:"An adverb of degree is needed before <em>compelling</em>. Roughly and nearly are about approximation, and closely goes with verbs such as <em>watch</em> or <em>follow</em>, not with an adjective like this." },
+    q2: { correct:"B", word:"risen",
+          why:"<em>Rise</em> has no object, which is what this sentence needs: something rises in popularity by itself. <em>Raise</em> needs an object (you raise something), <em>arise</em> means to come into existence, and <em>arouse</em> means to stir up a feeling." },
+    q3: { correct:"C", word:"risky",
+          why:"All four mean dangerous, but <em>risky behaviour</em> is the phrase English actually uses. Hazardous goes with substances and waste, perilous with journeys, precarious with a position or a living." },
+    q4: { correct:"B", word:"encouraged",
+          why:"Encourage someone <em>to do</em> something fits the sense: the producers want the conflict. Reminded and warned take the same pattern but say the opposite, and <em>refused</em> would need the participants to be the ones refusing." },
+    q5: { correct:"B", word:"catalyst",
+          why:"<em>A catalyst for change</em> is a fixed phrase: the one chemistry word English borrowed for this meaning. Accelerator, converter and reactor stayed literal." },
+    q6: { correct:"A", word:"opened",
+          why:"<em>Open up opportunities</em> is the phrasal verb — to make new chances available. Take up, bring up and put up all exist, but none of them means this." },
+    q7: { correct:"A", word:"attract",
+          why:"<em>Attract an audience</em> is the collocation for drawing people in. You invite guests and welcome them once they arrive; <em>receive</em> would make the audience something handed over." },
+    q8: { correct:"D", word:"integral",
+          why:"<em>An integral part of</em> means a part you could not remove without breaking the whole. Entire, overall and absolute all describe totality rather than belonging, and none of them fits before <em>part of</em>." }
+  };
+</script>
+
+<script>
+  const ids       = Object.keys(answerKey);
+  const selects   = ids.map(id => document.getElementById(id));
+  const checkBtn  = document.getElementById("checkBtn");
+  const revealBtn = document.getElementById("revealBtn");
+  const resetBtn  = document.getElementById("resetBtn");
+  const scoreBox  = document.getElementById("scoreBox");
+  const progress  = document.getElementById("progressLine");
+  const explanations = document.getElementById("explanations");
+  const expList   = document.getElementById("expList");
+
+  let revealed = false;
+
+  function answeredCount(){
+    return selects.filter(s => s.value).length;
+  }
+
+  function updateProgress(){
+    const n = answeredCount();
+    progress.textContent = n + " of " + selects.length + " answered";
+  }
+
+  function wordOf(sel, letter){
+    if (!letter) return "—";
+    const opt = [...sel.options].find(o => o.value === letter);
+    return opt ? opt.textContent.replace(/^[A-D]\s*/, "") : letter;
+  }
+
+  function clearMarks(){
+    selects.forEach(s => s.classList.remove("is-correct", "is-wrong"));
+    scoreBox.style.display = "none";
+    scoreBox.classList.remove("all-right");
+  }
+
+  /* ---- stage one: mark, but do not give the answers away ---- */
+  checkBtn.addEventListener("click", () => {
+    clearMarks();
+
+    let score = 0;
+    selects.forEach(sel => {
+      if (!sel.value) return;                 // leave unanswered gaps unmarked
+      if (sel.value === answerKey[sel.id].correct){
+        score++;
+        sel.classList.add("is-correct");
+      } else {
+        sel.classList.add("is-wrong");
+      }
+    });
+
+    const missing = selects.length - answeredCount();
+    let sub;
+    if (score === selects.length){
+      sub = "Every one right. Read the explanations to see why the other options fail.";
+      scoreBox.classList.add("all-right");
+    } else if (missing){
+      sub = "Change the ones marked in red, fill the " + missing +
+            " gap" + (missing === 1 ? "" : "s") + " still empty, then check again.";
+    } else {
+      sub = "Change the ones marked in red and check again — the answers are not shown yet.";
+    }
+
+    scoreBox.style.display = "block";
+    scoreBox.innerHTML = "Score: " + score + " / " + selects.length +
+                         "<span class='sub'>" + sub + "</span>";
+    scoreBox.scrollIntoView({ behavior:"smooth", block:"center" });
+  });
+
+  /* ---- stage two: the answers, only when asked for ---- */
+  revealBtn.addEventListener("click", () => {
+    expList.innerHTML = "";
+
+    selects.forEach((sel, i) => {
+      const item = answerKey[sel.id];
+      const chosen = sel.value;
+      const right = chosen === item.correct;
+
+      sel.classList.remove("is-correct", "is-wrong");
+      sel.classList.add(right ? "is-correct" : "is-wrong");
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "exp-item";
+
+      const q = document.createElement("div");
+      q.className = "exp-q";
+      q.textContent = "Gap " + (i + 1);
+      const tag = document.createElement("span");
+      tag.className = "tag " + (right ? "tag-ok" : "tag-err");
+      tag.textContent = right ? "Correct" : (chosen ? "Not this one" : "No answer");
+      q.appendChild(tag);
+
+      const a = document.createElement("p");
+      a.className = "exp-a";
+      a.innerHTML =
+        "<strong>Answer:</strong> " + item.correct + " — " + item.word +
+        (right ? "" : "<br><strong>You chose:</strong> " +
+          (chosen ? chosen + " — " + wordOf(sel, chosen) : "nothing")) +
+        "<br>" + item.why;
+
+      wrapper.appendChild(q);
+      wrapper.appendChild(a);
+      expList.appendChild(wrapper);
+    });
+
+    explanations.style.display = "block";
+    revealed = true;
+    explanations.scrollIntoView({ behavior:"smooth", block:"start" });
+  });
+
+  resetBtn.addEventListener("click", () => {
+    selects.forEach(s => { s.value = ""; });
+    clearMarks();
+    explanations.style.display = "none";
+    expList.innerHTML = "";
+    revealed = false;
+    updateProgress();
+    window.scrollTo({ top:0, behavior:"smooth" });
+  });
+
+  selects.forEach(sel => {
+    sel.addEventListener("change", () => {
+      updateProgress();
+      if (!revealed) sel.classList.remove("is-correct", "is-wrong");
+    });
+  });
+
+  updateProgress();
+</script>
+
+</body>
+</html>

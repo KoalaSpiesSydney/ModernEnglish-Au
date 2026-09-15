@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Use of English · Test 2 — Modern English Australia</title>
+  <meta name="description" content="Cambridge C1 Advanced Use of English practice, Test 2. Four parts, free, no sign-up.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- QR code library: draws the code in the page itself, no external image service -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+    /* ==========================================================
+       EXAM SKIN
+       Plain white panels, one sans-serif, teal accent, no
+       decoration — the look of a computer-based exam screen
+       rather than the main website.
+       ========================================================== */
+    :root{
+      --page:#f1f3f4;          /* the grey behind the paper */
+      --surface:#ffffff;
+      --ink:#333333;           /* exam screens use grey-black, not pure black */
+      --ink-strong:#1a1a1a;
+      --muted:#6b7378;
+      --line:#d5dade;
+      --line-soft:#e8ecee;
+      --accent:#00847d;        /* teal, darkened enough to read as text */
+      --accent-2:#006b65;
+      --accent-soft:#e3f4f3;
+      --bar:#2d3b45;           /* the dark chrome bar */
+      --bar-ink:#ffffff;
+      --good:#1b7a3d;
+      --good-bg:#eaf7ee;
+      --bad:#c0392b;
+      --bad-bg:#fdeeec;
+      --sans:"Source Sans 3","Source Sans Pro",Arial,"Helvetica Neue",Helvetica,sans-serif;
+      --max:1000px;
+      --radius:4px;
+    }
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family:var(--sans);
+      font-size:16px;
+      color:var(--ink);
+      line-height:1.6;
+      background:var(--page);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      -webkit-text-size-adjust:100%;
+    }
+
+    /* ===== EXAM CHROME ===== */
+    header{
+      background:var(--bar);
+      color:var(--bar-ink);
+      padding:10px 0;
+    }
+    .header-inner{
+      max-width:var(--max); margin:0 auto;
+      padding-inline:clamp(14px,3vw,24px);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+    }
+    .brand{ display:flex; flex-direction:column; gap:0; min-width:0; }
+    .brand .mea{
+      font-family:var(--sans); font-weight:600; font-size:.95rem;
+      letter-spacing:.02em; text-transform:none; line-height:1.3;
+      color:var(--bar-ink); text-decoration:none;
+    }
+    .brand .mea:hover{ text-decoration:underline; }
+    .brand .kss{
+      font-size:.72rem; font-weight:400; letter-spacing:.04em;
+      text-transform:none; color:rgba(255,255,255,.62); text-decoration:none;
+    }
+    .back-btn{
+      display:inline-flex; align-items:center; gap:7px;
+      padding:7px 14px; font-size:.86rem; font-weight:600;
+      color:var(--bar-ink); text-decoration:none;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.28);
+      border-radius:var(--radius); white-space:nowrap;
+    }
+    .back-btn:hover{ background:rgba(255,255,255,.2); }
+
+    /* the strip that names the task, like the bar across an exam screen */
+    .task-bar{
+      background:var(--surface);
+      border-bottom:1px solid var(--line);
+    }
+    .task-bar-inner{
+      max-width:var(--max); margin:0 auto;
+      padding:9px clamp(14px,3vw,24px);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+      font-size:.85rem; color:var(--muted);
+    }
+    .task-bar strong{ color:var(--ink-strong); font-weight:600; }
+    .task-progress{
+      height:4px; background:var(--line-soft);
+      max-width:var(--max); margin:0 auto;
+    }
+    .task-progress span{ display:block; height:100%; background:var(--accent); }
+
+    /* ===== MAIN ===== */
+    main{ flex:1 0 auto; padding-block:24px 36px; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding-inline:clamp(14px,3vw,24px); }
+
+    .kicker{
+      margin:0 0 2px; font-size:.78rem; font-weight:600;
+      letter-spacing:.06em; text-transform:none; color:var(--muted);
+    }
+    h1{
+      font-family:var(--sans); font-weight:600;
+      font-size:clamp(1.5rem,1.2rem + 1vw,2rem);
+      line-height:1.25; margin:0 0 14px; color:var(--ink-strong);
+    }
+
+    .rubric{
+      background:var(--surface); border:1px solid var(--line);
+      border-left:4px solid var(--accent); border-radius:var(--radius);
+      padding:14px 18px; margin:0 0 10px; font-size:.95rem;
+    }
+    .rubric p{ margin:0 0 6px; } .rubric p:last-child{ margin:0; }
+    .example{ font-size:.88rem; color:var(--muted); margin:0 0 20px; }
+
+    /* ===== THE TEXT PANEL ===== */
+    .text-card{
+      background:var(--surface); border:1px solid var(--line);
+      border-radius:var(--radius); box-shadow:none;
+      padding:24px 26px 20px; font-size:1rem; line-height:2.6;
+    }
+    .text-title{
+      font-family:var(--sans); font-size:1.05rem; font-weight:700;
+      line-height:1.3; margin:0 0 .6em; text-align:left; color:var(--ink-strong);
+    }
+    .text-card p{ margin:0 0 1em; } .text-card p:last-child{ margin-bottom:0; }
+
+    .gapno{
+      display:inline-block; min-width:1.5em;
+      font-weight:700; color:var(--accent); font-size:.88em;
+    }
+
+    /* ===== ACTIONS ===== */
+    .actions{ margin-top:20px; display:grid; gap:12px; }
+    .progress-line{ text-align:center; font-size:.88rem; color:var(--muted); margin:0; }
+    .btn-row{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+    .btn{
+      appearance:none; border:1px solid transparent; border-radius:var(--radius);
+      padding:11px 20px; font-family:inherit; font-size:1rem; font-weight:600;
+      cursor:pointer; min-height:44px;
+    }
+    .btn-primary{ background:var(--accent); color:#fff; }
+    .btn-primary:hover{ background:var(--accent-2); }
+    .btn-ghost{ background:#fff; color:var(--accent); border-color:var(--line); }
+    .btn-ghost:hover{ background:var(--accent-soft); border-color:var(--accent); }
+
+    .score-box{
+      text-align:center; padding:14px 16px; border-radius:var(--radius);
+      background:var(--surface); border:1px solid var(--line);
+      border-left:4px solid var(--accent);
+      font-weight:600; color:var(--ink-strong); display:none;
+    }
+    .score-box .sub{ display:block; font-weight:400; font-size:.9rem; color:var(--muted); margin-top:4px; }
+    .score-box.all-right{ border-left-color:var(--good); }
+
+    .explanations{
+      display:none; background:var(--surface); border:1px solid var(--line);
+      border-radius:var(--radius); padding:18px 20px;
+    }
+    .explanations h2{ font-family:var(--sans); font-weight:600; font-size:1.05rem; margin:0 0 12px; }
+    .exp-item{
+      padding:12px 14px; border-radius:var(--radius); background:#fafbfb;
+      border:1px solid var(--line-soft); margin-bottom:8px;
+    }
+    .exp-item:last-child{ margin-bottom:0; }
+    .exp-q{ font-weight:700; color:var(--ink-strong); margin-bottom:3px; font-size:.95rem; }
+    .exp-a{ margin:0; font-size:.94rem; color:var(--ink); }
+    .exp-a strong{ color:var(--ink-strong); }
+    .tag{
+      display:inline-block; padding:1px 8px; border-radius:2px; font-size:.7rem;
+      font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+      margin-left:8px; vertical-align:2px;
+    }
+    .tag-ok{ background:var(--good-bg); color:var(--good); border:1px solid rgba(27,122,61,.3); }
+    .tag-err{ background:var(--bad-bg); color:var(--bad); border:1px solid rgba(192,57,43,.3); }
+
+    /* ===== NAV + FOOTER ===== */
+    .nav-bar{
+      max-width:var(--max); margin:28px auto 0;
+      padding-inline:clamp(14px,3vw,24px);
+      display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+    }
+    .nav-bar a{
+      flex:1 1 140px; text-align:center; min-height:44px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--surface); color:var(--accent);
+      border:1px solid var(--line); border-radius:var(--radius);
+      text-decoration:none; font-weight:600; font-size:.92rem; padding:10px 12px;
+    }
+    .nav-bar a:hover{ background:var(--accent-soft); border-color:var(--accent); }
+    .nav-bar a[aria-current="page"]{ background:var(--accent); color:#fff; border-color:var(--accent); }
+
+    footer{
+      background:var(--surface); color:var(--muted);
+      border-top:1px solid var(--line);
+      padding:16px 0 20px; margin-top:28px;
+      text-align:center; font-size:.85rem;
+    }
+    .footer-inner{ max-width:var(--max); margin:0 auto; padding-inline:clamp(14px,3vw,24px); }
+    .disclaimer{ display:block; margin-top:5px; font-size:.78rem; color:var(--muted); }
+
+    @media (max-width:600px){
+      .text-card{ padding:18px 16px; line-height:2.8; }
+      .btn{ width:100%; }
+      .nav-bar a{ flex:1 1 100%; }
+    }
+
+    /* ---- Landing page ---- */
+    /* the header's own link, matching the .back-btn on the part pages */
+    .home-btn{
+      display:inline-flex; align-items:center; gap:7px; min-height:38px;
+      padding:7px 14px; font-size:.86rem; font-weight:600;
+      color:var(--bar-ink); text-decoration:none;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.28);
+      border-radius:var(--radius); white-space:nowrap;
+    }
+    .home-btn:hover{ background:rgba(255,255,255,.2); }
+    .home-btn svg{ width:15px; height:15px; fill:currentColor; flex:0 0 auto; }
+
+    /* footer links */
+    .footer-nav{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:6px; }
+    .footer-nav a{
+      color:var(--accent); text-decoration:none; font-size:.88rem; font-weight:600;
+    }
+    .footer-nav a:hover{ text-decoration:underline; text-underline-offset:3px; }
+
+    /* the introduction block, centred at the top of the page */
+    .intro-block{ text-align:center; margin-bottom:28px; }
+    .intro-block h1{ margin-bottom:12px; }
+    .meta-row{
+      display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; padding:0;
+      list-style:none; justify-content:center;
+    }
+    .meta-row li{
+      font-size:.82rem; font-weight:600; color:var(--ink);
+      background:var(--surface); border:1px solid var(--line);
+      border-radius:2px; padding:3px 10px;
+    }
+    .blurb{ max-width:68ch; color:var(--ink); margin:0 auto; }
+    .link-btn{
+      background:none; border:0; padding:0 0 0 6px; font:inherit;
+      font-size:.9rem; color:var(--accent); text-decoration:underline;
+      text-underline-offset:3px; cursor:pointer;
+    }
+    .link-btn:hover{ color:var(--accent-2); }
+
+    /* ===========================================================
+       INFORMATION TILE — opens when the page loads
+       =========================================================== */
+    .info-backdrop{
+      position:fixed; inset:0; z-index:70;
+      display:flex; align-items:center; justify-content:center;
+      background:rgba(20,26,30,.72); padding:1.2rem;
+    }
+    .info-backdrop[hidden]{ display:none; }
+
+    .info-tile{
+      position:relative; width:min(94%,520px); max-height:86vh; overflow-y:auto;
+      background:var(--surface); border:1px solid var(--line);
+      border-top:4px solid var(--accent); border-radius:var(--radius);
+      padding:26px 26px 22px;
+    }
+    .info-tile .kicker{ margin-bottom:4px; }
+    .info-tile h2{
+      font-family:var(--sans); font-weight:600; font-size:1.35rem;
+      margin:0 0 14px; color:var(--ink-strong);
+    }
+    .info-facts{ list-style:none; margin:0 0 16px; padding:0; }
+    .info-facts li{
+      display:flex; gap:10px; align-items:baseline;
+      padding:7px 0; border-bottom:1px solid var(--line-soft);
+      font-size:.95rem;
+    }
+    .info-facts li:last-child{ border-bottom:0; }
+    .info-facts .lbl{
+      flex:0 0 6.5rem; font-size:.74rem; font-weight:700;
+      letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
+    }
+    .info-facts .val{ color:var(--ink-strong); font-weight:600; }
+    .info-tile p{ margin:0 0 18px; font-size:.95rem; color:var(--ink); }
+    /* the pre-teaching block inside the tile */
+    .info-prep{
+      background:#f7f9f9; border:1px solid var(--line-soft);
+      border-left:4px solid var(--accent); border-radius:var(--radius);
+      padding:14px 16px; margin:0 0 18px;
+    }
+    .info-prep h3{
+      font-family:var(--sans); font-weight:700; font-size:.95rem;
+      margin:0 0 5px; color:var(--ink-strong);
+    }
+    .info-prep p{ margin:0 0 12px; font-size:.9rem; color:var(--muted); }
+    .info-pdf{
+      display:inline-flex; align-items:center; gap:7px; min-height:44px;
+      padding:9px 16px; background:#fff; color:var(--accent);
+      border:1px solid var(--accent); border-radius:var(--radius);
+      font-size:.9rem; font-weight:600; text-decoration:none;
+    }
+    .info-pdf:hover{ background:var(--accent-soft); }
+
+    .info-actions{ display:flex; justify-content:flex-end; }
+    .info-start{
+      min-height:44px; padding:10px 22px; background:var(--accent); color:#fff;
+      border:0; border-radius:var(--radius); font:inherit; font-weight:600; cursor:pointer;
+    }
+    .info-start:hover{ background:var(--accent-2); }
+    .info-close{
+      position:absolute; top:6px; right:8px; width:44px; height:44px;
+      background:none; border:0; color:var(--muted); font-size:1.1rem; cursor:pointer;
+      border-radius:var(--radius);
+    }
+    .info-close:hover{ background:#eef1f2; }
+    @media (max-width:600px){
+      .info-tile{ padding:22px 18px 18px; }
+      .info-facts .lbl{ flex-basis:5.5rem; }
+      .info-actions{ justify-content:stretch; }
+      .info-start{ width:100%; }
+    }
+
+    /* the one link left on the page — the hints sheet itself */
+    .pdf-line{ margin:18px 0 0; }
+    .pdf-link{
+      display:inline-flex; align-items:center; gap:8px; min-height:44px;
+      padding:10px 18px; background:#fff; color:var(--accent);
+      border:1px solid var(--accent); border-radius:var(--radius);
+      font-weight:600; font-size:.94rem; text-decoration:none;
+    }
+    .pdf-link:hover{ background:var(--accent-soft); }
+
+    .section-label{
+      font-size:.78rem; font-weight:700; letter-spacing:.06em;
+      text-transform:uppercase; color:var(--muted); margin:0 0 10px;
+    }
+    .parts{ display:grid; grid-template-columns:1fr; gap:10px; margin:0 auto 26px; max-width:70ch; }
+    .section-label{ max-width:70ch; margin-inline:auto; }
+    .part{
+      display:grid; grid-template-columns:58px 1fr; gap:16px; align-items:start;
+      background:var(--surface); border:1px solid var(--line);
+      border-radius:var(--radius); box-shadow:none;
+      padding:16px 18px; text-decoration:none; color:var(--ink);
+    }
+    .part:hover{ border-color:var(--accent); background:#fbfdfd; }
+    .part:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+    .part-num{
+      font-family:var(--sans); font-weight:700; font-size:1.7rem; line-height:1;
+      color:var(--accent); text-align:center; padding-top:2px;
+    }
+    .part-num small{
+      display:block; font-size:.58rem; font-weight:700; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--muted); margin-bottom:3px;
+    }
+    .part-task{ font-family:var(--sans); font-size:1.05rem; font-weight:700; margin:0 0 2px; color:var(--ink-strong); }
+    .part-what{ margin:0 0 8px; font-size:.94rem; color:var(--ink); }
+    .part-facts{
+      margin:0; padding:8px 0 0; border-top:1px solid var(--line-soft);
+      font-size:.82rem; color:var(--muted);
+    }
+    .after{ max-width:70ch; margin:0 auto; font-size:.9rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; }
+
+    /* ---- QR ---- */
+    .qr-box{
+      flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:3px;
+      background:none; border:0; padding:0; cursor:pointer;
+    }
+    .qr-box #qrcode{ background:#fff; padding:3px; border-radius:2px; line-height:0; }
+    .qr-box img, .qr-box canvas{ display:block; width:40px; height:40px; }
+    .qr-caption{ font-size:.54rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.6); }
+    .qr-backdrop{
+      position:fixed; inset:0; z-index:60; display:flex; align-items:center;
+      justify-content:center; background:rgba(20,26,30,.7); padding:1.2rem;
+    }
+    .qr-backdrop[hidden]{ display:none; }
+    .qr-panel{
+      background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+      padding:1.5rem 1.4rem 1.2rem; text-align:center; max-width:340px;
+    }
+    .qr-panel h2{ font-family:var(--sans); font-weight:600; font-size:1.05rem; margin:0 0 .8rem; }
+    .qr-panel p{ font-size:.78rem; color:var(--muted); margin:.9rem 0 0; word-break:break-all; }
+    .qr-panel button{
+      margin-top:1rem; min-height:44px; padding:.5rem 1.2rem;
+      background:var(--accent); color:#fff; border:0; border-radius:var(--radius);
+      font:inherit; font-weight:600; cursor:pointer;
+    }
+    @media (max-width:600px){ .part{ grid-template-columns:44px 1fr; gap:12px; } .part-num{ font-size:1.4rem; } }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <button type="button" class="qr-box" id="qrOpen" aria-label="Enlarge the QR code for this page">
+      <div id="qrcode"></div>
+      <span class="qr-caption">Scan</span>
+    </button>
+
+    <div class="brand">
+      <a class="mea" href="https://koalaspiessydney.github.io/ModernEnglishAU/index.html">Modern English Australia</a>
+      <a class="kss" href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">Koala Spies Sydney</a>
+    </div>
+
+    <a href="https://koalaspiessydney.github.io/ModernEnglishAU/MEAtests.html" class="home-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3l9 8h-3v10h-12v-10h-3l9-8z"/>
+      </svg>
+      All tests
+    </a>
+
+  </div>
+</header>
+
+<!-- exam chrome: where you are in the test -->
+<div class="task-bar">
+  <div class="task-bar-inner">
+    <span><strong>Use of English — Test 2</strong> · Cambridge C1 Advanced practice</span>
+    <span>4 parts · 24 questions</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <div class="intro-block">
+  <p class="kicker">Cambridge C1 Advanced · Reading &amp; Use of English</p>
+  <h1>Use of English — Test 2</h1>
+
+  <ul class="meta-row">
+    <li>Level C1</li>
+    <li>Theme: ancient civilisations</li>
+    <li>4 parts · 24 questions</li>
+    <li>About 35 minutes</li>
+  </ul>
+
+  <p class="blurb">
+    The full Use of English section of the paper: vocabulary, grammar, word building and rephrasing,
+    in the order Cambridge sets them. Do the parts in order the first time; after that, use them
+    separately for whatever you find hardest.
+    <button type="button" class="link-btn" id="openInfo">Show this again</button>
+  </p>
+
+  <!-- Add the hints sheet for this test here when it exists, the way Test 1 does:
+  <p class="pdf-line">
+    <a class="pdf-link" href="CAE_Test2_Hints_PreTeaching.pdf"
+       target="_blank" rel="noopener" download>&#8595; Hints &amp; pre-teaching (PDF)</a>
+  </p>
+  -->
+  </div>
+
+  <!-- ============================================================
+       THE PARTS
+       Links point at CAEt2p1.html – CAEt2p4.html. File names are
+       case-sensitive on GitHub Pages, so name the files exactly that.
+       ============================================================ -->
+  <p class="section-label">The test</p>
+
+  <div class="parts">
+
+    <a class="part" href="CAEt2p1.html">
+      <div class="part-num"><small>Part</small>1</div>
+      <div>
+        <p class="part-task">Multiple-choice cloze</p>
+        <p class="part-what">
+          Eight gaps, four options each. Vocabulary: which word actually goes with the words around it —
+          collocation, phrasal verbs, and shades of meaning between near-synonyms.
+        </p>
+        <p class="part-facts">8 questions · about 10 minutes · recognition</p>
+      </div>
+    </a>
+
+    <a class="part" href="CAEt2p2.html">
+      <div class="part-num"><small>Part</small>2</div>
+      <div>
+        <p class="part-task">Open cloze</p>
+        <p class="part-what">
+          Eight gaps, no options, one word in each. Grammar and structure: prepositions, articles,
+          auxiliaries, relative pronouns and linking words — the small words that hold a sentence together.
+        </p>
+        <p class="part-facts">8 questions · about 10 minutes · production</p>
+      </div>
+    </a>
+
+    <a class="part" href="CAEt2p3.html">
+      <div class="part-num"><small>Part</small>3</div>
+      <div>
+        <p class="part-task">Word formation</p>
+        <p class="part-what">
+          Each gap has its own stem word to change. Prefixes, suffixes and word class — and whether
+          the sentence needs a negative, a plural, or a different part of speech entirely.
+        </p>
+        <p class="part-facts">4 questions · about 5 minutes · production</p>
+      </div>
+    </a>
+
+    <a class="part" href="CAEt2p4.html">
+      <div class="part-num"><small>Part</small>4</div>
+      <div>
+        <p class="part-task">Key word transformations</p>
+        <p class="part-what">
+          Sentences to rewrite using a given word, in three to six words, without changing the
+          meaning. The part that catches people out: it tests grammar and vocabulary at the same time,
+          and it is the only part worth two marks a question.
+        </p>
+        <p class="part-facts">4 questions · about 8 minutes · production</p>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="after">
+    A full Cambridge paper has 8, 8, 8 and 6 questions in these four parts. This practice test is
+    shorter, so treat the timings as a guide rather than exam conditions. Time yourself only once you
+    are getting the answers right — accuracy first, speed second.
+  </p>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-nav">
+      <a href="https://koalaspiessydney.github.io/ModernEnglishAU/index.html">Home</a>
+      <a href="https://koalaspiessydney.github.io/ModernEnglishAU/MEAtests.html">All Tests</a>
+      <a href="CAEt1.html">Test 1</a>
+      <a href="http://modernenglish.au/IELTSPTEPLUS.html">IELTS &amp; PTE Practice</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>© Justine Kelly · Modern English Australia · Sydney<span class="disclaimer">Practice material. Not an official Cambridge paper, and not affiliated with or endorsed by Cambridge University Press &amp; Assessment.</span></div>
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     INFORMATION TILE
+     Opens by itself when the page loads; "Show this again" in the
+     paragraph above brings it back.
+     ============================================================ -->
+<div class="info-backdrop" id="infoBackdrop" hidden>
+  <div class="info-tile" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+    <button type="button" class="info-close" id="infoClose" aria-label="Close">✕</button>
+
+    <p class="kicker">Cambridge C1 Advanced · Reading &amp; Use of English</p>
+    <h2 id="infoTitle">Use of English — Test 2</h2>
+
+    <ul class="info-facts">
+      <li><span class="lbl">Level</span><span class="val">C1</span></li>
+      <li><span class="lbl">Theme</span><span class="val">Ancient civilisations</span></li>
+      <li><span class="lbl">Length</span><span class="val">4 parts · 24 questions</span></li>
+      <li><span class="lbl">Time</span><span class="val">About 35 minutes</span></li>
+    </ul>
+
+    <p>
+      One theme — ancient civilisations — runs through all four parts, so the same vocabulary comes
+      back at you in a different shape each time. Part 1 asks you to recognise the right word,
+      Parts 2 and 3 ask you to produce it, and Part 4 asks you to rebuild a whole sentence around it.
+      Do them in order the first time; after that, use them separately for whatever you find hardest.
+    </p>
+
+    <!-- Add the hints sheet for this test here when it exists:
+    <div class="info-prep">
+      <h3>Before you start</h3>
+      <p>Read the hints sheet first — worth ten minutes before you open Part 1.</p>
+      <a class="info-pdf" href="CAE_Test2_Hints_PreTeaching.pdf"
+         target="_blank" rel="noopener" download>&#8595; Hints &amp; pre-teaching (PDF)</a>
+    </div>
+    -->
+
+    <div class="info-actions">
+      <button type="button" class="info-start" id="infoStart">Start the test</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Enlarged QR, for showing a class -->
+<div class="qr-backdrop" id="qrBackdrop" hidden>
+  <div class="qr-panel" role="dialog" aria-modal="true" aria-label="QR code for this page">
+    <h2>Scan to open this test</h2>
+    <div id="qrcode-big"></div>
+    <p id="qrUrl"></p>
+    <button type="button" id="qrClose">Close</button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var here = window.location.href.split('#')[0];
+
+    /* The library draws the code in the page, so there is no external
+       image service to go down — but it still needs a real web address
+       to be worth scanning. */
+    /* Some school and office networks block cdnjs. If the library did
+       not load, take the QR button out rather than leaving an empty
+       white speck in the masthead. */
+    if (!window.QRCode) {
+      var box = document.getElementById("qrOpen");
+      if (box) box.style.display = "none";
+    }
+
+    if (window.QRCode) {
+      /* drawn at 132px and shrunk by CSS to 44px — a code generated at
+         44px has sub-pixel squares and will not scan or even look like
+         a QR code. The enlarged one below is the scannable one. */
+      new QRCode(document.getElementById("qrcode"), { text: here, width: 132, height: 132 });
+      new QRCode(document.getElementById("qrcode-big"), { text: here, width: 220, height: 220 });
+    }
+
+    /* ---------- the information tile ----------
+       Opens as soon as the page is ready, so a student reads what the
+       test is before they pick a part. Closes on Start, on ✕, on a
+       click outside, or on Esc. */
+    var info      = document.getElementById("infoBackdrop");
+    var infoOpen  = document.getElementById("openInfo");
+    var lastFocus = null;
+
+    function openInfo(){
+      lastFocus = document.activeElement;
+      info.hidden = false;
+      document.body.style.overflow = "hidden";
+      document.getElementById("infoStart").focus();
+    }
+    function closeInfo(){
+      info.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    if (infoOpen) infoOpen.addEventListener("click", openInfo);
+    document.getElementById("infoStart").addEventListener("click", closeInfo);
+    document.getElementById("infoClose").addEventListener("click", closeInfo);
+    info.addEventListener("click", function (e) { if (e.target === info) closeInfo(); });
+
+    openInfo();
+
+    /* Want it only on a student's first visit rather than every time?
+       Replace the openInfo() line above with:
+
+         try {
+           if (!localStorage.getItem("caet1-info-seen")) {
+             openInfo();
+             localStorage.setItem("caet1-info-seen", "1");
+           }
+         } catch (e) { openInfo(); }
+    */
+
+    var backdrop = document.getElementById("qrBackdrop");
+    var openBtn  = document.getElementById("qrOpen");
+
+    document.getElementById("qrUrl").textContent = here;
+
+    function open()  { backdrop.hidden = false; }
+    function close() { backdrop.hidden = true; openBtn.focus(); }
+
+    openBtn.addEventListener("click", open);
+    document.getElementById("qrClose").addEventListener("click", close);
+    backdrop.addEventListener("click", function (e) { if (e.target === backdrop) close(); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      if (!backdrop.hidden) close();
+      else if (!info.hidden) closeInfo();
+    });
+  })();
+</script>
+</body>
+</html>
