@@ -1,0 +1,299 @@
+// ===============================
+// LIVE CHECKING
+// ===============================
+
+const inputs = document.querySelectorAll(".gap");
+const progressBar = document.getElementById("progress-bar");
+const scoreOutput = document.getElementById("score-output"); // may not exist on every page
+
+inputs.forEach(input => {
+  input.addEventListener("input", () => {
+    const correct = input.dataset.answer.trim().toLowerCase();
+    const user = input.value.trim().toLowerCase();
+
+    // Instant marking
+    if (user === correct) {
+      input.classList.add("correct");
+      input.classList.remove("incorrect");
+    } else {
+      input.classList.remove("correct");
+      input.classList.remove("incorrect");
+    }
+
+    updateProgress();
+  });
+});
+
+// ===============================
+// UPDATE PROGRESS BAR
+// ===============================
+
+function updateProgress() {
+  if (!progressBar) return;
+
+  const total = inputs.length;
+  const correct = document.querySelectorAll(".gap.correct").length;
+  const percent = total ? (correct / total) * 100 : 0;
+
+  progressBar.style.width = percent + "%";
+}
+
+// ===============================
+// THE "CHECK" BUTTON ON EACH CARD
+// Checks only the gaps in that card and writes the tally into
+// the <p class="feedback"> underneath it.
+// ===============================
+
+document.querySelectorAll(".verse-card").forEach(card => {
+  const button = card.querySelector(".check-btn");
+  const feedback = card.querySelector(".feedback");
+  const gaps = card.querySelectorAll(".gap");
+
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+    let score = 0;
+
+    gaps.forEach(input => {
+      const correct = input.dataset.answer.trim().toLowerCase();
+      const user = input.value.trim().toLowerCase();
+
+      if (user === correct) {
+        input.classList.add("correct");
+        input.classList.remove("incorrect");
+        score++;
+      } else {
+        input.classList.add("incorrect");
+        input.classList.remove("correct");
+      }
+    });
+
+    if (feedback) {
+      feedback.textContent = score === gaps.length
+        ? `All ${gaps.length} correct — nice work.`
+        : `${score} / ${gaps.length} correct. Try the red ones again.`;
+    }
+
+    updateProgress();
+  });
+});
+
+// ===============================
+// CHECK ALL / SHOW ANSWERS
+// These only run if the page actually has those buttons, so the
+// script no longer stops dead on a page without them.
+// ===============================
+
+const checkAllBtn = document.getElementById("check-all");
+if (checkAllBtn) {
+  checkAllBtn.addEventListener("click", () => {
+    let score = 0;
+
+    inputs.forEach(input => {
+      const correct = input.dataset.answer.trim().toLowerCase();
+      const user = input.value.trim().toLowerCase();
+
+      if (user === correct) {
+        input.classList.add("correct");
+        input.classList.remove("incorrect");
+        score++;
+      } else {
+        input.classList.add("incorrect");
+        input.classList.remove("correct");
+      }
+    });
+
+    if (scoreOutput) scoreOutput.textContent = `Score: ${score} / ${inputs.length}`;
+
+    updateProgress();
+  });
+}
+
+const showAnswersBtn = document.getElementById("show-answers");
+if (showAnswersBtn) {
+  showAnswersBtn.addEventListener("click", () => {
+    inputs.forEach(input => {
+      input.value = input.dataset.answer;
+      input.classList.add("correct");
+      input.classList.remove("incorrect");
+      input.disabled = true;
+    });
+
+    if (scoreOutput) scoreOutput.textContent = "All answers revealed.";
+    updateProgress();
+  });
+}
+
+// ===============================
+// MINIMAL AUDIO PLAYER
+// The <audio> ships with its own controls so the page still works
+// without this script; here we hide them and drive our own.
+// ===============================
+
+const song = document.getElementById("song");
+
+if (song) {
+  const player   = document.getElementById("player");
+  const ui       = document.getElementById("player-ui");
+  const playBtn  = document.getElementById("play-btn");
+  const iconPlay  = playBtn.querySelector(".icon-play");
+  const iconPause = playBtn.querySelector(".icon-pause");
+  const wave     = document.getElementById("wave");
+  const timeText = document.getElementById("time");
+
+  // ---- build the waveform ----
+  // The shape is drawn from a formula, not from the audio itself, so it
+  // costs nothing to load. Change BAR_COUNT for a coarser or finer look.
+  const BAR_COUNT = 64;
+  const bars = [];
+
+  for (let i = 0; i < BAR_COUNT; i++) {
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    const shape = Math.abs(Math.sin(i * 0.37)) * (0.55 + 0.45 * Math.abs(Math.sin(i * 0.11 + 1)));
+    bar.style.setProperty("--h", (22 + shape * 68).toFixed(1) + "%");
+    bar.style.setProperty("--d", (i * 0.035).toFixed(3) + "s");
+    wave.appendChild(bar);
+    bars.push(bar);
+  }
+
+  // swap the native controls for ours
+  song.removeAttribute("controls");
+  player.classList.add("enhanced");
+  ui.hidden = false;
+
+  function clock(seconds) {
+    if (!isFinite(seconds)) return "0:00";
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return m + ":" + String(s).padStart(2, "0");
+  }
+
+  function paint() {
+    const ratio = song.duration ? song.currentTime / song.duration : 0;
+    const played = Math.round(ratio * BAR_COUNT);
+
+    bars.forEach((bar, i) => bar.classList.toggle("on", i < played));
+
+    wave.setAttribute("aria-valuenow", Math.round(ratio * 100));
+    timeText.textContent = song.duration
+      ? clock(song.currentTime) + " / " + clock(song.duration)
+      : clock(song.currentTime);
+  }
+
+  playBtn.addEventListener("click", () => {
+    if (song.paused) song.play(); else song.pause();
+  });
+
+  song.addEventListener("play", () => {
+    iconPlay.hidden = true;
+    iconPause.hidden = false;
+    playBtn.setAttribute("aria-label", "Pause");
+    ui.classList.add("playing");          // starts the bars dancing
+  });
+  song.addEventListener("pause", () => {
+    iconPlay.hidden = false;
+    iconPause.hidden = true;
+    playBtn.setAttribute("aria-label", "Play");
+    ui.classList.remove("playing");
+  });
+
+  song.addEventListener("timeupdate", paint);
+  song.addEventListener("loadedmetadata", paint);
+  song.addEventListener("ended", () => {
+    song.currentTime = 0;
+    paint();
+  });
+
+  // --- scrubbing: click anywhere on the bars, or drag along them ---
+  function scrubTo(clientX) {
+    const box = wave.getBoundingClientRect();
+    const ratio = Math.min(Math.max((clientX - box.left) / box.width, 0), 1);
+    if (song.duration) {
+      song.currentTime = ratio * song.duration;
+      paint();
+    }
+  }
+
+  let dragging = false;
+  wave.addEventListener("pointerdown", e => {
+    dragging = true;
+    wave.setPointerCapture(e.pointerId);
+    scrubTo(e.clientX);
+  });
+  wave.addEventListener("pointermove", e => { if (dragging) scrubTo(e.clientX); });
+  wave.addEventListener("pointerup",   e => {
+    dragging = false;
+    wave.releasePointerCapture(e.pointerId);
+  });
+  wave.addEventListener("pointercancel", () => { dragging = false; });
+
+  // --- keyboard: arrows jump 5 seconds, space plays and pauses ---
+  wave.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") { song.currentTime = Math.min(song.currentTime + 5, song.duration || 0); paint(); e.preventDefault(); }
+    if (e.key === "ArrowLeft")  { song.currentTime = Math.max(song.currentTime - 5, 0); paint(); e.preventDefault(); }
+    if (e.key === " " || e.key === "Enter") {
+      if (song.paused) song.play(); else song.pause();
+      e.preventDefault();
+    }
+  });
+
+  paint();
+}
+
+// ===============================
+// INSTRUCTIONS TILE
+// Opens itself when the page loads. Closes on ✕, on "Start the
+// activity", on a click outside the card, or on the Esc key.
+// The ℹ️ Instructions button at the top opens it again.
+// ===============================
+
+const tileBackdrop = document.getElementById("instructions-backdrop");
+
+if (tileBackdrop) {
+  const openBtn  = document.getElementById("open-instructions");
+  const closeBtn = document.getElementById("close-instructions");
+  const startBtn = document.getElementById("start-activity");
+  let lastFocused = null;
+
+  function openTile() {
+    lastFocused = document.activeElement;
+    tileBackdrop.hidden = false;
+    document.body.style.overflow = "hidden";   // no scrolling behind the tile
+    if (startBtn) startBtn.focus();
+  }
+
+  function closeTile() {
+    tileBackdrop.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+
+  if (openBtn)  openBtn.addEventListener("click", openTile);
+  if (closeBtn) closeBtn.addEventListener("click", closeTile);
+  if (startBtn) startBtn.addEventListener("click", closeTile);
+
+  // click on the dark area around the card
+  tileBackdrop.addEventListener("click", e => {
+    if (e.target === tileBackdrop) closeTile();
+  });
+
+  // Esc
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && !tileBackdrop.hidden) closeTile();
+  });
+
+  // ---- open it as soon as the page is ready ----
+  openTile();
+
+  /* WANT IT ONLY ONCE PER STUDENT, not on every visit?
+     Delete the openTile() line above and use this instead:
+
+       try {
+         if (!localStorage.getItem("gapfill-instructions-seen")) {
+           openTile();
+           localStorage.setItem("gapfill-instructions-seen", "1");
+         }
+       } catch (e) { openTile(); }
+  */
+}

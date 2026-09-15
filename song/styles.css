@@ -1,0 +1,423 @@
+/* ===========================
+   Modern English Australia / Koala Spies Sydney Theme
+   =========================== */
+
+:root {
+  --bg: #e7eef0;         /* very light ash/blue background */
+  --card: #1f2426;       /* dark ash charcoal */
+  --ink: #0f1416;        /* near-black text */
+  --muted: #9aa6ac;      /* muted ash text */
+  --accent: #009688;     /* TEAL BLUE (new main accent) */
+  --line: #2c3234;       /* darker ash divider */
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(0,0,0,.25);
+
+  --good: #2ecc71;
+  --bad: #e74c3c;
+}
+
+
+/* ===========================================================
+   PAGE TOOLS  —  the strip that replaced the old instructions
+   block. The lesson PDF link lives here permanently; the ℹ️
+   tile reopens the instructions card.
+   =========================================================== */
+.page-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+/* the PDF link, wherever it appears (toolbar or inside the tile) */
+.pdf-button {
+  display: inline-block;
+  padding: 0.55rem 1.2rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  box-shadow: var(--shadow);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.pdf-button:hover {
+  opacity: .9;
+  transform: translateY(-2px);
+}
+
+
+/* ===========================================================
+   THE INSTRUCTIONS TILE  —  opens when the page loads
+   =========================================================== */
+.tile-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: rgba(8,12,14,.72);
+  backdrop-filter: blur(4px);
+  animation: tile-fade .35s ease both;
+}
+.tile-backdrop[hidden] { display: none; }
+
+.tile {
+  position: relative;
+  width: min(92%, 640px);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: rgba(255,255,255,.94);
+  color: var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--accent);
+  padding: 2rem 1.8rem 1.6rem;
+  text-align: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  animation: tile-rise .4s cubic-bezier(.16,.84,.34,1) both;
+}
+
+.tile-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  color: var(--card);
+}
+
+.tile-body {
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+.tile-body p { margin: 0 0 .9rem; }
+.tile-body p:last-child { margin-bottom: 0; }
+
+/* the one line that tells them what to actually do */
+.tile-task {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(15,20,22,.12);
+  font-weight: 600;
+  color: var(--card);
+}
+
+.tile-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.tile-start {
+  padding: 0.55rem 1.4rem;
+  background: var(--card);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background .25s ease, transform .25s ease;
+}
+.tile-start:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.tile-close {
+  position: absolute;
+  top: .6rem;
+  right: .75rem;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.tile-close:hover { background: var(--line); color: #fff; }
+
+@keyframes tile-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes tile-rise {
+  from { opacity: 0; transform: translateY(18px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-backdrop, .tile { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .tile { padding: 1.6rem 1.1rem 1.2rem; }
+  .tile-body { font-size: 1.02rem; }
+  .tile-actions { flex-direction: column; }
+}
+
+/* ===== Header ===== */
+header {
+  background: var(--card);
+  color: var(--accent);
+  text-align: center;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+header p {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+}
+
+/* ===========================================================
+   AUDIO  —  minimal player
+   One teal play button, a hairline you can scrub, and the time.
+   The native <audio> only shows if the script never runs.
+   =========================================================== */
+.audio-section {
+  text-align: center;
+  padding: 1rem;
+}
+
+/* the fallback player, and how it is hidden once JS takes over */
+audio {
+  width: 90%;
+  max-width: 700px;
+  border-radius: var(--radius);
+}
+.player.enhanced audio { display: none; }
+
+.player-ui {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  width: min(92%, 640px);
+  margin: 0 auto;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.player-ui[hidden] { display: none; }
+
+/* play / pause — a bare teal glyph, no button chrome at all */
+.player-btn {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.player-btn:hover { transform: scale(1.15); }
+.player-btn:active { transform: scale(.95); }
+.player-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.player-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--accent);
+  pointer-events: none;
+}
+.player-btn svg[hidden] { display: none; }
+
+/* ---- the waveform ----
+   A row of bars built by script.js. Played bars go teal, the rest
+   stay faint, and they bounce gently while the song is running.
+   Click or drag anywhere along them to jump to that point. */
+.wave {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 46px;
+  cursor: pointer;
+  touch-action: none;
+}
+.wave:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+
+.wave .bar {
+  flex: 1 1 0;
+  min-width: 2px;
+  height: var(--h, 40%);
+  background: rgba(255,255,255,.22);
+  border-radius: 1px;
+  transform-origin: center;
+  transition: background .12s ease;
+}
+.wave .bar.on { background: var(--accent); }
+
+/* the bars dance only while the song is actually playing */
+.player-ui.playing .bar {
+  animation: bar-bounce 1.15s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+@keyframes bar-bounce {
+  0%, 100% { transform: scaleY(.82); }
+  50%      { transform: scaleY(1.12); }
+}
+
+.player-time {
+  flex: 0 0 auto;
+  min-width: 5rem;
+  text-align: right;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: .75rem;
+  letter-spacing: .08em;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255,255,255,.65);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player-ui.playing .bar { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .player-ui { gap: .9rem; width: 94%; }
+  .player-btn, .player-btn svg { width: 26px; height: 26px; }
+  .player-time { min-width: 4.4rem; font-size: .7rem; }
+  .wave { height: 38px; gap: 1px; }
+}
+
+/* ===== Verse Cards ===== */
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 1rem;
+}
+
+.verse-card {
+  background: white;
+  opacity: 70%;
+  padding: 1.5rem 1.8rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ===== Each line in the exercise (IMPROVED SPACING) ===== */
+
+/* ===== Input Styling (Improved) ===== */
+input.gap {
+  width: 120px;
+  padding: 6px 8px;
+  margin: 0 4px;
+  border: 2px solid var(--muted);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+/* Correct + Incorrect Styles (DYNAMIC) */
+input.gap.correct {
+  border-color: var(--good);
+  background: #eafff1;
+  box-shadow: 0 0 10px rgba(46,204,113,.4);
+}
+input.gap.incorrect {
+  border-color: var(--bad);
+  background: #ffecec;
+  animation: shake 0.25s ease;
+}
+
+/* input shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(3px); }
+  50% { transform: translateX(-3px); }
+  75% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 600px) {
+  input.gap {
+    width: 80px;
+    font-size: 0.9rem;
+  }
+  .gap-line {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+}
+
+/* ===== Footer ===== */
+footer {
+  background: var(--card);
+  color: var(--ink-light, #f5f5f5);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 -4px 12px rgba(0,0,0,.3);
+}
+
+footer p {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.footer-nav a {
+  background: #1e1e1e;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow);
+}
+
+.footer-nav a:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,.35);
+}
+
+/* ===== Background Video Overlay ===== */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: -3;
+}
+
+#bg-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  opacity: 0.35;
+  z-index: -2;
+}
