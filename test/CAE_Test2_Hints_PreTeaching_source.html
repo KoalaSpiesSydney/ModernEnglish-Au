@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Use of English Test 2 — Pre-teaching</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 14mm 12mm 14mm 12mm; }
+
+  :root{
+    --ink:#1a1a1a;
+    --body:#333;
+    --muted:#6b7378;
+    --line:#d5dade;
+    --soft:#eef1f2;
+    --accent:#00847d;
+    --accent-soft:#e3f4f3;
+    --bad:#c0392b;
+    --good:#1b7a3d;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; color:var(--body);
+    font-family:"Source Sans 3",Arial,Helvetica,sans-serif;
+    font-size:9.6pt; line-height:1.45;
+  }
+
+  /* ---- page furniture ---- */
+  .masthead{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    border-bottom:2.5pt solid var(--accent); padding-bottom:5pt; margin-bottom:12pt;
+  }
+  .masthead .who{ font-size:8pt; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; }
+  h1{ font-size:17pt; margin:2pt 0 0; color:var(--ink); font-weight:700; line-height:1.15; }
+  .standfirst{ font-size:9.6pt; color:var(--muted); margin:6pt 0 14pt; }
+
+  /* ---- two-column: student material + teacher margin ---- */
+  .row{ display:grid; grid-template-columns: 1fr 52mm; gap:7mm; margin-bottom:11pt; }
+  .teacher{
+    font-size:8pt; line-height:1.4; color:var(--muted);
+    border-left:2pt solid var(--soft); padding-left:4mm;
+  }
+  .teacher h4{
+    margin:0 0 3pt; font-size:7.4pt; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--accent); font-weight:700;
+  }
+  .teacher p{ margin:0 0 5pt; }
+  .teacher .time{ font-weight:700; color:var(--ink); }
+
+  h2{
+    font-size:11.5pt; color:var(--ink); margin:0 0 5pt; font-weight:700;
+    border-bottom:1pt solid var(--line); padding-bottom:3pt;
+  }
+  h2 .n{
+    display:inline-block; background:var(--accent); color:#fff;
+    width:15pt; height:15pt; line-height:15pt; text-align:center;
+    border-radius:2pt; font-size:9pt; margin-right:5pt;
+  }
+  h3{ font-size:9.8pt; margin:9pt 0 3pt; color:var(--ink); font-weight:700; }
+  p{ margin:0 0 6pt; }
+  ul{ margin:0 0 6pt; padding-left:14pt; }
+  li{ margin-bottom:2pt; }
+
+  table{ width:100%; border-collapse:collapse; margin:4pt 0 7pt; font-size:9pt; }
+  th{
+    background:var(--soft); color:var(--ink); text-align:left;
+    padding:4pt 5pt; border:.6pt solid var(--line); font-weight:700; font-size:8.4pt;
+  }
+  td{ padding:4pt 5pt; border:.6pt solid var(--line); vertical-align:top; }
+  td.v{ font-weight:700; color:var(--ink); white-space:nowrap; }
+  .yes{ color:var(--good); font-weight:700; }
+  .no{ color:var(--bad); font-weight:700; }
+
+  .eg{ margin:0; padding:0; list-style:none; }
+  .eg li{ margin-bottom:2pt; }
+  .tick::before{ content:"\2713  "; color:var(--good); font-weight:700; }
+  .cross::before{ content:"\2717  "; color:var(--bad); font-weight:700; }
+  .cross{ color:var(--muted); }
+
+  .box{
+    background:#fafbfb; border:.6pt solid var(--line);
+    border-left:2.5pt solid var(--accent); padding:6pt 8pt; margin:6pt 0 8pt;
+  }
+  .box strong{ color:var(--ink); }
+
+  .warn{ border-left-color:var(--bad); background:#fdf6f5; }
+
+  ol.task{ margin:3pt 0 6pt; padding-left:15pt; }
+  ol.task li{ margin-bottom:5pt; }
+  .fill{ display:inline-block; min-width:26mm; border-bottom:.8pt solid #9aa2a8; }
+
+  .pairs{ column-count:2; column-gap:7mm; margin:0 0 6pt; }
+
+  .key{ page-break-before:always; }
+  .key h2{ border-bottom-color:var(--accent); }
+  .key-block{ background:#fafbfb; border:.6pt solid var(--line); padding:6pt 8pt; margin-bottom:7pt; }
+  .key-block h3{ margin-top:0; }
+  .key-block ol{ margin:0; padding-left:15pt; }
+  .key-block li{ margin-bottom:3pt; }
+  .ans{ font-weight:700; color:var(--ink); }
+
+  .row{ break-inside:avoid; }
+  .key-block{ break-inside:avoid; }
+  table{ break-inside:avoid; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div>
+    <div class="who">Modern English Australia &middot; Koala Spies Sydney</div>
+    <h1>Use of English &mdash; Test 2: before you start</h1>
+  </div>
+  <div class="who" style="text-align:right">Cambridge C1 Advanced<br>Pre-teaching &middot; 20&ndash;30 min</div>
+</div>
+
+<p class="standfirst">
+  Everything on this sheet is tested somewhere in Test 2. Work through it first and the test becomes a
+  check on what you know rather than a guessing game. Teacher notes run down the right-hand margin.
+</p>
+
+<!-- ============================================================ -->
+<div class="row">
+  <div>
+    <h2><span class="n">1</span>Suggest, recommend, advise, warn</h2>
+
+    <p>
+      These four verbs all mean roughly &ldquo;tell someone what to do&rdquo;, and they all behave
+      differently afterwards. Part 4 of this test turns on the difference between two of them.
+    </p>
+
+    <table>
+      <tr>
+        <th style="width:23%">Verb</th>
+        <th style="width:26%">+ <i>-ing</i></th>
+        <th style="width:26%">+ someone + <i>to</i></th>
+        <th style="width:25%">+ <i>that</i>&hellip;</th>
+      </tr>
+      <tr>
+        <td class="v">suggest</td>
+        <td><span class="yes">yes</span><br>suggest going</td>
+        <td><span class="no">no</span></td>
+        <td><span class="yes">yes</span><br>suggest (that) we go</td>
+      </tr>
+      <tr>
+        <td class="v">recommend</td>
+        <td><span class="yes">yes</span><br>recommend going</td>
+        <td><span class="no">no</span></td>
+        <td><span class="yes">yes</span><br>recommend (that) we go</td>
+      </tr>
+      <tr>
+        <td class="v">advise</td>
+        <td><span class="yes">yes</span><br>advise going</td>
+        <td><span class="yes">yes</span><br>advise us to go</td>
+        <td><span class="yes">yes</span><br>advise (that) we go</td>
+      </tr>
+      <tr>
+        <td class="v">warn</td>
+        <td>only with <i>against</i><br>warn against going</td>
+        <td><span class="yes">yes</span><br>warn us (not) to go</td>
+        <td><span class="yes">yes</span><br>warn (that) it is closed</td>
+      </tr>
+    </table>
+
+    <div class="box warn">
+      <strong>The one error that costs marks.</strong>
+      <ul class="eg">
+        <li class="cross">She <i>recommended me to try</i> the restaurant.</li>
+        <li class="tick">She <b>recommended trying</b> the restaurant.</li>
+        <li class="tick">She <b>recommended</b> (that) <b>I try</b> the restaurant.</li>
+        <li class="tick">She <b>advised me to try</b> the restaurant.</li>
+      </ul>
+      <p style="margin:4pt 0 0">
+        <i>Advise</i> takes a person. <i>Suggest</i> and <i>recommend</i> do not &mdash; put the
+        activity straight after them, or start a new clause.
+      </p>
+    </div>
+
+    <h3>Warn: two patterns worth memorising</h3>
+    <ul class="eg">
+      <li class="tick">He <b>warned us about</b> the traffic. &nbsp;/&nbsp; <b>warned us of</b> the danger.</li>
+      <li class="tick">He <b>warned us not to</b> leave the door open.</li>
+    </ul>
+  </div>
+
+  <div class="teacher">
+    <h4>Teacher note</h4>
+    <p><span class="time">8&ndash;10 min.</span> Board the four verbs before showing the table. Elicit one
+      sentence for each and let the errors surface &mdash; <i>recommend me to</i> almost always appears.</p>
+    <p><b>CCQs</b><br>
+      &bull; After <i>advise</i>, do we say who was advised? (yes)<br>
+      &bull; After <i>recommend</i>, do we? (no)<br>
+      &bull; Which verb needs <i>against</i> before <i>-ing</i>? (warn)</p>
+    <p><b>Anticipated errors</b><br>
+      *recommend me to try &bull; *suggest me to go &bull; *advise to go (no object) &bull; *warn me about
+      to leave</p>
+    <p><b>L1 note</b><br>
+      Speakers of Romance languages transfer the object pattern to all four verbs, because their
+      equivalents allow it. Name that out loud &mdash; it stops the error faster than correction does.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<div class="row">
+  <div>
+    <h2><span class="n">2</span>Practice A &mdash; right or wrong?</h2>
+    <p>Tick the correct sentences. Rewrite the wrong ones.</p>
+    <ol class="task">
+      <li>The doctor recommended me to rest for a week. <span class="fill"></span></li>
+      <li>I suggest leaving before the traffic starts. <span class="fill"></span></li>
+      <li>She advised us to book early. <span class="fill"></span></li>
+      <li>They warned us the ice was thin. <span class="fill"></span></li>
+      <li>He suggested me a good hotel. <span class="fill"></span></li>
+      <li>The guide warned against swimming there. <span class="fill"></span></li>
+    </ol>
+  </div>
+  <div class="teacher">
+    <h4>Teacher note</h4>
+    <p><span class="time">5 min.</span> Pairs, then open class. Ask <i>why</i>, not just
+      <i>right or wrong</i> &mdash; the reason is the learning.</p>
+    <p>Items 1 and 5 are the two wrong ones. Item 4 is correct but looks wrong to many students because
+      <i>that</i> is left out.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<div class="row">
+  <div>
+    <h2><span class="n">3</span>Four verbs students mix up</h2>
+    <p>Part 1 tests one of these directly.</p>
+    <table>
+      <tr><th style="width:18%">Verb</th><th style="width:34%">Meaning</th><th>Example</th></tr>
+      <tr><td class="v">rise / rose / risen</td><td>go up by itself &mdash; no object</td><td>Popularity <b>has risen</b>.</td></tr>
+      <tr><td class="v">raise / raised</td><td>lift something &mdash; needs an object</td><td>They <b>raised</b> the price.</td></tr>
+      <tr><td class="v">arise / arose / arisen</td><td>come into existence (a problem, a chance)</td><td>A problem <b>has arisen</b>.</td></tr>
+      <tr><td class="v">arouse / aroused</td><td>stir up a feeling</td><td>It <b>aroused</b> suspicion.</td></tr>
+    </table>
+    <p style="margin-top:0"><b>Test yourself:</b> which one fits &mdash; <i>The genre has
+      <span class="fill" style="min-width:20mm"></span> in popularity.</i></p>
+  </div>
+  <div class="teacher">
+    <h4>Teacher note</h4>
+    <p><span class="time">4 min.</span> Drill the three past participles aloud. The test item depends on
+      spotting that there is no object after the gap.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<div class="row">
+  <div>
+    <h2><span class="n">4</span>Collocations to know before Part 1</h2>
+    <div class="pairs">
+      <ul>
+        <li><b>risky</b> behaviour <span style="color:var(--muted)">(not hazardous / perilous)</span></li>
+        <li>a <b>catalyst for</b> change</li>
+        <li><b>open up</b> opportunities</li>
+        <li><b>attract</b> an audience</li>
+        <li>an <b>integral part of</b> something</li>
+        <li><b>encourage</b> someone <b>to</b> do something</li>
+        <li><b>particularly</b> + adjective</li>
+        <li>a <b>chosen</b> few</li>
+      </ul>
+    </div>
+    <div class="box">
+      <strong>How Part 1 works.</strong> All four options usually mean almost the same thing. The
+      question is never &ldquo;what does this word mean?&rdquo; but &ldquo;which of these four does
+      English actually put next to the word after the gap?&rdquo; Read to the end of the sentence
+      before you choose.
+    </div>
+  </div>
+  <div class="teacher">
+    <h4>Teacher note</h4>
+    <p><span class="time">5 min.</span> Give the noun, students supply the verb or adjective from the
+      list. Then reverse it.</p>
+    <p>Stress the strategy line in the box &mdash; students who translate the four options instead of
+      testing them against the neighbouring word lose marks here consistently.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<div class="row">
+  <div>
+    <h2><span class="n">5</span>Small words &mdash; Part 2</h2>
+    <p>Open cloze answers are almost always one of these: a preposition, an article, an auxiliary, a
+      relative pronoun or a linker. The word immediately before the gap usually decides it.</p>
+    <ul class="eg">
+      <li class="tick">an opportunity <b>for</b> something &nbsp;|&nbsp; an opportunity <b>to</b> do something</li>
+      <li class="tick">risks such <b>as</b> &hellip; <span style="color:var(--muted)">(introducing examples)</span></li>
+      <li class="tick">protect someone <b>from</b> / <b>against</b> danger <span style="color:var(--muted)">(both correct)</span></li>
+      <li class="tick">allow someone <b>to</b> do &nbsp;|&nbsp; <span class="cross" style="color:var(--muted)">let someone do</span></li>
+      <li class="tick">expose someone <b>to</b> something</li>
+    </ul>
+  </div>
+  <div class="teacher">
+    <h4>Teacher note</h4>
+    <p><span class="time">4 min.</span> Cover the bold words and elicit. The <i>allow / let</i> pair is
+      worth an extra minute &mdash; it is the commonest slip at this level.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<div class="row">
+  <div>
+    <h2><span class="n">6</span>Word building &mdash; Part 3</h2>
+    <table>
+      <tr><th style="width:22%">Given</th><th style="width:26%">You need</th><th>Why</th></tr>
+      <tr><td class="v">DISTINCT</td><td>distinctive</td><td>adjective after <i>one of the most</i>. Not <i>distinguished</i>, which means respected.</td></tr>
+      <tr><td class="v">PROGRESS</td><td>progressively</td><td>adverb before an adjective: progress &rarr; progressive &rarr; progressively.</td></tr>
+      <tr><td class="v">DRAMA</td><td>dramatically</td><td>adverb. Watch the <i>-ic</i> before <i>-ally</i>.</td></tr>
+      <tr><td class="v">PURSUE</td><td>pursuit</td><td>noun in the fixed phrase <i>in pursuit of</i>. The <i>e</i> disappears.</td></tr>
+    </table>
+    <p><b>Two questions to ask at every gap:</b> which part of speech does the sentence need, and does
+      it need to be plural or negative?</p>
+  </div>
+  <div class="teacher">
+    <h4>Teacher note</h4>
+    <p><span class="time">5 min.</span> Build each word on the board one step at a time
+      (drama &rarr; dramatic &rarr; dramatically) so the middle form is visible.</p>
+    <p>Negative prefixes are not tested in this test but come up in the next &mdash; worth mentioning.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<div class="row">
+  <div>
+    <h2><span class="n">7</span>Practice B &mdash; one word in each gap</h2>
+    <ol class="task">
+      <li>The coach advised me <span class="fill" style="min-width:16mm"></span> train every day.</li>
+      <li>She recommended <span class="fill" style="min-width:16mm"></span> the new restaurant.</li>
+      <li>They warned us <span class="fill" style="min-width:16mm"></span> the storm.</li>
+      <li>It offers opportunities <span class="fill" style="min-width:16mm"></span> creativity.</li>
+      <li>The meeting <span class="fill" style="min-width:16mm"></span> be postponed until January.</li>
+      <li>The client complained <span class="fill" style="min-width:16mm"></span> the delay.</li>
+    </ol>
+  </div>
+  <div class="teacher">
+    <h4>Teacher note</h4>
+    <p><span class="time">4 min.</span> Individually, then compare. Items 1, 5 and 6 rehearse Part 4
+      answers directly &mdash; do not give those away, just note who struggles.</p>
+    <p><b>Then:</b> send them to the test. Part 1 first.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<div class="key">
+  <div class="masthead">
+    <div>
+      <div class="who">Modern English Australia &middot; Koala Spies Sydney</div>
+      <h1>Answer key</h1>
+    </div>
+    <div class="who" style="text-align:right">Use of English &mdash; Test 2<br>Pre-teaching</div>
+  </div>
+
+  <div class="key-block">
+    <h3>Practice A &mdash; right or wrong?</h3>
+    <ol>
+      <li><span class="ans">Wrong.</span> The doctor <b>recommended resting</b> for a week. (or: recommended that I rest)</li>
+      <li><span class="ans">Correct.</span> <i>Suggest + -ing</i>.</li>
+      <li><span class="ans">Correct.</span> <i>Advise + someone + to</i>.</li>
+      <li><span class="ans">Correct.</span> <i>Warn (that)</i> &mdash; the <i>that</i> can be left out.</li>
+      <li><span class="ans">Wrong.</span> He <b>suggested a good hotel</b>. (or: suggested that I try a good hotel)</li>
+      <li><span class="ans">Correct.</span> <i>Warn against + -ing</i>.</li>
+    </ol>
+  </div>
+
+  <div class="key-block">
+    <h3>Section 3 &mdash; test yourself</h3>
+    <p style="margin:0">The genre has <span class="ans">risen</span> in popularity. No object follows,
+      so it cannot be <i>raised</i>; nothing is coming into existence, so it is not <i>arisen</i>.</p>
+  </div>
+
+  <div class="key-block">
+    <h3>Practice B &mdash; one word in each gap</h3>
+    <ol>
+      <li>advised me <span class="ans">to</span> train</li>
+      <li>recommended <span class="ans">trying</span> the new restaurant
+        <span style="color:var(--muted)">(or: recommended the new restaurant &mdash; but then no gap word is needed)</span></li>
+      <li>warned us <span class="ans">about</span> the storm <span style="color:var(--muted)">(<i>of</i> also correct)</span></li>
+      <li>opportunities <span class="ans">for</span> creativity</li>
+      <li>The meeting <span class="ans">may</span> be postponed</li>
+      <li>complained <span class="ans">about</span> the delay</li>
+    </ol>
+  </div>
+
+  <div class="key-block">
+    <h3>Where each section is tested</h3>
+    <table style="margin-bottom:0">
+      <tr><th style="width:30%">Section</th><th>Comes up in</th></tr>
+      <tr><td class="v">1 &amp; 2 &mdash; the four verbs</td><td>Part 4, questions 18 and 19</td></tr>
+      <tr><td class="v">3 &mdash; rise / raise / arise</td><td>Part 1, question 2</td></tr>
+      <tr><td class="v">4 &mdash; collocations</td><td>Part 1, questions 1&ndash;8</td></tr>
+      <tr><td class="v">5 &mdash; small words</td><td>Part 2, questions 9&ndash;12</td></tr>
+      <tr><td class="v">6 &mdash; word building</td><td>Part 3, questions 13&ndash;16</td></tr>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>
