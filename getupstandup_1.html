@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- YouTube refuses to play embedded videos when it can't see which website they are on -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Get Up, Stand Up – Interactive Video</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fffce6;         /* the site's cream page colour */
+  --band: #1c1c1c;       /* the masthead band */
+  --card: #1c1c1c;
+  --ink: #0f172a;        /* the site's near-black slate text */
+  --paper: #f8fafc;      /* off-white type on dark */
+  --muted: #94a3b8;      /* muted slate */
+  --accent: #3968ea;     /* the site's blue */
+  --accent-soft: #60a5fa;
+  --highlight: #fde047;  /* Koala Spies yellow */
+  --line: #2c3234;
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(0,0,0,.25);
+
+  --good: #2ecc71;
+  --bad: #e74c3c;
+}
+.page-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+/* the PDF link, wherever it appears (toolbar or inside the tile) */
+.pdf-button {
+  display: inline-block;
+  padding: 0.55rem 1.2rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  box-shadow: var(--shadow);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.pdf-button:hover {
+  opacity: .9;
+  transform: translateY(-2px);
+}
+.tile-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: rgba(8,12,14,.72);
+  backdrop-filter: blur(4px);
+  animation: tile-fade .35s ease both;
+}
+.tile-backdrop[hidden] { display: none; }
+
+.tile {
+  position: relative;
+  width: min(92%, 640px);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: rgba(255,255,255,.94);
+  color: var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--accent);
+  padding: 2rem 1.8rem 1.6rem;
+  text-align: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  animation: tile-rise .4s cubic-bezier(.16,.84,.34,1) both;
+}
+
+.tile-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  color: var(--card);
+}
+
+.tile-body {
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+.tile-body p { margin: 0 0 .9rem; }
+.tile-body p:last-child { margin-bottom: 0; }
+
+/* the one line that tells them what to actually do */
+.tile-task {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(15,20,22,.12);
+  font-weight: 600;
+  color: var(--card);
+}
+
+.tile-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.tile-start {
+  padding: 0.55rem 1.4rem;
+  background: var(--card);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background .25s ease, transform .25s ease;
+}
+.tile-start:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.tile-close {
+  position: absolute;
+  top: .6rem;
+  right: .75rem;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.tile-close:hover { background: var(--line); color: #fff; }
+
+@keyframes tile-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes tile-rise {
+  from { opacity: 0; transform: translateY(18px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-backdrop, .tile { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .tile { padding: 1.6rem 1.1rem 1.2rem; }
+  .tile-body { font-size: 1.02rem; }
+  .tile-actions { flex-direction: column; }
+}
+header {
+  position: relative;
+  background: var(--band);
+  overflow: hidden;
+}
+
+/* the faint grid that drifts slowly across the band */
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: grid-drift 24s linear infinite;
+  pointer-events: none;
+}
+@keyframes grid-drift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(48px, 48px); }
+}
+
+/* the thin blue line along the bottom edge */
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0) 0%,
+    rgba(37,99,235,.55) 20%,
+    #60a5fa 50%,
+    rgba(37,99,235,.55) 80%,
+    rgba(0,0,0,0) 100%);
+}
+
+header .wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 4vw, 36px);
+}
+.header-inner { padding: 26px 0 30px; }
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+/* the wordmark, with the same white shimmer as the main site */
+.brand-top {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 5.2vw, 3.6rem);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  line-height: 1.05;
+  text-decoration: none;
+  color: var(--paper);
+  background: linear-gradient(100deg, #f8fafc 0%, #f8fafc 18%, #ffffff 30%, #a5c4fd 42%, #ffffff 56%, #f8fafc 70%, #f8fafc 100%);
+  background-size: 250% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3.5s linear infinite;
+}
+@keyframes shimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -50% center; }
+}
+
+.kss-label {
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--highlight);
+  text-decoration: none;
+}
+.kss-label:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---- the activity's own title, over the video ---- */
+.page-head {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 2.2rem clamp(16px, 4vw, 36px) .6rem;
+  text-align: center;
+}
+.page-head .kicker {
+  margin: 0 0 .4rem;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--highlight);
+}
+.page-head h1 {
+  margin: 0;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(0,0,0,.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header::before, .brand-top { animation: none; }
+  .brand-top { -webkit-text-fill-color: var(--paper); }
+}
+
+@media (max-width: 600px) {
+  .brand-top { letter-spacing: 1.5px; }
+  .kss-label { letter-spacing: 3px; font-size: .72rem; }
+  .header-inner { padding: 20px 0 22px; }
+}
+/* ===== Verse Cards ===== */
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* Translucent rather than `opacity: 70%` — opacity fades the text
+   as well, which is rough to read over a moving video. */
+.verse-card {
+  background: rgba(255,252,230,.92);
+  padding: 1.5rem 1.8rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(3px);
+}
+.verse-card h2 {
+  margin: 0 0 1rem;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--ink);
+  border-bottom: 2px solid rgba(57,104,234,.25);
+  padding-bottom: .5rem;
+}
+.gap-line {
+  margin: .8rem 0;
+  line-height: 2.4;
+}
+
+/* the Check button and its answer line */
+.check-btn {
+  margin-top: 1rem;
+  padding: .55rem 1.4rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.check-btn:hover { background: #2d55c7; transform: translateY(-2px); }
+
+.feedback {
+  margin: .7rem 0 0;
+  min-height: 1.4em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ===== Each line in the exercise (IMPROVED SPACING) ===== */
+
+/* ===== Input Styling (Improved) ===== */
+input.gap {
+  width: 120px;
+  padding: 6px 8px;
+  margin: 0 4px;
+  border: 2px solid var(--muted);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+/* Correct + Incorrect Styles (DYNAMIC) */
+input.gap.correct {
+  border-color: var(--good);
+  background: #eafff1;
+  box-shadow: 0 0 10px rgba(46,204,113,.4);
+}
+input.gap.incorrect {
+  border-color: var(--bad);
+  background: #ffecec;
+  animation: shake 0.25s ease;
+}
+
+/* input shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(3px); }
+  50% { transform: translateX(-3px); }
+  75% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 600px) {
+  input.gap {
+    width: 80px;
+    font-size: 0.9rem;
+  }
+  .gap-line {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+}
+footer {
+  position: relative;
+  background: var(--band);
+  color: var(--paper);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 -4px 12px rgba(0,0,0,.3);
+}
+
+footer p {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.footer-nav a {
+  background: #1e1e1e;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow);
+}
+
+.footer-nav a:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,.35);
+}
+button.pdf-button { border: none; cursor: pointer; }
+
+/* ===========================================================
+   PAGE
+   =========================================================== */
+body { margin: 0; background: #0b0d0e; color: var(--paper); font-family: "Source Sans 3", system-ui, sans-serif; }
+
+/* ===========================================================
+   INTERACTIVE VIDEO  —  YouTube inside, our branding around it
+   =========================================================== */
+.iv {
+  position: relative;
+  width: min(94%, 900px);
+  margin: .5rem auto 0;
+}
+.iv-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.iv-stage #yt, .iv-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* the question card that appears over the paused video */
+.iv-pop {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(8,12,14,.72);
+  backdrop-filter: blur(3px);
+  animation: tile-fade .3s ease both;
+}
+.iv-pop[hidden] { display: none; }
+.iv-card {
+  width: min(100%, 560px);
+  max-height: 100%;
+  overflow-y: auto;
+  background: rgba(255,252,230,.97);
+  color: var(--ink);
+  border-radius: var(--radius);
+  border-top: 5px solid var(--highlight);
+  padding: 1.3rem 1.4rem 1.2rem;
+  animation: tile-rise .35s cubic-bezier(.16,.84,.34,1) both;
+}
+.iv-step {
+  margin: 0 0 .35rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.iv-q { margin: 0 0 1rem; font-family: "Source Serif 4", Georgia, serif; font-size: 1.25rem; line-height: 1.3; }
+.iv-options { display: grid; gap: .5rem; }
+.iv-opt {
+  text-align: left;
+  padding: .6rem .9rem;
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid rgba(15,23,42,.14);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+.iv-opt:hover { border-color: var(--accent); }
+.iv-opt.correct   { border-color: var(--good); background: #eafff1; }
+.iv-opt.incorrect { border-color: var(--bad);  background: #ffecec; animation: shake .25s ease; }
+.iv-opt:disabled { cursor: default; }
+.iv-type { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+.iv-type input.gap { width: 160px; margin: 0; }
+.iv-type .check-btn { margin-top: 0; }
+.iv-explain { margin: .9rem 0 0; min-height: 1.3em; font-size: .98rem; line-height: 1.45; }
+.iv-explain.good { color: #177a43; font-weight: 600; }
+.iv-explain.bad  { color: #b3261e; font-weight: 600; }
+.iv-actions { display: flex; justify-content: flex-end; gap: .6rem; margin-top: 1rem; }
+.check-btn.ghost { background: transparent; color: var(--ink); border: 1px solid rgba(15,23,42,.25); }
+.check-btn.ghost:hover { background: var(--ink); color: #fff; }
+
+/* the thin timeline under the video, with a dot for each question */
+.iv-track {
+  position: relative;
+  height: 26px;
+  margin: .9rem 4px 0;
+  cursor: pointer;
+}
+.iv-track::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 12px;
+  height: 2px;
+  background: rgba(255,255,255,.18);
+  border-radius: 2px;
+}
+.iv-fill {
+  position: absolute;
+  left: 0; top: 12px;
+  height: 2px;
+  width: 0;
+  background: var(--highlight);
+  border-radius: 2px;
+}
+.iv-dot {
+  position: absolute;
+  top: 5px;
+  width: 16px; height: 16px;
+  margin-left: -8px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--highlight);
+  background: #0b0d0e;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease;
+}
+.iv-dot:hover { transform: scale(1.25); }
+.iv-dot.done { background: var(--highlight); }
+.iv-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.iv-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .2rem;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.6);
+  font-variant-numeric: tabular-nums;
+}
+.iv-notice {
+  position: absolute; inset: 0; z-index: 6;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem;
+  padding: 1.5rem; text-align: center; background: #0b0d0e; color: var(--paper); font-size: 1.05rem; line-height: 1.5;
+}
+.iv-notice[hidden] { display: none; }
+.iv-notice strong { color: var(--highlight); }
+.iv-notice a { color: #0b0d0e; background: var(--highlight); padding: .5rem 1.1rem; border-radius: var(--radius); text-decoration: none; font-weight: 700; }
+.iv-fallback { padding: 1rem; color: var(--muted); text-align: center; }
+.iv-fallback a { color: var(--highlight); }
+
+/* after-listening card */
+.verse-card h2 + .lead { margin-top: -.3rem; }
+.lead { color: #475569; margin: 0 0 .6rem; }
+.gap-line { color: var(--ink); font-size: 1.08rem; }
+.discuss { margin: .3rem 0 0; padding-left: 1.2rem; color: var(--ink); line-height: 1.7; }
+.card-actions { margin-top: 1rem; text-align: center; }
+.card-actions .check-btn + .check-btn { margin-left: 8px; }
+
+@media (max-width: 600px) {
+  .iv { width: 100%; }
+  .iv-stage { border-radius: 0; }
+  .iv-track, .iv-meta { margin-inline: 16px; }
+  .iv-card { padding: 1rem; }
+  /* on a phone the video is too short to hold the card, so it sits underneath */
+  .iv-pop { position: static; aspect-ratio: auto; background: none; backdrop-filter: none; padding: .8rem 16px 0; }
+  .iv-q { font-size: 1.08rem; }
+  .iv-opt { padding: .5rem .7rem; font-size: .95rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .iv-pop, .iv-card { animation: none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="header-inner">
+      <div class="brand">
+        <a href="index.html" class="brand-top">Modern English Au</a>
+        <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-label">Koala Spies Sydney</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="page-head">
+  <p class="kicker">Interactive Video · Phrasal Verbs &amp; Imperatives</p>
+  <h1>Get Up, Stand Up</h1>
+</section>
+
+<section class="page-tools">
+  <button type="button" class="pdf-button" id="open-instructions">ℹ️ Instructions</button>
+</section>
+
+<!-- ============================================================
+     INTERACTIVE VIDEO
+     The video plays from YouTube. The questions live in the
+     STOPS list inside the script at the bottom of this file.
+     ============================================================ -->
+<section class="iv" aria-label="Interactive video">
+  <div class="iv-stage">
+    <div id="yt">
+      <p class="iv-fallback">Loading the video…
+        <a href="https://www.youtube.com/watch?v=IhQEBAl3Gpk" target="_blank" rel="noopener">Watch on YouTube</a></p>
+    </div>
+    <div class="iv-notice" id="iv-notice" hidden>
+      <p id="iv-notice-text"></p>
+      <a href="https://www.youtube.com/watch?v=IhQEBAl3Gpk" target="_blank" rel="noopener">Watch on YouTube instead</a>
+    </div>
+  </div>
+
+  <div class="iv-pop" id="iv-pop" hidden>
+    <div class="iv-card" role="dialog" aria-modal="true" aria-labelledby="iv-q">
+      <p class="iv-step" id="iv-step">Question 1 of 5</p>
+      <p class="iv-q" id="iv-q"></p>
+      <div id="iv-answer"></div>
+      <p class="iv-explain" id="iv-explain" aria-live="polite"></p>
+      <div class="iv-actions">
+        <button type="button" class="check-btn ghost" id="iv-rewind">↺ Listen again</button>
+        <button type="button" class="check-btn" id="iv-continue" disabled>Continue ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="iv-track" id="iv-track" aria-label="Video progress">
+    <div class="iv-fill" id="iv-fill"></div>
+  </div>
+  <div class="iv-meta">
+    <span id="iv-time">0:00</span>
+    <span id="iv-score">0 / 5 answered</span>
+  </div>
+</section>
+
+<main>
+
+<section class="verse-card">
+  <h2>After listening · Phrasal verbs</h2>
+  <p class="lead">Write the missing particle (up, for, on…) in each sentence.</p>
+
+  <p class="gap-line">My alarm didn’t go off, so I didn’t get <input class="gap" data-answer="up"> until ten.</p>
+  <p class="gap-line">She always stands up <input class="gap" data-answer="for"> her younger brother.</p>
+  <p class="gap-line">The exam is hard, but don’t give <input class="gap" data-answer="up"> — keep studying.</p>
+  <p class="gap-line">Workers are fighting <input class="gap" data-answer="for"> better pay.</p>
+  <p class="gap-line">When the teacher came in, everyone stood <input class="gap" data-answer="up">.</p>
+  <p class="gap-line">It’s time to wake <input class="gap" data-answer="up"> and see what is really happening.</p>
+  <p class="gap-line">Keep <input class="gap" data-answer="on"> trying, even when it’s difficult.</p>
+
+  <div class="card-actions">
+    <button class="check-btn">Check</button>
+    <button class="check-btn ghost" id="show-answers">Show Answers</button>
+    <p class="feedback" id="score-output"></p>
+  </div>
+</section>
+
+<section class="verse-card">
+  <h2>Talk about it</h2>
+  <ul class="discuss">
+    <li>What does it mean to <strong>stand up for your rights</strong>? Give an example from your country.</li>
+    <li>Have you ever <strong>stood up for</strong> someone else? What happened?</li>
+    <li>Why do you think songs are a powerful way to share a message?</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</p>
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="dictation.html">Dictation &amp; Situations</a>
+    <a href="repeat.html">Repeat Sentence</a>
+    <a href="vocab.html">Vocabulary</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</footer>
+
+<div class="tile-backdrop" id="instructions-backdrop" hidden>
+  <div class="tile" role="dialog" aria-modal="true" aria-labelledby="instructions-title">
+    <button type="button" class="tile-close" id="close-instructions" aria-label="Close instructions">✕</button>
+    <h2 class="tile-title" id="instructions-title">Watch, listen, answer</h2>
+    <div class="tile-body">
+      <p>Bob Marley’s <strong>Get Up, Stand Up</strong> is full of <strong>phrasal verbs</strong> and
+         <strong>imperatives</strong> (instructions like <em>get up!</em>).</p>
+      <p>The video stops by itself five times with a question. Answer it, then press <strong>Continue</strong>.
+         The yellow dots under the video take you back to any question.</p>
+      <p class="tile-task">Press play, and listen carefully.</p>
+    </div>
+    <div class="tile-actions">
+      <button type="button" class="tile-start" id="start-activity">Start the activity</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// =====================================================================
+// THE QUESTIONS
+// time   = when the video stops (in seconds — 1:05 is 65)
+// type   = "choice" (buttons) or "type" (student writes the answer)
+// Edit freely. Check the times against the video before publishing.
+// =====================================================================
+const VIDEO_ID = "IhQEBAl3Gpk";
+
+const STOPS = [
+  { time: 20, type: "choice",
+    q: "The title uses the phrasal verb ‘stand up’. What does ‘stand up for’ something mean?",
+    options: ["To defend or support it", "To stand on a chair", "To leave a place quickly", "To wait in a queue"],
+    answer: 0,
+    explain: "‘Stand up for’ = defend or support: stand up for your rights, stand up for a friend." },
+
+  { time: 50, type: "choice",
+    q: "The singer gives the listener instructions: ‘Get up!’ What is this verb form called?",
+    options: ["The past simple", "The imperative", "The passive", "The second conditional"],
+    answer: 1,
+    explain: "The imperative is the base verb with no subject: Get up. Stand up. Don’t give up." },
+
+  { time: 85, type: "choice",
+    q: "Listen. Who do you think the singer is talking to?",
+    options: ["A teacher at school", "People who are treated unfairly", "A friend who is late", "A shop assistant"],
+    answer: 1,
+    explain: "The song speaks to ordinary people and tells them to fight for their rights." },
+
+  { time: 125, type: "type",
+    q: "Complete the phrasal verb: never ___ up = never stop trying.",
+    answer: "give",
+    explain: "‘Give up’ = stop trying. The negative imperative is ‘Don’t give up!’" },
+
+  { time: 165, type: "choice",
+    q: "What is the main message of the song?",
+    options: ["Enjoy life and don’t worry", "Wake up and fight for your rights", "Love is more important than money", "Travel and see the world"],
+    answer: 1,
+    explain: "It is a protest song: be aware, stand up, and keep fighting for your rights." }
+];
+
+// =====================================================================
+// INTERACTIVE VIDEO — uses YouTube's own player, so the video stays
+// on YouTube (their licence, no space on your site).
+// =====================================================================
+let player = null;
+let lastTime = 0;
+let activeStop = -1;
+const done = new Array(STOPS.length).fill(false);
+
+const pop      = document.getElementById("iv-pop");
+const stepEl   = document.getElementById("iv-step");
+const qEl      = document.getElementById("iv-q");
+const ansEl    = document.getElementById("iv-answer");
+const explainEl= document.getElementById("iv-explain");
+const contBtn  = document.getElementById("iv-continue");
+const rewindBtn= document.getElementById("iv-rewind");
+const track    = document.getElementById("iv-track");
+const fill     = document.getElementById("iv-fill");
+const timeEl   = document.getElementById("iv-time");
+const scoreEl  = document.getElementById("iv-score");
+
+function clock(s) {
+  if (!isFinite(s)) return "0:00";
+  return Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+}
+
+function updateScore() {
+  scoreEl.textContent = done.filter(Boolean).length + " / " + STOPS.length + " answered";
+}
+
+// load YouTube's player script
+(function () {
+  const s = document.createElement("script");
+  s.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(s);
+})();
+
+function showNotice(html) {
+  document.getElementById("iv-notice-text").innerHTML = html;
+  document.getElementById("iv-notice").hidden = false;
+}
+
+const onWebsite = location.protocol === "https:" || location.protocol === "http:";
+
+window.onYouTubeIframeAPIReady = function () {
+  const vars = { rel: 0, playsinline: 1, enablejsapi: 1 };
+  if (onWebsite) vars.origin = location.origin;   // lets the page talk to the player
+
+  player = new YT.Player("yt", {
+    videoId: VIDEO_ID,
+    host: "https://www.youtube.com",
+    playerVars: vars,
+    events: {
+      onReady: buildTrack,
+      onError: e => {
+        if (e.data === 101 || e.data === 150) {
+          showNotice("The video’s owner doesn’t allow it to play on other websites, so the questions can’t run here.");
+        } else if (!onWebsite || e.data === 153) {
+          showNotice("<strong>Open this page from your website</strong> (for example on GitHub Pages).<br>YouTube won’t play embedded videos from a file on your computer.");
+        } else {
+          showNotice("The video couldn’t load (YouTube error " + e.data + ").");
+        }
+      }
+    }
+  });
+  setInterval(tick, 250);
+};
+
+// opened straight from the computer: YouTube will refuse, so say so up front
+if (!onWebsite) {
+  showNotice("<strong>Open this page from your website</strong> (for example on GitHub Pages).<br>YouTube won’t play embedded videos from a file on your computer, so the questions can’t pop up.");
+}
+
+function buildTrack() {
+  const dur = player.getDuration() || 200;
+  STOPS.forEach((stop, i) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "iv-dot";
+    dot.style.left = (stop.time / dur * 100) + "%";
+    dot.setAttribute("aria-label", "Question " + (i + 1) + " at " + clock(stop.time));
+    dot.addEventListener("click", e => {
+      e.stopPropagation();
+      player.seekTo(stop.time, true);
+      lastTime = stop.time;
+      openStop(i);
+    });
+    track.appendChild(dot);
+    stop.dot = dot;
+  });
+}
+
+// click the line to jump
+track.addEventListener("click", e => {
+  if (!player || !player.getDuration) return;
+  const box = track.getBoundingClientRect();
+  const t = (e.clientX - box.left) / box.width * player.getDuration();
+  player.seekTo(t, true);
+  lastTime = t;
+});
+
+function tick() {
+  if (!player || !player.getCurrentTime) return;
+  const t = player.getCurrentTime();
+  const dur = player.getDuration() || 0;
+  fill.style.width = dur ? (t / dur * 100) + "%" : "0";
+  timeEl.textContent = clock(t) + (dur ? " / " + clock(dur) : "");
+
+  if (activeStop === -1 && player.getPlayerState() === YT.PlayerState.PLAYING) {
+    // stop at an unanswered question the video has just played past
+    const i = STOPS.findIndex((s, n) => !done[n] && lastTime < s.time && t >= s.time && t - s.time < 2);
+    if (i !== -1) openStop(i);
+  }
+  lastTime = t;
+}
+
+function openStop(i) {
+  const stop = STOPS[i];
+  activeStop = i;
+  if (player && player.pauseVideo) player.pauseVideo();
+
+  stepEl.textContent = "Question " + (i + 1) + " of " + STOPS.length;
+  qEl.textContent = stop.q;
+  explainEl.textContent = "";
+  explainEl.className = "iv-explain";
+  contBtn.disabled = !done[i];
+  ansEl.innerHTML = "";
+
+  if (stop.type === "choice") {
+    const wrap = document.createElement("div");
+    wrap.className = "iv-options";
+    stop.options.forEach((text, n) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "iv-opt";
+      b.textContent = text;
+      b.addEventListener("click", () => {
+        if (n === stop.answer) {
+          wrap.querySelectorAll(".iv-opt").forEach(o => o.disabled = true);
+          b.classList.add("correct");
+          markDone(i, true);
+        } else {
+          b.classList.add("incorrect");
+          b.disabled = true;
+          explainEl.textContent = "Not quite — try again.";
+          explainEl.className = "iv-explain bad";
+        }
+      });
+      if (done[i] && n === stop.answer) { b.classList.add("correct"); }
+      if (done[i]) b.disabled = true;
+      wrap.appendChild(b);
+    });
+    ansEl.appendChild(wrap);
+  } else {
+    const row = document.createElement("div");
+    row.className = "iv-type";
+    const input = document.createElement("input");
+    input.className = "gap";
+    input.setAttribute("aria-label", "Your answer");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "check-btn";
+    btn.textContent = "Check";
+    const check = () => {
+      if (input.value.trim().toLowerCase() === stop.answer) {
+        input.classList.add("correct"); input.classList.remove("incorrect");
+        input.disabled = true; btn.disabled = true;
+        markDone(i, true);
+      } else {
+        input.classList.remove("incorrect"); void input.offsetWidth; input.classList.add("incorrect");
+        explainEl.textContent = "Not quite — listen again and try once more.";
+        explainEl.className = "iv-explain bad";
+      }
+    };
+    btn.addEventListener("click", check);
+    input.addEventListener("keydown", e => { if (e.key === "Enter") check(); });
+    if (done[i]) { input.value = stop.answer; input.classList.add("correct"); input.disabled = true; btn.disabled = true; }
+    row.append(input, btn);
+    ansEl.appendChild(row);
+  }
+
+  if (done[i]) { explainEl.textContent = stop.explain; explainEl.className = "iv-explain good"; }
+  pop.hidden = false;
+  (ansEl.querySelector("button, input") || contBtn).focus();
+}
+
+function markDone(i) {
+  done[i] = true;
+  explainEl.textContent = "Correct! " + STOPS[i].explain;
+  explainEl.className = "iv-explain good";
+  contBtn.disabled = false;
+  if (STOPS[i].dot) STOPS[i].dot.classList.add("done");
+  updateScore();
+  contBtn.focus();
+}
+
+contBtn.addEventListener("click", () => {
+  const i = activeStop;
+  pop.hidden = true;
+  activeStop = -1;
+  if (player && player.playVideo) {
+    lastTime = STOPS[i].time + 0.5;
+    player.seekTo(STOPS[i].time + 0.5, true);
+    player.playVideo();
+  }
+});
+
+rewindBtn.addEventListener("click", () => {
+  const i = activeStop;
+  pop.hidden = true;
+  activeStop = -1;
+  if (player && player.playVideo) {
+    const back = Math.max(STOPS[i].time - 15, 0);
+    lastTime = back;
+    player.seekTo(back, true);
+    player.playVideo();
+  }
+});
+
+updateScore();
+
+// =====================================================================
+// AFTER-LISTENING CARD — Check / Show Answers
+// =====================================================================
+document.querySelectorAll(".verse-card").forEach(card => {
+  const button = card.querySelector(".check-btn");
+  const feedback = card.querySelector(".feedback");
+  const gaps = card.querySelectorAll(".gap");
+  if (!button || !gaps.length) return;
+
+  gaps.forEach(input => input.addEventListener("input", () => {
+    const ok = input.value.trim().toLowerCase() === input.dataset.answer;
+    input.classList.toggle("correct", ok);
+    input.classList.remove("incorrect");
+  }));
+
+  button.addEventListener("click", () => {
+    let score = 0;
+    gaps.forEach(input => {
+      const ok = input.value.trim().toLowerCase() === input.dataset.answer;
+      input.classList.toggle("correct", ok);
+      input.classList.toggle("incorrect", !ok);
+      if (ok) score++;
+    });
+    feedback.textContent = score === gaps.length
+      ? `All ${gaps.length} correct — nice work.`
+      : `${score} / ${gaps.length} correct. Try the red ones again.`;
+  });
+});
+
+const showAnswersBtn = document.getElementById("show-answers");
+if (showAnswersBtn) {
+  showAnswersBtn.addEventListener("click", () => {
+    showAnswersBtn.closest(".verse-card").querySelectorAll(".gap").forEach(input => {
+      input.value = input.dataset.answer;
+      input.classList.add("correct");
+      input.classList.remove("incorrect");
+      input.disabled = true;
+    });
+    document.getElementById("score-output").textContent = "All answers revealed.";
+  });
+}
+
+// =====================================================================
+// INSTRUCTIONS TILE — opens on load; ℹ️ reopens it
+// =====================================================================
+const tileBackdrop = document.getElementById("instructions-backdrop");
+if (tileBackdrop) {
+  const openBtn  = document.getElementById("open-instructions");
+  const closeBtn = document.getElementById("close-instructions");
+  const startBtn = document.getElementById("start-activity");
+  let lastFocused = null;
+
+  function openTile() {
+    lastFocused = document.activeElement;
+    tileBackdrop.hidden = false;
+    document.body.style.overflow = "hidden";
+    if (startBtn) startBtn.focus();
+  }
+  function closeTile() {
+    tileBackdrop.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+  openBtn.addEventListener("click", openTile);
+  closeBtn.addEventListener("click", closeTile);
+  startBtn.addEventListener("click", closeTile);
+  tileBackdrop.addEventListener("click", e => { if (e.target === tileBackdrop) closeTile(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !tileBackdrop.hidden) closeTile(); });
+  openTile();
+}
+</script>
+
+</body>
+</html>
