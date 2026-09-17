@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Think About You – Listening Gap-Fill</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap" rel="stylesheet">
+
+  <style>
+/* ===========================
+   Modern English Australia / Koala Spies Sydney Theme
+   =========================== */
+
+/* Palette taken from modernenglish.au so this page sits in the same
+   family as the rest of the site. */
+:root {
+  --bg: #fffce6;         /* the site's cream page colour */
+  --band: #1c1c1c;       /* the masthead band */
+  --card: #1c1c1c;
+  --ink: #0f172a;        /* the site's near-black slate text */
+  --paper: #f8fafc;      /* off-white type on dark */
+  --muted: #94a3b8;      /* muted slate */
+  --accent: #3968ea;     /* the site's blue */
+  --accent-soft: #60a5fa;
+  --highlight: #fde047;  /* Koala Spies yellow */
+  --line: #2c3234;
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(0,0,0,.25);
+
+  --good: #2ecc71;
+  --bad: #e74c3c;
+}
+
+
+/* ===========================================================
+   PAGE TOOLS  —  the strip that replaced the old instructions
+   block. The lesson PDF link lives here permanently; the ℹ️
+   tile reopens the instructions card.
+   =========================================================== */
+.page-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+/* the PDF link, wherever it appears (toolbar or inside the tile) */
+.pdf-button {
+  display: inline-block;
+  padding: 0.55rem 1.2rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  box-shadow: var(--shadow);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.pdf-button:hover {
+  opacity: .9;
+  transform: translateY(-2px);
+}
+
+
+/* ===========================================================
+   THE INSTRUCTIONS TILE  —  opens when the page loads
+   =========================================================== */
+.tile-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: rgba(8,12,14,.72);
+  backdrop-filter: blur(4px);
+  animation: tile-fade .35s ease both;
+}
+.tile-backdrop[hidden] { display: none; }
+
+.tile {
+  position: relative;
+  width: min(92%, 640px);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: rgba(255,255,255,.94);
+  color: var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--accent);
+  padding: 2rem 1.8rem 1.6rem;
+  text-align: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  animation: tile-rise .4s cubic-bezier(.16,.84,.34,1) both;
+}
+
+.tile-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  color: var(--card);
+}
+
+.tile-body {
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+.tile-body p { margin: 0 0 .9rem; }
+.tile-body p:last-child { margin-bottom: 0; }
+
+/* the one line that tells them what to actually do */
+.tile-task {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(15,20,22,.12);
+  font-weight: 600;
+  color: var(--card);
+}
+
+.tile-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.tile-start {
+  padding: 0.55rem 1.4rem;
+  background: var(--card);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background .25s ease, transform .25s ease;
+}
+.tile-start:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.tile-close {
+  position: absolute;
+  top: .6rem;
+  right: .75rem;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.tile-close:hover { background: var(--line); color: #fff; }
+
+@keyframes tile-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes tile-rise {
+  from { opacity: 0; transform: translateY(18px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-backdrop, .tile { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .tile { padding: 1.6rem 1.1rem 1.2rem; }
+  .tile-body { font-size: 1.02rem; }
+  .tile-actions { flex-direction: column; }
+}
+
+/* ===========================================================
+   HEADER BAND  —  matched to modernenglish.au
+   =========================================================== */
+header {
+  position: relative;
+  background: var(--band);
+  overflow: hidden;
+}
+
+/* the faint grid that drifts slowly across the band */
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: grid-drift 24s linear infinite;
+  pointer-events: none;
+}
+@keyframes grid-drift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(48px, 48px); }
+}
+
+/* the thin blue line along the bottom edge */
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0) 0%,
+    rgba(37,99,235,.55) 20%,
+    #60a5fa 50%,
+    rgba(37,99,235,.55) 80%,
+    rgba(0,0,0,0) 100%);
+}
+
+header .wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 4vw, 36px);
+}
+.header-inner { padding: 26px 0 30px; }
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+/* the wordmark, with the same white shimmer as the main site */
+.brand-top {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 5.2vw, 3.6rem);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  line-height: 1.05;
+  text-decoration: none;
+  color: var(--paper);
+  background: linear-gradient(100deg, #f8fafc 0%, #f8fafc 18%, #ffffff 30%, #a5c4fd 42%, #ffffff 56%, #f8fafc 70%, #f8fafc 100%);
+  background-size: 250% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3.5s linear infinite;
+}
+@keyframes shimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -50% center; }
+}
+
+.kss-label {
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--highlight);
+  text-decoration: none;
+}
+.kss-label:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---- the activity's own title, over the video ---- */
+.page-head {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 2.2rem clamp(16px, 4vw, 36px) .6rem;
+  text-align: center;
+}
+.page-head .kicker {
+  margin: 0 0 .4rem;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--highlight);
+}
+.page-head h1 {
+  margin: 0;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(0,0,0,.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header::before, .brand-top { animation: none; }
+  .brand-top { -webkit-text-fill-color: var(--paper); }
+}
+
+@media (max-width: 600px) {
+  .brand-top { letter-spacing: 1.5px; }
+  .kss-label { letter-spacing: 3px; font-size: .72rem; }
+  .header-inner { padding: 20px 0 22px; }
+}
+
+/* ===========================================================
+   AUDIO  —  minimal player
+   One teal play button, a hairline you can scrub, and the time.
+   The native <audio> only shows if the script never runs.
+   =========================================================== */
+.audio-section {
+  text-align: center;
+  padding: 1rem;
+}
+
+/* the fallback player, and how it is hidden once JS takes over */
+audio {
+  width: 90%;
+  max-width: 700px;
+  border-radius: var(--radius);
+}
+.player.enhanced audio { display: none; }
+
+.player-ui {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  width: min(92%, 640px);
+  margin: 0 auto;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.player-ui[hidden] { display: none; }
+
+/* play / pause — a bare teal glyph, no button chrome at all */
+.player-btn {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.player-btn:hover { transform: scale(1.15); }
+.player-btn:active { transform: scale(.95); }
+.player-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.player-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--highlight);
+  pointer-events: none;
+}
+.player-btn svg[hidden] { display: none; }
+
+/* ---- the waveform ----
+   A row of bars built by script.js. Played bars go teal, the rest
+   stay faint, and they bounce gently while the song is running.
+   Click or drag anywhere along them to jump to that point. */
+.wave {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 46px;
+  cursor: pointer;
+  touch-action: none;
+}
+.wave:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+
+.wave .bar {
+  flex: 1 1 0;
+  min-width: 2px;
+  height: var(--h, 40%);
+  background: rgba(255,255,255,.22);
+  border-radius: 1px;
+  transform-origin: center;
+  transition: background .12s ease;
+}
+/* yellow reads loudest over a black-and-white video */
+.wave .bar.on { background: var(--highlight); }
+
+/* the bars dance only while the song is actually playing */
+.player-ui.playing .bar {
+  animation: bar-bounce 1.15s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+@keyframes bar-bounce {
+  0%, 100% { transform: scaleY(.82); }
+  50%      { transform: scaleY(1.12); }
+}
+
+.player-time {
+  flex: 0 0 auto;
+  min-width: 5rem;
+  text-align: right;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: .75rem;
+  letter-spacing: .08em;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255,255,255,.65);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player-ui.playing .bar { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .player-ui { gap: .9rem; width: 94%; }
+  .player-btn, .player-btn svg { width: 26px; height: 26px; }
+  .player-time { min-width: 4.4rem; font-size: .7rem; }
+  .wave { height: 38px; gap: 1px; }
+}
+
+/* ===== Verse Cards ===== */
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* Translucent rather than `opacity: 70%` — opacity fades the text
+   as well, which is rough to read over a moving video. */
+.verse-card {
+  background: rgba(255,252,230,.92);
+  padding: 1.5rem 1.8rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(3px);
+}
+.verse-card h2 {
+  margin: 0 0 1rem;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--ink);
+  border-bottom: 2px solid rgba(57,104,234,.25);
+  padding-bottom: .5rem;
+}
+.gap-line {
+  margin: .8rem 0;
+  line-height: 2.4;
+}
+
+/* the Check button and its answer line */
+.check-btn {
+  margin-top: 1rem;
+  padding: .55rem 1.4rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.check-btn:hover { background: #2d55c7; transform: translateY(-2px); }
+
+.feedback {
+  margin: .7rem 0 0;
+  min-height: 1.4em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ===== Each line in the exercise (IMPROVED SPACING) ===== */
+
+/* ===== Input Styling (Improved) ===== */
+input.gap {
+  width: 120px;
+  padding: 6px 8px;
+  margin: 0 4px;
+  border: 2px solid var(--muted);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+/* Correct + Incorrect Styles (DYNAMIC) */
+input.gap.correct {
+  border-color: var(--good);
+  background: #eafff1;
+  box-shadow: 0 0 10px rgba(46,204,113,.4);
+}
+input.gap.incorrect {
+  border-color: var(--bad);
+  background: #ffecec;
+  animation: shake 0.25s ease;
+}
+
+/* input shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(3px); }
+  50% { transform: translateX(-3px); }
+  75% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 600px) {
+  input.gap {
+    width: 80px;
+    font-size: 0.9rem;
+  }
+  .gap-line {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+}
+
+/* ===== Footer ===== */
+footer {
+  position: relative;
+  background: var(--band);
+  color: var(--paper);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 -4px 12px rgba(0,0,0,.3);
+}
+
+footer p {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.footer-nav a {
+  background: #1e1e1e;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow);
+}
+
+.footer-nav a:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,.35);
+}
+
+/* ===== Background Video Overlay ===== */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: -3;
+}
+
+#bg-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  opacity: 0.35;
+  z-index: -2;
+}
+
+/* ---- this page: short preposition gaps, one quiet card ---- */
+input.gap { width: 90px; text-align: center; }
+.gap-line { margin: .35rem 0; line-height: 2.2; font-size: 1.15rem; color: var(--ink); }
+.card-actions { margin-top: 1.4rem; text-align: center; }
+.card-actions .check-btn + .check-btn { margin-left: 8px; }
+.check-btn.ghost { background: transparent; color: var(--ink); border: 1px solid rgba(15,23,42,.25); }
+.check-btn.ghost:hover { background: var(--ink); color: #fff; }
+.pdf-button.ghost { background: transparent; border: 1px solid rgba(255,255,255,.35); box-shadow: none; }
+@media (max-width: 600px) { input.gap { width: 70px; } }
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="header-inner">
+      <div class="brand">
+        <a href="index.html" class="brand-top">Modern English Au</a>
+        <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-label">Koala Spies Sydney</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="page-head">
+  <p class="kicker">Listening Gap-Fill · Prepositions</p>
+  <h1>I Think About You</h1>
+</section>
+
+<section class="page-tools">
+  <a class="pdf-button" href="LESSONPrep.pdf" download>📘 Review the Prepositions</a>
+  <button type="button" class="pdf-button ghost" id="open-instructions">ℹ️ Instructions</button>
+</section>
+
+<section class="audio-section">
+  <div class="player" id="player">
+    <audio id="song" controls preload="metadata">
+      <source src="Ithinkaboutyou.mp3" type="audio/mpeg">
+    </audio>
+    <div class="player-ui" id="player-ui" hidden>
+      <button type="button" class="player-btn" id="play-btn" aria-label="Play">
+        <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M7 5h3.2v14H7zM13.8 5H17v14h-3.2z"/></svg>
+      </button>
+      <div class="wave" id="wave" role="slider" tabindex="0"
+           aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      <span class="player-time" id="time">0:00</span>
+    </div>
+  </div>
+</section>
+
+<main>
+<video id="bg-video" autoplay muted loop playsinline>
+  <source src="missprep.mp4" type="video/mp4">
+</video>
+
+<section class="verse-card">
+  <p class="gap-line">I think <input class="gap" data-answer="about" aria-label="preposition"> you.</p>
+  <p class="gap-line">I care <input class="gap" data-answer="about" aria-label="preposition"> you.</p>
+  <p class="gap-line">I rely <input class="gap" data-answer="on" aria-label="preposition"> you.</p>
+  <p class="gap-line">I depend <input class="gap" data-answer="on" aria-label="preposition"> you.</p>
+  <p class="gap-line">I complain <input class="gap" data-answer="to" aria-label="preposition"> you.</p>
+  <p class="gap-line">I apologise <input class="gap" data-answer="to" aria-label="preposition"> you.</p>
+  <p class="gap-line">I belong <input class="gap" data-answer="to" aria-label="preposition"> you.</p>
+  <p class="gap-line">I believe <input class="gap" data-answer="in" aria-label="preposition"> you.</p>
+  <p class="gap-line">I think <input class="gap" data-answer="about" aria-label="preposition"> you.</p>
+  <p class="gap-line">I dream <input class="gap" data-answer="about" aria-label="preposition"> you.</p>
+  <p class="gap-line">I call you. I pay <input class="gap" data-answer="for" aria-label="preposition"> you.</p>
+  <p class="gap-line">I hate you. I can’t cope <input class="gap" data-answer="with" aria-label="preposition"> you.</p>
+  <p class="gap-line">I don’t worry <input class="gap" data-answer="about" aria-label="preposition"> you.</p>
+  <p class="gap-line">I succeed <input class="gap" data-answer="in" aria-label="preposition"> leaving you.</p>
+
+  <div class="card-actions">
+    <button class="check-btn">Check</button>
+    <button class="check-btn ghost" id="show-answers">Show Answers</button>
+    <p class="feedback" id="score-output"></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</p>
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="dictation.html">Dictation &amp; Situations</a>
+    <a href="repeat.html">Repeat Sentence</a>
+    <a href="vocab.html">Vocabulary</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</footer>
+
+<div class="tile-backdrop" id="instructions-backdrop" hidden>
+  <div class="tile" role="dialog" aria-modal="true" aria-labelledby="instructions-title">
+    <button type="button" class="tile-close" id="close-instructions" aria-label="Close instructions">✕</button>
+    <h2 class="tile-title" id="instructions-title">Which preposition?</h2>
+    <div class="tile-body">
+      <p>Many English verbs travel with a partner: <strong>think about</strong>, <strong>rely on</strong>,
+         <strong>belong to</strong>, <strong>believe in</strong>, <strong>cope with</strong>.</p>
+      <p class="tile-task">Listen to the song, and write in the missing prepositions.</p>
+    </div>
+    <div class="tile-actions">
+      <button type="button" class="tile-start" id="start-activity">Start the activity</button>
+    </div>
+  </div>
+</div>
+<script>
+// ===============================
+// LIVE CHECKING
+// ===============================
+
+const inputs = document.querySelectorAll(".gap");
+const progressBar = document.getElementById("progress-bar");
+const scoreOutput = document.getElementById("score-output"); // may not exist on every page
+
+inputs.forEach(input => {
+  input.addEventListener("input", () => {
+    const correct = input.dataset.answer.trim().toLowerCase();
+    const user = input.value.trim().toLowerCase();
+
+    // Instant marking
+    if (user === correct) {
+      input.classList.add("correct");
+      input.classList.remove("incorrect");
+    } else {
+      input.classList.remove("correct");
+      input.classList.remove("incorrect");
+    }
+
+    updateProgress();
+  });
+});
+
+// ===============================
+// UPDATE PROGRESS BAR
+// ===============================
+
+function updateProgress() {
+  if (!progressBar) return;
+
+  const total = inputs.length;
+  const correct = document.querySelectorAll(".gap.correct").length;
+  const percent = total ? (correct / total) * 100 : 0;
+
+  progressBar.style.width = percent + "%";
+}
+
+// ===============================
+// THE "CHECK" BUTTON ON EACH CARD
+// Checks only the gaps in that card and writes the tally into
+// the <p class="feedback"> underneath it.
+// ===============================
+
+document.querySelectorAll(".verse-card").forEach(card => {
+  const button = card.querySelector(".check-btn");
+  const feedback = card.querySelector(".feedback");
+  const gaps = card.querySelectorAll(".gap");
+
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+    let score = 0;
+
+    gaps.forEach(input => {
+      const correct = input.dataset.answer.trim().toLowerCase();
+      const user = input.value.trim().toLowerCase();
+
+      if (user === correct) {
+        input.classList.add("correct");
+        input.classList.remove("incorrect");
+        score++;
+      } else {
+        input.classList.add("incorrect");
+        input.classList.remove("correct");
+      }
+    });
+
+    if (feedback) {
+      feedback.textContent = score === gaps.length
+        ? `All ${gaps.length} correct — nice work.`
+        : `${score} / ${gaps.length} correct. Try the red ones again.`;
+    }
+
+    updateProgress();
+  });
+});
+
+// ===============================
+// CHECK ALL / SHOW ANSWERS
+// These only run if the page actually has those buttons, so the
+// script no longer stops dead on a page without them.
+// ===============================
+
+const checkAllBtn = document.getElementById("check-all");
+if (checkAllBtn) {
+  checkAllBtn.addEventListener("click", () => {
+    let score = 0;
+
+    inputs.forEach(input => {
+      const correct = input.dataset.answer.trim().toLowerCase();
+      const user = input.value.trim().toLowerCase();
+
+      if (user === correct) {
+        input.classList.add("correct");
+        input.classList.remove("incorrect");
+        score++;
+      } else {
+        input.classList.add("incorrect");
+        input.classList.remove("correct");
+      }
+    });
+
+    if (scoreOutput) scoreOutput.textContent = `Score: ${score} / ${inputs.length}`;
+
+    updateProgress();
+  });
+}
+
+const showAnswersBtn = document.getElementById("show-answers");
+if (showAnswersBtn) {
+  showAnswersBtn.addEventListener("click", () => {
+    inputs.forEach(input => {
+      input.value = input.dataset.answer;
+      input.classList.add("correct");
+      input.classList.remove("incorrect");
+      input.disabled = true;
+    });
+
+    if (scoreOutput) scoreOutput.textContent = "All answers revealed.";
+    updateProgress();
+  });
+}
+
+// ===============================
+// MINIMAL AUDIO PLAYER
+// The <audio> ships with its own controls so the page still works
+// without this script; here we hide them and drive our own.
+// ===============================
+
+const song = document.getElementById("song");
+
+if (song) {
+  const player   = document.getElementById("player");
+  const ui       = document.getElementById("player-ui");
+  const playBtn  = document.getElementById("play-btn");
+  const iconPlay  = playBtn.querySelector(".icon-play");
+  const iconPause = playBtn.querySelector(".icon-pause");
+  const wave     = document.getElementById("wave");
+  const timeText = document.getElementById("time");
+
+  // ---- build the waveform ----
+  // The shape is drawn from a formula, not from the audio itself, so it
+  // costs nothing to load. Change BAR_COUNT for a coarser or finer look.
+  const BAR_COUNT = 64;
+  const bars = [];
+
+  for (let i = 0; i < BAR_COUNT; i++) {
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    const shape = Math.abs(Math.sin(i * 0.37)) * (0.55 + 0.45 * Math.abs(Math.sin(i * 0.11 + 1)));
+    bar.style.setProperty("--h", (22 + shape * 68).toFixed(1) + "%");
+    bar.style.setProperty("--d", (i * 0.035).toFixed(3) + "s");
+    wave.appendChild(bar);
+    bars.push(bar);
+  }
+
+  // swap the native controls for ours
+  song.removeAttribute("controls");
+  player.classList.add("enhanced");
+  ui.hidden = false;
+
+  function clock(seconds) {
+    if (!isFinite(seconds)) return "0:00";
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return m + ":" + String(s).padStart(2, "0");
+  }
+
+  function paint() {
+    const ratio = song.duration ? song.currentTime / song.duration : 0;
+    const played = Math.round(ratio * BAR_COUNT);
+
+    bars.forEach((bar, i) => bar.classList.toggle("on", i < played));
+
+    wave.setAttribute("aria-valuenow", Math.round(ratio * 100));
+    timeText.textContent = song.duration
+      ? clock(song.currentTime) + " / " + clock(song.duration)
+      : clock(song.currentTime);
+  }
+
+  playBtn.addEventListener("click", () => {
+    if (song.paused) song.play(); else song.pause();
+  });
+
+  song.addEventListener("play", () => {
+    iconPlay.hidden = true;
+    iconPause.hidden = false;
+    playBtn.setAttribute("aria-label", "Pause");
+    ui.classList.add("playing");          // starts the bars dancing
+  });
+  song.addEventListener("pause", () => {
+    iconPlay.hidden = false;
+    iconPause.hidden = true;
+    playBtn.setAttribute("aria-label", "Play");
+    ui.classList.remove("playing");
+  });
+
+  song.addEventListener("timeupdate", paint);
+  song.addEventListener("loadedmetadata", paint);
+  song.addEventListener("ended", () => {
+    song.currentTime = 0;
+    paint();
+  });
+
+  // --- scrubbing: click anywhere on the bars, or drag along them ---
+  function scrubTo(clientX) {
+    const box = wave.getBoundingClientRect();
+    const ratio = Math.min(Math.max((clientX - box.left) / box.width, 0), 1);
+    if (song.duration) {
+      song.currentTime = ratio * song.duration;
+      paint();
+    }
+  }
+
+  let dragging = false;
+  wave.addEventListener("pointerdown", e => {
+    dragging = true;
+    wave.setPointerCapture(e.pointerId);
+    scrubTo(e.clientX);
+  });
+  wave.addEventListener("pointermove", e => { if (dragging) scrubTo(e.clientX); });
+  wave.addEventListener("pointerup",   e => {
+    dragging = false;
+    wave.releasePointerCapture(e.pointerId);
+  });
+  wave.addEventListener("pointercancel", () => { dragging = false; });
+
+  // --- keyboard: arrows jump 5 seconds, space plays and pauses ---
+  wave.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") { song.currentTime = Math.min(song.currentTime + 5, song.duration || 0); paint(); e.preventDefault(); }
+    if (e.key === "ArrowLeft")  { song.currentTime = Math.max(song.currentTime - 5, 0); paint(); e.preventDefault(); }
+    if (e.key === " " || e.key === "Enter") {
+      if (song.paused) song.play(); else song.pause();
+      e.preventDefault();
+    }
+  });
+
+  paint();
+}
+
+// ===============================
+// INSTRUCTIONS TILE
+// Opens itself when the page loads. Closes on ✕, on "Start the
+// activity", on a click outside the card, or on the Esc key.
+// The ℹ️ Instructions button at the top opens it again.
+// ===============================
+
+const tileBackdrop = document.getElementById("instructions-backdrop");
+
+if (tileBackdrop) {
+  const openBtn  = document.getElementById("open-instructions");
+  const closeBtn = document.getElementById("close-instructions");
+  const startBtn = document.getElementById("start-activity");
+  let lastFocused = null;
+
+  function openTile() {
+    lastFocused = document.activeElement;
+    tileBackdrop.hidden = false;
+    document.body.style.overflow = "hidden";   // no scrolling behind the tile
+    if (startBtn) startBtn.focus();
+  }
+
+  function closeTile() {
+    tileBackdrop.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+
+  if (openBtn)  openBtn.addEventListener("click", openTile);
+  if (closeBtn) closeBtn.addEventListener("click", closeTile);
+  if (startBtn) startBtn.addEventListener("click", closeTile);
+
+  // click on the dark area around the card
+  tileBackdrop.addEventListener("click", e => {
+    if (e.target === tileBackdrop) closeTile();
+  });
+
+  // Esc
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && !tileBackdrop.hidden) closeTile();
+  });
+
+  // ---- open it as soon as the page is ready ----
+  openTile();
+
+  /* WANT IT ONLY ONCE PER STUDENT, not on every visit?
+     Delete the openTile() line above and use this instead:
+
+       try {
+         if (!localStorage.getItem("gapfill-instructions-seen")) {
+           openTile();
+           localStorage.setItem("gapfill-instructions-seen", "1");
+         }
+       } catch (e) { openTile(); }
+  */
+}
+
+</script>
+
+</body>
+</html>
