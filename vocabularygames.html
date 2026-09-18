@@ -151,11 +151,17 @@
     .intro-text { font-size: 1.05rem; line-height: 1.82; }
     .divider { border: 0; height: 1px; background: var(--line); margin: 36px 0; }
 
+    /* Tips list */
+    .tips-title { margin-top: 30px; margin-bottom: 14px; }
+    .tips-list { list-style: decimal; padding-left: 1.4em; margin: 0 0 8px; }
+    .tips-list li { margin-bottom: 10px; padding-left: 4px; }
+    .tips-list li::marker { font-weight: 700; color: var(--link); }
+
     .cta-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--link); text-decoration: underline; text-underline-offset: 3px; transition: color .15s, gap .15s; }
     .cta-link::after { content: "→"; }
     .cta-link:hover { color: var(--accent-2); gap: 10px; }
 
-    /* ============ BLOG PILL ============ */
+    /* ============ PILL (shared by Blog + Pedagogy) ============ */
     .pill-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 28px 0 0; }
     .eyebrow + .pill-row { margin-top: 4px; }
 
@@ -186,7 +192,12 @@
     .pill[aria-expanded="true"] .pill-chev { transform: rotate(180deg); }
     .pill-hint { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
 
-    /* ============ BLOG PANEL (reveal) ============ */
+    /* Pedagogy pill: lighter variant so it doesn't compete with the blog pill */
+    .pill.pill-alt { background: var(--surface); color: var(--accent); border-color: rgba(14,40,97,.28); }
+    .pill.pill-alt:hover { background: var(--accent); color: var(--header-ink); }
+    .pill.pill-alt .pill-dot { background: var(--link); animation: none; }
+
+    /* ============ REVEAL PANEL (shared) ============ */
     .blog-panel {
       display: grid; grid-template-rows: 0fr;
       transition: grid-template-rows .45s cubic-bezier(.22,.68,0,1);
@@ -223,7 +234,7 @@
       margin-left: auto; white-space: nowrap;
     }
 
-    /* Blog post */
+    /* Post card (used by the pedagogy panel) */
     .post {
       background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
       padding: clamp(22px, 4vw, 40px); max-width: 760px;
@@ -250,14 +261,6 @@
       font-weight: 700; color: var(--ink); letter-spacing: 0; text-transform: none;
       margin: 30px 0 10px; line-height: 1.25;
     }
-    .post-body .lead { font-size: 1.06rem; }
-    .post-example {
-      font-family: var(--serif); font-size: 1.08rem; font-weight: 650; color: var(--accent);
-      border-left: 3px solid var(--link); background: rgba(57,104,234,.05);
-      border-radius: 0 8px 8px 0; padding: 12px 18px; margin: 0 0 16px;
-    }
-    .post-example.wrong { color: #9f1239; border-left-color: #e11d48; background: rgba(225,29,72,.05); }
-    .post-example.right { color: #14532d; border-left-color: #16a34a; background: rgba(22,163,74,.06); }
     .post-pull {
       font-family: var(--serif); font-weight: 700; font-style: italic;
       font-size: clamp(1.12rem, 1rem + 0.7vw, 1.4rem); line-height: 1.4;
@@ -271,42 +274,14 @@
       font-family: var(--sans); font-size: 0.72rem; font-weight: 700;
       letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
     }
-    .post-refs p { font-size: 0.86rem; line-height: 1.6; color: var(--muted); margin-bottom: 0; }
+    .post-refs p { font-size: 0.86rem; line-height: 1.6; color: var(--muted); margin-bottom: 6px; }
     .post-refs a { word-break: break-word; }
-    .post-sign {
-      margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line);
-      font-size: 0.9rem; color: var(--muted);
-    }
-    .post-top {
-      display: inline-flex; align-items: center; gap: 6px; margin-top: 18px;
-      font-family: var(--sans); font-weight: 700; font-size: 0.85rem;
-      letter-spacing: 1.4px; text-transform: uppercase; color: var(--link);
-      text-decoration: none; cursor: pointer; background: none; border: 0; padding: 0;
-    }
-    .post-top:hover { color: var(--accent-2); }
-
 
     /* FOLLOW / RSS */
-    .follow {
-      background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
-      padding: 24px 26px; max-width: 760px; margin-top: 34px;
-    }
-    .follow h2 { font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem); margin-bottom: 6px; }
-    .follow p { font-size: 0.95rem; color: var(--muted); margin-bottom: 16px; }
-    .rss-link {
-      display: inline-flex; align-items: center; gap: 9px;
-      font-family: var(--sans); font-weight: 700; font-size: 0.9rem;
-      letter-spacing: 1.4px; text-transform: uppercase;
-      color: var(--header-ink); background: #ea7a3c; border-radius: 999px;
-      padding: 10px 20px; text-decoration: none;
-      transition: transform .18s, box-shadow .18s, filter .18s;
-    }
-    .rss-link:hover { color: #fff; transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 8px 22px rgba(234,122,60,.35); }
-    .rss-link svg { width: 15px; height: 15px; fill: currentColor; flex: 0 0 auto; }
     .follow-note { font-size: 0.82rem; color: var(--muted); margin: 14px 0 0; }
     .follow-note a { font-weight: 600; }
     .footer-links .rss-foot { display: inline-flex; align-items: center; gap: 6px; }
-    @media (prefers-reduced-motion: reduce) { .rss-link { transition: none; } }
+    .footer-links .rss-foot svg { width: 14px; height: 14px; fill: currentColor; }
 
     /* GAME CARDS GRID */
     .game-grid {
@@ -361,7 +336,7 @@
     }
     .game-card:hover .game-card-arrow { gap: 8px; }
 
-    /* NEW badge — matches the yellow "new" signal used by the blog pill */
+    /* NEW badge */
     .game-card.is-new { border-color: rgba(253,224,71,.75); }
     .game-card.is-new .game-card-label { padding-right: 66px; }
     .new-badge {
@@ -452,28 +427,57 @@
           <span class="hero-word">vocab&nbsp;</span><span class="hero-word">games</span>
         </h1>
 
-        <p class="role-line">Themes· Idioms· Collocations· Phrasal Verbs</p>
+        <p class="role-line">Themes · Idioms · Collocations · Phrasal Verbs in English</p>
+        <p class="role-line">Warm up games · icebreakers · revision · self-study</p>
 
-       <p> Play them as - matching games- noughts and crosses -tick tac toe
-         <br>
-         <br>
-Play them in pairs, groups or on your own.
-These vocabulary games were designed to reflect the connections of old-school board games or game shows. They can be projected onto a board or wall, played on a tablet in the middle of a table, or played individually on a phone.
-<br>
-        <br>
-<b>Variety of Ways to Use</b>
-<br>
-        <br>
-Teachers can also stand at the front of the class and play the role of a game-show host, turning the activity into a fun whole-class game.
-<br>
-        <br>
-Use them as icebreakers, warmers, revision activities, or homework to reinforce and extend learning.
-<br>
-        <br>
-There is a QR code in the top-left corner of each game, so teachers can project the games while students play along on their phones.
-        <p class="intro-text">
+        <h2 class="tips-title">Ideas and tips for using them</h2>
+        <ol class="tips-list">
+          <li><strong>Classroom gameshow</strong> — project the game onto the board with the teacher (or one of the students) as the host/presenter.</li>
+          <li><strong>Board game</strong> — ideally on a tablet, but a phone or computer works too. One device goes on the table between a pair or group of students and is played like a board game.</li>
+          <li><strong>Homework</strong> — assign the game as homework, then open the next lesson with a class competition on the material.</li>
+          <li><strong>Zoom or online</strong> — the teacher and students take turns sharing the screen and being in control of the game.</li>
+        </ol>
 
-        </p>
+        <!-- PEDAGOGY PILL -->
+        <div class="pill-row">
+          <button class="pill pill-alt" id="pedToggle" type="button" aria-expanded="false" aria-controls="pedPanel">
+            <span class="pill-dot" aria-hidden="true"></span>
+            <span class="pill-text">Pedagogy: put students in control</span>
+            <span class="pill-chev" aria-hidden="true">▾</span>
+          </button>
+          <span class="pill-hint">Why hand over the game?</span>
+        </div>
+      </div>
+
+      <!-- PEDAGOGY PANEL -->
+      <div class="blog-panel" id="pedPanel" role="region" aria-labelledby="pedToggle">
+        <div class="blog-panel-inner">
+          <div class="blog-panel-pad">
+            <article class="post" id="pedagogy">
+              <div class="post-meta">
+                <span>Pedagogy</span><span class="dot" aria-hidden="true"></span><span class="post-read">2 min read</span>
+              </div>
+              <h3 class="post-title">Games: putting the student in control</h3>
+              <p class="post-standfirst">In communicative language teaching, the aim is for students to do around 80% of the speaking. Once you've demonstrated a game, hand over the reins and let your students lead.</p>
+
+              <div class="post-body">
+                <p class="post-pull">Research shows this role shift boosts metalinguistic awareness, complex language output, confidence and willingness to communicate.</p>
+
+                <h4 class="post-h">Students as facilitators produce richer language</h4>
+                <p>Recent research published by Cambridge University Press shows that when students facilitate communicative tasks — explaining rules, giving instructions and managing peers — they produce significantly richer and more complex language. Acting as the &ldquo;teacher&rdquo; increases metalinguistic awareness, encourages real-time monitoring of grammar and vocabulary, and strengthens interactional competence.<a class="post-fn" href="#ref-1">1</a></p>
+
+                <h4 class="post-h">Less anxiety, more willingness to speak</h4>
+                <p>A study in <em>Frontiers in Psychology</em> (2021) observed that communicative games substantially boost adult learners&rsquo; confidence and willingness to communicate. When students take presenter or teacher roles, anxiety decreases and autonomy increases, creating ideal conditions for spontaneous speaking. This role shift is especially effective in ELICOS contexts, where learners benefit from authentic, low-pressure interaction.<a class="post-fn" href="#ref-2">2</a></p>
+              </div>
+
+              <div class="post-refs">
+                <p class="post-refs-title">References</p>
+                <p id="ref-1">1. Cambridge University Press, <em>Language Teaching</em> — &ldquo;Game-enhanced language learning.&rdquo; <a href="https://www.cambridge.org/core/journals/language-teaching/article/gameenhanced-language-learning/" target="_blank" rel="noopener">cambridge.org</a></p>
+                <p id="ref-2">2. <em>Frontiers in Psychology</em> (2021). <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2021.708490/full" target="_blank" rel="noopener">frontiersin.org</a></p>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
 
       <hr class="divider">
@@ -531,8 +535,6 @@ There is a QR code in the top-left corner of each game, so teachers can project 
           <p class="game-card-desc">Upper-intermediate "get" expressions in a matching format.</p>
           <span class="game-card-arrow">Play <span>→</span></span>
         </a>
-
-
 
         <a class="game-card" href="matchinggame/throughthoughtthough.html">
           <span class="game-card-label">Matching Game · B2</span>
@@ -628,7 +630,7 @@ There is a QR code in the top-left corner of each game, so teachers can project 
   </div>
 </footer>
 
-<!-- ===== Structured data: helps Google understand the page and the post ===== -->
+<!-- ===== Structured data ===== -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -647,7 +649,7 @@ There is a QR code in the top-left corner of each game, so teachers can project 
       "name": "Vocabulary games",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Get Expressions (A2)", "url": "game1/geta2.html" },
-        { "@type": "ListItem", "position": 2, "name": "Have, Make or Do (A1–A2)", "url": "game1/have-make-do-matching-game.html" },
+        { "@type": "ListItem", "position": 2, "name": "Have, Make or Do (A1–A2)", "url": "game/make-have-do-colloations.html" },
         { "@type": "ListItem", "position": 3, "name": "Colour Idioms (B1–B2)", "url": "game/colouridioms.html" },
         { "@type": "ListItem", "position": 4, "name": "Weather Idioms (B2)", "url": "games/idioms-weather/index.html" },
         { "@type": "ListItem", "position": 5, "name": "Money Idioms (B2)", "url": "MoneyIdioms/index.html" },
@@ -664,62 +666,60 @@ There is a QR code in the top-left corner of each game, so teachers can project 
 
 <script>
 (function () {
-  var toggle = document.getElementById('blogToggle');
-  var panel  = document.getElementById('blogPanel');
-  if (!toggle || !panel) return;
+  // Reusable pill + reveal panel
+  function setupPill(toggleId, panelId, openText, closeText) {
+    var toggle = document.getElementById(toggleId);
+    var panel  = document.getElementById(panelId);
+    if (!toggle || !panel) return;
 
-  var label = toggle.querySelector('.pill-text');
-  var dot   = toggle.querySelector('.pill-dot');
+    var label = toggle.querySelector('.pill-text');
+    var dot   = toggle.querySelector('.pill-dot');
 
-  function openPanel(scroll) {
-    panel.classList.add('is-open');
-    toggle.setAttribute('aria-expanded', 'true');
-    if (label) label.textContent = 'Hide the Blog';
-    if (dot) dot.style.display = 'none';
-    if (scroll) {
-      window.setTimeout(function () {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 220);
+    function open(scroll) {
+      panel.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      if (label) label.textContent = closeText;
+      if (dot) dot.style.display = 'none';
+      if (scroll) {
+        window.setTimeout(function () {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 220);
+      }
     }
-  }
 
-  function closePanel() {
-    panel.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    if (label) label.textContent = 'Read the Blog';
-    if (dot) dot.style.display = '';
-  }
-
-  toggle.addEventListener('click', function () {
-    if (panel.classList.contains('is-open')) { closePanel(); }
-    else { openPanel(true); }
-  });
-
-  // Deep link: /vocab.html#post-funny-english opens the blog automatically
-  function openFromHash() {
-    if (!window.location.hash) return;
-    var target = document.querySelector(window.location.hash);
-    if (target && panel.contains(target)) {
-      openPanel(false);
-      window.setTimeout(function () {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
+    function close() {
+      panel.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      if (label) label.textContent = openText;
+      if (dot) dot.style.display = '';
     }
-  }
-  openFromHash();
-  window.addEventListener('hashchange', openFromHash);
 
-  // "Back to blog roll"
-  var topBtns = panel.querySelectorAll('[data-scroll-top]');
-  Array.prototype.forEach.call(topBtns, function (btn) {
-    btn.addEventListener('click', function () {
-      var roll = panel.querySelector('.blog-roll');
-      if (roll) roll.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    toggle.addEventListener('click', function () {
+      if (panel.classList.contains('is-open')) { close(); } else { open(true); }
     });
-  });
+
+    // Deep link: e.g. vocabularygames.html#pedagogy opens the right panel
+    function openFromHash() {
+      if (!window.location.hash) return;
+      var target;
+      try { target = document.querySelector(window.location.hash); } catch (e) { return; }
+      if (target && panel.contains(target)) {
+        open(false);
+        window.setTimeout(function () {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+  }
+
+  setupPill('pedToggle',  'pedPanel',  'Pedagogy: put students in control', 'Hide pedagogy notes');
+  setupPill('blogToggle', 'blogPanel', 'Read the Blog', 'Hide the Blog');
 })();
 </script>
 
 </body>
 </html>
+
 
