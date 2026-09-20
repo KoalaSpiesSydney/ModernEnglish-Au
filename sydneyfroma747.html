@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- YouTube refuses to play embedded videos when it can't see which website they are on -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Sydney from a 747 – Interactive Video</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fffce6;         /* the site's cream page colour */
+  --band: #1c1c1c;       /* the masthead band */
+  --card: #1c1c1c;
+  --ink: #0f172a;        /* the site's near-black slate text */
+  --paper: #f8fafc;      /* off-white type on dark */
+  --muted: #94a3b8;      /* muted slate */
+  --accent: #3968ea;     /* the site's blue */
+  --accent-soft: #60a5fa;
+  --highlight: #fde047;  /* Koala Spies yellow */
+  --line: #2c3234;
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(0,0,0,.25);
+
+  --good: #2ecc71;
+  --bad: #e74c3c;
+}
+.page-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+/* the PDF link, wherever it appears (toolbar or inside the tile) */
+.pdf-button {
+  display: inline-block;
+  padding: 0.55rem 1.2rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  box-shadow: var(--shadow);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.pdf-button:hover {
+  opacity: .9;
+  transform: translateY(-2px);
+}
+.tile-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: rgba(8,12,14,.72);
+  backdrop-filter: blur(4px);
+  animation: tile-fade .35s ease both;
+}
+.tile-backdrop[hidden] { display: none; }
+
+.tile {
+  position: relative;
+  width: min(92%, 640px);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: rgba(255,255,255,.94);
+  color: var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--accent);
+  padding: 2rem 1.8rem 1.6rem;
+  text-align: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  animation: tile-rise .4s cubic-bezier(.16,.84,.34,1) both;
+}
+
+.tile-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  color: var(--card);
+}
+
+.tile-body {
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+.tile-body p { margin: 0 0 .9rem; }
+.tile-body p:last-child { margin-bottom: 0; }
+
+/* the one line that tells them what to actually do */
+.tile-task {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(15,20,22,.12);
+  font-weight: 600;
+  color: var(--card);
+}
+
+.tile-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.tile-start {
+  padding: 0.55rem 1.4rem;
+  background: var(--card);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background .25s ease, transform .25s ease;
+}
+.tile-start:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.tile-close {
+  position: absolute;
+  top: .6rem;
+  right: .75rem;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.tile-close:hover { background: var(--line); color: #fff; }
+
+@keyframes tile-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes tile-rise {
+  from { opacity: 0; transform: translateY(18px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-backdrop, .tile { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .tile { padding: 1.6rem 1.1rem 1.2rem; }
+  .tile-body { font-size: 1.02rem; }
+  .tile-actions { flex-direction: column; }
+}
+header {
+  position: relative;
+  background: var(--band);
+  overflow: hidden;
+}
+
+/* the faint grid that drifts slowly across the band */
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.024) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: grid-drift 24s linear infinite;
+  pointer-events: none;
+}
+@keyframes grid-drift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(48px, 48px); }
+}
+
+/* the thin blue line along the bottom edge */
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0) 0%,
+    rgba(37,99,235,.55) 20%,
+    #60a5fa 50%,
+    rgba(37,99,235,.55) 80%,
+    rgba(0,0,0,0) 100%);
+}
+
+header .wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 4vw, 36px);
+}
+.header-inner { padding: 26px 0 30px; }
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+/* the wordmark, with the same white shimmer as the main site */
+.brand-top {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 5.2vw, 3.6rem);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  line-height: 1.05;
+  text-decoration: none;
+  color: var(--paper);
+  background: linear-gradient(100deg, #f8fafc 0%, #f8fafc 18%, #ffffff 30%, #a5c4fd 42%, #ffffff 56%, #f8fafc 70%, #f8fafc 100%);
+  background-size: 250% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3.5s linear infinite;
+}
+@keyframes shimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -50% center; }
+}
+
+.kss-label {
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--highlight);
+  text-decoration: none;
+}
+.kss-label:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---- the activity's own title, over the video ---- */
+.page-head {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 2.2rem clamp(16px, 4vw, 36px) .6rem;
+  text-align: center;
+}
+.page-head .kicker {
+  margin: 0 0 .4rem;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--highlight);
+}
+.page-head h1 {
+  margin: 0;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(0,0,0,.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header::before, .brand-top { animation: none; }
+  .brand-top { -webkit-text-fill-color: var(--paper); }
+}
+
+@media (max-width: 600px) {
+  .brand-top { letter-spacing: 1.5px; }
+  .kss-label { letter-spacing: 3px; font-size: .72rem; }
+  .header-inner { padding: 20px 0 22px; }
+}
+/* ===== Verse Cards ===== */
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* Translucent rather than `opacity: 70%` — opacity fades the text
+   as well, which is rough to read over a moving video. */
+.verse-card {
+  background: rgba(255,252,230,.92);
+  padding: 1.5rem 1.8rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(3px);
+}
+.verse-card h2 {
+  margin: 0 0 1rem;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--ink);
+  border-bottom: 2px solid rgba(57,104,234,.25);
+  padding-bottom: .5rem;
+}
+.gap-line {
+  margin: .8rem 0;
+  line-height: 2.4;
+}
+
+/* the Check button and its answer line */
+.check-btn {
+  margin-top: 1rem;
+  padding: .55rem 1.4rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.check-btn:hover { background: #2d55c7; transform: translateY(-2px); }
+
+.feedback {
+  margin: .7rem 0 0;
+  min-height: 1.4em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ===== Each line in the exercise (IMPROVED SPACING) ===== */
+
+/* ===== Input Styling (Improved) ===== */
+input.gap {
+  width: 120px;
+  padding: 6px 8px;
+  margin: 0 4px;
+  border: 2px solid var(--muted);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+/* Correct + Incorrect Styles (DYNAMIC) */
+input.gap.correct {
+  border-color: var(--good);
+  background: #eafff1;
+  box-shadow: 0 0 10px rgba(46,204,113,.4);
+}
+input.gap.incorrect {
+  border-color: var(--bad);
+  background: #ffecec;
+  animation: shake 0.25s ease;
+}
+
+/* input shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(3px); }
+  50% { transform: translateX(-3px); }
+  75% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 600px) {
+  input.gap {
+    width: 80px;
+    font-size: 0.9rem;
+  }
+  .gap-line {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+}
+footer {
+  position: relative;
+  background: var(--band);
+  color: var(--paper);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 -4px 12px rgba(0,0,0,.3);
+}
+
+footer p {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.footer-nav a {
+  background: #1e1e1e;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow);
+}
+
+.footer-nav a:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,.35);
+}
+button.pdf-button { border: none; cursor: pointer; }
+
+/* ===========================================================
+   PAGE
+   =========================================================== */
+body { margin: 0; background: #0b0d0e; color: var(--paper); font-family: "Source Sans 3", system-ui, sans-serif; }
+
+/* ===========================================================
+   INTERACTIVE VIDEO  —  YouTube inside, our branding around it
+   =========================================================== */
+.iv {
+  position: relative;
+  width: min(94%, 900px);
+  margin: .5rem auto 0;
+}
+.iv-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.iv-stage #yt, .iv-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* the question card that appears over the paused video */
+.iv-pop {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(8,12,14,.72);
+  backdrop-filter: blur(3px);
+  animation: tile-fade .3s ease both;
+}
+.iv-pop[hidden] { display: none; }
+.iv-card {
+  width: min(100%, 560px);
+  max-height: 100%;
+  overflow-y: auto;
+  background: rgba(255,252,230,.97);
+  color: var(--ink);
+  border-radius: var(--radius);
+  border-top: 5px solid var(--highlight);
+  padding: 1.3rem 1.4rem 1.2rem;
+  animation: tile-rise .35s cubic-bezier(.16,.84,.34,1) both;
+}
+.iv-step {
+  margin: 0 0 .35rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.iv-q { margin: 0 0 1rem; font-family: "Source Serif 4", Georgia, serif; font-size: 1.25rem; line-height: 1.3; }
+.iv-options { display: grid; gap: .5rem; }
+.iv-opt {
+  text-align: left;
+  padding: .6rem .9rem;
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid rgba(15,23,42,.14);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+.iv-opt:hover { border-color: var(--accent); }
+.iv-opt.correct   { border-color: var(--good); background: #eafff1; }
+.iv-opt.incorrect { border-color: var(--bad);  background: #ffecec; animation: shake .25s ease; }
+.iv-opt:disabled { cursor: default; }
+.iv-type { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+.iv-type input.gap { width: 160px; margin: 0; }
+.iv-type .check-btn { margin-top: 0; }
+.iv-explain { margin: .9rem 0 0; min-height: 1.3em; font-size: .98rem; line-height: 1.45; }
+.iv-explain.good { color: #177a43; font-weight: 600; }
+.iv-explain.bad  { color: #b3261e; font-weight: 600; }
+.iv-actions { display: flex; justify-content: flex-end; gap: .6rem; margin-top: 1rem; }
+.check-btn.ghost { background: transparent; color: var(--ink); border: 1px solid rgba(15,23,42,.25); }
+.check-btn.ghost:hover { background: var(--ink); color: #fff; }
+
+/* the thin timeline under the video, with a dot for each question */
+.iv-track {
+  position: relative;
+  height: 26px;
+  margin: .9rem 4px 0;
+  cursor: pointer;
+}
+.iv-track::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 12px;
+  height: 2px;
+  background: rgba(255,255,255,.18);
+  border-radius: 2px;
+}
+.iv-fill {
+  position: absolute;
+  left: 0; top: 12px;
+  height: 2px;
+  width: 0;
+  background: var(--highlight);
+  border-radius: 2px;
+}
+.iv-dot {
+  position: absolute;
+  top: 5px;
+  width: 16px; height: 16px;
+  margin-left: -8px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--highlight);
+  background: #0b0d0e;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease;
+}
+.iv-dot:hover { transform: scale(1.25); }
+.iv-dot.done { background: var(--highlight); }
+.iv-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.iv-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .2rem;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.6);
+  font-variant-numeric: tabular-nums;
+}
+.iv-notice {
+  position: absolute; inset: 0; z-index: 6;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem;
+  padding: 1.5rem; text-align: center; background: #0b0d0e; color: var(--paper); font-size: 1.05rem; line-height: 1.5;
+}
+.iv-notice[hidden] { display: none; }
+.iv-notice strong { color: var(--highlight); }
+.iv-notice a { color: #0b0d0e; background: var(--highlight); padding: .5rem 1.1rem; border-radius: var(--radius); text-decoration: none; font-weight: 700; }
+.iv-fallback { padding: 1rem; color: var(--muted); text-align: center; }
+.iv-fallback a { color: var(--highlight); }
+
+/* after-listening card */
+select.gap { width: auto; min-width: 90px; background: #fff; cursor: pointer; }
+.bank { display: flex; flex-wrap: wrap; gap: .4rem; margin: .2rem 0 .8rem; }
+.bank span { padding: .15rem .6rem; border-radius: 999px; background: rgba(57,104,234,.1); color: var(--ink); font-size: .92rem; }
+.verb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 0 1.2rem; margin-bottom: .4rem; }
+.verb-grid .gap-line { margin: .3rem 0; white-space: nowrap; }
+.rule { background: rgba(57,104,234,.08); border-left: 4px solid var(--accent); border-radius: 8px;
+  padding: .7rem 1rem; margin: 0 0 1rem; color: var(--ink); line-height: 1.55; }
+.rule code { font-family: inherit; font-weight: 700; color: var(--accent); }
+input.gap.wide { width: 150px; }
+.sound-key { color: #475569; font-size: .95rem; margin: 0 0 .4rem; }
+.verse-card h2 + .lead { margin-top: -.3rem; }
+.lead { color: #475569; margin: 0 0 .6rem; }
+.gap-line { color: var(--ink); font-size: 1.08rem; }
+.discuss { margin: .3rem 0 0; padding-left: 1.2rem; color: var(--ink); line-height: 1.7; }
+.card-actions { margin-top: 1rem; text-align: center; }
+.card-actions .check-btn + .check-btn { margin-left: 8px; }
+
+@media (max-width: 600px) {
+  .iv { width: 100%; }
+  .iv-stage { border-radius: 0; }
+  .iv-track, .iv-meta { margin-inline: 16px; }
+  .iv-card { padding: 1rem; }
+  /* on a phone the video is too short to hold the card, so it sits underneath */
+  .iv-pop { position: static; aspect-ratio: auto; background: none; backdrop-filter: none; padding: .8rem 16px 0; }
+  .iv-q { font-size: 1.08rem; }
+  .iv-opt { padding: .5rem .7rem; font-size: .95rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .iv-pop, .iv-card { animation: none; }
+}
+
+/* ===========================================================
+   QR CODE — button in the top-left corner of the header
+   =========================================================== */
+.header-inner { display: flex; align-items: flex-start; gap: clamp(12px, 2vw, 20px); }
+.qr-btn {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 4px;
+  padding: 7px 11px;
+  background: rgba(255,255,255,.06);
+  color: var(--paper);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 10px;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.qr-btn svg { width: 20px; height: 20px; display: block; }
+.qr-btn:hover { background: var(--highlight); border-color: var(--highlight); color: #0b0d0e; }
+.qr-btn:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
+@media (max-width: 600px) {
+  .qr-btn { padding: 8px; margin-top: 2px; }
+  .qr-btn span { display: none; }
+}
+
+.qr-tile { width: min(92%, 380px); }
+.qr-box {
+  display: flex; justify-content: center; align-items: center;
+  width: 240px; height: 240px; margin: 0 auto;
+  padding: 12px; background: #fff; border-radius: 10px;
+  border: 1px solid rgba(15,23,42,.12);
+}
+.qr-box svg { width: 216px; height: 216px; display: block; }
+.qr-url {
+  margin: 1rem 0 0; font-size: .85rem; color: #475569;
+  word-break: break-all; line-height: 1.4;
+}
+.qr-status { min-height: 1.2em; margin: .4rem 0 0; font-size: .85rem; color: #177a43; font-weight: 600; }
+
+/* ===========================================================
+   SPONSOR A SONG — small space above the footer
+   =========================================================== */
+.sponsor-song {
+  max-width: 900px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+}
+.sponsor-song-inner {
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
+  gap: .4rem 1rem;
+  padding: .9rem 1.2rem;
+  border: 1px dashed rgba(253,224,71,.45);
+  border-radius: var(--radius);
+  background: rgba(253,224,71,.05);
+  text-align: center;
+  font-size: .95rem;
+  color: rgba(248,250,252,.8);
+}
+.sponsor-song-title {
+  margin: 0;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: .74rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--highlight);
+}
+.sponsor-song p { margin: 0; }
+.sponsor-song a { color: var(--highlight); font-weight: 600; text-underline-offset: 3px; }
+.sponsor-song a:hover { color: #fef08a; }
+footer { margin-top: 1.5rem; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="header-inner">
+      <button type="button" class="qr-btn" id="open-qr" aria-label="Show a QR code for this page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
+          <path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/>
+        </svg>
+        <span>QR</span>
+      </button>
+      <div class="brand">
+        <a href="index.html" class="brand-top">Modern English Au</a>
+        <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-label">Koala Spies Sydney</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="page-head">
+  <p class="kicker">Interactive Video · Story, Vocabulary &amp; the Present Perfect</p>
+  <h1>Sydney from a 747</h1>
+</section>
+
+<section class="page-tools">
+  <button type="button" class="pdf-button" id="open-instructions">ℹ️ Instructions</button>
+</section>
+
+<!-- ============================================================
+     INTERACTIVE VIDEO
+     The video plays from YouTube. The questions live in the
+     STOPS list inside the script at the bottom of this file.
+     ============================================================ -->
+<section class="iv" aria-label="Interactive video">
+  <div class="iv-stage">
+    <div id="yt">
+      <p class="iv-fallback">Loading the video…
+        <a href="https://www.youtube.com/watch?v=6kR0tTKXXDw" target="_blank" rel="noopener">Watch on YouTube</a></p>
+    </div>
+    <div class="iv-notice" id="iv-notice" hidden>
+      <p id="iv-notice-text"></p>
+      <a href="https://www.youtube.com/watch?v=6kR0tTKXXDw" target="_blank" rel="noopener">Watch on YouTube instead</a>
+    </div>
+  </div>
+
+  <div class="iv-pop" id="iv-pop" hidden>
+    <div class="iv-card" role="dialog" aria-modal="true" aria-labelledby="iv-q">
+      <p class="iv-step" id="iv-step">Question 1 of 8</p>
+      <p class="iv-q" id="iv-q"></p>
+      <div id="iv-answer"></div>
+      <p class="iv-explain" id="iv-explain" aria-live="polite"></p>
+      <div class="iv-actions">
+        <button type="button" class="check-btn ghost" id="iv-rewind">↺ Listen again</button>
+        <button type="button" class="check-btn" id="iv-continue" disabled>Continue ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="iv-track" id="iv-track" aria-label="Video progress">
+    <div class="iv-fill" id="iv-fill"></div>
+  </div>
+  <div class="iv-meta">
+    <span id="iv-time">0:00</span>
+    <span id="iv-score">0 / 8 answered</span>
+  </div>
+</section>
+
+<main>
+
+<section class="verse-card">
+  <h2>1 · The present perfect for experience</h2>
+  <div class="rule">
+    The song asks <em>Have you <strong>ever</strong> seen Sydney from a 747?</em> We use the present perfect to talk about
+    <strong>experiences in our life up to now</strong>, when the exact time isn’t important.<br>
+    <code>have / has</code> + <code>past participle</code><br>
+    <em>I’ve flown to Sydney.</em> &nbsp;·&nbsp; <em>She hasn’t been to Bondi.</em> &nbsp;·&nbsp; <em>Have you ever swum in the ocean?</em>
+  </div>
+  <p class="lead">Write the verbs in brackets in the present perfect.</p>
+
+  <p class="gap-line">I <input class="gap wide" data-answer="have seen|'ve seen"> (see) Sydney from the air, and it looks amazing at night.</p>
+  <p class="gap-line"><input class="gap" data-answer="have"> you ever <input class="gap" data-answer="flown"> (fly) on a 747?</p>
+  <p class="gap-line">She <input class="gap wide" data-answer="has been|'s been"> (be) to Bondi Beach three times.</p>
+  <p class="gap-line">We <input class="gap wide" data-answer="haven't swum|have not swum"> (not / swim) at Bondi yet — the water is too cold!</p>
+  <p class="gap-line">He <input class="gap wide" data-answer="has fallen|'s fallen"> (fall) in love with someone who lives far away.</p>
+  <p class="gap-line">I <input class="gap wide" data-answer="have written|'ve written"> (write) her so many letters.</p>
+  <p class="gap-line">They <input class="gap wide" data-answer="have spent|'ve spent"> (spend) all their savings on plane tickets.</p>
+  <p class="gap-line"><input class="gap" data-answer="has"> she ever <input class="gap" data-answer="left"> (leave) her job for love?</p>
+
+  <div class="card-actions">
+    <button class="check-btn">Check</button>
+    <button class="check-btn ghost show-btn">Show Answers</button>
+    <p class="feedback"></p>
+  </div>
+</section>
+
+<section class="verse-card">
+  <h2>2 · Past participles</h2>
+  <div class="rule">
+    <strong>Regular</strong> verbs add <code>-ed</code>: <em>land → landed</em>, <em>travel → travelled</em>.<br>
+    <strong>Irregular</strong> verbs change — you have to learn them: <em>see → saw → <strong>seen</strong></em>.
+  </div>
+  <p class="lead">Write the past participle (the third form) of each verb.</p>
+
+  <div class="verb-grid">
+    <p class="gap-line">see → <input class="gap" data-answer="seen"></p>
+    <p class="gap-line">fly → <input class="gap" data-answer="flown"></p>
+    <p class="gap-line">be → <input class="gap" data-answer="been"></p>
+    <p class="gap-line">fall → <input class="gap" data-answer="fallen"></p>
+    <p class="gap-line">write → <input class="gap" data-answer="written"></p>
+    <p class="gap-line">spend → <input class="gap" data-answer="spent"></p>
+    <p class="gap-line">leave → <input class="gap" data-answer="left"></p>
+    <p class="gap-line">take → <input class="gap" data-answer="taken"></p>
+    <p class="gap-line">wake → <input class="gap" data-answer="woken"></p>
+    <p class="gap-line">swim → <input class="gap" data-answer="swum"></p>
+    <p class="gap-line">buy → <input class="gap" data-answer="bought"></p>
+    <p class="gap-line">break → <input class="gap" data-answer="broken"></p>
+    <p class="gap-line">come → <input class="gap" data-answer="come"></p>
+    <p class="gap-line">land → <input class="gap" data-answer="landed"></p>
+    <p class="gap-line">quit → <input class="gap" data-answer="quit"></p>
+    <p class="gap-line">long → <input class="gap" data-answer="longed"></p>
+  </div>
+
+  <div class="card-actions">
+    <button class="check-btn">Check</button>
+    <button class="check-btn ghost show-btn">Show Answers</button>
+    <p class="feedback"></p>
+  </div>
+</section>
+
+<section class="verse-card">
+  <h2>3 · Present perfect or past simple?</h2>
+  <div class="rule">
+    <strong>Present perfect</strong> – life experience or unfinished time: <em>ever, never, yet, already, before, since, for</em>.<br>
+    <strong>Past simple</strong> – a finished time in the past: <em>yesterday, last year, in 2019, two days ago, when…</em><br>
+    <em>I’<strong>ve been</strong> to Sydney.</em> &nbsp;but&nbsp; <em>I <strong>went</strong> to Sydney last summer.</em>
+  </div>
+  <p class="lead">Choose the correct form.</p>
+
+  <p class="gap-line">I <select class="gap" data-answer="have never seen" aria-label="choose the verb"><option value="">?</option><option>never saw</option><option>have never seen</option></select> the Opera House at night.</p>
+  <p class="gap-line">Our plane <select class="gap" data-answer="landed" aria-label="choose the verb"><option value="">?</option><option>has landed</option><option>landed</option></select> at 6 o’clock this morning.</p>
+  <p class="gap-line"><select class="gap" data-answer="have you ever flown" aria-label="choose the verb"><option value="">?</option><option>did you ever fly</option><option>have you ever flown</option></select> on a jumbo jet?</p>
+  <p class="gap-line">He <select class="gap" data-answer="quit" aria-label="choose the verb"><option value="">?</option><option>has quit</option><option>quit</option></select> his job two weeks ago.</p>
+  <p class="gap-line">She <select class="gap" data-answer="has lived" aria-label="choose the verb"><option value="">?</option><option>lived</option><option>has lived</option></select> in Sydney since 2020.</p>
+  <p class="gap-line">When I <select class="gap" data-answer="was" aria-label="choose the verb"><option value="">?</option><option>have been</option><option>was</option></select> a child, I lived near the beach.</p>
+  <p class="gap-line">I <select class="gap" data-answer="have been" aria-label="choose the verb"><option value="">?</option><option>have been</option><option>was</option></select> to Bondi twice, but I can’t surf!</p>
+  <p class="gap-line">We <select class="gap" data-answer="wrote" aria-label="choose the verb"><option value="">?</option><option>have written</option><option>wrote</option></select> to each other every week in 2019.</p>
+
+  <div class="card-actions">
+    <button class="check-btn">Check</button>
+    <button class="check-btn ghost show-btn">Show Answers</button>
+    <p class="feedback"></p>
+  </div>
+</section>
+
+<section class="verse-card">
+  <h2>4 · Your turn · Have you ever…?</h2>
+  <p class="lead">Ask a partner. If they say <em>yes</em>, ask a follow-up question in the <strong>past simple</strong>:
+    <em>When did you go? What was it like?</em></p>
+  <ul class="discuss">
+    <li>Have you ever seen a city from a plane at night?</li>
+    <li>Have you ever been to Bondi Beach — or another famous beach?</li>
+    <li>Have you ever done something crazy for love?</li>
+    <li>Have you ever quit a job or left home for a big change?</li>
+    <li>Have you ever written a letter by hand?</li>
+  </ul>
+</section>
+
+<section class="verse-card">
+  <h2>Talk about it</h2>
+  <ul class="discuss">
+    <li>Is the singer happy about the trip, nervous, or both? Why do you think so?</li>
+    <li>Would you give up your job and spend all your savings to be with someone? Why / why not?</li>
+    <li>What is the best view you have ever seen?</li>
+    <li>Why do you think the song asks <em>Have you ever…?</em> and not <em>Did you…?</em></li>
+  </ul>
+</section>
+
+</main>
+
+<!-- ── SPONSOR A SONG ─────────────────────────────────────── -->
+<aside class="sponsor-song" aria-label="Sponsor a song">
+  <div class="sponsor-song-inner">
+    <p class="sponsor-song-title">Sponsor a song</p>
+    <p>Help keep this lesson free. Enquire at
+      <a href="mailto:modernenglishau@outlook.com?subject=Sponsor%20a%20song%20%E2%80%93%20Sydney%20from%20a%20747">modernenglishau@outlook.com</a></p>
+  </div>
+</aside>
+
+<footer>
+  <p>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</p>
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="dictation.html">Dictation &amp; Situations</a>
+    <a href="repeat.html">Repeat Sentence</a>
+    <a href="vocab.html">Vocabulary</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</footer>
+
+<div class="tile-backdrop" id="instructions-backdrop" hidden>
+  <div class="tile" role="dialog" aria-modal="true" aria-labelledby="instructions-title">
+    <button type="button" class="tile-close" id="close-instructions" aria-label="Close instructions">✕</button>
+    <h2 class="tile-title" id="instructions-title">Watch, listen, answer</h2>
+    <div class="tile-body">
+      <p>In <strong>Sydney from a 747</strong> (written by Paul Kelly, sung here by Merril Bainbridge), the singer looks down at
+         Sydney from a plane and remembers why they have come.</p>
+      <p>The video stops eight times with a question about the <strong>story</strong> and the <strong>vocabulary</strong>.
+         Answer it, then press <strong>Continue</strong>. The yellow dots under the video take you back to any question.</p>
+      <p>After the video, practise the <strong>present perfect</strong> and <strong>past participles</strong>.</p>
+      <p class="tile-task">Press play, and listen carefully.</p>
+    </div>
+    <div class="tile-actions">
+      <button type="button" class="tile-start" id="start-activity">Start the activity</button>
+    </div>
+  </div>
+</div>
+
+<!-- QR CODE POPUP -->
+<div class="tile-backdrop" id="qr-backdrop" hidden>
+  <div class="tile qr-tile" role="dialog" aria-modal="true" aria-labelledby="qr-title">
+    <button type="button" class="tile-close" id="close-qr" aria-label="Close QR code">✕</button>
+    <h2 class="tile-title" id="qr-title">Scan to open on your phone</h2>
+    <div class="qr-box" id="qr-box"></div>
+    <p class="qr-url" id="qr-url"></p>
+    <p class="qr-status" id="qr-status" aria-live="polite"></p>
+    <div class="tile-actions">
+      <button type="button" class="tile-start" id="qr-copy">Copy link</button>
+    </div>
+  </div>
+</div>
+
+<!-- QR Code Generator for JavaScript · (c) 2009 Kazuhiko Arase · MIT licence · built into the page so it needs no outside service -->
+<script>
+var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],f={},c=function(t,r){o=function(t){for(var r=new Array(t),e=0;e<t;e+=1){r[e]=new Array(t);for(var n=0;n<t;n+=1)r[e][n]=null}return r}(i=4*e+17),l(0,0),l(i-7,0),l(0,i-7),s(),h(),d(t,r),e>=7&&v(t),null==a&&(a=p(e,n,u)),w(a,r)},l=function(t,r){for(var e=-1;e<=7;e+=1)if(!(t+e<=-1||i<=t+e))for(var n=-1;n<=7;n+=1)r+n<=-1||i<=r+n||(o[t+e][r+n]=0<=e&&e<=6&&(0==n||6==n)||0<=n&&n<=6&&(0==e||6==e)||2<=e&&e<=4&&2<=n&&n<=4)},h=function(){for(var t=8;t<i-8;t+=1)null==o[t][6]&&(o[t][6]=t%2==0);for(var r=8;r<i-8;r+=1)null==o[6][r]&&(o[6][r]=r%2==0)},s=function(){for(var t=B.getPatternPosition(e),r=0;r<t.length;r+=1)for(var n=0;n<t.length;n+=1){var i=t[r],a=t[n];if(null==o[i][a])for(var u=-2;u<=2;u+=1)for(var f=-2;f<=2;f+=1)o[i+u][a+f]=-2==u||2==u||-2==f||2==f||0==u&&0==f}},v=function(t){for(var r=B.getBCHTypeNumber(e),n=0;n<18;n+=1){var a=!t&&1==(r>>n&1);o[Math.floor(n/3)][n%3+i-8-3]=a}for(n=0;n<18;n+=1){a=!t&&1==(r>>n&1);o[n%3+i-8-3][Math.floor(n/3)]=a}},d=function(t,r){for(var e=n<<3|r,a=B.getBCHTypeInfo(e),u=0;u<15;u+=1){var f=!t&&1==(a>>u&1);u<6?o[u][8]=f:u<8?o[u+1][8]=f:o[i-15+u][8]=f}for(u=0;u<15;u+=1){f=!t&&1==(a>>u&1);u<8?o[8][i-u-1]=f:u<9?o[8][15-u-1+1]=f:o[8][15-u-1]=f}o[i-8][8]=!t},w=function(t,r){for(var e=-1,n=i-1,a=7,u=0,f=B.getMaskFunction(r),c=i-1;c>0;c-=2)for(6==c&&(c-=1);;){for(var g=0;g<2;g+=1)if(null==o[n][c-g]){var l=!1;u<t.length&&(l=1==(t[u]>>>a&1)),f(n,c-g)&&(l=!l),o[n][c-g]=l,-1==(a-=1)&&(u+=1,a=7)}if((n+=e)<0||i<=n){n-=e,e=-e;break}}},p=function(t,r,e){for(var n=A.getRSBlocks(t,r),o=b(),i=0;i<e.length;i+=1){var a=e[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var u=0;for(i=0;i<n.length;i+=1)u+=n[i].dataCount;if(o.getLengthInBits()>8*u)throw"code length overflow. ("+o.getLengthInBits()+">"+8*u+")";for(o.getLengthInBits()+4<=8*u&&o.put(0,4);o.getLengthInBits()%8!=0;)o.putBit(!1);for(;!(o.getLengthInBits()>=8*u||(o.put(236,8),o.getLengthInBits()>=8*u));)o.put(17,8);return function(t,r){for(var e=0,n=0,o=0,i=new Array(r.length),a=new Array(r.length),u=0;u<r.length;u+=1){var f=r[u].dataCount,c=r[u].totalCount-f;n=Math.max(n,f),o=Math.max(o,c),i[u]=new Array(f);for(var g=0;g<i[u].length;g+=1)i[u][g]=255&t.getBuffer()[g+e];e+=f;var l=B.getErrorCorrectPolynomial(c),h=k(i[u],l.getLength()-1).mod(l);for(a[u]=new Array(l.getLength()-1),g=0;g<a[u].length;g+=1){var s=g+h.getLength()-a[u].length;a[u][g]=s>=0?h.getAt(s):0}}var v=0;for(g=0;g<r.length;g+=1)v+=r[g].totalCount;var d=new Array(v),w=0;for(g=0;g<n;g+=1)for(u=0;u<r.length;u+=1)g<i[u].length&&(d[w]=i[u][g],w+=1);for(g=0;g<o;g+=1)for(u=0;u<r.length;u+=1)g<a[u].length&&(d[w]=a[u][g],w+=1);return d}(o,n)};f.addData=function(t,r){var e=null;switch(r=r||"Byte"){case"Numeric":e=M(t);break;case"Alphanumeric":e=x(t);break;case"Byte":e=m(t);break;case"Kanji":e=L(t);break;default:throw"mode:"+r}u.push(e),a=null},f.isDark=function(t,r){if(t<0||i<=t||r<0||i<=r)throw t+","+r;return o[t][r]},f.getModuleCount=function(){return i},f.make=function(){if(e<1){for(var t=1;t<40;t++){for(var r=A.getRSBlocks(t,n),o=b(),i=0;i<u.length;i++){var a=u[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var g=0;for(i=0;i<r.length;i++)g+=r[i].dataCount;if(o.getLengthInBits()<=8*g)break}e=t}c(!1,function(){for(var t=0,r=0,e=0;e<8;e+=1){c(!0,e);var n=B.getLostPoint(f);(0==e||t>n)&&(t=n,r=e)}return r}())},f.createTableTag=function(t,r){t=t||2;var e="";e+='<table style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: "+(r=void 0===r?4*t:r)+"px;",e+='">',e+="<tbody>";for(var n=0;n<f.getModuleCount();n+=1){e+="<tr>";for(var o=0;o<f.getModuleCount();o+=1)e+='<td style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: 0px;",e+=" width: "+t+"px;",e+=" height: "+t+"px;",e+=" background-color: ",e+=f.isDark(n,o)?"#000000":"#ffffff",e+=";",e+='"/>';e+="</tr>"}return e+="</tbody>",e+="</table>"},f.createSvgTag=function(t,r,e,n){var o={};"object"==typeof arguments[0]&&(t=(o=arguments[0]).cellSize,r=o.margin,e=o.alt,n=o.title),t=t||2,r=void 0===r?4*t:r,(e="string"==typeof e?{text:e}:e||{}).text=e.text||null,e.id=e.text?e.id||"qrcode-description":null,(n="string"==typeof n?{text:n}:n||{}).text=n.text||null,n.id=n.text?n.id||"qrcode-title":null;var i,a,u,c,g=f.getModuleCount()*t+2*r,l="";for(c="l"+t+",0 0,"+t+" -"+t+",0 0,-"+t+"z ",l+='<svg version="1.1" xmlns="http://www.w3.org/2000/svg"',l+=o.scalable?"":' width="'+g+'px" height="'+g+'px"',l+=' viewBox="0 0 '+g+" "+g+'" ',l+=' preserveAspectRatio="xMinYMin meet"',l+=n.text||e.text?' role="img" aria-labelledby="'+y([n.id,e.id].join(" ").trim())+'"':"",l+=">",l+=n.text?'<title id="'+y(n.id)+'">'+y(n.text)+"</title>":"",l+=e.text?'<description id="'+y(e.id)+'">'+y(e.text)+"</description>":"",l+='<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>',l+='<path d="',a=0;a<f.getModuleCount();a+=1)for(u=a*t+r,i=0;i<f.getModuleCount();i+=1)f.isDark(a,i)&&(l+="M"+(i*t+r)+","+u+c);return l+='" stroke="transparent" fill="black"/>',l+="</svg>"},f.createDataURL=function(t,r){t=t||2,r=void 0===r?4*t:r;var e=f.getModuleCount()*t+2*r,n=r,o=e-r;return I(e,e,function(r,e){if(n<=r&&r<o&&n<=e&&e<o){var i=Math.floor((r-n)/t),a=Math.floor((e-n)/t);return f.isDark(a,i)?0:1}return 1})},f.createImgTag=function(t,r,e){t=t||2,r=void 0===r?4*t:r;var n=f.getModuleCount()*t+2*r,o="";return o+="<img",o+=' src="',o+=f.createDataURL(t,r),o+='"',o+=' width="',o+=n,o+='"',o+=' height="',o+=n,o+='"',e&&(o+=' alt="',o+=y(e),o+='"'),o+="/>"};var y=function(t){for(var r="",e=0;e<t.length;e+=1){var n=t.charAt(e);switch(n){case"<":r+="&lt;";break;case">":r+="&gt;";break;case"&":r+="&amp;";break;case'"':r+="&quot;";break;default:r+=n}}return r};return f.createASCII=function(t,r){if((t=t||1)<2)return function(t){t=void 0===t?2:t;var r,e,n,o,i,a=1*f.getModuleCount()+2*t,u=t,c=a-t,g={"██":"█","█ ":"▀"," █":"▄","  ":" "},l={"██":"▀","█ ":"▀"," █":" ","  ":" "},h="";for(r=0;r<a;r+=2){for(n=Math.floor((r-u)/1),o=Math.floor((r+1-u)/1),e=0;e<a;e+=1)i="█",u<=e&&e<c&&u<=r&&r<c&&f.isDark(n,Math.floor((e-u)/1))&&(i=" "),u<=e&&e<c&&u<=r+1&&r+1<c&&f.isDark(o,Math.floor((e-u)/1))?i+=" ":i+="█",h+=t<1&&r+1>=c?l[i]:g[i];h+="\n"}return a%2&&t>0?h.substring(0,h.length-a-1)+Array(a+1).join("▀"):h.substring(0,h.length-1)}(r);t-=1,r=void 0===r?2*t:r;var e,n,o,i,a=f.getModuleCount()*t+2*r,u=r,c=a-r,g=Array(t+1).join("██"),l=Array(t+1).join("  "),h="",s="";for(e=0;e<a;e+=1){for(o=Math.floor((e-u)/t),s="",n=0;n<a;n+=1)i=1,u<=n&&n<c&&u<=e&&e<c&&f.isDark(o,Math.floor((n-u)/t))&&(i=0),s+=i?g:l;for(o=0;o<t;o+=1)h+=s+"\n"}return h.substring(0,h.length-1)},f.renderTo2dContext=function(t,r){r=r||2;for(var e=f.getModuleCount(),n=0;n<e;n++)for(var o=0;o<e;o++)t.fillStyle=f.isDark(n,o)?"black":"white",t.fillRect(n*r,o*r,r,r)},f};t.stringToBytes=(t.stringToBytesFuncs={default:function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);r.push(255&n)}return r}}).default,t.createStringToBytes=function(t,r){var e=function(){for(var e=S(t),n=function(){var t=e.read();if(-1==t)throw"eof";return t},o=0,i={};;){var a=e.read();if(-1==a)break;var u=n(),f=n()<<8|n();i[String.fromCharCode(a<<8|u)]=f,o+=1}if(o!=r)throw o+" != "+r;return i}(),n="?".charCodeAt(0);return function(t){for(var r=[],o=0;o<t.length;o+=1){var i=t.charCodeAt(o);if(i<128)r.push(i);else{var a=e[t.charAt(o)];"number"==typeof a?(255&a)==a?r.push(a):(r.push(a>>>8),r.push(255&a)):r.push(n)}}return r}};var r,e,n,o,i,a=1,u=2,f=4,c=8,g={L:1,M:0,Q:3,H:2},l=0,h=1,s=2,v=3,d=4,w=5,p=6,y=7,B=(r=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],e=1335,n=7973,i=function(t){for(var r=0;0!=t;)r+=1,t>>>=1;return r},(o={}).getBCHTypeInfo=function(t){for(var r=t<<10;i(r)-i(e)>=0;)r^=e<<i(r)-i(e);return 21522^(t<<10|r)},o.getBCHTypeNumber=function(t){for(var r=t<<12;i(r)-i(n)>=0;)r^=n<<i(r)-i(n);return t<<12|r},o.getPatternPosition=function(t){return r[t-1]},o.getMaskFunction=function(t){switch(t){case l:return function(t,r){return(t+r)%2==0};case h:return function(t,r){return t%2==0};case s:return function(t,r){return r%3==0};case v:return function(t,r){return(t+r)%3==0};case d:return function(t,r){return(Math.floor(t/2)+Math.floor(r/3))%2==0};case w:return function(t,r){return t*r%2+t*r%3==0};case p:return function(t,r){return(t*r%2+t*r%3)%2==0};case y:return function(t,r){return(t*r%3+(t+r)%2)%2==0};default:throw"bad maskPattern:"+t}},o.getErrorCorrectPolynomial=function(t){for(var r=k([1],0),e=0;e<t;e+=1)r=r.multiply(k([1,C.gexp(e)],0));return r},o.getLengthInBits=function(t,r){if(1<=r&&r<10)switch(t){case a:return 10;case u:return 9;case f:case c:return 8;default:throw"mode:"+t}else if(r<27)switch(t){case a:return 12;case u:return 11;case f:return 16;case c:return 10;default:throw"mode:"+t}else{if(!(r<41))throw"type:"+r;switch(t){case a:return 14;case u:return 13;case f:return 16;case c:return 12;default:throw"mode:"+t}}},o.getLostPoint=function(t){for(var r=t.getModuleCount(),e=0,n=0;n<r;n+=1)for(var o=0;o<r;o+=1){for(var i=0,a=t.isDark(n,o),u=-1;u<=1;u+=1)if(!(n+u<0||r<=n+u))for(var f=-1;f<=1;f+=1)o+f<0||r<=o+f||0==u&&0==f||a==t.isDark(n+u,o+f)&&(i+=1);i>5&&(e+=3+i-5)}for(n=0;n<r-1;n+=1)for(o=0;o<r-1;o+=1){var c=0;t.isDark(n,o)&&(c+=1),t.isDark(n+1,o)&&(c+=1),t.isDark(n,o+1)&&(c+=1),t.isDark(n+1,o+1)&&(c+=1),0!=c&&4!=c||(e+=3)}for(n=0;n<r;n+=1)for(o=0;o<r-6;o+=1)t.isDark(n,o)&&!t.isDark(n,o+1)&&t.isDark(n,o+2)&&t.isDark(n,o+3)&&t.isDark(n,o+4)&&!t.isDark(n,o+5)&&t.isDark(n,o+6)&&(e+=40);for(o=0;o<r;o+=1)for(n=0;n<r-6;n+=1)t.isDark(n,o)&&!t.isDark(n+1,o)&&t.isDark(n+2,o)&&t.isDark(n+3,o)&&t.isDark(n+4,o)&&!t.isDark(n+5,o)&&t.isDark(n+6,o)&&(e+=40);var g=0;for(o=0;o<r;o+=1)for(n=0;n<r;n+=1)t.isDark(n,o)&&(g+=1);return e+=Math.abs(100*g/r/r-50)/5*10},o),C=function(){for(var t=new Array(256),r=new Array(256),e=0;e<8;e+=1)t[e]=1<<e;for(e=8;e<256;e+=1)t[e]=t[e-4]^t[e-5]^t[e-6]^t[e-8];for(e=0;e<255;e+=1)r[t[e]]=e;var n={glog:function(t){if(t<1)throw"glog("+t+")";return r[t]},gexp:function(r){for(;r<0;)r+=255;for(;r>=256;)r-=255;return t[r]}};return n}();function k(t,r){if(void 0===t.length)throw t.length+"/"+r;var e=function(){for(var e=0;e<t.length&&0==t[e];)e+=1;for(var n=new Array(t.length-e+r),o=0;o<t.length-e;o+=1)n[o]=t[o+e];return n}(),n={getAt:function(t){return e[t]},getLength:function(){return e.length},multiply:function(t){for(var r=new Array(n.getLength()+t.getLength()-1),e=0;e<n.getLength();e+=1)for(var o=0;o<t.getLength();o+=1)r[e+o]^=C.gexp(C.glog(n.getAt(e))+C.glog(t.getAt(o)));return k(r,0)},mod:function(t){if(n.getLength()-t.getLength()<0)return n;for(var r=C.glog(n.getAt(0))-C.glog(t.getAt(0)),e=new Array(n.getLength()),o=0;o<n.getLength();o+=1)e[o]=n.getAt(o);for(o=0;o<t.getLength();o+=1)e[o]^=C.gexp(C.glog(t.getAt(o))+r);return k(e,0).mod(t)}};return n}var A=function(){var t=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12,7,37,13],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],r=function(t,r){var e={};return e.totalCount=t,e.dataCount=r,e},e={};return e.getRSBlocks=function(e,n){var o=function(r,e){switch(e){case g.L:return t[4*(r-1)+0];case g.M:return t[4*(r-1)+1];case g.Q:return t[4*(r-1)+2];case g.H:return t[4*(r-1)+3];default:return}}(e,n);if(void 0===o)throw"bad rs block @ typeNumber:"+e+"/errorCorrectionLevel:"+n;for(var i=o.length/3,a=[],u=0;u<i;u+=1)for(var f=o[3*u+0],c=o[3*u+1],l=o[3*u+2],h=0;h<f;h+=1)a.push(r(c,l));return a},e}(),b=function(){var t=[],r=0,e={getBuffer:function(){return t},getAt:function(r){var e=Math.floor(r/8);return 1==(t[e]>>>7-r%8&1)},put:function(t,r){for(var n=0;n<r;n+=1)e.putBit(1==(t>>>r-n-1&1))},getLengthInBits:function(){return r},putBit:function(e){var n=Math.floor(r/8);t.length<=n&&t.push(0),e&&(t[n]|=128>>>r%8),r+=1}};return e},M=function(t){var r=a,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+2<r.length;)t.put(o(r.substring(n,n+3)),10),n+=3;n<r.length&&(r.length-n==1?t.put(o(r.substring(n,n+1)),4):r.length-n==2&&t.put(o(r.substring(n,n+2)),7))}},o=function(t){for(var r=0,e=0;e<t.length;e+=1)r=10*r+i(t.charAt(e));return r},i=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);throw"illegal char :"+t};return n},x=function(t){var r=u,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+1<r.length;)t.put(45*o(r.charAt(n))+o(r.charAt(n+1)),11),n+=2;n<r.length&&t.put(o(r.charAt(n)),6)}},o=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);if("A"<=t&&t<="Z")return t.charCodeAt(0)-"A".charCodeAt(0)+10;switch(t){case" ":return 36;case"$":return 37;case"%":return 38;case"*":return 39;case"+":return 40;case"-":return 41;case".":return 42;case"/":return 43;case":":return 44;default:throw"illegal char :"+t}};return n},m=function(r){var e=f,n=t.stringToBytes(r),o={getMode:function(){return e},getLength:function(t){return n.length},write:function(t){for(var r=0;r<n.length;r+=1)t.put(n[r],8)}};return o},L=function(r){var e=c,n=t.stringToBytesFuncs.SJIS;if(!n)throw"sjis not supported.";!function(){var t=n("友");if(2!=t.length||38726!=(t[0]<<8|t[1]))throw"sjis not supported."}();var o=n(r),i={getMode:function(){return e},getLength:function(t){return~~(o.length/2)},write:function(t){for(var r=o,e=0;e+1<r.length;){var n=(255&r[e])<<8|255&r[e+1];if(33088<=n&&n<=40956)n-=33088;else{if(!(57408<=n&&n<=60351))throw"illegal char at "+(e+1)+"/"+n;n-=49472}n=192*(n>>>8&255)+(255&n),t.put(n,13),e+=2}if(e<r.length)throw"illegal char at "+(e+1)}};return i},D=function(){var t=[],r={writeByte:function(r){t.push(255&r)},writeShort:function(t){r.writeByte(t),r.writeByte(t>>>8)},writeBytes:function(t,e,n){e=e||0,n=n||t.length;for(var o=0;o<n;o+=1)r.writeByte(t[o+e])},writeString:function(t){for(var e=0;e<t.length;e+=1)r.writeByte(t.charCodeAt(e))},toByteArray:function(){return t},toString:function(){var r="";r+="[";for(var e=0;e<t.length;e+=1)e>0&&(r+=","),r+=t[e];return r+="]"}};return r},S=function(t){var r=t,e=0,n=0,o=0,i={read:function(){for(;o<8;){if(e>=r.length){if(0==o)return-1;throw"unexpected end of file./"+o}var t=r.charAt(e);if(e+=1,"="==t)return o=0,-1;t.match(/^\s$/)||(n=n<<6|a(t.charCodeAt(0)),o+=6)}var i=n>>>o-8&255;return o-=8,i}},a=function(t){if(65<=t&&t<=90)return t-65;if(97<=t&&t<=122)return t-97+26;if(48<=t&&t<=57)return t-48+52;if(43==t)return 62;if(47==t)return 63;throw"c:"+t};return i},I=function(t,r,e){for(var n=function(t,r){var e=t,n=r,o=new Array(t*r),i={setPixel:function(t,r,n){o[r*e+t]=n},write:function(t){t.writeString("GIF87a"),t.writeShort(e),t.writeShort(n),t.writeByte(128),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(255),t.writeByte(255),t.writeByte(255),t.writeString(","),t.writeShort(0),t.writeShort(0),t.writeShort(e),t.writeShort(n),t.writeByte(0);var r=a(2);t.writeByte(2);for(var o=0;r.length-o>255;)t.writeByte(255),t.writeBytes(r,o,255),o+=255;t.writeByte(r.length-o),t.writeBytes(r,o,r.length-o),t.writeByte(0),t.writeString(";")}},a=function(t){for(var r=1<<t,e=1+(1<<t),n=t+1,i=u(),a=0;a<r;a+=1)i.add(String.fromCharCode(a));i.add(String.fromCharCode(r)),i.add(String.fromCharCode(e));var f,c,g,l=D(),h=(f=l,c=0,g=0,{write:function(t,r){if(t>>>r!=0)throw"length over";for(;c+r>=8;)f.writeByte(255&(t<<c|g)),r-=8-c,t>>>=8-c,g=0,c=0;g|=t<<c,c+=r},flush:function(){c>0&&f.writeByte(g)}});h.write(r,n);var s=0,v=String.fromCharCode(o[s]);for(s+=1;s<o.length;){var d=String.fromCharCode(o[s]);s+=1,i.contains(v+d)?v+=d:(h.write(i.indexOf(v),n),i.size()<4095&&(i.size()==1<<n&&(n+=1),i.add(v+d)),v=d)}return h.write(i.indexOf(v),n),h.write(e,n),h.flush(),l.toByteArray()},u=function(){var t={},r=0,e={add:function(n){if(e.contains(n))throw"dup key:"+n;t[n]=r,r+=1},size:function(){return r},indexOf:function(r){return t[r]},contains:function(r){return void 0!==t[r]}};return e};return i}(t,r),o=0;o<r;o+=1)for(var i=0;i<t;i+=1)n.setPixel(i,o,e(i,o));var a=D();n.write(a);for(var u=function(){var t=0,r=0,e=0,n="",o={},i=function(t){n+=String.fromCharCode(a(63&t))},a=function(t){if(t<0);else{if(t<26)return 65+t;if(t<52)return t-26+97;if(t<62)return t-52+48;if(62==t)return 43;if(63==t)return 47}throw"n:"+t};return o.writeByte=function(n){for(t=t<<8|255&n,r+=8,e+=1;r>=6;)i(t>>>r-6),r-=6},o.flush=function(){if(r>0&&(i(t<<6-r),t=0,r=0),e%3!=0)for(var o=3-e%3,a=0;a<o;a+=1)n+="="},o.toString=function(){return n},o}(),f=a.toByteArray(),c=0;c<f.length;c+=1)u.writeByte(f[c]);return u.flush(),"data:image/gif;base64,"+u};return t}();qrcode.stringToBytesFuncs["UTF-8"]=function(t){return function(t){for(var r=[],e=0;e<t.length;e++){var n=t.charCodeAt(e);n<128?r.push(n):n<2048?r.push(192|n>>6,128|63&n):n<55296||n>=57344?r.push(224|n>>12,128|n>>6&63,128|63&n):(e++,n=65536+((1023&n)<<10|1023&t.charCodeAt(e)),r.push(240|n>>18,128|n>>12&63,128|n>>6&63,128|63&n))}return r}(t)},function(t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports&&(module.exports=t())}(function(){return qrcode});
+</script>
+<script>
+// =====================================================================
+// QR CODE — makes a code for whatever address this page is on
+// =====================================================================
+(function () {
+  const backdrop = document.getElementById("qr-backdrop");
+  const box      = document.getElementById("qr-box");
+  const urlEl    = document.getElementById("qr-url");
+  const status   = document.getElementById("qr-status");
+  const openBtn  = document.getElementById("open-qr");
+  const url      = location.href.split("#")[0];
+  let made = false, lastFocused = null;
+
+  function makeCode() {
+    if (made) return;
+    urlEl.textContent = url;
+    try {
+      const qr = qrcode(0, "M");
+      qr.addData(url);
+      qr.make();
+      box.innerHTML = qr.createSvgTag(4, 0);
+      made = true;
+    } catch (err) {
+      box.textContent = "QR code couldn’t load — use Copy link instead.";
+    }
+  }
+  function open() {
+    lastFocused = document.activeElement;
+    makeCode();
+    status.textContent = "";
+    backdrop.hidden = false;
+    document.body.style.overflow = "hidden";
+    document.getElementById("close-qr").focus();
+  }
+  function close() {
+    backdrop.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+  openBtn.addEventListener("click", open);
+  document.getElementById("close-qr").addEventListener("click", close);
+  backdrop.addEventListener("click", e => { if (e.target === backdrop) close(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !backdrop.hidden) close(); });
+  document.getElementById("qr-copy").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(url); status.textContent = "Link copied."; }
+    catch (err) { status.textContent = "Select the address above to copy it."; }
+  });
+})();
+
+// =====================================================================
+// THE QUESTIONS
+// time   = when the video stops (in seconds — 1:05 is 65)
+// type   = "choice" (buttons) or "type" (student writes the answer)
+// Edit freely. Check the times against the video before publishing.
+// =====================================================================
+const VIDEO_ID = "6kR0tTKXXDw";
+
+const STOPS = [
+  { time: 25, type: "choice",
+    q: "Where is the singer at the start of the song?",
+    options: ["On a boat in Sydney Harbour", "On a plane flying into Sydney", "On a train to Melbourne", "At home in Sydney"],
+    answer: 1,
+    explain: "The singer is in a plane, looking down at Sydney through the window." },
+
+  { time: 45, type: "choice",
+    q: "Vocabulary: a ‘747’ is…",
+    options: ["a small private plane", "a big passenger plane (a ‘jumbo jet’)", "a helicopter", "a flight number"],
+    answer: 1,
+    explain: "The Boeing 747 is a very large passenger plane, often called a jumbo jet." },
+
+  { time: 65, type: "choice",
+    q: "What time of day is it when the plane first flies over the city?",
+    options: ["Midday", "Late afternoon", "Night — the city lights are on", "Early evening, at sunset"],
+    answer: 2,
+    explain: "It’s night. The singer sees the city lit up below, while most people are still asleep." },
+
+  { time: 85, type: "choice",
+    q: "Vocabulary: Bondi is…",
+    options: ["a famous beach in Sydney", "a type of plane", "the name of the pilot", "a bridge in Sydney"],
+    answer: 0,
+    explain: "Bondi is one of Sydney’s most famous beaches, known for surfing." },
+
+  { time: 105, type: "choice",
+    q: "Vocabulary: in surfing, ‘the break’ is…",
+    options: ["a rest between songs", "the place where the waves break (fall over)", "a broken surfboard", "the end of the holiday"],
+    answer: 1,
+    explain: "The break is where the waves fall over and surfers ride them." },
+
+  { time: 125, type: "choice",
+    q: "The sun comes up and the plane gets ready to land. How does the singer feel?",
+    options: ["Tired after a long night flight", "Angry with the captain", "Bored and asleep", "Sick and scared of flying"],
+    answer: 0,
+    explain: "After flying all night, the singer is very tired — and ready to land." },
+
+  { time: 150, type: "choice",
+    q: "Why has the singer come to Sydney?",
+    options: ["For a new job", "To go surfing at Bondi", "To be with someone they have fallen in love with", "To visit their parents"],
+    answer: 2,
+    explain: "The singer fell for someone, wrote them letters, then left everything behind to go to them." },
+
+  { time: 175, type: "type",
+    q: "Vocabulary: the singer spent all their ______ on a plane ticket. (the money you keep in the bank — one word)",
+    answer: "savings|saving|money",
+    explain: "Savings = money you have kept and not spent. Spending all your savings is a big risk!" }
+];
+
+// =====================================================================
+// INTERACTIVE VIDEO — uses YouTube's own player, so the video stays
+// on YouTube (their licence, no space on your site).
+// =====================================================================
+let player = null;
+let lastTime = 0;
+let activeStop = -1;
+const done = new Array(STOPS.length).fill(false);
+
+const pop      = document.getElementById("iv-pop");
+const stepEl   = document.getElementById("iv-step");
+const qEl      = document.getElementById("iv-q");
+const ansEl    = document.getElementById("iv-answer");
+const explainEl= document.getElementById("iv-explain");
+const contBtn  = document.getElementById("iv-continue");
+const rewindBtn= document.getElementById("iv-rewind");
+const track    = document.getElementById("iv-track");
+const fill     = document.getElementById("iv-fill");
+const timeEl   = document.getElementById("iv-time");
+const scoreEl  = document.getElementById("iv-score");
+
+function clock(s) {
+  if (!isFinite(s)) return "0:00";
+  return Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+}
+
+function updateScore() {
+  scoreEl.textContent = done.filter(Boolean).length + " / " + STOPS.length + " answered";
+}
+
+// load YouTube's player script
+(function () {
+  const s = document.createElement("script");
+  s.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(s);
+})();
+
+function showNotice(html) {
+  document.getElementById("iv-notice-text").innerHTML = html;
+  document.getElementById("iv-notice").hidden = false;
+}
+
+const onWebsite = location.protocol === "https:" || location.protocol === "http:";
+
+window.onYouTubeIframeAPIReady = function () {
+  const vars = { rel: 0, playsinline: 1, enablejsapi: 1 };
+  if (onWebsite) vars.origin = location.origin;   // lets the page talk to the player
+
+  player = new YT.Player("yt", {
+    videoId: VIDEO_ID,
+    host: "https://www.youtube.com",
+    playerVars: vars,
+    events: {
+      onReady: buildTrack,
+      onError: e => {
+        if (e.data === 101 || e.data === 150) {
+          showNotice("The video’s owner doesn’t allow it to play on other websites, so the questions can’t run here.");
+        } else if (!onWebsite || e.data === 153) {
+          showNotice("<strong>Open this page from your website</strong> (for example on GitHub Pages).<br>YouTube won’t play embedded videos from a file on your computer.");
+        } else {
+          showNotice("The video couldn’t load (YouTube error " + e.data + ").");
+        }
+      }
+    }
+  });
+  setInterval(tick, 250);
+};
+
+// opened straight from the computer: YouTube will refuse, so say so up front
+if (!onWebsite) {
+  showNotice("<strong>Open this page from your website</strong> (for example on GitHub Pages).<br>YouTube won’t play embedded videos from a file on your computer, so the questions can’t pop up.");
+}
+
+function buildTrack() {
+  const dur = player.getDuration() || 200;
+  // a stop set past the end of the video moves to just before the end
+  STOPS.forEach(s => { if (s.time > dur - 2) s.time = Math.max(dur - 2, 0); });
+  STOPS.forEach((stop, i) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "iv-dot";
+    dot.style.left = (stop.time / dur * 100) + "%";
+    dot.setAttribute("aria-label", "Question " + (i + 1) + " at " + clock(stop.time));
+    dot.addEventListener("click", e => {
+      e.stopPropagation();
+      player.seekTo(stop.time, true);
+      lastTime = stop.time;
+      openStop(i);
+    });
+    track.appendChild(dot);
+    stop.dot = dot;
+  });
+}
+
+// click the line to jump
+track.addEventListener("click", e => {
+  if (!player || !player.getDuration) return;
+  const box = track.getBoundingClientRect();
+  const t = (e.clientX - box.left) / box.width * player.getDuration();
+  player.seekTo(t, true);
+  lastTime = t;
+});
+
+function tick() {
+  if (!player || !player.getCurrentTime) return;
+  const t = player.getCurrentTime();
+  const dur = player.getDuration() || 0;
+  fill.style.width = dur ? (t / dur * 100) + "%" : "0";
+  timeEl.textContent = clock(t) + (dur ? " / " + clock(dur) : "");
+
+  if (activeStop === -1 && player.getPlayerState() === YT.PlayerState.PLAYING) {
+    // stop at an unanswered question the video has just played past
+    const i = STOPS.findIndex((s, n) => !done[n] && lastTime < s.time && t >= s.time && t - s.time < 2);
+    if (i !== -1) openStop(i);
+  }
+  lastTime = t;
+}
+
+function openStop(i) {
+  const stop = STOPS[i];
+  activeStop = i;
+  if (player && player.pauseVideo) player.pauseVideo();
+
+  stepEl.textContent = "Question " + (i + 1) + " of " + STOPS.length;
+  qEl.textContent = stop.q;
+  explainEl.textContent = "";
+  explainEl.className = "iv-explain";
+  contBtn.disabled = !done[i];
+  ansEl.innerHTML = "";
+
+  if (stop.type === "choice") {
+    const wrap = document.createElement("div");
+    wrap.className = "iv-options";
+    stop.options.forEach((text, n) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "iv-opt";
+      b.textContent = text;
+      b.addEventListener("click", () => {
+        if (n === stop.answer) {
+          wrap.querySelectorAll(".iv-opt").forEach(o => o.disabled = true);
+          b.classList.add("correct");
+          markDone(i, true);
+        } else {
+          b.classList.add("incorrect");
+          b.disabled = true;
+          explainEl.textContent = "Not quite — try again.";
+          explainEl.className = "iv-explain bad";
+        }
+      });
+      if (done[i] && n === stop.answer) { b.classList.add("correct"); }
+      if (done[i]) b.disabled = true;
+      wrap.appendChild(b);
+    });
+    ansEl.appendChild(wrap);
+  } else {
+    const row = document.createElement("div");
+    row.className = "iv-type";
+    const input = document.createElement("input");
+    input.className = "gap";
+    input.setAttribute("aria-label", "Your answer");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "check-btn";
+    btn.textContent = "Check";
+    const check = () => {
+      if (matches(input.value, stop.answer)) {
+        input.classList.add("correct"); input.classList.remove("incorrect");
+        input.disabled = true; btn.disabled = true;
+        markDone(i, true);
+      } else {
+        input.classList.remove("incorrect"); void input.offsetWidth; input.classList.add("incorrect");
+        explainEl.textContent = "Not quite — listen again and try once more.";
+        explainEl.className = "iv-explain bad";
+      }
+    };
+    btn.addEventListener("click", check);
+    input.addEventListener("keydown", e => {
+      // preventDefault stops the same Enter press from also clicking Continue
+      if (e.key === "Enter") { e.preventDefault(); check(); }
+    });
+    if (done[i]) { input.value = stop.answer.split("|")[0]; input.classList.add("correct"); input.disabled = true; btn.disabled = true; }
+    row.append(input, btn);
+    ansEl.appendChild(row);
+  }
+
+  if (done[i]) { explainEl.textContent = stop.explain; explainEl.className = "iv-explain good"; }
+  pop.hidden = false;
+  (ansEl.querySelector("button, input") || contBtn).focus();
+}
+
+function markDone(i) {
+  done[i] = true;
+  explainEl.textContent = "Correct! " + STOPS[i].explain;
+  explainEl.className = "iv-explain good";
+  contBtn.disabled = false;
+  if (STOPS[i].dot) STOPS[i].dot.classList.add("done");
+  updateScore();
+  contBtn.focus();
+}
+
+contBtn.addEventListener("click", () => {
+  const i = activeStop;
+  pop.hidden = true;
+  activeStop = -1;
+  if (player && player.playVideo) {
+    lastTime = STOPS[i].time + 0.5;
+    player.seekTo(STOPS[i].time + 0.5, true);
+    player.playVideo();
+  }
+});
+
+rewindBtn.addEventListener("click", () => {
+  const i = activeStop;
+  pop.hidden = true;
+  activeStop = -1;
+  if (player && player.playVideo) {
+    const back = Math.max(STOPS[i].time - 15, 0);
+    lastTime = back;
+    player.seekTo(back, true);
+    player.playVideo();
+  }
+});
+
+updateScore();
+
+// =====================================================================
+// ANSWER MATCHING — "a|b" in data-answer accepts either; spaces and
+// curly apostrophes don't matter
+// =====================================================================
+function norm(s) { return s.trim().toLowerCase().replace(/[’‘]/g, "'").replace(/\s+/g, " "); }
+function matches(value, answer) { return answer.split("|").some(a => norm(a) === norm(value)); }
+
+// =====================================================================
+// AFTER-LISTENING CARD — Check / Show Answers
+// =====================================================================
+document.querySelectorAll(".verse-card").forEach(card => {
+  const button = card.querySelector(".check-btn");
+  const feedback = card.querySelector(".feedback");
+  const gaps = card.querySelectorAll(".gap");
+  if (!button || !gaps.length) return;
+
+  gaps.forEach(input => ["input", "change"].forEach(ev => input.addEventListener(ev, () => {
+    const ok = matches(input.value, input.dataset.answer);
+    input.classList.toggle("correct", ok);
+    input.classList.remove("incorrect");
+  })));
+
+  button.addEventListener("click", () => {
+    let score = 0;
+    gaps.forEach(input => {
+      const ok = matches(input.value, input.dataset.answer);
+      input.classList.toggle("correct", ok);
+      input.classList.toggle("incorrect", !ok);
+      if (ok) score++;
+    });
+    feedback.textContent = score === gaps.length
+      ? `All ${gaps.length} correct — nice work.`
+      : `${score} / ${gaps.length} correct. Try the red ones again.`;
+  });
+});
+
+document.querySelectorAll(".show-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const card = btn.closest(".verse-card");
+    card.querySelectorAll(".gap").forEach(input => {
+      input.value = input.dataset.answer.split("|")[0];
+      input.classList.add("correct");
+      input.classList.remove("incorrect");
+      input.disabled = true;
+    });
+    card.querySelector(".feedback").textContent = "All answers revealed.";
+  });
+});
+
+// =====================================================================
+// INSTRUCTIONS TILE — opens on load; ℹ️ reopens it
+// =====================================================================
+const tileBackdrop = document.getElementById("instructions-backdrop");
+if (tileBackdrop) {
+  const openBtn  = document.getElementById("open-instructions");
+  const closeBtn = document.getElementById("close-instructions");
+  const startBtn = document.getElementById("start-activity");
+  let lastFocused = null;
+
+  function openTile() {
+    lastFocused = document.activeElement;
+    tileBackdrop.hidden = false;
+    document.body.style.overflow = "hidden";
+    if (startBtn) startBtn.focus();
+  }
+  function closeTile() {
+    tileBackdrop.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+  openBtn.addEventListener("click", openTile);
+  closeBtn.addEventListener("click", closeTile);
+  startBtn.addEventListener("click", closeTile);
+  tileBackdrop.addEventListener("click", e => { if (e.target === tileBackdrop) closeTile(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !tileBackdrop.hidden) closeTile(); });
+  openTile();
+}
+</script>
+
+</body>
+</html>
