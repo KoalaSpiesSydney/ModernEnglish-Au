@@ -6,6 +6,11 @@
   <title>Learn English with Music · Modern English Australia</title>
   <meta name="description" content="Free listening activities built around original songs — gap-fills, tenses, prepositions. Modern English Australia · Koala Spies Sydney.">
 
+  <!-- ═══ ADSENSE LOADER — uncomment once approved, with your publisher ID ═══
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+          crossorigin="anonymous"></script>
+  ═══════════════════════════════════════════════════════════════════ -->
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -426,7 +431,99 @@
       font-size: 0.9rem;
     }
 
+    /* ===========================================================
+       AD SPACES — one after every third song
+       =========================================================== */
+    .ad-space { margin: 6px 0; }
+    .ad-label {
+      display: block;
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    /* Your own shop — a tall, narrow card, centred between the songs */
+    .shop-promo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 280px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      background: var(--header);
+      color: var(--header-ink);
+      border-radius: 10px;
+      border-top: 4px solid var(--highlight);
+      padding: 18px 18px 20px;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(15,23,42,0.14);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .shop-promo:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(15,23,42,0.24); }
+    .shop-img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: contain;
+      display: block;
+      background: #fff;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+    .shop-name {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 1.25rem;
+      line-height: 1.2;
+    }
+    .shop-by {
+      display: block;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--highlight);
+      margin: 5px 0 10px;
+    }
+    .shop-desc { display: block; font-size: .9rem; line-height: 1.5; color: rgba(248,250,252,.78); margin-bottom: 16px; }
+    .shop-btn {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      background: var(--highlight);
+      color: #1c1c1c;
+      font-weight: 700;
+      font-size: .9rem;
+      padding: 8px 14px;
+      border-radius: 6px;
+    }
+    .shop-promo:hover .shop-btn { background: #fef08a; }
+
+    /* Google AdSense slot.
+       .ad-mock is only a grey stand-in — delete it when you paste in
+       the real <ins class="adsbygoogle"> code from the comment above it. */
+    .ad-mock {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+      width: 100%; max-width: 728px; height: 100px; margin: 0 auto;
+      background: repeating-linear-gradient(45deg, #eef1f5 0 12px, #e6eaf0 12px 24px);
+      border: 1px dashed #b6c0cd; border-radius: 6px;
+      color: #64748b; font-size: .85rem; line-height: 1.3;
+    }
+    .ad-mock strong { color: #475569; }
+
+    @media (max-width: 620px) {
+      .ad-mock { height: 250px; max-width: 336px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
+      .shop-promo { transition: none; }
+      .shop-promo:hover { transform: none; }
       body, header::before, .brand-top { animation: none; }
       .brand-top { -webkit-text-fill-color: var(--header-ink); }
     }
@@ -515,8 +612,36 @@
       <div class="av-langs">English · Español · Português</div>
     </a>
 
+    <!-- ═══ AD SPACE 1 (after song 3): your own shop ═══════════ -->
+    <aside class="ad-space" aria-label="From our shop">
+      <span class="ad-label">From our shop</span>
+      <a class="shop-promo" href="https://justine.deco-apparel.com/" target="_blank" rel="noopener">
+        <img class="shop-img"
+             src="https://cdn.myportfolio.com/c930201a-c696-4b08-a062-486be8e0eeb3/5ee1deff-a2d5-4b71-8059-c924b6ae6ece_rw_1200.png?h=69acc53b25a5bb479c7246f91c6dc704"
+             alt="Black t-shirt printed with Koala in a Tiger Onesie, a painting by Justine Kelly"
+             width="260" height="347" loading="lazy">
+        <span class="shop-name">No Name Jus Tine</span>
+        <span class="shop-by">Koala Spies art &amp; t-shirts</span>
+        <span class="shop-desc">Original artwork on t-shirts and apparel. Every purchase helps keep these lessons free.</span>
+        <span class="shop-btn">Visit the shop →</span>
+      </a>
+    </aside>
+
+    <!-- ─── 4. present perfect ─── -->
+    <a class="av-card" href="sydneyfroma747.html">
+      <strong>Sydney from a 747 by Paul Kelly — The Present Perfect for Experience</strong>
+      <div class="av-meta">Theme: Australian pop · Level: A2–B1 · Pre-intermediate · Interactive video</div>
+      <div class="av-desc">
+        How to use: watch the video and it stops eight times to ask about the story and the vocabulary
+        (a 747, Bondi, the break, savings). Then practise <strong>Have you ever…?</strong> with the
+        present perfect, past participles, and when to choose the past simple instead — and finish by
+        asking a partner about their own experiences.
+      </div>
+      <div class="av-langs">Present perfect · Past participles · Present perfect vs past simple</div>
+    </a>
+
         <a class="av-card" href="waltzingmatilda.html">
-      <strong>Waltzing Matilida by Slim Dusty — Story telling in the past tense</strong>
+      <strong>Waltzing Matilda by Slim Dusty — Story telling in the past tense</strong>
       <div class="av-meta">Theme: Australian Folk Song · Level: A1–A2 · Elementary</div>
       <div class="av-desc">
         How to use: a slow reggae beat with one preposition to the bar, so beginners have time to hear
@@ -525,7 +650,7 @@
       <div class="av-langs">Place · Time · Movement</div>
     </a>
 
-    
+
 
             <a class="av-card" href="ifiwereaboy.html">
       <strong>If I Were A Boy by Beyonce —  2nd Relative Clause</strong>
@@ -536,6 +661,22 @@
       </div>
       <div class="av-langs">Place · Time · Movement</div>
     </a>
+
+    <!-- ═══ AD SPACE 2 (after song 6): Google AdSense ══════════
+         Live version — replace the .ad-mock div with:
+
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="1111111111"
+           data-ad-format="horizontal"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    ═══════════════════════════════════════════════════════════ -->
+    <aside class="ad-space" aria-label="Advertisement">
+      <span class="ad-label">Advertisement</span>
+      <div class="ad-mock"><strong>Google AdSense</strong>Responsive banner</div>
+    </aside>
 
     <!-- ════════════════════════════════════════════════════════
          NOT BUILT YET.
@@ -549,42 +690,47 @@
 
     <div class="av-card soon">
       <span class="soon-tag">Coming soon</span>
-      <strong>Song 4 — title to come</strong>
-      <div class="av-meta">Theme: XXX · Level: XX</div>
-      <div class="av-desc">How to use: one or two lines saying what the song practises and what the
-        student does. Replace this text when the activity is ready.</div>
-    </div>
-
-    <div class="av-card soon">
-      <span class="soon-tag">Coming soon</span>
-      <strong>Song 5 — title to come</strong>
-      <div class="av-meta">Theme: XXX · Level: XX</div>
-      <div class="av-desc">How to use: one or two lines saying what the song practises and what the
-        student does. Replace this text when the activity is ready.</div>
-    </div>
-
-    <div class="av-card soon">
-      <span class="soon-tag">Coming soon</span>
-      <strong>Song 6 — title to come</strong>
-      <div class="av-meta">Theme: XXX · Level: XX</div>
-      <div class="av-desc">How to use: one or two lines saying what the song practises and what the
-        student does. Replace this text when the activity is ready.</div>
-    </div>
-
-    <div class="av-card soon">
-      <span class="soon-tag">Coming soon</span>
       <strong>Song 7 — title to come</strong>
       <div class="av-meta">Theme: XXX · Level: XX</div>
       <div class="av-desc">How to use: one or two lines saying what the song practises and what the
         student does. Replace this text when the activity is ready.</div>
     </div>
 
+    <div class="av-card soon">
+      <span class="soon-tag">Coming soon</span>
+      <strong>Song 8 — title to come</strong>
+      <div class="av-meta">Theme: XXX · Level: XX</div>
+      <div class="av-desc">How to use: one or two lines saying what the song practises and what the
+        student does. Replace this text when the activity is ready.</div>
+    </div>
+
+    <div class="av-card soon">
+      <span class="soon-tag">Coming soon</span>
+      <strong>Song 9 — title to come</strong>
+      <div class="av-meta">Theme: XXX · Level: XX</div>
+      <div class="av-desc">How to use: one or two lines saying what the song practises and what the
+        student does. Replace this text when the activity is ready.</div>
+    </div>
+
+    <!-- ═══ AD SPACE 3 (after song 9): Google AdSense ══════════
+         Live version — replace the .ad-mock div with the same code as
+         Ad Space 2, but using a second ad unit ID (data-ad-slot).
+         For more songs, keep the pattern: one ad after every third.
+    ═══════════════════════════════════════════════════════════ -->
+    <aside class="ad-space" aria-label="Advertisement">
+      <span class="ad-label">Advertisement</span>
+      <div class="ad-mock"><strong>Google AdSense</strong>Responsive banner</div>
+    </aside>
+
+    <div class="av-card soon">
+      <span class="soon-tag">Coming soon</span>
+      <strong>Song 10 — title to come</strong>
+      <div class="av-meta">Theme: XXX · Level: XX</div>
+      <div class="av-desc">How to use: one or two lines saying what the song practises and what the
+        student does. Replace this text when the activity is ready.</div>
+    </div>
+
   </div>
-
-  <!-- ============================================================
-       Not a song — kept here so the link still works. Move this
-       block to another page whenever you are ready.
-
 
 </main>
 
@@ -709,3 +855,4 @@
 
 </body>
 </html>
+
