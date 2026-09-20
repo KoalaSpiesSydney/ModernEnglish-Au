@@ -971,9 +971,9 @@ const VIDEO_ID = "6kR0tTKXXDw";
 
 const STOPS = [
   { time: 25, type: "choice",
-    q: "Where is the singer at the start of the song?",
-    options: ["On a boat in Sydney Harbour", "On a plane flying into Sydney", "On a train to Melbourne", "At home in Sydney"],
-    answer: 1,
+    q: "What is the woman looking at?",
+    options: ["Sydney Harbour & the Opera House", "Another Plane", "Uluru", "her phone"],
+    answer: 0,
     explain: "The singer is in a plane, looking down at Sydney through the window." },
 
   { time: 45, type: "choice",
@@ -983,15 +983,15 @@ const STOPS = [
     explain: "The Boeing 747 is a very large passenger plane, often called a jumbo jet." },
 
   { time: 65, type: "choice",
-    q: "What time of day is it when the plane first flies over the city?",
-    options: ["Midday", "Late afternoon", "Night — the city lights are on", "Early evening, at sunset"],
-    answer: 2,
+    q: "Why does she use 'have you ever'?",
+    options: ["to tell about the past", "to ask a question about experience", "she doesn't have good grammar", "to ask about the future"],
+    answer: 1,
     explain: "It’s night. The singer sees the city lit up below, while most people are still asleep." },
 
   { time: 85, type: "choice",
-    q: "Vocabulary: Bondi is…",
-    options: ["a famous beach in Sydney", "a type of plane", "the name of the pilot", "a bridge in Sydney"],
-    answer: 0,
+    q: "Vocabulary: Where does she see Bondi beach ",
+    options: [" in front of her", "behind her", "to the right", "to the left"],
+    answer: 2,
     explain: "Bondi is one of Sydney’s most famous beaches, known for surfing." },
 
   { time: 105, type: "choice",
@@ -1000,11 +1000,6 @@ const STOPS = [
     answer: 1,
     explain: "The break is where the waves fall over and surfers ride them." },
 
-  { time: 125, type: "choice",
-    q: "The sun comes up and the plane gets ready to land. How does the singer feel?",
-    options: ["Tired after a long night flight", "Angry with the captain", "Bored and asleep", "Sick and scared of flying"],
-    answer: 0,
-    explain: "After flying all night, the singer is very tired — and ready to land." },
 
   { time: 150, type: "choice",
     q: "Why has the singer come to Sydney?",
@@ -1012,10 +1007,6 @@ const STOPS = [
     answer: 2,
     explain: "The singer fell for someone, wrote them letters, then left everything behind to go to them." },
 
-  { time: 175, type: "type",
-    q: "Vocabulary: the singer spent all their ______ on a plane ticket. (the money you keep in the bank — one word)",
-    answer: "savings|saving|money",
-    explain: "Savings = money you have kept and not spent. Spending all your savings is a big risk!" }
 ];
 
 // =====================================================================
