@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CAE Use of English Mini-test: Media theme &ndash; Part 4 Key Word Transformations</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#faf6ec;
+      --bg2:#f2ece0;
+      --card:#fffdf6;
+      --card2:#faf6ea;
+
+      --ink:#1e2630;
+      --muted:#5b6672;
+      --line:rgba(30,38,48,.14);
+
+      --shadow:0 8px 22px rgba(80,66,40,.10);
+      --radius:16px;
+
+      --ok:#1f7a55;
+      --err:#c0392b;
+
+      --accent:#8a5530;
+      --accent-soft:#6b3f22;
+      --accent-line:rgba(138,85,48,.30);
+      --accent-wash:rgba(138,85,48,.12);
+
+      --content: 980px;
+      --pad: clamp(14px, 3.6vw, 22px);
+    }
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; margin:0; }
+
+body{
+  font-family:"Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(165,111,74,.10), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(165,111,74,.07), transparent 55%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
+  color:var(--ink);
+  line-height:1.75;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  padding-bottom:118px;
+}
+
+header{
+  position:sticky; top:0; z-index:20;
+  background: rgba(255,253,246,.92);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:saturate(140%) blur(8px);
+}
+.header-inner{
+  max-width: var(--content);
+  margin:0 auto;
+  padding: 18px var(--pad);
+  text-align:center;
+  position:relative;
+}
+.brand{
+  font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color: var(--accent-soft);
+  font-size: clamp(0.85rem, 2.4vw, 1rem);
+  margin: 0 0 6px;
+}
+header h1{
+  margin:0;
+  font-size: clamp(1.2rem, 4.6vw, 1.85rem);
+  font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+  line-height:1.2; color: var(--ink);
+}
+
+h2{
+  margin:0 0 10px 0;
+  color: var(--accent-soft);
+  font-size:clamp(1.25rem,4.2vw,1.7rem);
+  text-align:center; font-weight:800;
+}
+h3{ margin:1.3rem 0 .55rem; color:var(--ink); font-size:1.15rem; }
+p{ margin: 0 0 1rem; color:var(--ink); font-size: 1.05rem; }
+em{ color:var(--muted); }
+.lead{ color:var(--muted); margin:.25rem 0; font-size:1.02rem; }
+.instructions{ color:var(--muted); margin-top:.25rem; font-size:1.02rem; }
+
+strong{
+  color: var(--accent-soft);
+  font-weight:800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+.submit-block{
+  margin-top:1.6rem; padding:1rem;
+  border:1px solid var(--line); border-radius:var(--radius);
+  background: rgba(30,38,48,0.03);
+}
+.submit-row{
+  display:flex; gap:12px; flex-wrap:wrap;
+  align-items:center; justify-content:space-between;
+}
+.score-pill{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.55rem .95rem; border-radius:999px;
+  border:1px solid var(--line); background: rgba(30,38,48,0.05);
+  font-weight:900; min-height:46px;
+}
+.score-pill b{ color: var(--accent-soft); }
+.actions{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+.btn{
+  background: var(--accent); color:#fff; border:none; border-radius:12px;
+  padding:.75rem 1.15rem; cursor:pointer;
+  font: inherit; font-size:.98rem; font-weight:900; min-height:46px;
+  transition: transform .15s ease, filter .2s ease;
+}
+.btn:hover{ transform:translateY(-1px); filter:brightness(1.06); }
+.btn-ghost{
+  background: rgba(30,38,48,0.05);
+  color: var(--accent-soft);
+  border:1px solid var(--line);
+}
+.btn-ghost:hover{ background: rgba(30,38,48,0.09); filter:none; }
+
+.notice{ margin-top:.75rem; color:var(--muted); font-size:.98rem; }
+
+#answerKey{
+  margin-top:.95rem; display:none;
+  border-top:1px solid var(--line); padding-top:.95rem; color:var(--muted);
+}
+.key-grid{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+  gap:.65rem 1rem; margin-top:.75rem; font-size:1rem;
+}
+.key-grid div{
+  border:1px solid var(--line); background: rgba(30,38,48,0.03);
+  border-radius:12px; padding:10px; color:var(--muted);
+}
+.key-grid strong{ text-decoration:none; color:var(--ink); }
+
+.bottom-nav{
+  position:fixed; bottom:0; left:0; right:0;
+  background: rgba(255,253,246,.95);
+  border-top:1px solid var(--line);
+  display:flex; justify-content:space-around; align-items:center;
+  padding:0.75rem 0.5rem;
+  box-shadow:0 -2px 12px rgba(80,66,40,0.10);
+  z-index:1000;
+  backdrop-filter:saturate(140%) blur(8px);
+}
+.bottom-nav a{
+  color: var(--accent-soft); text-decoration:none;
+  font-weight:900; font-size:0.98rem;
+  padding:0.65rem 0.6rem; border-radius:12px;
+  text-align:center; flex:1; margin:0 4px;
+  border:1px solid var(--accent-line);
+  min-height:46px; display:flex; align-items:center; justify-content:center;
+  transition: background-color .2s ease, transform .15s ease;
+}
+.bottom-nav a:hover{ background: var(--accent-wash); transform:translateY(-1px); }
+
+@media (max-width:600px){
+  body{ padding-bottom:132px; }
+  .submit-row{ justify-content:center; }
+  .score-pill{ width:100%; justify-content:center; }
+  .actions{ width:100%; }
+  .btn{ width:100%; }
+  .bottom-nav a{ font-size:0.9rem; padding:0.55rem 0.4rem; }
+  .key-grid{ grid-template-columns:1fr; }
+}
+
+@media print{
+  header,.submit-block,.bottom-nav,.ad-space{ display:none; }
+  body{ background:#fff; color:#000; padding-bottom:0; }
+  .container,.wrapper{ box-shadow:none; border:1px solid #ccc; background:#fff; }
+}
+
+
+.wrapper{
+  width:min(94%, 920px);
+  margin: clamp(14px, 4vw, 28px) auto;
+  background: linear-gradient(180deg, var(--card), var(--card2));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding: clamp(18px, 4.8vw, 40px);
+}
+.sub{
+  text-align:center; color:var(--muted);
+  margin:0 0 1rem 0; font-weight:700;
+  font-size: clamp(.98rem, 3vw, 1.08rem);
+}
+p.instructions{ margin:0 0 1.25rem 0; color:var(--muted); font-size: clamp(1rem, 3vw, 1.08rem); }
+
+.question-block{
+  margin-top:14px;
+  background: rgba(30,38,48,0.03);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+}
+.question-head{
+  display:flex; gap:.75rem; align-items:flex-start;
+  justify-content:space-between; flex-wrap:wrap; margin-bottom:8px;
+}
+.question-number{ font-weight:900; color:var(--accent-soft); letter-spacing:.06em; font-size:1.02rem; }
+.marks{ font-size:.78rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+.word-given{
+  font-weight:900; letter-spacing:.14em; color:var(--accent-soft);
+  text-transform:uppercase; font-size:.92rem;
+  border:1px solid var(--accent-line); background:#fff;
+  padding:.3rem .6rem; border-radius:999px; white-space:nowrap;
+}
+.sentence{ margin:6px 0; color:var(--ink); font-size: clamp(1.02rem, 2.8vw, 1.08rem); }
+
+.answer-input{
+  width:100%; margin-top:10px; padding:12px; font-size:1.05rem;
+  border:1px solid var(--line); border-radius:12px;
+  background:#fff; color:var(--ink); outline:none;
+  min-height:46px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.answer-input::placeholder{ color: rgba(91,102,114,.70); }
+.answer-input:focus{ border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
+.answer-input.correct{
+  border-color:var(--ok); box-shadow:0 0 0 3px rgba(31,122,85,.16);
+  background: rgba(31,122,85,.08); font-weight:800;
+}
+.answer-input.wrong{ border-color:var(--err); box-shadow:0 0 0 3px rgba(192,57,43,.14); }
+.answer-input:disabled{ cursor:not-allowed; opacity:1; color:var(--ink); }
+
+.counter{ margin-top:6px; font-size:.86rem; color:var(--muted); }
+.counter.over{ color:var(--err); font-weight:800; }
+
+.example{ border-left:5px solid var(--accent); }
+.example .answer-input{
+  font-weight:800; color:var(--accent-soft);
+  background:#fff; border-color:var(--accent-line); box-shadow:none;
+}
+
+@media (max-width:600px){
+  .wrapper{ margin:12px auto; padding:18px 16px; }
+  .question-block{ padding:12px; }
+}
+
+
+    /* ===== QR tile + ad space ===== */
+    .qr-tile{
+      position:absolute;
+      top:14px;
+      left: var(--pad);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:6px 6px 4px;
+      cursor:pointer;
+      line-height:0;
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .qr-tile:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(80,66,40,.18); }
+    .qr-tile canvas{ display:block; image-rendering:pixelated; }
+    .qr-tile .qr-cap{
+      margin:3px 0 0;
+      font-size:7.5px;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      font-weight:700;
+      color:#6b7280;
+      text-align:center;
+      line-height:1.2;
+    }
+
+    .ad-space{
+      width:min(92%, 900px);
+      margin: 10px auto 0;
+      padding: 18px 20px;
+      text-align:center;
+      border:1px dashed rgba(30,38,48,.28);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.45);
+    }
+    .ad-space .ad-k{
+      margin:0 0 6px;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:800;
+      color:var(--muted);
+    }
+    .ad-space p{ margin:0 0 12px; color:var(--ink); font-weight:700; }
+    .ad-space a{
+      display:inline-block;
+      text-decoration:none;
+      font-weight:800;
+      font-size:.95rem;
+      padding:9px 18px;
+      border-radius:12px;
+      color:#fff;
+      background: var(--accent);
+    }
+    .ad-space a:hover{ filter:brightness(1.06); }
+
+    .qr-backdrop{
+      position:fixed; inset:0; z-index:2000;
+      display:grid; place-items:center; padding:20px;
+      background: rgba(30,26,18,.55);
+    }
+    .qr-backdrop[hidden]{ display:none; }
+    .qr-modal{
+      position:relative;
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      width:100%;
+      max-width:420px;
+      text-align:center;
+    }
+    .qr-modal h3{ margin:0 0 14px; font-size:1.1rem; font-weight:800; color:var(--ink); }
+    .qr-modal canvas{
+      display:block; margin:0 auto 14px; background:#fff;
+      border:1px solid var(--line); border-radius:10px; padding:10px;
+      image-rendering:pixelated;
+    }
+    .qr-modal input{
+      width:100%; font:inherit; font-size:.95rem; font-weight:600;
+      padding:9px 12px; border:1px solid var(--line); border-radius:12px;
+      background:#fff; color:var(--ink); outline:none;
+    }
+    .qr-modal input:focus{ border-color: var(--accent); }
+    .qr-modal .qr-row{ display:flex; gap:10px; justify-content:center; margin-top:14px; flex-wrap:wrap; }
+    .qr-modal .qr-err{ margin:8px 0 0; min-height:18px; font-size:.9rem; color:var(--err); }
+    .qr-modal .qr-x{
+      position:absolute; top:8px; right:12px;
+      border:0; background:none; cursor:pointer;
+      font-size:22px; line-height:1; color:var(--muted);
+    }
+    .qr-modal .qr-x:hover{ color:var(--ink); }
+
+    @media (max-width:520px){
+      .qr-tile{ position:static; display:inline-block; margin:0 0 10px; }
+    }
+
+    /* Keep the centred title clear of the QR tile / home button */
+    @media (min-width:521px){
+      .header-inner{ padding-left:104px; padding-right:104px; }
+    }
+    .back-link{
+      min-height:44px;
+      display:inline-flex !important;
+      align-items:center;
+      justify-content:center;
+    }
+    @media (max-width:520px){
+      .header-inner{ padding-left:var(--pad); padding-right:var(--pad); }
+    }
+
+    /* ===== 10-minute countdown timer ===== */
+    .timer{
+      position:absolute;
+      top:14px;
+      right: var(--pad);
+      display:inline-flex; align-items:center; gap:.55rem;
+      padding:.35rem .85rem;
+      min-height:46px;
+      border:1px solid var(--accent-line);
+      border-radius:999px;
+      background:#fff;
+      box-shadow:0 2px 10px rgba(80,66,40,.10);
+      transition: background-color .25s ease, border-color .25s ease;
+    }
+    .timer-label{
+      font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
+      font-weight:800; color:var(--muted); line-height:1;
+    }
+    .timer-clock{
+      font-weight:900; font-size:1.08rem; letter-spacing:.04em;
+      color:var(--accent-soft); line-height:1;
+      font-variant-numeric: tabular-nums;
+    }
+    .timer.warn{ border-color:rgba(192,57,43,.45); background:rgba(192,57,43,.07); }
+    .timer.warn .timer-clock{ color:var(--err); }
+    .timer.over{ border-color:rgba(192,57,43,.60); background:rgba(192,57,43,.12); }
+    .timer.over .timer-clock{ color:var(--err); }
+    .timer.done{ border-color:rgba(31,122,85,.50); background:rgba(31,122,85,.09); }
+    .timer.done .timer-clock{ color:var(--ok); }
+    .timer.idle{ background:rgba(30,38,48,.03); }
+    .timer.idle .timer-clock{ color:var(--muted); }
+    .timer-btn{
+      font: inherit; font-size:.72rem; font-weight:900;
+      letter-spacing:.1em; text-transform:uppercase;
+      border:1px solid var(--accent-line); border-radius:999px;
+      background:var(--accent); color:#fff;
+      padding:.32rem .72rem; cursor:pointer; line-height:1.15;
+      transition: filter .2s ease, transform .15s ease;
+    }
+    .timer-btn:hover{ filter:brightness(1.08); transform:translateY(-1px); }
+    .timer-btn[hidden]{ display:none; }
+
+    /* Give the centred title room for the QR tile (left) and timer (right) */
+    @media (min-width:521px){
+      .header-inner{ padding-left:104px; padding-right:168px; }
+    }
+    @media (max-width:520px){
+      .timer{ position:static; display:inline-flex; margin:0 0 10px 10px; vertical-align:top; }
+    }
+    @media print{ .timer{ display:none; } }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <button class="qr-tile" id="qrTile" aria-label="QR code for this page">
+      <canvas id="qrMini"></canvas>
+      <p class="qr-cap">Scan</p>
+    </button>
+
+    <div class="timer" id="timerBox" role="timer" aria-label="Time remaining">
+      <span class="timer-label">Time</span>
+      <span class="timer-clock" id="timerClock">10:00</span>
+      <button type="button" class="timer-btn" id="timerStart">Start</button>
+    </div>
+
+    <div class="brand">Modern English Australia</div>
+    <h1>CAE Use of English Mini-test<br>Media Theme</h1>
+  </div>
+</header>
+
+<main class="wrapper">
+  <h2>Part 4 &middot; Key Word Transformations</h2>
+  <p class="sub">Sentence Transformations</p>
+
+  <p class="instructions">
+    For questions <strong>25&ndash;30</strong>, complete the second sentence so that it has a similar meaning to the first sentence,
+    using the word given. <strong>Do not change the word given.</strong> You must use between <strong>three and six words</strong>,
+    including the word given. Two marks for each question. Suggested time: 10 minutes.
+  </p>
+
+  <section class="question-block example">
+    <div class="question-head">
+      <div class="question-number">Example: 0</div>
+      <div class="word-given">ON</div>
+    </div>
+    <div class="sentence">James would only speak to the head of department alone.</div>
+    <div class="sentence">
+      James insisted
+      <input type="text" class="answer-input" value="on speaking" readonly />
+      to the head of department alone.
+    </div>
+  </section>
+
+  <section class="question-block">
+    <div class="question-head">
+      <div><span class="question-number">25</span> &nbsp;<span class="marks">2 marks</span></div>
+      <div class="word-given">MAY</div>
+    </div>
+    <div class="sentence">The CEO said, &ldquo;It is possible that the meeting will be postponed until after Christmas.&rdquo;</div>
+    <div class="sentence">
+      The meeting
+      <input type="text" class="answer-input" id="q25" data-key="MAY" placeholder="Your answer here" aria-label="Answer 25" />
+      <div class="counter" id="c25">0 words</div>
+      until after Christmas.
+    </div>
+  </section>
+
+  <section class="question-block">
+    <div class="question-head">
+      <div><span class="question-number">26</span> &nbsp;<span class="marks">2 marks</span></div>
+      <div class="word-given">RECOMMENDED</div>
+    </div>
+    <div class="sentence">&ldquo;You should try the new Italian restaurant in town,&rdquo; she said.</div>
+    <div class="sentence">
+      She
+      <input type="text" class="answer-input" id="q26" data-key="RECOMMENDED" placeholder="Your answer here" aria-label="Answer 26" />
+      <div class="counter" id="c26">0 words</div>
+      Italian restaurant in town.
+    </div>
+  </section>
+
+  <section class="question-block">
+    <div class="question-head">
+      <div><span class="question-number">27</span> &nbsp;<span class="marks">2 marks</span></div>
+      <div class="word-given">ADVISED</div>
+    </div>
+    <div class="sentence">&ldquo;If you want to improve, you should practise every day,&rdquo; the coach told the players.</div>
+    <div class="sentence">
+      The coach
+      <input type="text" class="answer-input" id="q27" data-key="ADVISED" placeholder="Your answer here" aria-label="Answer 27" />
+      <div class="counter" id="c27">0 words</div>
+      every day in order to improve.
+    </div>
+  </section>
+
+  <section class="question-block">
+    <div class="question-head">
+      <div><span class="question-number">28</span> &nbsp;<span class="marks">2 marks</span></div>
+      <div class="word-given">COMPLAINED</div>
+    </div>
+    <div class="sentence">&ldquo;The order arrived late,&rdquo; the client said.</div>
+    <div class="sentence">
+      The client
+      <input type="text" class="answer-input" id="q28" data-key="COMPLAINED" placeholder="Your answer here" aria-label="Answer 28" />
+      <div class="counter" id="c28">0 words</div>
+      arriving late.
+    </div>
+  </section>
+
+  <section class="question-block">
+    <div class="question-head">
+      <div><span class="question-number">29</span> &nbsp;<span class="marks">2 marks</span></div>
+      <div class="word-given">ON</div>
+    </div>
+    <div class="sentence">Although it was raining, they continued with the match.</div>
+    <div class="sentence">
+      They
+      <input type="text" class="answer-input" id="q29" data-key="ON" placeholder="Your answer here" aria-label="Answer 29" />
+      <div class="counter" id="c29">0 words</div>
+      the match despite the rain.
+    </div>
+  </section>
+
+  <section class="question-block">
+    <div class="question-head">
+      <div><span class="question-number">30</span> &nbsp;<span class="marks">2 marks</span></div>
+      <div class="word-given">SOONER</div>
+    </div>
+    <div class="sentence">The meeting ended and the arguments began immediately.</div>
+    <div class="sentence">
+      No
+      <input type="text" class="answer-input" id="q30" data-key="SOONER" placeholder="Your answer here" aria-label="Answer 30" />
+      <div class="counter" id="c30">0 words</div>
+      than the arguments began.
+    </div>
+  </section>
+
+  <section class="submit-block" aria-label="Submit answers and score">
+    <div class="submit-row">
+      <div class="score-pill">Score: <b id="scoreText">&mdash;</b></div>
+      <div class="actions">
+        <button type="button" class="btn" id="submitBtn">Submit answers</button>
+        <button type="button" class="btn btn-ghost" id="tryAgainBtn">Try again</button>
+        <button type="button" class="btn btn-ghost" id="toggleKeyBtn">Show answer key</button>
+      </div>
+    </div>
+
+    <div class="notice" id="noticeText">
+      Submit to score. Correct answers will lock. Incorrect answers stay editable.
+    </div>
+
+    <div id="answerKey">
+      <strong>Acceptable answers</strong>
+      <div class="key-grid" id="keyGrid"></div>
+      <div class="notice" style="margin-top:0.7rem;">
+        In the real exam an answer outside the three-to-six word limit scores zero, and the word given
+        must appear exactly as printed. Partial credit of one mark is possible; this page awards two or nothing.
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<section class="ad-space" aria-label="Advertising">
+  <p class="ad-k">Advertising</p>
+  <p>Sponsor or promote here</p>
+  <a href="https://modernenglish.au/contact.html">Contact modernenglish.au</a>
+</section>
+
+
+<nav class="bottom-nav" aria-label="Bottom navigation">
+  <a href="CAE-Use-of-English-Mini-test-Media-theme.html">Home</a>
+  <a href="CAE-Use-of-English-Mini-test-Media-theme-part-1.html">Part 1</a>
+  <a href="CAE-Use-of-English-Mini-test-Media-theme-part-2.html">Part 2</a>
+  <a href="CAE-Use-of-English-Mini-test-Media-theme-part-3.html">Part 3</a>
+  <a href="CAE-Use-of-English-Mini-test-Media-theme-part-4.html">Part 4</a>
+</nav>
+
+<div class="qr-backdrop" id="qrBack" hidden>
+  <div class="qr-modal" role="dialog" aria-modal="true" aria-label="QR code">
+    <button class="qr-x" id="qrClose" aria-label="Close">&times;</button>
+    <h3>QR code</h3>
+    <canvas id="qrBig"></canvas>
+    <input id="qrText" aria-label="Link to encode" spellcheck="false">
+    <p class="qr-err" id="qrErr"></p>
+    <div class="qr-row">
+      <button class="btn btn-ghost" id="qrThis" type="button">This page</button>
+      <button class="btn" id="qrSave" type="button">Save PNG</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const answersPart4 = {"q25": {"key": "MAY", "words": ["may be postponed", "may well be postponed"], "why": "\\u2018It is possible that\\u2026 will\\u2019 becomes the modal MAY, and the active \\u2018postpone the meeting\\u2019 becomes the passive \\u2018be postponed\\u2019."}, "q26": {"key": "RECOMMENDED", "words": ["recommended trying the new", "recommended i try the new"], "why": "\\u2018Recommend\\u2019 is followed by the -ing form when you suggest an activity: \\u2018recommended trying\\u2026\\u2019 (or \\u2018recommended I try\\u2026\\u2019)."}, "q27": {"key": "ADVISED", "words": ["advised the players to practise", "advised the players to practice", "advised them to practise", "advised them to practice"], "why": "\\u2018Advise\\u2019 takes an object plus the to-infinitive: \\u2018advised the players to practise\\u2019."}, "q28": {"key": "COMPLAINED", "words": ["complained about the order"], "why": "\\u2018Complain about\\u2019 + noun. The clause that follows (\\u2018the order arriving late\\u2019) keeps the -ing form."}, "q29": {"key": "ON", "words": ["carried on with", "went on with"], "why": "\\u2018Carry on with something\\u2019 = continue it. \\u2018Go on with\\u2019 is also accepted."}, "q30": {"key": "SOONER", "words": ["sooner had the meeting ended"], "why": "\\u2018No sooner\\u2026 than\\u2019 requires inversion after \\u2018No sooner\\u2019: auxiliary before subject \\u2014 \\u2018had the meeting ended\\u2019."}};
+  const MARKS_EACH = 2;
+
+  const ids = Object.keys(answersPart4);
+  const inputs = ids.map(id => document.getElementById(id));
+  const submitBtn = document.getElementById("submitBtn");
+  const tryAgainBtn = document.getElementById("tryAgainBtn");
+  const toggleKeyBtn = document.getElementById("toggleKeyBtn");
+  const scoreText = document.getElementById("scoreText");
+  const noticeText = document.getElementById("noticeText");
+  const answerKey = document.getElementById("answerKey");
+  const keyGrid = document.getElementById("keyGrid");
+
+  function norm(s){
+    return (s || "").trim().toLowerCase()
+      .replace(/[\u2018\u2019]/g,"'")
+      .replace(/[.,!?;:]+$/g,"")
+      .replace(/\s+/g," ");
+  }
+  function wordCount(s){
+    const t = norm(s);
+    return t === "" ? 0 : t.split(" ").length;
+  }
+
+  function updateCounter(inp){
+    const n = wordCount(inp.value);
+    const c = document.getElementById("c" + inp.id.slice(1));
+    if (!c) return;
+    c.textContent = n + (n === 1 ? " word" : " words");
+    c.classList.toggle("over", n > 6);
+    if (n > 6) c.textContent += " \u2014 over the limit";
+  }
+
+  inputs.forEach(function(inp){
+    inp.addEventListener("input", function(){
+      updateCounter(inp);
+      inp.classList.remove("correct","wrong");
+    });
+    updateCounter(inp);
+  });
+
+  function buildKey(){
+    keyGrid.innerHTML = "";
+    ids.forEach(function(q){
+      const item = answersPart4[q];
+      const div = document.createElement("div");
+      div.innerHTML = "<strong>" + q.toUpperCase().replace("Q","") + "</strong> (" + item.key + "): " +
+        item.words.join(" / ") + "<br><em>" + item.why + "</em>";
+      keyGrid.appendChild(div);
+    });
+  }
+
+  function allAnswered(){ return inputs.every(function(i){ return norm(i.value) !== ""; }); }
+
+  function grade(){
+    if (!allAnswered()){
+      noticeText.textContent = "Please attempt all questions (25\u201330) before submitting.";
+      return;
+    }
+
+    let marks = 0, overLimit = 0, missingKey = 0;
+
+    inputs.forEach(function(inp){
+      const item = answersPart4[inp.id];
+      const student = norm(inp.value);
+      const n = wordCount(student);
+      const accepted = item.words.map(norm);
+
+      inp.classList.remove("correct","wrong");
+
+      const phraseOk = accepted.indexOf(student) !== -1;
+      const lengthOk = (n >= 3 && n <= 6);
+      const keyOk = student.split(" ").indexOf(item.key.toLowerCase()) !== -1;
+
+      if (phraseOk && lengthOk && keyOk){
+        marks += MARKS_EACH;
+        inp.classList.add("correct");
+        inp.disabled = true;
+      } else {
+        inp.classList.add("wrong");
+        inp.disabled = false;
+        if (!lengthOk) overLimit++;
+        else if (!keyOk) missingKey++;
+      }
+    });
+
+    const total = inputs.length * MARKS_EACH;
+    scoreText.textContent = marks + " / " + total + " marks";
+
+    if (marks === total){
+      noticeText.textContent = "Perfect score. Nice work.";
+    } else if (overLimit > 0){
+      noticeText.textContent = "Check the word limit \u2014 between three and six words, including the word given. In the real exam, going over scores zero.";
+    } else if (missingKey > 0){
+      noticeText.textContent = "Your answer must contain the word given, exactly as printed and unchanged.";
+    } else {
+      noticeText.textContent = "Correct answers are locked. Fix the red ones and submit again.";
+    }
+  }
+
+  submitBtn.addEventListener("click", grade);
+
+  tryAgainBtn.addEventListener("click", function(){
+    inputs.forEach(function(inp){
+      inp.value = ""; inp.disabled = false;
+      inp.classList.remove("correct","wrong");
+      updateCounter(inp);
+    });
+    scoreText.textContent = "\u2014";
+    noticeText.textContent = "Reset complete. Try again.";
+    answerKey.style.display = "none";
+    toggleKeyBtn.textContent = "Show answer key";
+  });
+
+  toggleKeyBtn.addEventListener("click", function(){
+    const showing = answerKey.style.display === "block";
+    answerKey.style.display = showing ? "none" : "block";
+    toggleKeyBtn.textContent = showing ? "Show answer key" : "Hide answer key";
+  });
+
+  buildKey();
+</script>
+
+<script>/* Minimal QR encoder — byte mode, versions 1-6, EC levels L and M.
+   Returns a square array of 0/1 modules, or null if the text won't fit. */
+function qrEncode(text, prefer){
+  "use strict";
+
+  /* ---- GF(256) ---- */
+  var EXP = new Uint8Array(512), LOG = new Uint8Array(256);
+  (function(){
+    var x = 1;
+    for (var i=0;i<255;i++){
+      EXP[i] = x; LOG[x] = i;
+      x <<= 1; if (x & 0x100) x ^= 0x11D;
+    }
+    for (var j=255;j<512;j++) EXP[j] = EXP[j-255];
+  })();
+  function mul(a,b){ return (a===0||b===0) ? 0 : EXP[LOG[a]+LOG[b]]; }
+
+  function genPoly(n){
+    var g = [1];
+    for (var i=0;i<n;i++){
+      var ng = new Array(g.length+1).fill(0);
+      for (var j=0;j<g.length;j++){
+        ng[j] ^= mul(g[j], EXP[i]);
+        ng[j+1] ^= g[j];
+      }
+      g = ng;
+    }
+    return g.reverse();   /* descending order: g[0] is the x^n coefficient (1) */
+  }
+  function ecc(data, n){
+    var g = genPoly(n), res = new Array(n).fill(0);
+    for (var i=0;i<data.length;i++){
+      var f = data[i] ^ res[0];
+      res.shift(); res.push(0);
+      if (f !== 0) for (var j=0;j<n;j++) res[j] ^= mul(g[j+1], f);
+    }
+    return res;
+  }
+
+  /* ---- capacity tables: version -> level -> [dataCodewords, ecPerBlock, blocks] ---- */
+  var TAB = {
+    1:{L:[19,7,1],  M:[16,10,1]},
+    2:{L:[34,10,1], M:[28,16,1]},
+    3:{L:[55,15,1], M:[44,26,1]},
+    4:{L:[80,20,1], M:[64,18,2]},
+    5:{L:[108,26,1],M:[86,24,2]},
+    6:{L:[136,18,2],M:[108,16,4]}
+  };
+  var ALIGN = {1:[],2:[6,18],3:[6,22],4:[6,26],5:[6,30],6:[6,34]};
+  var ECBITS = {L:1, M:0};
+
+  /* ---- UTF-8 bytes ---- */
+  var bytes = [];
+  (function(){
+    var enc = unescape(encodeURIComponent(String(text)));
+    for (var i=0;i<enc.length;i++) bytes.push(enc.charCodeAt(i) & 0xFF);
+  })();
+
+  /* ---- pick the smallest version that fits ---- */
+  var levels = (prefer === "L") ? ["L","M"] : ["M","L"];
+  var version = 0, level = null, spec = null;
+  outer:
+  for (var v=1; v<=6; v++){
+    for (var li=0; li<levels.length; li++){
+      var s = TAB[v][levels[li]];
+      if (bytes.length + 2 <= s[0]){ version = v; level = levels[li]; spec = s; break outer; }
+    }
+  }
+  if (!version) return null;
+
+  var dataCount = spec[0], ecLen = spec[1], blocks = spec[2];
+  var size = 17 + 4*version;
+
+  /* ---- bit stream ---- */
+  var bits = [];
+  function put(val, len){ for (var i=len-1;i>=0;i--) bits.push((val>>i) & 1); }
+  put(4, 4);                 /* byte mode */
+  put(bytes.length, 8);      /* count indicator, versions 1-9 */
+  for (var i=0;i<bytes.length;i++) put(bytes[i], 8);
+  var cap = dataCount * 8;
+  for (var t=0; t<4 && bits.length<cap; t++) bits.push(0);
+  while (bits.length % 8) bits.push(0);
+  var words = [];
+  for (var b=0;b<bits.length;b+=8){
+    var w = 0; for (var k=0;k<8;k++) w = (w<<1) | bits[b+k];
+    words.push(w);
+  }
+  var padA = 0xEC, padB = 0x11, flip = 0;
+  while (words.length < dataCount){ words.push(flip++ % 2 ? padB : padA); }
+
+  /* ---- blocks + interleave ---- */
+  var per = dataCount / blocks;
+  var dBlocks = [], eBlocks = [];
+  for (var bi=0; bi<blocks; bi++){
+    var chunk = words.slice(bi*per, (bi+1)*per);
+    dBlocks.push(chunk);
+    eBlocks.push(ecc(chunk, ecLen));
+  }
+  var final = [];
+  for (var c=0;c<per;c++) for (var bj=0;bj<blocks;bj++) final.push(dBlocks[bj][c]);
+  for (var c2=0;c2<ecLen;c2++) for (var bk=0;bk<blocks;bk++) final.push(eBlocks[bk][c2]);
+
+  /* ---- matrix ---- */
+  var m = [], reserved = [];
+  for (var r=0;r<size;r++){ m.push(new Array(size).fill(0)); reserved.push(new Array(size).fill(false)); }
+  function set(r,c,val){ m[r][c] = val; reserved[r][c] = true; }
+
+  function finder(r,c){
+    for (var dr=-1; dr<=7; dr++) for (var dc=-1; dc<=7; dc++){
+      var rr = r+dr, cc = c+dc;
+      if (rr<0||cc<0||rr>=size||cc>=size) continue;
+      var inRing = (dr>=0&&dr<=6&&(dc===0||dc===6)) || (dc>=0&&dc<=6&&(dr===0||dr===6));
+      var inCore = dr>=2&&dr<=4&&dc>=2&&dc<=4;
+      set(rr, cc, (inRing||inCore) ? 1 : 0);
+    }
+  }
+  finder(0,0); finder(0,size-7); finder(size-7,0);
+
+  var ap = ALIGN[version];
+  for (var ai=0; ai<ap.length; ai++) for (var aj=0; aj<ap.length; aj++){
+    var ar = ap[ai], ac = ap[aj];
+    if ((ar<=7&&ac<=7) || (ar<=7&&ac>=size-8) || (ar>=size-8&&ac<=7)) continue;
+    for (var dr2=-2; dr2<=2; dr2++) for (var dc2=-2; dc2<=2; dc2++){
+      var ring = Math.max(Math.abs(dr2), Math.abs(dc2));
+      set(ar+dr2, ac+dc2, (ring===1) ? 0 : 1);
+    }
+  }
+
+  for (var i2=8; i2<size-8; i2++){
+    set(6, i2, i2%2===0 ? 1 : 0);
+    set(i2, 6, i2%2===0 ? 1 : 0);
+  }
+  set(size-8, 8, 1); /* dark module */
+
+  /* reserve format areas */
+  for (var f=0; f<9; f++){
+    if (!reserved[8][f]) { m[8][f]=0; reserved[8][f]=true; }
+    if (!reserved[f][8]) { m[f][8]=0; reserved[f][8]=true; }
+  }
+  for (var f2=0; f2<8; f2++){
+    if (!reserved[8][size-1-f2]) { m[8][size-1-f2]=0; reserved[8][size-1-f2]=true; }
+    if (!reserved[size-1-f2][8]) { m[size-1-f2][8]=0; reserved[size-1-f2][8]=true; }
+  }
+
+  /* ---- place data, zigzag from bottom-right ---- */
+  var bitIdx = 0, total = final.length*8;
+  function dataBit(){
+    if (bitIdx >= total) return 0;
+    var byte = final[bitIdx >> 3], bit = (byte >> (7 - (bitIdx & 7))) & 1;
+    bitIdx++;
+    return bit;
+  }
+  var up = true;
+  for (var col=size-1; col>0; col-=2){
+    if (col === 6) col--;                       /* skip the vertical timing column */
+    for (var n=0; n<size; n++){
+      var row = up ? (size-1-n) : n;
+      for (var q=0; q<2; q++){
+        var cc2 = col - q;
+        if (!reserved[row][cc2]) m[row][cc2] = dataBit();
+      }
+    }
+    up = !up;
+  }
+
+  /* ---- masking ---- */
+  function maskFn(k, r, c){
+    switch(k){
+      case 0: return (r+c) % 2 === 0;
+      case 1: return r % 2 === 0;
+      case 2: return c % 3 === 0;
+      case 3: return (r+c) % 3 === 0;
+      case 4: return (Math.floor(r/2) + Math.floor(c/3)) % 2 === 0;
+      case 5: return ((r*c) % 2) + ((r*c) % 3) === 0;
+      case 6: return (((r*c) % 2) + ((r*c) % 3)) % 2 === 0;
+      case 7: return (((r+c) % 2) + ((r*c) % 3)) % 2 === 0;
+    }
+  }
+  function penalty(g){
+    var p = 0, n = g.length, i, j, run, dark = 0;
+    for (i=0;i<n;i++){
+      run = 1;
+      for (j=1;j<n;j++){
+        if (g[i][j] === g[i][j-1]) run++;
+        else { if (run >= 5) p += 3 + (run-5); run = 1; }
+      }
+      if (run >= 5) p += 3 + (run-5);
+    }
+    for (j=0;j<n;j++){
+      run = 1;
+      for (i=1;i<n;i++){
+        if (g[i][j] === g[i-1][j]) run++;
+        else { if (run >= 5) p += 3 + (run-5); run = 1; }
+      }
+      if (run >= 5) p += 3 + (run-5);
+    }
+    for (i=0;i<n-1;i++) for (j=0;j<n-1;j++){
+      var a = g[i][j];
+      if (a === g[i][j+1] && a === g[i+1][j] && a === g[i+1][j+1]) p += 3;
+    }
+    var pat1 = [1,0,1,1,1,0,1,0,0,0,0], pat2 = [0,0,0,0,1,0,1,1,1,0,1];
+    function scan(arr){
+      for (var s=0; s+11<=arr.length; s++){
+        var ok1 = true, ok2 = true;
+        for (var t2=0;t2<11;t2++){
+          if (arr[s+t2] !== pat1[t2]) ok1 = false;
+          if (arr[s+t2] !== pat2[t2]) ok2 = false;
+        }
+        if (ok1 || ok2) p += 40;
+      }
+    }
+    for (i=0;i<n;i++){
+      scan(g[i]);
+      var colArr = []; for (j=0;j<n;j++) colArr.push(g[j][i]);
+      scan(colArr);
+    }
+    for (i=0;i<n;i++) for (j=0;j<n;j++) if (g[i][j]) dark++;
+    var pct = dark * 100 / (n*n);
+    p += Math.floor(Math.abs(pct - 50) / 5) * 10;
+    return p;
+  }
+
+  function formatBits(lvl, mk){
+    var data = (ECBITS[lvl] << 3) | mk;
+    var rem = data << 10;
+    for (var i=4;i>=0;i--) if (rem & (1 << (i+10))) rem ^= 0x537 << i;
+    return ((data << 10) | rem) ^ 0x5412;
+  }
+
+  /* format-info module coordinates, bit 0 (LSB) first — the two copies */
+  var FMT_A = [[0,8],[1,8],[2,8],[3,8],[4,8],[5,8],[7,8],[8,8],
+               [8,7],[8,5],[8,4],[8,3],[8,2],[8,1],[8,0]];
+  var FMT_B = [[8,size-1],[8,size-2],[8,size-3],[8,size-4],[8,size-5],[8,size-6],[8,size-7],[8,size-8],
+               [size-7,8],[size-6,8],[size-5,8],[size-4,8],[size-3,8],[size-2,8],[size-1,8]];
+
+  var best = null, bestScore = Infinity, bestMask = 0;
+  for (var mk=0; mk<8; mk++){
+    var g2 = [];
+    for (var r2=0;r2<size;r2++){
+      g2.push(m[r2].slice());
+      for (var c3=0;c3<size;c3++) if (!reserved[r2][c3] && maskFn(mk, r2, c3)) g2[r2][c3] ^= 1;
+    }
+    /* write format info so the penalty is measured on the finished symbol */
+    var fmt = formatBits(level, mk);
+    for (var i3=0;i3<15;i3++){
+      var bit = (fmt >> i3) & 1;
+      var a = FMT_A[i3], b2 = FMT_B[i3];
+      g2[a[0]][a[1]] = bit;
+      g2[b2[0]][b2[1]] = bit;
+    }
+    var sc = penalty(g2);
+    if (sc < bestScore){ bestScore = sc; best = g2; bestMask = mk; }
+  }
+
+  best.debug = {final: final, reserved: reserved, size: size, ecLen: ecLen, blocks: blocks, dataCount: dataCount};
+  best.version = version;
+  best.level = level;
+  best.mask = bestMask;
+  return best;
+}
+
+</script>
+<script>
+(function(){
+  var $=function(s){return document.getElementById(s);};
+  var SITE="https://modernenglish.au/";
+  function pageUrl(){ return /^https?:/.test(location.href) ? location.href.split("#")[0] : SITE; }
+  function draw(cv,text,px){
+    var g=qrEncode(text); if(!g) return false;
+    var n=g.length,q=4,t=n+q*2,dpr=Math.min(window.devicePixelRatio||1,3);
+    var s=Math.max(1,Math.round(px*dpr/t)),size=t*s;
+    cv.width=size; cv.height=size;
+    cv.style.width=(size/dpr)+"px"; cv.style.height=(size/dpr)+"px";
+    var x=cv.getContext("2d");
+    x.fillStyle="#ffffff"; x.fillRect(0,0,size,size);
+    x.fillStyle="#111111";
+    for(var r=0;r<n;r++) for(var c=0;c<n;c++) if(g[r][c]) x.fillRect((c+q)*s,(r+q)*s,s,s);
+    return true;
+  }
+  var back=$("qrBack"), big=$("qrBig"), txt=$("qrText"), err=$("qrErr");
+  draw($("qrMini"), pageUrl(), 58);
+  function render(){
+    var v=txt.value.trim();
+    if(!v){ err.textContent="Type a link."; return; }
+    err.textContent = draw(big,v,230) ? "" : "Too long for this QR size.";
+  }
+  $("qrTile").addEventListener("click",function(){ txt.value=pageUrl(); back.hidden=false; render(); });
+  $("qrClose").addEventListener("click",function(){ back.hidden=true; });
+  back.addEventListener("click",function(e){ if(e.target===back) back.hidden=true; });
+  txt.addEventListener("input",render);
+  $("qrThis").addEventListener("click",function(){ txt.value=pageUrl(); render(); });
+  $("qrSave").addEventListener("click",function(){
+    try{
+      var a=document.createElement("a");
+      a.href=big.toDataURL("image/png"); a.download="qr-code.png";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }catch(e){ err.textContent="Right-click the code and save it instead."; }
+  });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape" && !back.hidden) back.hidden=true; });
+})();
+</script>
+
+<script>
+/* ===== 10-minute countdown =====
+   Starts only when the student presses Start. At 2:00 the pill turns red. At 0:00 the paper is
+   submitted and marked automatically and every field is locked.
+   "Try again" resets the clock to 10:00 ready for another Start. */
+(function(){
+  var DURATION = 10 * 60;
+
+  var box    = document.getElementById("timerBox");
+  var clock  = document.getElementById("timerClock");
+  if (!box || !clock) return;
+
+  var submitBtn   = document.getElementById("submitBtn");
+  var tryAgainBtn = document.getElementById("tryAgainBtn");
+  var scoreText   = document.getElementById("scoreText");
+  var noticeText  = document.getElementById("noticeText");
+  var startBtn    = document.getElementById("timerStart");
+
+  var fields = Array.prototype.slice
+    .call(document.querySelectorAll("input.gap, select.gap, .answer-input"))
+    .filter(function(el){ return !el.readOnly; });
+
+  var left = DURATION, tid = null, expired = false;
+
+  function fmt(s){
+    var m = Math.floor(s / 60), r = s % 60;
+    return m + ":" + (r < 10 ? "0" : "") + r;
+  }
+
+  function render(){
+    clock.textContent = fmt(left);
+    box.classList.toggle("warn", left <= 120 && left > 0);
+    box.classList.toggle("over", left === 0);
+  }
+
+  function stop(){ if (tid){ clearInterval(tid); tid = null; } }
+  function start(){ stop(); tid = setInterval(tick, 1000); }
+
+  function tick(){
+    left = left - 1;
+    if (left <= 0){
+      left = 0;
+      render();
+      stop();
+      timeUp();
+      return;
+    }
+    render();
+  }
+
+  function lockAll(){
+    fields.forEach(function(el){ el.disabled = true; });
+    if (submitBtn) submitBtn.disabled = true;
+  }
+
+  function timeUp(){
+    expired = true;
+    /* Mark whatever has been written, even if some gaps are blank. */
+    var originalCheck = window.allAnswered;
+    try{
+      window.allAnswered = function(){ return true; };
+      if (typeof window.grade === "function") window.grade();
+    } catch(e){ /* ignore */ }
+    window.allAnswered = originalCheck;
+
+    lockAll();
+    box.classList.remove("done");
+    if (noticeText){
+      noticeText.textContent =
+        "Time's up. Your paper has been marked and locked. Press Try again for another attempt.";
+    }
+  }
+
+  if (submitBtn){
+    /* Runs after the page's own grading handler. */
+    submitBtn.addEventListener("click", function(){
+      if (expired || !scoreText) return;
+      var m = /^\s*(\d+)\s*\/\s*(\d+)/.exec(scoreText.textContent || "");
+      if (m && m[1] === m[2]){
+        stop();
+        box.classList.remove("warn", "over");
+        box.classList.add("done");
+      }
+    });
+  }
+
+  if (tryAgainBtn){
+    tryAgainBtn.addEventListener("click", function(){
+      expired = false;
+      left = DURATION;
+      fields.forEach(function(el){ el.disabled = false; });
+      if (submitBtn) submitBtn.disabled = false;
+      box.classList.remove("done", "warn", "over");
+      stop();
+      if (startBtn) startBtn.hidden = false;
+      box.classList.add("idle");
+      render();
+    });
+  }
+
+  if (startBtn){
+    startBtn.addEventListener("click", function(){
+      startBtn.hidden = true;
+      box.classList.remove("idle");
+      start();
+    });
+  }
+
+  box.classList.add("idle");
+  render();
+})();
+</script>
+
+</body>
+</html>
