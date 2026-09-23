@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -39,10 +39,11 @@
 html,body{ height:100%; margin:0; }
 
 body{
-  font-family:"Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:'Lato', sans-serif;
+  letter-spacing:.01em;
   background:
-    radial-gradient(1200px 600px at 20% -10%, rgba(63,111,143,.10), transparent 60%),
-    radial-gradient(900px 500px at 110% 10%, rgba(63,111,143,.07), transparent 55%),
+    radial-gradient(1200px 600px at 20% -10%, rgba(63,111,143,.08), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(138,85,48,.06), transparent 55%),
     linear-gradient(180deg, var(--bg), var(--bg2));
   color:var(--ink);
   line-height:1.75;
@@ -71,9 +72,10 @@ header{
   font-size: clamp(0.85rem, 2.4vw, 1rem);
   margin: 0 0 6px;
 }
+.brand a{ color:inherit; text-decoration:none; }
 header h1{
   margin:0;
-  font-size: clamp(1.2rem, 4.6vw, 1.85rem);
+  font-size: clamp(1.25rem, 4.5vw, 1.9rem);
   font-weight:800; letter-spacing:.06em; text-transform:uppercase;
   line-height:1.2; color: var(--ink);
 }
@@ -100,7 +102,7 @@ strong{
 
 .submit-block{
   margin-top:1.6rem; padding:1rem;
-  border:1px solid var(--line); border-radius:var(--radius);
+  border:1px solid var(--line); border-radius:5px;
   background: rgba(30,38,48,0.03);
 }
 .submit-row{
@@ -109,7 +111,7 @@ strong{
 }
 .score-pill{
   display:inline-flex; align-items:center; gap:.5rem;
-  padding:.55rem .95rem; border-radius:999px;
+  padding:.55rem .95rem; border-radius:5px;
   border:1px solid var(--line); background: rgba(30,38,48,0.05);
   font-weight:900; min-height:46px;
 }
@@ -117,7 +119,7 @@ strong{
 .actions{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
 
 .btn{
-  background: var(--accent); color:#fff; border:none; border-radius:12px;
+  background: var(--accent); color:#fff; border:none; border-radius:5px;
   padding:.75rem 1.15rem; cursor:pointer;
   font: inherit; font-size:.98rem; font-weight:900; min-height:46px;
   transition: transform .15s ease, filter .2s ease;
@@ -142,7 +144,7 @@ strong{
 }
 .key-grid div{
   border:1px solid var(--line); background: rgba(30,38,48,0.03);
-  border-radius:12px; padding:10px; color:var(--muted);
+  border-radius:5px; padding:10px; color:var(--muted);
 }
 .key-grid strong{ text-decoration:none; color:var(--ink); }
 
@@ -159,13 +161,19 @@ strong{
 .bottom-nav a{
   color: var(--accent-soft); text-decoration:none;
   font-weight:900; font-size:0.98rem;
-  padding:0.65rem 0.6rem; border-radius:12px;
+  padding:0.65rem 0.6rem; border-radius:5px;
   text-align:center; flex:1; margin:0 4px;
   border:1px solid var(--accent-line);
   min-height:46px; display:flex; align-items:center; justify-content:center;
   transition: background-color .2s ease, transform .15s ease;
 }
 .bottom-nav a:hover{ background: var(--accent-wash); transform:translateY(-1px); }
+
+footer{
+  border-top:1px solid var(--line); background: rgba(255,253,246,.92);
+  text-align:center; padding:14px 12px; color:var(--muted); font-size:.95rem; margin-top:26px;
+}
+footer span{ font-weight:800; color:var(--ink); }
 
 @media (max-width:600px){
   body{ padding-bottom:132px; }
@@ -178,20 +186,20 @@ strong{
 }
 
 @media print{
-  header,.submit-block,.bottom-nav,.ad-space{ display:none; }
+  header,footer,.submit-block,.bottom-nav,.ad-space{ display:none; }
   body{ background:#fff; color:#000; padding-bottom:0; }
   .container,.wrapper{ box-shadow:none; border:1px solid #ccc; background:#fff; }
 }
 
 
 .container{
-  width:min(92%, 920px);
-  margin: clamp(16px, 4vw, 32px) auto;
+  width:min(92%, 900px);
+  margin: clamp(18px, 4vw, 34px) auto;
   background: linear-gradient(180deg, var(--card), var(--card2));
   border:1px solid var(--line);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding: clamp(18px, 4.8vw, 40px);
+  padding: clamp(22px, 5vw, 42px);
 }
 .container p{ margin:0 0 1rem; font-size:1.05rem; }
 .passage{ line-height:2.6; }
@@ -199,11 +207,11 @@ strong{
 select.gap{
   margin: 0 6px;
   padding: 0.5rem 0.7rem;
-  border-radius: 12px;
+  border-radius: 5px;
   border: 1px solid var(--line);
   background:#fff;
   color: var(--ink);
-  font: inherit; font-weight:600; font-size:.97rem;
+  font: inherit; font-weight:700; font-size:.97rem;
   cursor: pointer; min-width: 13ch; outline:none;
   transition: border-color .15s ease, box-shadow .15s ease;
 }
@@ -221,25 +229,25 @@ select.gap:disabled{
   margin:14px 0 20px; padding:12px 16px;
   border-left:5px solid var(--accent);
   background: rgba(30,38,48,0.03);
-  border-radius:0 12px 12px 0;
+  border-radius:0 5px 5px 0;
   font-size:1.02rem;
 }
 
 @media (max-width:600px){
-  .container{ padding:18px 16px; }
+  .container{ padding:22px 16px; }
   .passage{ line-height:2.5; }
   select.gap{ display:block; width:100%; max-width:100%; margin:.5rem 0 .65rem; }
 }
 
 
-    /* ===== QR tile + ad space ===== */
+    /* ===== QR tile + ad space (matches the cover page) ===== */
     .qr-tile{
       position:absolute;
       top:14px;
       left: var(--pad);
       background:#fff;
       border:1px solid var(--line);
-      border-radius:12px;
+      border-radius:5px;
       padding:6px 6px 4px;
       cursor:pointer;
       line-height:0;
@@ -260,12 +268,9 @@ select.gap:disabled{
 
     .ad-space{
       width:min(92%, 900px);
-      margin: 10px auto 0;
+      margin: 10px auto 24px;
       padding: 18px 20px;
       text-align:center;
-      border:1px dashed rgba(30,38,48,.28);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.45);
     }
     .ad-space .ad-k{
       margin:0 0 6px;
@@ -275,18 +280,15 @@ select.gap:disabled{
       font-weight:800;
       color:var(--muted);
     }
-    .ad-space p{ margin:0 0 12px; color:var(--ink); font-weight:700; }
+    .ad-space p{ margin:0 0 4px; color:var(--ink); font-weight:700; }
     .ad-space a{
-      display:inline-block;
-      text-decoration:none;
-      font-weight:800;
+      font-weight:700;
       font-size:.95rem;
-      padding:9px 18px;
-      border-radius:12px;
-      color:#fff;
-      background: var(--accent);
+      color: var(--accent-soft);
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
-    .ad-space a:hover{ filter:brightness(1.06); }
+    .ad-space a:hover{ color: var(--ink); }
 
     .qr-backdrop{
       position:fixed; inset:0; z-index:2000;
@@ -308,7 +310,7 @@ select.gap:disabled{
     .qr-modal h3{ margin:0 0 14px; font-size:1.1rem; font-weight:800; color:var(--ink); }
     .qr-modal canvas{
       display:block; margin:0 auto 14px; background:#fff;
-      border:1px solid var(--line); border-radius:10px; padding:10px;
+      border:1px solid var(--line); border-radius:5px; padding:10px;
       image-rendering:pixelated;
     }
     .qr-modal input{
@@ -328,19 +330,6 @@ select.gap:disabled{
 
     @media (max-width:520px){
       .qr-tile{ position:static; display:inline-block; margin:0 0 10px; }
-    }
-
-    /* Keep the centred title clear of the QR tile / home button */
-    @media (min-width:521px){
-      .header-inner{ padding-left:104px; padding-right:104px; }
-    }
-    .back-link{
-      min-height:44px;
-      display:inline-flex !important;
-      align-items:center;
-      justify-content:center;
-    }
-    @media (max-width:520px){
       .header-inner{ padding-left:var(--pad); padding-right:var(--pad); }
     }
 
@@ -353,7 +342,7 @@ select.gap:disabled{
       padding:.35rem .85rem;
       min-height:46px;
       border:1px solid var(--accent-line);
-      border-radius:999px;
+      border-radius:5px;
       background:#fff;
       box-shadow:0 2px 10px rgba(80,66,40,.10);
       transition: background-color .25s ease, border-color .25s ease;
@@ -400,11 +389,12 @@ select.gap:disabled{
       <span class="timer-clock" id="timerClock">10:00</span>
     </div>
 
-    <div class="brand">Modern English Australia</div>
+    <div class="brand"><a href="https://modernenglish.au/">Modern English Australia</a></div>
     <h1>CAE Use of English Mini-test<br>Media Theme</h1>
   </div>
 </header>
 
+<main>
 <div class="container">
   <h2>Part 1 &middot; Multiple-Choice Cloze</h2>
 
@@ -467,13 +457,14 @@ select.gap:disabled{
   </section>
 </div>
 
-
 <section class="ad-space" aria-label="Advertising">
   <p class="ad-k">Advertising</p>
   <p>Sponsor or promote here</p>
   <a href="https://modernenglish.au/contact.html">Contact modernenglish.au</a>
 </section>
+</main>
 
+<footer>&copy; <span>Justine Kelly</span> 2025 &nbsp;&middot;&nbsp; Cambridge English Advanced (CAE) mock material</footer>
 
 <nav class="bottom-nav" aria-label="Bottom navigation">
   <a href="index.html">Home</a>
@@ -498,7 +489,7 @@ select.gap:disabled{
 </div>
 
 <script>
-  const answersPart1 = {"q1": {"a": "A", "word": "resist", "why": "\\u2018Find it hard to resist\\u2019 is the set phrase. \\u2018Refuse\\u2019 and \\u2018reject\\u2019 need an offer or a request; \\u2018deny\\u2019 means say something is not true."}, "q2": {"a": "B", "word": "accounts", "why": "\\u2018Account for\\u2019 = make up a proportion of something. \\u2018Count for\\u2019 = be worth; \\u2018amount to\\u2019 = come to a total; \\u2018add up to\\u2019 needs \\u2018up\\u2019."}, "q3": {"a": "D", "word": "reckless", "why": "\\u2018Reckless behaviour\\u2019 is the standard collocation \\u2014 knowingly taking risks. \\u2018Careless\\u2019 = not paying attention; \\u2018thoughtless\\u2019 = inconsiderate to others."}, "q4": {"a": "B", "word": "egged", "why": "\\u2018Egg someone on\\u2019 = urge them to do something unwise. Here in the passive: \\u2018are egged on to provoke\\u2019."}, "q5": {"a": "C", "word": "catalyst", "why": "\\u2018A catalyst for change\\u2019 is the fixed collocation. A \\u2018deterrent\\u2019 discourages; an \\u2018obstacle\\u2019 blocks."}, "q6": {"a": "A", "word": "sparked", "why": "\\u2018Spark a debate / a conversation\\u2019 = set it going. The other three all relate to fire but none collocates with \\u2018conversations\\u2019."}, "q7": {"a": "C", "word": "attract", "why": "\\u2018Attract viewers\\u2019 is the neutral collocation. \\u2018Appeal\\u2019 needs \\u2018to\\u2019; \\u2018tempt\\u2019 and \\u2018lure\\u2019 suggest enticing someone into something unwise."}, "q8": {"a": "D", "word": "fixture", "why": "\\u2018A permanent fixture\\u2019 = something that has become a lasting part of a scene."}};
+  const answersPart1 = {"q1": {"a": "A", "word": "resist", "why": "‘Find it hard to resist’ is the set phrase. ‘Refuse’ and ‘reject’ need an offer or a request; ‘deny’ means say something is not true."}, "q2": {"a": "B", "word": "accounts", "why": "‘Account for’ = make up a proportion of something. ‘Count for’ = be worth; ‘amount to’ = come to a total; ‘add up to’ needs ‘up’."}, "q3": {"a": "D", "word": "reckless", "why": "‘Reckless behaviour’ is the standard collocation — knowingly taking risks. ‘Careless’ = not paying attention; ‘thoughtless’ = inconsiderate to others."}, "q4": {"a": "B", "word": "egged", "why": "‘Egg someone on’ = urge them to do something unwise. Here in the passive: ‘are egged on to provoke’."}, "q5": {"a": "C", "word": "catalyst", "why": "‘A catalyst for change’ is the fixed collocation. A ‘deterrent’ discourages; an ‘obstacle’ blocks."}, "q6": {"a": "A", "word": "sparked", "why": "‘Spark a debate / a conversation’ = set it going. The other three all relate to fire but none collocates with ‘conversations’."}, "q7": {"a": "C", "word": "attract", "why": "‘Attract viewers’ is the neutral collocation. ‘Appeal’ needs ‘to’; ‘tempt’ and ‘lure’ suggest enticing someone into something unwise."}, "q8": {"a": "D", "word": "fixture", "why": "‘A permanent fixture’ = something that has become a lasting part of a scene."}};
 
   const ids = Object.keys(answersPart1);
   const inputs = ids.map(id => document.getElementById(id));
@@ -525,7 +516,7 @@ select.gap:disabled{
 
   function grade(){
     if (!allAnswered()){
-      noticeText.textContent = "Please answer all questions (1\u20138) before submitting.";
+      noticeText.textContent = "Please answer all questions (1–8) before submitting.";
       return;
     }
     let score = 0;
@@ -554,7 +545,7 @@ select.gap:disabled{
       s.value = ""; s.disabled = false;
       s.classList.remove("correct","wrong");
     });
-    scoreText.textContent = "\u2014";
+    scoreText.textContent = "—";
     noticeText.textContent = "Reset complete. Try again.";
   });
 
