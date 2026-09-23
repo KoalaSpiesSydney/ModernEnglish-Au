@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>It Is Written – Listening Gap-Fill · The Passive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+/* ===========================
+   Modern English Australia / Koala Spies Sydney Theme
+   =========================== */
+:root{
+  --bg:#fffce6;
+  --band:#1c1c1c;
+  --card:#1c1c1c;
+  --ink:#0f172a;
+  --paper:#f8fafc;
+  --muted:#94a3b8;
+  --accent:#3968ea;
+  --accent-soft:#60a5fa;
+  --highlight:#fde047;
+  --line:#2c3234;
+  --radius:14px;
+  --shadow:0 6px 24px rgba(0,0,0,.25);
+  --good:#2ecc71;
+  --bad:#e74c3c;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:#0b0b0b;color:var(--paper);
+  font-family:var(--sans);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+header{background:var(--band);border-bottom:1px solid var(--line)}
+.header-inner{max-width:1100px;margin:0 auto;padding:22px 26px}
+.header-inner .mark{
+  font-family:var(--serif);font-weight:700;font-size:clamp(26px,5vw,42px);
+  letter-spacing:.06em;color:#f6f3e8;margin:0;line-height:1.05;
+}
+.header-inner .sub{
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--highlight);font-weight:700;margin:6px 0 0;
+}
+
+/* ---------- page head ---------- */
+.page-head{text-align:center;padding:38px 20px 6px}
+.page-head .kicker{
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--highlight);font-weight:700;margin:0 0 10px;
+}
+.page-head h1{
+  font-family:var(--serif);font-weight:700;color:#f6f3e8;
+  font-size:clamp(30px,6vw,46px);margin:0;letter-spacing:.01em;
+}
+.page-head .dek{color:var(--muted);font-size:15px;margin:10px auto 0;max-width:560px}
+
+/* ---------- pill buttons ---------- */
+.page-tools{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px 20px 6px}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid transparent;border-radius:999px;
+  padding:9px 18px;font-size:14px;font-weight:600;
+  text-decoration:none;cursor:pointer;font-family:var(--sans);
+  transition:filter .15s,background .15s,transform .1s;
+}
+.pill:active{transform:translateY(1px)}
+.pill-primary{background:var(--accent);color:#fff}
+.pill-primary:hover{filter:brightness(1.12)}
+.pill-dark{background:#33383b;color:#f1f5f9;border-color:var(--line)}
+.pill-dark:hover{background:#3f4548}
+.pill-ghost{background:transparent;color:var(--accent-soft);border-color:var(--line)}
+.pill-ghost:hover{background:#1b2026}
+.pill em{font-style:normal;opacity:.85}
+
+/* ---------- audio ---------- */
+.audio-section{padding:22px 20px 10px}
+.player{
+  max-width:820px;margin:0 auto;background:#141414;border:1px solid var(--line);
+  border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);
+}
+.player-ui{display:flex;align-items:center;gap:14px}
+.playbtn{
+  flex:0 0 auto;width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--accent);color:#fff;display:grid;place-items:center;
+}
+.playbtn:hover{filter:brightness(1.12)}
+.playbtn svg{width:20px;height:20px;fill:currentColor}
+.wave{
+  flex:1 1 auto;height:56px;display:flex;align-items:center;gap:2px;
+  cursor:pointer;min-width:0;overflow:hidden;
+}
+.wave span{
+  flex:1 1 auto;background:#3a3f43;border-radius:2px;transition:background .12s;
+  min-width:1px;
+}
+.wave span.on{background:var(--accent-soft)}
+.wave span.cursor{background:var(--highlight)}
+.times{
+  flex:0 0 auto;font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);
+  min-width:84px;text-align:right;
+}
+.player-extra{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  margin-top:12px;padding-top:12px;border-top:1px solid var(--line);
+}
+.mini{
+  background:#23282b;color:#cbd5e1;border:1px solid var(--line);border-radius:999px;
+  padding:5px 13px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--sans);
+}
+.mini:hover{background:#2e3437;color:#fff}
+.mini[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ---------- cream cards ---------- */
+.card{
+  background:var(--bg);color:var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:30px 34px;margin:26px auto;max-width:900px;
+}
+.card h2{
+  font-family:var(--serif);font-size:26px;font-weight:700;margin:0 0 4px;color:#111827;
+}
+.card h3{
+  font-family:var(--serif);font-size:19px;font-weight:700;margin:26px 0 8px;color:#1f2937;
+}
+.card .lead{color:#4b5563;font-size:15px;margin:0 0 20px}
+.card p{margin:0 0 12px}
+.rule{border:0;border-top:1px solid #ded9c2;margin:24px 0}
+.section-kicker{
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+  color:#8a7f4e;margin:0 0 6px;
+}
+
+/* ---------- gap-fill ---------- */
+.lyrics{font-family:var(--serif);font-size:19px;line-height:2.5}
+.lyrics .line{margin:0 0 2px}
+.lyrics .verse{margin:0 0 22px}
+.verse-label{
+  font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:700;color:#8a7f4e;margin:0 0 6px;line-height:1.6;
+}
+input.gap{
+  font-family:var(--sans);font-size:15px;
+  padding:5px 9px;border:1px solid #c7ccd1;border-radius:8px;background:#fff;color:var(--ink);
+  outline:none;transition:border-color .15s,box-shadow .15s,background .15s;
+}
+input.gap:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(57,104,234,.18)}
+input.gap.right{border-color:var(--good);background:#eafaf0}
+input.gap.wrong{border-color:var(--bad);background:#fdeceb}
+input.gap.shown{border-color:#b9a85a;background:#fdf6d8}
+.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+.btn{
+  border:0;border-radius:999px;padding:10px 24px;font-size:15px;font-weight:700;
+  cursor:pointer;font-family:var(--sans);transition:filter .15s,transform .1s;
+}
+.btn:active{transform:translateY(1px)}
+.btn-check{background:var(--accent);color:#fff}
+.btn-check:hover{filter:brightness(1.12)}
+.btn-show{background:#6b7280;color:#fff}
+.btn-show:hover{filter:brightness(1.12)}
+.btn-reset{background:#d6d1b8;color:#3f3f46}
+.btn-reset:hover{filter:brightness(1.04)}
+.score{
+  text-align:center;margin-top:16px;font-weight:700;font-size:16px;min-height:24px;
+  font-family:var(--sans);
+}
+.score.good{color:#15803d}
+.score.mid{color:#a16207}
+
+/* ---------- tables ---------- */
+.tablewrap{overflow-x:auto;margin:14px 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid #e2ddc6;vertical-align:top}
+thead th{
+  font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#6b6440;border-bottom:2px solid #cdc6a6;font-weight:700;
+}
+tbody tr:hover{background:#faf6da}
+td.form{font-family:var(--sans);font-weight:600;color:#1f2937;white-space:nowrap}
+td.eg{font-family:var(--serif);color:#374151}
+td.eg b{color:#1d4ed8;font-weight:600}
+.pp{font-family:var(--sans);font-size:15px}
+.pp b{color:#1d4ed8}
+.note{
+  background:#fdf6d8;border-left:4px solid var(--highlight);
+  padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0;font-size:15px;color:#4b4319;
+}
+.note strong{color:#3f3a12}
+
+/* ---------- QR tile in the header ---------- */
+.header-inner{display:flex;align-items:center;gap:18px}
+.brand-block{min-width:0}
+.qr-tile{
+  flex:0 0 auto;background:#fff;border-radius:10px;padding:7px 7px 5px;
+  border:0;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.4);
+  transition:transform .15s,box-shadow .15s;font-family:var(--sans);
+}
+.qr-tile:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.55)}
+.qr-tile canvas{display:block;image-rendering:pixelated}
+.qr-tile .qr-cap{
+  font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;
+  text-align:center;margin:4px 0 0;font-weight:700;
+}
+.qr-panel{text-align:center}
+.qr-panel canvas{
+  display:block;margin:0 auto 16px;background:#fff;border-radius:8px;
+  padding:10px;box-shadow:0 2px 10px rgba(0,0,0,.15);image-rendering:pixelated;
+}
+.qr-field{
+  width:100%;font-family:var(--sans);font-size:14px;padding:9px 12px;
+  border:1px solid #c7ccd1;border-radius:9px;background:#fff;color:var(--ink);outline:none;
+}
+.qr-field:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(57,104,234,.18)}
+.qr-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.qr-hint{font-size:12.5px;color:#6b7280;margin:10px 0 0}
+.qr-err{color:#b91c1c;font-size:13px;margin:8px 0 0;min-height:18px}
+
+/* ---------- sponsorship ---------- */
+.sponsor{
+  max-width:900px;margin:34px auto 6px;padding:24px 28px;text-align:center;
+  background:#141414;border:1px dashed #4a4330;border-radius:var(--radius);
+}
+.sponsor .s-kicker{
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  color:var(--highlight);margin:0 0 8px;
+}
+.sponsor p.s-line{
+  font-family:var(--serif);font-size:19px;color:#e7e2d4;margin:0 0 4px;
+}
+.sponsor p.s-sub{font-size:14px;color:var(--muted);margin:0 0 16px}
+@media (max-width:640px){
+  .header-inner{gap:12px;padding:16px 16px}
+  .sponsor{margin:24px 12px 0;padding:20px}
+  .sponsor p.s-line{font-size:17px}
+}
+
+/* ---------- the rap table ---------- */
+.mode-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 20px}
+.mode-btn{
+  background:#efeacf;color:#6b6440;border:1px solid #ddd6b8;border-radius:999px;
+  padding:6px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--sans);
+}
+.mode-btn:hover{background:#e7e1c2}
+.mode-btn[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+table.raptable{min-width:460px}
+.raptable td{padding:6px 10px}
+.raptable td.base{
+  font-family:var(--serif);font-size:17px;font-weight:600;color:#1f2937;
+  white-space:nowrap;width:30%;
+}
+.raptable input.gap{width:100%;min-width:74px;font-size:14.5px;padding:5px 8px}
+.raptable input.gap.given{
+  background:#f1ecd6;border-color:#ddd6b8;color:#6b6440;font-weight:600;cursor:default;
+}
+.raptable tr.interject td{
+  text-align:center;font-family:var(--serif);font-style:italic;font-size:16px;
+  color:#8a7f4e;background:#f7f2d6;padding:10px;
+}
+.raptable tr.interject:hover td{background:#f7f2d6}
+.raptable tr.trap-row td{font-family:var(--serif);font-size:16px;color:#9a8f6a}
+.raptable tr.trap-row td.base{color:#9a8f6a}
+.raptable .mark{
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.06em;
+  color:#b45309;white-space:nowrap;margin-left:6px;vertical-align:middle;
+}
+.raptable tr.fix-row td:last-child input{width:calc(100% - 26px)}
+.raptable .mark.ok{color:#15803d}
+.raptable tr.fix-row td.base{color:#15803d}
+
+/* verb family grid */
+.families{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:14px}
+.fam{background:#faf6dd;border:1px solid #e6dfbe;border-radius:12px;padding:14px 16px}
+.fam h4{
+  margin:0 0 8px;font-family:var(--sans);font-size:12px;letter-spacing:.12em;
+  text-transform:uppercase;color:#8a7f4e;font-weight:700;
+}
+.fam ul{margin:0;padding:0;list-style:none;font-size:14.5px;line-height:1.85}
+.fam li span{color:#6b7280}
+.fam li b{color:#1d4ed8;font-weight:600}
+
+/* ---------- exercise ---------- */
+.ex-item{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  padding:10px 0;border-bottom:1px solid #ece7d1;font-size:16px;
+}
+.ex-item:last-of-type{border-bottom:0}
+.ex-num{
+  flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:#e4dfc4;
+  color:#6b6440;font-size:12px;font-weight:700;display:grid;place-items:center;
+}
+.ex-q{font-family:var(--serif);flex:1 1 220px;min-width:0}
+.ex-q .cue{color:#6b7280;font-style:italic}
+.rewrite{display:block;width:100%;margin-top:4px}
+input.ans{
+  font-family:var(--sans);font-size:15px;padding:6px 10px;border:1px solid #c7ccd1;
+  border-radius:8px;background:#fff;color:var(--ink);outline:none;flex:0 0 auto;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+input.ans.wide{flex:1 1 320px;min-width:220px}
+input.ans:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(57,104,234,.18)}
+input.ans.right{border-color:var(--good);background:#eafaf0}
+input.ans.wrong{border-color:var(--bad);background:#fdeceb}
+input.ans.shown{border-color:#b9a85a;background:#fdf6d8}
+
+/* ---------- modal ---------- */
+.tile-backdrop{
+  position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:22px;
+  background:rgba(8,8,8,.78);backdrop-filter:blur(4px);
+}
+.tile-backdrop[hidden]{display:none}
+.tile{
+  background:#fffdf2;color:var(--ink);border-radius:var(--radius);max-width:520px;width:100%;
+  box-shadow:0 30px 60px -18px rgba(0,0,0,.8);border-top:4px solid var(--accent);
+  padding:26px 30px 22px;max-height:88vh;overflow:auto;position:relative;
+}
+.tile h2{font-family:var(--serif);font-size:24px;margin:0 0 12px;text-align:center}
+.tile-body{font-size:15.5px;color:#374151}
+.tile-body p{margin:0 0 12px}
+.tile-body b{color:#1d4ed8}
+.tile-actions{text-align:center;margin-top:18px}
+.tile-close{
+  position:absolute;top:10px;right:12px;border:0;background:none;cursor:pointer;
+  font-size:20px;line-height:1;color:#9ca3af;
+}
+.tile-close:hover{color:#4b5563}
+
+/* ---------- footer ---------- */
+footer{
+  background:var(--band);border-top:3px solid var(--accent);
+  margin-top:40px;padding:26px 20px 34px;text-align:center;
+}
+footer .copy{font-family:var(--serif);color:#cbd5e1;font-size:15px;margin:0 0 14px}
+.footer-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.footer-links a{
+  background:#24292c;border:1px solid var(--line);border-radius:999px;
+  padding:7px 16px;font-size:14px;color:var(--accent-soft);text-decoration:none;
+}
+.footer-links a:hover{background:#2e3437;color:#fff}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .card{padding:24px 20px;margin:20px 12px;border-radius:12px}
+  .lyrics{font-size:17px;line-height:2.4}
+  .player{margin:0 12px}
+  .times{min-width:70px;font-size:12px}
+  .wave{height:46px}
+  .page-head{padding-top:28px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <button class="qr-tile" id="qrTile" aria-label="Show the QR code for this page">
+      <canvas id="qrMini" width="76" height="76"></canvas>
+      <p class="qr-cap">Scan me</p>
+    </button>
+    <div class="brand-block">
+      <p class="mark">MODERN ENGLISH AU</p>
+      <p class="sub">Koala Spies Sydney</p>
+    </div>
+  </div>
+</header>
+
+<section class="page-head">
+  <p class="kicker">Listening Gap-Fill · The Passive</p>
+  <h1>It Is Written</h1>
+  <p class="dek">Listen to the song and write the missing words. Every gap is part of a passive verb.</p>
+</section>
+
+<section class="page-tools">
+  <button class="pill pill-dark" id="toRap">🎤 The Rap</button>
+  <button class="pill pill-dark" id="toVerbs">📗 Past Participles</button>
+  <button class="pill pill-ghost" id="openInstr">ℹ️ Instructions</button>
+</section>
+
+<section class="audio-section">
+  <div class="player" id="player">
+    <div class="player-ui">
+      <button class="playbtn" id="playbtn" aria-label="Play">
+        <svg id="icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="wave" id="wave" role="slider" aria-label="Seek" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      <div class="times"><span id="cur">0:00</span> / <span id="dur">3:08</span></div>
+    </div>
+    <div class="player-extra">
+      <button class="mini" id="back5">↺ 5 sec</button>
+      <button class="mini" id="fwd5">5 sec ↻</button>
+      <button class="mini" id="slow" aria-pressed="false">Slow (0.75×)</button>
+      <button class="mini" id="restart">Start again</button>
+    </div>
+    <audio id="audio" preload="metadata" src="Itiswritten.mp3"></audio>
+  </div>
+</section>
+
+<!-- =================== GAP-FILL =================== -->
+<section class="card" id="gapcard">
+  <p class="section-kicker">Activity 1 · Listening</p>
+  <h2>Fill the gaps</h2>
+  <p class="lead">Play the song. Each gap is one word — part of a passive verb (a form of <b>be</b>, or a past participle).</p>
+
+  <div class="lyrics" id="lyrics">
+
+    <div class="verse">
+      <p class="verse-label">Verse 1</p>
+      <p class="line">Those love letters were <input class="gap" data-a="read" size="6"></p>
+      <p class="line">It <input class="gap" data-a="was" size="5"> heard</p>
+      <p class="line">Those words were <input class="gap" data-a="said" size="6"></p>
+      <p class="line">I have <input class="gap" data-a="been" size="6"> woken by the music</p>
+      <p class="line">This song has been <input class="gap" data-a="sung" size="6"> a million times</p>
+      <p class="line">Our love has been <input class="gap" data-a="grown" size="7"></p>
+      <p class="line">Our love has been <input class="gap" data-a="growing" size="8"></p>
+      <p class="line">Our hearts were being <input class="gap" data-a="broken" size="7"> — they were <input class="gap" data-a="breaking" size="9"></p>
+    </div>
+
+    <div class="verse">
+      <p class="verse-label">Verse 2</p>
+      <p class="line">It is <input class="gap" data-a="chosen" size="7"></p>
+      <p class="line">The drinks were <input class="gap" data-a="drunk" size="6"></p>
+      <p class="line">Those words were <input class="gap" data-a="spoken" size="7"></p>
+      <p class="line">They can't be <input class="gap" data-a="undone" size="7"></p>
+      <p class="line">The mistake has been <input class="gap" data-a="made" size="6"></p>
+      <p class="line">Love has been <input class="gap" data-a="chased" size="7"> away</p>
+      <p class="line">We have been <input class="gap" data-a="sent" size="6"></p>
+      <p class="line">But now we <input class="gap" data-a="are" size="5"> done</p>
+    </div>
+
+    <div class="verse">
+      <p class="verse-label">The chant — every tense in a row</p>
+      <p class="line">It is done, it <input class="gap" data-a="was" size="5"> done,</p>
+      <p class="line">it has <input class="gap" data-a="been" size="6"> done, it's <input class="gap" data-a="being" size="6"> done,</p>
+      <p class="line">it was <input class="gap" data-a="being" size="6"> done, it has been <input class="gap" data-a="done" size="6">,</p>
+      <p class="line">can it <input class="gap" data-a="be" size="4"> done, it might <input class="gap" data-a="be" size="4"> done,</p>
+      <p class="line">it <input class="gap" data-a="will" size="5"> be done —</p>
+      <p class="line"><input class="gap" data-a="by" size="4"> you.</p>
+    </div>
+
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-check" data-check="lyrics">Check</button>
+    <button class="btn btn-show" data-show="lyrics">Show Answers</button>
+    <button class="btn btn-reset" data-reset="lyrics">Clear</button>
+  </div>
+  <p class="score" id="score-lyrics"></p>
+</section>
+
+<!-- =================== THE RAP =================== -->
+<section class="card" id="rap">
+  <p class="section-kicker">Activity 2 · Listening</p>
+  <h2>The rap</h2>
+  <p class="lead">After <em>&ldquo;by you&rdquo;</em> the song turns into a list of irregular verbs. Listen and fill in the table: <b>base &middot; past simple &middot; past participle</b>.</p>
+
+  <div class="mode-row">
+    <button class="mode-btn" id="rapEasy" aria-pressed="true">Participles only</button>
+    <button class="mode-btn" id="rapFull" aria-pressed="false">Past simple + participle</button>
+  </div>
+
+  <div class="tablewrap">
+    <table class="raptable" id="rapbody">
+      <thead>
+        <tr><th>Base</th><th>Past simple</th><th>Past participle</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="base">become</td><td><input class="gap" data-col="past" data-a="became"></td><td><input class="gap" data-col="pp" data-a="become"></td></tr>
+        <tr><td class="base">win</td><td><input class="gap" data-col="past" data-a="won"></td><td><input class="gap" data-col="pp" data-a="won"></td></tr>
+        <tr><td class="base">blow</td><td><input class="gap" data-col="past" data-a="blew"></td><td><input class="gap" data-col="pp" data-a="blown"></td></tr>
+        <tr><td class="base">fly</td><td><input class="gap" data-col="past" data-a="flew"></td><td><input class="gap" data-col="pp" data-a="flown"></td></tr>
+        <tr><td class="base">cut</td><td><input class="gap" data-col="past" data-a="cut"></td><td><input class="gap" data-col="pp" data-a="cut"></td></tr>
+        <tr><td class="base">shut</td><td><input class="gap" data-col="past" data-a="shut"></td><td><input class="gap" data-col="pp" data-a="shut"></td></tr>
+        <tr><td class="base">send</td><td><input class="gap" data-col="past" data-a="sent"></td><td><input class="gap" data-col="pp" data-a="sent"></td></tr>
+        <tr><td class="base">bend</td><td><input class="gap" data-col="past" data-a="bent"></td><td><input class="gap" data-col="pp" data-a="bent"></td></tr>
+        <tr class="trap-row"><td class="base">sit</td><td>sit</td><td>sit <span class="mark">✗ the trap</span></td></tr>
+        <tr><td class="base">set</td><td><input class="gap" data-col="past" data-a="set"></td><td><input class="gap" data-col="pp" data-a="set"></td></tr>
+        <tr><td class="base">bet</td><td><input class="gap" data-col="past" data-a="bet"></td><td><input class="gap" data-col="pp" data-a="bet"></td></tr>
+        <tr><td class="base">hit</td><td><input class="gap" data-col="past" data-a="hit"></td><td><input class="gap" data-col="pp" data-a="hit"></td></tr>
+        <tr class="interject"><td colspan="3">but remember…</td></tr>
+        <tr class="fix-row"><td class="base">sit</td><td><input class="gap" data-col="past" data-a="sat"></td><td><input class="gap" data-col="pp" data-a="sat"> <span class="mark ok">✓</span></td></tr>
+        <tr><td class="base">bring</td><td><input class="gap" data-col="past" data-a="brought"></td><td><input class="gap" data-col="pp" data-a="brought"></td></tr>
+        <tr><td class="base">teach</td><td><input class="gap" data-col="past" data-a="taught"></td><td><input class="gap" data-col="pp" data-a="taught"></td></tr>
+        <tr><td class="base">catch</td><td><input class="gap" data-col="past" data-a="caught"></td><td><input class="gap" data-col="pp" data-a="caught"></td></tr>
+        <tr><td class="base">think</td><td><input class="gap" data-col="past" data-a="thought"></td><td><input class="gap" data-col="pp" data-a="thought"></td></tr>
+        <tr><td class="base">steal</td><td><input class="gap" data-col="past" data-a="stole"></td><td><input class="gap" data-col="pp" data-a="stolen"></td></tr>
+        <tr><td class="base">speak</td><td><input class="gap" data-col="past" data-a="spoke"></td><td><input class="gap" data-col="pp" data-a="spoken"></td></tr>
+        <tr><td class="base">write</td><td><input class="gap" data-col="past" data-a="wrote"></td><td><input class="gap" data-col="pp" data-a="written"></td></tr>
+        <tr><td class="base">bite</td><td><input class="gap" data-col="past" data-a="bit"></td><td><input class="gap" data-col="pp" data-a="bitten"></td></tr>
+        <tr><td class="base">ride</td><td><input class="gap" data-col="past" data-a="rode"></td><td><input class="gap" data-col="pp" data-a="ridden"></td></tr>
+        <tr><td class="base">give</td><td><input class="gap" data-col="past" data-a="gave"></td><td><input class="gap" data-col="pp" data-a="given"></td></tr>
+        <tr><td class="base">hold</td><td><input class="gap" data-col="past" data-a="held"></td><td><input class="gap" data-col="pp" data-a="held"></td></tr>
+        <tr><td class="base">tell</td><td><input class="gap" data-col="past" data-a="told"></td><td><input class="gap" data-col="pp" data-a="told"></td></tr>
+        <tr><td class="base">know</td><td><input class="gap" data-col="past" data-a="knew"></td><td><input class="gap" data-col="pp" data-a="known"></td></tr>
+        <tr><td class="base">show</td><td><input class="gap" data-col="past" data-a="showed"></td><td><input class="gap" data-col="pp" data-a="shown"></td></tr>
+        <tr><td class="base">throw</td><td><input class="gap" data-col="past" data-a="threw"></td><td><input class="gap" data-col="pp" data-a="thrown"></td></tr>
+        <tr><td class="base">fly</td><td><input class="gap" data-col="past" data-a="flew"></td><td><input class="gap" data-col="pp" data-a="flown"></td></tr>
+        <tr><td class="base">take</td><td><input class="gap" data-col="past" data-a="took"></td><td><input class="gap" data-col="pp" data-a="taken"></td></tr>
+        <tr><td class="base">shake</td><td><input class="gap" data-col="past" data-a="shook"></td><td><input class="gap" data-col="pp" data-a="shaken"></td></tr>
+        <tr><td class="base">wake</td><td><input class="gap" data-col="past" data-a="woke"></td><td><input class="gap" data-col="pp" data-a="woken"></td></tr>
+        <tr><td class="base">break</td><td><input class="gap" data-col="past" data-a="broke"></td><td><input class="gap" data-col="pp" data-a="broken"></td></tr>
+        <tr><td class="base">meet</td><td><input class="gap" data-col="past" data-a="met"></td><td><input class="gap" data-col="pp" data-a="met"></td></tr>
+        <tr><td class="base">leave</td><td><input class="gap" data-col="past" data-a="left"></td><td><input class="gap" data-col="pp" data-a="left"></td></tr>
+        <tr><td class="base">sleep</td><td><input class="gap" data-col="past" data-a="slept"></td><td><input class="gap" data-col="pp" data-a="slept"></td></tr>
+        <tr><td class="base">feel</td><td><input class="gap" data-col="past" data-a="felt"></td><td><input class="gap" data-col="pp" data-a="felt"></td></tr>
+        <tr><td class="base">build</td><td><input class="gap" data-col="past" data-a="built"></td><td><input class="gap" data-col="pp" data-a="built"></td></tr>
+        <tr><td class="base">see</td><td><input class="gap" data-col="past" data-a="saw"></td><td><input class="gap" data-col="pp" data-a="seen"></td></tr>
+        <tr><td class="base">be</td><td><input class="gap" data-col="past" data-a="was / were|was or were|was, were|was|were"></td><td><input class="gap" data-col="pp" data-a="been"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>Listen for the trick.</strong> The rap runs <em>send &middot; bend &middot; sit &middot; set &middot; bet &middot; hit</em> as if they all follow the same pattern &mdash; then stops and fixes it: <em>but remember&hellip; sit &middot; sat &middot; sat</em>. <b>set</b> never changes; <b>sit</b> does.
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-check" data-check="rap">Check</button>
+    <button class="btn btn-show" data-show="rap">Show Answers</button>
+    <button class="btn btn-reset" data-reset="rap">Clear</button>
+  </div>
+  <p class="score" id="score-rap"></p>
+</section>
+
+<!-- =================== LESSON: THE PASSIVE =================== -->
+<section class="card" id="lesson">
+  <p class="section-kicker">Lesson 1 · Grammar</p>
+  <h2>The passive in every tense</h2>
+  <p class="lead">The passive is always the same two pieces. Only the first piece changes.</p>
+
+  <div class="note">
+    <strong>The formula: <span style="font-family:var(--serif);font-size:17px">be + past participle</span></strong><br>
+    The tense lives in <b>be</b>. The second word — the past participle — never changes.
+    <br><em>done · written · broken · sung · spoken</em>
+  </div>
+
+  <p>We use the passive when the action matters more than the person who did it, when we don't know who did it, or when we don't want to say. If we do want to name them, we add <b>by</b> + the person: <em>by you</em>.</p>
+
+  <h3>Active → passive</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Active</th><th>Passive</th></tr></thead>
+      <tbody>
+        <tr><td class="eg">Someone <b>read</b> those love letters.</td><td class="eg">Those love letters <b>were read</b>.</td></tr>
+        <tr><td class="eg">A million singers <b>have sung</b> this song.</td><td class="eg">This song <b>has been sung</b> a million times.</td></tr>
+        <tr><td class="eg">You <b>will do</b> it.</td><td class="eg">It <b>will be done</b> by you.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:15px;color:#4b5563;margin-top:10px">The object of the active sentence becomes the subject of the passive sentence. The verb becomes <b>be + past participle</b>, in the same tense.</p>
+
+  <hr class="rule">
+
+  <h3>All the tenses — with lines from the song</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Tense</th><th>Form</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td class="form">Present simple</td><td class="form">am / is / are + PP</td><td class="eg">It <b>is written</b>. · It <b>is chosen</b>.</td></tr>
+        <tr><td class="form">Present continuous</td><td class="form">am / is / are being + PP</td><td class="eg">It<b>'s being done</b>.</td></tr>
+        <tr><td class="form">Present perfect</td><td class="form">have / has been + PP</td><td class="eg">This song <b>has been sung</b>. · We <b>have been sent</b>.</td></tr>
+        <tr><td class="form">Past simple</td><td class="form">was / were + PP</td><td class="eg">Those words <b>were said</b>. · It <b>was done</b>.</td></tr>
+        <tr><td class="form">Past continuous</td><td class="form">was / were being + PP</td><td class="eg">Our hearts <b>were being broken</b>.</td></tr>
+        <tr><td class="form">Past perfect</td><td class="form">had been + PP</td><td class="eg">It <b>had been done</b> before we arrived.</td></tr>
+        <tr><td class="form">Future simple</td><td class="form">will be + PP</td><td class="eg">It <b>will be done</b>.</td></tr>
+        <tr><td class="form">Future perfect</td><td class="form">will have been + PP</td><td class="eg">It <b>will have been done</b> by Friday.</td></tr>
+        <tr><td class="form">Going to</td><td class="form">am / is / are going to be + PP</td><td class="eg">It <b>is going to be done</b>.</td></tr>
+        <tr><td class="form">Modal</td><td class="form">can / might / must / should be + PP</td><td class="eg">They <b>can't be undone</b>. · It <b>might be done</b>.</td></tr>
+        <tr><td class="form">Modal perfect</td><td class="form">might / must have been + PP</td><td class="eg">It <b>must have been done</b> at night.</td></tr>
+        <tr><td class="form">Infinitive</td><td class="form">to be + PP</td><td class="eg">She wants it <b>to be done</b>.</td></tr>
+        <tr><td class="form">-ing form</td><td class="form">being + PP</td><td class="eg">I hate <b>being told</b> what to do.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>Two things students often mix up.</strong><br>
+    <em>Our love has been <b>grown</b></em> — passive, someone grew it.<br>
+    <em>Our love has been <b>growing</b></em> — active continuous, it grew by itself.<br>
+    Same with <em>they were <b>broken</b></em> (passive) and <em>they were <b>breaking</b></em> (active).
+  </div>
+
+  <h3>Questions and negatives</h3>
+  <p style="font-size:15.5px">Change <b>be</b>, never the participle.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>+</th><th>−</th><th>?</th></tr></thead>
+      <tbody>
+        <tr><td class="eg">It is written.</td><td class="eg">It isn't written.</td><td class="eg">Is it written?</td></tr>
+        <tr><td class="eg">It was done.</td><td class="eg">It wasn't done.</td><td class="eg">Was it done?</td></tr>
+        <tr><td class="eg">It has been done.</td><td class="eg">It hasn't been done.</td><td class="eg">Has it been done?</td></tr>
+        <tr><td class="eg">It can be done.</td><td class="eg">It can't be done.</td><td class="eg">Can it be done?</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- =================== EXERCISE: MAKE IT PASSIVE =================== -->
+<section class="card">
+  <p class="section-kicker">Activity 3 · Practice</p>
+  <h2>Make it passive</h2>
+  <p class="lead">Rewrite each sentence in the passive, keeping the same tense. Don't add <em>by</em> unless it is in brackets.</p>
+
+  <div id="ex-passive">
+    <div class="ex-item">
+      <span class="ex-num">1</span>
+      <span class="ex-q">Someone <span class="cue">speaks</span> those words every day.
+        <input class="ans wide rewrite" data-a="Those words are spoken every day.|Those words are spoken every day">
+      </span>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">2</span>
+      <span class="ex-q">They <span class="cue">broke</span> my heart.
+        <input class="ans wide rewrite" data-a="My heart was broken.|My heart was broken">
+      </span>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">3</span>
+      <span class="ex-q">Someone <span class="cue">has written</span> the letter.
+        <input class="ans wide rewrite" data-a="The letter has been written.|The letter has been written">
+      </span>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">4</span>
+      <span class="ex-q">They <span class="cue">were making</span> the same mistake.
+        <input class="ans wide rewrite" data-a="The same mistake was being made.|The same mistake was being made">
+      </span>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">5</span>
+      <span class="ex-q">Nobody <span class="cue">can undo</span> it.
+        <input class="ans wide rewrite" data-a="It can't be undone.|It cannot be undone.|It can't be undone|It cannot be undone">
+      </span>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">6</span>
+      <span class="ex-q">You <span class="cue">will do</span> it. <em class="cue">(by you)</em>
+        <input class="ans wide rewrite" data-a="It will be done by you.|It will be done by you">
+      </span>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">7</span>
+      <span class="ex-q">Someone <span class="cue">had drunk</span> all the drinks.
+        <input class="ans wide rewrite" data-a="All the drinks had been drunk.|All the drinks had been drunk">
+      </span>
+    </div>
+    <div class="ex-item">
+      <span class="ex-num">8</span>
+      <span class="ex-q">The music <span class="cue">woke</span> me.
+        <input class="ans wide rewrite" data-a="I was woken by the music.|I was woken by the music">
+      </span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-check" data-check="ex-passive">Check</button>
+    <button class="btn btn-show" data-show="ex-passive">Show Answers</button>
+    <button class="btn btn-reset" data-reset="ex-passive">Clear</button>
+  </div>
+  <p class="score" id="score-ex-passive"></p>
+</section>
+
+<!-- =================== PAST PARTICIPLES =================== -->
+<section class="card" id="verbs">
+  <p class="section-kicker">Lesson 2 · Grammar</p>
+  <h2>The past participle</h2>
+  <p class="lead">The passive needs the third form of the verb. Irregular verbs fall into families — learn the family, not the list.</p>
+
+  <div class="note">
+    <strong>Three forms:</strong> base · past simple · <b>past participle</b><br>
+    <em>write · wrote · <b>written</b></em> — "Those words were <b>written</b>."
+  </div>
+
+  <h3>The families</h3>
+  <div class="families">
+
+    <div class="fam">
+      <h4>1 · No change at all</h4>
+      <ul>
+        <li>cut · cut · <b>cut</b></li>
+        <li>shut · shut · <b>shut</b></li>
+        <li>set · set · <b>set</b></li>
+        <li>bet · bet · <b>bet</b></li>
+        <li>hit · hit · <b>hit</b></li>
+        <li>read · read · <b>read</b> <span>(spelling same, sound changes)</span></li>
+      </ul>
+    </div>
+
+    <div class="fam">
+      <h4>2 · Ends in -t or -d</h4>
+      <ul>
+        <li>send · sent · <b>sent</b></li>
+        <li>bend · bent · <b>bent</b></li>
+        <li>build · built · <b>built</b></li>
+        <li>leave · left · <b>left</b></li>
+        <li>sleep · slept · <b>slept</b></li>
+        <li>feel · felt · <b>felt</b></li>
+        <li>meet · met · <b>met</b></li>
+        <li>hold · held · <b>held</b></li>
+        <li>tell · told · <b>told</b></li>
+        <li>say · said · <b>said</b></li>
+        <li>hear · heard · <b>heard</b></li>
+        <li>make · made · <b>made</b></li>
+      </ul>
+    </div>
+
+    <div class="fam">
+      <h4>3 · -ought / -aught</h4>
+      <ul>
+        <li>bring · brought · <b>brought</b></li>
+        <li>think · thought · <b>thought</b></li>
+        <li>teach · taught · <b>taught</b></li>
+        <li>catch · caught · <b>caught</b></li>
+      </ul>
+    </div>
+
+    <div class="fam">
+      <h4>4 · Participle ends -en or -n</h4>
+      <ul>
+        <li>write · wrote · <b>written</b></li>
+        <li>speak · spoke · <b>spoken</b></li>
+        <li>steal · stole · <b>stolen</b></li>
+        <li>choose · chose · <b>chosen</b></li>
+        <li>break · broke · <b>broken</b></li>
+        <li>wake · woke · <b>woken</b></li>
+        <li>bite · bit · <b>bitten</b></li>
+        <li>ride · rode · <b>ridden</b></li>
+        <li>give · gave · <b>given</b></li>
+        <li>take · took · <b>taken</b></li>
+        <li>shake · shook · <b>shaken</b></li>
+        <li>see · saw · <b>seen</b></li>
+        <li>do · did · <b>done</b></li>
+      </ul>
+    </div>
+
+    <div class="fam">
+      <h4>5 · -ow / -y → -own</h4>
+      <ul>
+        <li>know · knew · <b>known</b></li>
+        <li>grow · grew · <b>grown</b></li>
+        <li>throw · threw · <b>thrown</b></li>
+        <li>blow · blew · <b>blown</b></li>
+        <li>show · showed · <b>shown</b></li>
+        <li>fly · flew · <b>flown</b></li>
+      </ul>
+    </div>
+
+    <div class="fam">
+      <h4>6 · i · a · u</h4>
+      <ul>
+        <li>sing · sang · <b>sung</b></li>
+        <li>drink · drank · <b>drunk</b></li>
+        <li>ring · rang · <b>rung</b></li>
+        <li>begin · began · <b>begun</b></li>
+      </ul>
+    </div>
+
+    <div class="fam">
+      <h4>7 · Back to the base</h4>
+      <ul>
+        <li>become · became · <b>become</b></li>
+        <li>come · came · <b>come</b></li>
+        <li>run · ran · <b>run</b></li>
+      </ul>
+    </div>
+
+    <div class="fam">
+      <h4>8 · The ones on their own</h4>
+      <ul>
+        <li>be · was / were · <b>been</b></li>
+        <li>win · won · <b>won</b></li>
+        <li>chase · chased · <b>chased</b> <span>(regular)</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <strong>Careful — the traps.</strong><br>
+    <em>sit</em> looks like family 1, but it is <b>sit · sat · sat</b>. Compare <em>set · set · set</em>.<br>
+    <em>wake</em> is <b>woken</b>, not "waken". <em>ride</em> is <b>rode · ridden</b>, not "rid".<br>
+    <em>show</em> is regular in the past (<em>showed</em>) but irregular in the participle (<b>shown</b>).
+  </div>
+</section>
+
+<!-- =================== EXERCISE: PARTICIPLES =================== -->
+<section class="card">
+  <p class="section-kicker">Activity 4 · Practice</p>
+  <h2>Write the past participle</h2>
+  <p class="lead">Give the third form of each verb.</p>
+
+  <div id="ex-pp">
+    <div class="ex-item"><span class="ex-num">1</span><span class="ex-q">speak</span><input class="ans" size="10" data-a="spoken"></div>
+    <div class="ex-item"><span class="ex-num">2</span><span class="ex-q">sing</span><input class="ans" size="10" data-a="sung"></div>
+    <div class="ex-item"><span class="ex-num">3</span><span class="ex-q">break</span><input class="ans" size="10" data-a="broken"></div>
+    <div class="ex-item"><span class="ex-num">4</span><span class="ex-q">send</span><input class="ans" size="10" data-a="sent"></div>
+    <div class="ex-item"><span class="ex-num">5</span><span class="ex-q">choose</span><input class="ans" size="10" data-a="chosen"></div>
+    <div class="ex-item"><span class="ex-num">6</span><span class="ex-q">wake</span><input class="ans" size="10" data-a="woken"></div>
+    <div class="ex-item"><span class="ex-num">7</span><span class="ex-q">teach</span><input class="ans" size="10" data-a="taught"></div>
+    <div class="ex-item"><span class="ex-num">8</span><span class="ex-q">grow</span><input class="ans" size="10" data-a="grown"></div>
+    <div class="ex-item"><span class="ex-num">9</span><span class="ex-q">ride</span><input class="ans" size="10" data-a="ridden"></div>
+    <div class="ex-item"><span class="ex-num">10</span><span class="ex-q">sit</span><input class="ans" size="10" data-a="sat"></div>
+    <div class="ex-item"><span class="ex-num">11</span><span class="ex-q">hit</span><input class="ans" size="10" data-a="hit"></div>
+    <div class="ex-item"><span class="ex-num">12</span><span class="ex-q">be</span><input class="ans" size="10" data-a="been"></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-check" data-check="ex-pp">Check</button>
+    <button class="btn btn-show" data-show="ex-pp">Show Answers</button>
+    <button class="btn btn-reset" data-reset="ex-pp">Clear</button>
+  </div>
+  <p class="score" id="score-ex-pp"></p>
+</section>
+
+<section class="sponsor">
+  <p class="s-kicker">Sponsorship</p>
+  <p class="s-line">Enquire about sponsoring a song</p>
+  <p class="s-sub">Put your name to a lesson used by English learners in Sydney and beyond.</p>
+  <a class="pill pill-primary" href="https://modernenglish.au/contact.html">Contact modernenglish.au</a>
+</section>
+
+<footer>
+  <p class="copy">© Koala Spies Sydney · Modern English Australia · All Rights Reserved</p>
+  <nav class="footer-links">
+    <a href="https://modernenglish.au/">Home</a>
+    <a href="https://modernenglish.au/dictation.html">Dictation &amp; Situations</a>
+    <a href="https://modernenglish.au/repeat.html">Repeat Sentence</a>
+    <a href="https://modernenglish.au/vocabulary.html">Vocabulary</a>
+    <a href="https://modernenglish.au/contact.html">Contact</a>
+  </nav>
+</footer>
+
+<div class="tile-backdrop" id="instructions-backdrop" hidden>
+  <div class="tile" role="dialog" aria-modal="true" aria-label="Instructions">
+    <button class="tile-close" id="tileClose" aria-label="Close">×</button>
+    <h2>The Passive</h2>
+    <div class="tile-body">
+      <p>English makes the passive with one simple formula: <b>be + past participle</b>.</p>
+      <p>The tense lives in <b>be</b> — <em>is written, was written, has been written, will be written</em>. The past participle never changes.</p>
+      <p>Listen to the song and write in the missing words. Then work through the lesson and the two exercises.</p>
+    </div>
+    <div class="tile-actions">
+      <button class="pill pill-primary" id="tileStart">Start the activity</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="tile-backdrop" id="qr-backdrop" hidden>
+  <div class="tile" role="dialog" aria-modal="true" aria-label="QR code">
+    <button class="tile-close" id="qrClose" aria-label="Close">&times;</button>
+    <h2>QR code</h2>
+    <div class="tile-body qr-panel">
+      <canvas id="qrBig" width="260" height="260"></canvas>
+      <input class="qr-field" id="qrText" aria-label="Text or link to encode" spellcheck="false">
+      <p class="qr-err" id="qrErr"></p>
+      <div class="qr-row">
+        <button class="pill pill-dark" id="qrThisPage">Use this page</button>
+        <button class="pill pill-primary" id="qrSave">Save PNG</button>
+      </div>
+      <p class="qr-hint">Put it on the board and let the class scan their way in.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Minimal QR encoder — byte mode, versions 1-6, EC levels L and M.
+   Returns a square array of 0/1 modules, or null if the text won't fit. */
+function qrEncode(text, prefer){
+  "use strict";
+
+  /* ---- GF(256) ---- */
+  var EXP = new Uint8Array(512), LOG = new Uint8Array(256);
+  (function(){
+    var x = 1;
+    for (var i=0;i<255;i++){
+      EXP[i] = x; LOG[x] = i;
+      x <<= 1; if (x & 0x100) x ^= 0x11D;
+    }
+    for (var j=255;j<512;j++) EXP[j] = EXP[j-255];
+  })();
+  function mul(a,b){ return (a===0||b===0) ? 0 : EXP[LOG[a]+LOG[b]]; }
+
+  function genPoly(n){
+    var g = [1];
+    for (var i=0;i<n;i++){
+      var ng = new Array(g.length+1).fill(0);
+      for (var j=0;j<g.length;j++){
+        ng[j] ^= mul(g[j], EXP[i]);
+        ng[j+1] ^= g[j];
+      }
+      g = ng;
+    }
+    return g.reverse();   /* descending order: g[0] is the x^n coefficient (1) */
+  }
+  function ecc(data, n){
+    var g = genPoly(n), res = new Array(n).fill(0);
+    for (var i=0;i<data.length;i++){
+      var f = data[i] ^ res[0];
+      res.shift(); res.push(0);
+      if (f !== 0) for (var j=0;j<n;j++) res[j] ^= mul(g[j+1], f);
+    }
+    return res;
+  }
+
+  /* ---- capacity tables: version -> level -> [dataCodewords, ecPerBlock, blocks] ---- */
+  var TAB = {
+    1:{L:[19,7,1],  M:[16,10,1]},
+    2:{L:[34,10,1], M:[28,16,1]},
+    3:{L:[55,15,1], M:[44,26,1]},
+    4:{L:[80,20,1], M:[64,18,2]},
+    5:{L:[108,26,1],M:[86,24,2]},
+    6:{L:[136,18,2],M:[108,16,4]}
+  };
+  var ALIGN = {1:[],2:[6,18],3:[6,22],4:[6,26],5:[6,30],6:[6,34]};
+  var ECBITS = {L:1, M:0};
+
+  /* ---- UTF-8 bytes ---- */
+  var bytes = [];
+  (function(){
+    var enc = unescape(encodeURIComponent(String(text)));
+    for (var i=0;i<enc.length;i++) bytes.push(enc.charCodeAt(i) & 0xFF);
+  })();
+
+  /* ---- pick the smallest version that fits ---- */
+  var levels = (prefer === "L") ? ["L","M"] : ["M","L"];
+  var version = 0, level = null, spec = null;
+  outer:
+  for (var v=1; v<=6; v++){
+    for (var li=0; li<levels.length; li++){
+      var s = TAB[v][levels[li]];
+      if (bytes.length + 2 <= s[0]){ version = v; level = levels[li]; spec = s; break outer; }
+    }
+  }
+  if (!version) return null;
+
+  var dataCount = spec[0], ecLen = spec[1], blocks = spec[2];
+  var size = 17 + 4*version;
+
+  /* ---- bit stream ---- */
+  var bits = [];
+  function put(val, len){ for (var i=len-1;i>=0;i--) bits.push((val>>i) & 1); }
+  put(4, 4);                 /* byte mode */
+  put(bytes.length, 8);      /* count indicator, versions 1-9 */
+  for (var i=0;i<bytes.length;i++) put(bytes[i], 8);
+  var cap = dataCount * 8;
+  for (var t=0; t<4 && bits.length<cap; t++) bits.push(0);
+  while (bits.length % 8) bits.push(0);
+  var words = [];
+  for (var b=0;b<bits.length;b+=8){
+    var w = 0; for (var k=0;k<8;k++) w = (w<<1) | bits[b+k];
+    words.push(w);
+  }
+  var padA = 0xEC, padB = 0x11, flip = 0;
+  while (words.length < dataCount){ words.push(flip++ % 2 ? padB : padA); }
+
+  /* ---- blocks + interleave ---- */
+  var per = dataCount / blocks;
+  var dBlocks = [], eBlocks = [];
+  for (var bi=0; bi<blocks; bi++){
+    var chunk = words.slice(bi*per, (bi+1)*per);
+    dBlocks.push(chunk);
+    eBlocks.push(ecc(chunk, ecLen));
+  }
+  var final = [];
+  for (var c=0;c<per;c++) for (var bj=0;bj<blocks;bj++) final.push(dBlocks[bj][c]);
+  for (var c2=0;c2<ecLen;c2++) for (var bk=0;bk<blocks;bk++) final.push(eBlocks[bk][c2]);
+
+  /* ---- matrix ---- */
+  var m = [], reserved = [];
+  for (var r=0;r<size;r++){ m.push(new Array(size).fill(0)); reserved.push(new Array(size).fill(false)); }
+  function set(r,c,val){ m[r][c] = val; reserved[r][c] = true; }
+
+  function finder(r,c){
+    for (var dr=-1; dr<=7; dr++) for (var dc=-1; dc<=7; dc++){
+      var rr = r+dr, cc = c+dc;
+      if (rr<0||cc<0||rr>=size||cc>=size) continue;
+      var inRing = (dr>=0&&dr<=6&&(dc===0||dc===6)) || (dc>=0&&dc<=6&&(dr===0||dr===6));
+      var inCore = dr>=2&&dr<=4&&dc>=2&&dc<=4;
+      set(rr, cc, (inRing||inCore) ? 1 : 0);
+    }
+  }
+  finder(0,0); finder(0,size-7); finder(size-7,0);
+
+  var ap = ALIGN[version];
+  for (var ai=0; ai<ap.length; ai++) for (var aj=0; aj<ap.length; aj++){
+    var ar = ap[ai], ac = ap[aj];
+    if ((ar<=7&&ac<=7) || (ar<=7&&ac>=size-8) || (ar>=size-8&&ac<=7)) continue;
+    for (var dr2=-2; dr2<=2; dr2++) for (var dc2=-2; dc2<=2; dc2++){
+      var ring = Math.max(Math.abs(dr2), Math.abs(dc2));
+      set(ar+dr2, ac+dc2, (ring===1) ? 0 : 1);
+    }
+  }
+
+  for (var i2=8; i2<size-8; i2++){
+    set(6, i2, i2%2===0 ? 1 : 0);
+    set(i2, 6, i2%2===0 ? 1 : 0);
+  }
+  set(size-8, 8, 1); /* dark module */
+
+  /* reserve format areas */
+  for (var f=0; f<9; f++){
+    if (!reserved[8][f]) { m[8][f]=0; reserved[8][f]=true; }
+    if (!reserved[f][8]) { m[f][8]=0; reserved[f][8]=true; }
+  }
+  for (var f2=0; f2<8; f2++){
+    if (!reserved[8][size-1-f2]) { m[8][size-1-f2]=0; reserved[8][size-1-f2]=true; }
+    if (!reserved[size-1-f2][8]) { m[size-1-f2][8]=0; reserved[size-1-f2][8]=true; }
+  }
+
+  /* ---- place data, zigzag from bottom-right ---- */
+  var bitIdx = 0, total = final.length*8;
+  function dataBit(){
+    if (bitIdx >= total) return 0;
+    var byte = final[bitIdx >> 3], bit = (byte >> (7 - (bitIdx & 7))) & 1;
+    bitIdx++;
+    return bit;
+  }
+  var up = true;
+  for (var col=size-1; col>0; col-=2){
+    if (col === 6) col--;                       /* skip the vertical timing column */
+    for (var n=0; n<size; n++){
+      var row = up ? (size-1-n) : n;
+      for (var q=0; q<2; q++){
+        var cc2 = col - q;
+        if (!reserved[row][cc2]) m[row][cc2] = dataBit();
+      }
+    }
+    up = !up;
+  }
+
+  /* ---- masking ---- */
+  function maskFn(k, r, c){
+    switch(k){
+      case 0: return (r+c) % 2 === 0;
+      case 1: return r % 2 === 0;
+      case 2: return c % 3 === 0;
+      case 3: return (r+c) % 3 === 0;
+      case 4: return (Math.floor(r/2) + Math.floor(c/3)) % 2 === 0;
+      case 5: return ((r*c) % 2) + ((r*c) % 3) === 0;
+      case 6: return (((r*c) % 2) + ((r*c) % 3)) % 2 === 0;
+      case 7: return (((r+c) % 2) + ((r*c) % 3)) % 2 === 0;
+    }
+  }
+  function penalty(g){
+    var p = 0, n = g.length, i, j, run, dark = 0;
+    for (i=0;i<n;i++){
+      run = 1;
+      for (j=1;j<n;j++){
+        if (g[i][j] === g[i][j-1]) run++;
+        else { if (run >= 5) p += 3 + (run-5); run = 1; }
+      }
+      if (run >= 5) p += 3 + (run-5);
+    }
+    for (j=0;j<n;j++){
+      run = 1;
+      for (i=1;i<n;i++){
+        if (g[i][j] === g[i-1][j]) run++;
+        else { if (run >= 5) p += 3 + (run-5); run = 1; }
+      }
+      if (run >= 5) p += 3 + (run-5);
+    }
+    for (i=0;i<n-1;i++) for (j=0;j<n-1;j++){
+      var a = g[i][j];
+      if (a === g[i][j+1] && a === g[i+1][j] && a === g[i+1][j+1]) p += 3;
+    }
+    var pat1 = [1,0,1,1,1,0,1,0,0,0,0], pat2 = [0,0,0,0,1,0,1,1,1,0,1];
+    function scan(arr){
+      for (var s=0; s+11<=arr.length; s++){
+        var ok1 = true, ok2 = true;
+        for (var t2=0;t2<11;t2++){
+          if (arr[s+t2] !== pat1[t2]) ok1 = false;
+          if (arr[s+t2] !== pat2[t2]) ok2 = false;
+        }
+        if (ok1 || ok2) p += 40;
+      }
+    }
+    for (i=0;i<n;i++){
+      scan(g[i]);
+      var colArr = []; for (j=0;j<n;j++) colArr.push(g[j][i]);
+      scan(colArr);
+    }
+    for (i=0;i<n;i++) for (j=0;j<n;j++) if (g[i][j]) dark++;
+    var pct = dark * 100 / (n*n);
+    p += Math.floor(Math.abs(pct - 50) / 5) * 10;
+    return p;
+  }
+
+  function formatBits(lvl, mk){
+    var data = (ECBITS[lvl] << 3) | mk;
+    var rem = data << 10;
+    for (var i=4;i>=0;i--) if (rem & (1 << (i+10))) rem ^= 0x537 << i;
+    return ((data << 10) | rem) ^ 0x5412;
+  }
+
+  /* format-info module coordinates, bit 0 (LSB) first — the two copies */
+  var FMT_A = [[0,8],[1,8],[2,8],[3,8],[4,8],[5,8],[7,8],[8,8],
+               [8,7],[8,5],[8,4],[8,3],[8,2],[8,1],[8,0]];
+  var FMT_B = [[8,size-1],[8,size-2],[8,size-3],[8,size-4],[8,size-5],[8,size-6],[8,size-7],[8,size-8],
+               [size-7,8],[size-6,8],[size-5,8],[size-4,8],[size-3,8],[size-2,8],[size-1,8]];
+
+  var best = null, bestScore = Infinity, bestMask = 0;
+  for (var mk=0; mk<8; mk++){
+    var g2 = [];
+    for (var r2=0;r2<size;r2++){
+      g2.push(m[r2].slice());
+      for (var c3=0;c3<size;c3++) if (!reserved[r2][c3] && maskFn(mk, r2, c3)) g2[r2][c3] ^= 1;
+    }
+    /* write format info so the penalty is measured on the finished symbol */
+    var fmt = formatBits(level, mk);
+    for (var i3=0;i3<15;i3++){
+      var bit = (fmt >> i3) & 1;
+      var a = FMT_A[i3], b2 = FMT_B[i3];
+      g2[a[0]][a[1]] = bit;
+      g2[b2[0]][b2[1]] = bit;
+    }
+    var sc = penalty(g2);
+    if (sc < bestScore){ bestScore = sc; best = g2; bestMask = mk; }
+  }
+
+  best.version = version;
+  best.level = level;
+  best.mask = bestMask;
+  return best;
+}
+
+</script>
+
+<script>
+(function(){
+"use strict";
+var $ = function(s,r){ return (r||document).querySelector(s); };
+var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+
+/* ---------------- audio player ---------------- */
+var PEAKS = [62,44,57,68,65,38,38,66,51,36,75,53,47,48,59,74,69,44,66,66,66,65,62,62,62,69,63,84,88,79,87,85,87,77,99,88,82,91,90,89,69,97,88,83,85,87,90,63,100,89,83,91,89,99,87,100,90,86,95,93,95,85,92,88,83,93,89,85,84,99,92,80,92,91,92,81,95,87,75,87,87,82,84,98,87,77,89,91,87,80,95,88,80,88,84,87,84,98,85,69,84,86,84,78,90,84,79,88,84,88,71,84,86,82,92,94,93,84,93,88,76,92,87,90,87,97,88,81,89,90,93,81,90,86,72,89,90,84,84,92,75,31,26,30,41,50,53,57,47,41,47,42,44,71,62,41,37,43,43,38,38,43,44,41,51,41,42,71,80,76,81,87,87,76,83,87,72,83,80,83,83,89,85,74,82,87,86,79,83,85,70,81,76,79,78,87,59,8,6,6];
+
+var audio = $("#audio"), wave = $("#wave"), bars = [];
+var playbtn = $("#playbtn"), icon = $("#icon"), curEl = $("#cur"), durEl = $("#dur");
+var PLAY = "M8 5v14l11-7z", PAUSE = "M7 5h3.5v14H7zM13.5 5H17v14h-3.5z";
+
+/* draw as many bars as the available width can hold, downsampling the peaks */
+function buildWave(){
+  var w = wave.clientWidth || 600;
+  var n = Math.max(40, Math.min(PEAKS.length, Math.floor(w / 3)));
+  if (bars.length === n) return;
+  wave.innerHTML = ""; bars = [];
+  for (var i=0;i<n;i++){
+    var lo = Math.floor(i * PEAKS.length / n);
+    var hi = Math.max(lo+1, Math.floor((i+1) * PEAKS.length / n));
+    var peak = 0;
+    for (var j=lo;j<hi;j++) if (PEAKS[j] > peak) peak = PEAKS[j];
+    var b = document.createElement("span");
+    b.style.height = Math.max(4, Math.round(peak * 0.52)) + "%";
+    wave.appendChild(b); bars.push(b);
+  }
+}
+buildWave();
+
+function fmt(t){
+  if (!isFinite(t) || t < 0) t = 0;
+  var m = Math.floor(t/60), s = Math.floor(t%60);
+  return m + ":" + (s<10 ? "0"+s : s);
+}
+function paint(){
+  var d = audio.duration || 188, p = (audio.currentTime / d) || 0;
+  var n = Math.floor(p * bars.length);
+  for (var i=0;i<bars.length;i++){
+    bars[i].className = i < n ? "on" : (i === n ? "cursor" : "");
+  }
+  curEl.textContent = fmt(audio.currentTime);
+  wave.setAttribute("aria-valuenow", Math.round(p*100));
+}
+audio.addEventListener("loadedmetadata", function(){ durEl.textContent = fmt(audio.duration); paint(); });
+audio.addEventListener("timeupdate", paint);
+audio.addEventListener("ended", function(){ icon.firstElementChild.setAttribute("d", PLAY); });
+
+playbtn.addEventListener("click", function(){
+  if (audio.paused){ audio.play(); icon.firstElementChild.setAttribute("d", PAUSE); }
+  else { audio.pause(); icon.firstElementChild.setAttribute("d", PLAY); }
+});
+function seekFrom(clientX){
+  var r = wave.getBoundingClientRect();
+  var p = Math.min(1, Math.max(0, (clientX - r.left) / r.width));
+  audio.currentTime = p * (audio.duration || 188);
+  paint();
+}
+wave.addEventListener("click", function(e){ seekFrom(e.clientX); });
+wave.addEventListener("keydown", function(e){
+  if (e.key === "ArrowRight"){ e.preventDefault(); audio.currentTime = Math.min((audio.duration||188), audio.currentTime + 5); }
+  if (e.key === "ArrowLeft"){ e.preventDefault(); audio.currentTime = Math.max(0, audio.currentTime - 5); }
+});
+$("#back5").addEventListener("click", function(){ audio.currentTime = Math.max(0, audio.currentTime - 5); paint(); });
+$("#fwd5").addEventListener("click", function(){ audio.currentTime = Math.min((audio.duration||188), audio.currentTime + 5); paint(); });
+$("#restart").addEventListener("click", function(){ audio.currentTime = 0; paint(); });
+$("#slow").addEventListener("click", function(){
+  var on = this.getAttribute("aria-pressed") === "true";
+  this.setAttribute("aria-pressed", on ? "false" : "true");
+  audio.playbackRate = on ? 1 : 0.75;
+  this.textContent = on ? "Slow (0.75×)" : "Normal speed";
+});
+
+/* ---------------- answer checking ---------------- */
+function norm(s){
+  return String(s||"")
+    .toLowerCase()
+    .replace(/[‘’ʼ]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/[.,!?;:]+$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+function accepted(input){
+  return String(input.getAttribute("data-a")||"").split("|").map(norm);
+}
+function isRight(input){
+  var v = norm(input.value);
+  if (!v) return false;
+  return accepted(input).indexOf(v) !== -1;
+}
+/* inputs that count: anything with an answer that isn't already given to the student */
+function fields(scopeId){
+  return $$("#" + scopeId + " input[data-a]").filter(function(i){
+    return !i.classList.contains("given");
+  });
+}
+
+function check(scopeId){
+  var list = fields(scopeId), right = 0;
+  list.forEach(function(inp){
+    inp.classList.remove("right","wrong","shown");
+    if (isRight(inp)){ inp.classList.add("right"); right++; }
+    else if (inp.value.trim() !== ""){ inp.classList.add("wrong"); }
+  });
+  var el = $("#score-" + scopeId);
+  if (el){
+    var pct = Math.round(right / list.length * 100);
+    el.textContent = right + " / " + list.length + " correct" + (pct === 100 ? " — perfect." : "");
+    el.className = "score " + (pct === 100 ? "good" : pct >= 60 ? "mid" : "");
+  }
+  var firstWrong = list.filter(function(i){ return !i.classList.contains("right"); })[0];
+  if (firstWrong) firstWrong.focus({preventScroll:true});
+}
+function show(scopeId){
+  fields(scopeId).forEach(function(inp){
+    inp.value = String(inp.getAttribute("data-a")||"").split("|")[0];
+    inp.classList.remove("right","wrong");
+    inp.classList.add("shown");
+  });
+  var el = $("#score-" + scopeId);
+  if (el){ el.textContent = "Answers shown."; el.className = "score mid"; }
+}
+function reset(scopeId){
+  fields(scopeId).forEach(function(inp){
+    inp.value = ""; inp.classList.remove("right","wrong","shown");
+  });
+  var el = $("#score-" + scopeId);
+  if (el){ el.textContent = ""; el.className = "score"; }
+}
+
+$$("[data-check]").forEach(function(b){ b.addEventListener("click", function(){ check(b.getAttribute("data-check")); }); });
+$$("[data-show]").forEach(function(b){ b.addEventListener("click", function(){ show(b.getAttribute("data-show")); }); });
+$$("[data-reset]").forEach(function(b){ b.addEventListener("click", function(){ reset(b.getAttribute("data-reset")); }); });
+
+/* clear the marking as soon as the student edits, and move on with Enter */
+$$("input[data-a]").forEach(function(inp, i, all){
+  inp.addEventListener("input", function(){ inp.classList.remove("right","wrong","shown"); });
+  inp.addEventListener("keydown", function(e){
+    if (e.key === "Enter"){
+      e.preventDefault();
+      for (var k = i+1; k < all.length; k++){
+        if (!all[k].readOnly && !all[k].classList.contains("given")){ all[k].focus(); return; }
+      }
+    }
+  });
+});
+
+/* ---------------- navigation & modal ---------------- */
+function jump(sel){
+  var el = $(sel);
+  if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
+}
+$("#toLesson").addEventListener("click", function(){ jump("#lesson"); });
+$("#toRap").addEventListener("click", function(){ jump("#rap"); });
+$("#toVerbs").addEventListener("click", function(){ jump("#verbs"); });
+
+/* ---------------- rap table: difficulty ---------------- */
+var rapEasy = $("#rapEasy"), rapFull = $("#rapFull");
+function setRapMode(easy){
+  rapEasy.setAttribute("aria-pressed", easy ? "true" : "false");
+  rapFull.setAttribute("aria-pressed", easy ? "false" : "true");
+  $$('#rap input[data-col="pp"]').forEach(function(inp){
+    inp.classList.remove("right","wrong","shown");
+  });
+  $$('#rap input[data-col="past"]').forEach(function(inp){
+    inp.classList.remove("right","wrong","shown");
+    if (easy){
+      inp.value = String(inp.getAttribute("data-a")||"").split("|")[0];
+      inp.readOnly = true;
+      inp.classList.add("given");
+    } else {
+      inp.value = "";
+      inp.readOnly = false;
+      inp.classList.remove("given");
+    }
+  });
+  var el = $("#score-rap");
+  if (el){ el.textContent = ""; el.className = "score"; }
+}
+rapEasy.addEventListener("click", function(){ setRapMode(true); });
+rapFull.addEventListener("click", function(){ setRapMode(false); });
+setRapMode(true);
+
+var backdrop = $("#instructions-backdrop");
+function openTile(){ backdrop.hidden = false; }
+function closeTile(){ backdrop.hidden = true; }
+$("#openInstr").addEventListener("click", openTile);
+$("#tileClose").addEventListener("click", closeTile);
+$("#tileStart").addEventListener("click", function(){ closeTile(); jump("#gapcard"); });
+backdrop.addEventListener("click", function(e){ if (e.target === backdrop) closeTile(); });
+document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !backdrop.hidden) closeTile(); });
+
+/* ---------------- QR code ---------------- */
+var SITE_URL = "https://modernenglish.au/song4/Itiswritten.html";
+function pageUrl(){
+  return /^https?:/.test(location.href) ? location.href.split("#")[0] : SITE_URL;
+}
+function drawQR(canvas, text, cssPx){
+  var grid = qrEncode(text);
+  if (!grid) return false;
+  var n = grid.length, quiet = 4, total = n + quiet*2;
+  var dpr = Math.min(window.devicePixelRatio || 1, 3);
+  var scale = Math.max(1, Math.round(cssPx * dpr / total));
+  var px = total * scale;
+  canvas.width = px; canvas.height = px;
+  /* size the element to a whole number of modules so the code stays crisp */
+  canvas.style.width = (px / dpr) + "px";
+  canvas.style.height = (px / dpr) + "px";
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, px, px);
+  ctx.fillStyle = "#111111";
+  for (var r=0;r<n;r++) for (var c=0;c<n;c++){
+    if (grid[r][c]) ctx.fillRect((c+quiet)*scale, (r+quiet)*scale, scale, scale);
+  }
+  return true;
+}
+
+var qrMini = $("#qrMini"), qrBig = $("#qrBig"), qrText = $("#qrText"), qrErr = $("#qrErr");
+var qrBack = $("#qr-backdrop");
+drawQR(qrMini, pageUrl(), 76);
+
+function renderBig(){
+  var v = qrText.value.trim();
+  if (!v){ qrErr.textContent = "Type a link or some text."; return; }
+  if (!drawQR(qrBig, v, 260)){
+    qrErr.textContent = "That's too long for this QR size — try a shorter link.";
+  } else {
+    qrErr.textContent = "";
+  }
+}
+$("#qrTile").addEventListener("click", function(){
+  qrText.value = pageUrl();
+  qrBack.hidden = false;
+  renderBig();
+});
+$("#qrClose").addEventListener("click", function(){ qrBack.hidden = true; });
+qrBack.addEventListener("click", function(e){ if (e.target === qrBack) qrBack.hidden = true; });
+qrText.addEventListener("input", renderBig);
+$("#qrThisPage").addEventListener("click", function(){ qrText.value = pageUrl(); renderBig(); });
+$("#qrSave").addEventListener("click", function(){
+  try{
+    var a = document.createElement("a");
+    a.href = qrBig.toDataURL("image/png");
+    a.download = "qr-code.png";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }catch(err){ qrErr.textContent = "Couldn't save the image here — try right-click, Save image as."; }
+});
+document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !qrBack.hidden) qrBack.hidden = true; });
+
+var rt;
+window.addEventListener("resize", function(){
+  clearTimeout(rt);
+  rt = setTimeout(function(){ buildWave(); paint(); }, 150);
+});
+
+openTile();
+paint();
+
+})();
+</script>
+</body>
+</html>
