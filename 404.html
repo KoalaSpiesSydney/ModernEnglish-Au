@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page not found | Modern English Australia</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap" rel="stylesheet">
+  <style>
+    :root{ --bg:#fffce6; --ink:#0f172a; --muted:#475569; --line:rgba(15,23,42,.10); --link:#3968ea; --header:#1c1c1c; }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{ font-family:"Source Sans 3", system-ui, sans-serif; font-size:18px; line-height:1.7; color:var(--ink);
+      background:radial-gradient(circle at top, #fffce6 0%, #f7f5ea 40%, #f0f4fa 100%); min-height:100vh; display:flex; flex-direction:column; }
+    header{ background:var(--header); padding:22px 16px; text-align:center; }
+    header a{ font-family:"Source Serif 4", Georgia, serif; font-weight:800; font-size:clamp(1.4rem, 1rem + 2vw, 2.2rem);
+      letter-spacing:3px; text-transform:uppercase; color:#f8fafc; text-decoration:none; }
+    header .kss{ display:block; margin-top:4px; font-family:"Source Sans 3", sans-serif; font-size:.75rem; font-weight:700;
+      letter-spacing:5px; color:#fde047; }
+    main{ flex:1; width:min(720px, 100%); margin:0 auto; padding:56px 16px 64px; }
+    .code{ font-family:"Source Serif 4", Georgia, serif; font-weight:800; font-size:clamp(3.5rem, 2rem + 8vw, 6rem); line-height:1; color:#0e2861; }
+    h1{ font-family:"Source Serif 4", Georgia, serif; font-size:clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem); margin:10px 0 12px; }
+    p{ color:var(--muted); margin-bottom:22px; }
+    ul{ list-style:none; border-top:1px solid var(--line); }
+    li{ border-bottom:1px solid var(--line); }
+    li a{ display:block; padding:14px 2px; font-weight:700; color:var(--link); text-decoration:none; }
+    li a span{ display:block; font-weight:400; font-size:.9rem; color:var(--muted); }
+    li a:hover{ color:#0e2861; }
+    footer{ background:var(--header); color:rgba(248,250,252,.6); text-align:center; padding:18px 16px; font-size:.87rem; }
+    footer a{ color:rgba(248,250,252,.8); }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HCH5CJD2ZS');
+    /* record which missing address people tried, so broken links can be found in Analytics */
+    gtag('event', 'page_not_found', { page_path: location.pathname });
+  </script>
+</head>
+<body>
+  <header>
+    <a href="https://modernenglish.au/">Modern English Au</a>
+    <span class="kss">KOALA SPIES SYDNEY</span>
+  </header>
+
+  <main>
+    <div class="code">404</div>
+    <h1>Sorry, that page isn&rsquo;t here</h1>
+    <p>It may have moved, or the link may have a typo. Try one of these instead:</p>
+    <ul>
+      <li><a href="https://modernenglish.au/">Home<span>Everything on Modern English Australia</span></a></li>
+      <li><a href="https://modernenglish.au/vocabularygames.html">Vocabulary games<span>Idioms, collocations and phrasal verbs, A1&ndash;C2</span></a></li>
+      <li><a href="https://modernenglish.au/IELTSPTEPLUS.html">IELTS, PTE &amp; CAE practice<span>Reading tests, dictation, speaking and mini tests</span></a></li>
+      <li><a href="https://modernenglish.au/blog.html">Blog<span>Teaching, classroom games and ESL resources</span></a></li>
+      <li><a href="https://modernenglish.au/contact.html">Contact<span>Tell us which link was broken</span></a></li>
+    </ul>
+  </main>
+
+  <footer>&copy; Koala Spies Sydney &middot; Modern English Australia &middot; <a href="https://modernenglish.au/privacy.html">Privacy &amp; Disclaimer</a></footer>
+</body>
+</html>
