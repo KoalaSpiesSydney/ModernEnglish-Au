@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CAE5 Reading and Use of English: Technology</title>
+  <meta name="description" content="Free CAE (C1 Advanced) Reading and Use of English mini-test on technology: key word transformations, a gapped text and a text-organisation warm-up. Timed and auto-scored." />
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+
+
+  <style>
+    :root{
+      --bg:#faf6ec;
+      --bg2:#f2ece0;
+      --card:#fffdf6;
+      --card2:#faf6ea;
+
+      --ink:#1e2630;
+      --muted:#5b6672;
+      --line:rgba(30,38,48,.14);
+
+      --shadow:0 8px 22px rgba(80,66,40,.10);
+      --radius:16px;
+
+      --ok:#1f7a55;
+      --err:#c0392b;
+
+      --accent:#2c5470;
+
+      --p1a:#3f6f8f; --p1b:#2c5470;
+      --p2a:#1f8a5b; --p2b:#136344;
+      --p3a:#6d3fd6; --p3b:#4a2da0;
+      --p4a:#a56f4a; --p4b:#8a5530;
+
+      --content: 980px;
+      --pad: clamp(14px, 3.6vw, 22px);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; margin:0; }
+
+    body{
+      font-family: 'Lato', sans-serif;
+      letter-spacing:.01em;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(63,111,143,.08), transparent 60%),
+        radial-gradient(900px 500px at 110% 10%, rgba(138,85,48,.06), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color: var(--ink);
+      min-height:100vh; display:flex; flex-direction:column;
+    }
+
+    header{
+      position:sticky; top:0; z-index:20;
+      background: rgba(255,253,246,.92);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:saturate(140%) blur(8px);
+    }
+    .header-inner{
+      max-width: var(--content); margin:0 auto;
+      padding: 18px var(--pad); text-align:center; position:relative;
+    }
+    .brand{
+      font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+      color: var(--accent); font-size: clamp(0.85rem, 2.4vw, 1rem); margin:0 0 6px;
+    }
+
+    .brand a{
+      color:inherit;
+      text-decoration:none;
+    }
+    .brand a:hover,
+    .brand a:focus-visible{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    header h1{
+      margin:0; font-size: clamp(1.25rem, 4.5vw, 1.9rem);
+      font-weight:800; letter-spacing:.06em; text-transform:uppercase; line-height:1.2;
+    }
+
+    main{ flex:1; }
+    .main-content{
+      width:min(92%, 900px); margin: clamp(18px,4vw,34px) auto;
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border:1px solid var(--line); border-radius:var(--radius);
+      box-shadow: var(--shadow); padding: clamp(22px,5vw,42px); text-align:center;
+    }
+    .main-content h2{
+      margin:0 0 6px; font-weight:700; color:var(--ink);
+      font-size: clamp(1.1rem,3.6vw,1.35rem); letter-spacing:.02em;
+    }
+    .paper-meta{ margin:0 0 4px; color:var(--muted); font-size:.95rem; font-weight:600; }
+    .paper-time{ margin:0 0 22px; color:var(--muted); font-size:.86rem; }
+
+    .nav-grid{ display:grid; grid-template-columns:1fr; gap:16px; max-width:760px; margin:0 auto; }
+    .nav-button{
+      display:flex; flex-direction:column; gap:6px; padding:18px;
+      color:#fff; text-decoration:none; border-radius:5px;
+      border:1px solid rgba(0,0,0,0.08); box-shadow:0 8px 18px rgba(80,66,40,.16);
+      text-align:left; transition: transform .18s ease, filter .2s ease, box-shadow .2s ease;
+    }
+    .nav-button:hover{ transform:translateY(-2px); filter:brightness(1.04); box-shadow:0 12px 26px rgba(80,66,40,.22); }
+    .nav-button .title{ font-weight:800; letter-spacing:.02em; font-size:1.15rem; }
+    .nav-button .desc{ font-size:1rem; opacity:.96; color:rgba(255,255,255,0.95); }
+    .nav-button .desc small{
+      display:block; margin-top:4px; font-size:.85rem; font-weight:700; letter-spacing:.04em; opacity:.9;
+    }
+    .p1{ background: linear-gradient(135deg, var(--p1a), var(--p1b)); }
+    .p2{ background: linear-gradient(135deg, var(--p2a), var(--p2b)); }
+    .p3{ background: linear-gradient(135deg, var(--p3a), var(--p3b)); }
+    .p4{ background: linear-gradient(135deg, var(--p4a), var(--p4b)); }
+
+    /* Shadow behind coloured tiles */
+.nav-button.p1,
+.nav-button.p2,
+.nav-button.p3,
+.nav-button.p4 {
+  box-shadow: 0 10px 24px rgba(30, 26, 18, 0.22);
+}
+
+    /* ── Tips / pre-lesson ── */
+    .tips-card{
+      display:flex; align-items:center; gap:16px;
+      max-width:760px; margin:18px auto 0;
+      padding:16px 20px; text-align:left;
+      background:#fff; border:transparent; border-radius:5px;
+      text-decoration:none; color:inherit;
+      transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .tips-card:hover{ transform:translateY(-2px); box-shadow:0 10px 22px rgba(80,66,40,.16); border-color:var(--accent); }
+    .tips-icon{
+      flex:0 0 auto; width:46px; height:46px; border-radius:5px;
+      background: linear-gradient(135deg,#eef3f7,#d8e5ee);
+      display:flex; align-items:center; justify-content:center; font-size:22px;
+    }
+    .tips-body{ flex:1; min-width:0; }
+    .tips-title{ font-size:1.05rem; font-weight:800; color:#fff; margin-bottom:2px; }
+    .tips-desc{ font-size:.92rem; color:var(--muted); line-height:1.5; }
+    .tips-pill{
+      flex:0 0 auto; font-size:.78rem; font-weight:800; letter-spacing:.1em;
+      text-transform:uppercase; color:#fff; background:var(--accent);
+      border-radius:5px; padding:6px 14px; white-space:nowrap;
+    }
+
+    .info-card{
+      max-width:760px; margin:22px auto 0; text-align:left;
+      font-size:.95rem; color: grey; line-height:1.75;
+    }
+    .info-card h3{
+      font-size:.78rem; font-weight:800; color: grey;
+      margin:0 0 10px; text-transform:uppercase; letter-spacing:.12em;
+    }
+    .info-row{ display:flex; gap:10px; align-items:flex-start; margin-bottom:8px; }
+    .info-icon{
+      flex-shrink:0; width:22px; height:22px; background:#fff; border:1px solid var(--line);
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:12px; font-weight:800; color: grey; margin-top:2px;
+    }
+    .info-card strong{ color:var(--ink); }
+
+    footer{
+      border-top:1px solid var(--line); background: rgba(255,253,246,.92);
+      text-align:center; padding:14px 12px; color:var(--muted); font-size:.95rem; margin-top:26px;
+    }
+    footer span{ font-weight:800; color:var(--ink); }
+
+    .btn{ background:white ; color: green; border:none; border: radius 5px;px;
+      padding:.75rem 1.15rem; font:inherit; font-weight:800; font-size:.95rem; cursor:pointer; }
+    .btn-ghost{ background: rgba(30,38,48,0.05); border:1px solid var(--line); color:var(--ink); }
+
+    @media (min-width:720px){ .nav-grid{ grid-template-columns:1fr 1fr; gap:18px; } }
+    @media (max-width:520px){
+      .main-content{ padding:22px 16px; }
+      .tips-card{ flex-wrap:wrap; }
+      .tips-pill{ order:3; }
+    }
+    @media print{ header, footer, .ad-space{ display:none; } body{ background:#fff; } }
+
+    /* ===== QR tile + ad space ===== */
+    .qr-tile{
+      position:absolute;
+      top:14px;
+      left: var(--pad);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:5px;
+      padding:6px 6px 4px;
+      cursor:pointer;
+      line-height:0;
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .qr-tile:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(80,66,40,.18); }
+    .qr-tile canvas{ display:block; image-rendering:pixelated; }
+    .qr-tile .qr-cap{
+      margin:3px 0 0;
+      font-size:7.5px;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      font-weight:700;
+      color:#6b7280;
+      text-align:center;
+      line-height:1.2;
+    }
+
+    .ad-space{
+      width:min(92%, 900px);
+      margin: 10px auto 24px;
+      padding: 18px 20px;
+      text-align:center;
+    }
+    .ad-space .ad-k{
+      margin:0 0 6px;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:800;
+      color:var(--muted);
+    }
+    .ad-space p{ margin:0 0 4px; color:var(--ink); font-weight:700; }
+    .ad-space a{
+      font-weight:700;
+      font-size:.95rem;
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .ad-space a:hover{ color: var(--ink); }
+
+    .qr-backdrop{
+      position:fixed; inset:0; z-index:2000;
+      display:grid; place-items:center; padding:20px;
+      background: rgba(30,26,18,.55);
+    }
+    .qr-backdrop[hidden]{ display:none; }
+    .qr-modal{
+      position:relative;
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      width:100%;
+      max-width:420px;
+      text-align:center;
+    }
+    .qr-modal h3{ margin:0 0 14px; font-size:1.1rem; font-weight:800; color:var(--ink); }
+    .qr-modal canvas{
+      display:block; margin:0 auto 14px; background:#fff;
+      border:1px solid var(--line); border-radius:5px; padding:10px;
+      image-rendering:pixelated;
+    }
+    .qr-modal input{
+      width:100%; font:inherit; font-size:.95rem; font-weight:600;
+      padding:9px 12px; border:1px solid var(--line); border-radius:12px;
+      background:#fff; color:var(--ink); outline:none;
+    }
+    .qr-modal input:focus{ border-color: var(--accent); }
+    .qr-modal .qr-row{ display:flex; gap:10px; justify-content:center; margin-top:14px; flex-wrap:wrap; }
+    .qr-modal .qr-err{ margin:8px 0 0; min-height:18px; font-size:.9rem; color:var(--err); }
+    .qr-modal .qr-x{
+      position:absolute; top:8px; right:12px;
+      border:0; background:none; cursor:pointer;
+      font-size:22px; line-height:1; color:var(--muted);
+    }
+    .qr-modal .qr-x:hover{ color:var(--ink); }
+
+    @media (max-width:520px){
+      .qr-tile{ position:static; display:inline-block; margin:0 0 10px; }
+    }
+
+    /* Keep the centred title clear of the QR tile / home button */
+    @media (min-width:521px){
+      .header-inner{ padding-left:104px; padding-right:104px; }
+    }
+
+    .back-link{
+      position:absolute;
+      top:14px;
+      right:var(--pad);
+      min-width:44px;
+      min-height:44px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      text-decoration:none;
+      font-size:1.35rem;
+      font-weight:400;
+      line-height:1;
+      cursor:pointer;
+      opacity:.72;
+      transition:opacity .15s ease, transform .15s ease;
+    }
+
+    .back-link:hover{
+      opacity:1;
+      transform:translateX(-2px);
+    }
+
+    .back-link:focus-visible{
+      outline:2px solid var(--accent);
+      outline-offset:3px;
+      border-radius:4px;
+    }
+
+    @media (max-width:520px){
+      .back-link{
+        top:10px;
+        right:var(--pad);
+      }
+    }
+
+    @media (max-width:520px){
+      .header-inner{ padding-left:var(--pad); padding-right:var(--pad); }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <button class="qr-tile" id="qrTile" aria-label="QR code for this page">
+      <canvas id="qrMini"></canvas>
+      <p class="qr-cap">Scan</p>
+    </button>
+    <button class="back-link" type="button" onclick="history.back()" aria-label="Go back" title="Back">
+      &lsaquo;
+    </button>
+    <div class="brand"><a href="https://modernenglish.au/">Modern English Australia</a></div>
+    <h1>CAE5 Reading and Use of English<br>Technology</h1>
+  </div>
+</header>
+
+<main>
+  <section class="main-content" aria-label="Choose a part">
+    <h2>Choose a Part</h2>
+    <p class="paper-meta">2 parts &middot; 9 questions &middot; 18 marks</p>
+    <p class="paper-time">Each part is timed separately &mdash; 22 minutes of exam time in total. Press Start on each page when you are ready.</p>
+
+    <div class="nav-grid">
+      <a href="CAE5-Reading-and-Use-of-English-Technology-part-4.html" class="nav-button p4">
+        <div class="title">Part 4</div>
+        <div class="desc">Key Word Transformations<br><small>Qs 25&ndash;29 &middot; 10 marks &middot; 10 min</small></div>
+      </a>
+      <a href="CAE5-Reading-and-Use-of-English-Technology-part-7.html" class="nav-button p2">
+        <div class="title">Part 7</div>
+        <div class="desc">Gapped Text<br><small>Qs 41&ndash;44 &middot; 8 marks &middot; 12 min</small></div>
+      </a>
+    </div>
+
+    <a href="CAE5-Reading-and-Use-of-English-Technology-warm-up.html" class="tips-card">
+      <div class="tips-body">
+        <div class="tips-title" style="color:var(--ink);">Warm-up: text organisation</div>
+        <div class="tips-desc">Do this before Part 7 &mdash; put sentences about AI and social media in order, and learn the linking and reference clues that hold a text together.</div>
+      </div>
+      <span class="tips-pill">Warm-up</span>
+    </a>
+
+    <div class="info-card">
+      <h3>Before you begin</h3>
+      <div class="info-row"><div class="info-icon">1</div><div>This is a <strong>mini test</strong> with two parts of the Reading and Use of English paper. Question numbers match the real exam.</div></div>
+      <div class="info-row"><div class="info-icon">2</div><div>Each part has its own <strong>timer</strong>. It does not start until you press Start.</div></div>
+      <div class="info-row"><div class="info-icon">3</div><div>In Part 4 you must use <strong>three to six words</strong> including the word given, and you may not change that word.</div></div>
+      <div class="info-row"><div class="info-icon">4</div><div>In Part 7 there is <strong>one extra paragraph</strong> you do not need. Read the text either side of each gap for linking words and references.</div></div>
+      <div class="info-row"><div class="info-icon">5</div><div>Spelling matters &mdash; an incorrect spelling scores no mark in the real exam.</div></div>
+    </div>
+  </section>
+
+<section class="ad-space" aria-label="Advertising">
+  <p class="ad-k">Advertising</p>
+  <p>Sponsor or promote here</p>
+  <a href="https://modernenglish.au/contact.html">Contact modernenglish.au</a>
+</section>
+
+</main>
+
+<footer>&copy; <span>Justine Kelly</span> 2026 &nbsp;&middot;&nbsp; Cambridge English Advanced (CAE) mock material</footer>
+
+<div class="qr-backdrop" id="qrBack" hidden>
+  <div class="qr-modal" role="dialog" aria-modal="true" aria-label="QR code">
+    <button class="qr-x" id="qrClose" aria-label="Close">&times;</button>
+    <h3>QR code</h3>
+    <canvas id="qrBig"></canvas>
+    <input id="qrText" aria-label="Link to encode" spellcheck="false">
+    <p class="qr-err" id="qrErr"></p>
+    <div class="qr-row">
+      <button class="btn btn-ghost" id="qrThis" type="button">This page</button>
+      <button class="btn" id="qrSave" type="button">Save PNG</button>
+    </div>
+  </div>
+</div>
+
+<script>/* Minimal QR encoder — byte mode, versions 1-6, EC levels L and M.
+   Returns a square array of 0/1 modules, or null if the text won't fit. */
+function qrEncode(text, prefer){
+  "use strict";
+
+  /* ---- GF(256) ---- */
+  var EXP = new Uint8Array(512), LOG = new Uint8Array(256);
+  (function(){
+    var x = 1;
+    for (var i=0;i<255;i++){
+      EXP[i] = x; LOG[x] = i;
+      x <<= 1; if (x & 0x100) x ^= 0x11D;
+    }
+    for (var j=255;j<512;j++) EXP[j] = EXP[j-255];
+  })();
+  function mul(a,b){ return (a===0||b===0) ? 0 : EXP[LOG[a]+LOG[b]]; }
+
+  function genPoly(n){
+    var g = [1];
+    for (var i=0;i<n;i++){
+      var ng = new Array(g.length+1).fill(0);
+      for (var j=0;j<g.length;j++){
+        ng[j] ^= mul(g[j], EXP[i]);
+        ng[j+1] ^= g[j];
+      }
+      g = ng;
+    }
+    return g.reverse();   /* descending order: g[0] is the x^n coefficient (1) */
+  }
+  function ecc(data, n){
+    var g = genPoly(n), res = new Array(n).fill(0);
+    for (var i=0;i<data.length;i++){
+      var f = data[i] ^ res[0];
+      res.shift(); res.push(0);
+      if (f !== 0) for (var j=0;j<n;j++) res[j] ^= mul(g[j+1], f);
+    }
+    return res;
+  }
+
+  /* ---- capacity tables: version -> level -> [dataCodewords, ecPerBlock, blocks] ---- */
+  var TAB = {
+    1:{L:[19,7,1],  M:[16,10,1]},
+    2:{L:[34,10,1], M:[28,16,1]},
+    3:{L:[55,15,1], M:[44,26,1]},
+    4:{L:[80,20,1], M:[64,18,2]},
+    5:{L:[108,26,1],M:[86,24,2]},
+    6:{L:[136,18,2],M:[108,16,4]}
+  };
+  var ALIGN = {1:[],2:[6,18],3:[6,22],4:[6,26],5:[6,30],6:[6,34]};
+  var ECBITS = {L:1, M:0};
+
+  /* ---- UTF-8 bytes ---- */
+  var bytes = [];
+  (function(){
+    var enc = unescape(encodeURIComponent(String(text)));
+    for (var i=0;i<enc.length;i++) bytes.push(enc.charCodeAt(i) & 0xFF);
+  })();
+
+  /* ---- pick the smallest version that fits ---- */
+  var levels = (prefer === "L") ? ["L","M"] : ["M","L"];
+  var version = 0, level = null, spec = null;
+  outer:
+  for (var v=1; v<=6; v++){
+    for (var li=0; li<levels.length; li++){
+      var s = TAB[v][levels[li]];
+      if (bytes.length + 2 <= s[0]){ version = v; level = levels[li]; spec = s; break outer; }
+    }
+  }
+  if (!version) return null;
+
+  var dataCount = spec[0], ecLen = spec[1], blocks = spec[2];
+  var size = 17 + 4*version;
+
+  /* ---- bit stream ---- */
+  var bits = [];
+  function put(val, len){ for (var i=len-1;i>=0;i--) bits.push((val>>i) & 1); }
+  put(4, 4);                 /* byte mode */
+  put(bytes.length, 8);      /* count indicator, versions 1-9 */
+  for (var i=0;i<bytes.length;i++) put(bytes[i], 8);
+  var cap = dataCount * 8;
+  for (var t=0; t<4 && bits.length<cap; t++) bits.push(0);
+  while (bits.length % 8) bits.push(0);
+  var words = [];
+  for (var b=0;b<bits.length;b+=8){
+    var w = 0; for (var k=0;k<8;k++) w = (w<<1) | bits[b+k];
+    words.push(w);
+  }
+  var padA = 0xEC, padB = 0x11, flip = 0;
+  while (words.length < dataCount){ words.push(flip++ % 2 ? padB : padA); }
+
+  /* ---- blocks + interleave ---- */
+  var per = dataCount / blocks;
+  var dBlocks = [], eBlocks = [];
+  for (var bi=0; bi<blocks; bi++){
+    var chunk = words.slice(bi*per, (bi+1)*per);
+    dBlocks.push(chunk);
+    eBlocks.push(ecc(chunk, ecLen));
+  }
+  var final = [];
+  for (var c=0;c<per;c++) for (var bj=0;bj<blocks;bj++) final.push(dBlocks[bj][c]);
+  for (var c2=0;c2<ecLen;c2++) for (var bk=0;bk<blocks;bk++) final.push(eBlocks[bk][c2]);
+
+  /* ---- matrix ---- */
+  var m = [], reserved = [];
+  for (var r=0;r<size;r++){ m.push(new Array(size).fill(0)); reserved.push(new Array(size).fill(false)); }
+  function set(r,c,val){ m[r][c] = val; reserved[r][c] = true; }
+
+  function finder(r,c){
+    for (var dr=-1; dr<=7; dr++) for (var dc=-1; dc<=7; dc++){
+      var rr = r+dr, cc = c+dc;
+      if (rr<0||cc<0||rr>=size||cc>=size) continue;
+      var inRing = (dr>=0&&dr<=6&&(dc===0||dc===6)) || (dc>=0&&dc<=6&&(dr===0||dr===6));
+      var inCore = dr>=2&&dr<=4&&dc>=2&&dc<=4;
+      set(rr, cc, (inRing||inCore) ? 1 : 0);
+    }
+  }
+  finder(0,0); finder(0,size-7); finder(size-7,0);
+
+  var ap = ALIGN[version];
+  for (var ai=0; ai<ap.length; ai++) for (var aj=0; aj<ap.length; aj++){
+    var ar = ap[ai], ac = ap[aj];
+    if ((ar<=7&&ac<=7) || (ar<=7&&ac>=size-8) || (ar>=size-8&&ac<=7)) continue;
+    for (var dr2=-2; dr2<=2; dr2++) for (var dc2=-2; dc2<=2; dc2++){
+      var ring = Math.max(Math.abs(dr2), Math.abs(dc2));
+      set(ar+dr2, ac+dc2, (ring===1) ? 0 : 1);
+    }
+  }
+
+  for (var i2=8; i2<size-8; i2++){
+    set(6, i2, i2%2===0 ? 1 : 0);
+    set(i2, 6, i2%2===0 ? 1 : 0);
+  }
+  set(size-8, 8, 1); /* dark module */
+
+  /* reserve format areas */
+  for (var f=0; f<9; f++){
+    if (!reserved[8][f]) { m[8][f]=0; reserved[8][f]=true; }
+    if (!reserved[f][8]) { m[f][8]=0; reserved[f][8]=true; }
+  }
+  for (var f2=0; f2<8; f2++){
+    if (!reserved[8][size-1-f2]) { m[8][size-1-f2]=0; reserved[8][size-1-f2]=true; }
+    if (!reserved[size-1-f2][8]) { m[size-1-f2][8]=0; reserved[size-1-f2][8]=true; }
+  }
+
+  /* ---- place data, zigzag from bottom-right ---- */
+  var bitIdx = 0, total = final.length*8;
+  function dataBit(){
+    if (bitIdx >= total) return 0;
+    var byte = final[bitIdx >> 3], bit = (byte >> (7 - (bitIdx & 7))) & 1;
+    bitIdx++;
+    return bit;
+  }
+  var up = true;
+  for (var col=size-1; col>0; col-=2){
+    if (col === 6) col--;                       /* skip the vertical timing column */
+    for (var n=0; n<size; n++){
+      var row = up ? (size-1-n) : n;
+      for (var q=0; q<2; q++){
+        var cc2 = col - q;
+        if (!reserved[row][cc2]) m[row][cc2] = dataBit();
+      }
+    }
+    up = !up;
+  }
+
+  /* ---- masking ---- */
+  function maskFn(k, r, c){
+    switch(k){
+      case 0: return (r+c) % 2 === 0;
+      case 1: return r % 2 === 0;
+      case 2: return c % 3 === 0;
+      case 3: return (r+c) % 3 === 0;
+      case 4: return (Math.floor(r/2) + Math.floor(c/3)) % 2 === 0;
+      case 5: return ((r*c) % 2) + ((r*c) % 3) === 0;
+      case 6: return (((r*c) % 2) + ((r*c) % 3)) % 2 === 0;
+      case 7: return (((r+c) % 2) + ((r*c) % 3)) % 2 === 0;
+    }
+  }
+  function penalty(g){
+    var p = 0, n = g.length, i, j, run, dark = 0;
+    for (i=0;i<n;i++){
+      run = 1;
+      for (j=1;j<n;j++){
+        if (g[i][j] === g[i][j-1]) run++;
+        else { if (run >= 5) p += 3 + (run-5); run = 1; }
+      }
+      if (run >= 5) p += 3 + (run-5);
+    }
+    for (j=0;j<n;j++){
+      run = 1;
+      for (i=1;i<n;i++){
+        if (g[i][j] === g[i-1][j]) run++;
+        else { if (run >= 5) p += 3 + (run-5); run = 1; }
+      }
+      if (run >= 5) p += 3 + (run-5);
+    }
+    for (i=0;i<n-1;i++) for (j=0;j<n-1;j++){
+      var a = g[i][j];
+      if (a === g[i][j+1] && a === g[i+1][j] && a === g[i+1][j+1]) p += 3;
+    }
+    var pat1 = [1,0,1,1,1,0,1,0,0,0,0], pat2 = [0,0,0,0,1,0,1,1,1,0,1];
+    function scan(arr){
+      for (var s=0; s+11<=arr.length; s++){
+        var ok1 = true, ok2 = true;
+        for (var t2=0;t2<11;t2++){
+          if (arr[s+t2] !== pat1[t2]) ok1 = false;
+          if (arr[s+t2] !== pat2[t2]) ok2 = false;
+        }
+        if (ok1 || ok2) p += 40;
+      }
+    }
+    for (i=0;i<n;i++){
+      scan(g[i]);
+      var colArr = []; for (j=0;j<n;j++) colArr.push(g[j][i]);
+      scan(colArr);
+    }
+    for (i=0;i<n;i++) for (j=0;j<n;j++) if (g[i][j]) dark++;
+    var pct = dark * 100 / (n*n);
+    p += Math.floor(Math.abs(pct - 50) / 5) * 10;
+    return p;
+  }
+
+  function formatBits(lvl, mk){
+    var data = (ECBITS[lvl] << 3) | mk;
+    var rem = data << 10;
+    for (var i=4;i>=0;i--) if (rem & (1 << (i+10))) rem ^= 0x537 << i;
+    return ((data << 10) | rem) ^ 0x5412;
+  }
+
+  /* format-info module coordinates, bit 0 (LSB) first — the two copies */
+  var FMT_A = [[0,8],[1,8],[2,8],[3,8],[4,8],[5,8],[7,8],[8,8],
+               [8,7],[8,5],[8,4],[8,3],[8,2],[8,1],[8,0]];
+  var FMT_B = [[8,size-1],[8,size-2],[8,size-3],[8,size-4],[8,size-5],[8,size-6],[8,size-7],[8,size-8],
+               [size-7,8],[size-6,8],[size-5,8],[size-4,8],[size-3,8],[size-2,8],[size-1,8]];
+
+  var best = null, bestScore = Infinity, bestMask = 0;
+  for (var mk=0; mk<8; mk++){
+    var g2 = [];
+    for (var r2=0;r2<size;r2++){
+      g2.push(m[r2].slice());
+      for (var c3=0;c3<size;c3++) if (!reserved[r2][c3] && maskFn(mk, r2, c3)) g2[r2][c3] ^= 1;
+    }
+    /* write format info so the penalty is measured on the finished symbol */
+    var fmt = formatBits(level, mk);
+    for (var i3=0;i3<15;i3++){
+      var bit = (fmt >> i3) & 1;
+      var a = FMT_A[i3], b2 = FMT_B[i3];
+      g2[a[0]][a[1]] = bit;
+      g2[b2[0]][b2[1]] = bit;
+    }
+    var sc = penalty(g2);
+    if (sc < bestScore){ bestScore = sc; best = g2; bestMask = mk; }
+  }
+
+  best.debug = {final: final, reserved: reserved, size: size, ecLen: ecLen, blocks: blocks, dataCount: dataCount};
+  best.version = version;
+  best.level = level;
+  best.mask = bestMask;
+  return best;
+}
+
+</script>
+<script>
+(function(){
+  var $=function(s){return document.getElementById(s);};
+  var SITE="https://modernenglish.au/";
+  function pageUrl(){ return /^https?:/.test(location.href) ? location.href.split("#")[0] : SITE; }
+  function draw(cv,text,px){
+    var g=qrEncode(text); if(!g) return false;
+    var n=g.length,q=4,t=n+q*2,dpr=Math.min(window.devicePixelRatio||1,3);
+    var s=Math.max(1,Math.round(px*dpr/t)),size=t*s;
+    cv.width=size; cv.height=size;
+    cv.style.width=(size/dpr)+"px"; cv.style.height=(size/dpr)+"px";
+    var x=cv.getContext("2d");
+    x.fillStyle="#ffffff"; x.fillRect(0,0,size,size);
+    x.fillStyle="#111111";
+    for(var r=0;r<n;r++) for(var c=0;c<n;c++) if(g[r][c]) x.fillRect((c+q)*s,(r+q)*s,s,s);
+    return true;
+  }
+  var back=$("qrBack"), big=$("qrBig"), txt=$("qrText"), err=$("qrErr");
+  draw($("qrMini"), pageUrl(), 58);
+  function render(){
+    var v=txt.value.trim();
+    if(!v){ err.textContent="Type a link."; return; }
+    err.textContent = draw(big,v,230) ? "" : "Too long for this QR size.";
+  }
+  $("qrTile").addEventListener("click",function(){ txt.value=pageUrl(); back.hidden=false; render(); });
+  $("qrClose").addEventListener("click",function(){ back.hidden=true; });
+  back.addEventListener("click",function(e){ if(e.target===back) back.hidden=true; });
+  txt.addEventListener("input",render);
+  $("qrThis").addEventListener("click",function(){ txt.value=pageUrl(); render(); });
+  $("qrSave").addEventListener("click",function(){
+    try{
+      var a=document.createElement("a");
+      a.href=big.toDataURL("image/png"); a.download="qr-code.png";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }catch(e){ err.textContent="Right-click the code and save it instead."; }
+  });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape" && !back.hidden) back.hidden=true; });
+})();
+</script>
+
+</body>
+</html>
