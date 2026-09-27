@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>IELTS General Reading Mini Test – Tenants' Rights (Note Completion) | Modern English Australia · Koala Spies Sydney</title>
+  <meta name="description" content="Free IELTS General Training Reading mini test: read a guide to tenants' rights in NSW when a landlord sells, and complete 7 notes. Auto-scored with feedback.">
+  <link rel="canonical" href="https://modernenglish.au/IELTSTESTS/mini-tenants-rights.html">
+
+  <style>
+    :root{
+      --bg:#f5f5f5;
+      --bar:#1e1f21;
+      --panel:#ffffff;
+      --ink:#1e1e1e;
+      --muted:#6b737a;
+      --line:rgba(0,0,0,.12);
+
+      --accent:#ff7a1a;
+      --shadow:0 10px 28px rgba(0,0,0,.14);
+      --radius:16px;
+
+      --ok:#1db954;
+      --err:#e74c3c;
+
+      --header-h:72px;
+      --gap-w:56px; /* wider gap so we can host the feedback window */
+
+      /* added for QR safe-area */
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      -webkit-text-size-adjust:100%;
+      text-rendering:optimizeLegibility;
+
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+    button,input{ font:inherit; }
+
+    /* ===== QR (top-left) — ADDED (does not affect your test) ===== */
+    .qr-fab{
+      position:fixed;
+      top:calc(10px + var(--safe-top));
+      left:calc(10px + var(--safe-left));
+      z-index:9999;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+    }
+    .qr-btn{
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,.18);
+      background:#fff;
+      box-shadow:0 10px 22px rgba(0,0,0,.14);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      line-height:1;
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+    }
+    .qr-btn:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 3px rgba(255,122,26,.22), 0 10px 22px rgba(0,0,0,.14);
+    }
+    .qr-pop{
+      width:220px;
+      border:1px solid rgba(0,0,0,.14);
+      border-radius:14px;
+      background:#fff;
+      box-shadow:0 16px 34px rgba(0,0,0,.18);
+      overflow:hidden;
+      display:none;
+    }
+    .qr-pop.show{ display:block; }
+    .qr-pop .qr-head{
+      padding:10px 12px;
+      font-weight:900;
+      font-size:.9rem;
+      color:var(--muted);
+      border-bottom:1px solid rgba(0,0,0,.10);
+      background:linear-gradient(to bottom, rgba(0,0,0,.05), rgba(0,0,0,0));
+    }
+    .qr-pop .qr-body{
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:center;
+    }
+    #qrcode{
+      width:160px;
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .qr-hint{
+      margin:0;
+      font-size:.85rem;
+      color:var(--muted);
+      text-align:center;
+      line-height:1.35;
+    }
+    /* ===== end QR additions ===== */
+
+    /* ===== Header ===== */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:var(--bar);
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .topbar-inner{
+      max-width:1320px;
+      margin:0 auto;
+      padding:10px 14px;
+      min-height:var(--header-h);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+    .brand .title{
+      font-weight:900;
+      letter-spacing:1.6px;
+      color:var(--accent);
+      font-size:1.05rem;
+      text-transform:uppercase;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand .sub{
+      font-weight:500;
+      font-size:.9rem;
+      color:rgba(255,255,255,.88);
+      letter-spacing:.6px;
+      margin-top:4px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    /* ===== Main ===== */
+    main{
+      flex:1;
+      max-width:1320px;
+      width:100%;
+      margin:0 auto;
+      padding:14px 14px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .rubric{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .rubric h2{ margin:0; font-size:1.05rem; }
+    .rubric p{ margin:4px 0 0; color:var(--muted); font-style:italic; }
+    .rubric .meta{ text-align:right; color:var(--muted); font-size:.92rem; white-space:nowrap; }
+
+    /* ===== Split workspace ===== */
+    .split{
+      flex:1;
+      min-height:min(72vh, 780px);
+      display:grid;
+      grid-template-columns: minmax(320px, 1fr) var(--gap-w) minmax(420px, 1fr);
+      gap:0;
+      align-items:stretch;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+    .panel-head{
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(to bottom, rgba(0,0,0,.03), rgba(0,0,0,0));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .panel-title{ font-weight:900; font-size:.98rem; letter-spacing:.2px; }
+    .panel-sub{ font-size:.9rem; color:var(--muted); }
+    .panel-body{
+      padding:14px;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    /* ===== Gap column: resizer + feedback window ===== */
+    .gapcol{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 0;
+      user-select:none;
+    }
+
+    /* Resizer handle (kept) */
+    .divider{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:col-resize;
+      touch-action:none;
+    }
+    .divider .handle{
+      width:10px;
+      height:54px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.12);
+    }
+
+    /* Mini feedback “window” in the gap */
+    .gap-feedback{
+      width:calc(var(--gap-w) - 14px);
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+      box-shadow:0 10px 22px rgba(0,0,0,.10);
+      overflow:hidden;
+      display:none; /* shown on submit */
+    }
+    .gap-feedback .gf-head{
+      padding:8px 8px 6px;
+      font-weight:900;
+      font-size:.78rem;
+      letter-spacing:.3px;
+      color:var(--muted);
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(to bottom, rgba(0,0,0,.05), rgba(0,0,0,0));
+      text-align:center;
+    }
+    .gap-feedback .gf-body{
+      padding:8px;
+      font-size:.84rem;
+      line-height:1.35;
+      color:var(--ink);
+      max-height:40vh;
+      overflow:auto;
+    }
+    .gap-feedback .gf-body strong{ font-weight:900; }
+    .gf-muted{ color:var(--muted); }
+
+    /* Passage typography */
+    .reading h3{ margin:0 0 10px; font-size:1.05rem; font-weight:900; }
+    .reading p{ margin:0 0 12px; line-height:1.65; }
+    .reading .lead{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-style:italic;
+      line-height:1.5;
+    }
+    .reading .subhead{
+      margin:14px 0 8px;
+      font-weight:900;
+    }
+
+    /* Questions */
+    .task-title{ margin:0 0 6px; font-size:1.05rem; font-weight:900; }
+    .task-instruction{ margin:0 0 12px; color:var(--muted); line-height:1.5; }
+
+    /* Table */
+    .table{
+      margin-top:10px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .t-head,.t-row{
+      display:grid;
+      grid-template-columns: 74px 1fr 240px;
+      gap:12px;
+      align-items:start;
+      padding:10px 12px;
+    }
+    .t-head{
+      background:linear-gradient(to bottom, rgba(0,0,0,.05), rgba(0,0,0,0));
+      border-bottom:1px solid var(--line);
+      font-weight:900;
+      color:var(--muted);
+      font-size:.88rem;
+      letter-spacing:.3px;
+    }
+    .t-row{ border-bottom:1px solid var(--line); }
+    .t-row:last-child{ border-bottom:none; }
+    .qnum{ font-weight:900; font-variant-numeric:tabular-nums; }
+    .cell{ line-height:1.45; }
+    .answer-cell{ display:flex; justify-content:flex-end; }
+
+    .ans{
+      width:100%;
+      padding:10px 10px;
+      border-radius:10px;
+      border:2px solid rgba(0,0,0,.18);
+      background:#fff;
+      outline:none;
+      font-size:1rem;
+    }
+    .ans:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(255,122,26,.22);
+    }
+    .ans.ok{ border-color:var(--ok); background:rgba(29,185,84,.10); }
+    .ans.bad{ border-color:var(--err); background:rgba(231,76,60,.10); }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .action{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,.14);
+      background:#fff;
+      color:var(--ink);
+      cursor:pointer;
+      font-weight:900;
+      box-shadow:0 10px 22px rgba(0,0,0,.10);
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+      white-space:nowrap;
+    }
+    .action.primary{
+      border-color:rgba(255,122,26,.35);
+      background:rgba(255,122,26,.14);
+    }
+    .action:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 3px rgba(255,122,26,.22), 0 10px 22px rgba(0,0,0,.10);
+    }
+
+    #score{ margin-top:12px; font-weight:900; min-height:1.4rem; }
+
+    /* Keep the big feedback panel for mobile / fallback */
+    #feedbackPanel{
+      margin-top:12px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:12px;
+      display:none;
+    }
+    #feedbackText{ color:var(--muted); line-height:1.55; }
+
+    /* ===== Footer ===== */
+    footer{
+      background:var(--bar);
+      border-top:1px solid rgba(255,255,255,.12);
+      color:rgba(255,255,255,.72);
+    }
+    .footer-inner{
+      max-width:1320px;
+      margin:0 auto;
+      padding:12px 14px;
+      text-align:center;
+      font-size:.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .split{ grid-template-columns: 1fr; min-height:auto; gap:12px; }
+      .gapcol{ display:none; }
+
+      .t-head{ display:none; }
+      .t-row{ grid-template-columns: 1fr; gap:8px; }
+      .answer-cell{ justify-content:flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; scroll-behavior:auto !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- QR Generator (TOP-LEFT) — ADDED (does not change your test) -->
+  <div class="qr-fab" aria-label="QR code generator">
+    <button class="qr-btn" id="qrBtn" type="button" aria-expanded="false" aria-controls="qrPop" title="QR code">
+      QR
+    </button>
+
+    <div class="qr-pop" id="qrPop" role="dialog" aria-modal="false" aria-label="QR code popup">
+      <div class="qr-head">Share this page</div>
+      <div class="qr-body">
+        <div id="qrcode" aria-label="QR code"></div>
+        <p class="qr-hint">Scan on a phone to open this page.</p>
+      </div>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="title">Modern English Australia</div>
+        <div class="sub">Koala Spies Sydney · IELTS Practice</div>
+      </div>
+    </div>
+  </header>
+  <nav class="back-link" style="max-width:1200px;margin:10px auto 0;padding:0 16px;font:600 14px/1.4 system-ui,sans-serif;"><a href="../tests-ielts-reading.html" style="color:#3968ea;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;">← All IELTS Reading tests</a></nav>
+
+
+  <main>
+    <section class="rubric" aria-label="Rubric">
+      <div>
+        <h2>SECTION 2</h2>
+        <p>Read the text below and answer Questions 15–21.</p>
+      </div>
+      <div class="meta"></div>
+    </section>
+
+    <section class="split" id="split">
+      <!-- LEFT: TEXT -->
+      <section class="panel" aria-label="Reading text">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Reading passage</div>
+            <div class="panel-sub"></div>
+          </div>
+        </div>
+
+        <div class="panel-body reading">
+          <h3>Tenants’ Rights: When the Landlord Decides to Sell</h3>
+          <p class="lead">
+            When a landlord decides to sell a rented home, tenants in New South Wales are protected by specific rules.
+            These rules determine how and when the landlord or agent may enter the property, how much notice must be given,
+            and what options the tenant has if they wish to leave.
+          </p>
+
+          <div class="subhead">Notification rights</div>
+          <p>
+            Before the property can be shown to potential buyers, the landlord or agent must provide written notice at least two weeks in advance.
+            After this, they must try to agree with the tenant on suitable inspection times and give at least 48 hours’ notice before each visit.
+            Tenants do not have to agree to more than two inspections per week. Access is restricted to certain hours, and no one may enter on Sundays
+            or public holidays without the tenant’s consent.
+          </p>
+
+          <div class="subhead">Inspections</div>
+          <p>
+            Open-house inspections are not specifically addressed in the law. While many agents treat them as normal practice, tenant advocates argue
+            that they allow people who are not genuine buyers to enter the home. Tenants may request that inspections be limited to registered prospective purchasers.
+          </p>
+
+          <p>
+            If the landlord intends to end the tenancy because of a sale, they must provide evidence of the sale or proposed sale, such as part of a contract
+            or a statement from a solicitor. The required notice period depends on whether the agreement is fixed-term or periodic. For example, a proposed sale
+            requires at least 90 days’ notice for most agreements, while an actual sale requires at least 30 days.
+          </p>
+
+          <div class="subhead">When the Tenant decides to leave</div>
+          <p>
+            Tenants who wish to leave may do so by giving the appropriate notice. Those on periodic agreements can leave at any time with 21 days’ notice.
+            Tenants on fixed-term agreements may leave earlier if they receive a termination notice or if the landlord failed to disclose the planned sale
+            before the agreement was signed.
+          </p>
+
+          <div class="subhead">A New Landlord</div>
+          <p>
+            If neither party ends the agreement, the tenancy continues after the sale, and the buyer becomes the new landlord under the same terms.
+          </p>
+        </div>
+      </section>
+
+      <!-- GAP COLUMN: resizer + feedback window -->
+      <aside class="gapcol" aria-label="Gap tools">
+        <div class="divider" id="divider" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize panels">
+          <div class="handle" aria-hidden="true"></div>
+        </div>
+
+        <div class="gap-feedback" id="gapFeedback" aria-live="polite">
+          <div class="gf-head">FEEDBACK</div>
+          <div class="gf-body" id="gapFeedbackBody">
+            <span class="gf-muted">Submit to enable feedback.</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT: QUESTIONS -->
+      <section class="panel" aria-label="Questions">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Questions 15–21</div>
+            <div class="panel-sub">Write NO MORE THAN THREE WORDS AND/OR A NUMBER from the passage for each answer.</div>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <h3 class="task-title">Complete the notes</h3>
+          <p class="task-instruction">Type your answers in the boxes, then submit to score.</p>
+
+          <div class="table" role="group" aria-label="Answer table">
+            <div class="t-head" aria-hidden="true">
+              <div>Q</div>
+              <div>Question</div>
+              <div style="text-align:right;">Answer</div>
+            </div>
+
+            <div class="t-row" id="q15">
+            <div class="qnum">15</div>
+            <div class="cell">Landlords must give tenants written notice no less than __________ before the first inspection.</div>
+            <div class="answer-cell">
+              <input class="ans" type="text" autocomplete="off" spellcheck="false" data-q="15" aria-label="Answer for question 15" />
+            </div>
+          </div>
+
+          <div class="t-row" id="q16">
+            <div class="qnum">16</div>
+            <div class="cell">Without the tenant’s __________, nobody can enter the property on a Sunday.</div>
+            <div class="answer-cell">
+              <input class="ans" type="text" autocomplete="off" spellcheck="false" data-q="16" aria-label="Answer for question 16" />
+            </div>
+          </div>
+
+          <div class="t-row" id="q17">
+            <div class="qnum">17</div>
+            <div class="cell">Tenant advocates argue that open inspections let in people who are not __________.</div>
+            <div class="answer-cell">
+              <input class="ans" type="text" autocomplete="off" spellcheck="false" data-q="17" aria-label="Answer for question 17" />
+            </div>
+          </div>
+
+          <div class="t-row" id="q18">
+            <div class="qnum">18</div>
+            <div class="cell">When a sale is only proposed, most agreements require at least __________ of notice.</div>
+            <div class="answer-cell">
+              <input class="ans" type="text" autocomplete="off" spellcheck="false" data-q="18" aria-label="Answer for question 18" />
+            </div>
+          </div>
+
+          <div class="t-row" id="q19">
+            <div class="qnum">19</div>
+            <div class="cell">To end the tenancy because of a sale, the landlord must show evidence such as part of a __________ or a statement from a solicitor.</div>
+            <div class="answer-cell">
+              <input class="ans" type="text" autocomplete="off" spellcheck="false" data-q="19" aria-label="Answer for question 19" />
+            </div>
+          </div>
+
+          <div class="t-row" id="q20">
+            <div class="qnum">20</div>
+            <div class="cell">Tenants with a __________ can leave at any time by giving 21 days’ notice.</div>
+            <div class="answer-cell">
+              <input class="ans" type="text" autocomplete="off" spellcheck="false" data-q="20" aria-label="Answer for question 20" />
+            </div>
+          </div>
+
+          <div class="t-row" id="q21">
+            <div class="qnum">21</div>
+            <div class="cell">If neither side ends the agreement, the tenancy continues after the sale under the same __________.</div>
+            <div class="answer-cell">
+              <input class="ans" type="text" autocomplete="off" spellcheck="false" data-q="21" aria-label="Answer for question 21" />
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="action primary" id="submitBtn" type="button">Submit &amp; score</button>
+          <button class="action" id="revealNextBtn" type="button" disabled>Reveal next</button>
+          <button class="action" id="resetBtn" type="button">Reset</button>
+        </div>
+
+        <div id="score" aria-live="polite"></div>
+
+        <!-- Fallback feedback panel (used on mobile; still works on desktop too) -->
+        <div id="feedbackPanel" aria-live="polite">
+          <div style="font-weight:900; margin-bottom:6px;">Feedback</div>
+          <div id="feedbackText"></div>
+        </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+    </div>
+  </footer>
+
+  <!-- QR library — ADDED -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- QR init — ADDED (separate from your test script) -->
+  <script>
+    const qrBtn = document.getElementById("qrBtn");
+    const qrPop = document.getElementById("qrPop");
+    const qrTarget = document.getElementById("qrcode");
+    let qrInstance = null;
+
+    function toggleQR(show){
+      const willShow = (typeof show === "boolean") ? show : !qrPop.classList.contains("show");
+      qrPop.classList.toggle("show", willShow);
+      qrBtn.setAttribute("aria-expanded", String(willShow));
+
+      if (willShow && !qrInstance){
+        qrInstance = new QRCode(qrTarget, {
+          text: window.location.href,
+          width: 160,
+          height: 160,
+          colorDark: "#1e1e1e",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }
+    }
+
+    qrBtn.addEventListener("click", () => toggleQR());
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") toggleQR(false);
+    });
+    document.addEventListener("click", (e) => {
+      if (!qrPop.classList.contains("show")) return;
+      const inside = e.target === qrBtn || qrPop.contains(e.target) || qrBtn.contains(e.target);
+      if (!inside) toggleQR(false);
+    });
+  </script>
+
+  <!-- YOUR ORIGINAL TEST SCRIPT — UNCHANGED -->
+  <script>
+  /* =========================
+     Desktop split resizer (unchanged behavior)
+  ========================= */
+  const split = document.getElementById("split");
+  const divider = document.getElementById("divider");
+  let dragging = false;
+
+  function setCols(pxLeft){
+    if (!split) return;
+    const rect = split.getBoundingClientRect();
+    const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--gap-w")) || 56;
+    const minLeft = 320;
+    const minRight = 420;
+    const maxLeft = rect.width - gap - minRight;
+    const left = Math.max(minLeft, Math.min(pxLeft, maxLeft));
+    split.style.gridTemplateColumns = `${left}px ${gap}px 1fr`;
+  }
+
+  function startDrag(clientX){
+    if (!split) return;
+    const rect = split.getBoundingClientRect();
+    setCols(clientX - rect.left);
+    dragging = true;
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+  }
+
+  function moveDrag(clientX){
+    if (!dragging || !split) return;
+    const rect = split.getBoundingClientRect();
+    setCols(clientX - rect.left);
+  }
+
+  function endDrag(){
+    if (!dragging) return;
+    dragging = false;
+    document.body.style.cursor = "";
+    document.body.style.userSelect = "";
+  }
+
+  if (divider && split){
+    divider.addEventListener("mousedown", (e) => startDrag(e.clientX));
+    window.addEventListener("mousemove", (e) => moveDrag(e.clientX));
+    window.addEventListener("mouseup", endDrag);
+
+    divider.addEventListener("touchstart", (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      startDrag(e.touches[0].clientX);
+    }, { passive:true });
+
+    window.addEventListener("touchmove", (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      moveDrag(e.touches[0].clientX);
+    }, { passive:true });
+
+    window.addEventListener("touchend", endDrag);
+
+    divider.addEventListener("keydown", (e) => {
+      const step = 24;
+      const cs = getComputedStyle(split).gridTemplateColumns.split(" ");
+      const currentLeft = parseFloat(cs[0]) || 520;
+      if (e.key === "ArrowLeft") { e.preventDefault(); setCols(currentLeft - step); }
+      if (e.key === "ArrowRight"){ e.preventDefault(); setCols(currentLeft + step); }
+    });
+  }
+
+  /* =========================
+     Submit + score + reveal-next + feedback
+     (Works with your current HTML as-is)
+  ========================= */
+
+  // Accept multiple answers with "|"
+  const ANSWERS = {
+    15: "two weeks|2 weeks|two weeks' notice|2 weeks' notice|two weeks notice|2 weeks notice",
+    16: "consent",
+    17: "genuine buyers",
+    18: "90 days|ninety days|90 days' notice|90 days notice",
+    19: "contract|sale contract",
+    20: "periodic agreement|periodic agreements|periodic tenancy",
+    21: "terms"
+  };
+
+  const FEEDBACK = {
+    15: "Written notice must be provided at least two weeks in advance before the property can be shown.",
+    16: "No one may enter on Sundays or public holidays without the tenant’s consent.",
+    17: "Tenant advocates argue open-house inspections allow entry to people who are not genuine buyers.",
+    18: "A proposed sale requires at least 90 days’ notice for most agreements.",
+    19: "'They must provide evidence of the sale or proposed sale, such as part of a contract or a statement from a solicitor.'",
+    20: "Those on periodic agreements can leave at any time with 21 days’ notice.",
+    21: "If neither party ends the agreement, the tenancy continues after the sale under the same terms."
+  };
+
+  const inputs = Array.from(document.querySelectorAll(".ans"));
+
+  const scoreEl = document.getElementById("score");
+  const submitBtn = document.getElementById("submitBtn");
+  const revealNextBtn = document.getElementById("revealNextBtn");
+  const resetBtn = document.getElementById("resetBtn");
+
+  const feedbackPanel = document.getElementById("feedbackPanel");
+  const feedbackText = document.getElementById("feedbackText");
+
+  const gapFeedback = document.getElementById("gapFeedback");
+  const gapFeedbackBody = document.getElementById("gapFeedbackBody");
+
+  let submitted = false;
+  const revealOrder = [15,16,17,18,19,20,21];
+  let revealIndex = 0;
+
+  function norm(s){
+    return String(s || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[’]/g, "'")
+      .replace(/\s+/g, " ");
+  }
+
+  function escapeHtml(str){
+    return String(str)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  function keyFor(q){
+    const raw = ANSWERS[q];
+    if (!raw) return [];
+    return String(raw).split("|").map(norm).filter(Boolean);
+  }
+
+  // Each input belongs to the question in its row (row ids q15–q21).
+  function getQuestionNumberFromInput(input){
+    const row = input.closest(".t-row");
+    if (!row || !row.id) return NaN;
+    return Number(row.id.replace(/^q/i, ""));
+  }
+
+  function getInputForQuestion(q){
+    return inputs.find(i => getQuestionNumberFromInput(i) === q) || null;
+  }
+
+  function clearMarks(){
+    inputs.forEach(i => i.classList.remove("ok","bad"));
+  }
+
+  function lockInputs(lock){
+    inputs.forEach(i => { i.disabled = lock; });
+  }
+
+  function setScore(correct, total){
+    if (!scoreEl) return;
+    scoreEl.textContent = `Score: ${correct} / ${total}`;
+    scoreEl.style.color = (total > 0 && correct === total) ? "var(--ok)" : "var(--ink)";
+  }
+
+  function showFeedback(q){
+    const fb = (FEEDBACK[q] || "").trim();
+    const html = fb
+      ? `<div><strong>Q${q}:</strong> ${escapeHtml(fb)}</div>`
+      : `<div><strong>Q${q}:</strong> <span class="gf-muted">(No feedback added.)</span></div>`;
+
+    if (feedbackPanel && feedbackText){
+      feedbackPanel.style.display = "block";
+      feedbackText.innerHTML = html;
+    }
+
+    if (gapFeedback && gapFeedbackBody){
+      gapFeedback.style.display = "block";
+      gapFeedbackBody.innerHTML = html;
+    }
+  }
+
+  function primeFeedback(){
+    const msg = "Click “Reveal next” to show answers and feedback.";
+    if (gapFeedback && gapFeedbackBody){
+      gapFeedback.style.display = "block";
+      gapFeedbackBody.innerHTML = `<span class="gf-muted">${escapeHtml(msg)}</span>`;
+    }
+    if (feedbackPanel && feedbackText){
+      feedbackPanel.style.display = "block";
+      feedbackText.textContent = msg;
+    }
+  }
+
+  function submitAndScore(){
+    clearMarks();
+
+    let correct = 0;
+    let total = 0;
+
+    inputs.forEach(i => {
+      const q = getQuestionNumberFromInput(i);
+      const keys = keyFor(q);
+      if (!keys.length) return;
+
+      total += 1;
+
+      const user = norm(i.value);
+      if (!user){
+        i.classList.add("bad");
+        return;
+      }
+
+      if (keys.includes(user)){
+        i.classList.add("ok");
+        correct += 1;
+      } else {
+        i.classList.add("bad");
+      }
+    });
+
+    setScore(correct, total);
+
+    submitted = true;
+    lockInputs(true);
+
+    revealIndex = 0;
+    if (revealNextBtn) revealNextBtn.disabled = false;
+
+    primeFeedback();
+  }
+
+  function revealNext(){
+    if (!submitted) return;
+
+    let q = null;
+    while (revealIndex < revealOrder.length){
+      const cand = revealOrder[revealIndex++];
+      if (keyFor(cand).length){ q = cand; break; }
+    }
+
+    if (q === null){
+      if (revealNextBtn) revealNextBtn.disabled = true;
+      return;
+    }
+
+    const input = getInputForQuestion(q);
+    const keys = keyFor(q);
+    const answerToFill = keys[0] || "";
+
+    if (input){
+      input.classList.remove("ok","bad");
+      input.value = answerToFill;
+      input.classList.add("ok");
+    }
+
+    const row = document.getElementById(`q${q}`) || document.getElementById(String(q));
+    if (row && row.scrollIntoView){
+      row.scrollIntoView({ behavior:"smooth", block:"center" });
+    }
+
+    showFeedback(q);
+
+    // Update score after reveal
+    let correct = 0;
+    let total = 0;
+    inputs.forEach(i => {
+      const qq = getQuestionNumberFromInput(i);
+      const keys2 = keyFor(qq);
+      if (!keys2.length) return;
+      total += 1;
+      if (keys2.includes(norm(i.value))) correct += 1;
+    });
+    setScore(correct, total);
+
+    if (revealIndex >= revealOrder.length && revealNextBtn){
+      revealNextBtn.disabled = true;
+    }
+  }
+
+  function resetAll(){
+    submitted = false;
+    revealIndex = 0;
+    if (revealNextBtn) revealNextBtn.disabled = true;
+
+    inputs.forEach(i => {
+      i.value = "";
+      i.disabled = false;
+      i.classList.remove("ok","bad");
+    });
+
+    if (scoreEl){
+      scoreEl.textContent = "";
+      scoreEl.style.color = "";
+    }
+
+    if (feedbackPanel && feedbackText){
+      feedbackPanel.style.display = "none";
+      feedbackText.textContent = "";
+    }
+
+    if (gapFeedback && gapFeedbackBody){
+      gapFeedback.style.display = "none";
+      gapFeedbackBody.textContent = "";
+    }
+  }
+
+  // Optional: Enter submits (doesn't change content/numbering)
+  inputs.forEach(i => {
+    i.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") submitAndScore();
+    });
+  });
+
+  if (submitBtn) submitBtn.addEventListener("click", submitAndScore);
+  if (revealNextBtn) revealNextBtn.addEventListener("click", revealNext);
+  if (resetBtn) resetBtn.addEventListener("click", resetAll);
+  </script>
+
+</body>
+</html>
+

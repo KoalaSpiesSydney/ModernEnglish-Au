@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>IELTS General Reading Mini Test – Little Byron Beach Festival (Matching Information) | Modern English Australia · Koala Spies Sydney</title>
+  <meta name="description" content="Free IELTS General Training Reading mini test: match 7 pieces of information to paragraphs A–E of a text about a beach festival. Auto-scored with feedback.">
+  <link rel="canonical" href="https://modernenglish.au/IELTSTESTS/mini-byron-beach-festival.html">
+
+  <style>
+    :root{
+      --bg:#f5f5f5;
+      --bar:#1e1f21;
+      --panel:#ffffff;
+      --ink:#1e1e1e;
+      --muted:#6b737a;
+      --line:rgba(0,0,0,.12);
+
+      --accent:#ff7a1a;
+      --shadow:0 10px 28px rgba(0,0,0,.14);
+      --radius:16px;
+
+      --ok:#1db954;
+      --err:#e74c3c;
+
+      --header-h:72px;
+      --footer-h:74px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      -webkit-text-size-adjust:100%;
+      text-rendering:optimizeLegibility;
+    }
+
+    /* ===== Page wrapper to keep footer at bottom without covering content ===== */
+    .page{
+      min-height:100vh;
+      min-height:100dvh;
+      display:flex;
+      flex-direction:column;
+    }
+    main{ flex:1 0 auto; }
+
+    button, input{ font:inherit; }
+    a{ color:inherit; }
+
+    /* ===== Sticky Top Bar ===== */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:var(--bar);
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .topbar-inner{
+      max-width:1320px;
+      margin:0 auto;
+      padding:10px 14px;
+      min-height:var(--header-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    /* QR (top-left) */
+    .qr-wrap{ position:relative; display:flex; align-items:flex-start; }
+    .qr-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(0,0,0,.25);
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+      white-space:nowrap;
+    }
+    .qr-btn:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 3px rgba(255,122,26,.28), 0 6px 18px rgba(0,0,0,.25);
+    }
+
+    .qr-panel{
+      position:absolute;
+      top:46px;
+      left:0;
+      width:170px;
+      max-width:calc(100vw - 28px);
+      background:rgba(30,31,33,.98);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:14px;
+      box-shadow:0 14px 30px rgba(0,0,0,.35);
+      padding:10px;
+      display:none;
+      z-index:80;
+    }
+    .qr-panel.open{ display:block; }
+    .qr-title{
+      margin:0 0 8px;
+      text-align:center;
+      color:rgba(255,255,255,.9);
+      font-size:.82rem;
+      font-weight:700;
+    }
+    #qrcode{
+      width:150px;
+      height:150px;
+      margin:0 auto;
+      background:#fff;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+      text-align:center;
+      flex:1;
+      min-width:0;
+    }
+    .brand .title{
+      font-weight:900;
+      letter-spacing:1.6px;
+      color:var(--accent);
+      font-size:1.05rem;
+      text-transform:uppercase;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand .sub{
+      font-weight:500;
+      font-size:.9rem;
+      color:rgba(255,255,255,.88);
+      letter-spacing:.6px;
+      margin-top:4px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    /* Right-side spacer to keep brand visually centered after removing buttons */
+    .header-spacer{ width:52px; flex:0 0 52px; }
+
+    /* ===== Rubric ===== */
+    .rubric{
+      max-width:1320px;
+      margin:14px auto 0;
+      padding:0 14px;
+    }
+    .rubric-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .rubric h2{ margin:0; font-size:1.05rem; }
+    .rubric p{ margin:4px 0 0; color:var(--muted); font-style:italic; }
+    .rubric .meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:.92rem;
+      white-space:nowrap;
+    }
+
+    /* ===== App ===== */
+    .app{
+      max-width:1320px;
+      margin:14px auto 0;
+      padding:0 14px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      min-height:calc(100vh - var(--header-h) - var(--footer-h) - 28px);
+    }
+
+    .split{
+      background:transparent;
+      border-radius:var(--radius);
+      display:grid;
+      grid-template-columns: minmax(280px, 1fr) 12px minmax(360px, 1fr);
+      gap:0;
+      align-items:stretch;
+      min-height:min(70vh, 760px);
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+    .panel-head{
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(to bottom, rgba(0,0,0,.03), rgba(0,0,0,0));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .panel-title{
+      font-weight:900;
+      color:var(--ink);
+      font-size:.98rem;
+      letter-spacing:.2px;
+    }
+    .panel-sub{
+      font-size:.9rem;
+      color:var(--muted);
+    }
+    .panel-body{
+      padding:14px;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    /* Divider */
+    .divider{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:col-resize;
+      touch-action:none;
+      user-select:none;
+    }
+    .divider .bar{
+      width:12px;
+      border-radius:999px;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+    }
+    .divider .handle{
+      width:10px;
+      height:54px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.12);
+    }
+
+    /* Passage */
+    .reading p{ margin:0 0 12px; }
+    .reading .section-title{
+      font-weight:900;
+      margin:0 0 10px;
+      font-size:1.05rem;
+    }
+
+    /* Task */
+    .task-title{
+      margin:0 0 6px;
+      font-size:1.05rem;
+      font-weight:900;
+    }
+    .task-instruction{
+      margin:0 0 12px;
+      color:var(--muted);
+    }
+
+    .ans{
+      width:100%;
+      padding:10px 10px;
+      border-radius:10px;
+      border:2px solid rgba(0,0,0,.18);
+      background:#fff;
+      outline:none;
+      font-size:1rem;
+    }
+    .ans:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(255,122,26,.22);
+    }
+    .ans.ok{
+      border-color:var(--ok);
+      background:rgba(29,185,84,.10);
+    }
+    .ans.bad{
+      border-color:var(--err);
+      background:rgba(231,76,60,.10);
+    }
+
+    .hintline{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    /* Controls */
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .action{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,.14);
+      background:#fff;
+      color:var(--ink);
+      cursor:pointer;
+      font-weight:900;
+      box-shadow:0 10px 22px rgba(0,0,0,.10);
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+      white-space:nowrap;
+    }
+    .action.primary{
+      border-color:rgba(255,122,26,.35);
+      background:rgba(255,122,26,.14);
+    }
+    .action:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 3px rgba(255,122,26,.22), 0 10px 22px rgba(0,0,0,.10);
+    }
+
+    #score{
+      margin-top:12px;
+      font-weight:900;
+      min-height:1.4rem;
+    }
+
+    /* Matching table */
+    .match{
+      margin-top:10px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .match-head,
+    .match-row{
+      display:grid;
+      grid-template-columns: 56px 1fr 110px;
+      gap:12px;
+      align-items:center;
+      padding:10px 12px;
+    }
+    .match-head{
+      background:linear-gradient(to bottom, rgba(0,0,0,.05), rgba(0,0,0,0));
+      border-bottom:1px solid var(--line);
+      font-weight:900;
+      color:var(--muted);
+      font-size:.88rem;
+      letter-spacing:.3px;
+    }
+    .match-row{ border-bottom:1px solid var(--line); }
+    .match-row:last-child{ border-bottom:none; }
+
+    .mq{ font-weight:900; font-variant-numeric:tabular-nums; }
+    .ms{ line-height:1.35; }
+    .ma{ display:flex; justify-content:flex-end; }
+
+    .match .ans{
+      width:96px;
+      text-align:center;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    #feedbackPanel{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:12px;
+      margin-top:12px;
+      display:none;
+    }
+
+    /* ===== Footer (NOT fixed, never covers content) ===== */
+    footer.bottom{
+      flex:0 0 auto;
+      background:var(--bar);
+      color:#fff;
+      border-top:1px solid rgba(255,255,255,.12);
+    }
+    .bottom-inner{
+      max-width:1320px;
+      margin:0 auto;
+      padding:10px 14px;
+      min-height:var(--footer-h);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .brand-foot{
+      color:rgba(255,255,255,.72);
+      font-size:.9rem;
+      text-align:center;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .split{ grid-template-columns: 1fr; min-height:auto; gap:12px; }
+      .divider{ display:none; }
+
+      .match-head{ display:none; }
+      .match-row{
+        grid-template-columns: 1fr;
+        gap:8px;
+      }
+      .mq{
+        font-size:.92rem;
+        color:var(--muted);
+      }
+      .ma{ justify-content:flex-start; }
+      .match .ans{ width:140px; }
+      .header-spacer{ width:0; flex:0 0 0; }
+    }
+
+    @media (max-width: 420px){
+      .brand .title{ font-size:1rem; }
+      .brand .sub{ font-size:.86rem; }
+      .rubric-card{ flex-direction:column; align-items:flex-start; }
+      .rubric .meta{ text-align:left; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; scroll-behavior:auto !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <!-- ===== TOP BAR ===== -->
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="qr-wrap">
+          <button class="qr-btn" id="qrToggle" type="button" aria-expanded="false" aria-controls="qrPanel">QR</button>
+          <div class="qr-panel" id="qrPanel" aria-hidden="true">
+            <p class="qr-title">Scan to open this page</p>
+            <div id="qrcode"></div>
+          </div>
+        </div>
+
+        <div class="brand" aria-label="Brand">
+          <div class="title">Modern English Australia</div>
+          <div class="sub">IELTS General Practice Reading · Part 1 · Matching information</div>
+        </div>
+
+        <!-- keeps heading centered after removing right buttons -->
+        <div class="header-spacer" aria-hidden="true"></div>
+      </div>
+    </div>
+  <nav class="back-link" style="max-width:1200px;margin:10px auto 0;padding:0 16px;font:600 14px/1.4 system-ui,sans-serif;"><a href="../tests-ielts-reading.html" style="color:#3968ea;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;">← All IELTS Reading tests</a></nav>
+
+
+    <main>
+      <!-- ===== RUBRIC ===== -->
+      <div class="rubric">
+        <div class="rubric-card">
+          <div>
+            <h2>Part 1</h2>
+            <p>The reading passage has five paragraphs, A–E.
+Which paragraph contains the following information?
+Write the correct letter, A–E, in boxes 8–14.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== APP ===== -->
+      <div class="app">
+        <div class="split" id="split">
+          <!-- LEFT: PASSAGE -->
+          <section class="panel" aria-label="Reading text">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">Reading passage</div>
+                <div class="panel-sub">Matching Paragraphs</div>
+              </div>
+            </div>
+
+            <div class="panel-body reading">
+              <h3 class="section-title">The Little Byron Beach Summer Waves Festival</h3>
+
+              <p>
+A. Little Byron Beach, a charming coastal town known for its stunning beaches and vibrant community, is gearing up for its annual Summer Waves Festival. This much-anticipated event draws visitors from all over, eager to experience the unique blend of music, art, and beach sports that this town has to offer.
+              </p>
+
+              <p>
+B. The festival, held in the heart of Little Byron Beach, features a diverse lineup of performances, from local bands to internationally acclaimed artists. Attendees can enjoy a variety of activities, including a surf carnival, indigenous art exhibitions, and food stalls offering delicious homemade cakes and a sausage sizzle. The highlight of the festival is the iron man competition in which a number of professional and local athletes take part in a cycling, swimming, and running competition along the coast. Amateurs are welcome to participate as long as they are over 16 and have a surf lifesaving certificate at bronze medal level.
+              </p>
+
+              <p>
+C. In addition to the entertainment, the Summer Waves Festival also focuses on promoting environmental awareness. Various workshops and talks are organized to educate visitors on sustainable practices on the beach and the importance of preserving the natural beauty of Little Byron Beach.
+              </p>
+
+              <p>
+D. The festival also includes a special kids' zone, where children can participate in various fun and educational activities. From sandcastle-building contests to interactive storytelling sessions, there's something for every young festivalgoer. Parents can relax knowing their children are engaged and entertained in a safe and supervised environment.
+              </p>
+
+              <p>
+E. Whether you're a local resident or a visitor, the Summer Waves Festival in Little Byron Beach promises an unforgettable experience. Don’t forget your sunscreen, a hat and your sense of fun.
+              </p>
+            </div>
+          </section>
+
+          <!-- DIVIDER -->
+          <div class="divider" id="divider" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize panels">
+            <div class="bar"><div class="handle" aria-hidden="true"></div></div>
+          </div>
+
+          <!-- RIGHT: QUESTIONS -->
+          <section class="panel" aria-label="Questions">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">Questions 8–14</div>
+                <div class="panel-sub">Matching information</div>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="task-instruction">
+                <strong>NB</strong> You may use any letter more than once.
+              </div>
+
+              <div class="match" role="group" aria-label="Matching questions table">
+                <div class="match-head" aria-hidden="true">
+                  <div>Q</div>
+                  <div>Statement</div>
+                  <div style="text-align:right;">Answer</div>
+                </div>
+
+                <div class="match-row" id="q8">
+                  <div class="mq">8</div>
+                  <div class="ms">An event that younger people are not allowed to enter</div>
+                  <div class="ma">
+                    <input class="ans" data-q="8" inputmode="text" maxlength="1" autocomplete="off"
+                           aria-label="Answer for Question 8" placeholder="A–E">
+                  </div>
+                </div>
+
+                <div class="match-row" id="q9">
+                  <div class="mq">9</div>
+                  <div class="ms">Sessions that teach visitors how to behave responsibly on the beach</div>
+                  <div class="ma">
+                    <input class="ans" data-q="9" inputmode="text" maxlength="1" autocomplete="off"
+                           aria-label="Answer for Question 9" placeholder="A–E">
+                  </div>
+                </div>
+
+                <div class="match-row" id="q10">
+                  <div class="mq">10</div>
+                  <div class="ms">A reminder about protecting your skin</div>
+                  <div class="ma">
+                    <input class="ans" data-q="10" inputmode="text" maxlength="1" autocomplete="off"
+                           aria-label="Answer for Question 10" placeholder="A–E">
+                  </div>
+                </div>
+
+                <div class="match-row" id="q11">
+                  <div class="mq">11</div>
+                  <div class="ms">A description of the different acts and activities on offer</div>
+                  <div class="ma">
+                    <input class="ans" data-q="11" inputmode="text" maxlength="1" autocomplete="off"
+                           aria-label="Answer for Question 11" placeholder="A–E">
+                  </div>
+                </div>
+
+                <div class="match-row" id="q12">
+                  <div class="mq">12</div>
+                  <div class="ms">This happens every year</div>
+                  <div class="ma">
+                    <input class="ans" data-q="12" inputmode="text" maxlength="1" autocomplete="off"
+                           aria-label="Answer for Question 12" placeholder="A–E">
+                  </div>
+                </div>
+
+                <div class="match-row" id="q13">
+                  <div class="mq">13</div>
+                  <div class="ms">A focus on looking after the local environment</div>
+                  <div class="ma">
+                    <input class="ans" data-q="13" inputmode="text" maxlength="1" autocomplete="off"
+                           aria-label="Answer for Question 13" placeholder="A–E">
+                  </div>
+                </div>
+
+                <div class="match-row" id="q14">
+                  <div class="mq">14</div>
+                  <div class="ms">Where the musicians who will perform come from</div>
+                  <div class="ma">
+                    <input class="ans" data-q="14" inputmode="text" maxlength="1" autocomplete="off"
+                           aria-label="Answer for Question 14" placeholder="A–E">
+                  </div>
+                </div>
+              </div>
+
+              <div class="hintline">Input check: this task expects a single letter A–E.</div>
+
+              <div class="controls">
+                <button class="action primary" id="submitBtn" type="button">Submit & score</button>
+                <button class="action" id="revealNextBtn" type="button" disabled>Reveal next answer</button>
+                <button class="action" id="resetBtn" type="button">Reset</button>
+              </div>
+
+              <div id="score" aria-live="polite"></div>
+
+              <div id="feedbackPanel" aria-live="polite">
+                <div style="font-weight:900; margin-bottom:6px;">Feedback</div>
+                <div id="feedbackText" style="color:var(--muted); line-height:1.5;"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bottom">
+      <div class="bottom-inner">
+        <div class="brand-foot">© Koala Spies Sydney · Modern English Australia · All Rights Reserved</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    /* =========================
+       YOUR ANSWERS + YOUR FEEDBACK
+       ========================= */
+    const ANSWERS = {
+      8:  "B",
+      9:  "C",
+      10: "E",
+      11: "B",
+      12: "A",
+      13: "C",
+      14: "B"
+    };
+
+    const FEEDBACK = {
+      8:  "B: 'Amateurs are welcome to participate as long as they are over 16' — the iron man competition is not open to children.",
+      9:  "C: 'Various workshops and talks are organized to educate visitors on sustainable practices on the beach.'",
+      10: "E: 'Don’t forget your sunscreen, a hat …'",
+      11: "...variety of activities, including a surf carnival, indigenous art exhibitions, and food stalls offering delicious homemade cakes and a sausage sizzle. The highlight of the festival is the iron man competition..",
+      12: "A: '… gearing up for its annual Summer Waves Festival.' Annual means every year.",
+      13: "C: '… the importance of preserving the natural beauty of Little Byron Beach.'",
+      14: "B: '… from local bands to internationally acclaimed artists.'"
+    };
+
+    /* =========================
+       QR toggle + generate once
+       ========================= */
+    const qrToggle = document.getElementById("qrToggle");
+    const qrPanel  = document.getElementById("qrPanel");
+    const qrTarget = document.getElementById("qrcode");
+    let qrMade = false;
+
+    function openQR(){
+      qrPanel.classList.add("open");
+      qrPanel.setAttribute("aria-hidden","false");
+      qrToggle.setAttribute("aria-expanded","true");
+
+      if (!qrMade && window.QRCode) {
+        qrTarget.innerHTML = "";
+        new QRCode(qrTarget, {
+          text: window.location.href,
+          width: 150,
+          height: 150,
+          correctLevel: QRCode.CorrectLevel.M
+        });
+        qrMade = true;
+      }
+    }
+    function closeQR(){
+      qrPanel.classList.remove("open");
+      qrPanel.setAttribute("aria-hidden","true");
+      qrToggle.setAttribute("aria-expanded","false");
+    }
+
+    qrToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = qrPanel.classList.contains("open");
+      isOpen ? closeQR() : openQR();
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!qrPanel.classList.contains("open")) return;
+      const inside = qrPanel.contains(e.target) || qrToggle.contains(e.target);
+      if (!inside) closeQR();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeQR();
+    });
+
+    /* =========================
+       Split resizer (desktop)
+       ========================= */
+    const split = document.getElementById("split");
+    const divider = document.getElementById("divider");
+    let dragging = false;
+
+    function setCols(pxLeft){
+      const rect = split.getBoundingClientRect();
+      const minLeft = 280;
+      const minRight = 360;
+      const maxLeft = rect.width - 12 - minRight;
+      const left = Math.max(minLeft, Math.min(pxLeft, maxLeft));
+      split.style.gridTemplateColumns = `${left}px 12px 1fr`;
+    }
+
+    function startDrag(clientX){
+      const rect = split.getBoundingClientRect();
+      setCols(clientX - rect.left);
+      dragging = true;
+      document.body.style.cursor = "col-resize";
+      document.body.style.userSelect = "none";
+    }
+
+    function moveDrag(clientX){
+      if (!dragging) return;
+      const rect = split.getBoundingClientRect();
+      setCols(clientX - rect.left);
+    }
+
+    function endDrag(){
+      if (!dragging) return;
+      dragging = false;
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    }
+
+    if (divider && split){
+      divider.addEventListener("mousedown", (e) => startDrag(e.clientX));
+      window.addEventListener("mousemove", (e) => moveDrag(e.clientX));
+      window.addEventListener("mouseup", endDrag);
+
+      divider.addEventListener("touchstart", (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        startDrag(e.touches[0].clientX);
+      }, {passive:true});
+
+      window.addEventListener("touchmove", (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        moveDrag(e.touches[0].clientX);
+      }, {passive:true});
+
+      window.addEventListener("touchend", endDrag);
+
+      divider.addEventListener("keydown", (e) => {
+        const step = 24;
+        const cs = getComputedStyle(split).gridTemplateColumns.split(" ");
+        const currentLeft = parseFloat(cs[0]) || 520;
+        if (e.key === "ArrowLeft") { e.preventDefault(); setCols(currentLeft - step); }
+        if (e.key === "ArrowRight"){ e.preventDefault(); setCols(currentLeft + step); }
+      });
+    }
+
+    /* =========================
+       Submit + reveal next
+       ========================= */
+    const inputs = Array.from(document.querySelectorAll(".ans"));
+    const scoreEl = document.getElementById("score");
+
+    const submitBtn = document.getElementById("submitBtn");
+    const revealNextBtn = document.getElementById("revealNextBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    const feedbackPanel = document.getElementById("feedbackPanel");
+    const feedbackText = document.getElementById("feedbackText");
+
+    let submitted = false;
+    let revealIndex = 0;
+    const revealOrder = [8,9,10,11,12,13,14];
+
+    inputs.forEach(i => {
+      i.addEventListener("input", () => {
+        if (submitted) return;
+        i.value = i.value.replace(/[^a-eA-E]/g, "").toUpperCase().slice(0,1);
+      });
+    });
+
+    function norm(s){ return String(s || "").trim().toUpperCase(); }
+
+    function keyFor(q){
+      const raw = ANSWERS[q];
+      return raw ? [norm(raw)] : [];
+    }
+
+    function clearMarks(){ inputs.forEach(i => i.classList.remove("ok","bad")); }
+    function setLocked(lock){ inputs.forEach(i => i.disabled = lock); }
+
+    function submitAndScore(){
+      clearMarks();
+
+      const anyKey = Object.keys(ANSWERS).some(k => keyFor(Number(k)).length);
+      if (!anyKey){
+        scoreEl.textContent = "Answer key not set. Fill ANSWERS in the script first.";
+        scoreEl.style.color = "var(--err)";
+        return;
+      }
+
+      let correct = 0;
+      let total = 0;
+
+      inputs.forEach(i => {
+        const q = Number(i.dataset.q);
+        const keys = keyFor(q);
+        if (!keys.length) return;
+
+        total += 1;
+        const user = norm(i.value);
+        if (!user) return;
+
+        if (keys.includes(user)) correct += 1;
+      });
+
+      scoreEl.textContent = `Score: ${correct} / ${total}`;
+      scoreEl.style.color = (correct === total) ? "var(--ok)" : "var(--ink)";
+
+      submitted = true;
+      setLocked(true);
+
+      revealIndex = 0;
+      revealNextBtn.disabled = false;
+
+      feedbackPanel.style.display = "block";
+      feedbackText.textContent = "Click “Reveal next answer” to see answers one by one.";
+    }
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function revealNext(){
+      if (!submitted) return;
+
+      let q = null;
+      while (revealIndex < revealOrder.length){
+        const cand = revealOrder[revealIndex];
+        revealIndex += 1;
+        if (keyFor(cand).length){ q = cand; break; }
+      }
+
+      if (q === null){
+        revealNextBtn.disabled = true;
+        feedbackText.textContent = "All answers revealed.";
+        return;
+      }
+
+      const input = inputs.find(i => Number(i.dataset.q) === q);
+      if (!input) return;
+
+      const keys = keyFor(q);
+      const correct = keys[0];
+      const user = norm(input.value);
+
+      input.classList.remove("ok","bad");
+
+      if (user && keys.includes(user)){
+        input.classList.add("ok");
+      } else {
+        input.classList.add("bad");
+      }
+
+      input.value = correct;
+      input.classList.add("ok");
+
+      const row = document.getElementById(`q${q}`);
+      if (row) row.scrollIntoView({behavior:"smooth", block:"center"});
+
+      const fb = (FEEDBACK[q] || "").trim();
+      feedbackText.innerHTML = fb
+        ? `<div><strong>Q${q}:</strong> ${escapeHtml(fb)}</div>`
+        : `<div><strong>Q${q}:</strong> (No feedback added yet. Add text in the FEEDBACK object.)</div>`;
+    }
+
+    function resetAll(){
+      submitted = false;
+      revealIndex = 0;
+      revealNextBtn.disabled = true;
+
+      inputs.forEach(i => {
+        i.value = "";
+        i.disabled = false;
+        i.classList.remove("ok","bad");
+      });
+
+      scoreEl.textContent = "";
+      scoreEl.style.color = "";
+
+      feedbackPanel.style.display = "none";
+      feedbackText.textContent = "";
+    }
+
+    submitBtn.addEventListener("click", submitAndScore);
+    revealNextBtn.addEventListener("click", revealNext);
+    resetBtn.addEventListener("click", resetAll);
+  </script>
+</body>
+</html>

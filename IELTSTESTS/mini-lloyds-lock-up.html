@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>IELTS General Reading Mini Test – Lloyd's Lock-up (True / False / Not Given) | Modern English Australia · Koala Spies Sydney</title>
+  <meta name="description" content="Free IELTS General Training Reading mini test: read an advertisement for a storage company and answer 7 True / False / Not Given questions. Auto-scored with feedback.">
+  <link rel="canonical" href="https://modernenglish.au/IELTSTESTS/mini-lloyds-lock-up.html">
+
+  <style>
+    :root{
+      --bg:#f5f5f5;
+      --bar:#1e1f21;
+      --panel:#ffffff;
+      --ink:#1e1e1e;
+      --muted:#6b737a;
+      --line:rgba(0,0,0,.12);
+
+      --accent:#ff7a1a;
+      --shadow:0 10px 28px rgba(0,0,0,.14);
+      --radius:16px;
+
+      --ok:#1db954;
+      --err:#e74c3c;
+
+      --header-h:72px;
+      --footer-h:74px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      -webkit-text-size-adjust:100%;
+      text-rendering:optimizeLegibility;
+    }
+
+    button, input{ font:inherit; }
+    a{ color:inherit; }
+
+    /* ===== Sticky Top Bar ===== */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:var(--bar);
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .topbar-inner{
+      max-width:1320px;
+      margin:0 auto;
+      padding:10px 14px;
+      min-height:var(--header-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    /* QR (top-left) */
+    .qr-wrap{ position:relative; display:flex; align-items:flex-start; }
+    .qr-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(0,0,0,.25);
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+      white-space:nowrap;
+    }
+    .qr-btn:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 3px rgba(255,122,26,.28), 0 6px 18px rgba(0,0,0,.25);
+    }
+
+    .qr-panel{
+      position:absolute;
+      top:46px;
+      left:0;
+      width:170px;
+      background:rgba(30,31,33,.98);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:14px;
+      box-shadow:0 14px 30px rgba(0,0,0,.35);
+      padding:10px;
+      display:none;
+      z-index:80;
+      max-width:calc(100vw - 28px);
+    }
+    .qr-panel.open{ display:block; }
+    .qr-title{
+      margin:0 0 8px;
+      text-align:center;
+      color:rgba(255,255,255,.9);
+      font-size:.82rem;
+      font-weight:700;
+    }
+    #qrcode{
+      width:150px;
+      height:150px;
+      margin:0 auto;
+      background:#fff;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+      text-align:center;
+      flex:1;
+      min-width:0;
+    }
+    .brand .title{
+      font-weight:900;
+      letter-spacing:1.6px;
+      color:var(--accent);
+      font-size:1.05rem;
+      text-transform:uppercase;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand .sub{
+      font-weight:500;
+      font-size:.9rem;
+      color:rgba(255,255,255,.88);
+      letter-spacing:.6px;
+      margin-top:4px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    /* right spacer keeps brand visually centered */
+    .header-spacer{ width:52px; flex:0 0 52px; }
+
+    /* ===== Rubric ===== */
+    .rubric{
+      max-width:1320px;
+      margin:14px auto 0;
+      padding:0 14px;
+    }
+    .rubric-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .rubric h2{ margin:0; font-size:1.05rem; }
+    .rubric p{ margin:4px 0 0; color:var(--muted); font-style:italic; }
+
+    /* ===== App ===== */
+    .app{
+      max-width:1320px;
+      margin:14px auto 0;
+      padding:0 14px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      min-height:calc(100vh - var(--header-h) - 24px);
+    }
+
+    .split{
+      border-radius:var(--radius);
+      display:grid;
+      grid-template-columns: minmax(280px, 1fr) 12px minmax(360px, 1fr);
+      gap:0;
+      align-items:stretch;
+      min-height:min(70vh, 760px);
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+    .panel-head{
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(to bottom, rgba(0,0,0,.03), rgba(0,0,0,0));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .panel-title{
+      font-weight:900;
+      color:var(--ink);
+      font-size:.98rem;
+      letter-spacing:.2px;
+    }
+    .panel-sub{
+      font-size:.9rem;
+      color:var(--muted);
+    }
+    .panel-body{
+      padding:14px;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    /* Divider */
+    .divider{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:col-resize;
+      touch-action:none;
+      user-select:none;
+    }
+    .divider .bar{
+      width:12px;
+      border-radius:999px;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+    }
+    .divider .handle{
+      width:10px;
+      height:54px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.12);
+    }
+
+    /* Passage */
+    .reading h3{
+      margin:0 0 10px;
+      font-size:1.05rem;
+      font-weight:900;
+    }
+    .reading p{ margin:0 0 12px; }
+
+    /* TFNG Task */
+    .task-title{
+      margin:0 0 6px;
+      font-size:1.05rem;
+      font-weight:900;
+    }
+    .task-instruction{
+      margin:0 0 12px;
+      color:var(--muted);
+    }
+
+    .tfng{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .item{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 12px 10px;
+      box-shadow:0 10px 22px rgba(0,0,0,.06);
+      background:#fff;
+    }
+    .item-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .qno{
+      font-weight:900;
+      min-width:52px;
+      color:var(--accent);
+    }
+    .stmt{
+      flex:1;
+      color:var(--ink);
+      line-height:1.55;
+    }
+
+    .choices{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .choice{
+      position:relative;
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:2px solid rgba(0,0,0,.14);
+      border-radius:999px;
+      padding:8px 12px;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+      font-weight:900;
+      background:#fff;
+    }
+    .choice input{
+      appearance:none;
+      width:16px;
+      height:16px;
+      border-radius:999px;
+      border:2px solid rgba(0,0,0,.24);
+      margin:0;
+      display:inline-block;
+      position:relative;
+    }
+    .choice input:checked{ border-color:var(--accent); }
+    .choice input:checked::after{
+      content:"";
+      position:absolute;
+      inset:3px;
+      background:var(--accent);
+      border-radius:999px;
+    }
+
+    .item.ok{ border-color:rgba(29,185,84,.5); background:rgba(29,185,84,.07); }
+    .item.bad{ border-color:rgba(231,76,60,.55); background:rgba(231,76,60,.07); }
+
+    .keyline{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:.92rem;
+      display:none;
+    }
+    .item.show-key .keyline{ display:block; }
+
+    /* Feedback panel */
+    #feedbackPanel{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+      box-shadow:var(--shadow);
+      padding:12px;
+      margin-top:12px;
+      display:none;
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .action{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,.14);
+      background:#fff;
+      color:var(--ink);
+      cursor:pointer;
+      font-weight:900;
+      box-shadow:0 10px 22px rgba(0,0,0,.10);
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+      white-space:nowrap;
+    }
+    .action.primary{
+      border-color:rgba(255,122,26,.35);
+      background:rgba(255,122,26,.14);
+    }
+    .action:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 3px rgba(255,122,26,.22), 0 10px 22px rgba(0,0,0,.10);
+    }
+
+    #score{
+      margin-top:12px;
+      font-weight:900;
+      min-height:1.4rem;
+    }
+
+    /* ===== Footer (copyright only) ===== */
+    footer.bottom{
+      background:var(--bar);
+      color:#fff;
+      border-top:1px solid rgba(255,255,255,.12);
+      margin-top:14px;
+    }
+    .bottom-inner{
+      max-width:1320px;
+      margin:0 auto;
+      padding:10px 14px;
+      min-height:var(--footer-h);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .brand-foot{
+      color:rgba(255,255,255,.72);
+      font-size:.9rem;
+      text-align:center;
+    }
+
+    /* ===== Responsive + touch optimisation ===== */
+    @media (max-width: 980px){
+      .split{ grid-template-columns: 1fr; min-height:auto; gap:12px; }
+      .divider{ display:none; }
+      .header-spacer{ width:0; flex:0 0 0; }
+      .panel-body{ max-height:none; }
+    }
+
+    @media (max-width: 420px){
+      .brand .title{ font-size:1rem; }
+      .brand .sub{ font-size:.86rem; }
+      .rubric-card{ flex-direction:column; align-items:flex-start; }
+      .qr-btn{ padding:10px 11px; }
+      .choices{ gap:8px; }
+      .choice{ padding:9px 12px; } /* slightly bigger touch target */
+    }
+
+    @media (hover:none){
+      .divider{ display:none; } /* avoid awkward resize handle on touch devices */
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; scroll-behavior:auto !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== TOP BAR (QR + branding only) ===== -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="qr-wrap">
+        <button class="qr-btn" id="qrToggle" type="button" aria-expanded="false" aria-controls="qrPanel">QR</button>
+        <div class="qr-panel" id="qrPanel" aria-hidden="true">
+          <p class="qr-title">Scan to open this page</p>
+          <div id="qrcode"></div>
+        </div>
+      </div>
+
+      <div class="brand" aria-label="Brand">
+        <div class="title">Modern English Australia</div>
+        <div class="sub">Koala Spies Sydney · IELTS Practice</div>
+      </div>
+
+      <div class="header-spacer" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <nav class="back-link" style="max-width:1200px;margin:10px auto 0;padding:0 16px;font:600 14px/1.4 system-ui,sans-serif;"><a href="../tests-ielts-reading.html" style="color:#3968ea;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;">← All IELTS Reading tests</a></nav>
+  <!-- ===== RUBRIC (Test taker ID removed) ===== -->
+  <div class="rubric">
+    <div class="rubric-card">
+      <div>
+        <h2>Part 1</h2>
+        <p>Read the text and answer questions 1–7.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== APP ===== -->
+  <div class="app">
+    <div class="split" id="split">
+      <!-- LEFT: PASSAGE -->
+      <section class="panel" aria-label="Reading text">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Reading passage</div>
+            <div class="panel-sub">Lloyd's Lock-up</div>
+          </div>
+        </div>
+
+        <div class="panel-body reading" id="passage">
+          <h3>Lloyd's Lock-up</h3>
+          <p>
+            Lloyd's Lock-up is a well-established and well-respected company, centrally located in the city and providing
+            excellent facilities for all your storage requirements.
+          </p>
+          <p>
+            We offer safe and secure units, whether your needs are for long- or short-term storage. We are happy to tailor to your specific requirements and your choice of storage unit. Heavy-duty locks and
+            keys are provided to all of our customers and included in the prices listed. You can hire the unit with the
+            storage capacity you need, for the period of time that the storage is required, in a sound and secure
+            environment, monitored by CCTV. With 24-hour access, customers are able to deliver and collect items when it is
+            convenient to do so, unrestricted by business or office hours. Tarmac roadways allow customers to park cars
+            and lorries immediately outside their units, minimising the effort required to collect or drop items off.
+          </p>
+          <p>
+            <strong>Household storage</strong> Self-storage is ideal for families or individuals with either a short- or
+            long-term need to store their belongings. Some of our clients are de-cluttering, or they may be getting their
+            property decorated, or planning to go abroad for a time.
+          </p>
+          <p>
+            <strong>Student storage</strong> You might be travelling or going home to see family and friends in the vacation,
+            or need time to find a place to stay. You may want to store all your books and personal items, or just a few
+            boxes or a musical instrument. We offer no-nonsense competitive pricing with flexible hire periods and with no
+            hidden extras. We can provide you with short- or long-term affordable hire in a safe and secure environment.
+            You are responsible for organising transport but we can also recommend local van and driver hire companies.
+          </p>
+          <p>
+            <strong>Business storage</strong> Free up that expensive retail space with more affordable self-storage. We have
+            three different business storage centres to choose from so you can choose the location that is most
+            convenient for you.
+          </p>
+        </div>
+      </section>
+
+      <!-- DIVIDER -->
+      <div class="divider" id="divider" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize panels">
+        <div class="bar"><div class="handle" aria-hidden="true"></div></div>
+      </div>
+
+      <!-- RIGHT: QUESTIONS -->
+      <section class="panel" aria-label="Questions">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Questions 1–7</div>
+            <div class="panel-sub">True / False / Not Given</div>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="task-title">Questions 1–7</div>
+          <div class="task-instruction">
+            Do the following statements agree with the information in the reading passage?
+            Write <strong>TRUE</strong> if the statement agrees with the information,
+            <strong>FALSE</strong> if the statement contradicts the information, or
+            <strong>NOT GIVEN</strong> if there is no information on this.
+          </div>
+
+          <div class="tfng" id="tfng">
+            <div class="item" data-q="1">
+              <div class="item-head">
+                <div class="qno">1</div>
+                <div class="stmt">Lloyd's Lock-up is a relatively new business.</div>
+              </div>
+              <div class="choices" role="radiogroup" aria-label="Question 1 choices">
+                <label class="choice"><input type="radio" name="q1" value="T">TRUE</label>
+                <label class="choice"><input type="radio" name="q1" value="F">FALSE</label>
+                <label class="choice"><input type="radio" name="q1" value="NG">NOT GIVEN</label>
+              </div>
+              <div class="keyline">Answer: <span class="key"></span></div>
+            </div>
+
+            <div class="item" data-q="2">
+              <div class="item-head">
+                <div class="qno">2</div>
+                <div class="stmt">You can't rent a unit for just a few days.</div>
+              </div>
+              <div class="choices" role="radiogroup" aria-label="Question 2 choices">
+                <label class="choice"><input type="radio" name="q2" value="T">TRUE</label>
+                <label class="choice"><input type="radio" name="q2" value="F">FALSE</label>
+                <label class="choice"><input type="radio" name="q2" value="NG">NOT GIVEN</label>
+              </div>
+              <div class="keyline">Answer: <span class="key"></span></div>
+            </div>
+
+            <div class="item" data-q="3">
+              <div class="item-head">
+                <div class="qno">3</div>
+                <div class="stmt">You can drive your vehicle right up to your storage unit.</div>
+              </div>
+              <div class="choices" role="radiogroup" aria-label="Question 3 choices">
+                <label class="choice"><input type="radio" name="q3" value="T">TRUE</label>
+                <label class="choice"><input type="radio" name="q3" value="F">FALSE</label>
+                <label class="choice"><input type="radio" name="q3" value="NG">NOT GIVEN</label>
+              </div>
+              <div class="keyline">Answer: <span class="key"></span></div>
+            </div>
+
+            <div class="item" data-q="4">
+              <div class="item-head">
+                <div class="qno">4</div>
+                <div class="stmt">The majority of their clients are individuals storing furniture while they travel overseas.</div>
+              </div>
+              <div class="choices" role="radiogroup" aria-label="Question 4 choices">
+                <label class="choice"><input type="radio" name="q4" value="T">TRUE</label>
+                <label class="choice"><input type="radio" name="q4" value="F">FALSE</label>
+                <label class="choice"><input type="radio" name="q4" value="NG">NOT GIVEN</label>
+              </div>
+              <div class="keyline">Answer: <span class="key"></span></div>
+            </div>
+
+            <div class="item" data-q="5">
+              <div class="item-head">
+                <div class="qno">5</div>
+                <div class="stmt">You should expect additional fees on top of the quoted price.</div>
+              </div>
+              <div class="choices" role="radiogroup" aria-label="Question 5 choices">
+                <label class="choice"><input type="radio" name="q5" value="T">TRUE</label>
+                <label class="choice"><input type="radio" name="q5" value="F">FALSE</label>
+                <label class="choice"><input type="radio" name="q5" value="NG">NOT GIVEN</label>
+              </div>
+              <div class="keyline">Answer: <span class="key"></span></div>
+            </div>
+
+            <div class="item" data-q="6">
+              <div class="item-head">
+                <div class="qno">6</div>
+                <div class="stmt">Lloyd's offers discounts with certain truck hire services.</div>
+              </div>
+              <div class="choices" role="radiogroup" aria-label="Question 6 choices">
+                <label class="choice"><input type="radio" name="q6" value="T">TRUE</label>
+                <label class="choice"><input type="radio" name="q6" value="F">FALSE</label>
+                <label class="choice"><input type="radio" name="q6" value="NG">NOT GIVEN</label>
+              </div>
+              <div class="keyline">Answer: <span class="key"></span></div>
+            </div>
+
+            <div class="item" data-q="7">
+              <div class="item-head">
+                <div class="qno">7</div>
+                <div class="stmt">Lloyd's offers free storage to some businesses.</div>
+              </div>
+              <div class="choices" role="radiogroup" aria-label="Question 7 choices">
+                <label class="choice"><input type="radio" name="q7" value="T">TRUE</label>
+                <label class="choice"><input type="radio" name="q7" value="F">FALSE</label>
+                <label class="choice"><input type="radio" name="q7" value="NG">NOT GIVEN</label>
+              </div>
+              <div class="keyline">Answer: <span class="key"></span></div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="action primary" id="submitBtn" type="button">Submit & score</button>
+            <button class="action" id="revealNextBtn" type="button" disabled>Reveal next feedback</button>
+            <button class="action" id="resetBtn" type="button">Reset</button>
+          </div>
+
+          <div id="score" aria-live="polite"></div>
+
+          <div id="feedbackPanel" aria-live="polite">
+            <div style="font-weight:900; margin-bottom:6px;">Feedback</div>
+            <div id="feedbackText" style="color:var(--muted); line-height:1.5;"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER (copyright only) ===== -->
+  <footer class="bottom">
+    <div class="bottom-inner">
+      <div class="brand-foot">© Koala Spies Sydney · Modern English Australia · All Rights Reserved</div>
+    </div>
+  </footer>
+
+  <!-- QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    /* =========================
+       YOUR ANSWERS + YOUR FEEDBACK
+       (case-insensitive: we normalize to uppercase)
+       Use keys: T, F, NG
+    ========================= */
+    const KEY = {
+      1: "F",
+      2: "F",
+      3: "T",
+      4: "NG",
+      5: "F",
+      6: "NG",
+      7: "F"
+    };
+
+    const FEEDBACK = {
+      1: "FALSE: 'Lloyd's Lock-up is a well-established … company' — so it is not new.",
+      2: "FALSE: 'We offer safe and secure units, whether your needs are for long- or short-term storage. We are happy to tailor to your specific requirements' — you choose the storage period you need.",
+      3: "TRUE: 'Tarmac roadways allow customers to park cars and lorries immediately outside their units, minimising the effort required to collect or drop items off.'",
+      4: "NOT GIVEN: it mentions 'some' (Some of our clients are de-cluttering, or they may be getting their property decorated, or planning to go abroad for a time.) But 'some' is not explicitly 'the majority'. They mention a few types of clients with 'some'.",
+      5: "FALSE: 'We offer no-nonsense competitive pricing … with no hidden extras.'",
+      6: "NOT GIVEN: mentions recommendations but NOT discounts (You are responsible for organising transport but we can also recommend local van and driver hire companies.)",
+      7: "FALSE: 'free up' is a distractor here. It means make more space available and nothing to do with price. It goes on to say they offer 'affordable' storage (cheap), but not free."
+    };
+
+    function norm(s){ return String(s || "").trim().toUpperCase(); }
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    /* =========================
+       QR toggle + generate once
+    ========================= */
+    const qrToggle = document.getElementById("qrToggle");
+    const qrPanel  = document.getElementById("qrPanel");
+    const qrTarget = document.getElementById("qrcode");
+    let qrMade = false;
+
+    function openQR(){
+      qrPanel.classList.add("open");
+      qrPanel.setAttribute("aria-hidden","false");
+      qrToggle.setAttribute("aria-expanded","true");
+
+      if (!qrMade && window.QRCode) {
+        qrTarget.innerHTML = "";
+        new QRCode(qrTarget, {
+          text: window.location.href,
+          width: 150,
+          height: 150,
+          correctLevel: QRCode.CorrectLevel.M
+        });
+        qrMade = true;
+      }
+    }
+    function closeQR(){
+      qrPanel.classList.remove("open");
+      qrPanel.setAttribute("aria-hidden","true");
+      qrToggle.setAttribute("aria-expanded","false");
+    }
+    qrToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      qrPanel.classList.contains("open") ? closeQR() : openQR();
+    });
+    document.addEventListener("click", (e) => {
+      if (!qrPanel.classList.contains("open")) return;
+      const inside = qrPanel.contains(e.target) || qrToggle.contains(e.target);
+      if (!inside) closeQR();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeQR();
+    });
+
+    /* =========================
+       Split resizer (desktop)
+    ========================= */
+    const split = document.getElementById("split");
+    const divider = document.getElementById("divider");
+
+    let dragging = false;
+
+    function setCols(pxLeft){
+      const rect = split.getBoundingClientRect();
+      const minLeft = 280;
+      const minRight = 360;
+      const maxLeft = rect.width - 12 - minRight;
+      const left = Math.max(minLeft, Math.min(pxLeft, maxLeft));
+      split.style.gridTemplateColumns = `${left}px 12px 1fr`;
+    }
+
+    function startDrag(clientX){
+      const rect = split.getBoundingClientRect();
+      setCols(clientX - rect.left);
+      dragging = true;
+      document.body.style.cursor = "col-resize";
+      document.body.style.userSelect = "none";
+    }
+    function moveDrag(clientX){
+      if (!dragging) return;
+      const rect = split.getBoundingClientRect();
+      setCols(clientX - rect.left);
+    }
+    function endDrag(){
+      if (!dragging) return;
+      dragging = false;
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    }
+
+    if (divider){
+      divider.addEventListener("mousedown", (e) => startDrag(e.clientX));
+      window.addEventListener("mousemove", (e) => moveDrag(e.clientX));
+      window.addEventListener("mouseup", endDrag);
+
+      divider.addEventListener("touchstart", (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        startDrag(e.touches[0].clientX);
+      }, {passive:true});
+      window.addEventListener("touchmove", (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        moveDrag(e.touches[0].clientX);
+      }, {passive:true});
+      window.addEventListener("touchend", endDrag);
+
+      divider.addEventListener("keydown", (e) => {
+        const step = 24;
+        const cs = getComputedStyle(split).gridTemplateColumns.split(" ");
+        const currentLeft = parseFloat(cs[0]) || 520;
+        if (e.key === "ArrowLeft") { e.preventDefault(); setCols(currentLeft - step); }
+        if (e.key === "ArrowRight"){ e.preventDefault(); setCols(currentLeft + step); }
+      });
+    }
+
+    /* =========================
+       Submit & score + reveal next feedback + reset
+    ========================= */
+    const items = Array.from(document.querySelectorAll(".item"));
+    const scoreEl = document.getElementById("score");
+
+    const submitBtn = document.getElementById("submitBtn");
+    const revealNextBtn = document.getElementById("revealNextBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    const feedbackPanel = document.getElementById("feedbackPanel");
+    const feedbackText = document.getElementById("feedbackText");
+
+    let submitted = false;
+    let revealIndex = 0;
+    const revealOrder = items.map(it => Number(it.dataset.q)).filter(n => Number.isFinite(n));
+
+    function clearMarks(){
+      items.forEach(it => it.classList.remove("ok","bad","show-key"));
+      scoreEl.textContent = "";
+      scoreEl.style.color = "";
+    }
+
+    function setLocked(lock){
+      items.forEach(it => {
+        it.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = lock);
+      });
+    }
+
+    function submitAndScore(){
+      clearMarks();
+
+      const hasKey = Object.keys(KEY).some(k => String(KEY[k] || "").trim());
+      if (!hasKey){
+        scoreEl.textContent = "Answer key not set. Add answers in the KEY object (T, F, NG) to enable scoring.";
+        scoreEl.style.color = "var(--err)";
+        return;
+      }
+
+      let correct = 0;
+      let total = 0;
+
+      items.forEach(it => {
+        const q = Number(it.dataset.q);
+        const k = norm(KEY[q]);
+        if (!k) return;
+
+        total += 1;
+
+        const picked = it.querySelector('input[type="radio"]:checked');
+        const val = picked ? norm(picked.value) : "";
+
+        if (!val){
+          it.classList.add("bad");
+          return;
+        }
+
+        if (val === k){
+          it.classList.add("ok");
+          correct += 1;
+        } else {
+          it.classList.add("bad");
+        }
+      });
+
+      scoreEl.textContent = `Score: ${correct} / ${total}`;
+      scoreEl.style.color = (correct === total) ? "var(--ok)" : "var(--ink)";
+
+      submitted = true;
+      setLocked(true);
+
+      revealIndex = 0;
+      revealNextBtn.disabled = false;
+
+      feedbackPanel.style.display = "block";
+      feedbackText.textContent = "Click “Reveal next feedback” to view explanations one by one.";
+    }
+
+    function revealNext(){
+      if (!submitted) return;
+
+      let q = null;
+      while (revealIndex < revealOrder.length){
+        const cand = revealOrder[revealIndex];
+        revealIndex += 1;
+        if (norm(KEY[cand])) { q = cand; break; }
+      }
+
+      if (q === null){
+        revealNextBtn.disabled = true;
+        feedbackText.textContent = "All feedback revealed.";
+        return;
+      }
+
+      const it = items.find(x => Number(x.dataset.q) === q);
+      if (!it) return;
+
+      const k = norm(KEY[q]);
+      const picked = it.querySelector('input[type="radio"]:checked');
+      const val = picked ? norm(picked.value) : "";
+
+      it.classList.remove("ok","bad");
+
+      if (val && val === k) it.classList.add("ok");
+      else it.classList.add("bad");
+
+      const keySpan = it.querySelector(".key");
+      if (keySpan){
+        keySpan.textContent = (k === "T") ? "TRUE" : (k === "F") ? "FALSE" : "NOT GIVEN";
+      }
+      it.classList.add("show-key");
+
+      it.scrollIntoView({behavior:"smooth", block:"center"});
+
+      const fb = String(FEEDBACK[q] || "").trim();
+      feedbackText.innerHTML = fb
+        ? `<div><strong>Q${q}:</strong> ${escapeHtml(fb)}</div>`
+        : `<div><strong>Q${q}:</strong> (No feedback added yet. Add text in the FEEDBACK object.)</div>`;
+    }
+
+    function resetAll(){
+      submitted = false;
+      revealIndex = 0;
+      revealNextBtn.disabled = true;
+
+      items.forEach(it => {
+        it.classList.remove("ok","bad","show-key");
+        it.querySelectorAll('input[type="radio"]').forEach(r => {
+          r.checked = false;
+          r.disabled = false;
+        });
+        const keySpan = it.querySelector(".key");
+        if (keySpan) keySpan.textContent = "";
+      });
+
+      scoreEl.textContent = "";
+      scoreEl.style.color = "";
+
+      feedbackPanel.style.display = "none";
+      feedbackText.textContent = "";
+    }
+
+    submitBtn.addEventListener("click", submitAndScore);
+    revealNextBtn.addEventListener("click", revealNext);
+    resetBtn.addEventListener("click", resetAll);
+  </script>
+</body>
+</html>
