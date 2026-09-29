@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>IELTS General Reading Mini Test – Tenants&#x27; Rights (Note Completion) | Modern English Australia · Koala Spies Sydney</title>
@@ -176,7 +185,7 @@
     gap:24px;
     align-items:start;
   }
-  @media (min-width:760px){
+  @media (min-width:760px) and (min-height:600px){
     .part-grid{
       grid-template-columns:minmax(0,1fr) minmax(0,1fr);
     }
@@ -300,6 +309,30 @@
   .back-row a:hover{text-decoration:underline;}
   .explain{display:block; flex-basis:100%; font-size:13px; color:var(--sub); margin:4px 0 2px 36px; line-height:1.45;}
   .passage h4.psub{font-size:15px; margin:14px 0 6px;}
+  /* ---- footer links ---- */
+  .foot-links{margin:0 0 8px;}
+  .foot-links a{color:var(--accent); font-weight:600; text-decoration:none; display:inline-flex; align-items:center; min-height:40px; padding:0 8px;}
+  .foot-links a:hover{text-decoration:underline;}
+
+  /* ---- TOUCH SCREENS ----
+     iPhones zoom the whole page in when you tap a box whose text is under
+     16px, and fingers need bigger targets than a mouse. */
+  @media (pointer:coarse){
+    .q-row select, .q-row input[type=text], .gap input[type=text]{font-size:16px; min-height:40px;}
+    .qr-btn{min-height:40px; padding:8px 14px;}
+    .qr-panel button{min-height:40px; font-size:14px;}
+    .btn{min-height:44px;}
+    .mc-block label{padding:6px 0;}
+    .source-pill{min-height:36px;}
+  }
+  /* ---- SMALL PHONES: give the reading text more of the width ---- */
+  @media (max-width:420px){
+    .wrap{padding:14px 10px 48px;}
+    section.part{padding:16px 12px 20px;}
+    .test-head{padding:16px 14px;}
+    .passage{padding:14px 12px;}
+    .q-row input[type=text]{width:100%; max-width:220px;}
+  }
 </style>
 </head>
 <body>
@@ -399,6 +432,7 @@
 </div>
 
 <footer class="site">
+  <p class="foot-links"><a href="../tests-ielts-reading.html">← All IELTS Reading tests</a> <a href="../index.html">Modern English Australia home</a></p>
   © Koala Spies Sydney · Modern English Australia · All Rights Reserved
 </footer>
 
