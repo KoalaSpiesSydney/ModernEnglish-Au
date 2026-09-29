@@ -17,35 +17,152 @@
 }
 
 
-/* ===== Instructions Block (NEW LOOK) ===== */
-.instructions {
-  text-align: center;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: rgba(255,255,255,0.8);
-  color: var(--ink);
-  backdrop-filter: blur(6px);
-  padding: 1.2rem 1.4rem;
-  margin: 1rem auto;
-  width: min(90%, 800px);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  font-size: 1.25rem;
-  line-height: 1.5;
+/* ===========================================================
+   PAGE TOOLS  —  the strip that replaced the old instructions
+   block. The lesson PDF link lives here permanently; the ℹ️
+   tile reopens the instructions card.
+   =========================================================== */
+.page-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1rem;
 }
 
-/* link button inside instructions */
-.instructions .pdf-button {
+/* the PDF link, wherever it appears (toolbar or inside the tile) */
+.pdf-button {
   display: inline-block;
-  margin-left: 0.8rem;
-  padding: 0.3rem 1rem;
+  padding: 0.55rem 1.2rem;
   background: var(--accent);
   color: #fff;
   border-radius: var(--radius);
   text-decoration: none;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-size: 1rem;
+  box-shadow: var(--shadow);
+  transition: opacity .25s ease, transform .25s ease;
 }
-.instructions .pdf-button:hover {
+.pdf-button:hover {
   opacity: .9;
+  transform: translateY(-2px);
+}
+
+
+/* ===========================================================
+   THE INSTRUCTIONS TILE  —  opens when the page loads
+   =========================================================== */
+.tile-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: rgba(8,12,14,.72);
+  backdrop-filter: blur(4px);
+  animation: tile-fade .35s ease both;
+}
+.tile-backdrop[hidden] { display: none; }
+
+.tile {
+  position: relative;
+  width: min(92%, 640px);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: rgba(255,255,255,.94);
+  color: var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-top: 5px solid var(--accent);
+  padding: 2rem 1.8rem 1.6rem;
+  text-align: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  animation: tile-rise .4s cubic-bezier(.16,.84,.34,1) both;
+}
+
+.tile-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  color: var(--card);
+}
+
+.tile-body {
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+.tile-body p { margin: 0 0 .9rem; }
+.tile-body p:last-child { margin-bottom: 0; }
+
+/* the one line that tells them what to actually do */
+.tile-task {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(15,20,22,.12);
+  font-weight: 600;
+  color: var(--card);
+}
+
+.tile-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.tile-start {
+  padding: 0.55rem 1.4rem;
+  background: var(--card);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background .25s ease, transform .25s ease;
+}
+.tile-start:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.tile-close {
+  position: absolute;
+  top: .6rem;
+  right: .75rem;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.tile-close:hover { background: var(--line); color: #fff; }
+
+@keyframes tile-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes tile-rise {
+  from { opacity: 0; transform: translateY(18px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-backdrop, .tile { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .tile { padding: 1.6rem 1.1rem 1.2rem; }
+  .tile-body { font-size: 1.02rem; }
+  .tile-actions { flex-direction: column; }
 }
 
 /* ===== Header ===== */
@@ -65,29 +182,116 @@ header p {
   color: var(--muted);
 }
 
-/* ===== Audio Section ===== */
+/* ===========================================================
+   AUDIO  —  minimal player
+   One teal play button, a hairline you can scrub, and the time.
+   The native <audio> only shows if the script never runs.
+   =========================================================== */
 .audio-section {
   text-align: center;
   padding: 1rem;
 }
+
+/* the fallback player, and how it is hidden once JS takes over */
 audio {
   width: 90%;
   max-width: 700px;
   border-radius: var(--radius);
 }
+.player.enhanced audio { display: none; }
 
-/* ===== Progress Bar ===== */
-.progress-container {
-  width: 100%;
-  background: #ddd;
-  height: 12px;
-  margin: 1rem 0 1.5rem;
+.player-ui {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  width: min(92%, 640px);
+  margin: 0 auto;
+  padding: 0;
+  background: none;
+  border: none;
 }
-.progress-bar {
-  height: 100%;
-  width: 0%;
-  background: var(--accent);
-  transition: width 0.4s ease;
+.player-ui[hidden] { display: none; }
+
+/* play / pause — a bare teal glyph, no button chrome at all */
+.player-btn {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.player-btn:hover { transform: scale(1.15); }
+.player-btn:active { transform: scale(.95); }
+.player-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.player-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--accent);
+  pointer-events: none;
+}
+.player-btn svg[hidden] { display: none; }
+
+/* ---- the waveform ----
+   A row of bars built by script.js. Played bars go teal, the rest
+   stay faint, and they bounce gently while the song is running.
+   Click or drag anywhere along them to jump to that point. */
+.wave {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 46px;
+  cursor: pointer;
+  touch-action: none;
+}
+.wave:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+
+.wave .bar {
+  flex: 1 1 0;
+  min-width: 2px;
+  height: var(--h, 40%);
+  background: rgba(255,255,255,.22);
+  border-radius: 1px;
+  transform-origin: center;
+  transition: background .12s ease;
+}
+.wave .bar.on { background: var(--accent); }
+
+/* the bars dance only while the song is actually playing */
+.player-ui.playing .bar {
+  animation: bar-bounce 1.15s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+@keyframes bar-bounce {
+  0%, 100% { transform: scaleY(.82); }
+  50%      { transform: scaleY(1.12); }
+}
+
+.player-time {
+  flex: 0 0 auto;
+  min-width: 5rem;
+  text-align: right;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: .75rem;
+  letter-spacing: .08em;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255,255,255,.65);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player-ui.playing .bar { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .player-ui { gap: .9rem; width: 94%; }
+  .player-btn, .player-btn svg { width: 26px; height: 26px; }
+  .player-time { min-width: 4.4rem; font-size: .7rem; }
+  .wave { height: 38px; gap: 1px; }
 }
 
 /* ===== Verse Cards ===== */
@@ -99,6 +303,7 @@ main {
 
 .verse-card {
   background: white;
+  opacity: 70%;
   padding: 1.5rem 1.8rem;
   margin-bottom: 1.5rem;
   border-radius: var(--radius);
@@ -106,20 +311,6 @@ main {
 }
 
 /* ===== Each line in the exercise (IMPROVED SPACING) ===== */
-.gap-line {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-
-  background: #fafafa;
-  padding: 0.7rem 0.9rem;
-  border-left: 4px solid var(--accent);
-  border-radius: 10px;
-  font-size: 1.15rem;
-  margin: 0.8rem 0;
-  box-shadow: 0 2px 7px rgba(0,0,0,.08);
-}
 
 /* ===== Input Styling (Improved) ===== */
 input.gap {
