@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-HCH5CJD2ZS');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Listening Gap-Fill – Modern English Australia</title>
+  <title>Dance, Think, Flirt, Remember – All the Tenses | Modern English Australia</title>
+  <meta name="description" content="Listening gap-fill: one song in English, Spanish and Portuguese with the same verbs in every tense. For Spanish and Portuguese speakers learning when to use each English tense.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap" rel="stylesheet">
+  <!-- loads without holding the page up where Google is blocked (mainland China, some schools) -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap" rel="stylesheet"></noscript>
 
   <style>
 /* ===========================
@@ -584,13 +596,71 @@ body::before {
 
 #bg-video {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 0.35;
   z-index: -2;
+  pointer-events: none;
+}
+
+/* ===========================================================
+   Added 29 Sep 2026: phones, tablets, older and Chinese browsers
+   =========================================================== */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; background: #000; color: var(--ink); font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", Arial, sans-serif; }
+.page-head .kicker, .page-head h1 { overflow-wrap: break-word; }
+.back-button { background: #2a2f33; }
+button.pdf-button { border: none; cursor: pointer; }
+
+/* older browsers (iPhones before iOS 14.5, older Android, UC, QQ and
+   WeChat browsers) do not know `inset` */
+.tile-backdrop, header::before { top: 0; right: 0; bottom: 0; left: 0; }
+/* Safari on iPhones before iOS 18 needs the prefixed blur */
+.tile-backdrop { -webkit-backdrop-filter: blur(4px); }
+.verse-card { -webkit-backdrop-filter: blur(3px); }
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .brand-top { background: none; -webkit-text-fill-color: var(--paper); }
+}
+
+/* the time readout was pushing the page sideways on small phones */
+.wave { min-width: 0; }
+.player-time { white-space: nowrap; }
+@media (max-width: 380px) {
+  .player-ui { gap: .6rem; }
+  .player-time { min-width: 0; font-size: .66rem; letter-spacing: .02em; }
+  .tile { width: 100%; box-sizing: border-box; }
+  .tile-backdrop { padding: .8rem; }
+  .verse-card { padding: 1.2rem 1rem; }
+  .brand-top { letter-spacing: 1px; }
+}
+
+/* TOUCH SCREENS: ~44px targets for fingers, and 16px text in the
+   answer boxes so iPhones don't zoom the page in on every tap */
+@media (pointer: coarse) {
+  input.gap { font-size: 16px; min-height: 40px; }
+  .check-btn, .pdf-button, .tile-start { min-height: 44px; }
+  .pdf-button { display: inline-flex; align-items: center; }
+  .player-btn { width: 44px; height: 44px; }
+  .tile-close { width: 44px; height: 44px; }
+  .footer-nav a { display: inline-flex; align-items: center; min-height: 44px; }
+  .kss-label { padding-block: 12px; margin-block: -12px; }
+  .check-btn:hover, .pdf-button:hover, .footer-nav a:hover { transform: none; }
+}
+@media (pointer: coarse) and (max-width: 600px) {
+  input.gap { width: 96px; }
+}
+
+/* phones held sideways: shorter masthead and instructions */
+@media (max-height: 500px) and (orientation: landscape) {
+  .header-inner { padding: 14px 0 16px; }
+  .brand-top { font-size: 1.8rem; }
+  .page-head { padding-top: 1rem; }
+  .tile { max-height: 92vh; padding: 1.1rem 1.3rem 1rem; }
+  .tile-body { font-size: 1rem; line-height: 1.45; }
+  .tile-actions { margin-top: 1rem; }
 }
 
 </style>
@@ -607,7 +677,7 @@ body::before {
   <div class="wrap">
     <div class="header-inner">
       <div class="brand">
-        <a href="index.html" class="brand-top">Modern English Au</a>
+        <a href="https://modernenglish.au/" class="brand-top">Modern English Au</a>
         <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-label">Koala Spies Sydney</a>
       </div>
     </div>
@@ -624,7 +694,9 @@ body::before {
      TOOLBAR — the one link that stays visible on the page.
      ============================================================ -->
 <section class="page-tools">
-  <a class="pdf-button" href="review_all_tenses.pdf" download>📘 Review All Tenses</a>
+  <a class="pdf-button back-button" href="https://modernenglish.au/learnEnglishwithMusic.html">← All song lessons</a>
+  <a class="pdf-button" href="review_all_tenses.pdf" target="_blank" rel="noopener">📘 Review All Tenses (PDF)</a>
+  <button type="button" class="pdf-button" id="open-instructions">ℹ️ Instructions</button>
 </section>
 
 <!-- ============================================================
@@ -921,11 +993,9 @@ body::before {
   <p>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</p>
 
   <nav class="footer-nav">
-    <a href="index.html">Home</a>
-    <a href="dictation.html">Dictation &amp; Situations</a>
-    <a href="repeat.html">Repeat Sentence</a>
-    <a href="vocab.html">Vocabulary</a>
-    <a href="contact.html">Contact</a>
+    <a href="https://modernenglish.au/">Home</a>
+    <a href="https://modernenglish.au/learnEnglishwithMusic.html">← More songs</a>
+    <a href="https://modernenglish.au/contact.html">Contact</a>
   </nav>
 </footer>
 
@@ -1260,5 +1330,3 @@ if (tileBackdrop) {
 </script>
 
 </body>
-</html>
-
