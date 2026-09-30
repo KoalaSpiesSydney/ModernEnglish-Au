@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
+<meta name="format-detection" content="telephone=no" />
+<!-- Chinese Android browsers (UC, QQ, 360, Sogou): use the modern engine -->
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="theme-color" content="#1f5130" />
+<title>Animal Idioms – Matching Game (B2–C1) – Modern English Australia</title>
+<meta name="description" content="Free B2–C1 English matching game: match animal idioms such as let the cat out of the bag, the elephant in the room and a wild goose chase with their meanings, then use them in context.">
+<link rel="canonical" href="https://modernenglish.au/game/animalidiomsc1.html" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+
+<!-- Link previews (Facebook, LinkedIn, WhatsApp, X) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Modern English Australia" />
+<meta property="og:locale" content="en_AU" />
+<meta property="og:url" content="https://modernenglish.au/game/animalidiomsc1.html" />
+<meta property="og:title" content="Animal Idioms – Matching Game (B2–C1)" />
+<meta property="og:description" content="Let the cat out of the bag, the elephant in the room, a wild goose chase: 20 upper-intermediate and advanced animal idioms, with animal sounds and a gap-fill." />
+<meta property="og:image" content="https://modernenglish.au/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Animal Idioms – Matching Game (B2–C1)" />
+<meta name="twitter:description" content="20 upper-intermediate and advanced animal idioms, with animal sounds and a gap-fill." />
+<meta name="twitter:image" content="https://modernenglish.au/og-image.jpg" />
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "LearningResource",
+   "name": "Animal Idioms – Matching Game",
+   "url": "https://modernenglish.au/game/animalidiomsc1.html",
+   "description": "Free B2–C1 matching game with 20 animal idioms, animal sounds and a gap-fill.",
+   "inLanguage": "en-AU",
+   "learningResourceType": ["Game", "Exercise"],
+   "educationalLevel": ["B2", "C1"],
+   "teaches": "English idioms with animals",
+   "isAccessibleForFree": true,
+   "audience": { "@type": "EducationalAudience", "educationalRole": ["student", "teacher"] },
+   "publisher": { "@type": "Organization", "name": "Modern English Australia", "url": "https://modernenglish.au/" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernenglish.au/" },
+    { "@type": "ListItem", "position": 2, "name": "Vocabulary games", "item": "https://modernenglish.au/vocabularygames.html" },
+    { "@type": "ListItem", "position": 3, "name": "Animal Idioms" }
+   ]
+  }
+ ]
+}
+</script>
+
+<!-- Google tag (gtag.js) - same Analytics property as the rest of modernenglish.au -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+
+<!-- Lato font, loaded without blocking the page: Google Fonts is blocked in
+     mainland China, and a normal stylesheet link would leave the screen blank
+     until it times out. If it can't load, Arial is used. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap"></noscript>
+
+<style>
+:root{
+  --bg:#f5f5f5;
+  --card:#2a2a2a;
+  --ink:#1e1e1e;
+  --muted:#bbbbbb;
+  --accent:#2e0e5b;
+  --line:#484141;
+  --ok:#1f7a3f;
+  --bad:#a32525;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+
+body{
+  font-family:"Lato", Arial, sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+}
+
+/* Background video: animal.mp4 in the same folder as this page.
+   If it is missing or can't play, the leaf pattern on <body> shows instead. */
+.bg-video{
+  position:fixed;
+  top:0; right:0; bottom:0; left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+  pointer-events:none;
+}
+@media (prefers-reduced-motion: reduce){ .bg-video{ display:none; } }
+.bg-overlay{
+  position:fixed;
+  top:0; right:0; bottom:0; left:0;   /* older iPhones / UC / QQ */
+  z-index:-1;
+  background:rgba(245,245,245,.78);
+}
+
+header{
+  background:#f7f4f4;
+  color:var(--accent);
+  text-align:center;
+  padding:1.4rem 0 1rem;
+  letter-spacing:2px;
+  font-weight:700;
+  font-size:1.2rem;
+}
+header span{
+  display:block;
+  color:#302d2d;
+  font-weight:400;
+  font-size:.8rem;
+  letter-spacing:3px;
+  margin-top:3px;
+}
+
+.qr-toggle{
+  position:fixed;
+  left:14px; top:14px;                              /* fallback */
+  left:max(14px, env(safe-area-inset-left));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(255,255,255,.92);
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  font-family:inherit;
+  font-size:.85rem;
+}
+.qr-panel{
+  position:fixed;
+  left:14px;
+  left:max(14px, env(safe-area-inset-left));
+  top:70px;
+  z-index:9999;
+  width:240px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  display:none;
+}
+.qr-panel .qr-title{
+  font-weight:800;
+  color:#111;
+  margin:0 0 8px;
+  font-size:.95rem;
+  letter-spacing:.5px;
+}
+.qr-panel .qr-url{
+  font-size:.72rem;
+  color:rgba(0,0,0,.65);
+  word-break:break-all;
+  margin:8px 0 0;
+  line-height:1.35;
+}
+.qr-code{
+  width:200px;
+  height:200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.10);
+}
+.home-btn{
+  position:fixed;
+  right:14px; top:14px;                             /* fallback */
+  right:max(14px, env(safe-area-inset-right));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  padding:.7rem 1rem;
+  border-radius:14px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  color:#111;
+  text-decoration:none;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  font-family:inherit;
+  font-size:.85rem;
+}
+@media(hover:hover){
+  .home-btn:hover{ background:#ffffff; }
+  .qr-toggle:hover{ background:#ffffff; }
+}
+
+.level-badge{
+  display:inline-block;
+  background:#27ae60;
+  color:#fff;
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:2px;
+  padding:3px 10px;
+  border-radius:999px;
+  margin-bottom:.5rem;
+  font-family:"Lato", Arial, sans-serif;
+}
+
+main{
+  flex:1;
+  text-align:center;
+  padding:2rem 1rem calc(3rem + env(safe-area-inset-bottom));
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+h1{
+  color:var(--accent);
+  letter-spacing:2px;
+  margin-top:.5rem;
+  font-size:1.6rem;
+  font-size:clamp(1.35rem,2.2vw,1.9rem);
+  font-weight:700;
+}
+
+p{
+  max-width:760px;
+  margin:.5rem auto 1.2rem;
+  opacity:.92;
+}
+
+.round-info{
+  font-size:.85rem;
+  color:var(--muted);
+  margin-bottom:.8rem;
+  letter-spacing:.5px;
+  font-weight:600;
+}
+
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:.8rem;
+  margin-bottom:1.2rem;
+  flex-wrap:wrap;
+}
+
+button.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.75rem 1.4rem;
+  border-radius:45px;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  font-family:inherit;
+  font-size:1rem;
+}
+button.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+
+#game{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:10px;
+  width:100%; max-width:760px;
+  margin:0 auto;
+}
+
+.card{
+  background:#671321;
+  border:2px solid var(--accent);
+  border-radius:14px;
+  padding:10px 8px;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  font-size:.82rem;
+  line-height:1.3;
+  position:relative;
+  color:#fff;
+  transition:background .3s,color .3s,transform .2s;
+  box-shadow:0 3px 6px rgba(0,0,0,.12);
+  word-break:break-word;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ── Card number badge ── */
+.card .card-num{
+  position:absolute;
+  top:5px;
+  left:7px;
+  font-size:.65rem;
+  font-weight:800;
+  line-height:1;
+  color:rgba(255,255,255,.55);
+  letter-spacing:.5px;
+  pointer-events:none;
+}
+
+.card{ flex-direction:column; gap:4px; }
+.card .card-label{ line-height:1.25; }
+button.btn.btn-sound{ background:#fff; color:var(--accent); border:2px solid var(--accent); }
+button.btn.btn-sound[aria-pressed="false"]{ opacity:.7; }
+.card .card-icon{
+  width:46px; height:46px; padding:4px;
+  background:#fff; border-radius:50%;
+  box-shadow:0 1px 3px rgba(0,0,0,.25);
+  display:block; flex-shrink:0;
+}
+.card .card-icon svg{ display:block; }
+.notes li.icon-li{ list-style:none; display:flex; align-items:center; gap:.6rem; margin-left:-1.2rem; }
+.notes .note-icon{ width:34px; height:34px; flex-shrink:0; background:#fff; border:1px solid rgba(0,0,0,.1); border-radius:50%; padding:3px; }
+@media(max-width:600px){ .card .card-icon{ width:40px; height:40px; } }
+
+.card.flipped{
+  background:var(--accent);
+  color:#fff;
+  transform:scale(1.04);
+}
+.card.matched{
+  cursor:default;
+  transform:none;
+}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
+.card.shake{ animation:shake .35s ease; }
+.card:focus-visible{ outline:3px solid var(--sun, #e8b33d); outline-offset:2px; }
+
+#status{
+  margin-top:1.2rem;
+  font-size:1.05rem;
+  font-weight:600;
+  min-height:1.6em;
+  color:var(--accent);
+}
+
+.score-bar{
+  display:flex;
+  justify-content:center;
+  gap:1.5rem;
+  margin:.6rem 0 0;
+  font-size:.88rem;
+  font-weight:700;
+  color:var(--muted);
+}
+.score-bar span{ color:var(--ink); }
+
+.notes{
+  width:100%; max-width:760px;
+  margin:2.2rem auto 0;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:1rem 1.1rem;
+  text-align:left;
+}
+.notes summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:.5rem;
+  font-size:1rem;
+}
+.notes ul{
+  margin:.8rem 0 0 1.2rem;
+  line-height:1.7;
+}
+.notes li{ margin-bottom:.35rem; }
+
+.gapfill-wrap{
+  width:100%; max-width:760px;
+  margin:2.2rem auto 0;
+  text-align:center;
+}
+.gapfill-wrap h2{
+  color:var(--accent);
+  margin-bottom:.35rem;
+  font-size:1.4rem;
+  font-size:clamp(1.2rem,2vw,1.6rem);
+}
+.gapfill-intro{ max-width:700px; margin:0 auto 1.2rem; }
+.gapfill-list{ display:grid; grid-template-columns:1fr; gap:12px; }
+.gapfill-item{
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+}
+.gapfill-item p{ margin:0 auto .85rem; max-width:680px; }
+
+.speak-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  margin:6px auto 10px;
+  padding:.55rem 1.1rem;
+  border-radius:999px;
+  border:2px solid var(--accent);
+  background:transparent;
+  color:var(--accent);
+  font-family:inherit;
+  font-size:.9rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .2s ease;
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+@media(hover:hover){ .speak-btn:hover{ background:var(--accent); color:#fff; transform:translateY(-2px); } }
+.speak-btn.speaking{
+  background:var(--accent); color:#fff;
+  animation:pulse-btn 1s ease infinite;
+}
+@keyframes pulse-btn{
+  0%,100%{ box-shadow:0 0 0 0 rgba(46,14,91,.4); }
+  50%{ box-shadow:0 0 0 8px rgba(46,14,91,0); }
+}
+.speak-btn svg{ flex-shrink:0; }
+
+.voice-bar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  margin-bottom:1rem;
+  flex-wrap:wrap;
+  font-size:.88rem;
+  color:var(--muted);
+  font-weight:600;
+}
+.voice-select{
+  padding:.4rem .7rem;
+  border-radius:8px;
+  border:1.5px solid rgba(46,14,91,.2);
+  font:inherit;
+  font-size:.88rem;
+  color:var(--ink);
+  background:#fff;
+  cursor:pointer;
+  outline:none;
+}
+.voice-select:focus{ border-color:var(--accent); }
+
+.gapfill-input{
+  display:block;
+  width:100%; max-width:280px;
+  font-size:16px;                                   /* stops iPhones zooming in when tapped */
+  margin:0 auto;
+  padding:.7rem .9rem;
+  border:2px solid rgba(46,14,91,.18);
+  border-radius:10px;
+  font:inherit;
+  outline:none;
+  text-align:center;
+}
+.gapfill-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(46,14,91,.10);
+}
+.gapfill-actions{
+  display:flex;
+  justify-content:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+  margin-top:.8rem;
+}
+.gapfill-btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.65rem 1rem;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-family:inherit;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+  transition:all .2s ease;
+  font-size:.95rem;
+}
+.gapfill-btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+.gapfill-feedback{ min-height:1.5em; margin-top:.75rem; font-weight:700; text-align:center; }
+.gapfill-feedback.correct{ color:var(--ok); }
+.gapfill-feedback.incorrect{ color:var(--bad); }
+.gapfill-answer{ display:none; margin-top:.65rem; font-weight:700; color:var(--accent); text-align:center; }
+.gapfill-answer.show{ display:block; }
+
+.links{ display:flex; justify-content:center; gap:1rem; margin-top:2rem; flex-wrap:wrap; }
+a.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  text-decoration:none;
+  padding:.8rem 1.4rem;
+  border-radius:45px;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  font-family:inherit;
+}
+a.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#ff9b3d);
+  transform:translateY(-2px);
+}
+
+footer{
+  background:var(--card);
+  color:var(--muted);
+  text-align:center;
+  padding:1rem 12px;
+  padding-bottom:calc(1rem + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);
+  font-size:.9rem;
+}
+
+@media(min-width:901px){
+  #game{ grid-template-columns:repeat(4,minmax(0,1fr)); max-width:760px; gap:10px; }
+  .card{ min-height:72px; font-size:.82rem; padding:10px 8px; }
+}
+@media(max-width:900px){
+  #game{ grid-template-columns:repeat(3,minmax(0,1fr)); max-width:540px; gap:9px; }
+  .card{ min-height:76px; font-size:.80rem; padding:9px 7px; }
+}
+@media(max-width:600px){
+  main{ padding:1.5rem .8rem calc(2.4rem + env(safe-area-inset-bottom)); }
+  #game{ grid-template-columns:repeat(2,minmax(0,1fr)); max-width:360px; gap:8px; }
+  .card{ min-height:80px; font-size:.76rem; padding:8px 6px; border-radius:12px; }
+  .qr-toggle,.home-btn{ transform:scale(.95); transform-origin:top; }
+  .gapfill-input{ width:100%; }
+}
+@media(max-width:360px){
+  #game{ width:100%; gap:6px; }
+  .card{ min-height:72px; font-size:.72rem; padding:6px 5px; }
+}
+
+/* ══════════ JUNGLE THEME + MINIMAL BUTTONS ══════════
+   Every colour lives in these variables, so the look can be
+   changed here without touching the rest of the page. */
+:root{
+  --bg:#edf3e4;          /* pale leaf */
+  --card:#16301d;        /* footer: deep jungle */
+  --ink:#1c2a1e;
+  --muted:#7c8a74;
+  --accent:#1f5130;      /* jungle green */
+  --line:#2b4a33;
+  --ok:#2e7d32;
+  --bad:#b23a2a;
+  --leaf:#4f8a3c;
+  --sun:#e8b33d;         /* sunlight through the canopy */
+  --back:#23492b;        /* face-down card: shady undergrowth */
+  --flip:#173d24;        /* card turned over */
+}
+body{
+  background:var(--bg) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='%234f8a3c' fill-opacity='.10'><path d='M20 40c20-24 50-20 56-4-18 4-38 14-56 4z'/><path d='M100 110c14-28 44-32 54-18-16 8-34 22-54 18z'/><path d='M90 20c4 22-8 40-22 44 0-18 8-36 22-44z'/><path d='M20 130c24-6 42 6 44 20-18-2-36-8-44-20z'/></g></svg>") repeat;
+}
+.bg-overlay{ background:rgba(237,243,228,.70); }
+header{ background:rgba(237,243,228,.9); border-bottom:1px solid rgba(31,81,48,.12); }
+header span{ color:var(--leaf); }
+.level-badge{ background:var(--sun); color:var(--accent); }
+h1{ color:var(--accent); }
+.round-info, .score-bar{ color:var(--muted); }
+#status{ color:var(--accent); }
+
+/* cards */
+.card{
+  background:var(--back);
+  background-image:radial-gradient(circle at 20% 15%, rgba(255,255,255,.10) 0 18%, transparent 19%),
+                   radial-gradient(circle at 85% 90%, rgba(0,0,0,.10) 0 22%, transparent 23%);
+  border:1px solid rgba(0,0,0,.18);
+  box-shadow:0 2px 4px rgba(22,48,29,.18);
+}
+.card.flipped, .card.matched{ background-image:none; }
+.card.flipped{ background:var(--flip); }
+
+/* minimal buttons: thin outline, no shadow, fill on hover */
+button.btn, a.btn, .gapfill-btn, button.btn.btn-sound{
+  background:transparent;
+  color:var(--accent);
+  border:1.5px solid var(--accent);
+  box-shadow:none;
+  font-weight:600;
+  font-size:.92rem;
+  padding:.5rem 1.15rem;
+  border-radius:999px;
+  transform:none;
+  transition:background .2s ease, color .2s ease;
+}
+button.btn:hover, a.btn:hover, .gapfill-btn:hover, button.btn.btn-sound:hover{
+  background:var(--accent);
+  color:#fff;
+  transform:none;
+}
+button.btn:focus-visible, a.btn:focus-visible, .gapfill-btn:focus-visible{ outline:2px solid var(--sun); outline-offset:2px; }
+button.btn.btn-sound[aria-pressed="false"]{ opacity:.55; }
+.gapfill-btn{ font-size:.85rem; padding:.42rem 1rem; }
+.qr-toggle, .home-btn{
+  background:rgba(255,255,255,.85);
+  border:1px solid rgba(31,81,48,.25);
+  color:var(--accent);
+  box-shadow:none;
+  font-weight:700;
+}
+
+/* panels */
+.notes, .gapfill-item{ background:rgba(255,255,255,.88); border:1px solid rgba(31,81,48,.14); }
+.notes summary, .gapfill-wrap h2{ color:var(--accent); }
+.gapfill-input{ border:1.5px solid rgba(31,81,48,.22); }
+.gapfill-input:focus{ border-color:var(--leaf); box-shadow:0 0 0 3px rgba(79,138,60,.15); }
+.gapfill-answer{ color:var(--accent); }
+footer{ background:var(--card); color:#b9c9b0; border-top:3px solid var(--sun); }
+@media(max-width:600px){
+  header{ font-size:.95rem; letter-spacing:1px; padding:1.2rem 70px .9rem; }
+  header span{ font-size:.68rem; letter-spacing:2px; }
+  /* phones: arrow only, so the button never covers the title */
+  .home-btn .txt{ display:none; }
+  .home-btn{ min-width:46px; height:46px; padding:0; display:inline-flex; align-items:center; justify-content:center; font-size:1.5rem; line-height:1; }
+}
+
+/* ══════════ TOUCH SCREENS (phones and tablets) ══════════ */
+.card{ touch-action:manipulation; }          /* quick taps never zoom the page */
+@media (pointer:coarse){
+  /* finger-sized buttons: at least 44px tall, as Apple and Google recommend */
+  button.btn, a.btn, .gapfill-btn, .home-btn, .qr-toggle{ min-height:44px; }
+  .home-btn, a.btn{ display:inline-flex; align-items:center; }
+  .gapfill-btn{ padding:.55rem 1.15rem; }
+}
+/* hover colours only on devices with a mouse, so a tapped button
+   doesn't stay stuck in its "hover" colour on a phone or iPad */
+@media (hover:none){
+  button.btn:hover, a.btn:hover, .gapfill-btn:hover, button.btn.btn-sound:hover{ background:transparent; color:var(--accent); }
+  .home-btn:hover, .qr-toggle:hover{ background:rgba(255,255,255,.85); }
+}
+button.btn:active, a.btn:active, .gapfill-btn:active{ background:var(--accent); color:#fff; }
+</style>
+</head>
+
+<body>
+
+<!-- Background video. x5-/webkit- attributes stop WeChat, QQ and older iPhones
+     opening it full-screen instead of playing it behind the page. -->
+<video class="bg-video" id="bgVideo" autoplay muted loop playsinline webkit-playsinline
+       x5-playsinline x5-video-player-type="h5-page" preload="auto"
+       disablepictureinpicture aria-hidden="true" tabindex="-1">
+  <source src="animal.mp4" type="video/mp4">
+</video>
+<div class="bg-overlay"></div>
+
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR">QR</button>
+<div class="qr-panel" id="qrPanel" aria-label="QR code panel">
+  <div class="qr-title">Open this page on your phone</div>
+  <div class="qr-code" id="qrCode"></div>
+  <div class="qr-url" id="qrUrl"></div>
+</div>
+
+<a class="home-btn" href="../vocabularygames.html" aria-label="Back to the vocab games"><span aria-hidden="true">&lsaquo;</span><span class="txt">&nbsp;Games</span></a>
+
+<header>
+  MODERN ENGLISH AUSTRALIA
+  <span>Koala Spies Sydney</span>
+</header>
+
+<main>
+  <div class="level-badge">B2–C1 UPPER-INTERMEDIATE · ADVANCED</div>
+  <h1>Animal Idioms – Matching Game</h1>
+  <p>
+    Flip two cards to match each <strong>animal idiom</strong> with its meaning — <em>let the cat out of the bag</em> … <em>reveal a secret</em>! Each round picks <strong>6 new pairs</strong> from a big list — play again and again!
+  </p>
+
+  <div class="round-info" id="roundInfo">Round 1</div>
+
+  <div class="score-bar">
+    <div>Matches: <span id="scoreMatched">0</span> / 6</div>
+    <div>Rounds played: <span id="scoreRounds">0</span></div>
+  </div>
+
+  <div class="controls" style="margin-top:1rem">
+    <button class="btn" id="newRoundBtn">New Round ↻</button>
+    <button class="btn btn-sound" id="soundBtn" type="button" aria-pressed="true">🔊 Sound on</button>
+  </div>
+
+  <div id="game"></div>
+  <div id="status"></div>
+
+  <details class="notes">
+    <summary>Teacher Notes / Full Idiom List (B2–C1)</summary>
+    <p style="margin:.4rem 0 0;max-width:none">An <strong>idiom</strong> is a fixed phrase whose meaning is different from the meaning of its words: nobody really puts a cat in a bag! Unlike the similes in the A1–B1 games, idioms don't use <em>like</em> or <em>as … as</em>, so learners have to know them as whole chunks.</p>
+    <p style="margin:.8rem 0 0;max-width:none"><strong>B2 – Upper-intermediate</strong></p>
+    <ul>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><path d="M14 28L12 8l16 12zM50 28L52 8 36 20z" fill="#7d8791"/><ellipse cx="32" cy="36" rx="19" ry="17" fill="#8e98a2"/><ellipse cx="25" cy="33" rx="3" ry="4" fill="#a8d86a"/><ellipse cx="39" cy="33" rx="3" ry="4" fill="#a8d86a"/><ellipse cx="25" cy="33" rx="1" ry="3" fill="#222"/><ellipse cx="39" cy="33" rx="1" ry="3" fill="#222"/><path d="M30 40h4l-2 2.5z" fill="#e5728f"/><path d="M22 42h-12M22 45l-11 3M42 42h12M42 45l11 3" stroke="#444" stroke-width="1.2" stroke-linecap="round"/></svg></span><span><strong>let the cat out of the bag</strong> – reveal a secret</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><circle cx="32" cy="33" r="25" fill="#c96f1e"/><circle cx="32" cy="34" r="16" fill="#f2c14e"/><circle cx="20" cy="21" r="5" fill="#f2c14e"/><circle cx="44" cy="21" r="5" fill="#f2c14e"/><circle cx="26" cy="31" r="2.4" fill="#222"/><circle cx="38" cy="31" r="2.4" fill="#222"/><path d="M28 37h8l-4 4z" fill="#7a3b12"/><path d="M32 41v3M28 45q4 3 8 0" stroke="#7a3b12" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg></span><span><strong>the lion&#x27;s share</strong> – the biggest part</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><path d="M14 10l8 16h20l8-16-12 8H26z" fill="#6f7780"/><path d="M14 20q18-8 36 0l-4 18-14 16-14-16z" fill="#7d858e"/><path d="M22 36q10 4 20 0l-10 18z" fill="#dfe3e6"/><circle cx="24" cy="30" r="2.4" fill="#222"/><circle cx="40" cy="30" r="2.4" fill="#222"/><circle cx="32" cy="46" r="3" fill="#222"/><path d="M18 13l4 8M46 13l-4 8" stroke="#3d4349" stroke-width="2.5" stroke-linecap="round"/></svg></span><span><strong>a wolf in sheep&#x27;s clothing</strong> – someone who seems kind but is dangerous</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><path d="M22 20l-2-12 8 8zM40 18l4-11 2 12z" fill="#7a4b2c"/><path d="M20 22q12-10 26-2l2 26q-4 10-15 10q-11 0-13-10z" fill="#9a6034"/><path d="M26 14q10-6 20 4q-6-2-10 2q-4-4-10-6z" fill="#3a2518"/><ellipse cx="33" cy="48" rx="11" ry="8" fill="#c48a5a"/><ellipse cx="29" cy="49" rx="1.8" ry="2.6" fill="#5a3b1f"/><ellipse cx="37" cy="49" rx="1.8" ry="2.6" fill="#5a3b1f"/><circle cx="25" cy="30" r="2.4" fill="#222"/><circle cx="41" cy="30" r="2.4" fill="#222"/><path d="M31 22l2 6 2-6z" fill="#fff"/></svg></span><span><strong>hold your horses</strong> – wait; don&#x27;t rush</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><path d="M50 44q10 2 10 10q-6-6-12-4" stroke="#c98f96" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="22" cy="20" r="8" fill="#7d6f66"/><circle cx="22" cy="20" r="4.5" fill="#e3a3ad"/><ellipse cx="34" cy="40" rx="18" ry="13" fill="#8a7b71"/><path d="M18 40l-12 6 12 4z" fill="#8a7b71"/><circle cx="6" cy="46" r="2.2" fill="#e5728f"/><circle cx="17" cy="38" r="2" fill="#222"/><path d="M9 44h-6M9 47l-5 3" stroke="#444" stroke-width="1" stroke-linecap="round"/></svg></span><span><strong>smell a rat</strong> – suspect something is wrong</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><ellipse cx="30" cy="42" rx="20" ry="12" fill="#f6c21c"/><circle cx="40" cy="24" r="11" fill="#f6c21c"/><path d="M48 26l10 2-10 4z" fill="#f28c28"/><circle cx="42" cy="22" r="2" fill="#222"/><path d="M16 40q10 6 18 0" stroke="#e0a800" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></span><span><strong>get your ducks in a row</strong> – get organised</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><circle cx="30" cy="36" r="17" fill="#3d8bd9"/><ellipse cx="30" cy="42" rx="10" ry="8" fill="#a9d4ff"/><path d="M22 34q-10 4-12 14q10-2 16-10z" fill="#2a6fb5"/><path d="M46 32l10 3-10 4z" fill="#f2a900"/><circle cx="38" cy="30" r="2.6" fill="#222"/><circle cx="38.8" cy="29.2" r=".9" fill="#fff"/><path d="M26 20q2-6 8-6" stroke="#3d8bd9" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span><span><strong>kill two birds with one stone</strong> – achieve two things with one action</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><circle cx="14" cy="32" r="7" fill="#8a5a36"/><circle cx="50" cy="32" r="7" fill="#8a5a36"/><circle cx="14" cy="32" r="3.5" fill="#e6b889"/><circle cx="50" cy="32" r="3.5" fill="#e6b889"/><circle cx="32" cy="32" r="18" fill="#8a5a36"/><path d="M20 30q0-10 12-8q12-2 12 8q0 16-12 16t-12-16z" fill="#e6b889"/><circle cx="26" cy="30" r="2.4" fill="#222"/><circle cx="38" cy="30" r="2.4" fill="#222"/><path d="M26 40q6 5 12 0" stroke="#5a3b1f" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span><span><strong>monkey business</strong> – silly or dishonest behaviour</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><path d="M22 20l-2-12 8 8zM40 18l4-11 2 12z" fill="#7a4b2c"/><path d="M20 22q12-10 26-2l2 26q-4 10-15 10q-11 0-13-10z" fill="#9a6034"/><path d="M26 14q10-6 20 4q-6-2-10 2q-4-4-10-6z" fill="#3a2518"/><ellipse cx="33" cy="48" rx="11" ry="8" fill="#c48a5a"/><ellipse cx="29" cy="49" rx="1.8" ry="2.6" fill="#5a3b1f"/><ellipse cx="37" cy="49" rx="1.8" ry="2.6" fill="#5a3b1f"/><circle cx="25" cy="30" r="2.4" fill="#222"/><circle cx="41" cy="30" r="2.4" fill="#222"/><path d="M31 22l2 6 2-6z" fill="#fff"/></svg></span><span><strong>a dark horse</strong> – someone who surprises everyone by succeeding</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><path d="M4 30q14-14 28-6q14-8 28 6q-12-2-20 6h-16q-8-8-20-6z" fill="#6b4a2c"/><ellipse cx="32" cy="38" rx="9" ry="13" fill="#7a5533"/><circle cx="32" cy="22" r="8" fill="#fff"/><path d="M34 23l8 2-6 5z" fill="#f2a900"/><circle cx="30" cy="21" r="1.8" fill="#222"/><path d="M28 50l-2 6M36 50l2 6" stroke="#f2a900" stroke-width="2.4" stroke-linecap="round"/></svg></span><span><strong>eagle-eyed</strong> – very good at noticing details</span></li>
+    </ul>
+    <p style="margin:.8rem 0 0;max-width:none"><strong>C1 – Advanced</strong></p>
+    <ul>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><path d="M16 20q-10-2-8-10q4 6 10 5zM48 20q10-2 8-10q-4 6-10 5z" fill="#efe6d2"/><ellipse cx="12" cy="27" rx="6" ry="3.5" fill="#f5f5f5" stroke="#d0d0d0"/><ellipse cx="52" cy="27" rx="6" ry="3.5" fill="#f5f5f5" stroke="#d0d0d0"/><path d="M18 18q14-6 28 0l-2 24H20z" fill="#fafafa" stroke="#d6d6d6"/><path d="M20 20q6 0 8 6q-4 6-8 4zM40 22q6-2 6 6q-6 2-6-6z" fill="#2f2a28"/><ellipse cx="32" cy="46" rx="14" ry="10" fill="#f4b6c2"/><circle cx="24" cy="31" r="2.4" fill="#222"/><circle cx="40" cy="31" r="2.4" fill="#222"/><ellipse cx="27" cy="47" rx="2" ry="3" fill="#b0566a"/><ellipse cx="37" cy="47" rx="2" ry="3" fill="#b0566a"/></svg></span><span><strong>a sacred cow</strong> – something people refuse to criticise</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><ellipse cx="14" cy="30" rx="10" ry="13" fill="#8e9aa6"/><ellipse cx="50" cy="30" rx="10" ry="13" fill="#8e9aa6"/><circle cx="32" cy="30" r="16" fill="#a3aeb9"/><path d="M32 36q0 14 8 18" stroke="#a3aeb9" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M24 40q-4 4-2 8M40 40q4 4 2 8" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="25" cy="28" r="2.4" fill="#222"/><circle cx="39" cy="28" r="2.4" fill="#222"/></svg></span><span><strong>the elephant in the room</strong> – an obvious problem nobody wants to discuss</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><circle cx="18" cy="17" r="6" fill="#f08a24"/><circle cx="46" cy="17" r="6" fill="#f08a24"/><circle cx="32" cy="34" r="20" fill="#f08a24"/><ellipse cx="32" cy="43" rx="11" ry="8" fill="#fff"/><path d="M32 14v6M26 15l2 6M38 15l-2 6M12 30h6M12 36h6M52 30h-6M52 36h-6" stroke="#222" stroke-width="2.4" stroke-linecap="round"/><circle cx="25" cy="31" r="2.4" fill="#222"/><circle cx="39" cy="31" r="2.4" fill="#222"/><path d="M29 39h6l-3 3z" fill="#e5728f"/></svg></span><span><strong>a paper tiger</strong> – something that seems powerful but is weak</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><ellipse cx="15" cy="30" rx="7" ry="14" fill="#6b4a2c" transform="rotate(15 15 30)"/><ellipse cx="49" cy="30" rx="7" ry="14" fill="#6b4a2c" transform="rotate(-15 49 30)"/><circle cx="32" cy="32" r="17" fill="#c9924f"/><ellipse cx="32" cy="42" rx="10" ry="8" fill="#f1dcc2"/><circle cx="25" cy="29" r="2.4" fill="#222"/><circle cx="39" cy="29" r="2.4" fill="#222"/><ellipse cx="32" cy="38" rx="4" ry="3" fill="#222"/><path d="M32 41v3M28 45q4 3 8 0" stroke="#5a3b1f" stroke-width="1.4" fill="none"/><path d="M32 46q0 6 3 6q3 0 2-6" fill="#e5728f"/></svg></span><span><strong>let sleeping dogs lie</strong> – don&#x27;t bring up old problems again</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><path d="M14 28L12 8l16 12zM50 28L52 8 36 20z" fill="#7d8791"/><ellipse cx="32" cy="36" rx="19" ry="17" fill="#8e98a2"/><ellipse cx="25" cy="33" rx="3" ry="4" fill="#a8d86a"/><ellipse cx="39" cy="33" rx="3" ry="4" fill="#a8d86a"/><ellipse cx="25" cy="33" rx="1" ry="3" fill="#222"/><ellipse cx="39" cy="33" rx="1" ry="3" fill="#222"/><path d="M30 40h4l-2 2.5z" fill="#e5728f"/><path d="M22 42h-12M22 45l-11 3M42 42h12M42 45l11 3" stroke="#444" stroke-width="1.2" stroke-linecap="round"/></svg></span><span><strong>put the cat among the pigeons</strong> – cause trouble or controversy</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><ellipse cx="28" cy="44" rx="20" ry="12" fill="#e9ecef" stroke="#c7ccd1"/><path d="M40 42q2-14 4-22q2-8 8-8" stroke="#e9ecef" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M40 42q2-14 4-22q2-8 8-8" stroke="#c7ccd1" stroke-width="1" fill="none"/><path d="M53 12l9 3-9 3z" fill="#f28c28"/><circle cx="51" cy="11" r="1.5" fill="#222"/><path d="M14 42q10 6 20 0" stroke="#c7ccd1" stroke-width="2" fill="none"/><path d="M24 56v4M32 56v4" stroke="#f28c28" stroke-width="2.4" stroke-linecap="round"/></svg></span><span><strong>a wild goose chase</strong> – a pointless search for something</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><circle cx="18" cy="17" r="6" fill="#f08a24"/><circle cx="46" cy="17" r="6" fill="#f08a24"/><circle cx="32" cy="34" r="20" fill="#f08a24"/><ellipse cx="32" cy="43" rx="11" ry="8" fill="#fff"/><path d="M32 14v6M26 15l2 6M38 15l-2 6M12 30h6M12 36h6M52 30h-6M52 36h-6" stroke="#222" stroke-width="2.4" stroke-linecap="round"/><circle cx="25" cy="31" r="2.4" fill="#222"/><circle cx="39" cy="31" r="2.4" fill="#222"/><path d="M29 39h6l-3 3z" fill="#e5728f"/></svg></span><span><strong>ride the tiger</strong> – be stuck in a risky situation you can&#x27;t easily leave</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><circle cx="30" cy="36" r="17" fill="#3d8bd9"/><ellipse cx="30" cy="42" rx="10" ry="8" fill="#a9d4ff"/><path d="M22 34q-10 4-12 14q10-2 16-10z" fill="#2a6fb5"/><path d="M46 32l10 3-10 4z" fill="#f2a900"/><circle cx="38" cy="30" r="2.6" fill="#222"/><circle cx="38.8" cy="29.2" r=".9" fill="#fff"/><path d="M26 20q2-6 8-6" stroke="#3d8bd9" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span><span><strong>birds of a feather flock together</strong> – similar people like to be together</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><ellipse cx="22" cy="24" rx="12" ry="7" fill="#cfe8ff" opacity=".9" transform="rotate(-30 22 24)"/><ellipse cx="42" cy="24" rx="12" ry="7" fill="#cfe8ff" opacity=".9" transform="rotate(30 42 24)"/><ellipse cx="32" cy="38" rx="9" ry="13" fill="#3b3a45"/><circle cx="32" cy="24" r="7" fill="#3b3a45"/><circle cx="28" cy="22" r="3.4" fill="#c0392b"/><circle cx="36" cy="22" r="3.4" fill="#c0392b"/><path d="M24 36l-8-4M24 42l-8 2M40 36l8-4M40 42l8 2" stroke="#3b3a45" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><strong>a fly in the ointment</strong> – a small problem that spoils something good</span></li>
+      <li class="icon-li"><span class="note-icon"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><ellipse cx="24" cy="18" rx="10" ry="6" fill="#d9ecff" opacity=".9" transform="rotate(-25 24 18)"/><ellipse cx="40" cy="18" rx="10" ry="6" fill="#d9ecff" opacity=".9" transform="rotate(25 40 18)"/><ellipse cx="34" cy="38" rx="17" ry="11" fill="#e8a317"/><path d="M28 28v20M36 27v22M44 29v18" stroke="#3a2415" stroke-width="4"/><path d="M51 38l8 0" stroke="#3a2415" stroke-width="3" stroke-linecap="round"/><circle cx="15" cy="36" r="7" fill="#8b3a1a"/><path d="M11 33l3 2M20 33l-3 2" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><path d="M12 30l-3-7M18 30l1-7" stroke="#3a2415" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><strong>stir up a hornet&#x27;s nest</strong> – cause a lot of anger and trouble</span></li>
+    </ul>
+    <p style="margin:.6rem 0 0;max-width:none"><strong>Usage notes:</strong> the verbs inside idioms change form (<em>she let the cat out of the bag; I smelt/smelled a rat</em>) and possessives change (<em>get <u>our</u> ducks in a row</em>). <em>Birds of a feather flock together</em> is often shortened to <em>birds of a feather</em>. <em>Put the cat among the pigeons</em> is mainly British and Australian English.</p>
+  </details>
+
+  <section class="gapfill-wrap" aria-labelledby="gapfillTitle">
+    <h2 id="gapfillTitle">Complete the Sentences</h2>
+    <p class="gapfill-intro">
+      Complete each sentence with the right <strong>animal idiom</strong>. Change the verb or pronoun if the sentence needs it, then press Submit.
+    </p>
+
+    <div class="gapfill-list">
+
+      <article class="gapfill-item" data-answer="let the cat out of the bag">
+        <p>1) It was meant to be a surprise party, but my little brother ______ at breakfast.</p>
+        <input class="gapfill-input" type="text" placeholder="Type the missing idiom">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: let the cat out of the bag</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="a wolf in sheep&#x27;s clothing">
+        <p>2) The new manager seemed so friendly at first, but he turned out to be ______.</p>
+        <input class="gapfill-input" type="text" placeholder="Type the missing idiom">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: a wolf in sheep&#x27;s clothing</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="the elephant in the room">
+        <p>3) Everyone knew the company was losing money, but nobody mentioned it. It was ______.</p>
+        <input class="gapfill-input" type="text" placeholder="Type the missing idiom">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: the elephant in the room</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="smelt a rat|smelled a rat">
+        <p>4) When the email asked for my bank password to claim a prize, I immediately ______.</p>
+        <input class="gapfill-input" type="text" placeholder="Type the missing idiom">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: smelt a rat / smelled a rat</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="kill two birds with one stone">
+        <p>5) If I cycle to work, I&#x27;ll ______: I&#x27;ll save money and get fit.</p>
+        <input class="gapfill-input" type="text" placeholder="Type the missing idiom">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: kill two birds with one stone</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="hold your horses">
+        <p>6) ______! We can&#x27;t sign the contract until the lawyer has read it.</p>
+        <input class="gapfill-input" type="text" placeholder="Type the missing idiom">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: hold your horses</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="get our ducks in a row">
+        <p>7) The inspectors arrive on Monday, so we need to ______ before then.</p>
+        <input class="gapfill-input" type="text" placeholder="Type the missing idiom">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: get our ducks in a row</div>
+      </article>
+
+      <article class="gapfill-item" data-answer="a wild goose chase">
+        <p>8) The shop said the part was in stock, but it wasn&#x27;t there. It was ______.</p>
+        <input class="gapfill-input" type="text" placeholder="Type the missing idiom">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback"></div>
+        <div class="gapfill-answer">Answer: a wild goose chase</div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="links">
+    <a href="../vocabularygames.html" class="btn">More vocab games</a>
+    <a href="../index.html" class="btn">Home</a>
+  </div>
+</main>
+
+<footer>
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
+
+<!-- Background video: start it, retry on the first tap (iPhones in Low Power
+     Mode, data saver), and hide it if animal.mp4 is missing so the leaves show -->
+<script>
+(function(){
+  var v = document.getElementById("bgVideo");
+  if(!v) return;
+  function hide(){ v.style.display = "none"; }
+  // Hide only on a real failure. (Checking "no source" straight away can
+  // catch a video that is simply still starting up, and hide a good video.)
+  if(v.error) hide();
+  v.addEventListener("error", hide, true);
+  var src = v.querySelector("source");
+  if(src) src.addEventListener("error", hide);
+  // Backstop: if the error fired before this script ran, nothing will have
+  // loaded at all after a few seconds.
+  setTimeout(function(){ if(v.error || (v.networkState === 3 && v.readyState === 0)) hide(); }, 4000);
+  v.muted = true; v.defaultMuted = true;            // needed for autoplay on iOS
+  function play(){ if(v.style.display === "none") return; var p = v.play(); if(p && p.catch) p.catch(function(){}); }
+  play();
+  ["touchstart","pointerdown","keydown"].forEach(function(evt){
+    document.addEventListener(evt, play, { once:true, passive:true });
+  });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script>
+(function(){
+  const toggle  = document.getElementById("qrToggle");
+  const panel   = document.getElementById("qrPanel");
+  const box     = document.getElementById("qrCode");
+  const urlLabel= document.getElementById("qrUrl");
+  if(!toggle||!panel||!box||!urlLabel) return;
+  let made = false;
+  function make(){
+    const url = window.location.href;
+    urlLabel.textContent = url;
+    box.innerHTML = "";
+    if(typeof QRCode === "undefined"){
+      /* the QR library is blocked or slow on some networks (e.g. mainland China) */
+      box.innerHTML = '<span style="font-size:.85rem;color:#333;padding:10px;line-height:1.4">QR code unavailable on this network. Share the address below instead.</span>';
+      return;
+    }
+    new QRCode(box,{ text:url, width:200, height:200, correctLevel:QRCode.CorrectLevel.M });
+    made = true;
+  }
+  toggle.addEventListener("click",()=>{
+    const open = panel.style.display === "block";
+    panel.style.display = open ? "none" : "block";
+    if(!open && !made) make();
+  });
+  document.addEventListener("click",(e)=>{
+    if(panel.style.display !== "block") return;
+    if(!panel.contains(e.target) && !toggle.contains(e.target)) panel.style.display = "none";
+  });
+})();
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   SOUNDS — made in the browser, so there are no files to upload.
+   An animal noise plays when an animal card turns over, a "bling"
+   for a match and a "blurp" for a miss.
+
+   WANT REAL RECORDINGS INSTEAD? Put mp3 files in a folder called
+   "sounds" next to this page, named after the animal (lion.mp3,
+   mouse.mp3, owl.mp3 ...) and change USE_SOUND_FILES to true.
+   Any animal without a file still uses the built-in sound.
+   ══════════════════════════════════════════════════════════════ */
+const USE_SOUND_FILES = false;
+const SOUND_FOLDER    = "sounds/";
+let soundOn = true, AC = null;
+
+function ac(){
+  if(!soundOn) return null;
+  try{
+    /* iPhones and iPads: let the game sound play even when the
+       ring/silent switch is on silent (Safari 17 and later) */
+    try{ if(navigator.audioSession) navigator.audioSession.type = "playback"; }catch(e){}
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    if(AC.state === "suspended") AC.resume();
+    return AC;
+  }catch(e){ return null; }
+}
+/* one note: type, start/end pitch, start time, length, volume, optional filter */
+function note(a, {type="sine", f=440, to=null, at=0, dur=.3, vol=.2, attack=.01, lp=null, bp=null, vib=0, vibRate=6, trem=0, tremRate=25}){
+  const t = a.currentTime + at;
+  const o = a.createOscillator(), g = a.createGain();
+  o.type = type; o.frequency.setValueAtTime(f, t);
+  if(to) o.frequency.exponentialRampToValueAtTime(to, t + dur);
+  if(vib){ const l = a.createOscillator(), lg = a.createGain(); l.frequency.value = vibRate; lg.gain.value = vib; l.connect(lg); lg.connect(o.frequency); l.start(t); l.stop(t + dur + .05); }
+  g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + attack); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  let node = o;
+  if(lp){ const fl = a.createBiquadFilter(); fl.type = "lowpass"; fl.frequency.value = lp; node.connect(fl); node = fl; }
+  if(bp){ const fl = a.createBiquadFilter(); fl.type = "bandpass"; fl.frequency.value = bp; fl.Q.value = 3; node.connect(fl); node = fl; }
+  if(trem){ const tg = a.createGain(), l = a.createOscillator(), lg = a.createGain(); l.frequency.value = tremRate; lg.gain.value = trem; l.connect(lg); lg.connect(tg.gain); l.start(t); l.stop(t + dur + .05); node.connect(tg); node = tg; }
+  node.connect(g); g.connect(a.destination);
+  o.start(t); o.stop(t + dur + .05);
+}
+let noiseBuf = null;
+function noise(a, {at=0, dur=.5, vol=.2, lp=800, bp=null, from=null, to=null}){
+  if(!noiseBuf){ noiseBuf = a.createBuffer(1, a.sampleRate * 2, a.sampleRate); const d = noiseBuf.getChannelData(0); for(let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; }
+  const t = a.currentTime + at, s = a.createBufferSource(), fl = a.createBiquadFilter(), g = a.createGain();
+  s.buffer = noiseBuf; fl.type = bp ? "bandpass" : "lowpass"; fl.frequency.setValueAtTime(from || bp || lp, t);
+  if(to) fl.frequency.exponentialRampToValueAtTime(to, t + dur);
+  g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .05); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  s.connect(fl); fl.connect(g); g.connect(a.destination); s.start(t); s.stop(t + dur + .05);
+}
+
+const ANIMAL_SOUNDS = {
+  rat:      a => { [0,.12,.26].forEach((t,i) => note(a,{f:2200+i*150,to:3000,at:t,dur:.08,vol:.18})); },
+  cow:      a => note(a,{type:"sawtooth",f:150,to:110,dur:1.2,vol:.35,attack:.15,lp:600,vib:3,vibRate:4}),
+  goose:    a => { [0,.28].forEach(t => note(a,{type:"sawtooth",f:560,to:470,at:t,dur:.2,vol:.3,bp:1000,trem:.4,tremRate:30})); },
+  fly:      a => note(a,{type:"sawtooth",f:260,dur:.9,vol:.16,attack:.05,lp:2000,vib:30,vibRate:3,trem:.6,tremRate:40}),
+  hornet:   a => note(a,{type:"sawtooth",f:170,dur:1,vol:.22,attack:.05,lp:1800,trem:.8,tremRate:32,vib:12,vibRate:7}),
+  leopard:  a => { note(a,{type:"sawtooth",f:95,to:75,dur:.8,vol:.3,attack:.06,lp:500,trem:.6,tremRate:16}); noise(a,{dur:.8,vol:.18,lp:550}); },
+  fish:     a => { [0,.12,.22,.36].forEach((t,i) => note(a,{f:500+i*140,to:900+i*160,at:t,dur:.07,vol:.22})); },
+  eagle:    a => { note(a,{type:"sawtooth",f:2200,to:1500,dur:.45,vol:0.31,bp:2200,vib:40,vibRate:18}); note(a,{type:"sawtooth",f:2000,to:1300,at:.5,dur:.35,vol:0.22,bp:2000}); },
+  swan:     a => { note(a,{type:"sawtooth",f:520,to:470,dur:.25,vol:0.5,bp:900}); note(a,{type:"sawtooth",f:500,to:440,at:.32,dur:.25,vol:0.43,bp:900}); },
+  frog:     a => { [0,.3].forEach(t => note(a,{type:"sawtooth",f:180,to:140,at:t,dur:.22,vol:0.48,bp:600,trem:.9,tremRate:40})); },
+  kangaroo: a => { [0,.3,.6].forEach(t => { note(a,{f:120,to:55,at:t,dur:.14,vol:.45}); noise(a,{at:t,dur:.08,vol:.12,lp:400}); }); },
+  elephant: a => { note(a,{type:"sawtooth",f:420,to:620,dur:.7,vol:.25,attack:.05,bp:900,vib:25,vibRate:9}); noise(a,{dur:.6,vol:.12,bp:1200}); },
+  monkey:   a => { [[0,500,700],[.2,520,720],[.45,700,1100],[.7,720,1150]].forEach(([t,f,to]) => note(a,{type:"triangle",f,to,at:t,dur:.16,vol:0.5,bp:1000})); },
+  dog:      a => { [0,.3].forEach(t => { note(a,{type:"sawtooth",f:320,to:180,at:t,dur:.14,vol:.35,bp:700}); noise(a,{at:t,dur:.1,vol:.15,bp:900}); }); },
+  butterfly:a => { [0,.1,.2,.3].forEach((t,i) => note(a,{f:2400+i*400,at:t,dur:.25,vol:0.15})); },
+  duck:     a => { [0,.25].forEach(t => note(a,{type:"sawtooth",f:420,to:300,at:t,dur:.16,vol:.3,bp:1100,trem:.5,tremRate:30})); },
+  snake:    a => noise(a,{dur:1.1,vol:.2,bp:5000}),
+  horse:    a => note(a,{type:"sawtooth",f:900,to:500,dur:1,vol:0.55,attack:.05,bp:1300,vib:60,vibRate:11}),
+  bull:     a => { noise(a,{dur:.25,vol:.3,bp:600}); note(a,{type:"sawtooth",f:110,to:85,at:.3,dur:1,vol:.35,attack:.12,lp:500}); },
+  lion:    a => { note(a,{type:"sawtooth",f:110,to:55,dur:1.1,vol:.35,attack:.12,lp:500,vib:6,vibRate:9}); noise(a,{dur:1.1,vol:.25,lp:600}); },
+  mouse:   a => { note(a,{f:2600,to:3600,dur:.09,vol:.18}); note(a,{f:2800,to:3900,at:.13,dur:.09,vol:.18}); note(a,{f:2600,to:3400,at:.26,dur:.08,vol:.15}); },
+  fox:     a => { note(a,{type:"square",f:650,to:1150,dur:.12,vol:0.17,lp:2200}); note(a,{type:"square",f:700,to:1200,at:.18,dur:.14,vol:0.17,lp:2200}); },
+  bee:     a => note(a,{type:"sawtooth",f:210,dur:.9,vol:.2,attack:.05,lp:1400,trem:.8,tremRate:28,vib:8,vibRate:5}),
+  mule:    a => { [0,.45].forEach(t => { note(a,{type:"sawtooth",f:620,to:560,at:t,dur:.2,vol:0.44,bp:900}); note(a,{type:"sawtooth",f:260,to:220,at:t+.2,dur:.25,vol:0.5,bp:700}); }); },
+  bat:     a => { [0,.09,.18,.27].forEach(t => note(a,{f:4200,to:2900,at:t,dur:.06,vol:0.17})); },
+  lamb:    a => note(a,{type:"sawtooth",f:330,to:300,dur:.8,vol:0.47,attack:.04,bp:950,vib:18,vibRate:7}),
+  peacock: a => { note(a,{type:"sawtooth",f:750,to:1100,dur:.18,vol:0.3,bp:1200}); note(a,{type:"sawtooth",f:1100,to:650,at:.18,dur:.35,vol:0.33,bp:1100}); },
+  wolf:    a => note(a,{type:"triangle",f:380,to:640,dur:1.6,vol:.28,attack:.3,vib:10,vibRate:5,lp:1800}),
+  snail:   a => noise(a,{dur:.45,vol:0.7,bp:1,from:300,to:1500}),
+  kitten:  a => note(a,{type:"triangle",f:900,to:1350,dur:.35,vol:0.56,attack:.03,bp:1400}),
+  ox:      a => note(a,{type:"sawtooth",f:140,to:105,dur:1.2,vol:.35,attack:.15,lp:550,vib:3,vibRate:4}),
+  deer:    a => { note(a,{type:"sawtooth",f:520,to:420,dur:.25,vol:0.48,bp:900}); note(a,{type:"sawtooth",f:500,to:400,at:.32,dur:.22,vol:0.43,bp:900}); },
+  tiger:   a => { note(a,{type:"sawtooth",f:85,to:70,dur:1,vol:0.28,attack:.08,lp:450,trem:.7,tremRate:18}); noise(a,{dur:1,vol:0.16,lp:500}); },
+  cat:     a => { note(a,{type:"triangle",f:520,to:820,dur:.25,vol:0.37,bp:1100}); note(a,{type:"triangle",f:820,to:480,at:.25,dur:.4,vol:0.37,bp:1000}); },
+  bear:    a => { note(a,{type:"sawtooth",f:60,to:48,dur:1.1,vol:0.24,attack:.1,lp:350,trem:.6,tremRate:12}); noise(a,{dur:1.1,vol:0.15,lp:350}); },
+  bunny:   a => { note(a,{f:140,to:60,dur:.12,vol:.4}); note(a,{f:140,to:60,at:.2,dur:.12,vol:.4}); note(a,{f:1800,to:2400,at:.4,dur:.07,vol:.1}); },
+  bird:    a => { [0,.14,.28].forEach((t,i) => note(a,{f:2900+i*300,to:4300,at:t,dur:.1,vol:.16})); },
+  owl:     a => { note(a,{f:430,to:400,dur:.35,vol:.3,attack:.08}); note(a,{f:430,to:390,at:.5,dur:.55,vol:.3,attack:.1}); },
+  pig:     a => { [0,.22].forEach(t => note(a,{type:"square",f:260,to:170,at:t,dur:.16,vol:0.38,bp:700})); }
+};
+
+const fileCache = {};
+function playAnimal(name){
+  if(!soundOn || !name) return;
+  if(USE_SOUND_FILES){
+    let au = fileCache[name];
+    if(au === false){ /* no file for this one */ }
+    else {
+      if(!au){ au = fileCache[name] = new Audio(SOUND_FOLDER + name + ".mp3"); au.addEventListener("error", () => { fileCache[name] = false; synthAnimal(name); }); }
+      try{ au.currentTime = 0; const p = au.play(); if(p && p.catch) p.catch(() => {}); return; }catch(e){}
+    }
+  }
+  synthAnimal(name);
+}
+function synthAnimal(name){ const a = ac(); if(a && ANIMAL_SOUNDS[name]) ANIMAL_SOUNDS[name](a); }
+function playBling(){ const a = ac(); if(!a) return;
+  note(a,{f:1318.5,dur:.35,vol:.18}); note(a,{f:1760,at:.08,dur:.45,vol:.18}); note(a,{f:2637,at:.16,dur:.6,vol:.1}); }
+/* ALL PAIRS FOUND — a rising fanfare, a big chord, a burst of
+   applause and a few jungle birds joining in */
+function playCelebration(){ const a = ac(); if(!a) return;
+  [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => note(a,{type:"triangle",f,at:i*.11,dur:.28,vol:.2}));
+  [523.25, 659.25, 783.99, 1046.5, 1318.5].forEach(f => note(a,{type:"triangle",f,at:.5,dur:1.5,vol:.11,attack:.03}));
+  note(a,{f:2093,at:.55,dur:.9,vol:.06}); note(a,{f:2637,at:.7,dur:.8,vol:.05});
+  /* applause: lots of short, soft claps */
+  for(let i = 0; i < 70; i++){
+    const at = .45 + Math.random() * 1.7 * Math.sqrt(Math.random());
+    noise(a,{at, dur:.035, vol:.12 + Math.random() * .12, bp:900 + Math.random() * 1600});
+  }
+  /* birds */
+  [[1.1,3000],[1.35,3400],[1.6,2800],[1.85,3600]].forEach(([at,f]) =>
+    note(a,{f,to:f*1.4,at,dur:.09,vol:.1}));
+}
+function playBlurp(){ const a = ac(); if(!a) return;
+  note(a,{type:"square",f:260,to:90,dur:.32,vol:.16,lp:900}); }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const b = document.getElementById("soundBtn");
+  b.addEventListener("click", () => {
+    soundOn = !soundOn;
+    b.textContent = soundOn ? "🔊 Sound on" : "🔇 Sound off";
+    b.setAttribute("aria-pressed", String(soundOn));
+    if(soundOn) playBling();
+  });
+});
+</script>
+
+<script>
+const SIMILES = [
+  ["reveal a secret", "let the cat out of the bag", "cat"],
+  ["the biggest part", "the lion's share", "lion"],
+  ["someone who seems kind but is dangerous", "a wolf in sheep's clothing", "wolf"],
+  ["wait; don't rush", "hold your horses", "horse"],
+  ["suspect something is wrong", "smell a rat", "rat"],
+  ["get organised", "get your ducks in a row", "duck"],
+  ["achieve two things with one action", "kill two birds with one stone", "bird"],
+  ["silly or dishonest behaviour", "monkey business", "monkey"],
+  ["someone who surprises everyone by succeeding", "a dark horse", "horse"],
+  ["very good at noticing details", "eagle-eyed", "eagle"],
+  ["something people refuse to criticise", "a sacred cow", "cow"],
+  ["an obvious problem nobody wants to discuss", "the elephant in the room", "elephant"],
+  ["something that seems powerful but is weak", "a paper tiger", "tiger"],
+  ["don't bring up old problems again", "let sleeping dogs lie", "dog"],
+  ["cause trouble or controversy", "put the cat among the pigeons", "cat"],
+  ["a pointless search for something", "a wild goose chase", "goose"],
+  ["be stuck in a risky situation you can't easily leave", "ride the tiger", "tiger"],
+  ["similar people like to be together", "birds of a feather flock together", "bird"],
+  ["a small problem that spoils something good", "a fly in the ointment", "fly"],
+  ["cause a lot of anger and trouble", "stir up a hornet's nest", "hornet"]
+];
+
+/* simple drawings of each animal, shown on the animal cards */
+const ANIMAL_ICONS = {
+ "bird": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><circle cx=\"30\" cy=\"36\" r=\"17\" fill=\"#3d8bd9\"/><ellipse cx=\"30\" cy=\"42\" rx=\"10\" ry=\"8\" fill=\"#a9d4ff\"/><path d=\"M22 34q-10 4-12 14q10-2 16-10z\" fill=\"#2a6fb5\"/><path d=\"M46 32l10 3-10 4z\" fill=\"#f2a900\"/><circle cx=\"38\" cy=\"30\" r=\"2.6\" fill=\"#222\"/><circle cx=\"38.8\" cy=\"29.2\" r=\".9\" fill=\"#fff\"/><path d=\"M26 20q2-6 8-6\" stroke=\"#3d8bd9\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/></svg>",
+ "cat": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><path d=\"M14 28L12 8l16 12zM50 28L52 8 36 20z\" fill=\"#7d8791\"/><ellipse cx=\"32\" cy=\"36\" rx=\"19\" ry=\"17\" fill=\"#8e98a2\"/><ellipse cx=\"25\" cy=\"33\" rx=\"3\" ry=\"4\" fill=\"#a8d86a\"/><ellipse cx=\"39\" cy=\"33\" rx=\"3\" ry=\"4\" fill=\"#a8d86a\"/><ellipse cx=\"25\" cy=\"33\" rx=\"1\" ry=\"3\" fill=\"#222\"/><ellipse cx=\"39\" cy=\"33\" rx=\"1\" ry=\"3\" fill=\"#222\"/><path d=\"M30 40h4l-2 2.5z\" fill=\"#e5728f\"/><path d=\"M22 42h-12M22 45l-11 3M42 42h12M42 45l11 3\" stroke=\"#444\" stroke-width=\"1.2\" stroke-linecap=\"round\"/></svg>",
+ "cow": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><path d=\"M16 20q-10-2-8-10q4 6 10 5zM48 20q10-2 8-10q-4 6-10 5z\" fill=\"#efe6d2\"/><ellipse cx=\"12\" cy=\"27\" rx=\"6\" ry=\"3.5\" fill=\"#f5f5f5\" stroke=\"#d0d0d0\"/><ellipse cx=\"52\" cy=\"27\" rx=\"6\" ry=\"3.5\" fill=\"#f5f5f5\" stroke=\"#d0d0d0\"/><path d=\"M18 18q14-6 28 0l-2 24H20z\" fill=\"#fafafa\" stroke=\"#d6d6d6\"/><path d=\"M20 20q6 0 8 6q-4 6-8 4zM40 22q6-2 6 6q-6 2-6-6z\" fill=\"#2f2a28\"/><ellipse cx=\"32\" cy=\"46\" rx=\"14\" ry=\"10\" fill=\"#f4b6c2\"/><circle cx=\"24\" cy=\"31\" r=\"2.4\" fill=\"#222\"/><circle cx=\"40\" cy=\"31\" r=\"2.4\" fill=\"#222\"/><ellipse cx=\"27\" cy=\"47\" rx=\"2\" ry=\"3\" fill=\"#b0566a\"/><ellipse cx=\"37\" cy=\"47\" rx=\"2\" ry=\"3\" fill=\"#b0566a\"/></svg>",
+ "dog": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><ellipse cx=\"15\" cy=\"30\" rx=\"7\" ry=\"14\" fill=\"#6b4a2c\" transform=\"rotate(15 15 30)\"/><ellipse cx=\"49\" cy=\"30\" rx=\"7\" ry=\"14\" fill=\"#6b4a2c\" transform=\"rotate(-15 49 30)\"/><circle cx=\"32\" cy=\"32\" r=\"17\" fill=\"#c9924f\"/><ellipse cx=\"32\" cy=\"42\" rx=\"10\" ry=\"8\" fill=\"#f1dcc2\"/><circle cx=\"25\" cy=\"29\" r=\"2.4\" fill=\"#222\"/><circle cx=\"39\" cy=\"29\" r=\"2.4\" fill=\"#222\"/><ellipse cx=\"32\" cy=\"38\" rx=\"4\" ry=\"3\" fill=\"#222\"/><path d=\"M32 41v3M28 45q4 3 8 0\" stroke=\"#5a3b1f\" stroke-width=\"1.4\" fill=\"none\"/><path d=\"M32 46q0 6 3 6q3 0 2-6\" fill=\"#e5728f\"/></svg>",
+ "duck": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><ellipse cx=\"30\" cy=\"42\" rx=\"20\" ry=\"12\" fill=\"#f6c21c\"/><circle cx=\"40\" cy=\"24\" r=\"11\" fill=\"#f6c21c\"/><path d=\"M48 26l10 2-10 4z\" fill=\"#f28c28\"/><circle cx=\"42\" cy=\"22\" r=\"2\" fill=\"#222\"/><path d=\"M16 40q10 6 18 0\" stroke=\"#e0a800\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\"/></svg>",
+ "eagle": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><path d=\"M4 30q14-14 28-6q14-8 28 6q-12-2-20 6h-16q-8-8-20-6z\" fill=\"#6b4a2c\"/><ellipse cx=\"32\" cy=\"38\" rx=\"9\" ry=\"13\" fill=\"#7a5533\"/><circle cx=\"32\" cy=\"22\" r=\"8\" fill=\"#fff\"/><path d=\"M34 23l8 2-6 5z\" fill=\"#f2a900\"/><circle cx=\"30\" cy=\"21\" r=\"1.8\" fill=\"#222\"/><path d=\"M28 50l-2 6M36 50l2 6\" stroke=\"#f2a900\" stroke-width=\"2.4\" stroke-linecap=\"round\"/></svg>",
+ "elephant": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><ellipse cx=\"14\" cy=\"30\" rx=\"10\" ry=\"13\" fill=\"#8e9aa6\"/><ellipse cx=\"50\" cy=\"30\" rx=\"10\" ry=\"13\" fill=\"#8e9aa6\"/><circle cx=\"32\" cy=\"30\" r=\"16\" fill=\"#a3aeb9\"/><path d=\"M32 36q0 14 8 18\" stroke=\"#a3aeb9\" stroke-width=\"8\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M24 40q-4 4-2 8M40 40q4 4 2 8\" stroke=\"#fff\" stroke-width=\"2.6\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"25\" cy=\"28\" r=\"2.4\" fill=\"#222\"/><circle cx=\"39\" cy=\"28\" r=\"2.4\" fill=\"#222\"/></svg>",
+ "fly": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><ellipse cx=\"22\" cy=\"24\" rx=\"12\" ry=\"7\" fill=\"#cfe8ff\" opacity=\".9\" transform=\"rotate(-30 22 24)\"/><ellipse cx=\"42\" cy=\"24\" rx=\"12\" ry=\"7\" fill=\"#cfe8ff\" opacity=\".9\" transform=\"rotate(30 42 24)\"/><ellipse cx=\"32\" cy=\"38\" rx=\"9\" ry=\"13\" fill=\"#3b3a45\"/><circle cx=\"32\" cy=\"24\" r=\"7\" fill=\"#3b3a45\"/><circle cx=\"28\" cy=\"22\" r=\"3.4\" fill=\"#c0392b\"/><circle cx=\"36\" cy=\"22\" r=\"3.4\" fill=\"#c0392b\"/><path d=\"M24 36l-8-4M24 42l-8 2M40 36l8-4M40 42l8 2\" stroke=\"#3b3a45\" stroke-width=\"1.6\" stroke-linecap=\"round\"/></svg>",
+ "goose": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><ellipse cx=\"28\" cy=\"44\" rx=\"20\" ry=\"12\" fill=\"#e9ecef\" stroke=\"#c7ccd1\"/><path d=\"M40 42q2-14 4-22q2-8 8-8\" stroke=\"#e9ecef\" stroke-width=\"7\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M40 42q2-14 4-22q2-8 8-8\" stroke=\"#c7ccd1\" stroke-width=\"1\" fill=\"none\"/><path d=\"M53 12l9 3-9 3z\" fill=\"#f28c28\"/><circle cx=\"51\" cy=\"11\" r=\"1.5\" fill=\"#222\"/><path d=\"M14 42q10 6 20 0\" stroke=\"#c7ccd1\" stroke-width=\"2\" fill=\"none\"/><path d=\"M24 56v4M32 56v4\" stroke=\"#f28c28\" stroke-width=\"2.4\" stroke-linecap=\"round\"/></svg>",
+ "hornet": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><ellipse cx=\"24\" cy=\"18\" rx=\"10\" ry=\"6\" fill=\"#d9ecff\" opacity=\".9\" transform=\"rotate(-25 24 18)\"/><ellipse cx=\"40\" cy=\"18\" rx=\"10\" ry=\"6\" fill=\"#d9ecff\" opacity=\".9\" transform=\"rotate(25 40 18)\"/><ellipse cx=\"34\" cy=\"38\" rx=\"17\" ry=\"11\" fill=\"#e8a317\"/><path d=\"M28 28v20M36 27v22M44 29v18\" stroke=\"#3a2415\" stroke-width=\"4\"/><path d=\"M51 38l8 0\" stroke=\"#3a2415\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"15\" cy=\"36\" r=\"7\" fill=\"#8b3a1a\"/><path d=\"M11 33l3 2M20 33l-3 2\" stroke=\"#fff\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><path d=\"M12 30l-3-7M18 30l1-7\" stroke=\"#3a2415\" stroke-width=\"1.6\" stroke-linecap=\"round\"/></svg>",
+ "horse": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><path d=\"M22 20l-2-12 8 8zM40 18l4-11 2 12z\" fill=\"#7a4b2c\"/><path d=\"M20 22q12-10 26-2l2 26q-4 10-15 10q-11 0-13-10z\" fill=\"#9a6034\"/><path d=\"M26 14q10-6 20 4q-6-2-10 2q-4-4-10-6z\" fill=\"#3a2518\"/><ellipse cx=\"33\" cy=\"48\" rx=\"11\" ry=\"8\" fill=\"#c48a5a\"/><ellipse cx=\"29\" cy=\"49\" rx=\"1.8\" ry=\"2.6\" fill=\"#5a3b1f\"/><ellipse cx=\"37\" cy=\"49\" rx=\"1.8\" ry=\"2.6\" fill=\"#5a3b1f\"/><circle cx=\"25\" cy=\"30\" r=\"2.4\" fill=\"#222\"/><circle cx=\"41\" cy=\"30\" r=\"2.4\" fill=\"#222\"/><path d=\"M31 22l2 6 2-6z\" fill=\"#fff\"/></svg>",
+ "lion": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><circle cx=\"32\" cy=\"33\" r=\"25\" fill=\"#c96f1e\"/><circle cx=\"32\" cy=\"34\" r=\"16\" fill=\"#f2c14e\"/><circle cx=\"20\" cy=\"21\" r=\"5\" fill=\"#f2c14e\"/><circle cx=\"44\" cy=\"21\" r=\"5\" fill=\"#f2c14e\"/><circle cx=\"26\" cy=\"31\" r=\"2.4\" fill=\"#222\"/><circle cx=\"38\" cy=\"31\" r=\"2.4\" fill=\"#222\"/><path d=\"M28 37h8l-4 4z\" fill=\"#7a3b12\"/><path d=\"M32 41v3M28 45q4 3 8 0\" stroke=\"#7a3b12\" stroke-width=\"1.6\" fill=\"none\" stroke-linecap=\"round\"/></svg>",
+ "monkey": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><circle cx=\"14\" cy=\"32\" r=\"7\" fill=\"#8a5a36\"/><circle cx=\"50\" cy=\"32\" r=\"7\" fill=\"#8a5a36\"/><circle cx=\"14\" cy=\"32\" r=\"3.5\" fill=\"#e6b889\"/><circle cx=\"50\" cy=\"32\" r=\"3.5\" fill=\"#e6b889\"/><circle cx=\"32\" cy=\"32\" r=\"18\" fill=\"#8a5a36\"/><path d=\"M20 30q0-10 12-8q12-2 12 8q0 16-12 16t-12-16z\" fill=\"#e6b889\"/><circle cx=\"26\" cy=\"30\" r=\"2.4\" fill=\"#222\"/><circle cx=\"38\" cy=\"30\" r=\"2.4\" fill=\"#222\"/><path d=\"M26 40q6 5 12 0\" stroke=\"#5a3b1f\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\"/></svg>",
+ "rat": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><path d=\"M50 44q10 2 10 10q-6-6-12-4\" stroke=\"#c98f96\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\"/><circle cx=\"22\" cy=\"20\" r=\"8\" fill=\"#7d6f66\"/><circle cx=\"22\" cy=\"20\" r=\"4.5\" fill=\"#e3a3ad\"/><ellipse cx=\"34\" cy=\"40\" rx=\"18\" ry=\"13\" fill=\"#8a7b71\"/><path d=\"M18 40l-12 6 12 4z\" fill=\"#8a7b71\"/><circle cx=\"6\" cy=\"46\" r=\"2.2\" fill=\"#e5728f\"/><circle cx=\"17\" cy=\"38\" r=\"2\" fill=\"#222\"/><path d=\"M9 44h-6M9 47l-5 3\" stroke=\"#444\" stroke-width=\"1\" stroke-linecap=\"round\"/></svg>",
+ "tiger": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><circle cx=\"18\" cy=\"17\" r=\"6\" fill=\"#f08a24\"/><circle cx=\"46\" cy=\"17\" r=\"6\" fill=\"#f08a24\"/><circle cx=\"32\" cy=\"34\" r=\"20\" fill=\"#f08a24\"/><ellipse cx=\"32\" cy=\"43\" rx=\"11\" ry=\"8\" fill=\"#fff\"/><path d=\"M32 14v6M26 15l2 6M38 15l-2 6M12 30h6M12 36h6M52 30h-6M52 36h-6\" stroke=\"#222\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><circle cx=\"25\" cy=\"31\" r=\"2.4\" fill=\"#222\"/><circle cx=\"39\" cy=\"31\" r=\"2.4\" fill=\"#222\"/><path d=\"M29 39h6l-3 3z\" fill=\"#e5728f\"/></svg>",
+ "wolf": "<svg viewBox=\"0 0 64 64\" width=\"100%\" height=\"100%\" aria-hidden=\"true\"><path d=\"M14 10l8 16h20l8-16-12 8H26z\" fill=\"#6f7780\"/><path d=\"M14 20q18-8 36 0l-4 18-14 16-14-16z\" fill=\"#7d858e\"/><path d=\"M22 36q10 4 20 0l-10 18z\" fill=\"#dfe3e6\"/><circle cx=\"24\" cy=\"30\" r=\"2.4\" fill=\"#222\"/><circle cx=\"40\" cy=\"30\" r=\"2.4\" fill=\"#222\"/><circle cx=\"32\" cy=\"46\" r=\"3\" fill=\"#222\"/><path d=\"M18 13l4 8M46 13l-4 8\" stroke=\"#3d4349\" stroke-width=\"2.5\" stroke-linecap=\"round\"/></svg>"
+};
+
+const matchColors = [
+  "#2e8b57","#c47f1e","#7a9e2a","#1f7a8c","#b0512b","#c25b7a",
+  "#b88a12","#2f8f9d","#8a5a2b","#6a5acd"
+];
+
+const PAIRS_PER_ROUND = 6;
+
+const gameEl         = document.getElementById("game");
+const statusEl       = document.getElementById("status");
+const newRoundBtn    = document.getElementById("newRoundBtn");
+const roundInfo      = document.getElementById("roundInfo");
+const scoreMatchedEl = document.getElementById("scoreMatched");
+const scoreRoundsEl  = document.getElementById("scoreRounds");
+
+let first = null, second = null, lock = false;
+let matched = 0, roundCount = 0;
+let usedPairs = new Set();
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length-1; i > 0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function pickPairs(n){
+  const unused = SIMILES.filter((_,i) => !usedPairs.has(i));
+  let pool = unused.length >= n ? unused : SIMILES;
+  if(pool === SIMILES) usedPairs.clear();
+  const indices = pool === SIMILES
+    ? SIMILES.map((_,i) => i)
+    : SIMILES.map((_,i) => i).filter(i => !usedPairs.has(i));
+  const chosen = shuffle(indices).slice(0, n);
+  chosen.forEach(i => usedPairs.add(i));
+  return chosen.map(i => SIMILES[i]);
+}
+
+function buildRound(){
+  gameEl.innerHTML = "";
+  statusEl.textContent = "";
+  first = null; second = null; lock = false; matched = 0;
+  roundCount++;
+  roundInfo.textContent = "Round " + roundCount;
+  scoreRoundsEl.textContent = roundCount;
+  scoreMatchedEl.textContent = "0";
+
+  const pairs = pickPairs(PAIRS_PER_ROUND);
+  const cards = shuffle(
+    pairs.flatMap(([expr, meaning, animal]) => [
+      { text: expr,    pair: expr, role: "expression" },
+      { text: meaning, pair: expr, role: "meaning", icon: ANIMAL_ICONS[animal], animal: animal }
+    ])
+  );
+
+  cards.forEach((data, idx) => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.dataset.pair = data.pair;
+    div.dataset.role = data.role;
+    div.style.background = "";
+
+    // ── Step 2: create the number badge ──
+    const num = document.createElement("span");
+    num.className = "card-num";
+    num.textContent = idx + 1;
+    div.appendChild(num);
+    // ─────────────────────────────────────
+
+    div.setAttribute("role", "button");
+    div.setAttribute("tabindex", "0");
+    div.setAttribute("aria-label", "Card " + (idx + 1) + ", face down");
+    gameEl.appendChild(div);
+    div.addEventListener("click", () => onCardClick(div, data));
+    div.addEventListener("keydown", e => {
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); onCardClick(div, data); }
+    });
+  });
+}
+
+function onCardClick(div, data){
+  if(lock || div.classList.contains("flipped") || div.classList.contains("matched")) return;
+
+  flip(div, data);
+  if(data.animal) playAnimal(data.animal);
+
+  if(!first){ first = div; return; }
+
+  second = div;
+  lock = true;
+
+  if(first.dataset.pair === second.dataset.pair && first !== second){
+    // ✅ Match
+    const color = matchColors[matched % matchColors.length];
+    setTimeout(()=>{
+      [first, second].forEach(c => {
+        c.classList.remove("flipped");
+        c.classList.add("matched");
+        c.style.background = color;
+        c.style.color = "#fff";
+      });
+      matched++;
+      scoreMatchedEl.textContent = matched;
+      playBling();
+      if(matched === PAIRS_PER_ROUND){
+        try{ if(typeof gtag === "function") gtag("event", "game_complete", { game: "animal_idioms", round: roundCount }); }catch(e){}
+        setTimeout(playCelebration, 350);
+        statusEl.textContent = "🎉 All matched! Press New Round to play again.";
+      }
+      first = null; second = null; lock = false;
+    }, 500);
+
+  } else {
+    // ❌ No match — shake and flip back
+    setTimeout(()=>{
+      playBlurp();
+      [first, second].forEach(c => {
+        c.classList.add("shake");
+        setTimeout(()=> c.classList.remove("shake"), 360);
+        c.classList.remove("flipped");
+        c.setAttribute("aria-label", "Card, face down");
+        c.style.background = "";
+        c.style.color = "#fff";
+
+        // ── Step 3: clear text but keep the number badge ──
+        const num = c.querySelector(".card-num");
+        c.textContent = "";
+        if(num) c.appendChild(num);
+        // ──────────────────────────────────────────────────
+      });
+      first = null; second = null; lock = false;
+    }, 700);
+  }
+}
+
+function flip(div, data){
+  div.classList.add("flipped");
+  div.setAttribute("aria-label", data.text);
+
+  // Keep the number badge when flipping; animal cards also show a picture
+  const num = div.querySelector(".card-num");
+  div.textContent = "";
+  if(data.icon){
+    const pic = document.createElement("span");
+    pic.className = "card-icon";
+    pic.innerHTML = data.icon;
+    div.appendChild(pic);
+  }
+  const label = document.createElement("span");
+  label.className = "card-label";
+  label.textContent = data.text;
+  div.appendChild(label);
+  if(num) div.appendChild(num);
+
+  div.style.background = "var(--flip)";
+  div.style.color = "#fff";
+}
+
+newRoundBtn.addEventListener("click", buildRound);
+buildRound();
+</script>
+
+<script>
+/* ---- Complete the sentences ----
+   The answer is the full simile. Capital letters, extra spaces and
+   end punctuation are ignored, straight and curly apostrophes both work,
+   and some answers accept more than one form (e.g. smelt / smelled). */
+function normalizeText(str){
+  return str.toLowerCase()
+    .replace(/[‘’]/g,"'").replace(/[“”]/g,'"')
+    .replace(/\s+/g," ").trim()
+    .replace(/[.,!?;:]+$/g,"");
+}
+
+document.querySelectorAll(".gapfill-item").forEach(item => {
+  const answer    = item.dataset.answer;
+  const input     = item.querySelector(".gapfill-input");
+  const submitBtn = item.querySelector(".gap-submit");
+  const revealBtn = item.querySelector(".gap-reveal");
+  const feedback  = item.querySelector(".gapfill-feedback");
+  const answerBox = item.querySelector(".gapfill-answer");
+
+  submitBtn.addEventListener("click", () => {
+    const typed   = normalizeText(input.value);
+    const options = answer.split('|').map(normalizeText);
+    feedback.classList.remove("correct","incorrect");
+    if(!typed){
+      feedback.textContent = "Please type your answer first.";
+      feedback.classList.add("incorrect");
+      return;
+    }
+    if(options.includes(typed)){
+      feedback.textContent = "✓ Correct!";
+      feedback.classList.add("correct");
+      if(typeof playBling === "function") playBling();
+    } else {
+      feedback.textContent = "✗ Try again.";
+      feedback.classList.add("incorrect");
+      if(typeof playBlurp === "function") playBlurp();
+    }
+  });
+  input.addEventListener("keydown", e => { if(e.key === "Enter") submitBtn.click(); });
+  revealBtn.addEventListener("click", () => { answerBox.classList.toggle("show"); });
+});
+</script>
+
+</body>
+</html>
