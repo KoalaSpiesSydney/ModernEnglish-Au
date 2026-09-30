@@ -1,13 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Have, Make & Do – Collocation Game (A1/A2) | Modern English AU</title>
+<meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
+<meta name="format-detection" content="telephone=no" />
+<!-- Chinese Android browsers (UC, QQ, 360, Sogou): use the modern engine -->
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="theme-color" content="#0a3d62" />
+<title>Have, Make &amp; Do – Collocation Game (A1–A2) – Modern English Australia</title>
+<meta name="description" content="Free A1–A2 English collocation game: choose have, make or do, then turn over a card to build the collocation – do the dishes, make a mistake, have a shower. With a listening dictation." />
+<link rel="canonical" href="https://modernenglish.au/game/make-have-do-colloations.html" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
 
+<!-- Link previews (Facebook, LinkedIn, WhatsApp, X) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Modern English Australia" />
+<meta property="og:locale" content="en_AU" />
+<meta property="og:url" content="https://modernenglish.au/game/make-have-do-colloations.html" />
+<meta property="og:title" content="Have, Make &amp; Do – Collocation Game (A1–A2)" />
+<meta property="og:description" content="Free beginner collocation game: do the dishes, make a mistake, have a shower. Build the collocation, then practise with a dictation." />
+<meta property="og:image" content="https://modernenglish.au/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Have, Make &amp; Do – Collocation Game (A1–A2)" />
+<meta name="twitter:description" content="Free beginner collocation game: do the dishes, make a mistake, have a shower." />
+<meta name="twitter:image" content="https://modernenglish.au/og-image.jpg" />
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "LearningResource",
+   "name": "Have, Make & Do – Collocation Game",
+   "url": "https://modernenglish.au/game/make-have-do-colloations.html",
+   "description": "Free A1–A2 English collocation game with have, make and do, plus a listening dictation.",
+   "inLanguage": "en-AU",
+   "learningResourceType": ["Game", "Exercise"],
+   "educationalLevel": ["A1", "A2"],
+   "teaches": "Collocations with have, make and do",
+   "isAccessibleForFree": true,
+   "audience": { "@type": "EducationalAudience", "educationalRole": ["student", "teacher"] },
+   "publisher": { "@type": "Organization", "name": "Modern English Australia", "url": "https://modernenglish.au/" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernenglish.au/" },
+    { "@type": "ListItem", "position": 2, "name": "Vocabulary games", "item": "https://modernenglish.au/vocabularygames.html" },
+    { "@type": "ListItem", "position": 3, "name": "Have, Make & Do" }
+   ]
+  }
+ ]
+}
+</script>
+
+<!-- Google tag (gtag.js) - same Analytics property as the rest of modernenglish.au -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+
+<!-- Fredoka font. Loaded without blocking the page: Google Fonts is blocked in
+     mainland China, and a normal stylesheet link would leave the screen blank
+     until it times out. If it can't load, the Trebuchet / system font is used. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"></noscript>
 
 <style>
 :root{
@@ -34,6 +100,7 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 
 body{
   font-family:"Fredoka", "Trebuchet MS", system-ui, -apple-system, sans-serif;
@@ -48,14 +115,14 @@ body{
 /* ===== Background ===== */
 .bg-gif{
   position:fixed;
-  inset:0;
+  top:0; right:0; bottom:0; left:0;   /* older iPhones / UC / QQ */
   z-index:-3;
   background:url("havemakedo.gif") center / cover no-repeat;
   background-color:#dce8f5;
 }
 .bg-video{
   position:fixed;
-  inset:0;
+  top:0; right:0; bottom:0; left:0;   /* older iPhones / UC / QQ */
   z-index:-2;
   width:100%;
   height:100%;
@@ -64,7 +131,7 @@ body{
 }
 .bg-overlay{
   position:fixed;
-  inset:0;
+  top:0; right:0; bottom:0; left:0;   /* older iPhones / UC / QQ */
   z-index:-1;
   background:rgba(240,246,252,.84);
 }
@@ -75,7 +142,7 @@ body{
 /* ===== Opening slide / instructions ===== */
 .slide{
   position:fixed;
-  inset:0;
+  top:0; right:0; bottom:0; left:0;   /* older iPhones / UC / QQ */
   z-index:10000;
   display:flex;
   align-items:center;
@@ -87,7 +154,7 @@ body{
 }
 .slide[hidden]{ display:none; }
 .slide-inner{
-  width:min(100%, 660px);
+  width:100%; max-width:660px;
   max-height:100%;
   overflow-y:auto;
   background:rgba(255,255,255,.97);
@@ -106,6 +173,7 @@ body{
 }
 .slide h2{
   color:var(--accent);
+  font-size:1.6rem;
   font-size:clamp(1.35rem,3.2vw,1.9rem);
   letter-spacing:1.5px;
   margin-bottom:.2rem;
@@ -152,7 +220,7 @@ body{
   box-shadow:0 4px 12px rgba(10,61,98,.35);
   transition:all .25s ease;
 }
-.slide-start:hover{ background:linear-gradient(90deg,var(--accent),#2196f3); transform:translateY(-2px); }
+@media(hover:hover){ .slide-start:hover{ background:linear-gradient(90deg,var(--accent),#2196f3); transform:translateY(-2px); } }
 .slide-foot{
   margin-top:1rem;
   font-size:.85rem;
@@ -214,15 +282,15 @@ header{
   color:#fff;
   text-align:center;
   padding:1.3rem 1rem 1rem;
-  letter-spacing:3px;
-  font-weight:300;
-  font-size:1.15rem;
+  letter-spacing:2px;
+  font-weight:700;          /* bold, like the header on the other games */
+  font-size:1.3rem;
 }
 header span{
   display:block;
-  color:rgba(255,255,255,.72);
+  color:rgba(255,255,255,.78);
   font-weight:300;
-  font-size:.62rem;
+  font-size:.8rem;
   letter-spacing:3px;
   margin-top:4px;
 }
@@ -230,6 +298,7 @@ header span{
 /* ===== QR button — top left corner ===== */
 .qr-toggle{
   position:fixed;
+  left:14px; top:14px;                              /* fallback */
   left:max(14px, env(safe-area-inset-left));
   top:max(14px, env(safe-area-inset-top));
   z-index:9999;
@@ -253,6 +322,7 @@ header span{
 /* ===== QR panel ===== */
 .qr-panel{
   position:fixed;
+  left:14px;
   left:max(14px, env(safe-area-inset-left));
   top:70px;
   z-index:9999;
@@ -364,6 +434,7 @@ h1{
   color:var(--accent);
   letter-spacing:2px;
   margin-top:.5rem;
+  font-size:1.55rem;
   font-size:clamp(1.3rem,2.2vw,1.85rem);
   font-weight:700;
 }
@@ -404,9 +475,11 @@ button.btn{
   font-family:inherit;
   font-size:1rem;
 }
-button.btn:hover{
-  background:linear-gradient(90deg,var(--accent),#2196f3);
-  transform:translateY(-2px);
+@media(hover:hover){
+  button.btn:hover{
+    background:linear-gradient(90deg,var(--accent),#2196f3);
+    transform:translateY(-2px);
+  }
 }
 button.btn.ghost{
   background:#fff;
@@ -414,7 +487,7 @@ button.btn.ghost{
   border:2px solid var(--accent);
   box-shadow:0 2px 6px rgba(0,0,0,.12);
 }
-button.btn.ghost:hover{ background:var(--accent); color:#fff; }
+@media(hover:hover){ button.btn.ghost:hover{ background:var(--accent); color:#fff; } }
 
 /* ===== Score bar ===== */
 .score-bar{
@@ -443,9 +516,9 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
 /* ===== Game Grid ===== */
 #game{
   display:grid;
-  grid-template-columns:repeat(5, 1fr);
+  grid-template-columns:repeat(5, minmax(0, 1fr));
   gap:10px;
-  width:min(100%, 960px);
+  width:100%; max-width:960px;
   margin:0 auto;
 }
 
@@ -453,6 +526,7 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
   position:relative;
   /* Height follows the viewport so all 25 tiles stay on one screen on a
      short window (laptop, iPad landscape) as well as a tall phone. */
+  min-height:64px;                                  /* fallback for older browsers */
   min-height:clamp(46px, 8.4vh, 92px);
   border:0;
   padding:0;
@@ -465,11 +539,11 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
   transition:transform .2s ease, opacity .3s ease;
 }
 .tile:focus-visible{ outline:3px solid var(--sel); outline-offset:3px; border-radius:var(--r); }
-.tile:hover:not(.done){ transform:translateY(-2px); }
+@media(hover:hover){ .tile:hover:not(.done){ transform:translateY(-2px); } }
 
 .face{
   position:absolute;
-  inset:0;
+  top:0; right:0; bottom:0; left:0;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -481,7 +555,7 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
   font-size:.86rem;
   line-height:1.25;
   overflow-wrap:anywhere;
-  hyphens:auto;
+  -webkit-hyphens:auto; hyphens:auto;
   backface-visibility:hidden;
   -webkit-backface-visibility:hidden;
   transition:background .25s, color .25s, border-color .25s;
@@ -512,7 +586,8 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
 .tile.wordtile{ perspective:1000px; }
 .tile.wordtile .inner{
   position:absolute;
-  inset:0;
+  top:0; right:0; bottom:0; left:0;
+  -webkit-transform-style:preserve-3d;
   transform-style:preserve-3d;
   transition:transform .45s cubic-bezier(.4,.15,.2,1);
 }
@@ -561,6 +636,9 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
 /* Cleared cards keep the full collocation on show, coloured by verb,
    so the finished board reads as a sorted list of correct phrases. */
 .tile.done{ pointer-events:none; }
+@keyframes candy-pop{ 0%{transform:scale(1)} 40%{transform:scale(1.12)} 70%{transform:scale(.97)} 100%{transform:scale(1)} }
+.tile.popped{ animation:candy-pop .35s ease-out; }
+@media(prefers-reduced-motion:reduce){ .tile.popped{ animation:none; } }
 .tile.done .face{ box-shadow:none; }
 .tile.wordtile.done .front{ font-weight:700; }
 .tile.wordtile.done.v-have .front{ background:var(--have); border-color:var(--have); }
@@ -569,7 +647,7 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
 
 /* ===== Made-collocations list ===== */
 .made{
-  width:min(100%, 860px);
+  width:100%; max-width:860px);
   margin:1.4rem auto 0;
 }
 .made h3{
@@ -607,7 +685,7 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
 
 /* ===== Teacher Notes ===== */
 .notes{
-  width:min(100%, 800px);
+  width:100%; max-width:800px);
   margin:2rem auto 0;
   background:rgba(255,255,255,.92);
   border:1px solid rgba(0,0,0,.12);
@@ -645,13 +723,14 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
 
 /* ===== Gap Fill ===== */
 .gapfill-wrap{
-  width:min(100%, 800px);
+  width:100%; max-width:800px);
   margin:2.2rem auto 0;
   text-align:center;
 }
 .gapfill-wrap h2{
   color:var(--accent);
   margin-bottom:.35rem;
+  font-size:1.4rem;
   font-size:clamp(1.2rem,2vw,1.6rem);
 }
 .gapfill-intro{
@@ -690,7 +769,7 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
   transition:all .2s ease;
   box-shadow:0 2px 6px rgba(0,0,0,.08);
 }
-.speak-btn:hover{ background:var(--accent); color:#fff; transform:translateY(-2px); }
+@media(hover:hover){ .speak-btn:hover{ background:var(--accent); color:#fff; transform:translateY(-2px); } }
 .speak-btn.speaking{
   background:var(--accent); color:#fff;
   animation:pulse-btn 1s ease infinite;
@@ -727,7 +806,8 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
 
 .gapfill-input{
   display:block;
-  width:min(100%, 300px);
+  width:100%; max-width:300px;
+  font-size:16px;                                   /* stops iPhones zooming in when tapped */
   margin:0 auto;
   padding:.7rem .9rem;
   border:2px solid rgba(10,61,98,.18);
@@ -760,9 +840,11 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
   transition:all .2s ease;
   font-size:.92rem;
 }
-.gapfill-btn:hover{
-  background:linear-gradient(90deg,var(--accent),#2196f3);
-  transform:translateY(-2px);
+@media(hover:hover){
+  .gapfill-btn:hover{
+    background:linear-gradient(90deg,var(--accent),#2196f3);
+    transform:translateY(-2px);
+  }
 }
 .gapfill-feedback{
   min-height:1.5em;
@@ -790,6 +872,9 @@ button.btn.ghost:hover{ background:var(--accent); color:#fff; }
   flex-wrap:wrap;
 }
 a.btn{
+  display:inline-block;
+  min-height:44px;
+  margin:0 .5rem .6rem;
   background:var(--accent);
   color:#fff;
   font-weight:600;
@@ -800,9 +885,11 @@ a.btn{
   transition:all .25s ease;
   font-family:inherit;
 }
-a.btn:hover{
-  background:linear-gradient(90deg,var(--accent),#2196f3);
-  transform:translateY(-2px);
+@media(hover:hover){
+  a.btn:hover{
+    background:linear-gradient(90deg,var(--accent),#2196f3);
+    transform:translateY(-2px);
+  }
 }
 
 /* ===== Footer ===== */
@@ -810,7 +897,8 @@ footer{
   background:var(--card);
   color:var(--muted);
   text-align:center;
-  padding:1rem 0 calc(1rem + env(safe-area-inset-bottom));
+  padding:1rem 12px;
+  padding-bottom:calc(1rem + env(safe-area-inset-bottom));
   border-top:1px solid var(--line);
   font-size:.9rem;
 }
@@ -867,7 +955,9 @@ footer{
   .tile.verbtile .face{ font-size:.64rem; letter-spacing:.5px; border-width:2px; }
   .tile.wordtile .back{ font-size:1rem; }
   .card-num{ font-size:.52rem; top:3px; left:4px; }
-  .qr-panel{ top:64px; width:min(240px, calc(100vw - 28px)); }
+  .qr-panel{ top:64px; width:230px; width:min(240px, calc(100vw - 28px)); }
+  header span{ font-size:.66rem; }
+  .voice-select{ font-size:16px; }
   .gapfill-input{ width:100%; }
   .score-bar{ gap:.9rem; font-size:.8rem; }
   .slide-inner{ padding:1.5rem 1.1rem 1.3rem; }
@@ -942,8 +1032,8 @@ footer{
 
 <div class="bg-gif"></div>
 <video class="bg-video" id="bgVideo" autoplay muted loop playsinline webkit-playsinline
-       preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1"
-       poster="havemakedo.gif">
+       x5-playsinline x5-video-player-type="h5-page"
+       preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1">
   <source src="bg.mp4" type="video/mp4">
   <!-- Optional: add a WebM alongside the MP4 for older Android browsers
        <source src="bg.webm" type="video/webm"> -->
@@ -1338,12 +1428,13 @@ footer{
   </section>
 
   <div class="links">
-    <a href="http://modernenglish.au/Microlessons%26Games.html" class="btn">Home</a>
+    <a href="../vocabularygames.html" class="btn">More vocab games</a>
+    <a href="../index.html" class="btn">Home</a>
   </div>
 </main>
 
 <footer>
-  © Modern English AU · All Rights Reserved
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
 </footer>
 
 <!-- QR library -->
@@ -1362,6 +1453,11 @@ footer{
     const url = window.location.href;
     urlLabel.textContent = url;
     box.innerHTML = "";
+    if(typeof QRCode === "undefined"){
+      /* the QR library is blocked or slow on some networks (e.g. mainland China) */
+      box.innerHTML = '<span style="font-size:.85rem;color:#333;padding:10px;line-height:1.4">QR code unavailable on this network. Share the address below instead.</span>';
+      return;
+    }
     new QRCode(box,{ text:url, width:200, height:200, correctLevel:QRCode.CorrectLevel.M });
     made = true;
   }
@@ -1695,34 +1791,91 @@ function playTheme(){
   tone(NOTE.G5, 0.46, 1.1, {type:"sine", vol:0.16});
 }
 
-/* Board cleared: a proper little fanfare. */
+/* ── Candy-style game sounds ─────────────────────────────────────────
+   Bubbly, sweet and bright. The "correct" chime climbs one step up a
+   happy (pentatonic) scale for every correct answer in a row, the way
+   Candy Crush cascades rise — a wrong answer resets the streak.       */
+
+/* C major pentatonic, two and a half octaves — every step sounds happy */
+const COMBO_SCALE = [523.25, 587.33, 659.25, 783.99, 880.00,
+                     1046.50, 1174.66, 1318.51, 1567.98, 1760.00,
+                     2093.00, 2349.32];
+let combo = 0;
+
+/* A soft bubble "bloop": pitch swoops up fast, like a sweet being picked up */
+function bloop(freq, delay, vol){
+  tone(freq, delay, 0.12, {type:"sine", vol:vol, glide:freq*2.1, attack:0.006});
+  tone(freq*2, delay+0.005, 0.08, {type:"triangle", vol:vol*0.35, glide:freq*3, attack:0.004});
+}
+/* A tiny glassy sparkle */
+function twinkle(freq, delay, vol){
+  tone(freq, delay, 0.18, {type:"sine", vol:vol, attack:0.004});
+  tone(freq*1.5, delay+0.02, 0.14, {type:"sine", vol:vol*0.45, attack:0.004});
+}
+
+/* Tap a verb tile — a bubbly bloop, pitched a little per verb */
+function playSelect(verb){
+  if(!audioReady()) return;
+  const base = verb === "make" ? 440 : verb === "do" ? 494 : 392;
+  bloop(base, 0, 0.22);
+}
+
+/* Turn a card over — a quick flick */
+function playFlip(){
+  if(!audioReady()) return;
+  tone(1400, 0, 0.05, {type:"triangle", vol:0.10, glide:700, attack:0.003});
+}
+
+/* Correct: a sweet two-note chime that climbs with the streak */
+function playCorrect(){
+  if(!audioReady()) return;
+  const i = Math.min(combo, COMBO_SCALE.length - 3);
+  const a = COMBO_SCALE[i], b = COMBO_SCALE[i + 2];
+  tone(a, 0,    0.16, {type:"triangle", vol:0.22, attack:0.005});
+  tone(b, 0.07, 0.26, {type:"sine",     vol:0.24, attack:0.005});
+  tone(b*2, 0.07, 0.18, {type:"sine",   vol:0.06, attack:0.005});   // shimmer
+  combo++;
+  // Streak flourishes at 3, 5 and 8 in a row — "Sweet!", "Tasty!", "Divine!"
+  if(combo === 3 || combo === 5 || combo === 8){
+    const n = combo === 8 ? 7 : combo === 5 ? 5 : 4;
+    for(let k = 0; k < n; k++) twinkle(COMBO_SCALE[Math.min(k + i, COMBO_SCALE.length - 1)], 0.32 + k*0.055, 0.12);
+  }
+}
+
+/* The card clears — a candy "pop" and a little glitter */
+function playPop(){
+  if(!audioReady()) return;
+  tone(180, 0, 0.09, {type:"sine", vol:0.30, glide:620, attack:0.003});    // pop
+  tone(900, 0.01, 0.06, {type:"square", vol:0.035, glide:1800, attack:0.002});
+  twinkle(2093.00, 0.06, 0.07);
+  twinkle(2637.02, 0.11, 0.05);
+}
+
+/* Wrong: a soft, friendly "boing" — never a buzzer, they're beginners */
+function playWrong(){
+  combo = 0;
+  if(!audioReady()) return;
+  tone(330, 0,    0.14, {type:"sine", vol:0.20, glide:220, attack:0.006});
+  tone(262, 0.12, 0.22, {type:"sine", vol:0.18, glide:175, attack:0.006});
+}
+
+/* Board cleared: a big sugary celebration */
 function playWin(){
   if(!audioReady()) return;
   stopTheme();
-  const run = [NOTE.C5, NOTE.E5, NOTE.G5, NOTE.C6, NOTE.E6];
-  run.forEach((f,i)=>{
-    tone(f, i*0.10, 0.4, {type:"triangle", vol:0.26});
-    tone(f/2, i*0.10, 0.45, {type:"sine", vol:0.12});
+  // fast bubbly glissando up the scale
+  COMBO_SCALE.forEach((f,i)=> bloop(f/2, i*0.045, 0.14));
+  // bouncy fanfare
+  [NOTE.C5, NOTE.E5, NOTE.G5, NOTE.C6, NOTE.E6].forEach((f,i)=>{
+    tone(f, 0.58 + i*0.10, 0.4, {type:"triangle", vol:0.24});
+    tone(f/2, 0.58 + i*0.10, 0.45, {type:"sine", vol:0.10});
   });
-  // Held major chord to land on
+  // held major chord to land on
   [NOTE.C5, NOTE.E5, NOTE.G5, NOTE.C6].forEach(f=>{
-    tone(f, 0.55, 1.5, {type:"sine", vol:0.17, attack:0.05});
+    tone(f, 1.1, 1.6, {type:"sine", vol:0.15, attack:0.05});
   });
-  // Sparkle on top
-  [NOTE.G6, NOTE.E6, NOTE.C6, NOTE.G6].forEach((f,i)=>{
-    tone(f, 0.75 + i*0.09, 0.3, {type:"sine", vol:0.1});
-  });
-}
-
-/* Small feedback blips. */
-function playCorrect(){
-  if(!audioReady()) return;
-  tone(NOTE.A5, 0,    0.14, {type:"sine", vol:0.22});
-  tone(NOTE.E6, 0.09, 0.22, {type:"sine", vol:0.2});
-}
-function playWrong(){
-  if(!audioReady()) return;   // gentle, not a buzzer — they're beginners
-  tone(NOTE.E4, 0, 0.26, {type:"triangle", vol:0.16, glide:NOTE.C4});
+  // shower of sparkles
+  [2093, 2637, 3136, 2349, 2794, 3520, 2637, 3136].forEach((f,i)=> twinkle(f, 1.2 + i*0.07, 0.07));
 }
 
 function speakPhrase(text){
@@ -1736,6 +1889,28 @@ function speakPhrase(text){
     speechSynthesis.speak(u);
   }catch(e){ /* speech is a nicety, never a blocker */ }
 }
+
+/* Shrink a card's text just enough that its longest word fits the tile,
+   instead of breaking it mid-word ("reservatio / n"). Only long words
+   on small screens are affected; everything else keeps its normal size. */
+let fitCanvas = null;
+function fitText(face){
+  if(!face) return;
+  face.style.fontSize = "";
+  const cs = getComputedStyle(face);
+  const avail = face.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - 1;
+  if(avail <= 0) return;
+  fitCanvas = fitCanvas || document.createElement("canvas").getContext("2d");
+  const base = parseFloat(cs.fontSize);
+  fitCanvas.font = cs.fontWeight + " " + base + "px " + cs.fontFamily;
+  let widest = 0;
+  face.textContent.split(/\s+/).forEach(w=>{ widest = Math.max(widest, fitCanvas.measureText(w).width); });
+  if(widest > avail) face.style.fontSize = Math.max(7, Math.floor(base * avail / widest * 10) / 10) + "px";
+}
+function fitAll(){ document.querySelectorAll(".tile.wordtile .front").forEach(fitText); }
+let fitTimer = null;
+window.addEventListener("resize", ()=>{ clearTimeout(fitTimer); fitTimer = setTimeout(fitAll, 150); });
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);   // Fredoka arrives late
 
 function buildRound(resetAll){
   tiles = [];
@@ -1751,11 +1926,13 @@ function buildRound(resetAll){
   selected = null;
   lock = false;
   matched = 0;
+  combo = 0;
   if(resetAll){ points = 0; misses = 0; roundNo = 1; }
 
   madeEl.innerHTML = "";
   statusEl.textContent = "";
   render();
+  fitAll();
   updateScore();
   say("Choose a verb to start.");
 }
@@ -1833,6 +2010,7 @@ function onTap(t, el){
     clearSelection();
     selected = t;
     el.classList.add("selected");
+    playSelect(t.verb);
     say("“" + t.text + "” — now turn over a card.");
     return;
   }
@@ -1849,6 +2027,7 @@ function onTap(t, el){
   const phrase   = verbTile.text + " " + t.text;
   lock = true;
   el.classList.add("flipped");
+  playFlip();
   el.setAttribute("aria-label", "card " + t.num + ", " + t.text);
 
   if(verbTile.verb === t.verb){
@@ -1866,7 +2045,9 @@ function onTap(t, el){
       // The card keeps the whole collocation on show, in its verb's colour.
       t.done = true;
       el.querySelector(".front").textContent = phrase;
-      el.classList.add("done");
+      fitText(el.querySelector(".front"));
+      el.classList.add("done", "popped");
+      playPop();
       el.setAttribute("aria-label", "matched, " + phrase);
       // The verb tile is NOT used up — it stays live for the rest of the board.
       verbTile.el.classList.remove("selected");
@@ -1919,7 +2100,10 @@ function nextBoard(){
   buildRound(false);
 }
 
+function track(name, params){ try { if (typeof gtag === "function") gtag("event", name, params || {}); } catch (e) {} }
+
 function finishRound(){
+  track("board_complete", { game: "have_make_do", round: roundNo, mistakes: misses, verbs: mix.join("+") });
   statusEl.textContent = "🎉 Board cleared! " + misses +
     (misses === 1 ? " mistake" : " mistakes") + " so far.";
   say("");
@@ -1944,7 +2128,7 @@ function finishRound(){
   });
 
   winSlide.hidden = false;
-  winNext.focus();
+  winNext.focus({ preventScroll:true });
   winTimer = setTimeout(nextBoard, WIN_MS);
 }
 
@@ -1982,11 +2166,12 @@ const slide      = document.getElementById("slide");
 const slideStart = document.getElementById("slideStart");
 const howToBtn   = document.getElementById("howToBtn");
 
-function openSlide(){ slide.hidden = false; slideStart.focus(); }
+function openSlide(){ slide.hidden = false; slide.querySelector(".slide-inner").scrollTop = 0; slideStart.focus({ preventScroll:true }); }
 function closeSlide(){ slide.hidden = true; }
 
 slideStart.addEventListener("click", ()=>{
   closeSlide();
+  if(typeof gtag === "function") gtag("event", "game_start", { game: "have_make_do" });
   // A real tap — the only reliable moment to start media on iOS.
   if(typeof window.playBgVideo === "function") window.playBgVideo();
   playTheme();
