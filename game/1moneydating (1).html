@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="renderer" content="webkit" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#1c1c1c" />
+
+<!-- Google Search Console verification (same token as modernenglish.au) -->
+<meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
+
+<title>Love or Money – Money Idioms Dictation | Modern English Australia</title>
+<meta name="description" content="Free B2 money idioms dictation practice for ESL classes. Listen and write questions using idioms like 'cost an arm and a leg' and 'break the bank', then discuss them with a partner. Modern English Australia · Koala Spies Sydney." />
+<meta property="og:title" content="Love or Money – Money Idioms Dictation | Modern English Australia" />
+<meta property="og:description" content="Listen, write the questions, then discuss money idioms with a partner." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Modern English Australia" />
+<meta property="og:url" content="https://modernenglish.au/MoneyIdioms/1moneydating.html" />
+<link rel="canonical" href="https://modernenglish.au/MoneyIdioms/1moneydating.html" />
+
+<style>
+:root{
+  --bg:#f5f5f5;
+  --card:#2a2a2a;
+  --ink:#1e1e1e;
+  --muted:#bbbbbb;
+  --accent:#ff7a1a;        /* brand orange – used on dark backgrounds and buttons */
+  --accent-ink:#b8470b;    /* darker brand orange – readable text on light backgrounds */
+  --line:#3a3a3a;
+  --success:#1e7a46;
+  --error:#c0392b;
+  --gold:#f4c430;
+}
+
+/* ===== Base ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei","Noto Sans",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+  line-height:1.6;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+/* ===== Header ===== */
+header{
+  background:var(--card);
+  color:var(--accent);
+  text-align:center;
+  padding:1.2rem 1rem;
+  padding-top:calc(1.2rem + env(safe-area-inset-top));
+  font-size:1.5rem;
+  font-weight:bold;
+  letter-spacing:2px;
+  border-bottom:1px solid var(--line);
+  line-height:1.3;
+}
+header span{
+  color:#f5f5f5;
+  font-weight:300;
+  display:block;
+  font-size:.85rem;
+  letter-spacing:3px;
+  margin-top:.25rem;
+}
+
+/* ===== Main ===== */
+main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:2rem 1rem 3rem;
+  padding-bottom:calc(3rem + env(safe-area-inset-bottom));
+  text-align:center;
+  width:100%;
+}
+
+h1{
+  color:var(--accent-ink);
+  margin-bottom:.75rem;
+  font-size:1.6rem;
+  font-size:clamp(1.3rem,4.5vw,2rem);
+  line-height:1.25;
+}
+.kicker{
+  font-style:italic;
+  font-weight:800;
+  color:var(--accent-ink);
+  margin-top:.5rem;
+  font-size:2.2rem;
+  font-size:clamp(1.8rem,6vw,2.6rem);
+  line-height:1.2;
+}
+.instructions{
+  color:var(--ink);
+  margin:1rem 0 1.5rem;
+  font-size:1.05rem;
+  font-weight:600;
+  max-width:750px;
+  line-height:1.7;
+}
+
+/* ===== Controls ===== */
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.8rem;
+  margin:0 0 1.5rem;
+}
+.score{
+  font-weight:700;
+  color:var(--accent-ink);
+  margin-bottom:1.2rem;
+  min-height:1.6em;
+}
+
+/* ===== Audio Card List ===== */
+.audio-list{
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+  width:100%;
+  max-width:700px;
+}
+.audio-slot{
+  background:#fff;
+  border:1px solid #d6d6d6;
+  border-left:6px solid var(--accent);
+  border-radius:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  padding:1.2rem 1.5rem;
+  text-align:left;
+  transition:border-color .3s, box-shadow .3s;
+}
+.audio-slot.is-correct{
+  border-left-color:var(--success);
+  box-shadow:0 0 0 2px rgba(30,122,70,.25), 0 2px 8px rgba(0,0,0,.08);
+}
+.audio-slot strong{
+  display:block;
+  margin-bottom:.5rem;
+  color:var(--accent-ink);
+}
+.audio-slot audio{
+  display:block;
+  width:100%;
+  margin-bottom:.8rem;
+}
+.response{
+  width:100%;
+  border:1px solid #bdbdbd;
+  border-radius:8px;
+  padding:.75rem;
+  font-size:16px; /* 16px stops iPhones zooming in on focus */
+  font-family:inherit;
+  color:var(--ink);
+  background:#fff;
+  resize:vertical;
+  min-height:70px;
+  margin-bottom:.8rem;
+  -webkit-appearance:none;
+  appearance:none;
+}
+.response:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(255,122,26,.18);
+}
+.feedback{font-size:1rem;margin-top:.5rem;font-weight:700;min-height:1.5em}
+.correct{color:var(--success)}
+.incorrect{color:var(--error)}
+
+/* ===== Buttons ===== */
+button,.btn{
+  display:inline-block;
+  background:var(--accent);
+  color:#1e1e1e;
+  font-weight:700;
+  font-size:1rem;
+  font-family:inherit;
+  text-decoration:none;
+  border:none;
+  border-radius:45px;
+  padding:.7rem 1.2rem;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  -webkit-appearance:none;
+  appearance:none;
+}
+@media (hover:hover){
+  button:hover,.btn:hover{
+    background:linear-gradient(90deg,var(--accent),#ff9b3d);
+    transform:translateY(-2px);
+  }
+}
+button:active,.btn:active{transform:translateY(0)}
+button:focus-visible,.btn:focus-visible{
+  outline:3px solid var(--card);
+  outline-offset:2px;
+}
+.btn-sound{
+  background:#fff;
+  color:var(--accent-ink);
+  border:2px solid var(--accent);
+}
+.btn-sound[aria-pressed="false"]{
+  color:#555;
+  border-color:#999;
+}
+.links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:1rem;
+  margin-top:2.5rem;
+}
+
+/* ===== Footer ===== */
+footer{
+  border-top:1px solid var(--line);
+  background:var(--card);
+  color:var(--muted);
+  font-size:.9rem;
+  text-align:center;
+  padding:1rem;
+  padding-bottom:calc(1rem + env(safe-area-inset-bottom));
+}
+
+/* ===== Money celebration ===== */
+.money-rain{
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  z-index:9000;
+  pointer-events:none;
+  overflow:hidden;
+  visibility:hidden;
+}
+.money-rain.show{visibility:visible}
+.money-glow{
+  position:absolute;
+  top:0;right:0;bottom:0;left:0;
+  background:radial-gradient(circle at 50% 35%, rgba(244,196,48,.35) 0%, rgba(255,122,26,.15) 35%, rgba(255,255,255,0) 70%);
+  opacity:0;
+}
+.money-rain.show .money-glow{
+  -webkit-animation:glow 4.5s ease forwards;
+  animation:glow 4.5s ease forwards;
+}
+.coin,.note{
+  position:absolute;
+  top:-60px;
+  will-change:transform;
+}
+.coin{
+  width:26px;height:26px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #fff6c9 0%, #f4c430 45%, #b8860b 100%);
+  box-shadow:inset 0 0 0 2px rgba(150,105,0,.55);
+}
+.note{
+  width:52px;height:26px;
+  border-radius:4px;
+  background:linear-gradient(135deg,#9fd8a8 0%,#5fb36f 100%);
+  box-shadow:inset 0 0 0 2px rgba(20,90,40,.45);
+}
+.note::after{
+  content:"$";
+  position:absolute;
+  left:0;right:0;top:0;bottom:0;
+  display:flex;align-items:center;justify-content:center;
+  font:800 14px/1 system-ui,Arial,sans-serif;
+  color:rgba(20,90,40,.75);
+}
+.money-rain.show .coin,
+.money-rain.show .note{
+  -webkit-animation:fall var(--dur,2.6s) cubic-bezier(.35,.1,.6,1) forwards;
+  animation:fall var(--dur,2.6s) cubic-bezier(.35,.1,.6,1) forwards;
+}
+@-webkit-keyframes fall{
+  0%{-webkit-transform:translate(0,0) rotate(0);transform:translate(0,0) rotate(0);opacity:1}
+  85%{opacity:1}
+  100%{-webkit-transform:translate(var(--dx,0),110vh) rotate(var(--rot,540deg));transform:translate(var(--dx,0),110vh) rotate(var(--rot,540deg));opacity:0}
+}
+@keyframes fall{
+  0%{transform:translate(0,0) rotate(0);opacity:1}
+  85%{opacity:1}
+  100%{transform:translate(var(--dx,0),110vh) rotate(var(--rot,540deg));opacity:0}
+}
+@-webkit-keyframes glow{0%{opacity:0}15%{opacity:1}75%{opacity:1}100%{opacity:0}}
+@keyframes glow{0%{opacity:0}15%{opacity:1}75%{opacity:1}100%{opacity:0}}
+
+/* ===== Small phones ===== */
+@media (max-width:600px){
+  header{font-size:1.2rem;letter-spacing:1.5px}
+  header span{font-size:.75rem}
+  main{padding-left:.8rem;padding-right:.8rem}
+  .instructions{font-size:.95rem}
+  .audio-slot{padding:1rem}
+  .links .btn, .links button{width:100%;max-width:340px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important}
+  .money-rain.show .coin,.money-rain.show .note{-webkit-animation:none;animation:none;display:none}
+}
+</style>
+</head>
+
+<body>
+<div class="money-rain" id="moneyRain" aria-hidden="true"><div class="money-glow"></div></div>
+
+<header>
+  MODERN ENGLISH AUSTRALIA
+  <span>KOALA SPIES SYDNEY</span>
+</header>
+
+<main>
+  <p class="kicker">Love or Money</p>
+  <h1>Write from Dictation – Further Practice</h1>
+  <p class="instructions">
+    WRITE THE QUESTIONS EXACTLY AS YOU HEAR THEM.<br>
+    *Use contractions (they are → they're)<br>
+    **Use punctuation (e.g. . , ?).<br>
+    After you have written all the answers, discuss them with a partner.
+  </p>
+
+  <div class="controls">
+    <button type="button" class="btn-sound" id="soundBtn" aria-pressed="true" aria-label="Sound effects on">🔊 Sound on</button>
+  </div>
+  <div class="score" id="score" role="status" aria-live="polite">0 / 5 correct</div>
+
+  <div class="audio-list">
+    <div class="audio-slot" data-answer="When on a first date, who should pay the bill?">
+      <strong>Audio 1:</strong>
+      <audio controls preload="metadata" src="1When.mp3"></audio>
+      <textarea class="response" aria-label="Audio 1 answer" placeholder="Type the question as you hear it here..."></textarea>
+      <button type="button" class="check-btn">Check Answer</button>
+      <div class="feedback" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="audio-slot" data-answer="If a restaurant makes a mistake, should the meal be on the house?">
+      <strong>Audio 2:</strong>
+      <audio controls preload="metadata" src="2If.mp3"></audio>
+      <textarea class="response" aria-label="Audio 2 answer" placeholder="Type the question as you hear it here..."></textarea>
+      <button type="button" class="check-btn">Check Answer</button>
+      <div class="feedback" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="audio-slot" data-answer="Should a date cost an arm and a leg?">
+      <strong>Audio 3:</strong>
+      <audio controls preload="metadata" src="3Should.mp3"></audio>
+      <textarea class="response" aria-label="Audio 3 answer" placeholder="Type the question as you hear it here..."></textarea>
+      <button type="button" class="check-btn">Check Answer</button>
+      <div class="feedback" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="audio-slot" data-answer="Does a wedding need to break the bank in your culture?">
+      <strong>Audio 4:</strong>
+      <audio controls preload="metadata" src="4Does.mp3"></audio>
+      <textarea class="response" aria-label="Audio 4 answer" placeholder="Type the question as you hear it here..."></textarea>
+      <button type="button" class="check-btn">Check Answer</button>
+      <div class="feedback" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="audio-slot" data-answer="Would you date someone just because they're rolling in money?">
+      <strong>Audio 5:</strong>
+      <audio controls preload="metadata" src="5Would.mp3"></audio>
+      <textarea class="response" aria-label="Audio 5 answer" placeholder="Type the question as you hear it here..."></textarea>
+      <button type="button" class="check-btn">Check Answer</button>
+      <div class="feedback" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <p class="instructions" style="margin-top:2.5rem;">NOW ASK A PARTNER THESE QUESTIONS AND HAVE A DISCUSSION</p>
+
+  <div class="links">
+    <button type="button" id="reset">🔁 Try Again</button>
+    <a href="https://modernenglish.au/game/moneyidiom.html" class="btn">⬅ Back to Matching Game</a>
+    <a href="https://modernenglish.au/vocabularygames.html" class="btn">More Vocabulary Games</a>
+  </div>
+</main>
+
+<footer>
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
+
+<script>
+/* ===== Money sound effects (made in the browser – no audio files needed) ===== */
+var MoneySFX = (function(){
+  var ctx = null;
+  var on = true;
+  try{ if(localStorage.getItem("moneySfx") === "off") on = false; }catch(e){}
+
+  function ac(){
+    if(!on) return null;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return null;
+    if(!ctx){ try{ ctx = new AC(); }catch(e){ return null; } }
+    if(ctx.state === "suspended" && ctx.resume) ctx.resume();
+    return ctx;
+  }
+
+  function noise(c, secs){
+    var len = Math.floor(c.sampleRate * secs);
+    var buf = c.createBuffer(1, len, c.sampleRate);
+    var d = buf.getChannelData(0);
+    for(var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    return buf;
+  }
+
+  // A short burst of filtered noise – the building block for paper sounds and clunks
+  function burst(c, t, dur, freq, q, vol, type){
+    var src = c.createBufferSource();
+    src.buffer = noise(c, dur + 0.02);
+    var f = c.createBiquadFilter();
+    f.type = type || "bandpass";
+    f.frequency.value = freq;
+    f.Q.value = q;
+    var g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.004);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(f); f.connect(g); g.connect(c.destination);
+    src.start(t); src.stop(t + dur + 0.02);
+  }
+
+  function tone(c, t, freq, dur, vol, type){
+    var o = c.createOscillator();
+    var g = c.createGain();
+    o.type = type || "sine";
+    o.frequency.value = freq;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.005);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(t); o.stop(t + dur + 0.02);
+  }
+
+  // Checking an answer: a quick flick of a banknote
+  function paper(){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    burst(c, t, 0.09, 3200, 0.8, 0.18);
+    burst(c, t + 0.07, 0.12, 2400, 0.7, 0.14);
+  }
+
+  // Correct: cash register – drawer clunk, rattle, then the "ka-ching" bell
+  function register(){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime + 0.12;
+    burst(c, t, 0.08, 180, 1.5, 0.7, "lowpass");          // drawer clunk
+    for(var i = 0; i < 5; i++){                              // coins rattle in the tray
+      burst(c, t + 0.05 + i * 0.03, 0.04, 5000 + Math.random() * 2000, 6, 0.08);
+    }
+    var b = t + 0.2;                                         // the bell
+    [2093, 2637, 4186, 5274].forEach(function(f, i){
+      tone(c, b, f, 1.1 - i * 0.18, [0.16, 0.1, 0.06, 0.04][i], i ? "sine" : "triangle");
+    });
+    tone(c, b + 0.09, 2637, 0.9, 0.12, "triangle");
+  }
+
+  // Incorrect: scrunching up a piece of paper
+  function crumple(){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime + 0.1;
+    for(var i = 0; i < 16; i++){
+      var st = t + i * 0.035 + Math.random() * 0.025;
+      burst(c, st, 0.03 + Math.random() * 0.05, 1200 + Math.random() * 3500, 1 + Math.random() * 2, 0.08 + Math.random() * 0.12);
+    }
+  }
+
+  // All correct: coins pouring out, then a big ka-ching
+  function jackpot(){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime + 0.9;
+    for(var i = 0; i < 22; i++){
+      var st = t + i * 0.05 + Math.random() * 0.04;
+      tone(c, st, 3000 + Math.random() * 2500, 0.18, 0.05, "triangle");
+      burst(c, st, 0.03, 6000, 5, 0.05);
+    }
+    setTimeout(register, 2100);
+  }
+
+  // Try Again: pages being shuffled
+  function shuffle(){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    for(var i = 0; i < 4; i++) burst(c, t + i * 0.09, 0.1, 2000 + i * 400, 0.6, 0.12);
+  }
+
+  function setOn(v){
+    on = v;
+    try{ localStorage.setItem("moneySfx", v ? "on" : "off"); }catch(e){}
+    if(v) paper();
+  }
+
+  return { paper:paper, register:register, crumple:crumple, jackpot:jackpot, shuffle:shuffle, setOn:setOn, isOn:function(){ return on; } };
+})();
+
+/* ===== Sound toggle ===== */
+(function(){
+  var btn = document.getElementById("soundBtn");
+  if(!btn) return;
+  function paint(){
+    var on = MoneySFX.isOn();
+    btn.textContent = on ? "🔊 Sound on" : "🔇 Sound off";
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.setAttribute("aria-label", on ? "Sound effects on" : "Sound effects off");
+  }
+  btn.addEventListener("click", function(){ MoneySFX.setOn(!MoneySFX.isOn()); paint(); });
+  paint();
+})();
+
+/* ===== Money rain celebration ===== */
+var rainEl = document.getElementById("moneyRain");
+var rainTimer = null;
+function showMoneyRain(){
+  if(!rainEl) return;
+  clearTimeout(rainTimer);
+  rainEl.querySelectorAll(".coin,.note").forEach(function(n){ n.remove(); });
+  rainEl.classList.remove("show");
+  void rainEl.offsetWidth;
+  var count = window.innerWidth < 600 ? 26 : 44;
+  for(var i = 0; i < count; i++){
+    var el = document.createElement("span");
+    el.className = Math.random() < 0.55 ? "coin" : "note";
+    el.style.left = (Math.random() * 100) + "%";
+    el.style.setProperty("--dx", (Math.random() * 120 - 60) + "px");
+    el.style.setProperty("--rot", (Math.random() * 720 - 360) + "deg");
+    el.style.setProperty("--dur", (2.2 + Math.random() * 1.6) + "s");
+    el.style.animationDelay = (Math.random() * 1.2) + "s";
+    rainEl.appendChild(el);
+  }
+  rainEl.classList.add("show");
+  rainTimer = setTimeout(function(){ rainEl.classList.remove("show"); }, 5000);
+}
+
+/* ===== Checking answers ===== */
+function normalize(str){
+  return str.toLowerCase()
+            .replace(/[‘’]/g, "'")
+            .replace(/[^\w\s]|_/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+}
+
+var slots = document.querySelectorAll(".audio-slot");
+var scoreEl = document.getElementById("score");
+var celebrated = false;
+
+function updateScore(){
+  var n = document.querySelectorAll(".audio-slot.is-correct").length;
+  if(n === slots.length){
+    scoreEl.textContent = "💰 " + n + " / " + slots.length + " correct – you're rolling in it! Now discuss the questions with a partner.";
+  }else{
+    scoreEl.textContent = n + " / " + slots.length + " correct";
+  }
+  return n;
+}
+
+document.querySelectorAll(".check-btn").forEach(function(button){
+  button.addEventListener("click", function(){
+    var slot = button.closest(".audio-slot");
+    var input = slot.querySelector(".response").value.trim();
+    var correct = slot.dataset.answer.trim();
+    var feedback = slot.querySelector(".feedback");
+
+    if(!input){
+      feedback.innerHTML = '<span class="incorrect">⚠ Please type your answer first.</span>';
+      return;
+    }
+    MoneySFX.paper();
+    if(normalize(input) === normalize(correct)){
+      feedback.innerHTML = '<span class="correct">✔ Correct!</span>';
+      slot.classList.add("is-correct");
+      var n = updateScore();
+      if(n === slots.length && !celebrated){
+        celebrated = true;
+        MoneySFX.jackpot();
+        showMoneyRain();
+      }else{
+        MoneySFX.register();
+      }
+    }else{
+      feedback.innerHTML = '<span class="incorrect">✖ Try again.</span>';
+      slot.classList.remove("is-correct");
+      updateScore();
+      MoneySFX.crumple();
+    }
+  });
+});
+
+document.getElementById("reset").addEventListener("click", function(){
+  document.querySelectorAll(".response").forEach(function(r){ r.value = ""; });
+  document.querySelectorAll(".feedback").forEach(function(f){ f.innerHTML = ""; });
+  slots.forEach(function(s){ s.classList.remove("is-correct"); });
+  celebrated = false;
+  updateScore();
+  MoneySFX.shuffle();
+  window.scrollTo(0, 0);
+});
+</script>
+</body>
+</html>
