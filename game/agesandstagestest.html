@@ -1,9 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Ages & Stages – Idiom Matching Game | Modern English Australia</title>
+<meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
+<meta name="format-detection" content="telephone=no" />
+<!-- Chinese Android browsers (UC, QQ, 360, Sogou): use the modern engine -->
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="theme-color" content="#f4b6c2" />
+
+<title>Ages &amp; Stages – Idiom Matching Game | Modern English Australia</title>
+<meta name="description" content="Free B2 English idiom matching game about ages and stages of life: over the hill, no spring chicken, a late bloomer and more. Play on a phone, tablet or classroom screen." />
+<meta name="author" content="Modern English Australia" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://modernenglish.au/game/agesandstagestest.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://modernenglish.au/game/agesandstagestest.html" />
+<meta property="og:site_name" content="Modern English Australia" />
+<meta property="og:locale" content="en_AU" />
+<meta property="og:title" content="Ages &amp; Stages – Idiom Matching Game" />
+<meta property="og:description" content="Free B2 idiom matching game about the stages of life, from wet behind the ears to over the hill." />
+<meta name="twitter:card" content="summary" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
 
 <style>
 :root {
@@ -11,29 +39,33 @@
   --card:#e8f7f2;
   --accent:#f4b6c2;
   --accent-2:#a7d8f5;
+  --plum:#5a2e57;            /* brand text colour for this game */
   --ink:#3a3a3a;
   --muted:#7b7b8f;
   --line:#e8dff5;
   --shadow:0 10px 28px rgba(0,0,0,.10);
   --radius:14px;
   --max:980px;
+  --footer:#2a2a2a;
+  --footer-ink:#bbbbbb;
 }
 
 /* Base */
 *{ box-sizing:border-box; }
-html, body{ height:100%; }
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 body{
   margin:0;
-  font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
   color:var(--ink);
   background:var(--bg);
   min-height:100vh;
+  display:flex; flex-direction:column;
 }
 
 /* Background video */
 .bg-video{
   position:fixed;
-  inset:0;
+  top:0; right:0; bottom:0; left:0;
   width:100%;
   height:100%;
   object-fit:cover;
@@ -43,105 +75,73 @@ body{
 }
 .bg-scrim{
   position:fixed;
-  inset:0;
+  top:0; right:0; bottom:0; left:0;
   background:linear-gradient(180deg, rgba(247,243,250,.72), rgba(247,243,250,.60));
   z-index:-1;
   pointer-events:none;
 }
 
-/* Top bar */
-.topbar{
-  position:sticky;
-  top:0;
-  z-index:10;
-  width:100%;
-  backdrop-filter:saturate(140%) blur(8px);
-  background:rgba(247,243,250,.72);
-  border-bottom:1px solid var(--line);
-}
-.topbar-inner{
-  width:min(var(--max), 100%);
-  margin:0 auto;
-  padding:10px 14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-.brand{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-  line-height:1.1;
+/* ===== HEADER — same layout as the other Modern English Australia games ===== */
+header{
+  position:relative;
   text-align:center;
+  padding:18px 12px;
+  padding-top:calc(18px + env(safe-area-inset-top, 0px));
+  background:linear-gradient(90deg, #fbd3dc, #f1d7ef, #dcdcf7, #cfe8f7, #d8f1e8, #fbd3dc);
+  border-bottom:1px solid rgba(90,46,87,.18);
+  color:var(--plum);
 }
-.brand .kicker{
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--muted);
+.brand-name{
+  display:block;
+  font-size:24px;
   font-weight:700;
-}
-.brand .name{
-  font-size:14px;
-  letter-spacing:.12em;
+  letter-spacing:2px;
   text-transform:uppercase;
-  color:var(--accent);
-  font-weight:800;
+  line-height:1.2;
+}
+.brand-sub{
+  display:block;
+  font-size:16px;
+  font-weight:300;
+  color:rgba(90,46,87,.85);
+  margin-top:2px;
 }
 
-/* Topbar controls */
-.top-left, .top-right{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  min-width:130px;
+/* QR button, top left like the other games */
+.qr-wrap{
+  position:absolute;
+  top:10px; left:10px;
+  top:calc(10px + env(safe-area-inset-top, 0px));
+  left:calc(10px + env(safe-area-inset-left, 0px));
+  z-index:5;
+  text-align:left;
 }
-.top-left{ justify-content:flex-start; }
-.top-right{ justify-content:flex-end; }
-
-.icon-btn{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.78);
-  color:var(--ink);
-  border-radius:12px;
-  padding:10px 12px;
+.qr-toggle{
+  -webkit-appearance:none; appearance:none;
+  font:inherit; font-size:13px; font-weight:700; letter-spacing:.5px;
+  color:#fff;
+  background:rgba(90,46,87,.82);
+  border:1px solid rgba(90,46,87,.35);
+  border-radius:5px;
+  padding:9px 13px;
+  min-height:36px;
   cursor:pointer;
-  font-weight:700;
-  letter-spacing:.02em;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-  transition:transform .06s ease, background .2s ease, border-color .2s ease;
-  user-select:none;
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
+  display:inline-flex; align-items:center;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
 }
-.icon-btn:hover{
-  background:#fff;
-  border-color:#d9cfe8;
-  transform:translateY(-1px);
-}
-.icon-btn:active{ transform:translateY(0); }
-
-.icon{
-  width:18px;
-  height:18px;
-  display:inline-block;
-}
-
-/* QR panel */
+.qr-toggle svg{ width:16px; height:16px; margin-right:6px; }
 .qr-panel{
   position:absolute;
-  top:58px;
-  left:14px;
+  top:44px; left:0;
   width:220px;
-  background:rgba(255,255,255,.92);
+  background:rgba(255,255,255,.96);
   border:1px solid var(--line);
   border-radius:14px;
   box-shadow:var(--shadow);
   padding:12px;
   display:none;
+  color:var(--ink);
 }
 .qr-panel.open{ display:block; }
 .qr-panel h3{
@@ -151,7 +151,7 @@ body{
   text-transform:uppercase;
   color:var(--muted);
 }
-.qr-wrap{
+.qr-box{
   display:flex;
   align-items:center;
   justify-content:center;
@@ -159,6 +159,7 @@ body{
   border-radius:12px;
   background:#fff;
   border:1px dashed #eadff3;
+  min-height:180px;
 }
 .qr-note{
   margin:10px 0 0 0;
@@ -167,24 +168,37 @@ body{
   line-height:1.35;
 }
 
-/* Main */
+/* ===== MAIN ===== */
 main{
-  width:min(var(--max), 100%);
+  flex:1 0 auto;
+  width:100%;
+  max-width:var(--max);
   margin:0 auto;
   padding:18px 14px 26px;
+  padding-left:calc(14px + env(safe-area-inset-left, 0px));
+  padding-right:calc(14px + env(safe-area-inset-right, 0px));
   text-align:center;
 }
+.level{
+  margin:10px 0 0;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
 h1{
-  margin:16px 0 6px;
+  margin:6px 0 6px;
+  font-size:1.6rem;                              /* fallback */
   font-size:clamp(1.35rem, 2.8vw, 2rem);
-  letter-spacing:.06em;
-  color:#2f2f2f;
+  letter-spacing:.04em;
+  line-height:1.2;
+  color:var(--plum);
 }
 p.lede{
   margin:0 auto 14px;
   max-width:760px;
   color:#444;
-  opacity:.92;
   line-height:1.55;
 }
 
@@ -194,26 +208,36 @@ p.lede{
   width:100%;
   max-width:860px;
   display:grid;
-  grid-template-columns:repeat(4, 1fr);
+  grid-template-columns:repeat(4, minmax(0, 1fr));
   gap:12px;
 }
 .card{
+  -webkit-appearance:none; appearance:none;
+  font:inherit;
+  color:var(--ink);
   background:rgba(232,247,242,.86);
   border:2px solid rgba(244,182,194,.92);
   border-radius:var(--radius);
   padding:18px 14px;
   min-height:110px;
+  min-width:0;
   display:flex;
   align-items:center;
   justify-content:center;
+  text-align:center;
   cursor:pointer;
   font-size:0.98rem;
   line-height:1.3;
+  overflow-wrap:break-word;
+  word-wrap:break-word;
+  -webkit-hyphens:auto; hyphens:auto;
   box-shadow:0 8px 22px rgba(0,0,0,.08);
   transition:transform .08s ease, background .2s ease, color .2s ease, border-color .2s ease;
-  user-select:none;
+  -webkit-user-select:none; user-select:none;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
 }
-.card:hover{ transform:translateY(-1px); }
+.card:focus-visible{ outline:3px solid var(--plum); outline-offset:2px; }
 .card.flipped{
   background:rgba(244,182,194,.95);
   color:#111;
@@ -224,6 +248,10 @@ p.lede{
   cursor:default;
   transform:none;
   border-color:rgba(255,255,255,.65);
+}
+@media (hover:hover){
+  .card:hover{ transform:translateY(-1px); }
+  .card.matched:hover{ transform:none; }
 }
 #status{
   margin:10px auto 0;
@@ -237,12 +265,14 @@ p.lede{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
-  margin-top:14px;
   flex-wrap:wrap;
+  margin-top:14px;
 }
 button.reset{
+  -webkit-appearance:none; appearance:none;
+  font:inherit;
   padding:.85rem 1.25rem;
+  min-height:44px;
   background:rgba(244,182,194,.95);
   border:1px solid rgba(0,0,0,.06);
   border-radius:12px;
@@ -252,83 +282,112 @@ button.reset{
   letter-spacing:.03em;
   box-shadow:0 10px 24px rgba(0,0,0,.10);
   transition:transform .06s ease, filter .2s ease;
+  touch-action:manipulation;
 }
-button.reset:hover{ transform:translateY(-1px); filter:brightness(1.02); }
+@media (hover:hover){ button.reset:hover{ transform:translateY(-1px); filter:brightness(1.02); } }
 button.reset:active{ transform:translateY(0); }
 
-/* Footer */
+/* Links row — same as Colour Idioms */
+.links{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin:32px 0 0;
+}
+.links a{
+  display:inline-block;
+  margin:0 8px 10px;
+  padding:12.8px 22.4px;
+  min-height:44px;
+  border-radius:5px;
+  background:var(--plum);
+  color:#fff;
+  font-weight:600;
+  font-size:16px;
+  text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.links a:hover{ filter:brightness(1.15); }
+.links a:focus-visible{ outline:3px solid var(--accent); outline-offset:2px; }
+
+/* ===== FOOTER — same as the other games ===== */
 footer{
+  flex-shrink:0;
   width:100%;
   text-align:center;
-  color:var(--muted);
-  padding:14px 0 18px;
-  border-top:1px solid var(--line);
-  background:rgba(247,243,250,.68);
+  background:var(--footer);
+  color:var(--footer-ink);
+  font-size:14.4px;
+  padding:16px 12px 12px;
+  padding-bottom:calc(12px + env(safe-area-inset-bottom, 0px));
 }
 
 /* Responsive */
+/* 16 cards: 4 across on computers and tablets, 2 across on phones (never 3, which leaves one card alone) */
 @media (max-width: 860px){
-  #game{ grid-template-columns:repeat(3, 1fr); }
-  .top-left, .top-right{ min-width:110px; }
+  #game{ gap:10px; }
+  .card{ padding:14px 10px; }
 }
 @media (max-width: 600px){
-  #game{ grid-template-columns:repeat(2, 1fr); gap:10px; }
-  .card{ min-height:96px; padding:14px 12px; font-size:1.02rem; }
-  .brand{ display:none; }
-  .qr-panel{ left:10px; top:56px; width:210px; }
+  header{ padding-top:calc(52px + env(safe-area-inset-top, 0px)); } /* room for the QR button */
+  .brand-name{ font-size:19px; letter-spacing:1.5px; }
+  .brand-sub{ font-size:14px; }
+  #game{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; }
+  .card{ min-height:96px; padding:14px 10px; font-size:1rem; }
+  .qr-panel{ width:210px; }
+}
+@media (max-width: 360px){
+  .brand-name{ font-size:17px; letter-spacing:1px; }
+  #game{ gap:8px; }
+  .card{ padding:12px 8px; font-size:.95rem; min-height:90px; }
+  .links a{ padding:12px 16px; }
+}
+/* Landscape phones: 4 across so the board fits without much scrolling */
+@media (max-height: 500px) and (orientation: landscape){
+  #game{ grid-template-columns:repeat(4, minmax(0, 1fr)); }
+  .card{ min-height:72px; padding:10px; }
+  header{ padding-top:14px; padding-bottom:10px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .bg-video{ display:none; }
+  .card, button.reset{ transition:none; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Background video (replace src with your file path) -->
-<video class="bg-video" autoplay muted loop playsinline>
+<!-- Background video. x5-/webkit- attributes stop WeChat, QQ and older iPhones
+     opening it full-screen instead of playing it behind the page. -->
+<video class="bg-video" autoplay muted loop playsinline webkit-playsinline
+       x5-playsinline x5-video-player-type="h5-page" preload="auto" aria-hidden="true" tabindex="-1">
   <source src="agesandstages.mp4" type="video/mp4">
 </video>
 <div class="bg-scrim" aria-hidden="true"></div>
 
-<header class="topbar" role="banner">
-  <div class="topbar-inner">
-
-    <div class="top-left">
-      <button class="icon-btn" id="qrBtn" type="button" aria-expanded="false" aria-controls="qrPanel" title="Show QR code">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M3 3h8v8H3V3Zm2 2v4h4V5H5Zm8-2h8v8h-8V3Zm2 2v4h4V5h-4ZM3 13h8v8H3v-8Zm2 2v4h4v-4H5Zm10 0h2v2h-2v-2Zm-2-2h4v4h-4v-4Zm6 0h2v2h-2v-2Zm0 4h2v6h-6v-2h4v-4Zm-6 2h2v2h-2v-2Zm2 2h2v2h-2v-2Z"/>
-        </svg>
-        QR
-      </button>
-
-      <div class="qr-panel" id="qrPanel" role="dialog" aria-label="QR code panel">
-        <h3>Scan this page</h3>
-        <div class="qr-wrap">
-          <div id="qrCode"></div>
-        </div>
-        <p class="qr-note">This QR code points to the current page URL.</p>
-      </div>
+<header>
+  <div class="qr-wrap">
+    <button class="qr-toggle" id="qrBtn" type="button" aria-expanded="false" aria-controls="qrPanel" title="Show QR code">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M3 3h8v8H3V3Zm2 2v4h4V5H5Zm8-2h8v8h-8V3Zm2 2v4h4V5h-4ZM3 13h8v8H3v-8Zm2 2v4h4v-4H5Zm10 0h2v2h-2v-2Zm-2-2h4v4h-4v-4Zm6 0h2v2h-2v-2Zm0 4h2v6h-6v-2h4v-4Zm-6 2h2v2h-2v-2Zm2 2h2v2h-2v-2Z"/>
+      </svg>QR
+    </button>
+    <div class="qr-panel" id="qrPanel" role="dialog" aria-label="QR code for this page">
+      <h3>Scan this page</h3>
+      <div class="qr-box"><div id="qrCode"></div></div>
+      <p class="qr-note">This QR code points to the current page.</p>
     </div>
-
-    <div class="brand" aria-label="Brand">
-      <div class="kicker">Modern English Australia</div>
-      <div class="name">Koala Spies Sydney</div>
-    </div>
-
-    <div class="top-right">
-      <!-- Set href to your home page -->
-      <a class="icon-btn" href="index.html" title="Home">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M12 3l9 8h-3v10h-5v-6H11v6H6V11H3l9-8Z"/>
-        </svg>
-        Home
-      </a>
-    </div>
-
   </div>
+
+  <span class="brand-name">Modern English Australia</span>
+  <span class="brand-sub">Koala Spies Sydney</span>
 </header>
 
 <main>
-  <h1>Ages & Stages – Idiom Matching Game</h1>
-  <p class="lede">Flip two cards to match each idiom with its meaning. Each round uses 8 random pairs (4 × 4). Reset to play again with a different selection.</p>
+  <p class="level">B2 · Upper-intermediate</p>
+  <h1>Ages &amp; Stages – Idiom Matching Game</h1>
+  <p class="lede">Flip two cards to match each idiom with its meaning. Each round uses 8 random pairs (4 × 4). Press Play Again for a different selection.</p>
 
   <div id="game" aria-label="Matching game board"></div>
   <div id="status" role="status" aria-live="polite"></div>
@@ -336,10 +395,15 @@ footer{
   <div class="controls">
     <button class="reset" type="button" id="resetBtn">Play Again</button>
   </div>
+
+  <div class="links">
+    <a href="../vocabularygames.html">More vocab games</a>
+    <a href="../index.html">Home</a>
+  </div>
 </main>
 
 <footer>
-  © 2026 KoalaSpiesSydney. All rights reserved.
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
 </footer>
 
 <!-- QRCode library -->
@@ -347,7 +411,7 @@ footer{
 
 <script>
 /* ===== PAIRS POOL (more than 8 pairs; used on resets) ===== */
-const pairs = [
+var pairs = [
   ["In the prime of life","at your strongest, healthiest, or most successful stage"],
   ["Over the hill","past your best years"],
   ["No spring chicken","not young anymore"],
@@ -360,53 +424,49 @@ const pairs = [
   ["A mid-life crisis","a time when people panic about aging"]
 ];
 
-const matchColors = [
+var matchColors = [
   "#ffd166","#06d6a0","#4cc9f0","#f72585","#ffb703",
   "#90be6d","#f28482","#43aa8b","#577590","#ff9f1c"
 ];
 
-let first = null;
-let second = null;
-let lock = false;
-let matchedCount = 0;
-let colorMap = {};
+var PAIRS_PER_ROUND = 8;
+var first = null, second = null, lock = false, matchedCount = 0, colorMap = {};
 
+/* Fair shuffle (Fisher–Yates) */
 function shuffle(arr){
-  return [...arr].sort(() => Math.random() - 0.5);
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
 }
 
-function startGame() {
-  const game = document.getElementById("game");
-  const status = document.getElementById("status");
+function setStatus(msg){ document.getElementById("status").textContent = msg; }
 
+function startGame(){
+  var game = document.getElementById("game");
   game.innerHTML = "";
-  status.textContent = "";
+  first = null; second = null; lock = false; matchedCount = 0; colorMap = {};
+  setStatus("Matches: 0 / " + PAIRS_PER_ROUND);
 
-  first = null;
-  second = null;
-  lock = false;
-  matchedCount = 0;
-  colorMap = {};
-
-  // Pick 8 random pairs from the full pool
-  const selectedPairs = shuffle(pairs).slice(0, 8);
-
-  // Build 16 cards (4x4)
-  let cards = selectedPairs.flatMap(([idiom, meaning]) => ([
-    { text: idiom, pair: idiom },
-    { text: meaning, pair: idiom }
-  ]));
+  var selected = shuffle(pairs).slice(0, PAIRS_PER_ROUND);
+  var cards = [];
+  selected.forEach(function(p){
+    cards.push({ text: p[0], pair: p[0] });
+    cards.push({ text: p[1], pair: p[0] });
+  });
   cards = shuffle(cards);
 
-  cards.forEach(data => {
-    const div = document.createElement("div");
-    div.className = "card";
-    div.textContent = "";
-    div.dataset.pair = data.pair;
-    div.dataset.text = data.text;
-
-    div.addEventListener("click", () => onCardClick(div));
-    game.appendChild(div);
+  cards.forEach(function(data, i){
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "card";
+    btn.setAttribute("aria-label", "Card " + (i + 1) + ", face down");
+    btn.dataset.pair = data.pair;
+    btn.dataset.text = data.text;
+    btn.addEventListener("click", function(){ onCardClick(btn); });
+    game.appendChild(btn);
   });
 }
 
@@ -415,87 +475,96 @@ function onCardClick(card){
 
   card.classList.add("flipped");
   card.textContent = card.dataset.text;
+  card.setAttribute("aria-label", card.dataset.text);
 
-  if (!first){
-    first = card;
-    return;
-  }
+  if (!first){ first = card; return; }
 
   second = card;
   lock = true;
 
-  window.setTimeout(() => {
-    const isMatch = first.dataset.pair === second.dataset.pair;
+  window.setTimeout(function(){
+    var isMatch = first.dataset.pair === second.dataset.pair;
 
     if (isMatch){
       if (!colorMap[first.dataset.pair]){
-        const used = Object.keys(colorMap).length;
+        var used = Object.keys(colorMap).length;
         colorMap[first.dataset.pair] = matchColors[used % matchColors.length];
       }
-      const c = colorMap[first.dataset.pair];
-
-      [first, second].forEach(el => {
+      var c = colorMap[first.dataset.pair];
+      [first, second].forEach(function(el){
         el.classList.remove("flipped");
         el.classList.add("matched");
         el.style.background = c;
         el.style.borderColor = "rgba(255,255,255,.55)";
+        el.setAttribute("aria-label", el.dataset.text + ", matched");
       });
-
       matchedCount++;
-      if (matchedCount === 8){
-        document.getElementById("status").textContent = "Brilliant. All matched.";
-      }
+      setStatus(matchedCount === PAIRS_PER_ROUND
+        ? "Brilliant. All matched."
+        : "Matches: " + matchedCount + " / " + PAIRS_PER_ROUND);
     } else {
-      first.classList.remove("flipped");
-      second.classList.remove("flipped");
-      first.textContent = "";
-      second.textContent = "";
+      [first, second].forEach(function(el){
+        el.classList.remove("flipped");
+        el.textContent = "";
+        el.setAttribute("aria-label", "Card, face down");
+      });
     }
-
-    first = null;
-    second = null;
-    lock = false;
+    first = null; second = null; lock = false;
   }, 800);
 }
 
 /* ===== QR Code ===== */
-let qrBuilt = false;
+var qrBuilt = false;
 function buildQRCode(){
-  const target = document.getElementById("qrCode");
+  var target = document.getElementById("qrCode");
   target.innerHTML = "";
-  new QRCode(target, {
-    text: window.location.href,
-    width: 160,
-    height: 160
-  });
+  if (typeof QRCode === "undefined"){
+    /* The QR library is blocked or slow on some networks (e.g. mainland China) */
+    target.textContent = "QR code unavailable on this network. Share the page address instead.";
+    return;
+  }
+  new QRCode(target, { text: window.location.href, width: 160, height: 160 });
   qrBuilt = true;
 }
 
-(function initTopbar(){
-  const btn = document.getElementById("qrBtn");
-  const panel = document.getElementById("qrPanel");
+(function initQR(){
+  var btn = document.getElementById("qrBtn");
+  var panel = document.getElementById("qrPanel");
 
-  btn.addEventListener("click", () => {
-    const open = panel.classList.toggle("open");
+  btn.addEventListener("click", function(){
+    var open = panel.classList.toggle("open");
     btn.setAttribute("aria-expanded", String(open));
     if (open && !qrBuilt) buildQRCode();
   });
 
-  // close QR panel if user clicks outside
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", function(e){
     if (!panel.classList.contains("open")) return;
-    const within = panel.contains(e.target) || btn.contains(e.target);
-    if (!within){
+    if (!panel.contains(e.target) && !btn.contains(e.target)){
       panel.classList.remove("open");
       btn.setAttribute("aria-expanded", "false");
     }
   });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && panel.classList.contains("open")){
+      panel.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
+      btn.focus();
+    }
+  });
 })();
 
-/* Reset */
-document.getElementById("resetBtn").addEventListener("click", startGame);
+/* Some browsers block autoplay; keep trying quietly after the first tap */
+(function(){
+  var v = document.querySelector(".bg-video");
+  if (!v || !v.play) return;
+  var p = v.play(); if (p && p.catch) p.catch(function(){});
+  document.addEventListener("touchstart", function once(){
+    var q = v.play(); if (q && q.catch) q.catch(function(){});
+    document.removeEventListener("touchstart", once);
+  }, { passive: true });
+})();
 
-/* Start */
+document.getElementById("resetBtn").addEventListener("click", startGame);
 startGame();
 </script>
 
