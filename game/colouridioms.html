@@ -1,10 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
+<meta name="format-detection" content="telephone=no" />
+<!-- Chinese Android browsers (UC, QQ, 360, Sogou): use the modern engine -->
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="theme-color" content="#0e2861" />
 <title>Colour Idioms Matching Game – Modern English Australia</title>
 <meta name="description" content="Free colour idioms matching game for intermediate and upper-intermediate English learners. Three levels, from everyday idioms to harder figurative ones. Auto-checked and mobile-friendly.">
+<link rel="canonical" href="https://modernenglish.au/game/colouridioms.html" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+
+<!-- Link previews (Facebook, LinkedIn, WhatsApp, X) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Modern English Australia" />
+<meta property="og:locale" content="en_AU" />
+<meta property="og:url" content="https://modernenglish.au/game/colouridioms.html" />
+<meta property="og:title" content="Colour Idioms Matching Game (B1–B2)" />
+<meta property="og:description" content="Free colour idioms matching game in three levels: green with envy, once in a blue moon, a red herring and more. For one, two or three players." />
+<meta property="og:image" content="https://modernenglish.au/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Colour Idioms Matching Game (B1–B2)" />
+<meta name="twitter:description" content="Free colour idioms matching game in three levels: green with envy, once in a blue moon, a red herring and more." />
+<meta name="twitter:image" content="https://modernenglish.au/og-image.jpg" />
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "LearningResource",
+   "name": "Colour Idioms Matching Game",
+   "url": "https://modernenglish.au/game/colouridioms.html",
+   "description": "Free colour idioms matching game for intermediate and upper-intermediate English learners, in three levels.",
+   "inLanguage": "en-AU",
+   "learningResourceType": ["Game", "Exercise"],
+   "educationalLevel": ["B1", "B2"],
+   "teaches": "English idioms with colours",
+   "isAccessibleForFree": true,
+   "audience": { "@type": "EducationalAudience", "educationalRole": ["student", "teacher"] },
+   "publisher": { "@type": "Organization", "name": "Modern English Australia", "url": "https://modernenglish.au/" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernenglish.au/" },
+    { "@type": "ListItem", "position": 2, "name": "Vocabulary games", "item": "https://modernenglish.au/vocabularygames.html" },
+    { "@type": "ListItem", "position": 3, "name": "Colour Idioms" }
+   ]
+  }
+ ]
+}
+</script>
+
+<!-- Google tag (gtag.js) - same Analytics property as the rest of modernenglish.au -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
 <style>
   :root {
     --bg:#f5f5f5;
@@ -16,11 +77,12 @@
     --line:#3a3a3a;
   }
   *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   /* Background: colour.mp4 plays on top of an animated colour wash.
      If the video file is missing, the wash simply shows through. */
   .bg-wash{
     position:fixed;
-    inset:0;
+    top:0; right:0; bottom:0; left:0;   /* works on older iPhones / UC / QQ as well */
     z-index:-2;
     pointer-events:none;
     opacity:.5;
@@ -39,7 +101,7 @@
   }
   .bg-video{
     position:fixed;
-    inset:0;
+    top:0; right:0; bottom:0; left:0;
     width:100%;
     height:100%;
     object-fit:cover;
@@ -73,14 +135,16 @@
     font-weight:bold;
     letter-spacing:2px;
     border-bottom:1px solid rgba(14,40,97,.18);
+    padding-left:12px; padding-right:12px;           /* fallback */
     padding-left: max(12px, env(safe-area-inset-left));
     padding-right:max(12px, env(safe-area-inset-right));
+    padding-top:calc(1.15rem + env(safe-area-inset-top, 0px));
   }
   @keyframes hue-slide {
     0%   { background-position:0% 50%; }
     100% { background-position:100% 50%; }
   }
-  header span {
+  header > span {   /* only the "Koala Spies Sydney" line, not the Sound button's label */
     color:rgba(14,40,97,.72);
     font-weight:300;
     display:block;
@@ -108,6 +172,8 @@
     display:inline-flex;
     align-items:center;
     gap:7px;
+    min-height:36px;
+    touch-action:manipulation;
     transition:transform .15s ease, opacity .15s ease;
   }
   .snd-toggle:hover{ opacity:.95; transform:translateY(-1px); }
@@ -137,11 +203,15 @@
     letter-spacing:.5px;
     line-height:1;
     transition:transform .15s ease, opacity .15s ease;
+    -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
+    min-height:36px;
+    touch-action:manipulation;
   }
   .qr-toggle:hover{ opacity:.95; transform:translateY(-1px); }
   .qr-toggle:active{ transform:translateY(0); }
   .qr-panel{
+    width:236px;                                    /* fallback */
     width:min(260px, calc(100vw - 24px));
     background:rgba(42,42,42,.92);
     border:1px solid var(--line);
@@ -163,6 +233,8 @@
   .qr-row{ display:flex; gap:8px; }
   .qr-input{
     flex:1;
+    min-width:0;
+    font-size:16px;                                 /* stops iPhones zooming in when tapped */
     padding:.55rem .65rem;
     border-radius:5px;
     border:1px solid #5a5a5a;
@@ -199,7 +271,7 @@
   }
   @media (max-width:520px){
     header{ padding-top:1.35rem; padding-bottom:1rem; font-size:1.25rem; }
-    header span{ font-size:.9rem; }
+    header > span{ font-size:.9rem; }
     .qr-wrap{ top:8px; left:8px; gap:8px; }
     .qr-toggle{ padding:.5rem .7rem; border-radius:11px; }
     .snd-wrap{ top:8px; right:8px; }
@@ -219,6 +291,7 @@
     color:var(--accent);
     letter-spacing:2px;
     margin-top:1rem;
+    font-size:1.7rem;                               /* fallback */
     font-size:clamp(1.4rem,2.5vw,2rem);
   }
   p {
@@ -269,8 +342,9 @@
   /* ===== How to play tile ===== */
   .how-scrim{
     position:fixed;
-    inset:0;
+    top:0; right:0; bottom:0; left:0;
     background:rgba(14,40,97,.45);
+    -webkit-backdrop-filter:blur(3px);
     backdrop-filter:blur(3px);
     display:flex;
     align-items:center;
@@ -284,16 +358,20 @@
     border:2px solid #c3cad2;
     border-radius:5px;
     box-shadow:0 18px 44px rgba(14,40,97,.28);
+    padding:28px;                                   /* fallback */
     padding:clamp(22px, 4vw, 34px);
     max-width:540px;
     width:100%;
     text-align:left;
     max-height:calc(100vh - 40px);
+    max-height:calc(100dvh - 40px);   /* iPhone/Android: keeps "Start playing" above the browser toolbar */
     overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
   }
   .how-tile h2{
     margin:0 0 4px;
     color:var(--accent);
+    font-size:1.4rem;                               /* fallback */
     font-size:clamp(1.25rem, 1.1rem + 0.8vw, 1.6rem);
     letter-spacing:1px;
   }
@@ -450,36 +528,61 @@
     text-align:center;
     background:var(--card);
     color:var(--muted);
-    padding:1rem 0;
+    padding:1rem 12px;
     border-top:1px solid var(--line);
     font-size:0.9rem;
     padding-left: max(12px, env(safe-area-inset-left));
     padding-right:max(12px, env(safe-area-inset-right));
     padding-bottom: max(12px, env(safe-area-inset-bottom));
   }
-  /* Responsive grid */
+  /* Responsive grid: 4 across on computers and tablets, 2 across on phones.
+     (3 across left stray cards at Level 2 = 16 cards and Level 3 = 20 cards.) */
   @media (max-width:900px){
-    #game{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+    #game{ width:100%; gap:12px; }
+    .card{ padding:14px 12px; }
   }
   @media (max-width:600px){
     #game{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; }
     .card { min-height:90px; font-size:1.05rem; padding:12px; }
     .level-btn{ font-size:.88rem; padding:.5rem .9rem; }
   }
+  @media (max-width:360px){
+    main{ padding-left:.6rem; padding-right:.6rem; }
+    .card{ font-size:.95rem; padding:10px 8px; min-height:84px; }
+    .level-btn{ font-size:.82rem; padding:.5rem .7rem; }
+  }
+  /* Phones on their side: 4 across and shorter cards so the board fits */
+  @media (max-height:500px) and (orientation:landscape){
+    #game{ grid-template-columns:repeat(4, minmax(0, 1fr)); }
+    .card{ min-height:70px; padding:10px; }
+    .how-tile li{ margin-bottom:6px; line-height:1.45; }
+  }
+  /* Touch screens: bigger tap targets and no "stuck" hover after a tap */
+  @media (hover:none){
+    .card:hover:not(.matched):not(.flipped){ background:#e2e6ea; border-color:#c3cad2; }
+    .level-btn:hover, .qr-toggle:hover, .snd-toggle:hover, .how-start:hover, .next-btn:hover, a.btn:hover{ transform:none; }
+    .level-btn, .next-btn, .how-start, .how-link, .reset-row a{ min-height:44px; }
+    .reset-row a{ display:inline-flex; align-items:center; }
+  }
+  .card, .level-btn, .next-btn, .how-start, a.btn{ touch-action:manipulation; }
+  .card:focus-visible, .level-btn:focus-visible, a.btn:focus-visible{ outline:3px solid var(--accent-2); outline-offset:2px; }
+  a.btn{ display:inline-block; min-height:44px; }
   /* Respect reduced motion */
   @media (prefers-reduced-motion: reduce){
     .card, a.btn, .qr-toggle, .level-btn, .next-btn{ transition:none; }
     .bg-wash{ animation:none; }
     header{ animation:none; }
+    .bg-video{ display:none; }
   }
 </style>
 </head>
 <body>
 
 <div class="bg-wash" aria-hidden="true"></div>
-<!-- Drop colour.mp4 into this folder and it plays here.
-     Until then the colour wash above shows instead. -->
-<video class="bg-video" autoplay muted loop playsinline aria-hidden="true">
+<!-- colour.mp4 plays here; the colour wash above shows while it loads.
+     x5-/webkit- attributes stop WeChat, QQ and older iPhones opening it full-screen. -->
+<video class="bg-video" autoplay muted loop playsinline webkit-playsinline
+       x5-playsinline x5-video-player-type="h5-page" aria-hidden="true" tabindex="-1">
   <source src="colour.mp4" type="video/mp4">
 </video>
 
@@ -739,6 +842,9 @@
   let levelIndex = 0;
   let first = null, second = null, lock = false, matchedPairs = 0, gridPairs = 6;
 
+  /* Analytics events (Google Analytics > Reports > Engagement > Events) */
+  function track(name, params){ try { if (typeof gtag === "function") gtag("event", name, params || {}); } catch (e) {} }
+
   function shuffle(arr){
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -845,18 +951,19 @@
             if (matchedPairs !== gridPairs) ColourSound.correct();
 
             if (matchedPairs === gridPairs) {
+              track("level_complete", { game: "colour_idioms", level: levelIndex + 1 });
               if (levelIndex < LEVELS.length - 1) {
                 ColourSound.fanfare(false);
                 statusEl.textContent = "Level complete. Ready for something harder?";
                 nextBtn.textContent = "Next level: " + LEVELS[levelIndex + 1].name.replace(" · ", " — ");
                 nextBtn.hidden = false;
-                nextBtn.focus();
+                nextBtn.focus({ preventScroll:true });
               } else {
                 ColourSound.fanfare(true);
                 statusEl.textContent = "Brilliant — you have finished all three levels.";
                 nextBtn.textContent = "Play Level 1 again";
                 nextBtn.hidden = false;
-                nextBtn.focus();
+                nextBtn.focus({ preventScroll:true });
               }
             }
           } else {
@@ -892,7 +999,8 @@
   nextBtn.addEventListener("click", function(){
     levelIndex = (levelIndex < LEVELS.length - 1) ? levelIndex + 1 : 0;
     renderGame();
-    game.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    try { game.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+    catch (e) { game.scrollIntoView(false); }
   });
 
   resetLink.addEventListener("click", function(e){
@@ -911,20 +1019,22 @@
     function show(){
       last = document.activeElement;
       scrim.hidden = false;
-      start.focus();
+      scrim.querySelector(".how-tile").scrollTop = 0;
+      start.focus({ preventScroll:true });
     }
     function hide(){
       scrim.hidden = true;
-      if (last && last.focus) last.focus();
+      if (last && last.focus) last.focus({ preventScroll:true });
     }
-    start.addEventListener("click", hide);
+    start.addEventListener("click", function(){ hide(); track("game_start", { game: "colour_idioms" }); });
     open.addEventListener("click", show);
     scrim.addEventListener("click", function(e){ if (e.target === scrim) hide(); });
     document.addEventListener("keydown", function(e){
       if (e.key === "Escape" && !scrim.hidden) hide();
     });
-    /* the tile is visible on load, so put the keyboard on Start straight away */
-    if (!scrim.hidden) start.focus();
+    /* the tile is visible on load, so put the keyboard on Start straight away
+       (without scrolling, so it opens at the top on short screens) */
+    if (!scrim.hidden) start.focus({ preventScroll:true });
   })();
 
   /* ===== QR generator logic ===== */
@@ -936,6 +1046,14 @@
 
   function ensureQrLibReady(){
     return typeof window.QRCode !== "undefined";
+  }
+  /* The QR library can be blocked or slow on some networks (e.g. mainland China) */
+  function qrUnavailable(){
+    qrCodeEl.innerHTML = "";
+    var m = document.createElement("span");
+    m.style.cssText = "color:#333;font-size:.85rem;line-height:1.4";
+    m.textContent = "QR code unavailable on this network. Share the page address instead.";
+    qrCodeEl.appendChild(m);
   }
   function makeQr(value){
     const text = (value && value.trim()) ? value.trim() : window.location.href;
@@ -954,7 +1072,7 @@
     if (ensureQrLibReady()) {
       makeQr(qrText.value);
     } else {
-      setTimeout(function(){ if (ensureQrLibReady()) makeQr(qrText.value); }, 250);
+      setTimeout(function(){ if (ensureQrLibReady()) makeQr(qrText.value); else qrUnavailable(); }, 1200);
     }
   }
   function closeQr(){
@@ -966,7 +1084,7 @@
     else openQr();
   });
   qrMake.addEventListener("click", function(){
-    if (ensureQrLibReady()) makeQr(qrText.value);
+    if (ensureQrLibReady()) makeQr(qrText.value); else qrUnavailable();
   });
   qrText.addEventListener("keydown", function(e){
     if (e.key === "Enter") {
