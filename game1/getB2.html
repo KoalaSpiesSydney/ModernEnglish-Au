@@ -3,11 +3,37 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Expressions with Get – Matching Game | Modern English AU</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="renderer" content="webkit" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#1c1c1c" />
+
+<!-- Google Search Console verification (same token as modernenglish.au) -->
+<meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
+
+<!-- Google tag (gtag.js) – same Analytics property as your other games -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+
+<title>Expressions with Get – Matching Game (B2) | Modern English Australia</title>
+<meta name="description" content="Free B2 upper-intermediate matching game for ESL: match advanced get expressions and phrasal verbs (get the hang of, get away with, get by on, get across) to their meanings, then practise with listening gap-fills. Modern English Australia · Koala Spies Sydney." />
+<meta property="og:title" content="Expressions with Get – Matching Game (B2) | Modern English Australia" />
+<meta property="og:description" content="Match advanced get expressions and phrasal verbs to their meanings, then listen and fill the gaps." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Modern English Australia" />
+<meta property="og:url" content="https://modernenglish.au/game1/getB2.html" />
+<link rel="canonical" href="https://modernenglish.au/game1/getB2.html" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<!-- Loaded non-blocking so the page still opens fast where Google Fonts is slow or blocked (e.g. mainland China); falls back to Georgia -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet"></noscript>
 
 <style>
 :root{
@@ -22,6 +48,7 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
 
 body{
   font-family:"Newsreader", Georgia, serif;
@@ -31,17 +58,21 @@ body{
   flex-direction:column;
   min-height:100vh;
   min-height:100dvh;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
 }
 
 /* ===== GIF background ===== */
 .bg-gif{
   position:fixed;
+  top:0;right:0;bottom:0;left:0;
   inset:0;
   z-index:-2;
   background:url("getexpressions.gif") center / cover no-repeat;
 }
 .bg-overlay{
   position:fixed;
+  top:0;right:0;bottom:0;left:0;
   inset:0;
   z-index:-1;
   background:rgba(245,245,245,.78);
@@ -88,8 +119,10 @@ header span{
   position:fixed;
   left:max(14px, env(safe-area-inset-left));
   top:70px;
+  top:calc(max(14px, env(safe-area-inset-top)) + 56px);
   z-index:9999;
   width:240px;
+  max-width:calc(100% - 28px);
   background:rgba(255,255,255,.96);
   border:1px solid rgba(0,0,0,.12);
   border-radius:16px;
@@ -114,6 +147,10 @@ header span{
 .qr-code{
   width:200px;
   height:200px;
+  max-width:100%;
+  font-size:.8rem;
+  padding:.5rem;
+  text-align:center;
   margin:0 auto;
   display:flex;
   align-items:center;
@@ -141,6 +178,18 @@ header span{
 @media (hover:hover){
   .home-btn:hover{ background:#ffffff; }
   .qr-toggle:hover{ background:#ffffff; }
+}
+
+.level-badge{
+  display:inline-block;
+  background:#6a1b9a;
+  color:#fff;
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:2px;
+  padding:3px 10px;
+  border-radius:999px;
+  margin-top:.5rem;
 }
 
 /* ===== Main ===== */
@@ -173,6 +222,7 @@ p{
   justify-content:center;
   gap:.8rem;
   margin-bottom:1.2rem;
+  flex-wrap:wrap;
 }
 
 button.btn{
@@ -187,17 +237,18 @@ button.btn{
   transition:all .25s ease;
   font-family:inherit;
 }
-button.btn:hover{
+@media(hover:hover){ button.btn:hover{
   background:linear-gradient(90deg,var(--accent),#ff9b3d);
   transform:translateY(-2px);
-}
+} }
 
 /* ===== Game Grid ===== */
 #game{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
   gap:12px;
-  width:min(100%, 420px);
+  width:100%;
+  max-width:420px;
   margin:0 auto;
 }
 
@@ -218,20 +269,42 @@ button.btn:hover{
   transition:background .3s,color .3s,transform .2s;
   box-shadow:0 3px 6px rgba(0,0,0,.12);
   word-break:break-word;
+  overflow-wrap:anywhere;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  -webkit-appearance:none;
+  appearance:none;
+  font-family:inherit;
+  width:100%;
 }
+.card:focus-visible{ outline:3px solid #ff9b3d; outline-offset:2px; }
 
 .card.flipped{
-  background:var(--accent);
-  color:#000;
+  color:#1e1e1e;
   transform:scale(1.04);
 }
 
+/* white text on the darker candy colours */
 .card.matched{
-  color:#000;
+  color:#fff;
+  font-weight:600;
   cursor:default;
 }
 
+/* the spare card with no partner */
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
+.card.shake{ -webkit-animation:shake .35s ease; animation:shake .35s ease; }
+
 #status{
+  color:var(--accent);
   margin-top:1.2rem;
   font-size:1.05rem;
   font-weight:600;
@@ -240,7 +313,8 @@ button.btn:hover{
 
 /* ===== Teacher Notes ===== */
 .notes{
-  width:min(100%, 760px);
+  width:100%;
+  max-width:760px;
   margin:2.2rem auto 0;
   background:rgba(255,255,255,.9);
   border:1px solid rgba(0,0,0,.12);
@@ -264,7 +338,8 @@ button.btn:hover{
 
 /* ===== Gap Fill / write from dictation section ===== */
 .gapfill-wrap{
-  width:min(100%, 760px);
+  width:100%;
+  max-width:760px;
   margin:2.2rem auto 0;
   text-align:center;
 }
@@ -283,31 +358,108 @@ button.btn:hover{
 .gapfill-list{
   display:grid;
   grid-template-columns:1fr;
-  gap:12px;
+  gap:0;
 }
 
 .gapfill-item{
-  background:rgba(255,255,255,.9);
-  border:1px solid rgba(0,0,0,.12);
-  border-radius:14px;
-  padding:14px;
+  background:none;
+  border:none;
+  border-bottom:1px solid rgba(42,42,42,.18);
+  border-radius:0;
+  padding:1.2rem 0 1.4rem;
   text-align:center;
 }
+.gapfill-item:last-child{ border-bottom:none; }
 
 .gapfill-item p{
   margin:0 auto .85rem;
   max-width:680px;
 }
 
-.gapfill-audio{
-  display:block;
-  margin:8px auto 10px;
-  width:min(100%, 320px);
+.gapfill-audio{ display:none; }
+
+/* ===== Minimal audio player ===== */
+.mini-player{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  width:100%;
+  max-width:320px;
+  margin:.4rem auto 1rem;
+}
+.mp-btn{
+  -webkit-appearance:none;
+  appearance:none;
+  flex:0 0 auto;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:1.5px solid var(--card);
+  background:rgba(255,255,255,.75);
+  color:var(--card);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:background .2s ease, color .2s ease;
+}
+.mp-btn svg{ width:14px; height:14px; fill:currentColor; }
+.mp-btn .i-pause{ display:none; }
+.mini-player.playing .mp-btn .i-play{ display:none; }
+.mini-player.playing .mp-btn .i-pause{ display:block; }
+.mini-player.playing .mp-btn{ background:var(--card); color:#ff7a1a; }
+@media(hover:hover){ .mp-btn:hover{ background:var(--card); color:#ff7a1a; } }
+.mp-track{
+  position:relative;
+  flex:1 1 auto;
+  height:24px;
+  cursor:pointer;
+  touch-action:none;
+}
+.mp-track::before{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:50%;
+  height:2px;
+  margin-top:-1px;
+  background:rgba(42,42,42,.22);
+}
+.mp-fill{
+  position:absolute;
+  left:0; top:50%;
+  height:2px;
+  margin-top:-1px;
+  width:0;
+  background:var(--card);
+}
+.mp-knob{
+  position:absolute;
+  top:50%;
+  left:0;
+  width:10px; height:10px;
+  margin:-5px 0 0 -5px;
+  border-radius:50%;
+  background:var(--card);
+}
+.mp-time{
+  flex:0 0 auto;
+  min-width:2.6em;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:.75rem;
+  letter-spacing:1px;
+  color:#5a5a5a;
+  font-variant-numeric:tabular-nums;
+  text-align:right;
 }
 
 .gapfill-input{
   display:block;
-  width:min(100%, 280px);
+  width:100%;
+  max-width:280px;
+  font-size:16px !important; /* stops iPhones zooming in */
   margin:0 auto;
   padding:.7rem .9rem;
   border:2px solid rgba(46,14,91,.18);
@@ -342,10 +494,10 @@ button.btn:hover{
   box-shadow:0 2px 6px rgba(0,0,0,.18);
   transition:all .2s ease;
 }
-.gapfill-btn:hover{
+@media(hover:hover){ .gapfill-btn:hover{
   background:linear-gradient(90deg,var(--accent),#ff9b3d);
   transform:translateY(-2px);
-}
+} }
 
 .gapfill-feedback{
   min-height:1.5em;
@@ -373,29 +525,309 @@ button.btn:hover{
   justify-content:center;
   gap:1rem;
   margin-top:2rem;
+  flex-wrap:wrap;
 }
 
 a.btn{
-  background:var(--accent);
-  color:#fff;
+  display:inline-block;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  background:rgba(255,255,255,.75);
+  color:var(--card);
+  font-size:.8rem;
   font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
   text-decoration:none;
-  padding:.8rem 1.4rem;
-  border-radius:45px;
-  box-shadow:0 2px 6px rgba(0,0,0,.25);
-  transition:all .25s ease;
+  padding:.75rem 1.4rem;
+  border:1.5px solid var(--card);
+  border-radius:4px;
+  box-shadow:none;
+  transition:background .2s ease, color .2s ease;
 }
-a.btn:hover{
-  background:linear-gradient(90deg,var(--accent),#ff9b3d);
-  transform:translateY(-2px);
+a.btn .arrow{ display:inline-block; margin-left:.4rem; color:#b8470b; transition:transform .2s ease, color .2s ease; }
+@media(hover:hover){
+  a.btn:hover{ background:var(--card); color:#ff7a1a; }
+  a.btn:hover .arrow{ color:#ff7a1a; transform:translateX(3px); }
 }
+a.btn:active{ background:var(--card); color:#ff7a1a; }
+a.btn:focus-visible, button:focus-visible{ outline:3px solid #ff9b3d; outline-offset:2px; }
+
+/* ═══ Minimal, on-brand buttons (override the older pill styles) ═══ */
+:root{ --brand-orange:#ff7a1a; --btn-font:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; }
+
+button.btn,
+.speak-btn,
+.gapfill-btn,
+.qr-toggle,
+.home-btn{
+  font-family:var(--btn-font);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  border-radius:4px;
+  box-shadow:none;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+/* New Round – outline */
+button.btn{
+  background:rgba(255,255,255,.75);
+  color:var(--card);
+  border:1.5px solid var(--card);
+  padding:.75rem 1.4rem;
+}
+/* Listen – outline with the speaker icon */
+.speak-btn{
+  background:rgba(255,255,255,.75);
+  color:var(--card);
+  border:1.5px solid var(--card);
+  padding:.55rem 1.1rem;
+}
+.speak-btn.speaking{
+  background:var(--card);
+  color:var(--brand-orange);
+  -webkit-animation:none;
+  animation:none;
+}
+/* Submit – the one solid button; Reveal Answer – quiet outline */
+.gapfill-btn{
+  padding:.65rem 1.1rem;
+  border:1.5px solid var(--card);
+}
+.gapfill-btn.gap-submit{ background:var(--card); color:#fff; }
+.gapfill-btn.gap-reveal{ background:rgba(255,255,255,.75); color:var(--card); }
+
+/* Floating QR + Home */
+.qr-toggle,
+.home-btn{
+  background:rgba(255,255,255,.92);
+  color:var(--card);
+  border:1.5px solid var(--card);
+}
+.qr-toggle{ font-size:.72rem; letter-spacing:1px; }
+.home-btn{ padding:.7rem 1rem; }
+
+@media(hover:hover){
+  button.btn:hover,
+  .speak-btn:hover,
+  .gapfill-btn:hover,
+  .qr-toggle:hover,
+  .home-btn:hover{
+    background:var(--card);
+    color:var(--brand-orange);
+    border-color:var(--card);
+    transform:none;
+  }
+}
+button.btn:active, .speak-btn:active, .gapfill-btn:active, .qr-toggle:active, .home-btn:active{
+  background:var(--card); color:var(--brand-orange);
+}
+
+/* Voice picker – matching thin outline */
+.voice-select{
+  font-family:var(--btn-font);
+  font-size:.85rem;
+  border:1.5px solid var(--card);
+  border-radius:4px;
+  background:rgba(255,255,255,.9);
+  padding:.45rem .7rem;
+}
+
+.gapfill-input{ border-radius:4px; border:1.5px solid rgba(42,42,42,.35); }
+.gapfill-input:focus{ border-color:var(--card); box-shadow:0 0 0 3px rgba(255,122,26,.18); }
+
+/* ===== Sound button (minimal) ===== */
+.btn-sound{
+  -webkit-appearance:none;
+  appearance:none;
+  background:none;
+  border:none;
+  box-shadow:none;
+  color:var(--accent);
+  padding:.4rem .6rem;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  opacity:.85;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+@media(hover:hover){ .btn-sound:hover{ opacity:1; } }
+.btn-sound[aria-pressed="false"]{ opacity:.5; }
+
+/* ===== Candy pop effects ===== */
+.card.pop{
+  -webkit-animation:jelly .5s ease;
+  animation:jelly .5s ease;
+}
+@keyframes jelly{
+  0%{transform:scale(1,1)}
+  30%{transform:scale(1.12,.88)}
+  50%{transform:scale(.9,1.12)}
+  70%{transform:scale(1.06,.95)}
+  100%{transform:scale(1,1)}
+}
+@-webkit-keyframes jelly{
+  0%{-webkit-transform:scale(1,1)}
+  30%{-webkit-transform:scale(1.12,.88)}
+  50%{-webkit-transform:scale(.9,1.12)}
+  70%{-webkit-transform:scale(1.06,.95)}
+  100%{-webkit-transform:scale(1,1)}
+}
+.card.win{
+  -webkit-animation:cardSpin .9s cubic-bezier(.3,.7,.3,1) var(--wd,0s) 2, sparkleGlow 1.2s ease-in-out var(--wd,0s) 3;
+  animation:cardSpin .9s cubic-bezier(.3,.7,.3,1) var(--wd,0s) 2, sparkleGlow 1.2s ease-in-out var(--wd,0s) 3;
+}
+#game{ -webkit-perspective:900px; perspective:900px; }
+@keyframes cardSpin{
+  0%{transform:rotateY(0) scale(1)}
+  50%{transform:rotateY(180deg) scale(1.08)}
+  100%{transform:rotateY(360deg) scale(1)}
+}
+@-webkit-keyframes cardSpin{
+  0%{-webkit-transform:rotateY(0) scale(1)}
+  50%{-webkit-transform:rotateY(180deg) scale(1.08)}
+  100%{-webkit-transform:rotateY(360deg) scale(1)}
+}
+@keyframes sparkleGlow{
+  0%,100%{box-shadow:0 0 0 3px #4dabf7, 0 0 12px rgba(77,171,247,.6)}
+  50%{box-shadow:0 0 0 4px #ffe066, 0 0 34px 10px rgba(255,224,102,.9)}
+}
+@-webkit-keyframes sparkleGlow{
+  0%,100%{box-shadow:0 0 0 3px #4dabf7, 0 0 12px rgba(77,171,247,.6)}
+  50%{box-shadow:0 0 0 4px #ffe066, 0 0 34px 10px rgba(255,224,102,.9)}
+}
+@keyframes rainbowGlow{
+  0%  {box-shadow:0 0 0 3px #ff4fa3, 0 0 22px 4px rgba(255,79,163,.8)}
+  25% {box-shadow:0 0 0 3px #ffd43b, 0 0 22px 4px rgba(255,212,59,.8)}
+  50% {box-shadow:0 0 0 3px #3ddc97, 0 0 22px 4px rgba(61,220,151,.8)}
+  75% {box-shadow:0 0 0 3px #4dabf7, 0 0 22px 4px rgba(77,171,247,.8)}
+  100%{box-shadow:0 0 0 3px #ff4fa3, 0 0 22px 4px rgba(255,79,163,.8)}
+}
+@-webkit-keyframes rainbowGlow{
+  0%  {box-shadow:0 0 0 3px #ff4fa3, 0 0 22px 4px rgba(255,79,163,.8)}
+  25% {box-shadow:0 0 0 3px #ffd43b, 0 0 22px 4px rgba(255,212,59,.8)}
+  50% {box-shadow:0 0 0 3px #3ddc97, 0 0 22px 4px rgba(61,220,151,.8)}
+  75% {box-shadow:0 0 0 3px #4dabf7, 0 0 22px 4px rgba(77,171,247,.8)}
+  100%{box-shadow:0 0 0 3px #ff4fa3, 0 0 22px 4px rgba(255,79,163,.8)}
+}
+.combo{
+  position:fixed;
+  left:50%;
+  top:42%;
+  z-index:9500;
+  pointer-events:none;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-weight:900;
+  font-size:clamp(2.2rem,9vw,4.2rem);
+  letter-spacing:1px;
+  color:#fff;
+  -webkit-text-stroke:2px #1c4fb0;
+  text-shadow:0 4px 0 #1c4fb0, 0 8px 18px rgba(28,79,176,.45);
+  -webkit-transform:translate(-50%,-50%) scale(0);
+  transform:translate(-50%,-50%) scale(0);
+  -webkit-animation:comboPop 1.4s cubic-bezier(.2,1.6,.4,1) forwards;
+  animation:comboPop 1.4s cubic-bezier(.2,1.6,.4,1) forwards;
+  white-space:nowrap;
+}
+.combo.big{ font-size:clamp(2.6rem,11vw,5.2rem); color:#8fe3ff; }
+@keyframes comboPop{
+  0%{transform:translate(-50%,-50%) scale(0) rotate(-8deg);opacity:1}
+  35%{transform:translate(-50%,-50%) scale(1.1) rotate(3deg);opacity:1}
+  75%{transform:translate(-50%,-60%) scale(1) rotate(0);opacity:1}
+  100%{transform:translate(-50%,-80%) scale(.9);opacity:0}
+}
+@-webkit-keyframes comboPop{
+  0%{-webkit-transform:translate(-50%,-50%) scale(0) rotate(-8deg);opacity:1}
+  35%{-webkit-transform:translate(-50%,-50%) scale(1.1) rotate(3deg);opacity:1}
+  75%{-webkit-transform:translate(-50%,-60%) scale(1) rotate(0);opacity:1}
+  100%{-webkit-transform:translate(-50%,-80%) scale(.9);opacity:0}
+}
+.candy-layer{
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  z-index:9400;
+  pointer-events:none;
+  overflow:hidden;
+}
+.candy{
+  position:absolute;
+  top:-50px;
+  width:26px;height:26px;
+  margin:0 0 0 -13px;
+  -webkit-animation:candyRain var(--dur,2.8s) cubic-bezier(.45,.05,.55,.95) var(--delay,0s) forwards;
+  animation:candyRain var(--dur,2.8s) cubic-bezier(.45,.05,.55,.95) var(--delay,0s) forwards;
+  opacity:0;
+}
+.candy.lolly{ width:24px;height:24px;border-radius:50%;
+  background:repeating-conic-gradient(from 0deg, var(--c1) 0 25deg, #fff 25deg 45deg); box-shadow:inset 0 0 0 2px rgba(0,0,0,.08); }
+.candy.lolly::after{ content:""; position:absolute; left:50%; top:22px; width:3px; height:22px; margin-left:-1.5px; background:#f1f3f5; border-radius:2px; box-shadow:0 0 0 1px rgba(0,0,0,.06); }
+.candy.sprinkle{ width:6px;height:18px;margin-left:-3px;border-radius:3px;background:var(--c1); }
+.candy.gumdrop{ width:24px;height:20px;border-radius:50% 50% 12% 12%; background:radial-gradient(circle at 40% 30%, rgba(255,255,255,.7) 0 12%, var(--c1) 35%, var(--c2) 100%); }
+@keyframes candyRain{
+  0%{opacity:0; transform:translate(0,0) rotate(0)}
+  8%{opacity:1}
+  25%{transform:translate(var(--sway),22vh) rotate(calc(var(--rot) * .25))}
+  50%{transform:translate(calc(var(--sway) * -1),50vh) rotate(calc(var(--rot) * .5))}
+  75%{transform:translate(var(--sway),78vh) rotate(calc(var(--rot) * .75))}
+  90%{opacity:1}
+  100%{opacity:0; transform:translate(0,108vh) rotate(var(--rot))}
+}
+@-webkit-keyframes candyRain{
+  0%{opacity:0; -webkit-transform:translate(0,0) rotate(0)}
+  8%{opacity:1}
+  25%{-webkit-transform:translate(var(--sway),22vh) rotate(calc(var(--rot) * .25))}
+  50%{-webkit-transform:translate(calc(var(--sway) * -1),50vh) rotate(calc(var(--rot) * .5))}
+  75%{-webkit-transform:translate(var(--sway),78vh) rotate(calc(var(--rot) * .75))}
+  90%{opacity:1}
+  100%{opacity:0; -webkit-transform:translate(0,108vh) rotate(var(--rot))}
+}
+.candy.ball{ border-radius:50%; background:radial-gradient(circle at 35% 30%, #fff 0 12%, var(--c1) 30%, var(--c2) 100%); box-shadow:0 2px 4px rgba(0,0,0,.2); }
+.candy.bean{ width:34px;height:20px;margin:-10px 0 0 -17px;border-radius:50%; background:radial-gradient(ellipse at 35% 30%, #fff 0 10%, var(--c1) 30%, var(--c2) 100%); }
+.candy.stripe{ width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%; background:repeating-conic-gradient(var(--c1) 0 30deg, #fff 30deg 60deg); box-shadow:inset 0 0 0 2px rgba(0,0,0,.08); }
+.candy.wrap{ width:24px;height:24px;border-radius:50%; background:radial-gradient(circle at 35% 30%, #fff 0 12%, var(--c1) 30%, var(--c2) 100%); }
+.candy.wrap::before,.candy.wrap::after{
+  content:""; position:absolute; top:5px; width:0; height:0;
+  border-top:7px solid transparent; border-bottom:7px solid transparent;
+}
+.candy.wrap::before{ left:-10px; border-right:12px solid var(--c1); }
+.candy.wrap::after{ right:-10px; border-left:12px solid var(--c1); }
+.candy.star{ width:30px;height:30px;margin:-15px 0 0 -15px;
+  background:var(--c1);
+  -webkit-clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+@keyframes candyBurst{
+  0%{opacity:1; transform:translate(0,0) scale(.3) rotate(0)}
+  30%{opacity:1; transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(calc(var(--rot) * .4))}
+  100%{opacity:0; transform:translate(calc(var(--dx) * 1.25), 75vh) scale(1) rotate(var(--rot))}
+}
+@-webkit-keyframes candyBurst{
+  0%{opacity:1; -webkit-transform:translate(0,0) scale(.3) rotate(0)}
+  30%{opacity:1; -webkit-transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(calc(var(--rot) * .4))}
+  100%{opacity:0; -webkit-transform:translate(calc(var(--dx) * 1.25), 75vh) scale(1) rotate(var(--rot))}
+}
+#status.win{
+  font-size:1.25rem;
+  color:#1c4fb0;
+}
+@media (prefers-reduced-motion:reduce){
+  .card.pop, .card.win{ -webkit-animation:none; animation:none; box-shadow:0 0 0 3px #ff4fa3, 0 0 18px rgba(255,79,163,.6); }
+  .candy-layer{ display:none; }
+  .card.win{ -webkit-animation:sparkleGlow 1.2s ease-in-out 3; animation:sparkleGlow 1.2s ease-in-out 3; }
+  .combo{ -webkit-animation-duration:.01s; animation-duration:.01s; }
+}
+
 
 /* ===== Footer ===== */
 footer{
   background:var(--card);
   color:var(--muted);
   text-align:center;
-  padding:1rem 0 calc(1rem + env(safe-area-inset-bottom));
+  padding:1rem 12px calc(1rem + env(safe-area-inset-bottom));
   border-top:1px solid var(--line);
   font-size:.9rem;
 }
@@ -403,7 +835,7 @@ footer{
 /* ===== Tablet ===== */
 @media (max-width:900px){
   #game{
-    width:min(100%, 390px);
+    max-width:390px;
     gap:10px;
   }
   .card{
@@ -415,13 +847,19 @@ footer{
 
 /* ===== Phones / iPhones ===== */
 @media(max-width:600px){
+  header{
+    padding:4.4rem 1rem 1rem;
+    font-size:1.05rem;
+  }
   main{
     padding:1.5rem .8rem calc(2.4rem + env(safe-area-inset-bottom));
   }
   #game{
-    width:min(100%, 312px);
+    max-width:340px;
     gap:8px;
   }
+  .links{ flex-direction:column; align-items:center; }
+  a.btn{ width:100%; max-width:320px; text-align:center; }
   .card{
     min-height:68px;
     font-size:.75rem;
@@ -437,66 +875,54 @@ footer{
     width:100%;
   }
 }
+@media(max-width:360px){
+  #game{ gap:6px; }
+  .card{ min-height:64px; font-size:.7rem; padding:6px; }
+}
 </style>
 </head>
 
 <body>
 
-<div class="bg-gif"></div>
-<div class="bg-overlay"></div>
+<div class="bg-gif" aria-hidden="true"></div>
+<div class="bg-overlay" aria-hidden="true"></div>
 
-<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR">QR</button>
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR code for this page" aria-expanded="false" aria-controls="qrPanel">QR</button>
 <div class="qr-panel" id="qrPanel" aria-label="QR code panel">
   <div class="qr-title">Open this page on your phone</div>
   <div class="qr-code" id="qrCode"></div>
   <div class="qr-url" id="qrUrl"></div>
 </div>
 
-<a class="home-btn" href="http://modernenglish.au/Microlessons&Games.html">Home</a>
+<a class="home-btn" href="https://modernenglish.au/">Home</a>
 
 <header>
-  MODERN ENGLISH AU
-  <span>Koala Spies Sydney</span>
+  MODERN ENGLISH AUSTRALIA
+  <span>KOALA SPIES SYDNEY</span>
 </header>
 
 <main>
+  <div class="level-badge">B2 UPPER-INTERMEDIATE</div>
   <h1>Expressions with Get – Matching Game</h1>
   <p>
     Flip two cards to match each expression with its meaning.
-    Each round uses <strong>9 cards</strong> selected from the full set.
+    Each round uses <strong>9 cards</strong>: four pairs and one spare card with no partner.
   </p>
 
   <div class="controls">
-    <button class="btn" id="newRoundBtn">New Round</button>
+    <button class="btn" id="newRoundBtn" type="button">New Round ↻</button>
+  </div>
+  <div class="controls" style="margin-top:-.6rem">
+    <button type="button" class="btn-sound" id="soundBtn" aria-pressed="true" aria-label="Sound effects on">🔊 Sound on</button>
   </div>
 
-  <div id="game"></div>
-  <div id="status"></div>
+  <div id="game" aria-label="Matching cards"></div>
+  <div id="status" role="status" aria-live="polite"></div>
 
   <details class="notes">
-    <summary>Teacher Notes / Full Expression List</summary>
-    <ul>
-      <li><strong>get the impression (that…)</strong> – believe something based on clues</li>
-      <li><strong>get the chance to…</strong> – have an opportunity</li>
-      <li><strong>get the hang of something</strong> – learn how to do something well</li>
-      <li><strong>get permission to…</strong> – receive approval</li>
-      <li><strong>get the point</strong> – understand the main idea</li>
-      <li><strong>get the joke</strong> – understand the humour</li>
-      <li><strong>get the most out of something</strong> – use something effectively</li>
-      <li><strong>get something done</strong> – arrange for something to be completed</li>
-      <li><strong>get someone’s attention</strong> – make someone notice</li>
-      <li><strong>get something straight</strong> – clarify information</li>
-      <li><strong>get ahead</strong> – make progress, succeed</li>
-      <li><strong>get around to (doing)</strong> – finally do something you delayed</li>
-      <li><strong>get away with (something)</strong> – avoid punishment</li>
-      <li><strong>get through to (someone)</strong> – make someone understand</li>
-      <li><strong>get over with (something)</strong> – finish something unpleasant</li>
-      <li><strong>get by on (something)</strong> – survive with limited resources</li>
-      <li><strong>get into (something)</strong> – become interested or involved</li>
-      <li><strong>get out of (doing something)</strong> – avoid doing something</li>
-      <li><strong>get back at (someone)</strong> – take revenge</li>
-      <li><strong>get across (an idea)</strong> – communicate clearly</li>
-    </ul>
+    <summary>Teacher Notes / Full Expression List (B2)</summary>
+    <p class="notes-intro" style="font-size:.9rem;color:#5a5a5a;margin:.4rem 0 0;max-width:none">This list is built from the game itself, so it always matches the cards.</p>
+    <ul id="notesList"></ul>
   </details>
 
   <section class="gapfill-wrap" aria-labelledby="gapfillTitle">
@@ -509,7 +935,7 @@ footer{
 
       <article class="gapfill-item" data-answer="get away with it">
         <p>1) Have you ever committed a crime? Did you ______?</p>
-        <audio controls class="gapfill-audio">
+        <audio preload="metadata" class="gapfill-audio">
           <source src="Get1.mp3" type="audio/mpeg">
         </audio>
         <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
@@ -517,13 +943,13 @@ footer{
           <button type="button" class="gapfill-btn gap-submit">Submit</button>
           <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
         </div>
-        <div class="gapfill-feedback"></div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
         <div class="gapfill-answer">Answer: get away with it</div>
       </article>
 
       <article class="gapfill-item" data-answer="get over it">
         <p>2) Have you ever had your heart broken? Did you ______?</p>
-        <audio controls class="gapfill-audio">
+        <audio preload="metadata" class="gapfill-audio">
           <source src="Get2.mp3" type="audio/mpeg">
         </audio>
         <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
@@ -531,13 +957,13 @@ footer{
           <button type="button" class="gapfill-btn gap-submit">Submit</button>
           <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
         </div>
-        <div class="gapfill-feedback"></div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
         <div class="gapfill-answer">Answer: get over it</div>
       </article>
 
       <article class="gapfill-item" data-answer="get by on">
         <p>3) How much money do you ______ each day?</p>
-        <audio controls class="gapfill-audio">
+        <audio preload="metadata" class="gapfill-audio">
           <source src="Get3.mp3" type="audio/mpeg">
         </audio>
         <input class="gapfill-input" type="text" placeholder="Type the missing phrase">
@@ -545,7 +971,7 @@ footer{
           <button type="button" class="gapfill-btn gap-submit">Submit</button>
           <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
         </div>
-        <div class="gapfill-feedback"></div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
         <div class="gapfill-answer">Answer: get by on</div>
       </article>
 
@@ -553,12 +979,13 @@ footer{
   </section>
 
   <div class="links">
-    <a href="http://modernenglish.au/Microlessons%26Games.html" class="btn">Home</a>
+    <a href="https://modernenglish.au/vocabularygames.html" class="btn">More Vocabulary Games<span class="arrow" aria-hidden="true">→</span></a>
+    <a href="https://modernenglish.au/" class="btn">Home<span class="arrow" aria-hidden="true">→</span></a>
   </div>
 </main>
 
 <footer>
-  © Modern English AU · All Rights Reserved
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
@@ -578,6 +1005,12 @@ footer{
     urlLabel.textContent = url;
     box.innerHTML = "";
 
+    if(typeof QRCode === "undefined"){
+      box.textContent = "QR unavailable on this connection – copy the link below.";
+      made = true;
+      return;
+    }
+
     new QRCode(box, {
       text: url,
       width: 200,
@@ -591,6 +1024,7 @@ footer{
   toggle.addEventListener("click", () => {
     const open = panel.style.display === "block";
     panel.style.display = open ? "none" : "block";
+    toggle.setAttribute("aria-expanded", open ? "false" : "true");
     if(!open && !made) make();
   });
 
@@ -600,6 +1034,172 @@ footer{
     if(!inside) panel.style.display = "none";
   });
 })();
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   CANDY SOUNDS — made in the browser, no audio files needed.
+   pop (turn a card) · sparkle chime that climbs with each match in a row ·
+   soft boing (no match) · fanfare + fizz (round complete) ·
+   a deep voice cheers "Sweet!", "Tasty!", "Delicious!" for streaks and wins.
+   ══════════════════════════════════════════════════════════════════════ */
+var CandySFX = (function(){
+  var ctx = null, on = true;
+  try{ if(localStorage.getItem("candySfx") === "off") on = false; }catch(e){}
+
+  function ac(){
+    if(!on) return null;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return null;
+    if(!ctx){ try{ ctx = new AC(); }catch(e){ return null; } }
+    if(ctx.state === "suspended" && ctx.resume) ctx.resume();
+    return ctx;
+  }
+  function sweep(c, t, f1, f2, dur, vol, type){
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(f1, t);
+    o.frequency.exponentialRampToValueAtTime(f2, t + dur * 0.8);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  function bell(c, t, f, dur, vol){
+    sweep(c, t, f, f, dur, vol, "sine");
+    sweep(c, t, f * 2.01, f * 2.01, dur * 0.6, vol * 0.35, "sine");
+    sweep(c, t, f * 3, f * 3, dur * 0.3, vol * 0.12, "triangle");
+  }
+
+  // Turning a card: a bubblegum "plop" (drops in pitch – the A1 page rises)
+  function pop(){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    var base = 880 + Math.random() * 80;
+    sweep(c, t, base, base * 0.42, 0.12, 0.26, "sine");
+    sweep(c, t, 2600, 1800, 0.02, 0.05, "square");
+  }
+
+  // Match: a xylophone run – each match in a row climbs a little higher
+  var SCALE = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21];
+  function xylo(c, t, f, vol){
+    sweep(c, t, f, f, 0.28, vol, "triangle");
+    sweep(c, t, f * 4, f * 4, 0.06, vol * 0.25, "sine");
+  }
+  function match(streak){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    var step = SCALE[Math.min(streak, SCALE.length - 1)];
+    var root = 587.33 * Math.pow(2, step / 12);
+    [1, 1.122, 1.335, 1.498, 2].forEach(function(m, i){ xylo(c, t + i * 0.055, root * m, 0.16); });
+    bell(c, t + 0.3, root * 2, 0.5, 0.06);
+  }
+
+  // No match: a soft, jelly "boing" going down
+  function miss(){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    var o = c.createOscillator(), g = c.createGain(), lfo = c.createOscillator(), lg = c.createGain();
+    o.type = "sine";
+    o.frequency.setValueAtTime(340, t);
+    o.frequency.exponentialRampToValueAtTime(150, t + 0.35);
+    lfo.frequency.value = 18; lg.gain.value = 22;
+    lfo.connect(lg); lg.connect(o.frequency);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.22, t + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+    o.connect(g); g.connect(c.destination);
+    o.start(t); lfo.start(t); o.stop(t + 0.45); lfo.stop(t + 0.45);
+  }
+
+  // Round complete: a bouncy xylophone tune, then bubbles rising
+  function win(){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime + 0.05;
+    var tune = [[783.99,0],[1046.5,.12],[1318.5,.24],[1567.98,.36],[1318.5,.56],[1567.98,.68],[2093,.86]];
+    tune.forEach(function(n, i){
+      xylo(c, t + n[1], n[0], 0.17);
+      sweep(c, t + n[1], n[0] / 2, n[0] / 2, 0.22, 0.05, "sine");
+    });
+    bell(c, t + 0.86, 1046.5, 1.3, 0.1);
+    for(var i = 0; i < 16; i++){                                     // bubbles rising
+      var at = t + 1.1 + i * 0.09 + Math.random() * 0.05, b = 300 + i * 40 + Math.random() * 80;
+      sweep(c, at, b, b * 1.8, 0.09, 0.09, "sine");
+    }
+  }
+
+  // A deep, happy voice cheer (uses the browser's own voice)
+  function cheer(word){
+    if(!on || typeof speechSynthesis === "undefined") return;
+    try{
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(word);
+      u.lang = "en-GB"; u.pitch = 0.55; u.rate = 0.78; u.volume = 1;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+
+  function setOn(v){
+    on = v;
+    try{ localStorage.setItem("candySfx", v ? "on" : "off"); }catch(e){}
+    if(v) pop(); else if(typeof speechSynthesis !== "undefined") speechSynthesis.cancel();
+  }
+  return { pop:pop, match:match, miss:miss, win:win, cheer:cheer, setOn:setOn, isOn:function(){ return on; } };
+})();
+
+/* ===== Sound on/off ===== */
+(function(){
+  var btn = document.getElementById("soundBtn");
+  if(!btn) return;
+  function paint(){
+    var on = CandySFX.isOn();
+    btn.textContent = on ? "🔊 Sound on" : "🔇 Sound off";
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.setAttribute("aria-label", on ? "Sound effects on" : "Sound effects off");
+  }
+  btn.addEventListener("click", function(){ CandySFX.setOn(!CandySFX.isOn()); paint(); });
+  paint();
+})();
+
+/* ===== Candy visuals ===== */
+function showCombo(word, big){
+  var old = document.querySelector(".combo"); if(old) old.remove();
+  var el = document.createElement("div");
+  el.className = "combo" + (big ? " big" : "");
+  el.setAttribute("aria-hidden", "true");
+  el.textContent = word;
+  document.body.appendChild(el);
+  setTimeout(function(){ el.remove(); }, 1500);
+}
+
+var CANDY_COLOURS = [
+  ["#ff5fa2","#c2185b"], ["#ffd43b","#f08c00"], ["#51cf66","#2b8a3e"], ["#4dabf7","#1864ab"],
+  ["#b197fc","#6741d9"], ["#ff8787","#c92a2a"], ["#ffa94d","#d9480f"], ["#66d9e8","#0b7285"]
+];
+var CANDY_SHAPES = ["lolly","lolly","sprinkle","sprinkle","gumdrop","ball","wrap"];
+function candyBurst(){   // B2 version: candy rain falling from the top of the screen
+  var old = document.querySelector(".candy-layer"); if(old) old.remove();
+  var layer = document.createElement("div");
+  layer.className = "candy-layer";
+  layer.setAttribute("aria-hidden", "true");
+  var count = window.innerWidth < 600 ? 36 : 64;
+  for(var i = 0; i < count; i++){
+    var el = document.createElement("span");
+    var col = CANDY_COLOURS[Math.floor(Math.random() * CANDY_COLOURS.length)];
+    el.className = "candy " + CANDY_SHAPES[Math.floor(Math.random() * CANDY_SHAPES.length)];
+    el.style.left = (Math.random() * 100) + "%";
+    el.style.setProperty("--c1", col[0]);
+    el.style.setProperty("--c2", col[1]);
+    el.style.setProperty("--sway", (10 + Math.random() * 30) * (Math.random() < .5 ? -1 : 1) + "px");
+    el.style.setProperty("--rot", (Math.random() * 720 - 360) + "deg");
+    el.style.setProperty("--dur", (2.4 + Math.random() * 1.6) + "s");
+    el.style.setProperty("--delay", (Math.random() * 1.4) + "s");
+    layer.appendChild(el);
+  }
+  document.body.appendChild(layer);
+  setTimeout(function(){ layer.remove(); }, 5600);
+}
 </script>
 
 <script>
@@ -618,7 +1218,8 @@ const GET_EXPRESSIONS = [
   ["get around to (doing)", "finally do something you delayed"],
   ["get away with (something)", "avoid punishment"],
   ["get through to (someone)", "make someone understand"],
-  ["get over with (something)", "finish something unpleasant"],
+  ["get (something) over with", "finish something unpleasant"],
+  ["get over (something)", "recover from something sad or difficult"],
   ["get by on (something)", "survive with limited resources"],
   ["get into (something)", "become interested or involved"],
   ["get out of (doing something)", "avoid doing something"],
@@ -631,10 +1232,25 @@ const pastelColors = [
   "#ede7f6","#e1f5fe","#f3e5f5","#f1f8e9","#fffde7"
 ];
 
+// Candy colours, dark enough for white text to stay readable
 const matchColors = [
-  "#27ae60","#2980b9","#8e44ad","#f39c12","#e67e22",
-  "#16a085","#c0392b","#1abc9c","#d35400","#9b59b6"
+  "#c2185b","#6a1b9a","#1565c0","#00796b","#2e7d32",
+  "#d84315","#ad1457","#4527a0","#00838f","#9e2a2b"
 ];
+
+/* Teacher notes: built from the list above, so they always match the game */
+(function(){
+  const ul = document.getElementById("notesList");
+  if(!ul) return;
+  GET_EXPRESSIONS.forEach(([e, m]) => {
+    const li = document.createElement("li");
+    const b = document.createElement("strong");
+    b.textContent = e;
+    li.appendChild(b);
+    li.appendChild(document.createTextNode(" – " + m));
+    ul.appendChild(li);
+  });
+})();
 
 const game = document.getElementById("game");
 const statusEl = document.getElementById("status");
@@ -644,6 +1260,7 @@ let first = null;
 let second = null;
 let lock = false;
 let matched = 0;
+let streak = 0;
 let colorMap = {};
 
 function shuffle(arr){
@@ -662,7 +1279,10 @@ function buildRound(){
   second = null;
   lock = false;
   matched = 0;
+  streak = 0;
   colorMap = {};
+  statusEl.classList.remove("win");
+  const oldLayer = document.querySelector(".candy-layer"); if(oldLayer) oldLayer.remove();
 
   const shuffled = shuffle(GET_EXPRESSIONS);
   const fullPairs = shuffled.slice(0, 4);
@@ -677,8 +1297,10 @@ function buildRound(){
   ]);
 
   cards.forEach((data, idx) => {
-    const div = document.createElement("div");
+    const div = document.createElement("button");
+    div.type = "button";
     div.className = "card";
+    div.setAttribute("aria-label", "Card " + (idx + 1) + ", face down");
     div.textContent = "";
     div.dataset.text = data.text;
     div.dataset.pair = data.pair;
@@ -691,12 +1313,22 @@ function buildRound(){
 
       div.classList.add("flipped");
       div.textContent = data.text;
+      div.setAttribute("aria-label", data.text);
+      CandySFX.pop();
 
       if(data.kind === "free"){
         setTimeout(() => {
+          CandySFX.miss();
+          div.classList.add("shake");
+          setTimeout(() => div.classList.remove("shake"), 380);
+          statusEl.textContent = "That one is the spare – it has no partner!";
+        }, 350);
+        setTimeout(() => {
           div.classList.remove("flipped");
           div.textContent = "";
-        }, 700);
+          div.setAttribute("aria-label", "Card " + (idx + 1) + ", face down");
+          if(statusEl.textContent.indexOf("spare") === 0 || statusEl.textContent.indexOf("That one") === 0) statusEl.textContent = "";
+        }, 1200);
         return;
       }
 
@@ -725,17 +1357,30 @@ function buildRound(){
             card.classList.remove("flipped");
             card.classList.add("matched");
             card.style.background = c;
+            card.classList.remove("pop"); void card.offsetWidth; card.classList.add("pop");
+            card.setAttribute("aria-label", card.dataset.text + " (matched)");
           });
 
           matched++;
+          streak++;
           if(matched === 4){
-            statusEl.textContent = "Excellent work — all matches found.";
+            statusEl.textContent = "🍭 Brilliant! All matches found – press New Round to play again.";
+            statusEl.classList.add("win");
+            celebrateWin();
+          }else{
+            CandySFX.match(streak - 1);
+            if(streak === 3){ showCombo("Nice streak!"); CandySFX.cheer("Nice streak!"); }
           }
         }else{
+          streak = 0;
+          CandySFX.miss();
           [first, second].forEach(card => {
             if(card){
+              card.classList.add("shake");
+              setTimeout(() => card.classList.remove("shake"), 380);
               card.classList.remove("flipped");
               card.textContent = "";
+              card.setAttribute("aria-label", "Face-down card");
             }
           });
         }
@@ -748,11 +1393,87 @@ function buildRound(){
   });
 }
 
+function celebrateWin(){
+  const words = ["Brilliant!", "Sensational!", "Superb!", "Outstanding!"];
+  const word = streak >= 4 ? "Flawless!" : words[Math.floor(Math.random() * words.length)];
+  CandySFX.win();
+  setTimeout(() => CandySFX.cheer(word), 700);
+  showCombo(word, true);
+  candyBurst();
+  game.querySelectorAll(".card.matched").forEach((c, i) => {
+    c.classList.remove("pop");
+    c.style.setProperty("--wd", (i * 0.05) + "s");
+    c.classList.add("win");
+  });
+}
+
 newRoundBtn.addEventListener("click", buildRound);
 buildRound();
 </script>
 
 <script>
+/* ===== Minimal audio players (replace the browser's own controls) ===== */
+(function(){
+  const ICONS = '<svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>' +
+                '<svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h3v12H4zM9 2h3v12H9z"/></svg>';
+  const all = [];
+  function fmt(t){
+    if(!isFinite(t) || t < 0) t = 0;
+    const m = Math.floor(t / 60), s = Math.floor(t % 60);
+    return m + ":" + (s < 10 ? "0" : "") + s;
+  }
+  document.querySelectorAll(".gapfill-audio").forEach((audio, n) => {
+    const wrap = document.createElement("div");
+    wrap.className = "mini-player";
+    wrap.innerHTML =
+      '<button type="button" class="mp-btn" aria-label="Play recording ' + (n + 1) + '">' + ICONS + '</button>' +
+      '<div class="mp-track" role="slider" tabindex="0" aria-label="Position in recording ' + (n + 1) + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">' +
+        '<div class="mp-fill"></div><div class="mp-knob"></div></div>' +
+      '<span class="mp-time">0:00</span>';
+    audio.insertAdjacentElement("afterend", wrap);
+    const btn = wrap.querySelector(".mp-btn"), track = wrap.querySelector(".mp-track");
+    const fill = wrap.querySelector(".mp-fill"), knob = wrap.querySelector(".mp-knob"), time = wrap.querySelector(".mp-time");
+    all.push(audio);
+
+    function paint(){
+      const d = audio.duration, t = audio.currentTime;
+      const pct = (isFinite(d) && d > 0) ? (t / d) * 100 : 0;
+      fill.style.width = pct + "%";
+      knob.style.left = pct + "%";
+      track.setAttribute("aria-valuenow", Math.round(pct));
+      time.textContent = audio.paused && t === 0 && isFinite(d) ? fmt(d) : fmt(t);
+    }
+    btn.addEventListener("click", () => {
+      if(audio.paused){
+        all.forEach(a => { if(a !== audio) a.pause(); });   // one recording at a time
+        const p = audio.play(); if(p && p.catch) p.catch(() => {});
+      }else{
+        audio.pause();
+      }
+    });
+    audio.addEventListener("play",  () => { wrap.classList.add("playing");    btn.setAttribute("aria-label", "Pause recording " + (n + 1)); });
+    audio.addEventListener("pause", () => { wrap.classList.remove("playing"); btn.setAttribute("aria-label", "Play recording " + (n + 1)); });
+    audio.addEventListener("ended", () => { audio.currentTime = 0; paint(); });
+    ["timeupdate", "loadedmetadata", "durationchange"].forEach(ev => audio.addEventListener(ev, paint));
+
+    function seekTo(clientX){
+      const r = track.getBoundingClientRect();
+      const f = Math.min(1, Math.max(0, (clientX - r.left) / r.width));
+      if(isFinite(audio.duration)) { audio.currentTime = f * audio.duration; paint(); }
+    }
+    let dragging = false;
+    track.addEventListener("pointerdown", e => { dragging = true; try{ track.setPointerCapture(e.pointerId); }catch(_){} seekTo(e.clientX); });
+    track.addEventListener("pointermove", e => { if(dragging) seekTo(e.clientX); });
+    track.addEventListener("pointerup",   () => { dragging = false; });
+    track.addEventListener("keydown", e => {
+      if(!isFinite(audio.duration)) return;
+      if(e.key === "ArrowRight"){ audio.currentTime = Math.min(audio.duration, audio.currentTime + 2); e.preventDefault(); }
+      if(e.key === "ArrowLeft"){  audio.currentTime = Math.max(0, audio.currentTime - 2); e.preventDefault(); }
+    });
+    paint();
+  });
+})();
+
 function normalizeText(str){
   return str
     .toLowerCase()
