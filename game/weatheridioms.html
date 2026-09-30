@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="renderer" content="webkit" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#1c1c1c" />
+
+<!-- Google Search Console verification (same token as modernenglish.au) -->
+<meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
+
+<title>Weather Idioms Matching Game | Modern English Australia</title>
+<meta name="description" content="Free B2 weather idioms matching game and dictation practice for ESL classes. Match idioms like 'under the weather' and 'on cloud nine' to their meanings. Modern English Australia · Koala Spies Sydney." />
+<meta property="og:title" content="Weather Idioms Matching Game | Modern English Australia" />
+<meta property="og:description" content="Match weather idioms to their meanings, then practise with dictation." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Modern English Australia" />
+<meta property="og:url" content="https://modernenglish.au/game/weatheridioms.html" />
+<link rel="canonical" href="https://modernenglish.au/game/weatheridioms.html" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Loaded non-blocking so the page still renders fast where Google Fonts is slow or blocked (e.g. mainland China); falls back to Georgia -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet"></noscript>
+
+<style>
+:root{
+  --bg:#f5f5f5;
+  --card:#2a2a2a;
+  --ink:#1e1e1e;
+  --muted:#bbbbbb;
+  --accent:#2e0e5b;
+  --line:#484141;
+  --ok:#1f7a3f;
+  --bad:#a32525;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:"Newsreader", Georgia, serif;
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+/* ===== Header ===== */
+header{
+  background:#f7f4f4;
+  color:var(--accent);
+  text-align:center;
+  padding:1.4rem 0 1rem;
+  letter-spacing:2px;
+  font-weight:700;
+  font-size:1.2rem;
+}
+header span{
+  display:block;
+  color:#302d2d;
+  font-weight:300;
+  font-size:.6rem;
+  letter-spacing:3px;
+  margin-top:1px;
+}
+
+/* ===== QR + HOME ===== */
+.qr-toggle{
+  position:fixed;
+  left:max(14px, env(safe-area-inset-left));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(255,255,255,.92);
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.qr-panel{
+  position:fixed;
+  left:max(14px, env(safe-area-inset-left));
+  top:70px;
+  top:calc(max(14px, env(safe-area-inset-top)) + 56px);
+  z-index:9999;
+  width:240px;
+  max-width:calc(100% - 28px);
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  display:none;
+}
+.qr-panel .qr-title{
+  font-weight:800;
+  color:#111;
+  margin:0 0 8px;
+  font-size:.95rem;
+  letter-spacing:.5px;
+}
+.qr-panel .qr-url{
+  font-size:.72rem;
+  color:rgba(0,0,0,.65);
+  word-break:break-all;
+  margin:8px 0 0;
+  line-height:1.35;
+}
+.qr-code{
+  width:200px;
+  height:200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.10);
+}
+.home-btn{
+  position:fixed;
+  right:max(14px, env(safe-area-inset-right));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  padding:.7rem 1rem;
+  border-radius:14px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  color:#111;
+  text-decoration:none;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+@media (hover:hover){
+  .home-btn:hover{ background:#ffffff; }
+  .qr-toggle:hover{ background:#ffffff; }
+}
+
+/* ===== Video background ===== */
+.bg-video{
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  inset:0;
+  z-index:-2;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  pointer-events:none;
+  background:#000;
+}
+.bg-overlay{
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  inset:0;
+  z-index:-1;
+  background:rgba(245,245,245,.78);
+}
+
+.video-debug{
+  position:fixed;
+  left:14px;
+  bottom:14px;
+  z-index:9999;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:12px;
+  padding:.6rem .8rem;
+  font-size:.78rem;
+  color:#111;
+  display:none;
+  max-width:min(520px, calc(100% - 28px));
+  text-align:left;
+}
+
+/* ===== Main ===== */
+main{
+  flex:1;
+  text-align:center;
+  padding:2rem 1rem calc(3rem + env(safe-area-inset-bottom));
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+h1{
+  color:var(--accent);
+  letter-spacing:2px;
+  margin-top:1rem;
+  font-size:clamp(1.35rem,2.2vw,1.9rem);
+  font-weight:700;
+}
+
+p{
+  max-width:680px;
+  margin:.5rem auto 1.2rem;
+  opacity:.9;
+}
+
+/* ===== Controls ===== */
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:.8rem;
+  margin-bottom:1.2rem;
+}
+
+button.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.75rem 1.4rem;
+  border-radius:45px;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  font-family:inherit;
+}
+@media (hover:hover){
+  button.btn:hover{
+    background:linear-gradient(90deg,var(--accent),#ff9b3d);
+    transform:translateY(-2px);
+  }
+}
+button.btn:focus-visible,
+a.btn:focus-visible,
+.dictation-btn:focus-visible,
+.card:focus-visible{
+  outline:3px solid #ff9b3d;
+  outline-offset:2px;
+}
+
+.controls{ flex-wrap:wrap; }
+button.btn-sound{
+  background:#fff;
+  color:var(--accent);
+  border:2px solid var(--accent);
+}
+button.btn-sound[aria-pressed="false"]{
+  color:#555;
+  border-color:#999;
+}
+
+/* ===== Sunshine celebration ===== */
+.sunshine{
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  z-index:9000;
+  pointer-events:none;
+  overflow:hidden;
+  opacity:0;
+  visibility:hidden;
+}
+.sunshine.show{
+  visibility:visible;
+  -webkit-animation:sunFade 4.2s ease forwards;
+  animation:sunFade 4.2s ease forwards;
+}
+.sunshine-glow{
+  position:absolute;
+  top:0;right:0;bottom:0;left:0;
+  background:radial-gradient(circle at 50% 28%, rgba(255,214,90,.55) 0%, rgba(255,183,77,.28) 32%, rgba(255,236,179,0) 68%);
+}
+.sun{
+  position:absolute;
+  left:50%;
+  top:28%;
+  width:120px;
+  height:120px;
+  margin:-60px 0 0 -60px;
+  -webkit-transform:translateY(60vh) scale(.6);
+  transform:translateY(60vh) scale(.6);
+}
+.sunshine.show .sun{
+  -webkit-animation:sunRise 1.4s cubic-bezier(.2,.8,.25,1) forwards;
+  animation:sunRise 1.4s cubic-bezier(.2,.8,.25,1) forwards;
+}
+.sun-core{
+  position:absolute;
+  top:20px;left:20px;
+  width:80px;height:80px;
+  border-radius:50%;
+  background:radial-gradient(circle at 40% 38%, #fff7c2 0%, #ffd54f 45%, #ffb300 100%);
+  box-shadow:0 0 40px 14px rgba(255,202,40,.65), 0 0 110px 40px rgba(255,167,38,.35);
+}
+.sun-rays{
+  position:absolute;
+  top:-90px;left:-90px;
+  width:300px;height:300px;
+  border-radius:50%;
+  background:repeating-conic-gradient(from 0deg, rgba(255,213,79,.55) 0deg 7deg, rgba(255,213,79,0) 7deg 22.5deg);
+  -webkit-mask:radial-gradient(circle, transparent 0 58px, #000 60px 120px, transparent 150px);
+  mask:radial-gradient(circle, transparent 0 58px, #000 60px 120px, transparent 150px);
+}
+.sunshine.show .sun-rays{
+  -webkit-animation:sunSpin 9s linear infinite;
+  animation:sunSpin 9s linear infinite;
+}
+.sparkle{
+  position:absolute;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:#ffe082;
+  box-shadow:0 0 10px 3px rgba(255,213,79,.8);
+  opacity:0;
+}
+.sunshine.show .sparkle{
+  -webkit-animation:sparkle 1.8s ease-out forwards;
+  animation:sparkle 1.8s ease-out forwards;
+}
+@-webkit-keyframes sunFade{0%{opacity:0}12%{opacity:1}75%{opacity:1}100%{opacity:0}}
+@keyframes sunFade{0%{opacity:0}12%{opacity:1}75%{opacity:1}100%{opacity:0}}
+@-webkit-keyframes sunRise{to{-webkit-transform:translateY(0) scale(1);transform:translateY(0) scale(1)}}
+@keyframes sunRise{to{transform:translateY(0) scale(1)}}
+@-webkit-keyframes sunSpin{to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
+@keyframes sunSpin{to{transform:rotate(360deg)}}
+@keyframes sparkle{
+  0%{opacity:0;transform:translate(0,0) scale(.4)}
+  20%{opacity:1}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.2)}
+}
+.card.sunlit{
+  box-shadow:0 0 0 3px #ffd54f, 0 0 18px rgba(255,193,7,.7);
+}
+@media(max-width:600px){
+  .sun{ -webkit-transform:translateY(60vh) scale(.45); transform:translateY(60vh) scale(.45); }
+  @keyframes sunRise{to{transform:translateY(0) scale(.8)}}
+  @-webkit-keyframes sunRise{to{-webkit-transform:translateY(0) scale(.8);transform:translateY(0) scale(.8)}}
+}
+@media (prefers-reduced-motion:reduce){
+  .sunshine.show .sun{ -webkit-animation:none; animation:none; -webkit-transform:none; transform:none; }
+  .sunshine.show .sun-rays, .sunshine.show .sparkle{ -webkit-animation:none; animation:none; }
+}
+
+/* ===== Game Grid ===== */
+#game{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+  width:100%;
+  max-width:420px;
+  margin:0 auto;
+}
+
+.card{
+  background:#671321;
+  border:2px solid var(--accent);
+  border-radius:16px;
+  padding:12px;
+  min-height:82px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  font-size:.88rem;
+  line-height:1.25;
+  color:#fff;
+  transition:background .3s,color .3s,transform .2s;
+  box-shadow:0 3px 6px rgba(0,0,0,.12);
+  word-break:break-word;
+  overflow-wrap:anywhere;
+  font-family:inherit;
+  -webkit-appearance:none;
+  appearance:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  width:100%;
+}
+
+.card.flipped{
+  background:var(--accent);
+  color:#000;
+  transform:scale(1.04);
+}
+
+.card.matched{
+  color:#fff;
+  font-weight:600;
+  cursor:default;
+}
+
+#status{
+  margin-top:1.2rem;
+  font-size:1.05rem;
+  font-weight:600;
+  min-height:1.6em;
+}
+
+/* ===== Dictation Section ===== */
+.dictation-wrap{
+  width:100%;
+  max-width:920px;
+  margin:3rem auto 0;
+  text-align:center;
+}
+
+.dictation-wrap h2{
+  text-align:center;
+  color:var(--accent);
+  letter-spacing:1px;
+  margin-bottom:.4rem;
+  font-size:clamp(1.25rem,2vw,1.7rem);
+}
+
+.dictation-intro{
+  text-align:center;
+  max-width:300px;
+  margin:0 auto 1.5rem;
+}
+
+.dictation-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+}
+
+
+.dictation-card{
+  padding:6px 0;
+  border:none;
+  background:transparent;
+  box-shadow:none;
+  text-align:center;
+}
+
+.dictation-card h3{
+  color:var(--accent);
+  margin-bottom:.8rem;
+  font-size:1.05rem;
+}
+
+.dictation-audio{
+  display:block;
+  width:100%;
+  max-width:360px;
+  margin:0 auto 1rem;
+}
+
+.dictation-input{
+  width:100%;
+  max-width:520px;
+  min-height:110px;
+  margin:0 auto;
+  display:block;
+  resize:vertical;
+  border:2px solid rgba(46,14,91,.18);
+  border-radius:12px;
+  padding:.9rem 1rem;
+  font:inherit;
+  color:var(--ink);
+  background:#fff;
+  outline:none;
+  text-align:left;
+  font-size:16px; /* prevents iOS auto-zoom on focus */
+  -webkit-appearance:none;
+  appearance:none;
+}
+
+.dictation-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(46,14,91,.10);
+}
+
+.dictation-actions{
+  display:flex;
+  justify-content:center;
+  gap:.7rem;
+  flex-wrap:wrap;
+  margin-top:.9rem;
+}
+
+.dictation-btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.7rem 1.1rem;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+  transition:all .2s ease;
+  font-family:inherit;
+}
+@media (hover:hover){
+  .dictation-btn:hover{
+    background:linear-gradient(90deg,var(--accent),#ff9b3d);
+    transform:translateY(-2px);
+  }
+}
+
+.dictation-feedback{
+  min-height:1.5em;
+  margin-top:.8rem;
+  font-weight:700;
+  text-align:center;
+}
+
+.dictation-feedback.correct{
+  color:var(--ok);
+}
+
+.dictation-feedback.incorrect{
+  color:var(--bad);
+}
+
+.dictation-teacher-notes{
+  width:100%;
+  max-width:720px;
+  margin:1.2rem auto 0;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:1rem 1.1rem;
+  text-align:left;
+}
+
+.dictation-teacher-notes summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:.5rem;
+}
+
+.dictation-teacher-notes ol{
+  margin:.8rem 0 0 1.2rem;
+  line-height:1.7;
+}
+
+/* ===== Links ===== */
+.links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:1rem;
+  margin-top:2rem;
+}
+
+a.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  text-decoration:none;
+  padding:.8rem 1.4rem;
+  border-radius:45px;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  display:inline-block;
+}
+@media (hover:hover){
+  a.btn:hover{
+    background:linear-gradient(90deg,var(--accent),#ff9b3d);
+    transform:translateY(-2px);
+  }
+}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--card);
+  color:var(--muted);
+  text-align:center;
+  padding:1rem 0 calc(1rem + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);
+  font-size:.9rem;
+}
+
+/* ===== Tablet ===== */
+@media (max-width:900px){
+  #game{
+    max-width:390px;
+    gap:10px;
+  }
+  .card{
+    min-height:76px;
+    font-size:.82rem;
+    padding:10px;
+  }
+}
+
+/* ===== Smaller screens ===== */
+@media(max-width:700px){
+  .dictation-card{
+    padding:14px;
+  }
+  .dictation-input{
+    min-height:96px;
+  }
+}
+
+/* ===== Phones / iPhones ===== */
+@media(max-width:600px){
+  header{
+    padding:4.4rem 1rem 1rem;
+    font-size:1.05rem;
+  }
+  main{
+    padding:1.5rem .8rem calc(2.4rem + env(safe-area-inset-bottom));
+  }
+  #game{
+    max-width:312px;
+    gap:8px;
+  }
+  .card{
+    min-height:68px;
+    font-size:.75rem;
+    padding:8px;
+    border-radius:14px;
+  }
+  .qr-toggle,
+  .home-btn{
+    transform:scale(.95);
+    transform-origin:top;
+  }
+}
+
+/* Very small / budget Android & Chinese-market phones (320–360px) */
+@media(max-width:360px){
+  #game{ gap:6px; }
+  .card{ min-height:64px; font-size:.7rem; padding:6px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{ transition:none !important; }
+}
+</style>
+</head>
+
+<body>
+
+<video
+  class="bg-video"
+  id="bgVideo"
+  autoplay
+  muted
+  loop
+  playsinline
+  webkit-playsinline
+  x5-playsinline
+  x5-video-player-type="h5-page"
+  preload="auto"
+  aria-hidden="true"
+  tabindex="-1"
+  poster="weather-poster.jpg"
+>
+  <source src="weatheridioms.mp4" type="video/mp4">
+</video>
+<div class="bg-overlay" aria-hidden="true"></div>
+
+<div class="video-debug" id="videoDebug"></div>
+
+<div class="sunshine" id="sunshine" aria-hidden="true">
+  <div class="sunshine-glow"></div>
+  <div class="sun"><div class="sun-rays"></div><div class="sun-core"></div></div>
+</div>
+
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR code for this page" aria-expanded="false" aria-controls="qrPanel">QR</button>
+<div class="qr-panel" id="qrPanel" aria-label="QR code panel">
+  <div class="qr-title">Open this page on your phone</div>
+  <div class="qr-code" id="qrCode"></div>
+  <div class="qr-url" id="qrUrl"></div>
+</div>
+
+<a class="home-btn" href="https://modernenglish.au/Microlessons%26Games.html">Home</a>
+
+<header>
+  MODERN ENGLISH AUSTRALIA
+  <span>KOALA SPIES SYDNEY</span>
+</header>
+
+<main>
+  <h1>Weather Idioms Matching Game</h1>
+  <p>
+    Flip two cards to match each idiom with its meaning.
+    Each round uses <strong>9 cards</strong> selected from the full set. There will be one spare (extra) for each game that you don't need. Play 3 or 4 rounds, or as many as you need to remember the pairs.
+  </p>
+
+  <div class="controls">
+    <button class="btn" id="newRoundBtn" type="button">New Round</button>
+    <button class="btn btn-sound" id="soundBtn" type="button" aria-pressed="true" aria-label="Sound effects on">🔊 Sound on</button>
+  </div>
+
+  <div id="game" aria-label="Matching cards"></div>
+  <div id="status" role="status" aria-live="polite"></div>
+
+  <section class="dictation-wrap" aria-labelledby="dictationTitle">
+    <h2 id="dictationTitle">Write from Dictation</h2>
+    <p class="dictation-intro">
+      Listen to each sentence and type exactly what you hear. After you have written all the questions and remember them, ask your classmates the questions and discuss the answers.
+    </p>
+
+    <div class="dictation-grid">
+
+      <article class="dictation-card" data-answer="What is something you do every day, rain or shine?">
+        <h3>Sentence 1</h3>
+        <audio controls preload="metadata" class="dictation-audio">
+          <source src="dictation1.mp3" type="audio/mpeg">
+        </audio>
+        <textarea class="dictation-input" rows="3" placeholder="Type the sentence here..." aria-label="Write from dictation sentence 1"></textarea>
+        <div class="dictation-actions">
+          <button type="button" class="dictation-btn submit-btn">Submit</button>
+        </div>
+        <div class="dictation-feedback" role="status" aria-live="polite"></div>
+      </article>
+
+      <article class="dictation-card" data-answer="Who is somebody that you consider a ray of sunshine?">
+        <h3>Sentence 2</h3>
+        <audio controls preload="metadata" class="dictation-audio">
+          <source src="dictation2.mp3" type="audio/mpeg">
+        </audio>
+        <textarea class="dictation-input" rows="3" placeholder="Type the sentence here..." aria-label="Write from dictation sentence 2"></textarea>
+        <div class="dictation-actions">
+          <button type="button" class="dictation-btn submit-btn">Submit</button>
+        </div>
+        <div class="dictation-feedback" role="status" aria-live="polite"></div>
+      </article>
+
+      <article class="dictation-card" data-answer="What is a good way to break the ice when you meet new people?">
+        <h3>Sentence 3</h3>
+        <audio controls preload="metadata" class="dictation-audio">
+          <source src="dictation3.mp3" type="audio/mpeg">
+        </audio>
+        <textarea class="dictation-input" rows="3" placeholder="Type the sentence here..." aria-label="Write from dictation sentence 3"></textarea>
+        <div class="dictation-actions">
+          <button type="button" class="dictation-btn submit-btn">Submit</button>
+        </div>
+        <div class="dictation-feedback" role="status" aria-live="polite"></div>
+      </article>
+
+      <article class="dictation-card" data-answer="Do you believe that every cloud has a silver lining?">
+        <h3>Sentence 4</h3>
+        <audio controls preload="metadata" class="dictation-audio">
+          <source src="dictation4.mp3" type="audio/mpeg">
+        </audio>
+        <textarea class="dictation-input" rows="3" placeholder="Type the sentence here..." aria-label="Write from dictation sentence 4"></textarea>
+        <div class="dictation-actions">
+          <button type="button" class="dictation-btn submit-btn">Submit</button>
+        </div>
+        <div class="dictation-feedback" role="status" aria-live="polite"></div>
+      </article>
+
+    </div>
+
+    <details class="dictation-teacher-notes">
+      <summary>Teacher Notes / Answer Key</summary>
+      <ol>
+        <li>What is something you do every day, rain or shine?</li>
+        <li>Who is somebody that you consider a ray of sunshine?</li>
+        <li>What is a good way to break the ice when you meet new people?</li>
+        <li>Do you believe that every cloud has a silver lining?</li>
+      </ol>
+    </details>
+  </section>
+
+  <div class="links">
+    <a href="https://modernenglish.au/Microlessons%26Games.html" class="btn">MicroLessons &amp; Games</a>
+    <a href="https://modernenglish.au/vocabularygames.html" class="btn">More Vocabulary Games</a>
+  </div>
+</main>
+
+<footer>
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script>
+(function(){
+  const toggle = document.getElementById("qrToggle");
+  const panel = document.getElementById("qrPanel");
+  const box = document.getElementById("qrCode");
+  const urlLabel = document.getElementById("qrUrl");
+  if(!toggle || !panel || !box || !urlLabel) return;
+
+  let made = false;
+
+  function make(){
+    const url = window.location.href;
+    urlLabel.textContent = url;
+    box.innerHTML = "";
+
+    // QR library comes from a CDN that can be slow/blocked in some regions
+    if(typeof QRCode === "undefined"){
+      box.textContent = "QR unavailable — copy the link below.";
+      box.style.fontSize = ".8rem";
+      box.style.padding = "1rem";
+      made = true;
+      return;
+    }
+
+    new QRCode(box, {
+      text: url,
+      width: 200,
+      height: 200,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+
+    made = true;
+  }
+
+  toggle.addEventListener("click", () => {
+    const open = panel.style.display === "block";
+    panel.style.display = open ? "none" : "block";
+    toggle.setAttribute("aria-expanded", open ? "false" : "true");
+    if(!open && !made) make();
+  });
+
+  document.addEventListener("click", (e) => {
+    if(panel.style.display !== "block") return;
+    const inside = panel.contains(e.target) || toggle.contains(e.target);
+    if(!inside){
+      panel.style.display = "none";
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const v = document.getElementById("bgVideo");
+  const dbg = document.getElementById("videoDebug");
+  if(!v || !dbg) return;
+
+  // Add ?debug=1 to the URL to see video diagnostics. Students never see them.
+  const debugOn = /[?&]debug=1\b/.test(window.location.search);
+
+  function show(msg){
+    if(!debugOn) return;
+    dbg.textContent = "Video issue: " + msg;
+    dbg.style.display = "block";
+  }
+
+  v.addEventListener("error", () => {
+    const err = v.error;
+    show(err ? ("code " + err.code + " (file/codec issue)") : "unknown error");
+  });
+
+  setTimeout(() => {
+    const canPlay = v.readyState >= 2;
+    const isPlaying = !v.paused && !v.ended && v.currentTime > 0;
+
+    if(!canPlay){
+      show("not loading. Check filename/path + GitHub case-sensitivity.");
+      return;
+    }
+
+    if(!isPlaying){
+      const p = v.play();
+      if(p && p.catch) p.catch(() => show("autoplay blocked or codec unsupported. Convert to MP4 (H.264)."));
+    }
+  }, 900);
+})();
+</script>
+
+<script>
+/* ===== Weather sound effects (made in the browser – no audio files needed) ===== */
+const WeatherSFX = (function(){
+  let ctx = null;
+  let on = true;
+  try{ if(localStorage.getItem("weatherSfx") === "off") on = false; }catch(e){}
+
+  function ac(){
+    if(!on) return null;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return null;
+    if(!ctx){ try{ ctx = new AC(); }catch(e){ return null; } }
+    if(ctx.state === "suspended" && ctx.resume) ctx.resume();
+    return ctx;
+  }
+
+  function noiseBuffer(c, secs, brown){
+    const len = Math.floor(c.sampleRate * secs);
+    const buf = c.createBuffer(1, len, c.sampleRate);
+    const d = buf.getChannelData(0);
+    let last = 0;
+    for(let i = 0; i < len; i++){
+      const w = Math.random() * 2 - 1;
+      if(brown){ last = (last + 0.02 * w) / 1.02; d[i] = last * 3.5; }
+      else d[i] = w;
+    }
+    return buf;
+  }
+
+  // Card turn: short gust of wind
+  function flip(){
+    const c = ac(); if(!c) return;
+    const t = c.currentTime;
+    const src = c.createBufferSource();
+    src.buffer = noiseBuffer(c, 0.35, false);
+    const f = c.createBiquadFilter();
+    f.type = "bandpass"; f.Q.value = 1.2;
+    f.frequency.setValueAtTime(500, t);
+    f.frequency.exponentialRampToValueAtTime(2200, t + 0.12);
+    f.frequency.exponentialRampToValueAtTime(900, t + 0.32);
+    const g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.22, t + 0.06);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.33);
+    src.connect(f).connect(g).connect(c.destination);
+    src.start(t); src.stop(t + 0.36);
+  }
+
+  function drop(c, t, freq, vol){
+    const o = c.createOscillator();
+    const g = c.createGain();
+    o.type = "sine";
+    o.frequency.setValueAtTime(freq, t);
+    o.frequency.exponentialRampToValueAtTime(freq * 1.6, t + 0.05);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.35);
+    o.connect(g).connect(c.destination);
+    o.start(t); o.stop(t + 0.4);
+  }
+
+  // Match: bright raindrop chimes
+  function match(){
+    const c = ac(); if(!c) return;
+    const t = c.currentTime;
+    [659, 784, 988, 1319].forEach((fq, i) => drop(c, t + i * 0.08, fq, 0.18));
+  }
+
+  // No match: distant thunder rumble
+  function miss(){
+    const c = ac(); if(!c) return;
+    const t = c.currentTime;
+    const src = c.createBufferSource();
+    src.buffer = noiseBuffer(c, 1.2, true);
+    const f = c.createBiquadFilter();
+    f.type = "lowpass";
+    f.frequency.setValueAtTime(400, t);
+    f.frequency.exponentialRampToValueAtTime(90, t + 1.1);
+    const g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.7, t + 0.05);
+    g.gain.exponentialRampToValueAtTime(0.35, t + 0.3);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.15);
+    src.connect(f).connect(g).connect(c.destination);
+    src.start(t); src.stop(t + 1.2);
+  }
+
+  // Spare card: light patter of rain
+  function spare(){
+    const c = ac(); if(!c) return;
+    const t = c.currentTime;
+    for(let i = 0; i < 7; i++){
+      drop(c, t + i * 0.06 + Math.random() * 0.03, 1400 + Math.random() * 900, 0.06);
+    }
+  }
+
+  // Round complete: sunshine / rainbow arpeggio
+  function win(){
+    const c = ac(); if(!c) return;
+    const t = c.currentTime + 0.35;
+    [523, 659, 784, 1047, 1319, 1568].forEach((fq, i) => {
+      const o = c.createOscillator();
+      const g = c.createGain();
+      o.type = "triangle";
+      o.frequency.value = fq;
+      const st = t + i * 0.09;
+      g.gain.setValueAtTime(0.0001, st);
+      g.gain.exponentialRampToValueAtTime(0.14, st + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, st + 0.9);
+      o.connect(g).connect(c.destination);
+      o.start(st); o.stop(st + 1);
+    });
+  }
+
+  function setOn(v){
+    on = v;
+    try{ localStorage.setItem("weatherSfx", v ? "on" : "off"); }catch(e){}
+    if(v) flip();
+  }
+
+  return { flip, match, miss, spare, win, setOn, isOn: () => on };
+})();
+
+(function(){
+  const btn = document.getElementById("soundBtn");
+  if(!btn) return;
+  function paint(){
+    const on = WeatherSFX.isOn();
+    btn.textContent = on ? "🔊 Sound on" : "🔇 Sound off";
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.setAttribute("aria-label", on ? "Sound effects on" : "Sound effects off");
+  }
+  btn.addEventListener("click", () => { WeatherSFX.setOn(!WeatherSFX.isOn()); paint(); });
+  paint();
+})();
+</script>
+
+<script>
+const WEATHER_IDIOMS = [
+  ["Under the weather","Feeling sick or unwell"],
+  ["A storm in a teacup","A big reaction to something small"],
+  ["Take a rain check","Postpone something"],
+  ["On cloud nine","Extremely happy"],
+  ["Every cloud has a silver lining","There is something good in every bad situation"],
+  ["Steal someone’s thunder","Take attention away from someone"],
+  ["Calm before the storm","A quiet period before trouble starts"],
+  ["Chase rainbows","Pursue unrealistic goals"],
+  ["Come rain or shine","No matter what happens"],
+  ["Break the ice","Make people feel more comfortable"],
+  ["Throw caution to the wind","Take a risk"],
+  ["Head in the clouds","Not paying attention"],
+  ["Snowed under","Extremely busy"],
+  ["A fair-weather friend","A friend who is only around in good times"],
+  ["Weather the storm","Survive a difficult situation"],
+  ["Lightning fast","Very fast"],
+  ["A bolt from the blue","A complete surprise"],
+  ["Make hay while the sun shines","Take advantage of a good opportunity"],
+  ["In the eye of the storm","In the centre of a difficult situation"],
+  ["It’s raining cats and dogs","Raining very heavily"],
+  ["Break like a thunderstorm","Emotions suddenly explode"],
+  ["Cloud over","Become sad or upset"],
+  ["A ray of sunshine","Someone who brings happiness"],
+  ["Skate on thin ice","Take a dangerous risk"],
+  ["As right as rain","Completely fine or healthy again"]
+];
+
+const pastelColors = [
+  "#f8cdda","#fce1e4","#e0f2fe","#e8f5e9","#fff3cd",
+  "#ede7f6","#e1f5fe","#f3e5f5","#f1f8e9","#fffde7"
+];
+
+// Darker tones so white text stays readable (WCAG AA) on matched cards
+const matchColors = [
+  "#1e7a46","#1f5f99","#6c3483","#a04000","#0e6655",
+  "#922b21","#34495e","#7d3c98","#1b4f72","#6e2c00"
+];
+
+const game = document.getElementById("game");
+const statusEl = document.getElementById("status");
+const newRoundBtn = document.getElementById("newRoundBtn");
+
+let first = null;
+let second = null;
+let lock = false;
+let matched = 0;
+let colorMap = {};
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const sunshineEl = document.getElementById("sunshine");
+let sunTimer = null;
+
+function showSunshine(){
+  if(!sunshineEl) return;
+  clearTimeout(sunTimer);
+  sunshineEl.querySelectorAll(".sparkle").forEach(n => n.remove());
+  sunshineEl.classList.remove("show");
+  void sunshineEl.offsetWidth; // restart animation
+  const sun = sunshineEl.querySelector(".sun");
+  for(let i = 0; i < 18; i++){
+    const sp = document.createElement("span");
+    sp.className = "sparkle";
+    const ang = (i / 18) * Math.PI * 2;
+    const dist = 90 + Math.random() * 110;
+    sp.style.left = "56px";
+    sp.style.top = "56px";
+    sp.style.setProperty("--dx", Math.cos(ang) * dist + "px");
+    sp.style.setProperty("--dy", Math.sin(ang) * dist + "px");
+    sp.style.animationDelay = (1.1 + Math.random() * 0.5) + "s";
+    sun.appendChild(sp);
+  }
+  sunshineEl.classList.add("show");
+  document.querySelectorAll("#game .card.matched").forEach(c => c.classList.add("sunlit"));
+  sunTimer = setTimeout(() => sunshineEl.classList.remove("show"), 4300);
+}
+
+function buildRound(){
+  if(sunshineEl){ clearTimeout(sunTimer); sunshineEl.classList.remove("show"); }
+  game.innerHTML = "";
+  statusEl.textContent = "";
+  first = null;
+  second = null;
+  lock = false;
+  matched = 0;
+  colorMap = {};
+
+  const shuffled = shuffle(WEATHER_IDIOMS);
+  const fullPairs = shuffled.slice(0, 4);
+  const spareOne = shuffled[4];
+
+  const cards = shuffle([
+    ...fullPairs.flatMap(([i, m]) => [
+      {text:i, pair:i, kind:"pair"},
+      {text:m, pair:i, kind:"pair"}
+    ]),
+    {text:spareOne[0], pair:"free-" + spareOne[0], kind:"free"}
+  ]);
+
+  cards.forEach((data, idx) => {
+    const div = document.createElement("button");
+    div.type = "button";
+    div.className = "card";
+    div.setAttribute("aria-label", "Card " + (idx + 1) + ", face down");
+    div.textContent = "";
+    div.dataset.text = data.text;
+    div.dataset.pair = data.pair;
+    div.dataset.kind = data.kind;
+    div.style.background = pastelColors[idx % pastelColors.length];
+    game.appendChild(div);
+
+    div.addEventListener("click", () => {
+      if(lock || div.classList.contains("flipped") || div.classList.contains("matched")) return;
+
+      div.classList.add("flipped");
+      div.textContent = data.text;
+      div.setAttribute("aria-label", data.text);
+      WeatherSFX.flip();
+
+      if(data.kind === "free"){
+        setTimeout(WeatherSFX.spare, 150);
+        setTimeout(() => {
+          div.classList.remove("flipped");
+          div.textContent = "";
+          div.setAttribute("aria-label", "Card " + (idx + 1) + ", face down");
+        }, 700);
+        return;
+      }
+
+      if(!first){
+        first = div;
+        return;
+      }
+
+      second = div;
+      lock = true;
+
+      setTimeout(() => {
+        if(
+          second &&
+          first.dataset.kind === "pair" &&
+          second.dataset.kind === "pair" &&
+          first.dataset.pair === second.dataset.pair
+        ){
+          if(!colorMap[first.dataset.pair]){
+            const idx = Object.keys(colorMap).length;
+            colorMap[first.dataset.pair] = matchColors[idx % matchColors.length];
+          }
+          const c = colorMap[first.dataset.pair];
+
+          [first, second].forEach(card => {
+            card.classList.remove("flipped");
+            card.classList.add("matched");
+            card.style.background = c;
+            card.setAttribute("aria-label", card.dataset.text + " (matched)");
+          });
+
+          matched++;
+          WeatherSFX.match();
+          if(matched === 4){
+            statusEl.textContent = "☀️ Excellent work — all matches found! Sunny skies ahead.";
+            WeatherSFX.win();
+            showSunshine();
+          }
+        }else{
+          WeatherSFX.miss();
+          [first, second].forEach(card => {
+            if(card){
+              card.classList.remove("flipped");
+              card.textContent = "";
+              card.setAttribute("aria-label", "Face-down card");
+            }
+          });
+        }
+
+        first = null;
+        second = null;
+        lock = false;
+      }, 700);
+    });
+  });
+}
+
+newRoundBtn.addEventListener("click", buildRound);
+buildRound();
+</script>
+
+<script>
+function normalizeText(str){
+  return str
+    .toLowerCase()
+    .replace(/[‘’]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/[.,!?;:]+$/g, "");
+}
+
+document.querySelectorAll(".dictation-card").forEach(card => {
+  const answer = card.dataset.answer;
+  const input = card.querySelector(".dictation-input");
+  const submitBtn = card.querySelector(".submit-btn");
+  const feedback = card.querySelector(".dictation-feedback");
+
+  submitBtn.addEventListener("click", () => {
+    const typed = normalizeText(input.value);
+    const correct = normalizeText(answer);
+
+    feedback.classList.remove("correct", "incorrect");
+
+    if(!typed){
+      feedback.textContent = "Please type your answer first.";
+      feedback.classList.add("incorrect");
+      return;
+    }
+
+    if(typed === correct){
+      feedback.textContent = "Correct";
+      feedback.classList.add("correct");
+    }else{
+      feedback.textContent = "Incorrect";
+      feedback.classList.add("incorrect");
+    }
+  });
+});
+</script>
+
+</body>
+</html>
