@@ -1,5 +1,0 @@
-# modernenglish.au
-User-agent: *
-Allow: /
-
-Sitemap: https://modernenglish.au/sitemap.xml
