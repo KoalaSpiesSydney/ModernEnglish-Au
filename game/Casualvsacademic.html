@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<!-- Chinese Android browsers (UC, QQ, 360, Sogou): use the modern engine, not IE/compat mode -->
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- Stops Safari on iPhone/iPad turning numbers into phone-call links -->
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#1f1f1f" />
+
+<!-- Google Search Console verification (same token as modernenglish.au) -->
+<meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
+
+<title>Casual vs Academic Language – Matching Game + Gap-Fill (C2) | Modern English Australia</title>
+<meta name="description" content="Free C2 matching game: pair casual English with its formal academic equivalent, then practise in an academic gap-fill on ancient ceramics. Great for IELTS Writing and university English. Modern English Australia · Koala Spies Sydney." />
+<link rel="canonical" href="https://modernenglish.au/Set3/Casualvsacademic.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Modern English Australia" />
+<meta property="og:locale" content="en_AU" />
+<meta property="og:url" content="https://modernenglish.au/Set3/Casualvsacademic.html" />
+<meta property="og:title" content="Casual vs Academic Language – Matching Game | Modern English Australia" />
+<meta property="og:description" content="Match casual English with formal academic language, then try the academic gap-fill." />
+
+<!-- Google tag (gtag.js) – same Analytics property as your other games -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+
+<style>
+:root{
+  --bg:#f6f6f6;
+  --card:#ffffff;
+  --ink:#222;
+  --muted:#5f5f5f;
+  --line:#e3e3e3;
+  --ok:#2f7d4b;
+  --err:#b94a48;
+  --dark:#1f1f1f;
+  --brand:#ff7a1a;        /* Modern English Australia orange */
+
+  /* Tiles */
+  --formal-down:#3a3a3a;  /* academic, face down  – dark grey */
+  --formal-up:#4d4d4d;    /* academic, face up */
+  --casual-down:#c9c9c9;  /* casual, face down    – light grey */
+  --casual-up:#e9e9e9;    /* casual, face up */
+
+  --radius:16px;
+  --shadow:0 10px 24px rgba(0,0,0,.10);
+  --max:1100px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{height:100%}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei","Noto Sans",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
+  min-height:100vh;
+  min-height:100dvh;
+  display:-webkit-box;display:-webkit-flex;display:flex;
+  -webkit-flex-direction:column;flex-direction:column;
+  overflow-x:hidden;
+}
+
+/* Background image behind the game (background.png in the same folder) */
+body::before{
+  content:"";
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  background:url("background.png") center / cover no-repeat;
+  opacity:.25;
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* ===== Header ===== */
+header{
+  position:relative;
+  background:var(--dark);
+  color:var(--brand);
+  text-align:center;
+  font-weight:700;
+  font-size:1.35rem;
+  letter-spacing:2px;
+  line-height:1.3;
+  padding:1.1rem 12px;
+  padding-top:calc(1.1rem + env(safe-area-inset-top, 0px));
+  padding-left:max(12px, env(safe-area-inset-left, 0px));
+  padding-right:max(12px, env(safe-area-inset-right, 0px));
+  border-bottom:1px solid #3a3a3a;
+}
+header a.brand{color:var(--brand);text-decoration:none}
+header span{
+  display:block;
+  color:#f5f5f5;
+  font-weight:300;
+  font-size:.8rem;
+  letter-spacing:3px;
+  margin-top:.25rem;
+}
+
+/* ===== QR (top-left) ===== */
+.qr-area-left{
+  position:absolute;
+  left:12px;
+  top:12px;
+  top:calc(12px + env(safe-area-inset-top, 0px));
+  z-index:5;
+  text-align:left;
+}
+.qr-btn{
+  -webkit-appearance:none;appearance:none;
+  border:1px solid rgba(255,255,255,.3);
+  background:transparent;
+  color:#fff;
+  padding:.45rem .75rem;
+  border-radius:999px;
+  font:800 .8rem/1 inherit;
+  font-family:inherit;
+  letter-spacing:1px;
+  cursor:pointer;
+  box-shadow:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.qr-btn:focus-visible{outline:3px solid rgba(255,255,255,.35);outline-offset:3px}
+#qrcodeLeft{
+  background:#fff;
+  padding:6px;
+  border-radius:10px;
+  margin-top:8px;
+  display:none;          /* shown when QR is pressed */
+  color:#222;
+  font-size:.7rem;
+  letter-spacing:0;
+  font-weight:600;
+  max-width:200px;
+  word-break:break-all;
+}
+#qrcodeLeft img,#qrcodeLeft canvas{display:block}
+
+/* ===== Page ===== */
+.page{
+  width:100%;
+  max-width:var(--max);
+  margin:0 auto;
+  padding:1.25rem 1rem 2.25rem;
+  padding-left:max(1rem, env(safe-area-inset-left, 0px));
+  padding-right:max(1rem, env(safe-area-inset-right, 0px));
+}
+h1,h2{text-align:center;color:var(--ink);letter-spacing:.01em}
+h1{font-size:1.5rem;font-size:clamp(1.25rem, 2vw, 1.6rem);margin:.35rem 0 .3rem;line-height:1.25}
+h2{font-size:1.15rem;font-size:clamp(1.05rem, 1.6vw, 1.25rem);margin:1.1rem 0 .6rem;color:var(--muted);font-weight:700;line-height:1.3}
+.level{
+  display:block;
+  text-align:center;
+  font-size:.75rem;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#b8470b;
+}
+
+/* Tile key */
+.tile-key{
+  display:-webkit-box;display:-webkit-flex;display:flex;
+  -webkit-justify-content:center;justify-content:center;
+  -webkit-flex-wrap:wrap;flex-wrap:wrap;
+  margin:0 0 .4rem;
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#444;
+}
+.tile-key span{display:inline-block;margin:.2rem .7rem}
+.tile-key i{
+  display:inline-block;
+  width:20px;height:14px;
+  border-radius:3px;
+  vertical-align:-2px;
+  margin-right:.4rem;
+}
+.tile-key .k-formal i{background:var(--formal-down)}
+.tile-key .k-casual i{background:var(--casual-down);border:1px solid #b5b5b5}
+
+/* Controls */
+.controls{
+  display:-webkit-box;display:-webkit-flex;display:flex;
+  -webkit-justify-content:center;justify-content:center;
+  -webkit-flex-wrap:wrap;flex-wrap:wrap;
+  margin:.6rem 0 1.1rem;
+}
+.btn{
+  -webkit-appearance:none;appearance:none;
+  display:inline-block;
+  background:rgba(255,255,255,.75);
+  color:#2a2a2a;
+  border:1.5px solid #2a2a2a;
+  border-radius:4px;
+  padding:.65rem 1.2rem;
+  min-height:44px;                     /* comfortable tap size */
+  font-family:inherit;
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  line-height:1.4;
+  cursor:pointer;
+  box-shadow:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+}
+@media (hover:hover){ .btn:hover{background:#2a2a2a;color:var(--brand)} }
+.btn:active{background:#2a2a2a;color:var(--brand)}
+.btn:focus-visible{outline:3px solid #2a2a2a;outline-offset:2px}
+
+/* ===== Game grid: 4 x 4 on computers and tablets, 2 x 8 on phones ===== */
+.game-wrap{width:100%;max-width:920px;margin:0 auto}
+#game{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  grid-gap:14px;
+  gap:14px;
+}
+
+/* Card: a fixed height (not aspect-ratio) so older iPhones and Chinese
+   browsers that don't support aspect-ratio still show the tiles */
+.card{
+  position:relative;
+  width:100%;
+  height:130px;
+  cursor:pointer;
+  border-radius:var(--radius);
+  -webkit-perspective:900px;perspective:900px;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  -webkit-user-select:none;user-select:none;
+  outline:none;
+}
+.inner{
+  position:absolute;
+  top:0;right:0;bottom:0;left:0;
+  -webkit-transform-style:preserve-3d;transform-style:preserve-3d;
+  -webkit-transition:-webkit-transform .45s ease;
+  transition:transform .45s ease;
+}
+.card.flipped .inner,.card.matched .inner{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}
+
+.front,.back{
+  position:absolute;
+  top:0;right:0;bottom:0;left:0;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  border-radius:calc(var(--radius) - 2px);
+  display:-webkit-box;display:-webkit-flex;display:flex;
+  -webkit-align-items:center;align-items:center;
+  -webkit-justify-content:center;justify-content:center;
+  text-align:center;
+  padding:.8rem;
+  border:2px solid transparent;
+  box-shadow:var(--shadow);
+  font-size:.95rem;
+  font-weight:600;
+  line-height:1.3;
+  overflow:hidden;
+  word-break:break-word;
+  overflow-wrap:anywhere;
+  /* Belt and braces: if a browser ignores backface-visibility, the hidden
+     face is also faded out halfway through the flip, so answers never show through */
+  -webkit-transition:opacity 0s linear .22s, box-shadow .3s ease, border-color .3s ease;
+  transition:opacity 0s linear .22s, box-shadow .3s ease, border-color .3s ease;
+}
+.front{opacity:1}
+.back{opacity:0;-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}
+.card.flipped .front,.card.matched .front{opacity:0}
+.card.flipped .back,.card.matched .back{opacity:1}
+
+/* Face down: formal = dark grey, casual = light grey */
+.card[data-type="academic"] .front{background:var(--formal-down);border-color:#2a2a2a}
+.card[data-type="casual"]   .front{background:var(--casual-down);border-color:#b5b5b5}
+/* Face up: same family, a shade lighter, with readable text */
+.card[data-type="academic"] .back{background:var(--formal-up);color:#fff;border-color:#2a2a2a}
+.card[data-type="casual"]   .back{background:var(--casual-up);color:#1e1e1e;border-color:#b5b5b5}
+
+/* Small label in the corner of face-down tiles */
+.front small{
+  font-size:.62rem;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  opacity:.75;
+}
+.card[data-type="academic"] .front small{color:#e0e0e0}
+.card[data-type="casual"]   .front small{color:#4a4a4a}
+
+/* Matched: both cards in a pair get the same coloured outline */
+.card.matched{cursor:default}
+.card.matched .back{
+  border-color:var(--pair, #2f7d4b);
+  box-shadow:0 0 0 3px var(--pair, #2f7d4b), var(--shadow);
+}
+
+/* Keyboard */
+.card:focus-visible .front,.card:focus-visible .back{box-shadow:0 0 0 3px var(--brand), var(--shadow)}
+
+#status{
+  text-align:center;
+  font-weight:800;
+  min-height:1.6em;
+  margin-top:.9rem;
+  color:var(--ok);
+}
+
+/* ===== Gap fill ===== */
+#gapfill{
+  width:100%;
+  max-width:920px;
+  margin:1.6rem auto 0;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:1.2rem 1.1rem;
+}
+#gapfill p{margin:.75rem 0;color:var(--ink)}
+#gapfill .sentences{line-height:2.4}
+#gapfill em{color:var(--muted)}
+#gapfill input{
+  -webkit-appearance:none;appearance:none;
+  width:110px;
+  max-width:40vw;
+  border:none;
+  border-bottom:2px solid #c8c8c8;
+  border-radius:0;
+  background:transparent;
+  color:var(--ink);
+  text-align:center;
+  margin:0 .2rem;
+  font-family:inherit;
+  font-size:16px;                 /* 16px stops iPhones zooming in when you tap a gap */
+  padding:.2rem .2rem;
+}
+#gapfill input:focus{outline:none;border-bottom-color:#7a7a7a}
+.correct{color:var(--ok)!important;border-bottom-color:var(--ok)!important}
+.incorrect{color:var(--err)!important;border-bottom-color:var(--err)!important}
+#checkBtn{display:block;margin:1.1rem auto 0}
+#feedback{text-align:center;margin-top:.85rem;color:var(--muted);font-weight:800}
+
+/* ===== Nav ===== */
+.nav-buttons{
+  display:-webkit-box;display:-webkit-flex;display:flex;
+  -webkit-justify-content:center;justify-content:center;
+  -webkit-flex-wrap:wrap;flex-wrap:wrap;
+  margin:1.5rem 0 0;
+}
+.nav-buttons a{
+  display:inline-block;
+  margin:.375rem;
+  background:rgba(255,255,255,.75);
+  color:#2a2a2a;
+  border:1.5px solid #2a2a2a;
+  border-radius:4px;
+  padding:.75rem 1.4rem;
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .2s ease, color .2s ease;
+}
+.nav-buttons a .arrow{display:inline-block;margin-left:.4rem;color:#b8470b;transition:transform .2s ease, color .2s ease}
+@media (hover:hover){
+  .nav-buttons a:hover{background:#2a2a2a;color:var(--brand)}
+  .nav-buttons a:hover .arrow{color:var(--brand);transform:translateX(3px)}
+}
+.nav-buttons a:active{background:#2a2a2a;color:var(--brand)}
+.nav-buttons a:focus-visible{outline:3px solid #2a2a2a;outline-offset:2px}
+@media (max-width:600px){
+  .nav-buttons{-webkit-flex-direction:column;flex-direction:column;-webkit-align-items:center;align-items:center}
+  .nav-buttons a{width:100%;max-width:320px;text-align:center}
+}
+
+footer{
+  margin-top:auto;
+  background:var(--dark);
+  color:#fff;
+  text-align:center;
+  padding:1rem;
+  padding-bottom:calc(1rem + env(safe-area-inset-bottom, 0px));
+  font-size:.9rem;
+}
+
+/* ===== Responsive ===== */
+/* Small laptops and tablets (iPad, Android tablets) */
+@media (max-width:900px){
+  #game{grid-gap:12px;gap:12px}
+  .card{height:122px}
+  .front,.back{font-size:.9rem;padding:.65rem}
+}
+/* Phones: 2 columns so every sentence fits and stays readable */
+@media (max-width:600px){
+  header{font-size:1.1rem;letter-spacing:1.5px;padding-top:calc(3.4rem + env(safe-area-inset-top, 0px))}
+  header span{font-size:.7rem;letter-spacing:2px}
+  .qr-area-left{left:10px;top:calc(10px + env(safe-area-inset-top, 0px))}
+  .page{padding-top:1rem}
+  #game{grid-template-columns:repeat(2, minmax(0,1fr));grid-gap:10px;gap:10px}
+  .card{height:112px}
+  .front,.back{font-size:.92rem;padding:.6rem}
+  #gapfill{padding:1rem .85rem}
+  #gapfill .sentences{line-height:2.6}
+}
+/* Very small phones (iPhone SE 1st gen, budget Android) */
+@media (max-width:360px){
+  .card{height:118px}
+  .front,.back{font-size:.84rem;padding:.45rem}
+  header{font-size:1rem}
+}
+/* Phones turned sideways: back to 4 columns */
+@media (max-width:900px) and (max-height:500px) and (orientation:landscape){
+  #game{grid-template-columns:repeat(4, minmax(0,1fr))}
+  .card{height:100px}
+  .front,.back{font-size:.82rem}
+}
+
+/* ===== Sound button ===== */
+.btn-sound,.btn-sound:active{
+  background:none;
+  border:none;
+  color:#2a2a2a;
+  padding:.4rem .6rem;
+  opacity:.8;
+}
+@media (hover:hover){ .btn-sound:hover{background:none;color:#2a2a2a;opacity:1} }
+.btn-sound[aria-pressed="false"]{opacity:.5}
+.controls .btn{margin:.3rem .4rem}
+
+/* ===== Pair counter ===== */
+.pair-count{
+  text-align:center;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#444;
+  margin:-.4rem 0 1rem;
+}
+.pair-count b{font-size:1.1rem;color:#1e1e1e;letter-spacing:1px}
+
+/* ===== Instructions tile (opens when the page loads) ===== */
+.rules-overlay{
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  z-index:9500;
+  display:-webkit-box;display:-webkit-flex;display:flex;
+  -webkit-align-items:center;align-items:center;
+  -webkit-justify-content:center;justify-content:center;
+  padding:16px;
+  padding-top:max(16px, env(safe-area-inset-top, 0px));
+  padding-bottom:max(16px, env(safe-area-inset-bottom, 0px));
+  background:rgba(20,20,20,.62);
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.rules-overlay[hidden]{display:none}
+body.rules-open{overflow:hidden}
+.rules-tile{
+  position:relative;
+  width:100%;
+  max-width:580px;
+  margin:auto;
+  background:#fff;
+  color:var(--ink);
+  border-radius:18px;
+  border:3px solid var(--brand);
+  box-shadow:0 18px 50px rgba(0,0,0,.35);
+  padding:1.5rem 1.5rem 1.3rem;
+  text-align:left;
+  -webkit-animation:rulesIn .35s ease-out;animation:rulesIn .35s ease-out;
+}
+@-webkit-keyframes rulesIn{from{opacity:0;-webkit-transform:translateY(14px)}to{opacity:1;-webkit-transform:none}}
+@keyframes rulesIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.rules-kicker{margin:0;text-align:center;font-size:.72rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#b8470b}
+.rules-tile h2{margin:.25rem 0 .9rem;text-align:center;font-size:1.45rem;color:var(--ink);line-height:1.25}
+.rules-tile h3{font-size:.78rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#444;margin:1rem 0 .45rem}
+.rules-steps{margin:0;padding-left:1.3rem;line-height:1.5;font-size:.95rem}
+.rules-steps li{margin-bottom:.3rem}
+.rules-steps .sw{display:inline-block;width:14px;height:11px;border-radius:2px;vertical-align:-1px;margin:0 2px}
+.rules-steps .sw.dark{background:var(--formal-down)}
+.rules-steps .sw.light{background:var(--casual-down);border:1px solid #b5b5b5}
+.rules-why{font-size:.93rem;line-height:1.55;margin:0 0 .6rem}
+.rules-uses{
+  display:-webkit-box;display:-webkit-flex;display:flex;
+  -webkit-flex-wrap:wrap;flex-wrap:wrap;
+  margin:0 -4px .7rem;
+}
+.rules-uses span{
+  margin:4px;
+  font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  background:#2a2a2a;color:#fff;border-radius:4px;padding:.3rem .6rem;
+}
+.rules-example{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-gap:8px;gap:8px;
+  margin:0 0 .8rem;
+}
+.rules-example div{border-radius:10px;padding:.55rem .65rem;font-size:.86rem;line-height:1.35;font-weight:600}
+.rules-example small{display:block;font-size:.6rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;opacity:.75;margin-bottom:2px}
+.rules-example .ex-casual{background:var(--casual-up);border:1px solid #b5b5b5;color:#1e1e1e}
+.rules-example .ex-academic{background:var(--formal-up);color:#fff}
+.rules-tips{margin:0 0 1rem;padding-left:1.2rem;font-size:.88rem;line-height:1.5;color:#333}
+.rules-tips li{margin-bottom:.2rem}
+.rules-go{display:block;margin:0 auto}
+@media (max-width:600px){
+  .rules-tile{padding:1.1rem .95rem 1rem}
+  .rules-tile h2{font-size:1.15rem;margin-bottom:.6rem}
+  .rules-tile h3{margin:.75rem 0 .35rem}
+  .rules-steps{font-size:.86rem;padding-left:1.1rem}
+  .rules-steps li{margin-bottom:.2rem}
+  .rules-why{font-size:.85rem;line-height:1.45}
+  .rules-uses span{font-size:.6rem;letter-spacing:1px;padding:.22rem .45rem;margin:3px}
+  .rules-example div{font-size:.8rem;padding:.45rem .55rem}
+  .rules-tips{font-size:.8rem;line-height:1.4;margin-bottom:.8rem}
+}
+@media (prefers-reduced-motion:reduce){ .rules-tile{-webkit-animation:none;animation:none} }
+
+/* ===== Win: every tile lights up in a wave ===== */
+.card.celebrate .back{
+  -webkit-animation:tileGlow 1.2s ease-in-out var(--gd, 0s) 4;
+  animation:tileGlow 1.2s ease-in-out var(--gd, 0s) 4;
+}
+@-webkit-keyframes tileGlow{
+  0%,100%{-webkit-filter:brightness(1);filter:brightness(1)}
+  45%{-webkit-filter:brightness(1.35);filter:brightness(1.35);box-shadow:0 0 0 4px var(--pair, #ffd54a), 0 0 28px 6px var(--pair, #ffd54a)}
+}
+@keyframes tileGlow{
+  0%,100%{filter:brightness(1)}
+  45%{filter:brightness(1.35);box-shadow:0 0 0 4px var(--pair, #ffd54a), 0 0 28px 6px var(--pair, #ffd54a)}
+}
+.card.celebrate{-webkit-animation:tilePop .6s ease-out var(--gd, 0s) both;animation:tilePop .6s ease-out var(--gd, 0s) both}
+@-webkit-keyframes tilePop{0%{-webkit-transform:scale(1)}50%{-webkit-transform:scale(1.07)}100%{-webkit-transform:scale(1)}}
+@keyframes tilePop{0%{transform:scale(1)}50%{transform:scale(1.07)}100%{transform:scale(1)}}
+#status.win{font-size:1.15rem;color:#b8470b}
+
+/* Fireworks layer (drawn on a canvas over the page; taps go straight through) */
+#fireworks{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  z-index:9000;
+  display:none;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .inner,.btn{-webkit-transition:none;transition:none}
+  .front,.back{-webkit-transition:none;transition:none}
+  .card.celebrate,.card.celebrate .back{-webkit-animation:none;animation:none}
+}
+</style>
+
+<!-- QR library (loads after the page; if it's slow or blocked, e.g. in China, the QR panel shows the link as text) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+</head>
+
+<body>
+  <!-- Game music: wonders.mp3 in the same folder – soft while playing, louder after a win -->
+  <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline>
+    <source src="wonders.mp3" type="audio/mpeg">
+    <source src="wonders.mp4" type="audio/mp4">
+  </audio>
+  <canvas id="fireworks" aria-hidden="true"></canvas>
+
+  <!-- ===== Instructions tile (opens when the page loads) ===== -->
+  <div class="rules-overlay" id="rules" role="dialog" aria-modal="true" aria-labelledby="rulesTitle" hidden>
+    <div class="rules-tile">
+      <p class="rules-kicker">How to play</p>
+      <h2 id="rulesTitle">Casual vs Academic Language</h2>
+      <ol class="rules-steps">
+        <li>Flip <b>two tiles</b>: a light <span class="sw light"></span> <b>casual</b> tile and a dark <span class="sw dark"></span> <b>academic</b> tile.</li>
+        <li>If they say the same thing, it's a <b>pair</b> – they stay face up. If not, they turn back over.</li>
+        <li>Count your pairs. Find all <b>8</b> to win. Playing in teams? Take turns and keep score – the most pairs wins.</li>
+        <li>Then try the <b>gap-fill</b> below using the academic language.</li>
+      </ol>
+
+      <h3>Why tone matters</h3>
+      <p class="rules-why">The same idea can sound chatty or professional. Choosing the right <b>tone</b> (or <b>register</b>) is marked in exams and noticed at work – a casual phrase in an essay or report can cost you marks or make you sound less expert.</p>
+      <div class="rules-uses" aria-label="Useful for">
+        <span>IELTS Writing</span><span>PTE Academic</span><span>Academic English</span><span>Business English</span>
+      </div>
+      <div class="rules-example">
+        <div class="ex-casual"><small>Casual</small>The prices went up a lot.</div>
+        <div class="ex-academic"><small>Academic</small>The costs increased significantly.</div>
+      </div>
+      <ul class="rules-tips">
+        <li>Swap vague words (<i>a lot, big, things</i>) for precise ones (<i>considerable, substantial, factors</i>).</li>
+        <li>Avoid contractions – <i>it is</i>, not <i>it's</i>.</li>
+        <li>Choose one formal verb over a phrasal verb – <i>increase</i>, not <i>go up</i>.</li>
+      </ul>
+      <button type="button" class="btn rules-go" id="rulesGo">Let's play</button>
+    </div>
+  </div>
+
+  <header>
+    <!-- QR generator (top-left) -->
+    <div class="qr-area-left">
+      <button class="qr-btn" id="qrBtn" type="button" aria-expanded="false" aria-controls="qrcodeLeft" aria-label="Show QR code for this page">QR</button>
+      <div id="qrcodeLeft" aria-label="QR code"></div>
+    </div>
+
+    <a class="brand" href="https://modernenglish.au/">MODERN ENGLISH AUSTRALIA</a>
+    <span>KOALA SPIES SYDNEY</span>
+  </header>
+
+  <main class="page">
+    <span class="level">Matching Game · C2</span>
+    <h1>Casual vs Academic Language</h1>
+    <h2>Part 1 – Match casual English with its academic equivalent</h2>
+
+    <div class="tile-key" aria-hidden="true">
+      <span class="k-formal"><i></i>Dark tiles = academic</span>
+      <span class="k-casual"><i></i>Light tiles = casual</span>
+    </div>
+
+    <div class="controls">
+      <button class="btn" type="button" id="playAgain">Play again</button>
+      <button class="btn btn-sound" type="button" id="rulesBtn">📜 Instructions</button>
+      <button class="btn btn-sound" type="button" id="soundBtn" aria-pressed="true" aria-label="Sound on">🔊 Sound on</button>
+    </div>
+
+    <p class="pair-count" aria-live="polite">Pairs found: <b id="pairCount">0</b> / 8</p>
+
+    <div class="game-wrap">
+      <div id="game" aria-label="Matching game board"></div>
+      <div id="status" role="status" aria-live="polite"></div>
+    </div>
+
+    <section id="gapfill" aria-label="Gap fill practice">
+      <h2 style="margin-top:0">Part 2 – Academic English Gap-Fill</h2>
+      <p><strong>Topic:</strong> Ancient Ceramics<br>
+      Fill each gap with <em>one suitable word</em>. Use formal or academic language.</p>
+
+      <p class="sentences">
+        There had been (1) <input id="g1" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Gap 1"> developments in ceramic production before that period.<br>
+        It was (2) <input id="g2" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Gap 2"> practice to use such vessels for the storage of food and water.<br>
+        These artefacts (3) <input id="g3" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Gap 3"> specific iconography that attracted (4) <input id="g4" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Gap 4"> support among local communities.<br>
+        Although some items (5) <input id="g5" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Gap 5"> minor errors, they are still regarded as culturally valuable.<br>
+        Over time, the (6) <input id="g6" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Gap 6"> increased (7) <input id="g7" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Gap 7">, and artisans (8) <input id="g8" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Gap 8"> substantial influence.<br>
+        (9) <input id="g9" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Gap 9"> findings from new manufacturing techniques seem encouraging,
+        suggesting that they played a (10) <input id="g10" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Gap 10"> role in technological progress.
+      </p>
+
+      <button class="btn" id="checkBtn" type="button">Check answers</button>
+      <div id="feedback" role="status" aria-live="polite"></div>
+    </section>
+
+    <div class="nav-buttons">
+      <a href="https://modernenglish.au/vocabularygames.html">More Vocabulary Games<span class="arrow" aria-hidden="true">→</span></a>
+      <a href="https://modernenglish.au/">Home<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </main>
+
+  <footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</footer>
+
+<script>
+/* ===== QR (top-left) ===== */
+(function(){
+  var btn = document.getElementById("qrBtn");
+  var box = document.getElementById("qrcodeLeft");
+  btn.addEventListener("click", function(){
+    var open = box.style.display === "block";
+    if(!open && box.innerHTML === ""){
+      if(typeof window.QRCode !== "undefined"){
+        new QRCode(box, { text: window.location.href, width: 110, height: 110 });
+      }else{
+        box.textContent = window.location.href;   // QR library blocked or slow: show the link instead
+      }
+    }
+    box.style.display = open ? "none" : "block";
+    btn.setAttribute("aria-expanded", open ? "false" : "true");
+  });
+})();
+
+/* ==== PART 1: MATCHING GAME (8 pairs = 16 cards) ==== */
+var pairs = [
+  ["Before that, there were important changes.","There had been significant developments."],
+  ["That’s an important part.","That’s a significant aspect."],
+  ["The prices went up a lot.","The costs increased significantly."],
+  ["There was a very big difference.","There was an enormous variation."],
+  ["There were a lot of different types.","There was considerable diversity."],
+  ["They had a lot of power.","They wielded substantial influence."],
+  ["It shows special and unique designs.","It displays specific iconography."],
+  ["It has tiny mistakes in it.","It contains minor errors."],
+  ["The idea is really popular.","There is widespread support."],
+  ["They agree.","There is common ground."],
+  ["Everyone knows that…","It is common knowledge that…"],
+  ["Everyone was doing this.","It was common practice to do this."],
+  ["She did a lot of research.","She undertook extensive research."],
+  ["The results didn’t match.","The findings conflicted."],
+  ["He could continue the research.","He was able to maintain the program."],
+  ["It was difficult to keep the people focused.","It was challenging to maintain engagement."],
+  ["They asked different people to answer questions.","They surveyed a random sample."],
+  ["For ages.","For an extended period of time."],
+  ["There is still a big argument about that.","Considerable debate continues."],
+  ["How long it takes is important.","Timing is crucial."],
+  ["There are different parts that don’t make sense.","There are some conflicting elements."],
+  ["The first results look good.","Preliminary findings seem encouraging."],
+  ["They were important in the process.","They played a pivotal role."],
+  ["People are richer.","People are better off in economic terms."],
+  ["People think it’s a bad idea.","It is widely regarded as ineffective."],
+  ["The plan didn’t work.","The strategy proved unsuccessful."],
+  ["Their work was important.","Their work was highly influential."],
+  ["Thousands of years ago, it was usual.","In ancient times, it was commonplace."]
+];
+
+/* One outline colour per pair – strong enough to see on dark and light grey */
+var PAIR_COLOURS = ["#e6194b","#3cb44b","#4363d8","#f58231","#911eb4","#00a3a3","#f032e6","#9a6324"];
+
+/* ===== Music: wonders.mp3 – soft while playing, pumping after a win =====
+   iPhones and iPads ignore an audio element's own volume, so on those devices the
+   sound goes through the browser's sound system instead (only works on the website,
+   not from a computer folder). Everyone else uses the normal volume control. */
+var Music = (function(){
+  var SOFT = 0.15, LOUD = 0.9;                 // ← change these to taste
+  var el = document.getElementById("bgMusic");
+  var on = true;
+  try{ if(localStorage.getItem("cvaMusic") === "off") on = false; }catch(e){}
+  var ctx = null, gain = null, wired = false, level = SOFT;
+  var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
+              (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var canRoute = isIOS && /^https?:$/.test(location.protocol);
+
+  function wire(){
+    if(wired || !el) return;
+    wired = true;
+    if(!canRoute) return;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return;
+    try{
+      ctx = new AC();
+      var src = ctx.createMediaElementSource(el);
+      gain = ctx.createGain();
+      gain.gain.value = 0.0001;
+      src.connect(gain); gain.connect(ctx.destination);
+    }catch(e){ gain = null; }
+  }
+  function setLevel(v, secs){
+    level = v;
+    if(!el) return;
+    if(gain && ctx){
+      var t = ctx.currentTime;
+      gain.gain.cancelScheduledValues(t);
+      gain.gain.setValueAtTime(Math.max(gain.gain.value, 0.0001), t);
+      gain.gain.linearRampToValueAtTime(on ? v : 0.0001, t + (secs || 0.6));
+    }else{
+      try{ el.volume = on ? v : 0; }catch(e){}
+    }
+  }
+  function start(){
+    if(!on || !el) return;
+    wire();
+    if(ctx && ctx.state === "suspended" && ctx.resume) ctx.resume();
+    el.muted = false;
+    if(el.paused){ var p = el.play(); if(p && p.catch) p.catch(function(){}); }
+    setLevel(level, 0.8);
+  }
+  function soft(){ setLevel(SOFT, 1.0); }
+  function loud(){ start(); setLevel(LOUD, 1.2); }
+  function setOn(v){
+    on = v;
+    try{ localStorage.setItem("cvaMusic", v ? "on" : "off"); }catch(e){}
+    if(v){ start(); }
+    else if(el){ setLevel(0, 0.2); el.pause(); }
+  }
+  if(el){
+    el.addEventListener("error", function(){
+      if(window.console) console.warn("Music could not be loaded – check wonders.mp3 sits next to this page.");
+    }, true);
+  }
+  return { start:start, soft:soft, loud:loud, setOn:setOn, isOn:function(){ return on; } };
+})();
+
+/* ===== Sound effects: paper and typewriter (made in the browser – no audio files) =====
+   Tile turn  = a paper swish
+   No match   = paper sliding back
+   Pair made  = three typewriter keys and the carriage-return bell
+   Win        = the carriage return ratchets across, then a double bell */
+var SFX = (function(){
+  var ctx = null, noise = null;
+  var on = true;
+  try{ if(localStorage.getItem("cvaMusic") === "off") on = false; }catch(e){}
+
+  function ac(){
+    if(!on) return null;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return null;
+    if(!ctx){
+      try{ ctx = new AC(); }catch(e){ return null; }
+      // one second of white noise, reused for every paper and key sound
+      noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+      var d = noise.getChannelData(0);
+      for(var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    }
+    if(ctx.state === "suspended" && ctx.resume) ctx.resume();
+    return ctx;
+  }
+
+  // a short burst of filtered noise: the basis of paper and key sounds
+  function hiss(c, t, dur, type, f1, f2, q, vol){
+    var src = c.createBufferSource(), flt = c.createBiquadFilter(), g = c.createGain();
+    src.buffer = noise;
+    flt.type = type; flt.Q.value = q;
+    flt.frequency.setValueAtTime(f1, t);
+    if(f2 !== f1) flt.frequency.exponentialRampToValueAtTime(f2, t + dur);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + Math.min(0.012, dur / 4));
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(flt); flt.connect(g); g.connect(c.destination);
+    src.start(t, Math.random() * 0.5); src.stop(t + dur + 0.05);
+  }
+  function tone(c, t, f, dur, vol, type){
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(f, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.004);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  // one typewriter key: a sharp clack plus a low thunk as the typebar hits the platen
+  function key(c, t, vol){
+    hiss(c, t, 0.035, "highpass", 2600, 2600, 0.7, 0.5 * vol);
+    hiss(c, t, 0.06, "bandpass", 900, 500, 1.2, 0.35 * vol);
+    tone(c, t, 140 + Math.random() * 30, 0.05, 0.25 * vol, "triangle");
+  }
+  function bell(c, t, vol){
+    tone(c, t, 2093, 0.9, 0.16 * vol, "sine");
+    tone(c, t, 4186, 0.5, 0.05 * vol, "sine");
+    tone(c, t, 3136, 0.35, 0.03 * vol, "sine");
+  }
+
+  function flip(){                       // paper swish
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    hiss(c, t, 0.16, "bandpass", 1400, 4200, 0.9, 0.35);
+    hiss(c, t + 0.03, 0.09, "highpass", 5000, 5000, 0.5, 0.08);
+  }
+  function miss(){                       // paper sliding back
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    hiss(c, t, 0.28, "bandpass", 3200, 900, 0.8, 0.22);
+  }
+  function match(){                      // tap-tap-tap … ding!
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    key(c, t, 1); key(c, t + 0.085, 0.9); key(c, t + 0.16, 1);
+    bell(c, t + 0.3, 1);
+  }
+  function win(){                        // carriage return ratchet, then a double bell
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    for(var i = 0; i < 14; i++){
+      hiss(c, t + i * 0.03, 0.02, "highpass", 3000, 3000, 0.8, 0.25);
+    }
+    hiss(c, t + 0.44, 0.12, "bandpass", 700, 300, 1, 0.45);   // the clunk at the end
+    bell(c, t + 0.55, 1.1);
+    bell(c, t + 0.85, 1.1);
+  }
+  function shuffle(){                    // a quick riffle of paper
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    for(var i = 0; i < 5; i++) hiss(c, t + i * 0.05, 0.07, "bandpass", 2500 + i * 300, 4000, 1, 0.12);
+  }
+  function setOn(v){ on = v; }
+  return { flip:flip, miss:miss, match:match, win:win, shuffle:shuffle, setOn:setOn };
+})();
+
+/* Sound button: music and sound effects together */
+(function(){
+  var btn = document.getElementById("soundBtn");
+  function paint(){
+    var on = Music.isOn();
+    btn.textContent = on ? "🔊 Sound on" : "🔇 Sound off";
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.setAttribute("aria-label", on ? "Sound on" : "Sound off");
+  }
+  btn.addEventListener("click", function(){ var v = !Music.isOn(); Music.setOn(v); SFX.setOn(v); if(v) SFX.flip(); paint(); });
+  paint();
+})();
+
+/* ===== Fireworks (canvas – no images or libraries needed) ===== */
+var Fireworks = (function(){
+  var cv = document.getElementById("fireworks");
+  var cx = cv && cv.getContext ? cv.getContext("2d") : null;
+  var parts = [], rockets = [], running = false, endAt = 0, nextLaunch = 0, raf = 0;
+  var COLS = ["#ff7a1a","#ffd54a","#e6194b","#3cb44b","#4363d8","#f032e6","#00c2c2","#ffffff"];
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var W = 0, H = 0, dpr = 1;
+
+  function size(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function launch(){
+    rockets.push({
+      x: W * (0.15 + Math.random() * 0.7), y: H,
+      vx: (Math.random() - 0.5) * 2, vy: -(H * 0.012 + Math.random() * H * 0.006),
+      col: COLS[Math.floor(Math.random() * COLS.length)]
+    });
+  }
+  function burst(r){
+    var n = W < 600 ? 40 : 70;                 // fewer sparks on phones
+    for(var i = 0; i < n; i++){
+      var a = Math.PI * 2 * i / n, sp = 1.5 + Math.random() * 3.5;
+      parts.push({ x:r.x, y:r.y, vx:Math.cos(a) * sp, vy:Math.sin(a) * sp,
+                   life:1, decay:0.012 + Math.random() * 0.012,
+                   col: Math.random() < 0.25 ? "#ffffff" : r.col });
+    }
+  }
+  function frame(t){
+    cx.clearRect(0, 0, W, H);
+    if(t < endAt && t > nextLaunch){ launch(); if(Math.random() < 0.4) launch(); nextLaunch = t + 350 + Math.random() * 350; }
+    for(var i = rockets.length - 1; i >= 0; i--){
+      var r = rockets[i];
+      r.x += r.vx; r.y += r.vy; r.vy += 0.12;
+      cx.fillStyle = r.col; cx.beginPath(); cx.arc(r.x, r.y, 2.4, 0, 6.283); cx.fill();
+      if(r.vy >= -1){ burst(r); rockets.splice(i, 1); }
+    }
+    for(var j = parts.length - 1; j >= 0; j--){
+      var p = parts[j];
+      p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.vx *= 0.985; p.vy *= 0.985;
+      p.life -= p.decay;
+      if(p.life <= 0){ parts.splice(j, 1); continue; }
+      cx.globalAlpha = p.life;
+      cx.fillStyle = p.col; cx.beginPath(); cx.arc(p.x, p.y, 2, 0, 6.283); cx.fill();
+    }
+    cx.globalAlpha = 1;
+    if(t < endAt || rockets.length || parts.length){ raf = requestAnimationFrame(frame); }
+    else{ stop(); }
+  }
+  function start(secs){
+    if(!cx || reduce) return;
+    stop();
+    size();
+    cv.style.display = "block";
+    running = true;
+    var now = (window.performance && performance.now) ? performance.now() : 0;
+    endAt = now + (secs || 6) * 1000; nextLaunch = 0;
+    raf = requestAnimationFrame(frame);
+  }
+  function stop(){
+    if(raf) cancelAnimationFrame(raf);
+    raf = 0; running = false; parts = []; rockets = [];
+    if(cx) cx.clearRect(0, 0, W, H);
+    if(cv) cv.style.display = "none";
+  }
+  window.addEventListener("resize", function(){ if(running) size(); });
+  return { start:start, stop:stop };
+})();
+
+/* Win celebration: all tiles light up in a wave, fireworks, music pumps */
+function celebrate(){
+  var cards = document.querySelectorAll("#game .card");
+  for(var i = 0; i < cards.length; i++){
+    cards[i].style.setProperty("--gd", (i * 0.06) + "s");
+    cards[i].classList.add("celebrate");
+  }
+  statusEl.classList.add("win");
+  SFX.win();
+  Music.loud();
+  Fireworks.start(6);
+}
+
+var flipped = [];
+var matchedCount = 0;
+var board = document.getElementById("game");
+var statusEl = document.getElementById("status");
+
+function shuffle(a){
+  for(var i = a.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function makeCard(c){
+  var card = document.createElement("div");
+  card.className = "card";
+  card.tabIndex = 0;
+  card.setAttribute("role", "button");
+  card.setAttribute("aria-label", (c.type === "academic" ? "Academic" : "Casual") + " card, face down");
+  card.dataset.pair = c.pair;
+  card.dataset.type = c.type;
+
+  var inner = document.createElement("div");
+  inner.className = "inner";
+  var front = document.createElement("div");
+  front.className = "front";
+  front.innerHTML = "<small>" + (c.type === "academic" ? "Academic" : "Casual") + "</small>";
+  var back = document.createElement("div");
+  back.className = "back";
+  back.textContent = c.text;
+  inner.appendChild(front);
+  inner.appendChild(back);
+  card.appendChild(inner);
+
+  card.addEventListener("click", function(){ flip(card); });
+  card.addEventListener("keydown", function(e){
+    if(e.key === "Enter" || e.key === " " || e.keyCode === 13 || e.keyCode === 32){
+      e.preventDefault();
+      flip(card);
+    }
+  });
+  return card;
+}
+
+function initGame(){
+  board.innerHTML = "";
+  flipped = [];
+  matchedCount = 0;
+  document.getElementById("pairCount").textContent = "0";
+  statusEl.textContent = "";
+  statusEl.classList.remove("win");
+  Fireworks.stop();
+  Music.soft();
+
+  var gamePairs = shuffle(pairs.slice()).slice(0, 8);
+  var cards = [];
+  gamePairs.forEach(function(p, i){
+    cards.push({ text:p[0], pair:i, type:"casual" });
+    cards.push({ text:p[1], pair:i, type:"academic" });
+  });
+  shuffle(cards).forEach(function(c){ board.appendChild(makeCard(c)); });
+}
+
+function flip(card){
+  if(card.classList.contains("flipped") || card.classList.contains("matched")) return;
+  if(flipped.length === 2) return;
+
+  card.classList.add("flipped");
+  card.setAttribute("aria-label", card.querySelector(".back").textContent);
+  Music.start();
+  SFX.flip();
+  flipped.push(card);
+
+  if(flipped.length === 2){
+    var c1 = flipped[0], c2 = flipped[1];
+    var isMatch = c1.dataset.pair === c2.dataset.pair && c1.dataset.type !== c2.dataset.type;
+
+    if(isMatch){
+      var colour = PAIR_COLOURS[matchedCount % PAIR_COLOURS.length];
+      [c1, c2].forEach(function(c){
+        c.classList.remove("flipped");
+        c.classList.add("matched");
+        c.style.setProperty("--pair", colour);
+        c.setAttribute("aria-label", c.querySelector(".back").textContent + " (matched)");
+      });
+      matchedCount++;
+      document.getElementById("pairCount").textContent = matchedCount;
+      flipped = [];
+      if(matchedCount < 8) setTimeout(SFX.match, 250);   // after the flip sound has finished
+      if(matchedCount === 8){
+        statusEl.textContent = "Well done – all 8 pairs matched! Press Play again for new sentences.";
+        setTimeout(celebrate, 450);
+      }
+    }else{
+      setTimeout(function(){
+        SFX.miss();
+        [c1, c2].forEach(function(c){
+          c.classList.remove("flipped");
+          c.setAttribute("aria-label", (c.dataset.type === "academic" ? "Academic" : "Casual") + " card, face down");
+        });
+        flipped = [];
+      }, 900);
+    }
+  }
+}
+
+document.getElementById("playAgain").addEventListener("click", function(){ SFX.shuffle(); initGame(); });
+initGame();
+
+/* ===== Instructions tile: opens when the page loads ===== */
+(function(){
+  var box = document.getElementById("rules");
+  var go = document.getElementById("rulesGo");
+  var open = document.getElementById("rulesBtn");
+  var lastFocus = null;
+  function show(){
+    lastFocus = document.activeElement;
+    box.hidden = false;
+    document.body.classList.add("rules-open");
+    box.scrollTop = 0;
+    setTimeout(function(){
+      try{ go.focus({ preventScroll:true }); }catch(e){ go.focus(); }
+      box.scrollTop = 0;                // start at the top on small phones
+    }, 30);
+  }
+  function hide(){
+    box.hidden = true;
+    document.body.classList.remove("rules-open");
+    Music.start();                      // a tap is needed before browsers allow music
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  go.addEventListener("click", hide);
+  box.addEventListener("click", function(e){ if(e.target === box) hide(); });
+  document.addEventListener("keydown", function(e){
+    if((e.key === "Escape" || e.keyCode === 27) && !box.hidden) hide();
+  });
+  open.addEventListener("click", show);
+  show();
+})();
+
+/* ==== PART 2: GAP FILL ==== */
+/* Each gap lists every answer that is accepted; the first is the model answer */
+var answers = [
+  ["significant","considerable"],            // 1 There had been ___ developments
+  ["common"],                                // 2 It was ___ practice
+  ["display","displayed"],                   // 3 These artefacts ___ specific iconography
+  ["widespread"],                            // 4 attracted ___ support
+  ["contain","contained"],                   // 5 some items ___ minor errors
+  ["costs","prices"],                        // 6 the ___ increased
+  ["significantly","considerably"],          // 7 increased ___
+  ["wielded","exerted"],                     // 8 artisans ___ substantial influence
+  ["preliminary"],                           // 9 ___ findings
+  ["pivotal","crucial"]                      // 10 a ___ role
+];
+
+document.getElementById("checkBtn").addEventListener("click", function(){
+  var correct = 0;
+  for(var i = 0; i < answers.length; i++){
+    var box = document.getElementById("g" + (i + 1));
+    if(!box) continue;
+    box.classList.remove("correct", "incorrect");
+    var user = box.value.trim().toLowerCase();
+    if(answers[i].indexOf(user) !== -1){
+      box.classList.add("correct");
+      correct++;
+    }else{
+      box.classList.add("incorrect");
+    }
+  }
+  document.getElementById("feedback").textContent = "You got " + correct + "/" + answers.length + " correct.";
+});
+</script>
+</body>
+</html>
