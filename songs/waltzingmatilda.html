@@ -15,7 +15,7 @@
   <!-- YouTube refuses to play embedded videos when it can't see which website they are on -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Waltzing Matilda – Interactive Song Lesson | Modern English Australia</title>
-  <meta name="description" content="Learn Australian words and the past simple with Waltzing Matilda. The video pauses with nine questions, then practise irregular verbs and the three -ed sounds.">
+  <meta name="description" content="Learn Australian words and the past simple with Waltzing Matilda. The video pauses with eight questions, then practise irregular verbs and the three -ed sounds.">
   <link rel="canonical" href="https://modernenglish.au/songs/waltzingmatilda.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -705,7 +705,7 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
 
   <div class="iv-pop" id="iv-pop" hidden>
     <div class="iv-card" role="dialog" aria-modal="true" aria-labelledby="iv-q">
-      <p class="iv-step" id="iv-step">Question 1 of 9</p>
+      <p class="iv-step" id="iv-step">Question 1 of 8</p>
       <p class="iv-q" id="iv-q"></p>
       <div id="iv-answer"></div>
       <p class="iv-explain" id="iv-explain" aria-live="polite"></p>
@@ -721,7 +721,7 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
   </div>
   <div class="iv-meta">
     <span id="iv-time">0:00</span>
-    <span id="iv-score">0 / 9 answered</span>
+    <span id="iv-score">0 / 8 answered</span>
   </div>
 </section>
 
@@ -735,7 +735,7 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
   <p class="gap-line">He <input class="gap" data-answer="sat"> (sit) under a coolibah tree.</p>
   <p class="gap-line">He <input class="gap" data-answer="sang"> (sing) while he <input class="gap" data-answer="waited"> (wait) for his kettle to boil.</p>
   <p class="gap-line">A sheep <input class="gap" data-answer="came"> (come) down to the water to drink.</p>
-  <p class="gap-line">The traveller <input class="gap" data-answer="grabbed"> (grab) it and <input class="gap" data-answer="put"> (put) it in his backpack.</p>
+  <p class="gap-line">The traveller <input class="gap" data-answer="grabbed"> (grab) it and <input class="gap" data-answer="shoved"> (shove) it in his backpack.</p>
   <p class="gap-line">The rich farmer <input class="gap" data-answer="rode"> (ride) up on his horse with three policemen.</p>
   <p class="gap-line">The traveller <input class="gap" data-answer="jumped"> (jump) into the river to escape.</p>
   <p class="gap-line">The traveller <input class="gap" data-answer="preferred"> (prefer) to die rather than become a prisoner.</p>
@@ -820,7 +820,7 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
     <div class="tile-body">
       <p><strong>Waltzing Matilda</strong> is Australia’s best-known folk song. It tells the story of a
          <strong>swagman</strong>, a travelling worker, and it’s full of old Australian words.</p>
-      <p>The video stops nine times with a question about the story or a word. Answer it, then press
+      <p>The video stops eight times with a question about the story or a word. Answer it, then press
          <strong>Continue</strong>. The yellow dots under the video take you back to any question.</p>
       <p>After the video, practise the <strong>past simple</strong> verbs that tell the story.</p>
       <p class="tile-task">Press play, and listen carefully.</p>
@@ -860,27 +860,23 @@ const STOPS = [
     explain: "A jumbuck is old slang for a sheep. A billabong is an Aboriginal word for a pool or pond that is left when a river changes its course. The coolibah is the tree beside it." },
 
   { time: 65, type: "choice",
-    q: "He sang 'You'll come a waltzing matilda with me' What was he doing with the jumbuck/sheep?",
-    options: ["He was dancing with it", "He was stealing it", "He was killing it", "He was feeding it"],
-    answer: 1,
-    explain: "'Tucker' is slang for food and it is still commonly used in Australia. For example, a school canteen is called a ‘tuckshop’." },
-
- 
-  { time: 105, type: "choice",
     q: "What did the swagman do with the jumbuck?",
-    options: ["He gave it some water", "He took it and hid it in his food bag", "He chased it away", "He sold it at the market"],
+    options: ["He gave it some water", "He grabbed it and shoved it in his food bag", "He chased it away", "He sold it at the market"],
     answer: 1,
-    explain: "He grabbed the sheep and put it in his ‘tuckerbag’. ‘Tucker’ is Australian slang for food." },
-  
-  
-         { time: 137, type: "choice",
+    explain: "He grabbed the sheep and shoved it in his ‘tuckerbag’ (‘shove’ = push something in roughly and quickly). ‘Tucker’ is Australian slang for food." },
+
+        { time: 96, type: "choice",
     q: "He sang 'down came the 'squatter' and down came the 'troopers' on their thorough bred (horses). Who are they?",
     options: ["His mother and wife", "some other thieves", "a kangaroo and wombat", "A rich farmer and the police"],
     answer: 3,
     explain: "'Squatters' refer to rich British colonist who claimed the land (swagman were often freed convicts or refugees). The 'troopers' are the British police or soldiers who protected the colonists." },
 
   
-  { time: 158, type: "choice",
+
+  
+  
+  
+  { time: 119, type: "choice",
     q: "When the squatter and troopers sang 'You'll come a waltzing matilda with me, what did they mean? ",
      options: ["Let’s dance and be friends", "welcome to my farm, enjoy yourself", "they were crazy and made no sense", "We are taking you to prison"],
     answer: 3,
