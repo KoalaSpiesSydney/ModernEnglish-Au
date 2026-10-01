@@ -727,17 +727,18 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
 <main>
 
 <section class="verse-card">
-  <h2>1 · Tell the story · Past simple</h2>
+  <h2>1 · Retell the story · Past simple</h2>
   <p class="lead">Write the verb in brackets in the past simple.</p>
 
-  <p class="gap-line">Once, a swagman <input class="gap" data-answer="camped"> (camp) beside a billabong.</p>
+  <p class="gap-line">Once, a travel <input class="gap" data-answer="camped"> (camp) beside a river.</p>
   <p class="gap-line">He <input class="gap" data-answer="sat"> (sit) under a coolibah tree.</p>
-  <p class="gap-line">He <input class="gap" data-answer="sang"> (sing) while he <input class="gap" data-answer="waited"> (wait) for his billy to boil.</p>
-  <p class="gap-line">A jumbuck <input class="gap" data-answer="came"> (come) down to the water to drink.</p>
-  <p class="gap-line">The swagman <input class="gap" data-answer="grabbed"> (grab) it and <input class="gap" data-answer="put"> (put) it in his tuckerbag.</p>
-  <p class="gap-line">The squatter <input class="gap" data-answer="rode"> (ride) up on his horse with three troopers.</p>
-  <p class="gap-line">The swagman <input class="gap" data-answer="jumped"> (jump) into the billabong.</p>
-  <p class="gap-line">The troopers never <input class="gap" data-answer="caught"> (catch) him alive.</p>
+  <p class="gap-line">He <input class="gap" data-answer="sang"> (sing) while he <input class="gap" data-answer="waited"> (wait) for his kettle to boil.</p>
+  <p class="gap-line">A shee <input class="gap" data-answer="came"> (come) down to the water to drink.</p>
+  <p class="gap-line">The travel <input class="gap" data-answer="grabbed"> (grab) it and <input class="gap" data-answer="put"> (put) it in his backpack.</p>
+  <p class="gap-line">The rich farmer <input class="gap" data-answer="rode"> (ride) up on his horse with three policemen.</p>
+  <p class="gap-line">The traveller <input class="gap" data-answer="jumped"> (jump) into the river to escape.</p>
+  <p class="gap-line">The traveller <input class="gap" data-answer="preferred"> (prefer) to die rather than become a prisoner.</p>
+  <p class="gap-line">The police never <input class="gap" data-answer="caught"> (catch) him alive.</p>
   <p class="gap-line">People say they <input class="gap" data-answer="heard"> (hear) his ghost singing.</p>
 
   <div class="card-actions">
@@ -796,7 +797,6 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
 <section class="verse-card">
   <h2>Talk about it</h2>
   <ul class="discuss">
-    <li>Was the swagman a hero or a thief? Why?</li>
     <li>Why do you think many Australians love this song so much?</li>
     <li>Is there a famous folk song from your country? What story does it tell?</li>
   </ul>
@@ -840,44 +840,62 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
 const VIDEO_ID = "FqtttbbYfSM";
 
 const STOPS = [
-  { time: 22, type: "choice",
+  { time: 12, type: "choice",
     q: "The song is about a ‘swagman’. What is a swagman?",
     options: ["A rich farmer", "A travelling worker who carries everything he owns", "A soldier", "A sheep shearer in a big shed"],
     answer: 1,
-    explain: "A swagman walked from farm to farm looking for work, carrying his ‘swag’: a bedroll with all his things." },
+    explain: "A swagman walked from farm to farm looking for work, carrying his ‘swag’ or a bag: a bedroll with all his things. Something like a backpacker." },
 
-  { time: 38, type: "choice",
-    q: "He camped by a ‘billabong’. What is a billabong?",
-    options: ["A small pool of water left by a river", "A kind of tent", "A country pub", "A tall gum tree"],
+    { time: 22, type: "choice",
+    q: "‘swagman/ traveller ’ waited until his 'billy' boiled. What is a 'billy'?",
+    options: ["A goat", "A camp kettle ", "A bathtub", "A friend"],
+    answer: 1,
+    explain: "A billy is a kettle or pot used to boil water and make tea. Swagmen used to make fires and boil tea in a billy." },
+
+  { time: 54, type: "choice",
+    q: "A 'jumbuck' came down to drink by the ‘billabong’. What is a jumback and what is a billabong?",
+    options: ["A sheep and a small pool of water left by a river", " A kanagaroo and a kind of tent", "A cowboy and a country pub", "A koala and a tall gum tree"],
     answer: 0,
-    explain: "A billabong is a pool or pond that is left when a river changes its course. The coolibah is the tree beside it." },
+    explain: "A jumback is old slang for a sheep. A billabong an Aborginal word for a pool or pond that is left when a river changes its course. The coolibah is the tree beside it." },
 
-  { time: 55, type: "choice",
-    q: "What was the swagman waiting for?",
-    options: ["A train to arrive", "His friends to come back", "His billy to boil", "The rain to stop"],
-    answer: 2,
-    explain: "A ‘billy’ is a tin can used to boil water over a fire, for tea." },
+  { time: 1.O5, type: "choice",
+    q: "He sang 'You'll come a waltzing matilda with me' What was he doing with the jumbuck/sheep?",
+    options: ["He was dancing with it", "He was stealing it", "He was killing it", "He was feeding it"],
+    answer: 1,
+    explain: "'Tucker' is slang for food and it is still commonly used in Australia. For example, a school canteen is called a "Tuckshop". },
 
-  { time: 85, type: "type",
-    q: "A ‘jumbuck’ came down to drink. What animal is a jumbuck? (one word)",
-    answer: "sheep",
-    explain: "‘Jumbuck’ is old Australian slang for a sheep." },
+        { time: 1.26, type: "choice",
+    q: "He sang 'down came the 'squatter' and down came the 'troopers' on their thorough bred (horses). Who are they?",
+    options: ["His mother and wife", "some other thieves", "a kangaroo and wombat", "A rich farmer and the police"],
+    answer: 3,
+    explain: "'Squatters' refer to rich British colonist who claimed the land (swagman were often freed convicts or refugees). The 'troopers' are the British police or soldiers who protected the colonists". },
 
+  
   { time: 105, type: "choice",
     q: "What did the swagman do with the jumbuck?",
     options: ["He gave it some water", "He took it and hid it in his food bag", "He chased it away", "He sold it at the market"],
     answer: 1,
     explain: "He grabbed the sheep and put it in his ‘tuckerbag’. ‘Tucker’ is Australian slang for food." },
+  
+  
+  
+  { time: 1.59, type: "type",
+    q: " When the squatter and troopers sand 'You'll come a waltzing matilda with me, what did they mean? ",
+     options: ["lets dance and be friends", "welcome to my farm, enjoy yourself", "they were crazy and made no sense", "We are taking you to prison"],
+    answer: 3,
+    explain: "‘Waltzing Matilda' has many colourful meanings related to imagery." },
+
+ 
 
   { time: 140, type: "choice",
-    q: "Who arrived next?",
-    options: ["The swagman’s family", "Some other swagmen", "The landowner and three policemen", "A group of farm workers"],
+    q: "Instead of being arrested, what did the swagman do?",
+    options: ["He shot the squatter", "He shot the troopers", "He jumped into the water and killed himself", "He made everyone some tea"],
     answer: 2,
     explain: "The ‘squatter’ (the rich landowner who owned the sheep) came with three ‘troopers’ (mounted police)." },
 
   { time: 175, type: "choice",
-    q: "How does the story end?",
-    options: ["The swagman goes to prison", "The swagman jumps into the billabong so they can’t catch him", "The squatter lets him keep the sheep", "The swagman runs away to the city"],
+    q: "What can you now hear by the billabong?",
+    options: ["The jumbuck's ghosts ", "The swagman's ghost", "The angry squatter", "The troopers swimming"],
     answer: 1,
     explain: "He chose the billabong rather than be caught. People say you can still hear his ghost singing there." }
 ];
