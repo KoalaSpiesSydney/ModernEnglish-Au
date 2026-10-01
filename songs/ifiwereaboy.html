@@ -838,61 +838,62 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
 const VIDEO_ID = "AWpsOqh8q0M";
 
 const STOPS = [
-
+  // 0:30
   { time: 30, type: "choice",
     q: "The song imagines being a different person. ‘If I were a boy’ describes…",
     options: ["something that happened yesterday", "something she plans to do", "an imaginary situation", "something that is always true"],
     answer: 2,
     explain: "‘If I were…’ is imaginary: she isn’t a boy, but she imagines it." },
 
-I'd kick it with who I wanted
-And I'd never get confronted for it
-'Cause they'd stick up for me
-  
-    { time: 38, type: "choice",
-    q: Beyonce sings: "I'd roll outta bed in the mornin, And throw on what I wanted, then go". What does she mean?,
-    options: ["She get out of bed early and get ready with care", "She'd get out of bed late and now worry about her appearance",
+  // 0:38
+  { time: 38, type: "choice",
+    q: "She sings that if she were a boy, she would get out of bed in the morning, put on whatever she wanted and go. What does she mean?",
+    options: ["She would get out of bed early and get ready with care", "She would get out of bed late and not worry about her appearance"],
     answer: 1,
-    explain: "She plays a police officer. Watch how she behaves with her work partner and at home." },
+    explain: "As a boy, she imagines she wouldn’t need to spend time on how she looks. She could just get up and go." },
 
-  { time: 102, type: "choice",
-    q: "She sings:" I'd kick it with who I wanted, And I'd never get confronted for it, 'Cause they'd stick up for me,
-    options: ["she would be faithful and pay attention to her girlfriend because she is afraid of getting caught.", "she do whatever she wanted with whoever she wanted and her friends would keep her secret", ],
+  // 1:02
+  { time: 62, type: "choice",
+    q: "She sings that she would spend time with whoever she wanted, nobody would challenge her about it, and her friends would defend her. What does she mean?",
+    options: ["She would be faithful and pay attention to her girlfriend because she is afraid of getting caught", "She would do whatever she wanted with whoever she wanted, and her friends would keep her secret"],
     answer: 1,
-    explain: "'Kick it with the boys'= party, 'get confronted' when somone accuses you directly of doing somethng bad, 'stick up' means 'stand up' or 'defend'." },
+    explain: "‘Kick it with the boys’ = hang out, party. ‘Get confronted’ = when someone accuses you directly of doing something bad. ‘Stick up for’ = stand up for, defend." },
 
-  { time: 140, type: "choice",
-    q: "She sings: 'Cause he's taken you for granted" to take for granted means,
-    options: ["to not appreciate what someone does for you", "to take a money from someone"],
+  // 1:40
+  { time: 100, type: "choice",
+    q: "She says he has taken her for granted. ‘To take someone for granted’ means…",
+    options: ["to not appreciate what someone does for you", "to take money from someone"],
     answer: 0,
-    explain: "to take someone or something for granted is to not appreciate them, thank them, unitl they are gone and it's too late. Then you miss them." },
+    explain: "To take someone or something for granted is to not appreciate them or thank them, until they are gone and it’s too late. Then you miss them." },
 
-  { time: 150, type: "choice",
+  // 1:50
+  { time: 110, type: "choice",
     q: "Vocabulary: to ‘take someone for granted’ means…",
     options: ["to thank them a lot", "to give them a present", "to stop valuing them because they are always there", "to ask them for permission"],
     answer: 2,
     explain: "If you take someone for granted, you forget how much they do for you." },
 
-
-  { time: 405, type: "choice",
+  // 4:05
+  { time: 245, type: "choice",
     q: "The ending has a twist. What do we discover?",
     options: ["It was all a dream about the future", "The roles were swapped: in real life, she is the one being hurt", "She loses her job", "They move to a new city"],
     answer: 1,
-    explain: "The video swaps the roles to make the man see how his behaviour feels." }
+    explain: "The video swaps the roles to make the man see how his behaviour feels." },
 
-    { time: 418, type: "choice",
-    q: "She changes the verb tense from 'I were a boy" to 'but you're just a boy' Why? ",
-    options: ["'were' is the past while 'are' is the present", " 'were' is imaginary while 'are' is realty",],
+  // 4:18
+  { time: 258, type: "choice",
+    q: "At the end she stops saying ‘if I were a boy’ and says that he IS just a boy. Why does she change from ‘were’ to ‘are’?",
+    options: ["‘Were’ is the past, while ‘are’ is the present", "‘Were’ is imaginary, while ‘are’ is reality"],
     answer: 1,
-    explain: "'were' is conditional in 'if' clauses. It is used to talk about imaginary present and future. It looks the same as past simple but it is not the past." },
+    explain: "‘Were’ in ‘if’ clauses is the conditional. It talks about the imaginary present and future. It looks the same as the past simple, but it is not the past." },
 
-  { time: 30, type: "choice",
-    q: "She sings 'You wish you were a better man". She refers? ",
-    options: ["something that happened before, " 'his imagination or desire'",],
+  // 4:30: check this time against the video
+  { time: 270, type: "choice",
+    q: "She says he wishes he were a better man. ‘Wish + were’ refers to…",
+    options: ["something that happened before", "his imagination or desire"],
     answer: 1,
-    explain: "'were' is conditional in 'if' clauses. It is used to talk about imaginary present and future. It looks the same as past simple but it is not the past." },
-      
-      ];
+    explain: "After ‘wish’, we use ‘were’ for something imaginary that we want to be true now. It looks like the past simple, but it is not the past." }
+];
 
 // =====================================================================
 // INTERACTIVE VIDEO — uses YouTube's own player, so the video stays
