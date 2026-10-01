@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-HCH5CJD2ZS');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- YouTube refuses to play embedded videos when it can't see which website they are on -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <title>Waltzing Matilda – Interactive Video</title>
+  <title>Waltzing Matilda – Interactive Song Lesson | Modern English Australia</title>
+  <meta name="description" content="Learn Australian words and the past simple with Waltzing Matilda. The video pauses with seven questions, then practise irregular verbs and the three -ed sounds.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap" rel="stylesheet">
@@ -599,6 +609,56 @@ select.gap { width: auto; min-width: 90px; background: #fff; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .iv-pop, .iv-card { animation: none; }
 }
+/* ===========================================================
+   Phones, tablets, touch screens and older browsers
+   (the same as the other song lessons)
+   =========================================================== */
+.back-button { background: #2a2f33; }
+.iv-pop { z-index: 7; }
+select.gap { padding: 6px 8px; margin: 0 4px; border: 2px solid var(--muted); border-radius: 8px; font-size: 1rem; color: var(--ink); }
+select.gap.correct { border-color: var(--good); background: #eafff1; }
+select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
+/* older browsers (iPhones before iOS 15, older Android) do not know
+   aspect-ratio or inset: without these the video box collapses */
+.tile-backdrop, .iv-notice, .iv-stage #yt, .iv-stage iframe, header::before { top: 0; right: 0; bottom: 0; left: 0; }
+@supports not (aspect-ratio: 16 / 9) {
+  .iv-stage { height: 0; padding-top: 56.25%; }
+  .iv-pop { position: static; background: none; padding: .8rem 0 0; }
+}
+@media (max-width: 600px) {
+  .verse-card { padding: 1.2rem 1rem; }
+  .verb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 .8rem; }
+  .verb-grid .gap-line { white-space: normal; padding: .3rem 0; }
+  .verb-grid input.gap { width: 100%; max-width: 110px; }
+  select.gap { min-width: 0; max-width: 100%; }
+  .card-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .card-actions .check-btn + .check-btn { margin-left: 0; }
+  .card-actions .feedback { flex-basis: 100%; }
+}
+/* touch screens: iPhones zoom in on boxes with text under 16px,
+   and fingers need bigger targets than a mouse */
+@media (pointer: coarse) {
+  input.gap, select.gap, .iv-type input.gap { font-size: 16px; min-height: 40px; }
+  .check-btn, .pdf-button, .tile-start, .iv-opt { min-height: 44px; }
+  .tile-close { width: 44px; height: 44px; }
+  .footer-nav a { display: inline-flex; align-items: center; min-height: 44px; }
+  .kss-label { padding-block: 12px; margin-block: -12px; }
+  .iv-notice a { display: inline-flex; align-items: center; min-height: 44px; }
+  .iv-dot::before { content: ""; position: absolute; top: -13px; right: -13px; bottom: -13px; left: -13px; }
+  .iv-fallback a { display: inline-block; padding: 10px 4px; }
+}
+/* short screens (phones held sideways): keep the whole video on screen
+   and put the question card under it */
+@media (max-height: 600px) {
+  .iv { width: min(94%, 900px, calc((100vh - 70px) * 16 / 9)); }
+  .iv-pop { position: static; aspect-ratio: auto; background: none; backdrop-filter: none; padding: .8rem 0 0; }
+  .iv-card { max-height: none; }
+  .page-head { padding-top: 1.2rem; }
+  .tile { padding: 1.2rem 1.4rem 1rem; max-height: 92vh; }
+  .tile-title { font-size: 1.25rem; margin-bottom: .6rem; }
+  .tile-body { font-size: 1rem; line-height: 1.45; }
+  .tile-actions { margin-top: 1rem; }
+}
 </style>
 </head>
 
@@ -621,6 +681,7 @@ select.gap { width: auto; min-width: 90px; background: #fff; cursor: pointer; }
 </section>
 
 <section class="page-tools">
+  <a class="pdf-button back-button" href="learnEnglishwithMusic.html">← All song lessons</a>
   <button type="button" class="pdf-button" id="open-instructions">ℹ️ Instructions</button>
 </section>
 
@@ -747,10 +808,7 @@ select.gap { width: auto; min-width: 90px; background: #fff; cursor: pointer; }
   <p>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</p>
   <nav class="footer-nav">
     <a href="index.html">Home</a>
-    <a href="dictation.html">Dictation &amp; Situations</a>
-    <a href="repeat.html">Repeat Sentence</a>
-    <a href="vocab.html">Vocabulary</a>
-    <a href="contact.html">Contact</a>
+    <a href="learnEnglishwithMusic.html">← More songs</a>
   </nav>
 </footer>
 
@@ -892,6 +950,16 @@ window.onYouTubeIframeAPIReady = function () {
   setInterval(tick, 250);
 };
 
+// YouTube never arrived: blocked on this network or a very slow
+// connection. Say so instead of "Loading…" forever.
+setTimeout(function () {
+  if (onWebsite && !player) {
+    showNotice("The video isn’t loading. YouTube may be blocked on this network " +
+      "(for example in mainland China or at some schools), or the connection is slow.<br>" +
+      "You can still do the <strong>exercises</strong> below the video.");
+  }
+}, 12000);
+
 // opened straight from the computer: YouTube will refuse, so say so up front
 if (!onWebsite) {
   showNotice("<strong>Open this page from your website</strong> (for example on GitHub Pages).<br>YouTube won’t play embedded videos from a file on your computer, so the questions can’t pop up.");
@@ -1012,7 +1080,16 @@ function openStop(i) {
 
   if (done[i]) { explainEl.textContent = stop.explain; explainEl.className = "iv-explain good"; }
   pop.hidden = false;
-  (ansEl.querySelector("button, input") || contBtn).focus();
+  // make sure the question is on screen (under the video on phones,
+  // over it on bigger screens)
+  {
+    const card = pop.querySelector(".iv-card");
+    const box = card.getBoundingClientRect();
+    if (box.bottom > window.innerHeight || box.top < 0) {
+      card.scrollIntoView({ behavior: "smooth", block: box.height > window.innerHeight ? "start" : "end" });
+    }
+  }
+  (ansEl.querySelector("button, input") || contBtn).focus({ preventScroll: true });
 }
 
 function markDone(i) {
