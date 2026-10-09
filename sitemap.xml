@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://modernenglish.au/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -68,6 +68,16 @@
   <url>
     <loc>https://modernenglish.au/vocabularygames.html</loc>
     <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/teachertools/bespoke-certificate-maker.html</loc>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/teachertools/bespoke-report-maker.html</loc>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -297,7 +307,7 @@
   </url>
   <url>
     <loc>https://modernenglish.au/songs/ifiwereaboy.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
