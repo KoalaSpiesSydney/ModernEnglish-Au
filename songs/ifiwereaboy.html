@@ -15,7 +15,7 @@
   <!-- YouTube refuses to play embedded videos when it can't see which website they are on -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>If I Were a Boy – Interactive Song Lesson | Modern English Australia</title>
-  <meta name="description" content="Learn the second conditional with Beyoncé's If I Were a Boy. The video pauses with eight questions, then practise the conditionals and talk about the song.">
+  <meta name="description" content="Learn the second conditional with Beyoncé's If I Were a Boy. The video pauses with nine questions, then practise the conditionals and talk about the song.">
   <link rel="canonical" href="https://modernenglish.au/songs/ifiwereaboy.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -520,7 +520,7 @@ body { margin: 0; background: #0b0d0e; color: var(--paper); font-family: "Source
 .iv-type .check-btn { margin-top: 0; }
 /* a gap fill with several lines */
 .iv-gaps { margin: -.4rem 0 .5rem; }
-.iv-gapline { margin: 0; line-height: 1.9; font-size: 1.02rem; }
+.iv-gapline { margin: 0; line-height: 1.8; font-size: 1.02rem; }
 .iv-gaps input.gap { width: 110px; padding: 3px 6px; margin: 0 2px; }
 .iv-explain { margin: .9rem 0 0; min-height: 1.3em; font-size: .98rem; line-height: 1.45; }
 .iv-explain.good { color: #177a43; font-weight: 600; }
@@ -713,7 +713,7 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
 
   <div class="iv-pop" id="iv-pop" hidden>
     <div class="iv-card" role="dialog" aria-modal="true" aria-labelledby="iv-q">
-      <p class="iv-step" id="iv-step">Question 1 of 8</p>
+      <p class="iv-step" id="iv-step">Question 1 of 9</p>
       <p class="iv-q" id="iv-q"></p>
       <div id="iv-answer"></div>
       <p class="iv-explain" id="iv-explain" aria-live="polite"></p>
@@ -729,7 +729,7 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
   </div>
   <div class="iv-meta">
     <span id="iv-time">0:00</span>
-    <span id="iv-score">0 / 8 answered</span>
+    <span id="iv-score">0 / 9 answered</span>
   </div>
 </section>
 
@@ -821,7 +821,7 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
     <div class="tile-body">
       <p>In <strong>If I Were a Boy</strong>, Beyoncé imagines life in someone else’s shoes. The title is a
          <strong>second conditional</strong>: an imaginary situation.</p>
-      <p>The video stops eight times with a question about words and meaning. Answer it, then press
+      <p>The video stops for nine questions: some are missing words, some are about meaning. Answer each one, then press
          <strong>Continue</strong>. The yellow dots under the video take you back to any question.</p>
       <p>After the video, practise the <strong>conditionals</strong>.</p>
       <p class="tile-task">Press play, and watch carefully.</p>
@@ -849,8 +849,8 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
 const VIDEO_ID = "AWpsOqh8q0M";
 
 const STOPS = [
-  // 1:04: DUMMY GAP FILL. Paste the lines between the two ` marks, one line of
-  //       the song per line. Put [square brackets] around each missing word.
+  // 1:04: gap fill. The lines go between the two ` marks, one line of the
+  //       song per line, with [square brackets] around each missing word.
   { time: 64, type: "gaps",
     q: "Listen and fill in the missing words.",
     text: `
@@ -872,7 +872,7 @@ And I'd never get [confronted] for it
     answer: 1,
     explain: "‘If I were…’ is imaginary: she isn’t a boy, but she imagines it." },
 
-  // 1:46: DUMMY GAP FILL
+  // 1:46: gap fill
   { time: 106, type: "gaps",
     q: "Listen and fill in the missing words.",
     text: `
@@ -888,20 +888,21 @@ And everything you had got [destroyed]
 `,
     explain: "" },
 
-      { time: 64, type: "choice",
-    q: "What is 'I'd'?",
-    options: ["Had", "Would"],
+  // 1:46: grammar check, straight after the gap fill
+  { time: 106, type: "choice",
+    q: "What is ‘I’d’?",
+    options: ["I had", "I would"],
     answer: 1,
-    explain: "‘If I were…’ is imaginary: she isn’t a boy, but she imagines it." },
+    explain: "Here ‘I’d’ = ‘I would’. In the second conditional we use would + base verb for the imaginary result." },
 
-  // 1:46: comprehension check, straight after the gap fill
+  // 1:46: comprehension check, after the grammar check
   { time: 106, type: "choice",
     q: "What does ‘take for granted’ mean?",
     options: ["to thank someone a lot", "to take money from someone", "to not appreciate what someone does for you", "to ask someone for permission"],
     answer: 2,
     explain: "To take someone or something for granted is to not appreciate them or thank them, until they are gone and it’s too late. Then you miss them." },
 
-  // 2:32: DUMMY GAP FILL
+  // 2:32: gap fill
   { time: 152, type: "gaps",
     q: "Listen and fill in the missing words.",
     text: `
@@ -1111,7 +1112,7 @@ function openStop(i) {
   } else if (stop.type === "gaps") {
     const box = document.createElement("div");
     box.className = "iv-gaps";
-    stop.text.trim().split("\n").forEach(line => {
+    stop.text.split("\n").filter(line => line.trim()).forEach(line => {
       const p = document.createElement("p");
       p.className = "iv-gapline";
       // every [word] becomes a box; the rest stays as text
