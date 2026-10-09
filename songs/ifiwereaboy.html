@@ -519,8 +519,8 @@ body { margin: 0; background: #0b0d0e; color: var(--paper); font-family: "Source
 .iv-type input.gap { width: 160px; margin: 0; }
 .iv-type .check-btn { margin-top: 0; }
 /* a gap fill with several lines */
-.iv-gaps { margin: -.4rem 0 .5rem; }
-.iv-gapline { margin: 0; line-height: 1.8; font-size: 1.02rem; }
+.iv-gaps { margin: -.4rem 0 0; }
+.iv-gapline { margin: 0; line-height: 1.7; font-size: 1.02rem; }
 .iv-gaps input.gap { width: 110px; padding: 3px 6px; margin: 0 2px; }
 .iv-explain { margin: .9rem 0 0; min-height: 1.3em; font-size: .98rem; line-height: 1.45; }
 .iv-explain.good { color: #177a43; font-weight: 600; }
@@ -668,10 +668,122 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
   .tile-body { font-size: 1rem; line-height: 1.45; }
   .tile-actions { margin-top: 1rem; }
 }
+
+/* ===========================================================
+   QR button (top left corner) and its panel.
+   They scroll away with the page, like on the other lessons.
+   =========================================================== */
+.qr-toggle {
+  position: absolute;
+  left: 14px; left: max(14px, env(safe-area-inset-left));
+  top: 14px;  top: max(14px, env(safe-area-inset-top));
+  z-index: 40;
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.92);
+  color: #111;
+  font: inherit; font-weight: 800; font-size: .8rem; letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.qr-toggle:hover { background: #fff; }
+.qr-toggle:focus-visible { outline: 2px solid var(--highlight); outline-offset: 3px; }
+.qr-panel {
+  position: absolute;
+  left: 14px; left: max(14px, env(safe-area-inset-left));
+  top: 70px;  top: calc(max(14px, env(safe-area-inset-top)) + 56px);
+  z-index: 41;
+  box-sizing: border-box;
+  width: 240px;
+  max-width: calc(100% - 28px);
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.35);
+}
+.qr-panel[hidden] { display: none; }
+.qr-title { margin: 0 0 8px; font-weight: 700; font-size: .95rem; color: #111; }
+.qr-code { display: flex; align-items: center; justify-content: center; width: 200px; max-width: 100%; min-height: 200px; margin: 0 auto; color: #111; font-size: .85rem; text-align: center; }
+.qr-code img, .qr-code canvas { max-width: 100%; height: auto; }
+.qr-url { margin: 8px 0 0; font-size: .72rem; line-height: 1.35; color: rgba(0,0,0,.65); word-break: break-all; }
+/* the wordmark starts to the right of the QR button */
+header .wrap { padding-left: 74px; padding-left: max(74px, calc(env(safe-area-inset-left) + 60px)); }
+
+/* ===========================================================
+   Minimal links at the bottom: watch and listen · karaoke
+   =========================================================== */
+.song-links {
+  display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+  gap: .2rem .8rem;
+  margin: 1.5rem auto 0;
+  padding: 0 1rem;
+  text-align: center;
+  font-size: .95rem;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+.song-links a { color: var(--paper); text-decoration: none; border-bottom: 1px solid rgba(248,250,252,.35); padding-bottom: 1px; transition: color .2s ease, border-color .2s ease; }
+.song-links a:hover, .song-links a:focus-visible { color: var(--highlight); border-color: var(--highlight); }
+
+/* ===========================================================
+   Every screen size
+   =========================================================== */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { overflow-x: hidden; overflow-wrap: break-word; }
+input.gap, select.gap { box-sizing: border-box; max-width: 100%; }
+.iv-card { box-sizing: border-box; }
+/* when a question is too tall to sit over the video (long gap fills,
+   tablets, small laptops) the page moves it underneath, as on phones */
+.iv-pop.below { position: static; aspect-ratio: auto; background: none; backdrop-filter: none; padding: .8rem 0 0; }
+.iv-pop.below .iv-card { max-height: none; }
+.iv-actions { flex-wrap: wrap; }
+.iv-actions .check-btn { margin-top: 0; }
+.iv-gapcheck { margin-right: auto; }
+@media (max-width: 600px) {
+  .iv-pop.below { padding: .8rem 16px 0; }
+  .iv-gaps input.gap { width: 96px; }
+  .gap-line { padding: .2rem 0; }
+  input.gap.wide { width: 130px; }
+  .page-head { padding-top: 1.4rem; }
+  .song-links { font-size: .9rem; }
+}
+@media (max-width: 420px) {
+  .song-links { flex-direction: column; gap: .5rem; }
+  .song-links span { display: none; }
+}
+@media (max-width: 380px) {
+  .brand-top { font-size: 1.5rem; letter-spacing: 1px; }
+  .kss-label { letter-spacing: 2px; font-size: .66rem; }
+  .iv-gaps input.gap { width: 84px; }
+  .iv-actions { justify-content: center; }
+  .iv-gapcheck { margin-right: 0; }
+}
+@media (pointer: coarse) {
+  .song-links a { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(248,250,252,.35); }
+  .iv-gapline { line-height: 2.6; }
+}
+/* very wide screens and projectors: nothing stretches past a readable width */
+@media (min-width: 1600px) {
+  .iv { width: min(94%, 1100px); }
+  main { max-width: 1000px; }
+  .iv-card { width: min(100%, 640px); }
+}
 </style>
 </head>
 
 <body>
+
+<!-- QR code for this page: the button sits in the top left corner -->
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR code for this page" aria-expanded="false" aria-controls="qrPanel">QR</button>
+<div class="qr-panel" id="qrPanel" role="region" aria-label="QR code for this page" hidden>
+  <p class="qr-title">Open this page on your phone</p>
+  <div class="qr-code" id="qrCode"></div>
+  <p class="qr-url" id="qrUrl"></p>
+</div>
 
 <header>
   <div class="wrap">
@@ -806,6 +918,12 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
 
 </main>
 
+<nav class="song-links" aria-label="More with this song">
+  <a href="https://www.youtube.com/watch?v=AWpsOqh8q0M" target="_blank" rel="noopener">Watch and listen</a>
+  <span aria-hidden="true">·</span>
+  <a href="https://www.youtube.com/watch?v=56kZ5BYfO6E" target="_blank" rel="noopener">Sing: karaoke version</a>
+</nav>
+
 <footer>
   <p>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</p>
   <nav class="footer-nav">
@@ -813,6 +931,43 @@ select.gap.incorrect { border-color: var(--bad); background: #ffecec; }
     <a href="https://modernenglish.au/learnEnglishwithMusic.html">← More songs</a>
   </nav>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+// QR CODE: made the first time the button is pressed. It points to this
+// page's own address (or the address in <link rel="canonical"> when the
+// file is opened straight from a computer).
+(function () {
+  const toggle = document.getElementById("qrToggle");
+  const panel  = document.getElementById("qrPanel");
+  const box    = document.getElementById("qrCode");
+  const label  = document.getElementById("qrUrl");
+  if (!toggle || !panel || !box || !label) return;
+  let made = false;
+  function make() {
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const url = /^https?:/.test(location.protocol) ? location.href.split("#")[0]
+              : (canonical ? canonical.href : location.href);
+    label.textContent = url;
+    made = true;
+    if (typeof QRCode === "undefined") {
+      box.textContent = "QR unavailable on this connection. Copy the link below.";
+      return;
+    }
+    new QRCode(box, { text: url, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
+  }
+  function show(open) {
+    panel.hidden = !open;
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open && !made) make();
+  }
+  toggle.addEventListener("click", () => show(panel.hidden));
+  document.addEventListener("click", e => {
+    if (!panel.hidden && !panel.contains(e.target) && !toggle.contains(e.target)) show(false);
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !panel.hidden) { show(false); toggle.focus(); } });
+})();
+</script>
 
 <div class="tile-backdrop" id="instructions-backdrop" hidden>
   <div class="tile" role="dialog" aria-modal="true" aria-labelledby="instructions-title">
@@ -919,7 +1074,7 @@ Waitin' for me to come home, to come home
 
   // 4:05
   { time: 245, type: "choice",
-    q: "The ending has a twist. What do we discover?",
+    q: "What is the twist?",
     options: ["It was all a dream about the future", "The roles were swapped: in real life, she is the one being hurt", "She loses her job", "They move to a new city"],
     answer: 1,
     explain: "The video swaps the roles to make the man see how his behaviour feels." },
@@ -1083,6 +1238,7 @@ function openStop(i) {
   explainEl.className = "iv-explain";
   contBtn.disabled = !done[i];
   ansEl.innerHTML = "";
+  document.querySelectorAll(".iv-gapcheck").forEach(b => b.remove());
 
   if (stop.type === "choice") {
     const wrap = document.createElement("div");
@@ -1156,7 +1312,10 @@ function openStop(i) {
     inputs.forEach(input => input.addEventListener("keydown", e => {
       if (e.key === "Enter") { e.preventDefault(); check(); }
     }));
-    ansEl.append(box, btn);
+    ansEl.append(box);
+    // Check sits in the bottom row with Listen again and Continue
+    btn.classList.add("iv-gapcheck");
+    rewindBtn.before(btn);
   } else {
     const row = document.createElement("div");
     row.className = "iv-type";
@@ -1189,7 +1348,9 @@ function openStop(i) {
   }
 
   if (done[i]) { explainEl.textContent = stop.explain || "Correct!"; explainEl.className = "iv-explain good"; }
+  pop.classList.remove("below");
   pop.hidden = false;
+  fitPop();
   // make sure the question is on screen (under the video on phones,
   // over it on bigger screens)
   {
@@ -1202,6 +1363,15 @@ function openStop(i) {
   (ansEl.querySelector("button, input") || contBtn).focus({ preventScroll: true });
 }
 
+// a question that does not fit over the video goes underneath it
+function fitPop() {
+  if (pop.hidden) return;
+  const card = pop.querySelector(".iv-card");
+  pop.classList.remove("below");
+  if (card.scrollHeight > card.clientHeight + 1) pop.classList.add("below");
+}
+window.addEventListener("resize", fitPop);
+
 function markDone(i) {
   done[i] = true;
   explainEl.textContent = ("Correct! " + (STOPS[i].explain || "")).trim();
@@ -1210,6 +1380,7 @@ function markDone(i) {
   // the dot fills in when every question at that time is answered
   if (STOPS[i].dot && STOPS.every((s, n) => s.dot !== STOPS[i].dot || done[n])) STOPS[i].dot.classList.add("done");
   updateScore();
+  fitPop();   // the explanation can make the card taller
   contBtn.focus();
 }
 
