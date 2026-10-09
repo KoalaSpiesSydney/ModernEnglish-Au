@@ -45,6 +45,16 @@
   --line:#484141;
   --ok:#1f7a3f;
   --bad:#a32525;
+
+  /* Card tones while playing – change these to restyle the game.
+     Light = the "get" expression · Dark = its meaning */
+  --get-back:#d9e9f7;      /* get card, face down */
+  --get-open:#f3f9ff;      /* get card, turned over */
+  --get-ink:#0b2a4a;       /* text on a get card */
+  --get-edge:#9dbfdf;      /* border of a get card */
+  --mean-back:#0b2a4a;     /* meaning card, face down */
+  --mean-open:#12508a;     /* meaning card, turned over */
+  --mean-ink:#ffffff;      /* text on a meaning card */
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -218,6 +228,8 @@ p{
   opacity:.92;
 }
 
+.howto-link{ color:var(--accent); font-weight:600; text-underline-offset:3px; }
+
 .round-info{
   font-size:.85rem;
   color:#5a5a5a;
@@ -304,15 +316,34 @@ button.btn{
   pointer-events:none;
 }
 
-.card.flipped{
-  background:#0072ce;
-  color:#fff;
-  transform:scale(1.04);
+/* ── Card tones: light = get expression, dark = meaning ── */
+.card.is-get{
+  background:var(--get-back);
+  color:var(--get-ink);
+  border-color:var(--get-edge);
 }
+.card.is-get .card-num{ color:rgba(11,42,74,.6); }
+.card.is-meaning{
+  background:var(--mean-back);
+  color:var(--mean-ink);
+}
+
+/* turned over: same tone, a touch brighter, with an orange ring */
+.card.flipped{
+  transform:scale(1.04);
+  box-shadow:0 0 0 3px #f2a900, 0 3px 6px rgba(0,0,0,.12);
+}
+.card.flipped.is-get{ background:var(--get-open); }
+.card.flipped.is-meaning{ background:var(--mean-open); }
+
+/* matched: both cards of the pair take the pair's colour (set in the script) */
 .card.matched{
   cursor:default;
   transform:none;
+  color:#fff;
+  border-color:var(--accent);
 }
+.card.matched .card-num{ color:rgba(255,255,255,.6); }
 
 @keyframes shake{
   0%,100%{transform:translateX(0)}
@@ -383,7 +414,7 @@ button.btn{
 .gapfill-tense{
   max-width:700px; margin:0 auto 1.2rem; padding:.7rem 1rem;
   background:rgba(255,255,255,.9); border:1px solid rgba(0,0,0,.12);
-  border-left:5px solid #0072ce; border-radius:6px; text-align:left; opacity:1;
+  border-radius:6px; text-align:left; opacity:1;
 }
 .gapfill-list{ display:grid; grid-template-columns:1fr; gap:12px; }
 .gapfill-item{
@@ -519,47 +550,34 @@ a.btn .arrow{ display:inline-block; margin-left:.4rem; color:#0072ce; transition
 a.btn:active{ background:var(--card); color:#f2a900; }
 a.btn:focus-visible, button:focus-visible{ outline:3px solid #f2a900; outline-offset:2px; }
 
-/* ===== Mini lesson ===== */
+/* ===== Mini lesson (plain columns – no coloured bars or boxes) ===== */
 details.mini-lesson{ max-width:980px; }
 details.mini-lesson summary{ font-size:1.05rem; }
 .lesson-intro{ margin:.6rem 0 1rem; max-width:none; }
 .lesson-grid{
   display:grid;
   grid-template-columns:repeat(3, minmax(0,1fr));
-  gap:14px;
+  gap:1.2rem 2rem;
   text-align:left;
 }
-.lesson-card{
-  background:rgba(255,255,255,.93);
-  border:1px solid rgba(0,0,0,.12);
-  border-top:5px solid var(--cat);
-  border-radius:6px;
-  padding:1rem 1.1rem 1.1rem;
-}
-.lesson-card.become { --cat:#0072ce; }
-.lesson-card.receive{ --cat:#007a70; }
-.lesson-card.phrasal{ --cat:#b4530a; }
 .lesson-tag{
-  display:inline-block;
+  display:block;
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   font-size:.7rem;
   font-weight:700;
   letter-spacing:2px;
   text-transform:uppercase;
-  color:#fff;
-  background:var(--cat);
-  border-radius:3px;
-  padding:3px 8px;
-  margin-bottom:.5rem;
+  color:#5a5a5a;
+  margin-bottom:.3rem;
 }
 .lesson-card h3{ font-size:1.15rem; color:var(--ink); margin-bottom:.35rem; }
-.lesson-card h3 u{ text-decoration-color:var(--cat); text-decoration-thickness:3px; text-underline-offset:3px; }
+.lesson-card h3 u{ text-decoration-thickness:1px; text-underline-offset:3px; }
 .lesson-card p{ margin:0 0 .5rem; max-width:none; }
 .lesson-card ul{ margin:0 0 .6rem 1.1rem; line-height:1.55; }
 .lesson-card li{ margin-bottom:.2rem; }
-.lesson-card b{ color:var(--cat); }
+.lesson-card b{ color:var(--ink); }
 .lesson-card i{ color:#5a5a5a; }
-.lesson-tip{ font-size:.92rem; background:rgba(0,0,0,.04); border-radius:4px; padding:.45rem .6rem; }
+.lesson-tip{ font-size:.92rem; color:#5a5a5a; }
 .lesson-go{ margin:1rem 0 0; font-size:.95rem; max-width:none; }
 
 /* meaning tag on matched cards */
@@ -884,7 +902,7 @@ body.dd-dragging{ cursor:grabbing; }
 }
 @media(pointer:coarse){ .dd-chip{ min-height:40px; } .dd-listen{ width:40px; height:40px; } }
 
-/* ===== Intro / How to play screen ===== */
+/* ===== Intro / How to play screen (plain – no coloured bars or boxes) ===== */
 html.intro-open, html.intro-open body{ overflow:hidden; }
 .intro{
   position:fixed;
@@ -905,7 +923,6 @@ html.intro-open, html.intro-open body{ overflow:hidden; }
   width:100%;
   max-width:660px;
   background:#fff;
-  border-top:6px solid var(--accent);
   border-radius:6px;
   padding:1.5rem 1.5rem 1.4rem;
   text-align:left;
@@ -934,31 +951,15 @@ html.intro-open, html.intro-open body{ overflow:hidden; }
   letter-spacing:2px;
   text-transform:uppercase;
   color:var(--accent);
-  margin:1.15rem 0 .4rem;
-  padding-top:.9rem;
-  border-top:1px solid rgba(0,0,0,.12);
+  margin:1.2rem 0 .4rem;
 }
 .intro-box p{ max-width:none; margin:0 0 .6rem; opacity:1; }
 .intro-box ol, .intro-box ul{ margin:0 0 0 1.25rem; }
 .intro-box li{ margin-bottom:.3rem; }
-.intro-swaps{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0,1fr));
-  gap:8px;
-  margin-top:.8rem;
-}
-.intro-swap{
-  border:1px solid rgba(0,0,0,.12);
-  border-left:5px solid var(--cat);
-  border-radius:4px;
-  padding:.5rem .65rem;
-  background:rgba(0,0,0,.025);
-}
-.intro-swap.become { --cat:#0072ce; }
-.intro-swap.receive{ --cat:#007a70; }
-.intro-swap.arrive { --cat:#b4530a; }
-.intro-swap .old{ display:block; font-size:.9rem; color:#5a5a5a; }
-.intro-swap .new{ display:block; font-size:1.08rem; font-weight:700; color:var(--cat); }
+.intro-swaps{ margin:.2rem 0 0 1.25rem; }
+.intro-swap{ display:list-item; margin-bottom:.2rem; }
+.intro-swap .old{ color:#5a5a5a; }
+.intro-swap .new{ font-weight:700; color:var(--ink); }
 .intro-swap .new::before{ content:"→ "; font-weight:400; color:#5a5a5a; }
 .intro-actions{ text-align:center; margin-top:1.3rem; }
 button.btn.intro-start{
@@ -970,8 +971,6 @@ button.btn.intro-start{
 @media(hover:hover){ button.btn.intro-start:hover{ color:var(--brand-orange); } }
 @media(max-width:600px){
   .intro-box{ padding:1.2rem 1.05rem 1.1rem; }
-  .intro-swaps{ grid-template-columns:1fr; }
-  .intro-swap .old, .intro-swap .new{ display:inline; }
 }
 
 footer{
@@ -1047,7 +1046,7 @@ h1, h2, h3, p, li, summary{ overflow-wrap:break-word; }
   header{ padding-top:.9rem; padding-bottom:.7rem; }
   main{ padding-top:1rem; }
   .intro-box{ padding-top:1rem; padding-bottom:1rem; }
-  .intro-box h3{ margin-top:.7rem; padding-top:.6rem; }
+  .intro-box h3{ margin-top:.8rem; }
 }
 @media(max-height:520px) and (max-width:900px){
   #game{ grid-template-columns:repeat(4,1fr); max-width:100%; }
@@ -1088,16 +1087,16 @@ h1, h2, h3, p, li, summary{ overflow-wrap:break-word; }
       <strong>get</strong>, not <em>become</em>, <em>receive</em> or <em>arrive</em>.
     </p>
     <div class="intro-swaps">
-      <div class="intro-swap become"><span class="old">become tired</span> <span class="new">get tired</span></div>
-      <div class="intro-swap receive"><span class="old">receive a message</span> <span class="new">get a message</span></div>
-      <div class="intro-swap arrive"><span class="old">arrive home</span> <span class="new">get home</span></div>
+      <div class="intro-swap"><span class="old">become tired</span> <span class="new">get tired</span></div>
+      <div class="intro-swap"><span class="old">receive a message</span> <span class="new">get a message</span></div>
+      <div class="intro-swap"><span class="old">arrive home</span> <span class="new">get home</span></div>
     </div>
 
     <h3>How to play</h3>
     <p>This game is like the children's card game <strong>Memory</strong>.</p>
     <ol>
-      <li>Turn over <strong>two cards</strong>.</li>
-      <li>A <strong>get</strong> expression and its meaning? That's a <strong>pair</strong> – the cards stay open.</li>
+      <li>Turn over <strong>two cards</strong>: one <strong>light</strong> card (a <strong>get</strong> expression) and one <strong>dark</strong> card (a meaning).</li>
+      <li>A <strong>get</strong> expression and its meaning? That's a <strong>pair</strong> – the cards change colour, you hear a click, and they stay open.</li>
       <li>Not a pair? The cards turn back. Remember where they are!</li>
       <li>Find all <strong>6 pairs</strong> to finish the round.</li>
     </ol>
@@ -1135,11 +1134,7 @@ h1, h2, h3, p, li, summary{ overflow-wrap:break-word; }
 <main>
   <div class="level-badge">A1 BEGINNER</div>
   <h1>Expressions with Get – Matching Game</h1>
-  <p>
-    Flip two cards to match each <strong>get</strong> expression with its meaning.
-    Each round picks <strong>6 new pairs</strong> from 40 expressions — play again and again!
-    Need help? Open the <strong>Mini Lesson</strong> below the game.
-  </p>
+  <p><a href="#intro" class="howto-link" id="howToLink">How to play</a></p>
 
   <div class="round-info" id="roundInfo">Round 1</div>
 
@@ -1336,6 +1331,8 @@ h1, h2, h3, p, li, summary{ overflow-wrap:break-word; }
 
   start.addEventListener("click", close);
   if(again) again.addEventListener("click", open);
+  var link = document.getElementById("howToLink");
+  if(link) link.addEventListener("click", function(e){ e.preventDefault(); open(); });
   intro.addEventListener("click", function(e){ if(e.target === intro) close(); });
   document.addEventListener("keydown", function(e){
     if(!isOpen()) return;
@@ -1387,9 +1384,10 @@ h1, h2, h3, p, li, summary{ overflow-wrap:break-word; }
 <script>
 /* ══════════════════════════════════════════════════════════════════════
    CANDY SOUNDS — made in the browser, no audio files needed.
-   pop (turn a card) · sparkle chime that climbs with each match in a row ·
+   pop (turn a card) · click (a pair is matched) ·
    soft boing (no match) · fanfare + fizz (round complete) ·
    a deep voice cheers "Sweet!", "Tasty!", "Delicious!" for streaks and wins.
+   (The older sparkle chime is still here as CandySFX.match if you want it back.)
    ══════════════════════════════════════════════════════════════════════ */
 var CandySFX = (function(){
   var ctx = null, on = true;
@@ -1429,7 +1427,26 @@ var CandySFX = (function(){
     sweep(c, t + 0.02, base * 3, base * 4, 0.05, 0.05, "triangle");
   }
 
-  // Match: a sparkly chime – every match in a row climbs a little higher
+  // Match: a crisp "click-clack", like two pieces locking together
+  function tick(c, t, freq, vol){
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = "square";
+    o.frequency.setValueAtTime(freq, t);
+    o.frequency.exponentialRampToValueAtTime(freq * 0.45, t + 0.03);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.002);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
+    o.connect(g); g.connect(c.destination);
+    o.start(t); o.stop(t + 0.07);
+  }
+  function click(){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    tick(c, t, 1900, 0.22);
+    tick(c, t + 0.075, 2700, 0.26);
+  }
+
+  // (Not used now) the old sparkly chime – every match in a row climbs a little higher
   var SCALE = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21];
   function match(streak){
     var c = ac(); if(!c) return;
@@ -1462,7 +1479,7 @@ var CandySFX = (function(){
   // Round complete: a happy fanfare, a fizzy glissando and popping candy
   function win(){
     var c = ac(); if(!c) return;
-    var t = c.currentTime + 0.05;
+    var t = c.currentTime + 0.25;                                    // starts just after the last click
     [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5, 1318.5].forEach(function(f, i){
       var at = t + i * 0.1 + (i > 3 ? 0.08 : 0);
       bell(c, at, f, i === 6 ? 1.2 : 0.4, 0.14);
@@ -1491,7 +1508,7 @@ var CandySFX = (function(){
     try{ localStorage.setItem("candySfx", v ? "on" : "off"); }catch(e){}
     if(v) pop(); else if(typeof speechSynthesis !== "undefined") speechSynthesis.cancel();
   }
-  return { pop:pop, match:match, miss:miss, win:win, cheer:cheer, setOn:setOn, isOn:function(){ return on; } };
+  return { pop:pop, click:click, match:match, miss:miss, win:win, cheer:cheer, setOn:setOn, isOn:function(){ return on; } };
 })();
 
 /* ===== Sound on/off ===== */
@@ -1598,7 +1615,9 @@ const GET_EXPRESSIONS = [
   ["get changed",       "take off one outfit and put on another", "become"]
 ];
 
-// Matched-pair colours, dark enough for white text to stay readable
+// Matched-pair colours: both cards of a pair turn the same colour.
+// Dark enough for white text to stay readable. (Use just one colour here
+// if you want every matched pair to look the same.)
 const matchColors = [
   "#0072ce","#007a70","#6a3d9a","#b4530a","#2e7d32","#a3285a",
   "#12508a","#00838f","#5b4a8a","#8a3b12"
@@ -1608,7 +1627,12 @@ const PAIRS_PER_ROUND = 6;
 
 const CAT_LABEL = { become:"get = become", receive:"get = receive", phrasal:"phrasal verb" };
 
-
+// Light card = get expression · dark card = meaning (colours are in the CSS, under :root)
+const ROLE_CLASS = { expression:"is-get", meaning:"is-meaning" };
+const ROLE_NAME  = { expression:"light card, get expression", meaning:"dark card, meaning" };
+function faceDownLabel(num, role){
+  return "Card " + num + ", " + (ROLE_NAME[role] || "") + ", face down";
+}
 
 const gameEl         = document.getElementById("game");
 const statusEl       = document.getElementById("status");
@@ -1664,12 +1688,11 @@ function buildRound(){
   cards.forEach((data, idx) => {
     const div = document.createElement("button");
     div.type = "button";
-    div.className = "card";
-    div.setAttribute("aria-label", "Card " + (idx + 1) + ", face down");
+    div.className = "card " + ROLE_CLASS[data.role];     // light (get) or dark (meaning)
+    div.setAttribute("aria-label", faceDownLabel(idx + 1, data.role));
     div.dataset.pair = data.pair;
     div.dataset.role = data.role;
     div.dataset.cat = data.cat;
-    div.style.background = "#0b2a4a";
 
     // ── Step 2: create the number badge ──
     const num = document.createElement("span");
@@ -1696,7 +1719,7 @@ function onCardClick(div, data){
   lock = true;
 
   if(first.dataset.pair === second.dataset.pair && first !== second){
-    // ✅ Match
+    // ✅ Match – both cards take the pair's colour and we hear a click
     const color = matchColors[matched % matchColors.length];
     setTimeout(()=>{
       [first, second].forEach(c => {
@@ -1714,12 +1737,12 @@ function onCardClick(div, data){
       matched++;
       streak++;
       scoreMatchedEl.textContent = matched;
+      CandySFX.click();
       if(matched === PAIRS_PER_ROUND){
         statusEl.textContent = "🍬 Delicious! All matched – press New Round to play again.";
         statusEl.classList.add("win");
         celebrateWin();
       }else{
-        CandySFX.match(streak - 1);
         if(streak === 3){ showCombo("Sweet!"); CandySFX.cheer("Sweet!"); }
         else if(streak === 5){ showCombo("Tasty!"); CandySFX.cheer("Tasty!"); }
       }
@@ -1734,15 +1757,13 @@ function onCardClick(div, data){
       [first, second].forEach(c => {
         c.classList.add("shake");
         setTimeout(()=> c.classList.remove("shake"), 360);
-        c.classList.remove("flipped");
-        c.style.background = "#0b2a4a";
-        c.style.color = "#fff";
+        c.classList.remove("flipped");                   // back to its light or dark face-down tone
 
         // ── Step 3: clear text but keep the number badge ──
         const num = c.querySelector(".card-num");
         c.textContent = "";
         if(num) c.appendChild(num);
-        c.setAttribute("aria-label", "Card " + (num ? num.textContent : "") + ", face down");
+        c.setAttribute("aria-label", faceDownLabel(num ? num.textContent : "", c.dataset.role));
         // ──────────────────────────────────────────────────
       });
       first = null; second = null; lock = false;
@@ -1751,15 +1772,12 @@ function onCardClick(div, data){
 }
 
 function flip(div, text){
-  div.classList.add("flipped");
+  div.classList.add("flipped");                          // the CSS keeps it light (get) or dark (meaning)
 
   // Keep the number badge when flipping
   const num = div.querySelector(".card-num");
   div.textContent = text;
   if(num) div.appendChild(num);
-
-  div.style.background = "#0072ce";
-  div.style.color = "#fff";
 }
 
 function celebrateWin(){
