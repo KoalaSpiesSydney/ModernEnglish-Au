@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<!-- Bespoke Certificate Maker © Koala Spies Sydney. All rights reserved. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bespoke Certificate Maker: Free for Teachers | Modern English Australia</title>
+<meta name="description" content="Make a printable certificate in a minute. Add your logo, pick colours and fonts, then download a PDF for one student or the whole class. Free, no sign-up.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bebas+Neue&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Dancing+Script:wght@600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Fredoka:wght@400;600&family=Great+Vibes&family=Lato:wght@400;700&family=Montserrat:wght@400;600;800&family=Nunito:wght@400;700&family=Oswald:wght@500&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* =====================================================================
+   BESPOKE CERTIFICATE MAKER
+   One file, no server. Everything (logo, names, design) stays in the
+   visitor's browser. The certificate is drawn on a <canvas>, so the
+   preview, the PDF and the print-out are always identical.
+   ===================================================================== */
+:root{
+  --bench:#dfe7e2;      /* the work surface behind everything */
+  --panel:#ffffff;
+  --ink:#14211e;
+  --soft:#51615c;
+  --line:#c4d0ca;
+  --deep:#16302b;       /* header and primary buttons */
+  --foil:#a8781f;       /* certificate-foil brass, used sparingly */
+  --focus:#1d6fd6;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Koala Spies Sydney watermark: faint, repeated across the page behind the
+   panels. It is part of the page only, never of the certificates. To make
+   it stronger or fainter, change fill-opacity in the line below. */
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%2316302b%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.top{background:var(--deep);color:#f3f6f4}
+.top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top h1{margin:0;font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.top p{margin:0;color:#c9d6d0;font-size:.95rem;max-width:46ch}
+
+/* ---------- ad spaces ---------- */
+.ad-slot{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem}
+.ad-box{min-height:90px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);border-radius:var(--radius);color:var(--soft);font-size:.8rem;background:rgba(255,255,255,.45)}
+
+/* ---------- the bench: controls + preview ---------- */
+.bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(300px,400px) minmax(0,1fr);gap:1.5rem;align-items:start}
+.controls{display:grid;gap:.75rem}
+details.group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+details.group>summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.group>summary::-webkit-details-marker{display:none}
+details.group>summary::after{content:"";width:.55rem;height:.55rem;border-right:2px solid var(--soft);border-bottom:2px solid var(--soft);transform:rotate(45deg);transition:transform .15s ease;flex:none;margin-right:.2rem}
+details.group[open]>summary::after{transform:rotate(-135deg)}
+.group-body{padding:0 1rem 1rem;display:grid;gap:.8rem}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft)}
+label.f>span{font-weight:700;color:var(--ink)}
+input[type=text],textarea,select{width:100%;padding:.55rem .65rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:1rem;min-height:44px}
+textarea{resize:vertical;min-height:5.2rem;line-height:1.4}
+input[type=range]{width:100%;accent-color:var(--deep)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:.35rem .8rem;font-size:.9rem;cursor:pointer;min-height:38px}
+.chip:hover{border-color:var(--deep)}
+
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg label{position:relative;text-align:center;padding:.5rem .4rem;cursor:pointer;font-size:.95rem;min-height:44px;display:flex;align-items:center;justify-content:center}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--deep);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:-3px}
+
+.tpls{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:.5rem}
+.tpl{padding:4px;border:2px solid transparent;border-radius:8px;background:none;cursor:pointer;text-align:center;font-size:.8rem;color:var(--soft)}
+.tpl canvas{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:4px;background:#fff;margin-bottom:.2rem}
+.tpl[aria-pressed=true]{border-color:var(--deep);color:var(--ink);font-weight:700}
+
+.swatches{display:flex;flex-wrap:wrap;gap:.45rem}
+.sw{width:44px;height:44px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep)}
+.pickers{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.pickers label{display:grid;gap:.25rem;font-size:.85rem;color:var(--soft);text-align:center}
+input[type=color]{width:100%;height:44px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+
+.file-row{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
+.btn:hover{background:#eef3f0}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:hover{background:#0e231f}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn[disabled]{opacity:.55;cursor:progress}
+.btn[aria-disabled=true]{opacity:.5;cursor:not-allowed}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep)}
+
+/* ---------- preview ---------- */
+.stage{position:sticky;top:1rem;display:grid;gap:.8rem}
+.paper{background:#cfd9d4;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.4rem);display:flex;justify-content:center}
+#preview{display:block;max-width:100%;max-height:72vh;width:auto;height:auto;background:#fff;box-shadow:0 1px 2px rgba(20,33,30,.25),0 14px 34px -10px rgba(20,33,30,.45)}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.pager{display:flex;align-items:center;gap:.5rem;font-size:.95rem}
+.pager[hidden]{display:none}
+.pager .btn{padding:.3rem .8rem}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.agree{align-items:flex-start;background:var(--panel);border:1.5px solid var(--line);border-radius:var(--radius);padding:.7rem .9rem;font-size:.95rem}
+.agree input{margin-top:.2rem;flex:none}
+.agree.nudge{border-color:#b3261e;box-shadow:0 0 0 3px rgba(179,38,30,.18)}
+.agree a,.terms a{color:var(--deep);font-weight:700}
+.terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
+.terms h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+
+/* ---------- reading matter under the tool ---------- */
+.notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+footer{background:var(--deep);color:#c9d6d0;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer a{color:#fff}
+
+#printArea{display:none}
+
+/* ---------- smaller screens: preview first, download bar stays in reach ---------- */
+@media (max-width:900px){
+  .bench{grid-template-columns:1fr;padding:1rem}
+  .stage{position:static;order:-1}
+  #preview{max-height:56vh}
+  .actions{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--panel);border-top:1px solid var(--line);padding:.6rem .8rem;padding-bottom:max(.6rem,env(safe-area-inset-bottom));justify-content:center}
+  .actions .btn{flex:1 1 auto;padding:.55rem .6rem}
+  body{padding-bottom:5rem}
+}
+@media (max-width:420px){
+  .two{grid-template-columns:1fr}
+  .actions .btn.png{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- printing: only the certificates ---------- */
+@media print{
+  body>*:not(#printArea){display:none!important}
+  body{background:#fff none;padding:0}
+  #printArea{display:block}
+  #printArea img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
+  #printArea img:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <h1>Bespoke Certificate Maker</h1>
+    <p>Free for teachers. Your logo and your students' names never leave this device.</p>
+  </div>
+</header>
+
+<!-- AD SPACE 1 (top). Replace the <div class="ad-box"> with your AdSense unit. -->
+<aside class="ad-slot" aria-label="Advertisement"><div class="ad-box">Ad space</div></aside>
+
+<main class="bench">
+
+  <!-- ================= CONTROLS ================= -->
+  <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
+
+    <details class="group" open>
+      <summary>Who is it for?</summary>
+      <div class="group-body">
+        <div class="seg" role="radiogroup" aria-label="How many certificates">
+          <label><input type="radio" name="mode" value="one" checked>One person</label>
+          <label><input type="radio" name="mode" value="class">Whole class</label>
+        </div>
+        <label class="f" id="oneWrap"><span>Name</span>
+          <input type="text" data-k="name" placeholder="e.g. Yuki Tanaka">
+        </label>
+        <label class="f" id="classWrap" hidden><span>Names, one per line</span>
+          <textarea data-k="names" rows="7" placeholder="Yuki Tanaka&#10;Lucas Oliveira&#10;Amira Haddad"></textarea>
+          <span class="hint" id="classCount" style="font-weight:400"></span>
+        </label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>Wording</summary>
+      <div class="group-body">
+        <div>
+          <p class="hint" style="margin-bottom:.4rem">Start from a ready-made wording:</p>
+          <div class="chips" id="presets"></div>
+        </div>
+        <label class="f"><span>Title</span><input type="text" data-k="title"></label>
+        <label class="f"><span>Line above the name</span><input type="text" data-k="pre"></label>
+        <label class="f"><span>What it is for</span><textarea data-k="reason" rows="3"></textarea></label>
+        <label class="f"><span>School or organisation</span><input type="text" data-k="org" placeholder="e.g. Bluesky Education"></label>
+        <label class="f"><span>Date</span><input type="text" data-k="date" placeholder="e.g. 9 October 2026"></label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>Design</summary>
+      <div class="group-body">
+        <div class="tpls" id="tpls" role="group" aria-label="Template"></div>
+        <div class="two">
+          <div class="seg" role="radiogroup" aria-label="Orientation">
+            <label><input type="radio" name="orient" value="landscape" checked>Wide</label>
+            <label><input type="radio" name="orient" value="portrait">Tall</label>
+          </div>
+          <div class="seg" role="radiogroup" aria-label="Paper size">
+            <label><input type="radio" name="paper" value="a4" checked>A4</label>
+            <label><input type="radio" name="paper" value="letter">Letter</label>
+          </div>
+        </div>
+        <div>
+          <p class="hint" style="margin-bottom:.4rem">Colours</p>
+          <div class="swatches" id="swatches" role="group" aria-label="Colour sets"></div>
+        </div>
+        <div class="pickers">
+          <label>Main<input type="color" data-k="cMain"></label>
+          <label>Accent<input type="color" data-k="cAccent"></label>
+          <label>Paper<input type="color" data-k="cPaper"></label>
+        </div>
+        <label class="f"><span>Fonts</span><select data-k="font" id="fontSel"></select></label>
+        <label class="check"><input type="checkbox" data-k="seal">Add a seal</label>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary>Logo, signatures and numbering</summary>
+      <div class="group-body">
+        <div>
+          <label class="check" style="align-items:flex-start"><input type="checkbox" data-k="logoOk" style="margin-top:.2rem;flex:none"><span>This is my organisation's logo, or I have permission to use it.</span></label>
+          <div class="file-row" style="margin-top:.5rem">
+            <label class="btn" id="logoPick" aria-disabled="true">Choose logo<input class="sr" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" id="logoFile" disabled></label>
+            <button type="button" class="btn quiet" id="logoClear" hidden>Remove</button>
+          </div>
+          <p class="hint" style="margin-top:.4rem">PNG, JPG, WebP or SVG, up to 5 MB. The logo is read on this device only and is never uploaded.</p>
+        </div>
+        <label class="f" id="logoSizeWrap" hidden><span>Logo size</span><input type="range" min="40" max="170" data-k="logoSize"></label>
+        <div class="two">
+          <label class="f"><span>Signed by</span><input type="text" data-k="sig1" placeholder="e.g. Ms J. Kelly"></label>
+          <label class="f"><span>Role</span><input type="text" data-k="role1" placeholder="e.g. Teacher"></label>
+        </div>
+        <div class="two">
+          <label class="f"><span>Second signature</span><input type="text" data-k="sig2" placeholder="Optional"></label>
+          <label class="f"><span>Role</span><input type="text" data-k="role2" placeholder="e.g. Principal"></label>
+        </div>
+        <p class="hint">Each signer gets a blank line. <strong>Sign by hand</strong>: with a pen after printing, or on the PDF with the Sign or Draw tool in your PDF reader. A real signature shows the certificate is genuine.</p>
+        <label class="check"><input type="checkbox" data-k="serial">Number each certificate</label>
+        <p class="hint">Every certificate gets its own number. Keep the record below so you can confirm a certificate later.</p>
+        <button type="button" class="btn" id="csvBtn">Download record of names and numbers</button>
+      </div>
+    </details>
+
+    <button type="button" class="btn quiet" id="resetBtn">Start again with a blank design</button>
+  </form>
+
+  <!-- ================= PREVIEW ================= -->
+  <section class="stage" aria-label="Preview">
+    <div class="paper"><canvas id="preview" role="img" aria-label="Certificate preview"></canvas></div>
+    <label class="check agree" id="agreeWrap"><input type="checkbox" data-k="agree" id="agree" form="controls"><span>This is a genuine award from a real organisation that I represent, and I agree to the <a href="#terms">terms of use</a>.</span></label>
+    <div class="stage-bar">
+      <div class="pager" id="pager" hidden>
+        <button type="button" class="btn" id="prevBtn" aria-label="Previous name">‹</button>
+        <span id="pagerText"></span>
+        <button type="button" class="btn" id="nextBtn" aria-label="Next name">›</button>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn main" id="pdfBtn">Download PDF</button>
+        <button type="button" class="btn png" id="pngBtn">Download image</button>
+        <button type="button" class="btn" id="printBtn">Print</button>
+      </div>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+  </section>
+</main>
+
+<section class="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>Type a name, or switch to Whole class and paste your class list.</li>
+      <li>Pick a template, then change the colours, fonts and logo to match your school.</li>
+      <li>Download the PDF. A class list gives you one file with a page for each student.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Wording ideas</h2>
+    <ul>
+      <li>for completing the Intermediate English course with excellent results</li>
+      <li>for 100% attendance in Term 3</li>
+      <li>for outstanding effort and a positive attitude in class</li>
+      <li>for the most improved speaking this term</li>
+      <li>in appreciation of your help at the school open day</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Questions</h2>
+    <dl>
+      <dt>Is my class list uploaded anywhere?</dt>
+      <dd>No. The certificate is drawn in your browser. Names and logos stay on your device.</dd>
+      <dt>Is this an official certificate?</dt>
+      <dd>No. It is a certificate you design and give yourself. It is not an accredited qualification, and it must only be used for genuine awards. See the <a href="#terms" style="color:var(--deep);font-weight:700">terms of use</a>.</dd>
+      <dt>Can I add a signature?</dt>
+      <dd>Sign by hand, either with a pen after printing or with the Sign tool in your PDF reader. The maker leaves a line for each signer and does not store signatures.</dd>
+      <dt>What is the certificate number for?</dt>
+      <dd>Each certificate gets its own number. Download the record of names and numbers and keep it, so you can confirm later that a certificate came from you.</dd>
+      <dt>Will it remember my design?</dt>
+      <dd>Yes, on this device and browser. Your next visit opens with the same logo, colours and wording.</dd>
+      <dt>What size does it print?</dt>
+      <dd>A4 or US Letter, wide or tall, at print quality.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
+     the site goes public, and change the date when you edit it. -->
+<section class="terms" id="terms" tabindex="-1">
+  <div class="terms-in">
+    <h2>Terms of use</h2>
+    <p class="updated">Last updated 9 October 2026</p>
+    <p>The Bespoke Certificate Maker is a free design tool. By making, downloading or printing a certificate you agree to these terms.</p>
+
+    <h3>What you may use it for</h3>
+    <ul>
+      <li>Certificates for genuine awards, courses, events and achievements that you or your organisation actually give.</li>
+      <li>Names, logos and signatures that are your own or your organisation's, or that you have permission to use.</li>
+    </ul>
+
+    <h3>What you must not do</h3>
+    <ul>
+      <li>Use the name, logo, seal or signature of a school, company, government body or person you do not represent.</li>
+      <li>Invent an institution, or pretend to be one, in order to mislead anyone.</li>
+      <li>Make anything that looks like or claims to be an accredited qualification, degree, diploma, licence, trade certificate, identity document, medical or legal certificate, or any other official document.</li>
+      <li>Copy the certificate of a real institution.</li>
+      <li>Use a certificate to deceive an employer, school, government agency or anyone else.</li>
+    </ul>
+    <p>Making or using a false document can be a criminal offence. You are responsible for everything you put on a certificate and for how it is used.</p>
+
+    <h3>What a certificate from this tool is</h3>
+    <p>It is a document you designed yourself. It is not issued, checked, endorsed or accredited by Modern English Australia or Koala Spies Sydney. The certificate number is a reference for the person who made the certificate; we keep no record of it and cannot confirm that any certificate is genuine.</p>
+
+    <h3>Your information</h3>
+    <p>Names, logos and wording stay in your browser and are never sent to us. Your design is saved on your own device so it is there next time; the "Start again" button removes it. This site shows advertising, and advertising providers such as Google may use cookies. See our privacy policy for details.</p>
+
+    <h3>No guarantees</h3>
+    <p>The tool is provided free and as it is. We do not promise it will always be available or free of errors, so check each certificate before you give it out. To the extent the law allows, we are not liable for loss or damage arising from use of the tool or of certificates made with it. Nothing in these terms limits any rights you have under the Australian Consumer Law.</p>
+
+    <h3>Changes and governing law</h3>
+    <p>We may update these terms; the date above shows the latest version. These terms are governed by the laws of New South Wales, Australia.</p>
+    <p>To report misuse of your organisation's name or logo, contact us through <a href="https://modernenglish.au/index.html">Modern English Australia</a>.</p>
+  </div>
+</section>
+
+<!-- AD SPACE 2 (bottom). Replace the <div class="ad-box"> with your AdSense unit. -->
+<aside class="ad-slot" aria-label="Advertisement" style="margin-bottom:1.5rem"><div class="ad-box">Ad space</div></aside>
+
+<footer>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="#terms">Terms of use</a></p>
+</footer>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT
+// =====================================================================
+
+// Ready-made wordings (the chips under "Wording")
+const PRESETS = [
+  { label: "Completion",   title: "Certificate of Completion",   pre: "This certificate is presented to", reason: "for successfully completing the course" },
+  { label: "Achievement",  title: "Certificate of Achievement",  pre: "This certificate is proudly presented to", reason: "for outstanding achievement and hard work" },
+  { label: "Student of the week", title: "Student of the Week",  pre: "This week's award goes to", reason: "for great effort, kindness and a positive attitude in class" },
+  { label: "Attendance",   title: "Certificate of Attendance",   pre: "This certificate is presented to", reason: "for excellent attendance this term" },
+  { label: "Participation",title: "Certificate of Participation",pre: "This certificate is presented to", reason: "for taking part with enthusiasm" },
+  { label: "Appreciation", title: "Certificate of Appreciation", pre: "With thanks to", reason: "in appreciation of your time, help and support" }
+];
+
+// Colour sets: main, accent, paper
+const PALETTES = [
+  { name: "Navy and gold",     c: ["#1b2a4a", "#b8892d", "#fffdf7"] },
+  { name: "Forest and brass",  c: ["#1f4d3a", "#c39a3b", "#fbfaf3"] },
+  { name: "Burgundy and gold", c: ["#6b1e2e", "#c8a24a", "#fffcf8"] },
+  { name: "Ocean and amber",   c: ["#0e5c7a", "#f2a541", "#ffffff"] },
+  { name: "Violet and yellow", c: ["#4b2e83", "#e6b325", "#ffffff"] },
+  { name: "Coral and teal",    c: ["#e4572e", "#17a8a5", "#fffdf5"] },
+  { name: "Sky and orange",    c: ["#2563eb", "#f59e0b", "#ffffff"] },
+  { name: "Charcoal and grey", c: ["#2b2b2b", "#8a8a8a", "#ffffff"] }
+];
+
+// Font sets. f = family, w = weight. caps = title in capitals,
+// track = letter spacing for the title, scale = size adjustment.
+const FONTS = {
+  classic:   { label: "Classic (Cinzel + script)",       title: { f: "Cinzel", w: 700, caps: true, track: .1 },              name: { f: "Great Vibes", w: 400, scale: 1.3 },   body: { f: "EB Garamond", w: 400, scale: 1.08 } },
+  elegant:   { label: "Elegant (Playfair)",              title: { f: "Playfair Display", w: 700 },                           name: { f: "Playfair Display", w: 500, italic: true }, body: { f: "Lato", w: 400 } },
+  scholar:   { label: "Scholar (Cormorant + script)",    title: { f: "Cormorant Garamond", w: 700, caps: true, track: .1 }, name: { f: "Pinyon Script", w: 400, scale: 1.3 }, body: { f: "Cormorant Garamond", w: 500, scale: 1.15 } },
+  modern:    { label: "Modern (Montserrat)",             title: { f: "Montserrat", w: 800, caps: true, track: .05, scale: .9 }, name: { f: "Montserrat", w: 600, scale: .9 },   body: { f: "Montserrat", w: 400, scale: .95 } },
+  bold:      { label: "Bold (Bebas Neue)",               title: { f: "Bebas Neue", w: 400, caps: true, track: .05, scale: 1.2 }, name: { f: "Oswald", w: 500 },                 body: { f: "Source Sans 3", w: 400 } },
+  friendly:  { label: "Friendly (Fredoka)",              title: { f: "Fredoka", w: 600 },                                    name: { f: "Fredoka", w: 600 },                    body: { f: "Nunito", w: 400 } },
+  handwritten:{ label: "Handwritten name (Dancing Script)", title: { f: "Nunito", w: 700, caps: true, track: .1, scale: .85 }, name: { f: "Dancing Script", w: 600, scale: 1.2 }, body: { f: "Nunito", w: 400 } },
+  clear:     { label: "Easy to read (Atkinson)",         title: { f: "Atkinson Hyperlegible", w: 700 },                      name: { f: "Atkinson Hyperlegible", w: 700 },      body: { f: "Atkinson Hyperlegible", w: 400 } }
+};
+
+const TEMPLATES = [
+  { id: "classic", label: "Classic" },
+  { id: "banner",  label: "Banner" },
+  { id: "modern",  label: "Modern" },
+  { id: "playful", label: "Playful" },
+  { id: "minimal", label: "Minimal" }
+];
+
+const DEFAULTS = {
+  mode: "one", name: "", names: "",
+  title: PRESETS[1].title, pre: PRESETS[1].pre, reason: PRESETS[1].reason,
+  org: "", date: "", tpl: "classic", orient: "landscape", paper: "a4",
+  cMain: PALETTES[0].c[0], cAccent: PALETTES[0].c[1], cPaper: PALETTES[0].c[2],
+  agree: false,
+  font: "classic", seal: true, logo: "", logoOk: false, logoSize: 90,
+  sig1: "", role1: "", sig2: "", role2: "", serial: true
+};
+const STORE = "certificate-maker.v1";
+
+// =====================================================================
+// STATE (saved in this browser only)
+// =====================================================================
+let st = Object.assign({}, DEFAULTS);
+try { Object.assign(st, JSON.parse(localStorage.getItem(STORE) || "{}")); } catch (e) {}
+if (!FONTS[st.font]) st.font = DEFAULTS.font;
+if (!TEMPLATES.some(t => t.id === st.tpl)) st.tpl = DEFAULTS.tpl;
+const images = { logo: null };
+
+// A number for each certificate, e.g. 7K4Q-9XPM. Made with the browser's
+// secure random generator, from letters and digits that are hard to
+// misread. The same person keeps the same number until the page is closed.
+const serials = new Map();
+function serialFor(person, index) {
+  const key = index + "|" + person;
+  if (!serials.has(key)) {
+    const abc = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", buf = new Uint8Array(8);
+    (window.crypto || window.msCrypto).getRandomValues(buf);
+    const code = Array.from(buf, b => abc[b % abc.length]).join("");
+    serials.set(key, code.slice(0, 4) + "-" + code.slice(4));
+  }
+  return serials.get(key);
+}
+let pageIndex = 0, saveTimer = 0;
+
+function save() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try { localStorage.setItem(STORE, JSON.stringify(st)); }
+    catch (e) { try { localStorage.setItem(STORE, JSON.stringify(Object.assign({}, st, { logo: "" }))); } catch (e2) {} }
+  }, 300);
+}
+function nameList() {
+  if (st.mode !== "class") return [st.name.trim()];
+  const list = st.names.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+  return list.length ? list : [""];
+}
+
+// =====================================================================
+// DRAWING
+// =====================================================================
+function pageSize() {
+  const p = st.paper === "letter" ? [1056, 816] : [1123, 794];   // CSS pixels at 96 dpi
+  return st.orient === "portrait" ? [p[1], p[0]] : p;
+}
+function lum(hex) {
+  const n = parseInt(hex.slice(1), 16), r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+}
+function mix(a, b, t) {
+  const x = parseInt(a.slice(1), 16), y = parseInt(b.slice(1), 16);
+  const ch = s => Math.round((x >> s & 255) * (1 - t) + (y >> s & 255) * t);
+  return "rgb(" + ch(16) + "," + ch(8) + "," + ch(0) + ")";
+}
+function fontStr(spec, px) {
+  return (spec.italic ? "italic " : "") + spec.w + " " + px + 'px "' + spec.f + '", Georgia, "Times New Roman", serif';
+}
+function setTrack(ctx, px) { if ("letterSpacing" in ctx) ctx.letterSpacing = px + "px"; }
+function wrapLines(ctx, text, maxW) {
+  const out = [];
+  text.split(/\r?\n/).forEach(par => {
+    let line = "";
+    par.split(/\s+/).forEach(word => {
+      const test = line ? line + " " + word : word;
+      if (line && ctx.measureText(test).width > maxW) { out.push(line); line = word; } else line = test;
+    });
+    out.push(line);
+  });
+  return out.filter((l, i) => l || i);
+}
+// largest size (down to min) at which the text fits the width
+function fitSize(ctx, text, spec, px, maxW, track) {
+  let size = px;
+  for (let i = 0; i < 40; i++) {
+    ctx.font = fontStr(spec, size);
+    setTrack(ctx, (track || 0) * size);
+    if (ctx.measureText(text).width <= maxW || size <= px * .35) break;
+    size *= .95;
+  }
+  return size;
+}
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+function drawSeal(ctx, x, y, r, c) {
+  ctx.save();
+  ctx.translate(x, y);
+  // ribbon tails
+  ctx.fillStyle = c.main;
+  [[-1, 1], [1, 1]].forEach(([sx]) => {
+    ctx.beginPath();
+    ctx.moveTo(sx * r * .15, r * .4); ctx.lineTo(sx * r * .75, r * 1.75); ctx.lineTo(sx * r * .38, r * 1.5);
+    ctx.lineTo(sx * r * .12, r * 1.85); ctx.lineTo(-sx * r * .1, r * .6); ctx.closePath(); ctx.fill();
+  });
+  // scalloped edge
+  ctx.fillStyle = c.accent;
+  ctx.beginPath();
+  const pts = 28;
+  for (let i = 0; i <= pts * 2; i++) {
+    const a = i / (pts * 2) * Math.PI * 2, rr = i % 2 ? r : r * .9;
+    ctx[i ? "lineTo" : "moveTo"](Math.cos(a) * rr, Math.sin(a) * rr);
+  }
+  ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = c.paper; ctx.lineWidth = r * .045;
+  ctx.beginPath(); ctx.arc(0, 0, r * .72, 0, Math.PI * 2); ctx.stroke();
+  // star
+  ctx.fillStyle = c.paper;
+  ctx.beginPath();
+  for (let i = 0; i < 10; i++) {
+    const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .2 : r * .46;
+    ctx[i ? "lineTo" : "moveTo"](Math.cos(a) * rr, Math.sin(a) * rr);
+  }
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+// ---- the decoration behind the words, one function per template ----
+// Each returns the box the words must stay inside, and how they align.
+const DECOR = {
+  classic(ctx, W, H, u, c) {
+    ctx.strokeStyle = c.main; ctx.lineWidth = 9 * u; ctx.strokeRect(26 * u, 26 * u, W - 52 * u, H - 52 * u);
+    ctx.strokeStyle = c.accent; ctx.lineWidth = 2 * u; ctx.strokeRect(41 * u, 41 * u, W - 82 * u, H - 82 * u);
+    ctx.lineWidth = 1 * u; ctx.strokeRect(47 * u, 47 * u, W - 94 * u, H - 94 * u);
+    // corner pieces
+    [[47, 47, 1, 1], [W / u - 47, 47, -1, 1], [47, H / u - 47, 1, -1], [W / u - 47, H / u - 47, -1, -1]].forEach(([x, y, sx, sy]) => {
+      ctx.save(); ctx.translate(x * u, y * u); ctx.scale(sx, sy);
+      ctx.fillStyle = c.paper; ctx.fillRect(-8 * u, -8 * u, 34 * u, 34 * u);
+      ctx.strokeStyle = c.accent; ctx.lineWidth = 2 * u;
+      ctx.beginPath(); ctx.arc(0, 0, 26 * u, 0, Math.PI / 2); ctx.stroke();
+      ctx.fillStyle = c.accent; ctx.beginPath(); ctx.moveTo(9 * u, 3 * u); ctx.lineTo(15 * u, 9 * u); ctx.lineTo(9 * u, 15 * u); ctx.lineTo(3 * u, 9 * u); ctx.closePath(); ctx.fill();
+      ctx.restore();
+    });
+    return { x: 95 * u, y: 80 * u, w: W - 190 * u, h: H - 160 * u, align: "center" };
+  },
+  banner(ctx, W, H, u, c) {
+    const bh = Math.min(H * .29, 250 * u);
+    ctx.fillStyle = c.main; ctx.fillRect(0, 0, W, bh);
+    ctx.fillStyle = c.accent; ctx.fillRect(0, bh, W, 7 * u);
+    ctx.fillStyle = c.main; ctx.fillRect(0, H - 16 * u, W, 16 * u);
+    ctx.fillStyle = c.accent; ctx.fillRect(0, H - 21 * u, W, 5 * u);
+    return { x: 80 * u, y: bh + 30 * u, w: W - 160 * u, h: H - bh - 78 * u, align: "center", band: { y: 0, h: bh } };
+  },
+  modern(ctx, W, H, u, c) {
+    const a = Math.min(W, H);
+    ctx.fillStyle = c.accent; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(a * .30, 0); ctx.lineTo(0, a * .30); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = c.main; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(a * .24, 0); ctx.lineTo(0, a * .24); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = c.accent; ctx.beginPath(); ctx.moveTo(W, H); ctx.lineTo(W - a * .30, H); ctx.lineTo(W, H - a * .30); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = c.main; ctx.beginPath(); ctx.moveTo(W, H); ctx.lineTo(W - a * .24, H); ctx.lineTo(W, H - a * .24); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = mix(c.main, c.paper, .75); ctx.lineWidth = 1.5 * u; ctx.strokeRect(22 * u, 22 * u, W - 44 * u, H - 44 * u);
+    return { x: 110 * u, y: 84 * u, w: W - 220 * u, h: H - 84 * u - 138 * u, align: "center" };
+  },
+  playful(ctx, W, H, u, c) {
+    const r = rng(11), cols = [c.main, c.accent, mix(c.main, c.accent, .5), mix(c.accent, c.paper, .45)];
+    const band = 92 * u, n = Math.round((W + H) / u / 26);
+    for (let i = 0; i < n; i++) {
+      // scatter shapes around the four edges only
+      const side = i % 4, t = r();
+      let x, y;
+      if (side === 0) { x = t * W; y = 16 * u + r() * band; }
+      else if (side === 1) { x = t * W; y = H - 16 * u - r() * band; }
+      else if (side === 2) { x = 16 * u + r() * band; y = t * H; }
+      else { x = W - 16 * u - r() * band; y = t * H; }
+      const s = (7 + r() * 13) * u, kind = Math.floor(r() * 4);
+      ctx.save(); ctx.translate(x, y); ctx.rotate(r() * Math.PI * 2);
+      ctx.fillStyle = ctx.strokeStyle = cols[Math.floor(r() * cols.length)];
+      ctx.lineWidth = 3.5 * u; ctx.lineCap = "round";
+      if (kind === 0) { ctx.beginPath(); ctx.arc(0, 0, s * .55, 0, Math.PI * 2); ctx.fill(); }
+      else if (kind === 1) { ctx.beginPath(); ctx.moveTo(0, -s * .7); ctx.lineTo(s * .65, s * .5); ctx.lineTo(-s * .65, s * .5); ctx.closePath(); ctx.fill(); }
+      else if (kind === 2) { ctx.beginPath(); ctx.moveTo(-s, 0); ctx.quadraticCurveTo(-s * .5, -s * .8, 0, 0); ctx.quadraticCurveTo(s * .5, s * .8, s, 0); ctx.stroke(); }
+      else { ctx.beginPath(); for (let k = 0; k < 10; k++) { const a = k * Math.PI / 5, rr = k % 2 ? s * .32 : s * .75; ctx[k ? "lineTo" : "moveTo"](Math.cos(a) * rr, Math.sin(a) * rr); } ctx.closePath(); ctx.fill(); }
+      ctx.restore();
+    }
+    // clear panel for the words
+    const m = 104 * u;
+    ctx.fillStyle = c.paper; ctx.beginPath(); ctx.roundRect(m, m, W - 2 * m, H - 2 * m, 26 * u); ctx.fill();
+    ctx.strokeStyle = c.main; ctx.lineWidth = 5 * u; ctx.setLineDash([2 * u, 13 * u]); ctx.lineCap = "round";
+    ctx.beginPath(); ctx.roundRect(m, m, W - 2 * m, H - 2 * m, 26 * u); ctx.stroke(); ctx.setLineDash([]); ctx.lineCap = "butt";
+    return { x: m + 34 * u, y: m + 26 * u, w: W - 2 * m - 68 * u, h: H - 2 * m - 46 * u, align: "center" };
+  },
+  minimal(ctx, W, H, u, c) {
+    ctx.fillStyle = c.main; ctx.fillRect(0, 0, 54 * u, H);
+    ctx.fillStyle = c.accent; ctx.fillRect(54 * u, 0, 9 * u, H);
+    return { x: 130 * u, y: 84 * u, w: W - 215 * u, h: H - 160 * u, align: "left" };
+  }
+};
+
+function drawImageFit(ctx, img, x, y, maxW, maxH, alignX) {
+  const k = Math.min(maxW / img.naturalWidth, maxH / img.naturalHeight);
+  const w = img.naturalWidth * k, h = img.naturalHeight * k;
+  ctx.drawImage(img, alignX === "left" ? x : x - w / 2, y + (maxH - h), w, h);
+  return h;
+}
+
+// Draws one certificate. ctx must already be scaled so that W x H fits.
+function drawCertificate(ctx, W, H, person, tplId, serial) {
+  const u = Math.min(W, H) / 794;
+  const c = { main: st.cMain, accent: st.cAccent, paper: st.cPaper };
+  const ink = lum(c.paper) > .5 ? "#1c2330" : "#ffffff";
+  const softInk = mix(ink, c.paper, .28);
+  const titleCol = Math.abs(lum(c.main) - lum(c.paper)) > .25 ? c.main : ink;
+  const F = FONTS[st.font];
+  ctx.save();
+  ctx.fillStyle = c.paper; ctx.fillRect(0, 0, W, H);
+  const box = DECOR[tplId || st.tpl](ctx, W, H, u, c);
+  const left = box.align === "left";
+  const ax = left ? box.x : box.x + box.w / 2;
+  ctx.textAlign = left ? "left" : "center";
+  ctx.textBaseline = "alphabetic";
+
+  const title = F.title.caps ? st.title.toUpperCase() : st.title;
+  const org = st.org.trim(), logo = images.logo;
+
+  // --- banner template: organisation and title sit in the coloured band ---
+  if (box.band) {
+    const onMain = lum(c.main) > .55 ? "#1c2330" : "#ffffff";
+    const ts = fitSize(ctx, title, F.title, 54 * u * (F.title.scale || 1), W - 150 * u, F.title.track);
+    const orgSize = 15 * u, stackH = (org ? orgSize + 16 * u : 0) + ts * .78;
+    let y = box.band.y + (box.band.h - stackH) / 2;
+    if (org) {
+      ctx.font = fontStr(Object.assign({}, F.body, { w: 600 }), orgSize); setTrack(ctx, orgSize * .18);
+      ctx.fillStyle = mix(onMain, c.main, .15); ctx.fillText(org.toUpperCase(), W / 2 + orgSize * .09, y + orgSize * .8); y += orgSize + 16 * u;
+    }
+    ctx.font = fontStr(F.title, ts); setTrack(ctx, (F.title.track || 0) * ts);
+    ctx.fillStyle = onMain; ctx.fillText(title, W / 2 + (F.title.track || 0) * ts / 2, y + ts * .76);
+    setTrack(ctx, 0);
+  }
+
+  // --- bottom row: date and signatures ---
+  const cols = [];
+  if (st.date.trim()) cols.push({ value: st.date.trim(), label: "Date" });
+  if (st.sig1.trim() || st.role1.trim()) cols.push({ label: st.sig1.trim(), sub: st.role1.trim() });
+  if (st.sig2.trim() || st.role2.trim()) cols.push({ label: st.sig2.trim(), sub: st.role2.trim() });
+  const rowH = cols.length ? 96 * u : 10 * u;
+  const lineY = box.y + box.h - 40 * u;
+  const lineW = Math.min(200 * u, box.w / Math.max(cols.length, 2) - 24 * u);
+  const frac = { 1: [.5], 2: [.2, .8], 3: [.17, .5, .83] }[cols.length] || [];
+  cols.forEach((col, i) => {
+    const cx = left ? box.x + lineW / 2 + i * (lineW + 46 * u) : box.x + box.w * frac[i];
+    ctx.textAlign = "center";
+    if (col.value) { const s = fitSize(ctx, col.value, F.body, 17 * u * (F.body.scale || 1), lineW, 0); ctx.font = fontStr(F.body, s); ctx.fillStyle = ink; ctx.fillText(col.value, cx, lineY - 9 * u); }
+    ctx.strokeStyle = softInk; ctx.lineWidth = 1.2 * u; ctx.beginPath(); ctx.moveTo(cx - lineW / 2, lineY); ctx.lineTo(cx + lineW / 2, lineY); ctx.stroke();
+    if (col.label) { const s = fitSize(ctx, col.label, Object.assign({}, F.body, { w: 600 }), 14 * u * (F.body.scale || 1), lineW + 30 * u, 0); ctx.font = fontStr(Object.assign({}, F.body, { w: 600 }), s); ctx.fillStyle = ink; ctx.fillText(col.label, cx, lineY + 19 * u); }
+    if (col.sub) { ctx.font = fontStr(F.body, 12.5 * u * (F.body.scale || 1)); ctx.fillStyle = softInk; ctx.fillText(col.sub, cx, lineY + (col.label ? 36 : 19) * u); }
+  });
+  ctx.textAlign = left ? "left" : "center";
+
+  // --- certificate number, small, under the bottom row ---
+  if (st.serial && serial) {
+    const s = 10.5 * u;
+    ctx.font = fontStr(F.body, s); setTrack(ctx, s * .08); ctx.fillStyle = softInk;
+    ctx.fillText("Certificate no. " + serial, ax, box.y + box.h + 13 * u); setTrack(ctx, 0);
+  }
+
+  // --- seal ---
+  if (st.seal) {
+    const r = 37 * u;
+    if (left) drawSeal(ctx, box.x + box.w - r - 6 * u, box.y + r + 4 * u, r, c);
+    else if (cols.length === 2 || cols.length === 0) drawSeal(ctx, box.x + box.w / 2, lineY - r * 1.05, r, c);
+    else if (box.band) drawSeal(ctx, W - 96 * u, box.band.h + 6 * u, r, c);
+    else drawSeal(ctx, box.x + box.w - r - 4 * u, box.y + r + 2 * u, r * .9, c);
+  }
+  const sealAtBottom = st.seal && !left && cols.length === 0;
+
+  // --- the words, stacked and centred in the space that is left ---
+  const availH = box.h - rowH - (sealAtBottom ? 120 * u : 0);
+  let k = 1, items = [];
+  for (let pass = 0; pass < 3; pass++) {
+    items = [];
+    const add = (h, gap, draw) => items.push({ h, gap, draw });
+    if (logo) { const lh = st.logoSize * u * k; add(lh, 16 * u * k, y => drawImageFit(ctx, logo, ax, y, box.w * .7, lh, left ? "left" : "center")); }
+    if (!box.band) {
+      if (org) { const s = 15 * u * k; add(s, 14 * u * k, y => { ctx.font = fontStr(Object.assign({}, F.body, { w: 600 }), s); setTrack(ctx, s * .18); ctx.fillStyle = softInk; ctx.fillText(org.toUpperCase(), ax + (left ? 0 : s * .09), y + s * .8); setTrack(ctx, 0); }); }
+      const ts = fitSize(ctx, title, F.title, 50 * u * k * (F.title.scale || 1), box.w, F.title.track);
+      add(ts * .8, 24 * u * k, y => { ctx.font = fontStr(F.title, ts); setTrack(ctx, (F.title.track || 0) * ts); ctx.fillStyle = titleCol; ctx.fillText(title, ax + (left ? 0 : (F.title.track || 0) * ts / 2), y + ts * .76); setTrack(ctx, 0); });
+    }
+    if (st.pre.trim()) { const s = 18 * u * k * (F.body.scale || 1); add(s, 12 * u * k, y => { ctx.font = fontStr(F.body, s); ctx.fillStyle = softInk; ctx.fillText(st.pre.trim(), ax, y + s * .8); }); }
+    {
+      const shown = person || "Name";
+      const ns = fitSize(ctx, shown, F.name, 62 * u * k * (F.name.scale || 1), box.w * .92, 0);
+      add(ns * .95, 10 * u * k, y => { ctx.font = fontStr(F.name, ns); ctx.fillStyle = person ? ink : mix(ink, c.paper, .7); ctx.fillText(shown, ax, y + ns * .76); });
+      add(3 * u, 18 * u * k, y => { ctx.fillStyle = c.accent; ctx.fillRect(left ? ax : ax - 70 * u, y, 140 * u, 3 * u); });
+    }
+    if (st.reason.trim()) {
+      const s = 18 * u * k * (F.body.scale || 1), lh = s * 1.45;
+      ctx.font = fontStr(F.body, s);
+      const lines = wrapLines(ctx, st.reason.trim(), Math.min(box.w, 640 * u));
+      add(lines.length * lh, 0, y => { ctx.font = fontStr(F.body, s); ctx.fillStyle = ink; lines.forEach((l, i) => ctx.fillText(l, ax, y + s * .85 + i * lh)); });
+    }
+    const total = items.reduce((t, it) => t + it.h + it.gap, 0);
+    if (total <= availH) break;
+    k *= Math.max(availH / total, .6);
+  }
+  const total = items.reduce((t, it) => t + it.h + it.gap, 0);
+  let y = box.y + Math.max((availH - total) / 2, 0);
+  items.forEach(it => { it.draw(y); y += it.h + it.gap; });
+  ctx.restore();
+}
+
+function renderTo(canvas, scale, person, tplId, index) {
+  const [W, H] = pageSize();
+  canvas.width = Math.round(W * scale); canvas.height = Math.round(H * scale);
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  drawCertificate(ctx, W, H, person, tplId, person && index !== undefined ? serialFor(person, index) : "");
+  return canvas;
+}
+
+// =====================================================================
+// SCREEN
+// =====================================================================
+const $ = id => document.getElementById(id);
+const preview = $("preview");
+let drawQueued = false;
+
+function redraw() {
+  if (drawQueued) return;
+  drawQueued = true;
+  requestAnimationFrame(() => {
+    drawQueued = false;
+    const names = nameList();
+    pageIndex = Math.min(pageIndex, names.length - 1);
+    renderTo(preview, Math.min(window.devicePixelRatio || 1, 2) * 1.25, names[pageIndex], undefined, pageIndex);
+    document.querySelectorAll(".tpl").forEach(b => {
+      renderTo(b.querySelector("canvas"), .2, names[pageIndex] || "Name", b.dataset.tpl);
+      b.setAttribute("aria-pressed", b.dataset.tpl === st.tpl);
+    });
+    const multi = st.mode === "class";
+    $("pager").hidden = !(multi && names.length > 1);
+    $("pagerText").textContent = (pageIndex + 1) + " of " + names.length;
+    $("classCount").textContent = multi ? (names[0] ? names.length + (names.length === 1 ? " certificate" : " certificates") : "Paste or type your class list.") : "";
+    $("pdfBtn").textContent = multi && names.length > 1 ? "Download PDF (" + names.length + ")" : "Download PDF";
+  });
+}
+
+// fonts arrive after the first paint: draw again when the chosen ones are ready
+function loadFonts() {
+  if (!document.fonts || !document.fonts.load) return Promise.resolve();
+  const F = FONTS[st.font];
+  return Promise.all([F.title, F.name, F.body, Object.assign({}, F.body, { w: 600 })]
+    .map(s => document.fonts.load(fontStr(s, 20)).catch(() => {}))).then(redraw);
+}
+
+function syncForm() {
+  document.querySelectorAll("[data-k]").forEach(el => {
+    const v = st[el.dataset.k];
+    if (el.type === "checkbox") el.checked = !!v; else el.value = v;
+  });
+  ["mode", "orient", "paper"].forEach(n => document.querySelectorAll('input[name="' + n + '"]').forEach(r => r.checked = r.value === st[n]));
+  $("oneWrap").hidden = st.mode === "class";
+  $("classWrap").hidden = st.mode !== "class";
+  $("logoClear").hidden = $("logoSizeWrap").hidden = !st.logo;
+  $("logoFile").disabled = !st.logoOk;
+  $("logoPick").setAttribute("aria-disabled", st.logoOk ? "false" : "true");
+  $("csvBtn").hidden = !st.serial;
+  document.querySelectorAll(".sw").forEach(b => { const p = PALETTES[b.dataset.i].c; b.setAttribute("aria-pressed", p[0] === st.cMain && p[1] === st.cAccent && p[2] === st.cPaper); });
+}
+function changed() { syncForm(); save(); redraw(); }
+
+// build the pickers
+PRESETS.forEach(p => { const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = p.label; b.onclick = () => { st.title = p.title; st.pre = p.pre; st.reason = p.reason; changed(); }; $("presets").appendChild(b); });
+TEMPLATES.forEach(t => { const b = document.createElement("button"); b.type = "button"; b.className = "tpl"; b.dataset.tpl = t.id; b.innerHTML = "<canvas></canvas>" + t.label; b.onclick = () => { st.tpl = t.id; changed(); }; $("tpls").appendChild(b); });
+PALETTES.forEach((p, i) => { const b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.dataset.i = i; b.title = p.name; b.setAttribute("aria-label", p.name); b.style.background = "linear-gradient(135deg," + p.c[0] + " 0 50%," + p.c[1] + " 50% 100%)"; b.onclick = () => { st.cMain = p.c[0]; st.cAccent = p.c[1]; st.cPaper = p.c[2]; changed(); }; $("swatches").appendChild(b); });
+Object.keys(FONTS).forEach(k => { const o = document.createElement("option"); o.value = k; o.textContent = FONTS[k].label; $("fontSel").appendChild(o); });
+
+$("controls").addEventListener("input", e => {
+  const el = e.target;
+  if (el.dataset.k) st[el.dataset.k] = el.type === "checkbox" ? el.checked : el.type === "range" ? +el.value : el.value;
+  else if (el.name && el.type === "radio") { st[el.name] = el.value; if (el.name === "mode") pageIndex = 0; }
+  else return;
+  if (el.dataset.k === "font") loadFonts();
+  if (el.dataset.k === "logoOk" && !st.logoOk) { st.logo = ""; images.logo = null; }
+  changed();
+});
+$("agree").addEventListener("input", e => { st.agree = e.target.checked; $("agreeWrap").classList.remove("nudge"); if (st.agree) say(""); changed(); });
+$("prevBtn").onclick = () => { pageIndex = Math.max(pageIndex - 1, 0); redraw(); };
+$("nextBtn").onclick = () => { pageIndex = Math.min(pageIndex + 1, nameList().length - 1); redraw(); };
+
+// ---- images: read in the browser, shrunk so they are quick to save ----
+function loadImage(key) {
+  return new Promise(res => {
+    if (!st[key]) { images[key] = null; return res(); }
+    const img = new Image();
+    img.onload = () => { images[key] = img; res(); };
+    img.onerror = () => { images[key] = null; st[key] = ""; res(); };
+    img.src = st[key];
+  });
+}
+// Safety: only image types are accepted, with a size limit. The picture is
+// then re-drawn as a plain PNG, which drops anything hidden in the file
+// (scripts inside an SVG, camera or location data inside a photo).
+const IMAGE_TYPES = ["image/png", "image/jpeg", "image/webp", "image/svg+xml"];
+function pickImage(input, key, maxSide) {
+  input.addEventListener("change", () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    if (!st.logoOk) { input.value = ""; return; }
+    if (IMAGE_TYPES.indexOf(file.type) === -1) { input.value = ""; say("That file type is not supported. Use a PNG, JPG, WebP or SVG image."); return; }
+    if (file.size > 5 * 1024 * 1024) { input.value = ""; say("That image is larger than 5 MB. Choose a smaller file."); return; }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const w = img.naturalWidth || 600, h = img.naturalHeight || 600, k = Math.min(1, maxSide / Math.max(w, h));
+        const cv = document.createElement("canvas"); cv.width = Math.max(1, Math.round(w * k)); cv.height = Math.max(1, Math.round(h * k));
+        cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
+        st[key] = cv.toDataURL("image/png");
+        loadImage(key).then(changed);
+        say("");
+      };
+      img.onerror = () => say("That file could not be read as an image. Try a PNG or JPG.");
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+    input.value = "";
+  });
+}
+pickImage($("logoFile"), "logo", 900);
+$("logoClear").onclick = () => { st.logo = ""; images.logo = null; changed(); };
+$("resetBtn").onclick = () => { st = Object.assign({}, DEFAULTS, { agree: st.agree }); images.logo = null; serials.clear(); pageIndex = 0; loadFonts(); changed(); say("Design cleared."); };
+
+// =====================================================================
+// DOWNLOAD AND PRINT
+// =====================================================================
+function say(msg) { $("status").textContent = msg; }
+function fileName(ext) {
+  const names = nameList();
+  const base = (st.mode === "class" && names.length > 1 ? (st.title || "certificates") : (names[0] || "certificate"));
+  return base.replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "_").slice(0, 60) + (st.mode === "class" && names.length > 1 ? "_class" : "_certificate") + "." + ext;
+}
+const pause = () => new Promise(r => setTimeout(r, 0));
+async function busy(btn, job) {
+  // nothing is made until the terms have been accepted
+  if (!st.agree) {
+    const wrap = $("agreeWrap");
+    wrap.classList.add("nudge");
+    wrap.scrollIntoView({ block: "center", behavior: "smooth" });
+    $("agree").focus({ preventScroll: true });
+    say("Tick the box above the buttons to confirm this is a genuine award, then try again.");
+    return;
+  }
+  const all = [$("pdfBtn"), $("pngBtn"), $("printBtn")];
+  all.forEach(b => b.disabled = true);
+  try { await loadFonts(); await job(); } catch (e) { say("Something went wrong making the file. Try again, or use Print."); }
+  all.forEach(b => b.disabled = false);
+  redraw();
+}
+
+$("pdfBtn").onclick = () => busy($("pdfBtn"), async () => {
+  if (!window.jspdf) { say("The PDF tool did not load (check your connection). Use Print and choose Save as PDF."); return; }
+  const names = nameList(), [W, H] = pageSize();
+  const mm = st.paper === "letter" ? [279.4, 215.9] : [297, 210];
+  const pw = st.orient === "portrait" ? mm[1] : mm[0], ph = st.orient === "portrait" ? mm[0] : mm[1];
+  const pdf = new window.jspdf.jsPDF({ orientation: st.orient, unit: "mm", format: st.paper });
+  const scale = names.length > 1 ? 2.2 : 3.125;          // about 210 or 300 dots per inch
+  const cv = document.createElement("canvas");
+  for (let i = 0; i < names.length; i++) {
+    say(names.length > 1 ? "Making certificate " + (i + 1) + " of " + names.length + "…" : "Making your PDF…");
+    await pause();
+    renderTo(cv, scale, names[i], undefined, i);
+    if (i) pdf.addPage();
+    pdf.addImage(cv.toDataURL("image/jpeg", .92), "JPEG", 0, 0, pw, ph, undefined, "FAST");
+  }
+  pdf.save(fileName("pdf"));
+  say(names.length > 1 ? "Downloaded " + names.length + " certificates in one PDF." : "PDF downloaded.");
+});
+
+// a record of who got which number, for the teacher to keep
+$("csvBtn").onclick = () => {
+  const names = nameList().filter(Boolean);
+  if (!names.length) { say("Add a name first."); return; }
+  const cell = v => '"' + String(v).replace(/"/g, '""').replace(/^([=+\-@])/, "'$1") + '"';
+  const all = nameList();
+  const rows = [["Name", "Certificate no.", "Title", "Date", "Organisation"]]
+    .concat(all.map((n, i) => n ? [n, serialFor(n, i), st.title, st.date, st.org] : null).filter(Boolean));
+  const blob = new Blob(["\ufeff" + rows.map(r => r.map(cell).join(",")).join("\r\n")], { type: "text/csv" });
+  const a = document.createElement("a");
+  a.download = fileName("csv").replace(/_(class|certificate)\.csv$/, "_record.csv"); a.href = URL.createObjectURL(blob);
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  say("Record downloaded. Keep it somewhere safe.");
+};
+
+$("pngBtn").onclick = () => busy($("pngBtn"), async () => {
+  const cv = renderTo(document.createElement("canvas"), 2.5, nameList()[pageIndex], undefined, pageIndex);
+  const a = document.createElement("a");
+  a.download = fileName("png").replace("_class", "_certificate"); a.href = cv.toDataURL("image/png");
+  document.body.appendChild(a); a.click(); a.remove();
+  say("Image downloaded.");
+});
+
+$("printBtn").onclick = () => busy($("printBtn"), async () => {
+  const names = nameList(), area = $("printArea"), cv = document.createElement("canvas");
+  area.innerHTML = "";
+  let rule = $("pageRule");
+  if (!rule) { rule = document.createElement("style"); rule.id = "pageRule"; document.head.appendChild(rule); }
+  rule.textContent = "@page{size:" + (st.paper === "letter" ? "letter" : "A4") + " " + st.orient + ";margin:0}";
+  const waits = [];
+  for (let i = 0; i < names.length; i++) {
+    say("Getting ready to print…"); await pause();
+    renderTo(cv, 2, names[i], undefined, i);
+    const img = new Image();
+    waits.push(new Promise(r => { img.onload = img.onerror = r; }));
+    img.src = cv.toDataURL("image/jpeg", .92);
+    area.appendChild(img);
+  }
+  await Promise.all(waits);
+  say("");
+  window.print();
+});
+
+// =====================================================================
+// START
+// =====================================================================
+Promise.all([loadImage("logo")]).then(() => { syncForm(); redraw(); loadFonts(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+window.addEventListener("resize", redraw);
+</script>
+</body>
+</html>
