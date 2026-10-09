@@ -12,27 +12,24 @@
   <meta name="theme-color" content="#1c1c1c" />
 
   <!-- ===== SEO ===== -->
-  <title>Free Online English Vocabulary Games for Class | Modern English Australia</title>
-  <meta name="description" content="Free online vocabulary games for English classes — idioms, similes, collocations, 'get' expressions and a Lovers &amp; Haters team game, written by a native speaker. Project them or play on a phone." />
+  <title>Free English Micro Lessons: Vocabulary and Grammar | Modern English Australia</title>
+  <meta name="description" content="Free micro lessons for English vocabulary and grammar, written by a native speaker. Each short lesson states its level, lists matching coursebooks, and links to practice and a game." />
   <meta name="author" content="Modern English Australia" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 
-  <link rel="canonical" href="https://modernenglish.au/vocabularygames.html" />
+  <link rel="canonical" href="https://modernenglish.au/microlessons.html" />
   <link rel="alternate" type="application/rss+xml" title="Modern English Australia &#8212; Blog" href="https://modernenglish.au/feed.xml" />
 
   <!-- Social preview -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://modernenglish.au/vocabularygames.html" />
+  <meta property="og:url" content="https://modernenglish.au/microlessons.html" />
   <meta property="og:site_name" content="Modern English Australia" />
   <meta property="og:locale" content="en_AU" />
-  <meta property="og:title" content="Free Online English Vocabulary Games for Class" />
-  <meta property="og:description" content="Free online vocabulary games for English classes — idioms, similes, collocations and 'get' expressions, written by a native speaker. Project them or play on a phone." />
+  <meta property="og:title" content="Free English Micro Lessons: Vocabulary and Grammar" />
+  <meta property="og:description" content="Short vocabulary and grammar lessons with a clear level, coursebook alignment, practice and a linked game." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Free Online English Vocabulary Games for Class" />
-  <meta name="twitter:description" content="Free online vocabulary games for English classes, written by a native speaker. Project them, play on a tablet or phone. No sign-up." />
-  <!-- TODO: add a 1200x630 image and uncomment:
-  <meta property="og:image" content="https://modernenglish.au/og-vocab-games.jpg" />
-  <meta name="twitter:image" content="https://modernenglish.au/og-vocab-games.jpg" /> -->
+  <meta name="twitter:title" content="Free English Micro Lessons: Vocabulary and Grammar" />
+  <meta name="twitter:description" content="Short vocabulary and grammar lessons with a clear level, coursebook alignment, practice and a linked game. No sign-up." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet">
@@ -437,27 +434,6 @@
     }
     .game-card.is-soon .game-card-arrow { color: var(--muted); }
 
-    /* Cards with a coursebook block and two links (game + mini lesson) */
-    h3.game-card-title { margin: 0; }
-    .game-card-title a { color: inherit; text-decoration: none; }
-    .game-card-title a:hover { color: var(--accent); text-decoration: underline; }
-    .game-card-books {
-      font-size: 0.88rem; line-height: 1.55; color: var(--muted);
-      border-top: 1px solid var(--line); padding-top: 10px; margin-top: 4px;
-    }
-    .game-card-books strong { color: var(--ink); }
-    .game-card-books p { margin: 0; }
-    .game-card-books ul { padding-left: 1.2em; margin: 4px 0 0; }
-    .game-card-books a { overflow-wrap: anywhere; }
-    .game-card-links { display: flex; flex-wrap: wrap; gap: 0 22px; margin-top: auto; }
-    .game-card-links a {
-      display: inline-flex; align-items: center; gap: 4px; min-height: 44px;
-      font-size: 0.88rem; font-weight: 700; color: var(--link); text-decoration: none; transition: gap .15s;
-    }
-    .game-card-links a:hover { gap: 8px; color: var(--accent-2); }
-    .game-card-links a:focus-visible, .game-card-title a:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
-    @supports not (inset: 0) { .game-card-links a { margin-right: 22px; } }
-
     /* FOOTER */
     footer { background: var(--header); color: var(--header-ink); border-top: 1px solid rgba(255,255,255,.08); padding: 20px 0 20px; padding-bottom: calc(20px + var(--safe-bottom)); }
     .footer-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; text-align: center; font-family: var(--sans); font-size: 0.87rem; color: rgba(248,250,252,.60); }
@@ -524,6 +500,27 @@
       .pill .pill-dot { animation: none; }
       .new-badge { animation: none; }
     }
+
+    /* ===== MICRO LESSON CARDS (same card as the games page, with level + coursebook blocks) ===== */
+    .game-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); }
+    h3.game-card-title { margin: 0; }
+    .game-card-title a { color: inherit; text-decoration: none; }
+    .game-card-title a:hover { color: var(--accent); text-decoration: underline; }
+    .game-card-level { font-size: 0.92rem; line-height: 1.6; margin: 0; color: var(--ink); }
+    .game-card-books {
+      font-size: 0.88rem; line-height: 1.55; color: var(--muted);
+      border-top: 1px solid var(--line); padding-top: 10px; margin-top: 4px;
+    }
+    .game-card-books strong { color: var(--ink); }
+    .game-card-books ul { padding-left: 1.2em; margin: 4px 0 0; }
+    .game-card-links { display: flex; flex-wrap: wrap; gap: 0 22px; margin-top: 4px; }
+    .game-card-links a {
+      display: inline-flex; align-items: center; gap: 4px; min-height: 44px;
+      font-size: 0.88rem; font-weight: 700; color: var(--link); text-decoration: none; transition: gap .15s;
+    }
+    .game-card-links a:hover { gap: 8px; color: var(--accent-2); }
+    .game-card-links a:focus-visible, .game-card-title a:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+    @supports not (inset: 0) { .game-card-links a { margin-right: 22px; } }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -556,61 +553,75 @@
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="index.html">Home</a>
         <span aria-hidden="true">›</span>
-        <span aria-current="page">Vocab Games</span>
+        <span aria-current="page">Micro Lessons</span>
       </nav>
 
       <div class="one-col">
-        <p class="eyebrow">Interactive Learning</p>
+        <p class="eyebrow">Short Lessons</p>
 
         <h1 class="hero-headline">
-          <span class="hero-word">vocab&nbsp;</span><span class="hero-word">games</span>
+          <span class="hero-word">micro&nbsp;</span><span class="hero-word">lessons</span>
         </h1>
 
-        <p class="role-line">Themes · Idioms · Collocations · Phrasal Verbs in English</p>
-        <p class="role-line">Warm up games · icebreakers · revision · self-study</p>
-
+        <p class="role-line">Vocabulary · Grammar · One idea at a time</p>
+        <p class="role-line">Level · Coursebook alignment · Practice · Game</p>
       </div>
 
-      <!-- VOCAB GAMES — first, so people find them straight away -->
-      <h2 id="games" class="games-h">Free Online Vocabulary Games for English Class</h2>
+      <h2 id="lessons" class="games-h">Free Micro Lessons for English Vocabulary and Grammar</h2>
       <div class="game-grid">
 
-        <!-- Cards with a mini lesson use <article> and two links (Play + Mini lesson),
-             because a link cannot sit inside another link. -->
-        <article class="game-card">
-          <span class="game-card-label">ESL Classroom Game · A1–A2</span>
-          <h3 class="game-card-title"><a href="game1/geta2.html">Get Expressions</a></h3>
-          <p class="game-card-desc">
-            Practise common expressions with <strong>get</strong> such as
-            get hungry, get thirsty, get tired, get cold and get lost.
-            Designed for elementary-level ESL learners.
+        <!-- MICRO LESSON CARD — copy this whole <article> for each new lesson.
+             Change: the label (type + level), title, level description, short description,
+             coursebook list, and the two links (lesson page + game page).
+             Then add the lesson to the ItemList at the bottom of the page. -->
+        <article class="game-card" id="get-beginners">
+          <span class="game-card-label">Vocabulary Micro Lesson · A1–A2</span>
+          <h3 class="game-card-title"><a href="game1/get-lesson.html">A Beginner&rsquo;s Guide to &lsquo;Get&rsquo;</a></h3>
+          <p class="game-card-level">
+            <strong>Level: A1–A2 (Beginner to Elementary).</strong>
+            For learners who can make simple present and past sentences
+            (<em>I get</em>, <em>I got</em>) and know everyday words like <em>hungry</em>, <em>home</em> and <em>bus</em>.
+            After this lesson, students can understand and use <strong>get</strong> to mean
+            <em>become</em>, <em>receive</em> and <em>arrive</em>.
           </p>
+          <p class="game-card-desc">
+            Why native speakers say <strong>get</strong> all the time: get tired, get a message, get home.
+            Three meanings, a short note on phrasal verbs, a drag-and-drop exercise and three dictation sentences.
+          </p>
+
           <div class="game-card-books">
             <strong>Coursebook alignment:</strong>
-            <p>Suitable for adult ESL elementary classes</p>
             <ul>
               <li>Pearson Speakout Elementary</li>
               <li>Cambridge English Vocabulary in Use Elementary</li>
               <li>Suitable for A1-A2 vocabulary and speaking practice</li>
             </ul>
           </div>
+
           <div class="game-card-links">
-            <a href="game1/geta2.html">Play <span aria-hidden="true">→</span></a>
-            <a href="game1/get-lesson.html">Mini lesson <span aria-hidden="true">→</span></a>
+            <a href="game1/get-lesson.html">Open the lesson <span aria-hidden="true">→</span></a>
+            <a href="game1/geta2.html">Play the game <span aria-hidden="true">→</span></a>
           </div>
         </article>
 
-        <article class="game-card">
-          <span class="game-card-label">ESL Classroom Game · A1–A2</span>
-          <h3 class="game-card-title"><a href="game/make-have-do-colloations.html">Have, Make &amp; Do</a></h3>
-          <p class="game-card-desc">
-            Choose <strong>have</strong>, <strong>make</strong> or <strong>do</strong>, then turn over a card
-            to build the collocation: do the dishes, make a mistake, have a shower.
-            Designed for elementary-level ESL learners.
+        <article class="game-card" id="have-make-do">
+          <span class="game-card-label">Vocabulary Micro Lesson · A1–A2</span>
+          <h3 class="game-card-title"><a href="game/have-make-do-lesson.html">Have, Make or Do?</a></h3>
+          <p class="game-card-level">
+            <strong>Level: A1–A2 (Beginner to Elementary).</strong>
+            For learners who know the verbs <em>have</em>, <em>make</em> and <em>do</em> and everyday words
+            for meals, housework and study, but are not sure which verb goes with which word.
+            After this lesson, students can choose the right verb for common collocations such as
+            <em>have a shower</em>, <em>make a mistake</em> and <em>do the dishes</em>.
           </p>
+          <p class="game-card-desc">
+            Three simple ideas: <strong>have</strong> for things that happen to you, <strong>make</strong> for
+            something new, <strong>do</strong> for jobs and activities. With a full list of 84 expressions
+            and nine dictation sentences.
+          </p>
+
           <div class="game-card-books">
             <strong>Coursebook alignment:</strong>
-            <p>Suitable for adult ESL elementary classes</p>
             <ul>
               <li>Cambridge English Empower A2 / B1</li>
               <li>Cambridge Complete Preliminary / Complete First: a very clear collocation lesson</li>
@@ -619,264 +630,31 @@
               <li>Suitable for A1-A2 vocabulary and speaking practice</li>
             </ul>
           </div>
+
           <div class="game-card-links">
-            <a href="game/make-have-do-colloations.html">Play <span aria-hidden="true">→</span></a>
-            <a href="game/have-make-do-lesson.html">Mini lesson <span aria-hidden="true">→</span></a>
+            <a href="game/have-make-do-lesson.html">Open the lesson <span aria-hidden="true">→</span></a>
+            <a href="game/make-have-do-colloations.html">Play the game <span aria-hidden="true">→</span></a>
           </div>
         </article>
-
-        <article class="game-card">
-          <span class="game-card-label">Matching Game · A1–A2 · K–12 &amp; ESL</span>
-          <h3 class="game-card-title"><a href="game/animalsimilesa2.html">Animal Similes</a></h3>
-          <p class="game-card-desc">Match <em>as … as</em> similes with animals — as brave as a lion, as busy as a bee. Pictures, animal sounds and a gap-fill.</p>
-          <div class="game-card-books">
-            <strong>Curriculum and coursebook alignment:</strong>
-            <p>Suitable for primary school English (K–12) and ESL classes</p>
-            <ul>
-              <li>Cambridge Passages 2nd Edition: ESL, around B1</li>
-              <li>English Grammar Practice 5B: Year 5</li>
-              <li>The New First Aid in English: primary</li>
-              <li>US Common Core L.3.5 / L.4.5: Grades 3–4</li>
-              <li>Australian Curriculum, Years 5–6: <a href="https://www.twinkl.com.au/resource/similes-word-mat-t2-e-5136" target="_blank" rel="noopener">Twinkl simile word mat</a></li>
-              <li>ESL methodology, A2–B1: <a href="https://www.tefl.net/esl-activities/animal-adventures.php" target="_blank" rel="noopener">TEFL.net Animal Adventures activity</a></li>
-            </ul>
-          </div>
-          <div class="game-card-links">
-            <a href="game/animalsimilesa2.html">Play <span aria-hidden="true">→</span></a>
-          </div>
-        </article>
-
-        <a class="game-card" href="game/likesimilesb1.html">
-          <span class="game-card-label">Matching Game · A2–B1</span>
-          <span class="game-card-title">Animal Similes with Like</span>
-          <p class="game-card-desc">Run like a leopard, swim like a fish, work like a dog. Match each action to its animal, then use the right verb form.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game/colouridioms.html">
-          <span class="game-card-label">Matching Game · B1–B2</span>
-          <span class="game-card-title">Colour Idioms</span>
-          <p class="game-card-desc">Three levels of colour idioms, easy to harder. One, two or three players — keep your own score.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game/weatheridioms.html">
-          <span class="game-card-label">Matching Game · B2</span>
-          <span class="game-card-title">Weather Idioms</span>
-          <p class="game-card-desc">Match weather-based idioms to their meanings.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game/moneyidiom.html">
-          <span class="game-card-label">Snap Game · B2</span>
-          <span class="game-card-title">Money Idioms</span>
-          <p class="game-card-desc">Fast-paced snap game targeting money idioms in context.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game/agesandstagestest.html">
-          <span class="game-card-label">Matching Game · B2</span>
-          <span class="game-card-title">Ages &amp; Stages in Life Idioms</span>
-          <p class="game-card-desc">Match idioms about life stages to their definitions.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game1/getB2.html">
-          <span class="game-card-label">Matching Game · B2</span>
-          <span class="game-card-title">Get Expressions</span>
-          <p class="game-card-desc">Upper-intermediate "get" expressions in a matching format.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game/throughthoughtthough.html">
-          <span class="game-card-label">Matching Game · B2</span>
-          <span class="game-card-title">Though-Thought-Through-Thorough</span>
-          <p class="game-card-desc">Intermediate Though-Thought-Through-Thorough.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game/body-idioms.html">
-          <span class="game-card-label">Matching Game · B2–C1</span>
-          <span class="game-card-title">Body Idioms</span>
-          <p class="game-card-desc">Turn a blind eye, pull someone&rsquo;s leg, give someone the cold shoulder. Two levels, example sentences and follow-up gap-fills.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game/inside-body-idioms.html">
-          <span class="game-card-label">Matching Game · B2–C1</span>
-          <span class="game-card-title">Inside the Body Idioms</span>
-          <p class="game-card-desc">Butterflies in your stomach, nerves of steel, a bone to pick. Idioms about the stomach, brain, bones, nerves, skin and lungs, with gap-fills.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game/animalidiomsc1.html">
-          <span class="game-card-label">Matching Game · B2–C1</span>
-          <span class="game-card-title">Animal Idioms</span>
-          <p class="game-card-desc">From <em>let the cat out of the bag</em> to <em>the elephant in the room</em> — 20 upper-intermediate and advanced animal idioms.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game/Casualvsacademic.html">
-          <span class="game-card-label">Matching Game · C2</span>
-          <span class="game-card-title">Casual vs Academic Language</span>
-          <p class="game-card-desc">Distinguish between casual and formal academic register.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card" href="game1/getC2.html">
-          <span class="game-card-label">Matching Game · C2</span>
-          <span class="game-card-title">Get Expressions</span>
-          <p class="game-card-desc">Advanced "get" expressions for proficiency-level students.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <a class="game-card is-new" href="game/loversandhaters.html">
-          <span class="new-badge">New</span>
-          <span class="game-card-label">Team Game · B2–C2</span>
-          <span class="game-card-title">Lovers &amp; Haters</span>
-          <p class="game-card-desc">Workaholics, technophobes, bibliophiles and more. Two teams, the Lovers and the Haters, battle it out with 1, 2 and 4-point words, from everyday English to expert words few native speakers know.</p>
-          <span class="game-card-arrow">Play <span>→</span></span>
-        </a>
-
-        <!-- COMING SOON · A1–B2 — Homophones
-             To go live: change <div ...> to <a class="game-card" href="game/homophones.html">,
-             change the closing </div> to </a>, delete the soon-badge line,
-             change "Coming soon" at the bottom to Play <span>→</span>,
-             and add it to the ItemList at the bottom of the page. -->
-        <div class="game-card is-soon" aria-label="Homophones, A1 to B2 level, coming soon" data-href="game/homophones.html">
-          <span class="soon-badge">Coming soon</span>
-          <span class="game-card-label">Matching Game · A1–B2</span>
-          <span class="game-card-title">Homophones</span>
-          <p class="game-card-desc">Confusing words in English that sound the same but mean different things, like <em>there, their</em> and <em>they&rsquo;re</em>.</p>
-          <span class="game-card-arrow">Coming soon</span>
-        </div>
 
       </div>
 
-      <p><a class="cta-link" href="microlessons.html">Micro lessons: short vocabulary and grammar lessons that go with the games</a></p>
-
       <hr class="divider">
 
-      <!-- HOW TO USE THEM — the longer text, below the games -->
       <div class="one-col">
-        <h2 class="tips-title" id="tips">Ideas and tips for using them</h2>
+        <h2 class="tips-title" id="how">How the micro lessons work</h2>
         <ol class="tips-list">
-          <li><strong>Classroom gameshow</strong> — project the game onto the board with the teacher (or one of the students) as the host/presenter.</li>
-          <li><strong>Board game</strong> — ideally on a tablet, but a phone or computer works too. One device goes on the table between a pair or group of students and is played like a board game.</li>
-          <li><strong>Homework</strong> — assign the game as homework, then open the next lesson with a class competition on the material.</li>
-          <li><strong>Zoom or online</strong> — the teacher and students take turns sharing the screen and being in control of the game.</li>
+          <li><strong>One idea</strong> — each lesson teaches one small piece of vocabulary or grammar in a few minutes.</li>
+          <li><strong>A clear level</strong> — every lesson says who it is for and what students can do afterwards.</li>
+          <li><strong>Coursebook alignment</strong> — each lesson lists the coursebooks it fits, so it can slot into a class as a warm-up, extension or revision.</li>
+          <li><strong>Practice, then play</strong> — short exercises on the lesson page, then a linked game to recycle the language.</li>
         </ol>
-
-        <!-- PEDAGOGY PILL -->
-        <div class="pill-row">
-          <button class="pill pill-alt" id="pedToggle" type="button" aria-expanded="false" aria-controls="pedPanel">
-            <span class="pill-dot" aria-hidden="true"></span>
-            <span class="pill-text">Pedagogy: put students in control</span>
-            <span class="pill-chev" aria-hidden="true">▾</span>
-          </button>
-          <span class="pill-hint">Why hand over the game?</span>
-        </div>
-      </div>
-
-      <!-- PEDAGOGY PANEL -->
-      <div class="blog-panel" id="pedPanel" role="region" aria-labelledby="pedToggle">
-        <div class="blog-panel-inner">
-          <div class="blog-panel-pad">
-            <article class="post" id="pedagogy">
-              <div class="post-meta">
-                <span>Pedagogy</span><span class="dot" aria-hidden="true"></span><span class="post-read">2 min read</span>
-              </div>
-              <h3 class="post-title">Games: putting the student in control</h3>
-              <p class="post-standfirst">In communicative language teaching, the aim is for students to do around 80% of the speaking. Once you've demonstrated a game, hand over the reins and let your students lead.</p>
-
-              <div class="post-body">
-                <p class="post-pull">Research shows this role shift boosts metalinguistic awareness, complex language output, confidence and willingness to communicate.</p>
-
-                <h4 class="post-h">Students as facilitators produce richer language</h4>
-                <p>Recent research published by Cambridge University Press shows that when students facilitate communicative tasks — explaining rules, giving instructions and managing peers — they produce significantly richer and more complex language. Acting as the &ldquo;teacher&rdquo; increases metalinguistic awareness, encourages real-time monitoring of grammar and vocabulary, and strengthens interactional competence.<a class="post-fn" href="#ref-1">1</a></p>
-
-                <h4 class="post-h">Less anxiety, more willingness to speak</h4>
-                <p>A study in <em>Frontiers in Psychology</em> (2021) observed that communicative games substantially boost adult learners&rsquo; confidence and willingness to communicate. When students take presenter or teacher roles, anxiety decreases and autonomy increases, creating ideal conditions for spontaneous speaking. This role shift is especially effective in ELICOS contexts, where learners benefit from authentic, low-pressure interaction.<a class="post-fn" href="#ref-2">2</a></p>
-              </div>
-
-              <div class="post-refs">
-                <p class="post-refs-title">References</p>
-                <!-- ⚠ LINK BROKEN: this Cambridge URL returns 404 (checked 30 Sep 2026). It needs the full article address. -->
-                <p id="ref-1">1. Cambridge University Press, <em>Language Teaching</em> — &ldquo;Game-enhanced language learning.&rdquo; <a href="https://www.cambridge.org/core/journals/language-teaching/article/gameenhanced-language-learning/" target="_blank" rel="noopener">cambridge.org</a></p>
-                <p id="ref-2">2. <em>Frontiers in Psychology</em> (2021). <a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2021.708490/full" target="_blank" rel="noopener">frontiersin.org</a></p>
-              </div>
-            </article>
-          </div>
-        </div>
       </div>
 
       <hr class="divider">
 
-      <!-- BLOG PILL -->
-      <div class="one-col">
-        <p class="eyebrow">From the Blog</p>
-        <div class="pill-row">
-          <button class="pill" id="blogToggle" type="button" aria-expanded="false" aria-controls="blogPanel">
-            <span class="pill-dot" aria-hidden="true"></span>
-            <span class="pill-text">Read the Blog</span>
-            <span class="pill-chev" aria-hidden="true">▾</span>
-          </button>
-          <span class="pill-hint">New post · 24 Sep 2026</span>
-        </div>
-      </div>
-
-      <!-- BLOG PANEL -->
-      <div class="blog-panel" id="blogPanel" role="region" aria-labelledby="blogToggle">
-        <div class="blog-panel-inner">
-          <div class="blog-panel-pad">
-
-            <div class="blog-roll one-col">
-              <p class="blog-roll-title">Latest posts</p>
-              <ul class="blog-roll-list">
-                <li>
-                  <a href="blog/what-are-english-tests-actually-testing.html">
-                    <span class="blog-roll-date">6 Oct 2026</span>
-                    <span class="blog-roll-name">What Are English Tests Actually Testing?</span>
-                    <span class="blog-roll-tag">Testing</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="blog/incidental-learning-in-the-age-of-ai.html">
-                    <span class="blog-roll-date">24 Sep 2026</span>
-                    <span class="blog-roll-name">Incidental Learning in the Age of AI</span>
-                    <span class="blog-roll-tag">AI &amp; Teaching</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="blog/ielts-reading-changes-2026.html">
-                    <span class="blog-roll-date">11 Sep 2026</span>
-                    <span class="blog-roll-name">IELTS Reading Changes in 2026</span>
-                    <span class="blog-roll-tag">IELTS</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="blog/kahoot-baamboozle-wordwall-funny-english.html">
-                    <span class="blog-roll-date">10 Sep 2026</span>
-                    <span class="blog-roll-name">Kahoot!, Baamboozle and Wordwall&#8217;s Funny English</span>
-                    <span class="blog-roll-tag">Ed-tech</span>
-                  </a>
-                </li>
-              </ul>
-              <p style="margin-top:18px;">
-                <a class="cta-link" href="blog.html">Read all posts</a>
-              </p>
-              <p class="follow-note" style="margin-top:14px;">
-                Follow by <a href="https://modernenglish.au/feed.xml">RSS</a> for new posts.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <hr class="divider">
-
-      <a class="cta-link" href="contact.html">Get in touch about custom games</a>
+      <p><a class="cta-link" href="vocabularygames.html">See all the vocabulary games</a></p>
+      <a class="cta-link" href="contact.html">Get in touch about custom lessons</a>
 
     </div>
   </section>
@@ -902,94 +680,22 @@
   "@graph": [
     {
       "@type": "CollectionPage",
-      "name": "Free Online English Vocabulary Games for Class",
-      "description": "Free online vocabulary games for English classes — idioms, collocations and 'get' expressions, written by a native speaker.",
+      "name": "Free English Micro Lessons: Vocabulary and Grammar",
+      "description": "Short vocabulary and grammar lessons with a clear level, coursebook alignment, practice and a linked game.",
       "inLanguage": "en-AU",
       "isPartOf": { "@type": "WebSite", "name": "Modern English Australia" },
-      "about": ["ESL vocabulary games", "English idiom games", "English simile games", "classroom games for English teachers"],
-      "hasPart": { "@type": "Blog", "@id": "https://modernenglish.au/blog.html", "name": "Modern English Australia Blog" }
+      "about": ["ESL micro lessons", "English vocabulary lessons", "English grammar lessons", "lessons for English teachers"]
     },
     {
       "@type": "ItemList",
-      "name": "Vocabulary games",
+      "name": "Micro lessons",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Get Expressions (A2)", "url": "https://modernenglish.au/game1/geta2.html" },
-        { "@type": "ListItem", "position": 2, "name": "Have, Make or Do (A1–A2)", "url": "https://modernenglish.au/game/make-have-do-colloations.html" },
-        { "@type": "ListItem", "position": 3, "name": "Animal Similes (A1–A2)", "url": "https://modernenglish.au/game/animalsimilesa2.html" },
-        { "@type": "ListItem", "position": 4, "name": "Animal Similes with Like (A2–B1)", "url": "https://modernenglish.au/game/likesimilesb1.html" },
-        { "@type": "ListItem", "position": 5, "name": "Colour Idioms (B1–B2)", "url": "https://modernenglish.au/game/colouridioms.html" },
-        { "@type": "ListItem", "position": 6, "name": "Weather Idioms (B2)", "url": "https://modernenglish.au/games/idioms-weather/index.html" },
-        { "@type": "ListItem", "position": 7, "name": "Money Idioms (B2)", "url": "https://modernenglish.au/MoneyIdioms/index.html" },
-        { "@type": "ListItem", "position": 8, "name": "Ages & Stages in Life Idioms (B2)", "url": "https://modernenglish.au/game/agesandstagestest.html" },
-        { "@type": "ListItem", "position": 9, "name": "Get Expressions (B2)", "url": "https://modernenglish.au/game1/getB2.html" },
-        { "@type": "ListItem", "position": 10, "name": "Though-Thought-Through-Thorough (B2)", "url": "https://modernenglish.au/matchinggame/throughthoughtthough.html" },
-        { "@type": "ListItem", "position": 11, "name": "Body Idioms (B2–C1)", "url": "https://modernenglish.au/game/body-idioms.html" },
-        { "@type": "ListItem", "position": 12, "name": "Inside the Body Idioms (B2–C1)", "url": "https://modernenglish.au/game/inside-body-idioms.html" },
-        { "@type": "ListItem", "position": 13, "name": "Animal Idioms (B2–C1)", "url": "https://modernenglish.au/game/animalidiomsc1.html" },
-        { "@type": "ListItem", "position": 14, "name": "Casual vs Academic Language (C2)", "url": "https://modernenglish.au/Set3/Casualvsacademic.html" },
-        { "@type": "ListItem", "position": 15, "name": "Get Expressions (C2)", "url": "https://modernenglish.au/game1/getC2.html" },
-        { "@type": "ListItem", "position": 16, "name": "Lovers & Haters (B2–C2)", "url": "https://modernenglish.au/game/loversandhaters.html" }
+        { "@type": "ListItem", "position": 1, "name": "A Beginner's Guide to 'Get' (A1–A2)", "url": "https://modernenglish.au/game1/get-lesson.html" },
+        { "@type": "ListItem", "position": 2, "name": "Have, Make or Do? (A1–A2)", "url": "https://modernenglish.au/game/have-make-do-lesson.html" }
       ]
     }
   ]
 }
-</script>
-
-<script>
-(function () {
-  // Reusable pill + reveal panel
-  function setupPill(toggleId, panelId, openText, closeText) {
-    var toggle = document.getElementById(toggleId);
-    var panel  = document.getElementById(panelId);
-    if (!toggle || !panel) return;
-
-    var label = toggle.querySelector('.pill-text');
-    var dot   = toggle.querySelector('.pill-dot');
-
-    // Smooth scroll where supported; plain jump on older iOS / Chinese browsers
-    function scrollToEl(el) {
-      try { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      catch (e) { el.scrollIntoView(true); }
-    }
-
-    function open(scroll) {
-      panel.classList.add('is-open');
-      toggle.setAttribute('aria-expanded', 'true');
-      if (label) label.textContent = closeText;
-      if (dot) dot.style.display = 'none';
-      if (scroll) {
-        window.setTimeout(function () { scrollToEl(panel); }, 220);
-      }
-    }
-
-    function close() {
-      panel.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      if (label) label.textContent = openText;
-      if (dot) dot.style.display = '';
-    }
-
-    toggle.addEventListener('click', function () {
-      if (panel.classList.contains('is-open')) { close(); } else { open(true); }
-    });
-
-    // Deep link: e.g. vocabularygames.html#pedagogy opens the right panel
-    function openFromHash() {
-      if (!window.location.hash) return;
-      var target;
-      try { target = document.querySelector(window.location.hash); } catch (e) { return; }
-      if (target && panel.contains(target)) {
-        open(false);
-        window.setTimeout(function () { scrollToEl(target); }, 100);
-      }
-    }
-    openFromHash();
-    window.addEventListener('hashchange', openFromHash);
-  }
-
-  setupPill('pedToggle',  'pedPanel',  'Pedagogy: put students in control', 'Hide pedagogy notes');
-  setupPill('blogToggle', 'blogPanel', 'Read the Blog', 'Hide the Blog');
-})();
 </script>
 
 </body>
