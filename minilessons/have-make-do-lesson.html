@@ -66,13 +66,13 @@
   gtag('config', 'G-HCH5CJD2ZS');
 </script>
 
-<!-- Fredoka font. Loaded without blocking the page: Google Fonts is blocked in
+<!-- Atkinson Hyperlegible font. Loaded without blocking the page: Google Fonts is blocked in
      mainland China, and a normal stylesheet link would leave the screen blank
-     until it times out. If it can't load, the Trebuchet / system font is used. -->
+     until it times out. If it can't load, Verdana / the system font is used. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"></noscript>
 
 <style>
 :root{
@@ -102,7 +102,7 @@
 html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 
 body{
-  font-family:"Fredoka", "Trebuchet MS", system-ui, -apple-system, sans-serif;
+  font-family:"Atkinson Hyperlegible", Verdana, "Segoe UI", Arial, sans-serif;
   background:var(--bg);
   color:var(--ink);
   display:flex;
@@ -1056,6 +1056,11 @@ main > p{ display:block !important; }
 h1{ font-size:1.3rem !important; font-size:clamp(1.25rem,2.2vw,1.85rem) !important; letter-spacing:1px; margin-top:.4rem !important; }
 .qr-toggle, .qr-panel{ position:absolute; }      /* scrolls away, so it never covers the lesson */
 @media(max-width:600px){ header{ padding-top:3.6rem; } }
+/* ===== Projector readability: clear sans-serif font, slightly bigger text everywhere.
+   Change the percentages to make all text bigger or smaller (100% = browser default). ===== */
+html{ font-size:112.5%; }
+@media(max-width:600px){ html{ font-size:106.25%; } }
+body{ line-height:1.5; }
 </style>
 </head>
 <body>
