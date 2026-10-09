@@ -319,7 +319,7 @@ footer a{color:#fff}
       <dt>What is the certificate number for?</dt>
       <dd>Each certificate gets its own number. Download the record of names and numbers and keep it, so you can confirm later that a certificate came from you.</dd>
       <dt>Will it remember my design?</dt>
-      <dd>Yes, on this device and browser. Your next visit opens with the same logo, colours and wording.</dd>
+      <dd>Yes, on this device and browser. Your next visit opens with the same logo, colours and wording. Students' names are never kept: they are gone when you close the page.</dd>
       <dt>What size does it print?</dt>
       <dd>A4 or US Letter, wide or tall, at print quality.</dd>
     </dl>
@@ -369,7 +369,7 @@ footer a{color:#fff}
 <aside class="ad-slot" aria-label="Advertisement" style="margin-bottom:1.5rem"><div class="ad-box">Ad space</div></aside>
 
 <footer>
-  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="#terms">Terms of use</a></p>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="bespoke-report-maker.html">Report maker</a> · <a href="fun-cards-and-certificates.html">Fun cards and certificates</a> · <a href="#terms">Terms of use</a></p>
 </footer>
 
 <div id="printArea" aria-hidden="true"></div>
@@ -463,8 +463,10 @@ let pageIndex = 0, saveTimer = 0;
 function save() {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
-    try { localStorage.setItem(STORE, JSON.stringify(st)); }
-    catch (e) { try { localStorage.setItem(STORE, JSON.stringify(Object.assign({}, st, { logo: "" }))); } catch (e2) {} }
+    // students' names are never kept: they are gone when the page is closed
+    const keep = Object.assign({}, st, { name: "", names: "" });
+    try { localStorage.setItem(STORE, JSON.stringify(keep)); }
+    catch (e) { try { keep.logo = ""; localStorage.setItem(STORE, JSON.stringify(keep)); } catch (e2) {} }
   }, 300);
 }
 function nameList() {
