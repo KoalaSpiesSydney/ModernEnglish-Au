@@ -275,6 +275,7 @@ label.lbl{font-size:13px;font-weight:700;color:var(--muted);display:block;margin
 .pckey .pts{margin-left:auto;font-family:var(--display);font-weight:700;font-size:20px;color:var(--blue)}
 /* Fast Money: verbs in brackets, the face-down postcard and the stamp wager */
 .pcverb{font:700 .6em/1 var(--body);color:var(--muted);letter-spacing:.02em}
+.pcbank{margin:6px 0 10px;padding:8px 12px;border:1.5px dashed var(--muted);border-radius:8px;font:600 15px/1.4 var(--body);text-align:center}
 .postcard.sealed{grid-template-columns:minmax(0,1fr);text-align:center;min-height:220px;align-items:center;
   background:repeating-linear-gradient(45deg,rgba(135,135,135,.10) 0 14px,transparent 14px 28px),linear-gradient(180deg,#fafafa,#f5f5f5)}
 .postcard.sealed .sealtitle{font-size:1.7em;font-weight:700;color:var(--azure);line-height:1.1;margin:6px 0}
@@ -1031,7 +1032,7 @@ function renderRules(){
         <span class="pcex"><span class="tag">Example: Charles Darwin · scientist</span>Darwin <u>sailed</u> <span class="pcverb">(sail)</span> around the world on the Beagle. Before the voyage, he <u>had studied</u> <span class="pcverb">(study)</span> at Cambridge. Scientists <u>have discussed</u> <span class="pcverb">(discuss)</span> his ideas ever since.</span></span></li>
       <li><span>The team that chose guesses first, and keeps guessing while they’re right. <b>Every round has a 90-second timer</b>: when it runs out, the round is over.</span></li>
       <li><span>A wrong guess is a <b>strike</b>. The board opens, and the first team to shout <b>“We’ll take it!”</b> takes over. Two strikes and you’re out for that round.</span></li>
-      <li><span><b>Fast Money:</b> four harder scrolls arrive in sealed bottles, each with five gaps. <b>Choose a wax seal before the bottle is opened</b> — bronze, silver or gold. Fill in <b>every</b> gap to win; a better seal wins more, but costs you points if you miss. Each answer gets <b>one shot</b> — no retyping, and a misspelling is an immediate miss.</span></li>
+      <li><span><b>Fast Money:</b> four harder scrolls arrive in sealed bottles, each with five gaps. <b>Choose a wax seal before the bottle is opened</b> — bronze, silver or gold. The seal sets the level: <b>bronze</b> gives the verb and its tense, <b>silver</b> gives only the verb, and <b>gold</b> mixes the verbs up. Fill in <b>every</b> gap to win; a harder seal wins more, but costs you points if you miss. Each answer gets <b>one shot</b> — no retyping, and a misspelling is an immediate miss.</span></li>
       <li><span><b>Strict rule:</b> no phones, no dictionaries, no translation apps — verbs from memory only.</span></li>
       <li><span>The team with the most points at the end wins.</span></li>
     </ol>
@@ -1267,12 +1268,18 @@ function takers(missTeam){
 }
 /* ---------- THE SCROLL (answer board) ---------- */
 function scrollHTML(card,finalView){
+  // Fast Money: the seal chosen sets how much help each gap gives (see FM_STAMPS)
+  const fmf=state.phase==="fmPlay"?state.fm:null;
+  const lvl=fmf&&fmf.stamp&&fmf.stage!=="decide"?(fmf.stamp.level||"verb"):"verb";
+  const bank=lvl==="bank"&&!finalView?`<p class="pcbank"><b>Verbs to use:</b> ${card.gaps.map(x=>x[1]).slice().sort((a,b)=>a.localeCompare(b)).map(esc).join(" · ")}</p>`:"";
   const text=card.gaps.map((x,i)=>{
     const c=state.claimed[i], a=state.board[i]; let gap;
     if(c===null&&!finalView) gap=`<span class="pcblank" role="img" aria-label="gap ${i+1}"><i>${i+1}</i></span>`;
     else { const fresh=state.lastResult&&state.lastResult.slot===i, missed=c===null||c<0;
       gap=`<span class="pcword ${missed?"missed":""} ${fresh?"inkin":""}"${missed?"":` style="color:${TEAM_COLORS[c]}"`}>${esc(a.name)}</span>`; }
-    return esc(x[0])+gap+` <span class="pcverb">(${esc(x[1])})</span>`+esc(x[2]);
+    const open=state.claimed[i]===null&&!finalView;
+    const verb=lvl==="bank"&&open?"":` <span class="pcverb">(${esc(x[1])}${lvl==="hint"&&open?" · "+esc(String(x[5]||"").toLowerCase()):""})</span>`;
+    return esc(x[0])+gap+verb+esc(x[2]);
   }).join(" ");
   const keys=state.board.map((a,i)=>{
     const c=state.claimed[i]; if(c===null&&!finalView) return "";
@@ -1280,7 +1287,7 @@ function scrollHTML(card,finalView){
     return `<div class="pckey ${missed?"missed":""}"><b>${esc(a.name)}</b><span class="muted">${esc(a.reason)}</span>${missed?'<span class="muted">not found</span>':`<span class="who" style="background:${TEAM_COLORS[c]}">${esc(state.teams[c].name)}</span>`}<span class="pts">${missed?"—":a.points}</span></div>`;
   }).join("");
   const nm=card.name[0].toUpperCase()+card.name.slice(1);
-  return `<div class="scroll"><p class="sname">${esc(nm)}</p><p class="scat">${esc(card.cat)}</p><p class="stext">${text}</p></div>
+  return `<div class="scroll"><p class="sname">${esc(nm)}</p><p class="scat">${esc(card.cat)}</p>${bank}<p class="stext">${text}</p></div>
     ${keys?`<div class="pckeys">${keys}</div>`:""}`;
 }
 function boardHTML(finalView){
@@ -1418,14 +1425,23 @@ const FM_POINTS=20;        // value of each answer on a Fast Money board
 const FM_SECS_PER_ANSWER=12, FM_MIN_SECS=30;      // time to play = answers × 12s (at least 30s)
 const FM_STEAL_PER_ANSWER=10, FM_STEAL_MIN=20;    // time to steal = missing answers × 10s (at least 20s)
 // the wager: win = postcard value × mult; a miss loses postcard value × lose (never below zero)
-const FM_STAMPS=[{name:"Bronze",mult:1,lose:0},{name:"Silver",mult:2,lose:.5},{name:"Gold",mult:3,lose:1}]; // the three wax seals
+/* The three wax seals are three LEVELS of the same scroll:
+     level "hint" = each gap shows the verb AND its tense, e.g. (leave · past simple)
+     level "verb" = each gap shows only the verb, e.g. (leave)
+     level "bank" = the gaps are empty; the verbs are listed above the scroll in a mixed-up order,
+                    so the team must decide which verb goes where as well as its tense
+   "tip" is the line shown on the seal button and in the rules. */
+const FM_STAMPS=[
+  {name:"Bronze",mult:1,lose:0, level:"hint",tip:"Easy: verb and tense given"},
+  {name:"Silver",mult:2,lose:.5,level:"verb",tip:"Medium: verb only"},
+  {name:"Gold",  mult:3,lose:1, level:"bank",tip:"Hard: verbs mixed up"}];
 function strictHTML(){ return `<div class="callout" style="border-width:2px"><p><b>${esc(STRICT_RULE)}</b></p></div>`; }
 function fmRulesHTML(){
   const v=5*FM_POINTS;
   return `<div class="panel stack fmrules" style="gap:10px">
     <h2 style="margin:0">Fast Money: the sealed bottles</h2>
-    <p style="margin:0">Four harder scrolls, each with <b>five gaps</b>. Choose the right form from the sentence: past simple, present perfect or past perfect. <b>Choose your wax seal before the bottle is opened.</b></p>
-    <div class="fmtiles">${FM_STAMPS.map(s=>`<div class="fmtile"><b>${s.name}</b><span>Fill in <b>every</b> gap and win <b>${v*s.mult}</b>. ${s.lose?`Miss one and you lose <b>${Math.round(v*s.lose)}</b>.`:"Miss one and you lose nothing."}</span></div>`).join("")}</div>
+    <p style="margin:0">Four harder scrolls, each with <b>five gaps</b>. Choose the right form from the sentence: past simple, present perfect or past perfect. <b>Choose your wax seal before the bottle is opened: the seal sets the level.</b></p>
+    <div class="fmtiles">${FM_STAMPS.map(s=>`<div class="fmtile"><b>${s.name}</b><span><b>${esc(s.tip||"")}.</b> Fill in <b>every</b> gap and win <b>${v*s.mult}</b>. ${s.lose?`Miss one and you lose <b>${Math.round(v*s.lose)}</b>.`:"Miss one and you lose nothing."}</span></div>`).join("")}</div>
     <p class="note" style="margin:0">If a team misses, the other team can <b>steal</b> the scroll by finding every missing answer (${v} points). The team that’s behind goes first; teams take turns. <b>One shot per answer:</b> no retyping to fix a guess, and a misspelling counts as wrong.</p>
   </div>`;
 }
@@ -1461,7 +1477,7 @@ function fmLoadQuestion(){
     state.board=Array.from({length:known.need},()=>({name:"",aliases:[],points:FM_POINTS,reason:""})); }
   else state.board=known.map(([name,aliases,p,reason])=>({name,aliases,points:FM_POINTS,reason}));
   state.claimed=state.board.map(()=>null);
-  f.value=state.board.length*FM_POINTS; f.passed=false; f.stamp=null; f.lossNote=""; f.on=fmOwner(); f.msg="";
+  f.value=state.board.length*FM_POINTS; f.passed=false; f.stamp=null; f.lossNote=""; f.missNote=""; f.on=fmOwner(); f.msg="";
   f.stage="decide"; revealQuestion();
 }
 function fmLeft(){ return Math.max(0,state.fm.deadline-Date.now()); }
@@ -1480,20 +1496,19 @@ function renderFmPlay(){
     return;
   }
   const head=`<div class="row" style="justify-content:space-between;align-items:center">
-      <p class="pill" style="margin:0">Fast Money · Scroll ${f.qi+1} of ${f.qs.length}${f.stamp&&f.stage!=="steal"?` · ${f.stamp.name} seal`:""} · worth ${f.value*(f.stamp&&f.stage==="play"?f.stamp.mult:1)} points</p>
+      <p class="pill" style="margin:0">Fast Money · Scroll ${f.qi+1} of ${f.qs.length}${f.stage==="play"&&f.stamp?` · ${f.stamp.name} seal · worth ${f.value*f.stamp.mult} points`:f.stage==="steal"?` · steal for ${f.value} points`:f.stage==="decide"?` · ${state.board.length} gaps`:""}</p>
       ${f.running?`<span class="bigteam" id="fmclock" style="font-size:clamp(36px,6vw,56px);color:${TEAM_COLORS[f.on]}">${Math.ceil(fmLeft()/1000)}</span>`:""}</div>`;
   let side="";
   if(f.stage==="decide"){
     const secs=Math.max(FM_MIN_SECS,state.board.length*FM_SECS_PER_ANSWER);
     side=`<div class="panel stack" style="gap:12px"><h2 style="margin:0">${T(f.on)}: choose your wax seal</h2>
-      <p class="muted" style="margin:0">The bottle is still sealed. The scroll inside has ${state.board.length} gaps and you get ${secs} seconds to fill in every one. A better seal wins more, but costs you if you miss.</p>
-      <div class="stamps">${FM_STAMPS.map((st,k)=>`<button class="stampbtn s${k}" data-stamp="${k}"><b>${st.name}</b><span>Win ${f.value*st.mult}</span><span>${st.lose?`Miss: lose ${Math.round(f.value*st.lose)}`:"Miss: lose nothing"}</span>${st.mixed?"<span>Tenses mixed up</span>":""}</button>`).join("")}</div></div>`;
+      <p class="muted" style="margin:0">The bottle is still sealed. The scroll inside has ${state.board.length} gaps and you get ${secs} seconds to fill in every one. The seal sets the level: a harder seal gives you less help and wins more, but costs you if you miss.</p>
+      <div class="stamps">${FM_STAMPS.map((st,k)=>`<button class="stampbtn s${k}" data-stamp="${k}"><b>${st.name}</b><span>Win ${f.value*st.mult}</span><span>${st.lose?`Miss: lose ${Math.round(f.value*st.lose)}`:"Miss: lose nothing"}</span><span style="font-weight:400;opacity:.9">${esc(st.tip||"")}</span></button>`).join("")}</div></div>`;
   } else if(f.stage==="play"||f.stage==="steal"){
-    const left=Math.max(0,(f.target||state.board.length)-(f.guesses||0));
     side=`<div class="panel stack" style="gap:10px">
       <h2 style="margin:0">${T(f.on)} ${f.stage==="steal"?`can steal: find the ${fmMissing()} missing answer${fmMissing()>1?"s":""} for ${f.value}!`:`must find all ${state.board.length}!`}</h2>
       <div class="guessrow"><input class="big" type="text" id="fmguess" autocomplete="off" placeholder="Type an answer"><button class="btn-main" id="fmok">Answer</button></div>
-      <p class="note" style="margin:0">${left} guess${left===1?"":"es"} left — each one is final, right or wrong.</p>
+      <p class="note" style="margin:0">${fmMissing()} gap${fmMissing()===1?"":"s"} to go. One shot each — a wrong answer ends your turn.</p>
       ${f.msg?`<p class="${f.msgGood?"":"err"} pop" style="margin:0">${f.msg}</p>`:""}
       <div><button class="btn-ghost btn-small" id="fmstuck">We’re stuck: stop the clock</button></div></div>`;
   } else if(f.stage==="result"){
@@ -1506,10 +1521,6 @@ function renderFmPlay(){
     ${f.log.length?`<div class="log"><h3>Fast Money so far</h3>${f.log.map(l=>`<span>${l}</span>`).join("")}</div>`:""}</div></div></div>`;
   const $=id=>document.getElementById(id);
   app.querySelectorAll("[data-stamp]").forEach(b=>b.onclick=()=>{ f.stamp=FM_STAMPS[+b.dataset.stamp];
-    const cd=state.item&&state.item.card;
-    if(f.stamp.mixed&&cd&&cd.airmail){ // Airmail: the harder version of this postcard, tenses in a mixed-up order
-      const c2={...cd,gaps:cd.airmail}; state.item={...state.item,card:c2};
-      state.board=c2.gaps.map(g=>({name:g[3],aliases:g[4],points:FM_POINTS,reason:g[5]})); state.claimed=state.board.map(()=>null); }
     f.stage="play"; f.guesses=0; f.target=state.board.length;
     fmStartClock(Math.max(FM_MIN_SECS,state.board.length*FM_SECS_PER_ANSWER)); render(); });
   if($("fmguess")){ const inp=$("fmguess"); inp.focus();
@@ -1519,17 +1530,17 @@ function renderFmPlay(){
   if($("fmnext")) $("fmnext").onclick=()=>{ if(f.qi+1>=f.qs.length){ state.phase="final"; render(); return; } f.qi++; fmLoadQuestion(); render(); };
 }
 function fmGuess(v){
-  // Fast Money is one shot per answer: every submitted guess is final (right, wrong, or a
-  // repeat) and uses up one of the board's answers — no correcting a misspelling and
-  // retyping. Once as many guesses have been used as there are answers, time's called.
+  // Fast Money is all or nothing, one shot per answer. A right answer fills its gap. Anything else
+  // (a wrong form, a misspelling, or an answer that is already on the scroll) is a miss, and a miss
+  // ends the turn at once: the clock stops and the scroll goes to the other team to steal.
   const f=state.fm, slot=matchGuess(v);
   f.guesses=(f.guesses||0)+1;
   if(slot>=0&&state.claimed[slot]===null){ state.claimed[slot]=f.on; state.lastResult={slot}; sfx.right(); f.msg=`✓ ${esc(state.board[slot].name)}`; f.msgGood=true;
-    if(fmMissing()===0){ fmResolve(true); return; } }
-  else if(slot>=0){ sfx.blip(); f.msg=`${esc(state.board[slot].name)} is already on the board.`; f.msgGood=false; }
-  else { sfx.wrong(); f.msg=`“${esc(v)}” isn’t on the scroll. That’s locked in as wrong — no retyping.`; f.msgGood=false; }
-  if(f.guesses>=(f.target||state.board.length)){ fmResolve(false); return; }
-  render();
+    if(fmMissing()===0){ fmResolve(true); return; }
+    render(); return; }
+  sfx.wrong();
+  f.missNote=slot>=0?`“${esc(v)}” was already on the scroll.`:`“${esc(v)}” isn’t on the scroll.`;
+  fmResolve(false);
 }
 function fmTimeUp(){ const f=state.fm; if(f.stage!=="play"&&f.stage!=="steal") return; fmResolve(false); }
 function fmResolve(allFound){
@@ -1541,14 +1552,14 @@ function fmResolve(allFound){
       f.log.push(`Scroll ${f.qi+1}: ${esc(state.teams[f.on].name)} +${pts} (${stamp.name})`); sfx.cleared(); }
     else { // miss: pay for the stamp, then the other team may steal with one guess per missing answer
       const lose=Math.min(state.teams[f.on].score,Math.round(f.value*stamp.lose)); state.teams[f.on].score-=lose;
-      f.lossNote=`${name(f.on)} didn’t finish the scroll${lose?` and lost <b>${lose}</b>`:""}.`;
+      f.lossNote=`${f.missNote?f.missNote+" ":"Time’s up. "}${name(f.on)} didn’t finish the scroll${lose?` and lost <b>${lose}</b>`:""}.`; f.missNote="";
       f.log.push(`Scroll ${f.qi+1}: ${esc(state.teams[f.on].name)} missed${lose?` −${lose}`:""} (${stamp.name})`);
-      sfx.timeup(); f.stage="steal"; f.on=fmOther(f.on); f.msg=""; state.lastResult=null; f.guesses=0; f.target=fmMissing();
+      sfx.timeup(); f.stage="steal"; f.on=fmOther(f.on); f.msg=f.lossNote; f.msgGood=false; state.lastResult=null; f.guesses=0; f.target=fmMissing();
       fmStartClock(Math.max(FM_STEAL_MIN,fmMissing()*FM_STEAL_PER_ANSWER)); render(); return; }
   } else if(f.stage==="steal"){
     if(allFound){ state.teams[f.on].score+=f.value; f.result=`${f.lossNote} ${name(f.on)} stole it: <b>+${f.value}</b>.`; f.resultGood=true;
       f.log.push(`Scroll ${f.qi+1}: ${esc(state.teams[f.on].name)} stole +${f.value}`); sfx.cleared(); }
-    else { sfx.timeup(); f.result=`${f.lossNote} Nobody finished the scroll.`; f.resultGood=false; f.log.push(`Scroll ${f.qi+1}: not stolen`); }
+    else { sfx.timeup(); f.result=`${f.lossNote} ${f.missNote?f.missNote+" ":""}${name(f.on)} couldn’t steal it. Nobody finished the scroll.`; f.missNote=""; f.resultGood=false; f.log.push(`Scroll ${f.qi+1}: not stolen`); }
   }
   state.fmUsed=(state.fmUsed||[]).concat(state.q);
   state.bank=state.bank.filter(q=>q.text!==state.q);
