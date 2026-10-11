@@ -4,6 +4,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
 
     <title> Latin &amp; Greek Roots - Academic Vocab</title>
     <script type="text/javascript" src="lib/lzwcompress.js"></script>
@@ -147,6 +155,12 @@ body{display:flex;flex-direction:column}
 .mea-nav a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:600px){.mea-brand{letter-spacing:1.5px}.mea-kss{letter-spacing:3px;font-size:.65rem}.mea-wrap{padding-block:10px 12px}.mea-footer{font-size:.72rem;justify-content:center;text-align:center}.mea-nav{justify-content:center}.mea-footer p{display:none}}
 @media (prefers-reduced-motion:reduce){.mea-header::before,.mea-brand{animation:none}.mea-brand{-webkit-text-fill-color:var(--mea-paper)}}
+.mea-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  font-family:"Source Sans 3",system-ui,sans-serif;color:#475569;font-size:1rem;letter-spacing:.04em}
+.mea-loading p{margin:0}
+.mea-spin{width:34px;height:34px;border-radius:50%;border:3px solid #cbd5e1;border-top-color:var(--mea-accent);animation:mea-spin .9s linear infinite}
+@keyframes mea-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.mea-spin{animation:none}}
 </style>
 <!-- MEA-BRANDING END -->
 </head>
@@ -157,7 +171,8 @@ body{display:flex;flex-direction:column}
   <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="mea-kss">Koala Spies Sydney</a>
 </div></header>
 <!-- MEA-BRANDING END -->
-    <div id="app"></div>
+    <div id="app"><!-- MEA-LOADING: shown until the course player has loaded; the player replaces it -->
+<div class="mea-loading" role="status"><span class="mea-spin" aria-hidden="true"></span><p>Loading your course&hellip;</p></div></div>
 <!-- MEA-BRANDING START -->
 <footer class="mea-footer">
   <p>© Koala Spies Sydney · Modern English Australia</p>
