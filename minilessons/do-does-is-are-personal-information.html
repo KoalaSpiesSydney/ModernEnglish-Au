@@ -1,0 +1,499 @@
+<!doctype html>
+<!-- Do, Does, Is or Are? © Koala Spies Sydney. All rights reserved. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Do, Does, Is or Are? Asking for Personal Information · Free ESL Worksheet &amp; Speaking Activity · Modern English Australia</title>
+  <meta name="description" content="Free A1-A2 grammar and speaking lesson: do, does, is or are in questions about personal information. Interactive exercises to project or play on a phone, plus a printable worksheet with answer key." />
+  <meta name="author" content="Koala Spies Sydney" />
+  <meta name="copyright" content="© Koala Spies Sydney. All rights reserved." />
+  <link rel="canonical" href="https://modernenglish.au/do-does-is-are-personal-information.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet">
+  <style>
+    /* =====================================================================
+       DO, DOES, IS OR ARE?  A grammar and speaking lesson.
+       One file. On screen it is an interactive lesson; when printed it
+       becomes a two-page worksheet with an answer key.
+       To change the questions, edit the lists at the top of the script.
+       ===================================================================== */
+    :root {
+      --bg: #fffce6; --surface: #ffffff; --ink: #0f172a; --muted: #475569;
+      --line: rgba(15,23,42,.12); --accent: #0e2861; --link: #3968ea;
+      --header: #1c1c1c; --header-ink: #f8fafc;
+      --good: #0e7c66; --good-bg: #e3f4ef; --bad: #b3261e; --bad-bg: #fbe9e7;
+      --c: #9a3412;            /* the colour of this lesson */
+      --max: 980px;
+      --sans: "Source Sans 3", system-ui, sans-serif;
+      --serif: "Source Serif 4", Georgia, serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
+    body { font-family: var(--sans); font-size: 18px; line-height: 1.6; color: var(--ink); -webkit-text-size-adjust: 100%;
+      background: radial-gradient(circle at top, #fffce6 0%, #f7f5ea 40%, #f0f4fa 100%) fixed; overflow-x: hidden; }
+    button, input { font: inherit; color: inherit; }
+    a { color: var(--link); text-underline-offset: 3px; }
+    :focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding-inline: clamp(16px, 4vw, 32px); }
+
+    header.site { background: var(--header); color: var(--header-ink); padding: 18px 0 20px; border-bottom: 2px solid #60a5fa; }
+    .brand-top { font-family: var(--serif); font-weight: 800; font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem); letter-spacing: 3px; text-transform: uppercase; color: #f8fafc; text-decoration: none; line-height: 1.1; display: block; }
+    .kss-label { font-weight: 700; font-size: .72rem; letter-spacing: 5px; text-transform: uppercase; color: #fde047; text-decoration: none; }
+
+    .intro { padding: 30px 0 6px; }
+    .kick { font-size: .8rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--c); }
+    h1 { font-family: var(--serif); font-weight: 800; font-size: clamp(2rem, 1.2rem + 3.6vw, 3.4rem); line-height: 1.08; margin: 4px 0 10px; }
+    .intro p { color: var(--muted); max-width: 62ch; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+    .btn { border: 2px solid var(--accent); background: #fff; color: var(--accent); border-radius: 10px; padding: 9px 18px; font-weight: 700; cursor: pointer; min-height: 46px; }
+    .btn:hover { background: #eef2fb; }
+    .btn.main { background: var(--accent); color: #fff; }
+    .btn.main:hover { background: #0a1d47; }
+    .btn.quiet { border-color: var(--line); color: var(--muted); font-weight: 600; }
+
+    section.part { margin: 26px 0; background: rgba(255,255,255,.9); border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: 14px; padding: clamp(16px, 3vw, 26px); box-shadow: 0 10px 22px -14px rgba(15,23,42,.25); }
+    .part h2 { font-family: var(--serif); font-size: clamp(1.3rem, 1.05rem + 1vw, 1.8rem); line-height: 1.2; }
+    .part .num { color: var(--c); }
+    .part .task { color: var(--muted); margin: 4px 0 16px; }
+
+    /* the grammar box */
+    .rule { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .rule > div { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: #fff; }
+    .rule h3 { font-size: 1.1rem; margin-bottom: 4px; }
+    .rule p { font-size: .97rem; color: var(--muted); margin-bottom: 8px; }
+    .rule ul { list-style: none; font-size: 1rem; }
+    .rule li { padding: 2px 0; }
+    .rule b, .eg b { color: var(--c); }
+    .tip { margin-top: 14px; font-size: .97rem; color: var(--muted); }
+
+    /* part 1: choose the word */
+    .items { list-style: none; counter-reset: n; display: grid; gap: 10px; }
+    .item { counter-increment: n; display: grid; grid-template-columns: auto 1fr auto; gap: 8px 14px; align-items: center; border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; background: #fff; }
+    .item::before { content: counter(n); font-weight: 800; color: var(--c); min-width: 1.4em; }
+    .sent { font-size: 1.15rem; font-weight: 600; }
+    .gap { display: inline-block; min-width: 4.2em; text-align: center; border-bottom: 3px solid var(--ink); margin: 0 .15em; padding: 0 .3em; line-height: 1.3; }
+    .item.done { background: var(--good-bg); border-color: #b5ddd2; }
+    .item.done .gap, .card .gap.shown { border-color: var(--good); color: var(--good); font-weight: 800; }
+    .opts { display: flex; gap: 6px; flex-wrap: wrap; }
+    .opt { border: 2px solid var(--line); background: #fff; border-radius: 999px; padding: 5px 14px; font-weight: 700; cursor: pointer; min-height: 42px; min-width: 3.6em; }
+    .opt:hover:not(:disabled) { border-color: var(--accent); }
+    .opt.no { background: var(--bad-bg); border-color: var(--bad); color: var(--bad); text-decoration: line-through; }
+    .opt.yes { background: var(--good); border-color: var(--good); color: #fff; }
+    .opt:disabled { cursor: default; }
+    .item.done .opt:not(.yes) { opacity: .4; }
+    .score { margin-top: 16px; font-weight: 700; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+
+    /* part 2: fix the mistake */
+    .fix { list-style: none; counter-reset: f; display: grid; gap: 12px; }
+    .fix li { counter-increment: f; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: #fff; }
+    .fix .wrong { font-size: 1.1rem; font-weight: 600; }
+    .fix .wrong::before { content: counter(f) ". "; color: var(--c); font-weight: 800; }
+    .fix .row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .fix input { flex: 1 1 14rem; padding: 8px 12px; border: 2px solid var(--line); border-radius: 8px; background: #fff; min-height: 46px; font-size: 1.05rem; }
+    .fix .msg { margin-top: 6px; font-weight: 700; min-height: 1.5em; }
+    .fix li.done { background: var(--good-bg); border-color: #b5ddd2; }
+    .fix li.done .msg { color: var(--good); }
+    .fix li.miss .msg { color: var(--bad); }
+
+    /* part 3: speaking cards */
+    .card { border-radius: 16px; background: var(--accent); color: #fff; text-align: center; padding: clamp(26px, 6vw, 60px) clamp(16px, 4vw, 40px); }
+    .card .count { font-size: .8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #a5c4fd; }
+    .card .q { font-family: var(--serif); font-weight: 700; font-size: clamp(1.6rem, 1rem + 3.6vw, 3.2rem); line-height: 1.25; margin: 12px 0; }
+    .card .sent { font-size: inherit; font-weight: inherit; }
+    .card .gap { border-color: #fde047; min-width: 3.4em; }
+    .card .gap.shown { color: #fde047; }
+    .card .then { color: #dbe6fb; font-size: 1rem; }
+    .deck-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 16px; }
+    .eg { list-style: none; display: grid; gap: 6px; margin-top: 4px; }
+    .eg li { padding-left: 1.2em; position: relative; }
+    .eg li::before { content: "›"; position: absolute; left: 0; color: var(--c); font-weight: 800; }
+
+    footer.site { background: var(--header); color: rgba(248,250,252,.65); text-align: center; padding: 20px 0; font-size: .87rem; margin-top: 40px; }
+    footer.site a { color: rgba(248,250,252,.85); margin: 0 8px; }
+
+    @media (max-width: 640px) {
+      .rule { grid-template-columns: 1fr; }
+      .item { grid-template-columns: auto 1fr; }
+      .opts { grid-column: 1 / -1; }
+      .opt { flex: 1 1 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+    /* =====================================================================
+       THE PRINT VERSION: plain black on white, two pages plus the answers.
+       ===================================================================== */
+    #print { display: none; }
+    @page { margin: 13mm 14mm; }
+    @media print {
+      body { background: #fff; font-size: 12.5pt; line-height: 1.35; color: #000; }
+      body > *:not(#print) { display: none !important; }
+      #print { display: block; }
+      .pg { page-break-after: always; break-after: page; }
+      .pg:last-child, body.nokey .pg.last-sheet { page-break-after: auto; break-after: auto; }
+      body.nokey .key { display: none; }
+      .p-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12pt; border-bottom: 2pt solid #000; padding-bottom: 5pt; }
+      .p-head h1 { font-family: var(--serif); font-size: 21pt; margin: 0; line-height: 1.1; }
+      .p-head .sub { font-size: 11pt; }
+      .p-name { font-size: 11pt; white-space: nowrap; }
+      .p-rule { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; margin: 9pt 0 4pt; }
+      .p-rule div { border: 1pt solid #000; border-radius: 5pt; padding: 6pt 9pt; font-size: 11pt; }
+      .p-rule h3 { font-size: 11.5pt; margin-bottom: 2pt; }
+      .p-part { margin-top: 14pt; }
+      .p-part h2 { font-family: var(--serif); font-size: 13.5pt; margin-bottom: 1pt; }
+      .p-part .task { font-style: italic; margin-bottom: 6pt; }
+      .p-cols { columns: 2; column-gap: 22pt; list-style: none; counter-reset: p; }
+      .p-cols li { counter-increment: p; break-inside: avoid; padding: 6.5pt 0 6.5pt 22pt; position: relative; }
+      .p-cols li::before { content: counter(p) "."; position: absolute; left: 0; font-weight: 700; }
+      .p-gap { display: inline-block; width: 46pt; border-bottom: 1pt solid #000; margin: 0 2pt; }
+      .p-line { display: block; border-bottom: 1pt solid #000; height: 23pt; }
+      table.p-tab { width: 100%; border-collapse: collapse; }
+      .p-tab th, .p-tab td { border: 1pt solid #000; padding: 10pt 8pt; text-align: left; vertical-align: middle; }
+      .p-tab th { font-size: 11pt; background: #eee; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .p-tab td.n { width: 22pt; text-align: center; font-weight: 700; }
+      .p-tab td.q { width: 52%; }
+      .p-eg { font-size: 11pt; margin-bottom: 4pt; }
+      .p-foot { margin-top: 10pt; font-size: 8.5pt; color: #444; text-align: center; }
+      .key ol { columns: 2; column-gap: 22pt; padding-left: 18pt; }
+      .key li { break-inside: avoid; padding: 2pt 0; }
+      .key b { text-decoration: underline; }
+      .key .note { font-size: 11pt; margin-top: 4pt; }
+    }
+  </style>
+  <!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HCH5CJD2ZS');
+  </script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a href="index.html" class="brand-top">Modern English Au</a>
+    <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-label">Koala Spies Sydney</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <span class="kick">Grammar and speaking · A1 to A2</span>
+    <h1>Do, does, is or are?</h1>
+    <p>Asking for personal information. Learn the rule, practise it, then ask a partner. Project it for the class, play it on a phone, or print the worksheet.</p>
+    <div class="toolbar">
+      <button type="button" class="btn main" data-print="key">Print the worksheet and answers</button>
+      <button type="button" class="btn" data-print="nokey">Print the worksheet only</button>
+    </div>
+  </div>
+
+  <section class="part" aria-labelledby="h-rule">
+    <h2 id="h-rule">Remember</h2>
+    <p class="task">Look at the word after the gap. Is there another verb?</p>
+    <div class="rule">
+      <div>
+        <h3>is / are</h3>
+        <p>No other verb. Use <b>be</b> with a noun, an adjective, an age or a place.</p>
+        <ul>
+          <li><b>Are</b> you a student?</li>
+          <li><b>Is</b> your sister married?</li>
+          <li>Where <b>are</b> you from?</li>
+        </ul>
+      </div>
+      <div>
+        <h3>do / does</h3>
+        <p>There is another verb: live, work, have, like, speak …</p>
+        <ul>
+          <li><b>Do</b> you live near here?</li>
+          <li><b>Does</b> your sister work?</li>
+          <li>Where <b>do</b> you work?</li>
+        </ul>
+      </div>
+    </div>
+    <p class="tip"><b>is</b> and <b>does</b> go with he, she, it or one person or thing. <b>are</b> and <b>do</b> go with you, we, they or more than one.</p>
+  </section>
+
+  <section class="part" aria-labelledby="h-a">
+    <h2 id="h-a"><span class="num">A.</span> Choose the word</h2>
+    <p class="task">Click do, does, is or are to finish each question.</p>
+    <ol class="items" id="items"></ol>
+    <div class="score"><span id="score" role="status" aria-live="polite"></span><button type="button" class="btn quiet" id="againA">Try again</button></div>
+  </section>
+
+  <section class="part" aria-labelledby="h-b">
+    <h2 id="h-b"><span class="num">B.</span> Fix the mistake</h2>
+    <p class="task">Each question has one wrong word. Type the question correctly.</p>
+    <ol class="fix" id="fix"></ol>
+  </section>
+
+  <section class="part" aria-labelledby="h-c">
+    <h2 id="h-c"><span class="num">C.</span> Ask a partner</h2>
+    <p class="task">Say the question with the missing word. Then ask your partner. You can invent your answers.</p>
+    <div class="card">
+      <div class="count" id="count"></div>
+      <p class="q" id="q" aria-live="polite"></p>
+      <p class="then">Listen to the answer, then ask one more question.</p>
+    </div>
+    <div class="deck-btns">
+      <button type="button" class="btn" id="showBtn">Show the missing word</button>
+      <button type="button" class="btn main" id="nextBtn">Next question</button>
+      <button type="button" class="btn quiet" id="mixBtn">Shuffle</button>
+    </div>
+  </section>
+
+  <section class="part" aria-labelledby="h-d">
+    <h2 id="h-d"><span class="num">D.</span> Tell the class</h2>
+    <p class="task">Say three or four things about your partner. Remember the <b>s</b>: he live<b>s</b>, she speak<b>s</b>, he ha<b>s</b>.</p>
+    <ul class="eg">
+      <li>My partner <b>is</b> from … and <b>lives</b> in …</li>
+      <li>She <b>has</b> two brothers. / He <b>doesn't have</b> any brothers or sisters.</li>
+      <li>His first language <b>is</b> … and he <b>speaks</b> …</li>
+      <li>Her hobbies <b>are</b> … and she <b>likes</b> …</li>
+    </ul>
+    <div class="toolbar">
+      <button type="button" class="btn main" data-print="key">Print the worksheet and answers</button>
+      <button type="button" class="btn" data-print="nokey">Print the worksheet only</button>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</div>
+    <div style="margin-top:6px"><a href="index.html">Home</a><a href="microlessons.html">Mini lessons</a><a href="grammargames.html">Grammar games</a><a href="privacy.html">Privacy &amp; Disclaimer</a></div>
+  </div>
+</footer>
+
+<!-- the printed worksheet is built here by the script -->
+<div id="print" aria-hidden="true"></div>
+
+<script>
+"use strict";
+// =====================================================================
+// THE QUESTIONS. Edit these lists to change the lesson; the screen
+// version and the printed worksheet both use them.
+// Each line is: [words before the gap, words after the gap, the answer]
+// =====================================================================
+
+// Part A: choose the word
+const CHOOSE = [
+  ["", "you a new student?", "are"],
+  ["Where", "your teacher come from?", "does"],
+  ["", "your classmates friendly?", "are"],
+  ["", "you work on weekends?", "do"],
+  ["What", "your surname?", "is"],
+  ["", "your mother speak English?", "does"],
+  ["How old", "your brothers and sisters?", "are"],
+  ["When", "you do your homework?", "do"],
+  ["", "your birthday in summer?", "is"],
+  ["What", "your father do?", "does"],
+  ["", "you and your family from a big city?", "are"],
+  ["Why", "you want to learn English?", "do"]
+];
+
+// Part B: fix the mistake. [the wrong question, the right answer, any other answer to accept]
+const FIX = [
+  ["Do you from Brazil?", "Are you from Brazil?"],
+  ["Where does you work?", "Where do you work?"],
+  ["Is your brother like football?", "Does your brother like football?"],
+  ["What do your name?", "What is your name?", "What's your name?"],
+  ["Are you have a car?", "Do you have a car?"],
+  ["Does your sister a student?", "Is your sister a student?"],
+  ["How old is your parents?", "How old are your parents?"],
+  ["Do your teacher live near the school?", "Does your teacher live near the school?"]
+];
+
+// Part C: questions to ask a partner. A fourth item of true puts the question on the printed worksheet too.
+const ASK = [
+  ["What", "your first name?", "is", true],
+  ["Where", "you from?", "are", true],
+  ["", "you live in a house or an apartment?", "do", true],
+  ["What", "you do?", "do"],
+  ["", "you have any brothers or sisters?", "do", true],
+  ["What", "your first language?", "is"],
+  ["", "your family live in this city?", "does", true],
+  ["What", "your hobbies?", "are", true],
+  ["", "you a morning person or a night person?", "are", true],
+  ["What time", "you usually get up?", "do"],
+  ["", "your best friend speak English?", "does", true],
+  ["What", "your favourite food?", "is", true],
+  ["How", "you come to class?", "do"],
+  ["", "your home far from here?", "is", true],
+  ["What kind of music", "you like?", "do"],
+  ["", "your weekends usually busy or relaxing?", "are"]
+];
+
+const WORDS = ["do", "does", "is", "are"];
+
+// =====================================================================
+// HELPERS
+// =====================================================================
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const shown = q => q[0] ? q[2] : cap(q[2]);                 // the answer as it is written in the question
+// builds "Where ____ you from?" with the gap as its own element
+function sentence(q, gapClass) {
+  const s = el("span", "sent");
+  if (q[0]) s.appendChild(document.createTextNode(q[0] + " "));
+  s.appendChild(el("span", gapClass, " "));
+  s.appendChild(document.createTextNode(" " + q[1]));
+  return s;
+}
+
+// =====================================================================
+// PART A: CHOOSE THE WORD
+// =====================================================================
+let firstTry = 0, solved = 0;
+function buildChoose() {
+  const list = $("items"); list.textContent = ""; firstTry = 0; solved = 0;
+  CHOOSE.forEach(q => {
+    const li = el("li", "item"), s = sentence(q, "gap"), opts = el("span", "opts");
+    let tries = 0;
+    WORDS.forEach(w => {
+      const b = el("button", "opt", w); b.type = "button";
+      b.onclick = () => {
+        tries++;
+        if (w !== q[2]) { b.classList.add("no"); b.disabled = true; return; }
+        b.classList.add("yes"); li.classList.add("done");
+        s.querySelector(".gap").textContent = shown(q);
+        opts.querySelectorAll("button").forEach(x => x.disabled = true);
+        solved++; if (tries === 1) firstTry++;
+        showScore();
+      };
+      opts.appendChild(b);
+    });
+    li.appendChild(s); li.appendChild(opts); list.appendChild(li);
+  });
+  showScore();
+}
+function showScore() {
+  const n = CHOOSE.length;
+  $("score").textContent = solved < n ? solved + " of " + n + " done"
+    : "Finished: " + firstTry + " of " + n + " right first time." + (firstTry === n ? " Perfect!" : firstTry >= n * .75 ? " Well done!" : " Read the rule again and have another go.");
+}
+$("againA").onclick = buildChoose;
+
+// =====================================================================
+// PART B: FIX THE MISTAKE
+// =====================================================================
+// compares answers without worrying about capitals, spaces or the question mark
+const norm = s => s.toLowerCase().replace(/[‘’]/g, "'").replace(/[?.!,]/g, "").replace(/\s+/g, " ").trim();
+function buildFix() {
+  const list = $("fix"); list.textContent = "";
+  FIX.forEach((f, i) => {
+    const li = el("li"), row = el("div", "row"), input = el("input"), check = el("button", "btn", "Check"), msg = el("div", "msg");
+    input.type = "text"; input.autocomplete = "off"; input.spellcheck = false; input.setAttribute("aria-label", "Correct question " + (i + 1));
+    check.type = "button"; msg.setAttribute("role", "status");
+    let tries = 0;
+    const answer = () => {
+      if (li.classList.contains("done")) return;
+      const typed = norm(input.value);
+      if (!typed) { input.focus(); return; }
+      if (f.slice(1).some(a => norm(a) === typed)) {
+        li.classList.remove("miss"); li.classList.add("done"); input.value = f[1]; input.readOnly = true; check.disabled = true; msg.textContent = "Correct!";
+        return;
+      }
+      tries++; li.classList.add("miss");
+      msg.textContent = tries < 2 ? "Not yet. Is there another verb in the question?" : "";
+      if (tries >= 2) {
+        const show = el("button", "btn quiet", "Show the answer"); show.type = "button";
+        show.onclick = () => { li.classList.remove("miss"); li.classList.add("done"); input.value = f[1]; input.readOnly = true; check.disabled = true; msg.textContent = "The answer: " + f[1]; };
+        msg.textContent = "Not yet. Try again, or "; msg.appendChild(show);
+      }
+    };
+    check.onclick = answer;
+    input.addEventListener("keydown", e => { if (e.key === "Enter") answer(); });
+    li.appendChild(el("div", "wrong", f[0])); row.appendChild(input); row.appendChild(check); li.appendChild(row); li.appendChild(msg);
+    list.appendChild(li);
+  });
+}
+
+// =====================================================================
+// PART C: ASK A PARTNER
+// =====================================================================
+let order = ASK.map((_, i) => i), at = 0, open = false;
+function showCard() {
+  const q = ASK[order[at]], box = $("q");
+  box.textContent = "";
+  const s = sentence(q, "gap" + (open ? " shown" : ""));
+  if (open) s.querySelector(".gap").textContent = shown(q);
+  box.appendChild(s);
+  $("count").textContent = "Question " + (at + 1) + " of " + ASK.length;
+  $("showBtn").textContent = open ? "Hide the missing word" : "Show the missing word";
+}
+$("showBtn").onclick = () => { open = !open; showCard(); };
+$("nextBtn").onclick = () => { at = (at + 1) % ASK.length; open = false; showCard(); };
+$("mixBtn").onclick = () => {
+  for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = order[i]; order[i] = order[j]; order[j] = t; }
+  at = 0; open = false; showCard();
+};
+
+// =====================================================================
+// THE PRINTED WORKSHEET
+// =====================================================================
+function buildPrint() {
+  const P = $("print"); P.textContent = "";
+  const gapped = q => { const s = el("span"); if (q[0]) s.appendChild(document.createTextNode(q[0] + " ")); s.appendChild(el("span", "p-gap")); s.appendChild(document.createTextNode(" " + q[1])); return s; };
+  const part = (title, task) => { const d = el("div", "p-part"); d.appendChild(el("h2", "", title)); if (task) d.appendChild(el("p", "task", task)); return d; };
+  const foot = () => el("p", "p-foot", "© Koala Spies Sydney · modernenglish.au · Free to print and copy for your own classes.");
+  const asked = ASK.filter(q => q[3]);
+
+  // ---- page 1 ----
+  const p1 = el("div", "pg"), head = el("div", "p-head"), left = el("div");
+  left.appendChild(el("h1", "", "Do, does, is or are?")); left.appendChild(el("div", "sub", "Asking for personal information · Grammar and speaking · A1 to A2"));
+  head.appendChild(left); head.appendChild(el("div", "p-name", "Name ______________________   Date ____________"));
+  p1.appendChild(head);
+  const rule = el("div", "p-rule");
+  rule.innerHTML = "<div><h3>is / are</h3>No other verb. Use <b>be</b> with a noun, an adjective, an age or a place.<br><b>Are</b> you a student? &nbsp; Where <b>is</b> she from?</div>" +
+                   "<div><h3>do / does</h3>There is another verb: live, work, have, like …<br><b>Do</b> you live near here? &nbsp; Where <b>does</b> she work?</div>";
+  p1.appendChild(rule);
+  const a = part("A. Write do, does, is or are.", ""), al = el("ol", "p-cols");
+  CHOOSE.forEach(q => { const li = el("li"); li.appendChild(gapped(q)); al.appendChild(li); });
+  a.appendChild(al); p1.appendChild(a);
+  const b = part("B. Each question has one wrong word. Write the question correctly.", ""), bl = el("ol", "p-cols");
+  FIX.forEach(f => { const li = el("li", "", f[0]); li.appendChild(el("span", "p-line")); bl.appendChild(li); });
+  b.appendChild(bl); p1.appendChild(b); p1.appendChild(foot());
+  P.appendChild(p1);
+
+  // ---- page 2 ----
+  const p2 = el("div", "pg last-sheet");
+  const c = part("C. Complete the questions. Then ask a partner and write short answers.", "You can invent your answers."), tab = el("table", "p-tab");
+  tab.innerHTML = "<thead><tr><th></th><th>Question</th><th>My partner's answer</th></tr></thead>";
+  const tb = el("tbody");
+  asked.forEach((q, i) => { const tr = el("tr"); tr.appendChild(el("td", "n", String(i + 1))); const td = el("td", "q"); td.appendChild(gapped(q)); tr.appendChild(td); tr.appendChild(el("td")); tb.appendChild(tr); });
+  tab.appendChild(tb); c.appendChild(tab); p2.appendChild(c);
+  const d = part("D. Write four sentences about your partner.", "");
+  d.appendChild(el("p", "p-eg", "Example: My partner is from Japan. She lives in an apartment and she has one brother."));
+  for (let i = 0; i < 4; i++) { const ln = el("span", "p-line"); ln.style.height = "30pt"; d.appendChild(ln); }
+  p2.appendChild(d); p2.appendChild(foot());
+  P.appendChild(p2);
+
+  // ---- answers ----
+  const k = el("div", "pg key"), kh = el("div", "p-head"); kh.appendChild(el("h1", "", "Answer key")); kh.appendChild(el("div", "p-name", "Do, does, is or are?")); k.appendChild(kh);
+  const keyed = (title, list, line) => { const s = part(title, ""), ol = el("ol"); list.forEach(x => ol.appendChild(line(x))); s.appendChild(ol); k.appendChild(s); return s; };
+  const bold = q => { const li = el("li"); if (q[0]) li.appendChild(document.createTextNode(q[0] + " ")); li.appendChild(el("b", "", shown(q))); li.appendChild(document.createTextNode(" " + q[1])); return li; };
+  keyed("A", CHOOSE, bold);
+  keyed("B", FIX, f => el("li", "", f[1] + (f[2] ? " (or: " + f[2] + ")" : "")));
+  keyed("C", asked, bold).appendChild(el("p", "note", "Students' own answers. Part D: check the third person s (lives, has, speaks) and doesn't."));
+  P.appendChild(k);
+}
+
+document.querySelectorAll("[data-print]").forEach(b => b.onclick = () => {
+  document.body.classList.toggle("nokey", b.dataset.print === "nokey");
+  window.print();
+});
+
+// =====================================================================
+// START
+// =====================================================================
+buildChoose(); buildFix(); showCard(); buildPrint();
+</script>
+</body>
+</html>
