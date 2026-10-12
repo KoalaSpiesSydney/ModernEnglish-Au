@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<!-- Bespoke Bingo Card Maker © Koala Spies Sydney. All rights reserved. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bespoke Bingo Card Maker: Free Printable Bingo Card Generator for Teachers | Modern English Australia</title>
+<meta name="description" content="Make printable bingo cards in a minute. Type or paste your own words, choose 3x3, 4x4 or 5x5, and download a PDF with a different card for every student plus a caller's list. Free, no sign-up.">
+<link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-bingo-card-maker.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@500;600&family=Montserrat:wght@600;800&family=Nunito:wght@700;800&family=Playfair+Display:wght@700&display=swap">
+<style>
+/* =====================================================================
+   BESPOKE BINGO CARD MAKER
+   One file, no server. Everything (words, design) stays in the
+   visitor's browser. The cards are drawn on a <canvas>, so the
+   preview, the PDF and the print-out are always identical.
+   ===================================================================== */
+:root{
+  --bench:#dfe7e2;      /* the work surface behind everything */
+  --panel:#ffffff;
+  --ink:#14211e;
+  --soft:#51615c;
+  --line:#c4d0ca;
+  --deep:#16302b;       /* header and primary buttons */
+  --foil:#a8781f;       /* brass, used sparingly */
+  --focus:#1d6fd6;
+  --warn:#b3261e;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Koala Spies Sydney watermark: faint, repeated across the page behind the
+   panels. It is part of the page only, never of the bingo cards. To make
+   it stronger or fainter, change fill-opacity in the line below. */
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%2316302b%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.top{background:var(--deep);color:#f3f6f4}
+.top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top h1{margin:0;font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.top p{margin:0;color:#c9d6d0;font-size:.95rem;max-width:46ch}
+
+/* ---------- the bench: controls + preview ---------- */
+.bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(300px,400px) minmax(0,1fr);gap:1.5rem;align-items:start}
+.controls{display:grid;gap:.75rem}
+details.group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+details.group>summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.group>summary::-webkit-details-marker{display:none}
+details.group>summary::after{content:"";width:.55rem;height:.55rem;border-right:2px solid var(--soft);border-bottom:2px solid var(--soft);transform:rotate(45deg);transition:transform .15s ease;flex:none;margin-right:.2rem}
+details.group[open]>summary::after{transform:rotate(-135deg)}
+.group-body{padding:0 1rem 1rem;display:grid;gap:.8rem}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft)}
+label.f>span{font-weight:700;color:var(--ink)}
+input[type=text],input[type=number],textarea,select{width:100%;padding:.55rem .65rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:1rem;min-height:44px}
+textarea{resize:vertical;min-height:9rem;line-height:1.4}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+.hint.warn{color:var(--warn);font-weight:700}
+.lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
+
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:.35rem .8rem;font-size:.9rem;cursor:pointer;min-height:38px}
+.chip:hover{border-color:var(--deep)}
+
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg label{position:relative;text-align:center;padding:.5rem .4rem;cursor:pointer;font-size:.95rem;min-height:44px;display:flex;align-items:center;justify-content:center}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--deep);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:-3px}
+
+.swatches{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.sw{width:44px;height:44px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep)}
+input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
+.btn:hover{background:#eef3f0}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:hover{background:#0e231f}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn[disabled]{opacity:.55;cursor:progress}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep);flex:none}
+
+/* ---------- preview ---------- */
+.stage{position:sticky;top:1rem;display:grid;gap:.8rem}
+.paper{background:#cfd9d4;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.4rem);display:flex;justify-content:center}
+#preview{display:block;max-width:100%;max-height:78vh;width:auto;height:auto;background:#fff;box-shadow:0 1px 2px rgba(20,33,30,.25),0 14px 34px -10px rgba(20,33,30,.45)}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.pager{display:flex;align-items:center;gap:.5rem;font-size:.95rem}
+.pager .btn{padding:.3rem .8rem}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+.fineprint{margin:0;font-size:.9rem;color:var(--soft)}
+.fineprint a,.terms a,.notes a{color:var(--deep);font-weight:700}
+
+/* ---------- reading matter under the tool ---------- */
+.notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+.terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
+.terms h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+footer{background:var(--deep);color:#c9d6d0;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer a{color:#fff}
+
+#printArea{display:none}
+
+/* ---------- smaller screens: preview first, download bar stays in reach ---------- */
+@media (max-width:900px){
+  .bench{grid-template-columns:1fr;padding:1rem}
+  .stage{position:static;order:-1}
+  #preview{max-height:60vh}
+  .actions{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--panel);border-top:1px solid var(--line);padding:.6rem .8rem;padding-bottom:max(.6rem,env(safe-area-inset-bottom));justify-content:center}
+  .actions .btn{flex:1 1 auto;padding:.55rem .6rem}
+  body{padding-bottom:5rem}
+}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- printing: only the bingo pages ---------- */
+@media print{
+  body>*:not(#printArea){display:none!important}
+  body{background:#fff none;padding:0}
+  #printArea{display:block}
+  #printArea img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
+  #printArea img:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+<!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
+     With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <h1>Bespoke Bingo Card Maker</h1>
+    <p>Free for teachers. Type your words and print a different card for every student. Nothing leaves this device.</p>
+  </div>
+</header>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<main class="bench">
+
+  <!-- ================= CONTROLS ================= -->
+  <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
+
+    <details class="group" open>
+      <summary>Words</summary>
+      <div class="group-body">
+        <div>
+          <p class="hint" style="margin-bottom:.4rem">Start from a ready-made list, or type your own:</p>
+          <div class="chips" id="presets"></div>
+        </div>
+        <label class="f"><span>Words, one per line</span>
+          <textarea data-k="words" rows="9" spellcheck="true" placeholder="apple&#10;banana&#10;bread"></textarea>
+        </label>
+        <p class="hint" id="wordHint" role="status"></p>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>Cards</summary>
+      <div class="group-body">
+        <div>
+          <p class="lab">Grid size</p>
+          <div class="seg" role="radiogroup" aria-label="Grid size">
+            <label><input type="radio" name="size" value="3">3 × 3</label>
+            <label><input type="radio" name="size" value="4">4 × 4</label>
+            <label><input type="radio" name="size" value="5">5 × 5</label>
+          </div>
+        </div>
+        <div id="freeWrap" class="two" style="align-items:end">
+          <label class="check"><input type="checkbox" data-k="free">Free space in the middle</label>
+          <label class="f"><span>Free space text</span><input type="text" data-k="freeText" maxlength="20"></label>
+        </div>
+        <div class="two">
+          <label class="f"><span>Number of cards</span><input type="number" min="1" max="60" step="1" inputmode="numeric" data-k="count"></label>
+          <div>
+            <p class="lab">Cards per page</p>
+            <div class="seg" role="radiogroup" aria-label="Cards per page">
+              <label><input type="radio" name="perPage" value="1">1</label>
+              <label><input type="radio" name="perPage" value="2">2</label>
+              <label><input type="radio" name="perPage" value="4">4</label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Paper size</p>
+          <div class="seg" role="radiogroup" aria-label="Paper size">
+            <label><input type="radio" name="paper" value="a4">A4</label>
+            <label><input type="radio" name="paper" value="letter">Letter</label>
+          </div>
+        </div>
+        <p class="hint" id="cardHint"></p>
+        <button type="button" class="btn" id="shuffleBtn">Shuffle the cards again</button>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>Design</summary>
+      <div class="group-body">
+        <label class="f"><span>Title</span><input type="text" data-k="title" maxlength="40" placeholder="e.g. BINGO"></label>
+        <label class="f"><span>Small line under each card</span><input type="text" data-k="sub" maxlength="60" placeholder="e.g. Class 4B, Food vocabulary"></label>
+        <div>
+          <p class="lab">Colour</p>
+          <div class="swatches" id="swatches" role="group" aria-label="Colours">
+            <input type="color" data-k="cMain" aria-label="Choose your own colour">
+          </div>
+        </div>
+        <label class="f"><span>Font</span><select data-k="font" id="fontSel"></select></label>
+        <label class="check"><input type="checkbox" data-k="showNum">Number each card</label>
+        <label class="check"><input type="checkbox" data-k="callSheet">Add a caller's list (your words in a random order)</label>
+      </div>
+    </details>
+
+    <button type="button" class="btn quiet" id="resetBtn">Start again with the example cards</button>
+  </form>
+
+  <!-- ================= PREVIEW ================= -->
+  <section class="stage" aria-label="Preview">
+    <div class="paper"><canvas id="preview" role="img" aria-label="Bingo card preview"></canvas></div>
+    <div class="stage-bar">
+      <div class="pager" id="pager" hidden>
+        <button type="button" class="btn" id="prevBtn" aria-label="Previous page">‹</button>
+        <span id="pagerText"></span>
+        <button type="button" class="btn" id="nextBtn" aria-label="Next page">›</button>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn main" id="pdfBtn">Download PDF</button>
+        <button type="button" class="btn" id="printBtn">Print</button>
+      </div>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <p class="fineprint">For classroom and family use. <a href="#terms">Terms of use</a></p>
+  </section>
+</main>
+
+<section class="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>Pick a ready-made list or type your own words, one per line.</li>
+      <li>Choose the grid size and how many cards you need. Every card is shuffled differently.</li>
+      <li>Download the PDF and print. The last page is a caller's list with your words in a random order.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Ideas for class</h2>
+    <ul>
+      <li><strong>Definitions:</strong> read out a meaning; students mark the word.</li>
+      <li><strong>Verb forms:</strong> put past forms on the cards and call the base form ("go" for "went").</li>
+      <li><strong>Opposites:</strong> call "hot"; students find "cold".</li>
+      <li><strong>Listening:</strong> read a short story and students mark each word they hear.</li>
+      <li><strong>Numbers:</strong> use the 1 to 75 list for quick number practice.</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Questions</h2>
+    <dl>
+      <dt>How many words do I need?</dt>
+      <dd>At least enough to fill one card: 9 for a 3 × 3 card, 16 for 4 × 4 and 25 for 5 × 5, or one fewer on 3 × 3 and 5 × 5 cards with a free space. Add more and the cards differ more, so the game lasts longer.</dd>
+      <dt>Is every card different?</dt>
+      <dd>Yes. Each card gets its own random mix of your words in a random order.</dd>
+      <dt>Are my words uploaded anywhere?</dt>
+      <dd>No. The cards are drawn in your browser. Nothing you type is sent to us.</dd>
+      <dt>Can I use phrases or short sentences?</dt>
+      <dd>Yes. Longer text is shrunk and wrapped to fit its square. Short entries print larger and are easier to read.</dd>
+      <dt>Will it remember my list?</dt>
+      <dd>Yes, on this device and browser, so your next visit opens with the same words and design.</dd>
+      <dt>What do students mark the cards with?</dt>
+      <dd>A pencil works for one game. For reuse, laminate the cards or use counters, buttons or scraps of paper.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
+     the site goes public, and change the date when you edit it. -->
+<section class="terms" id="terms" tabindex="-1">
+  <div class="terms-in">
+    <h2>Terms of use</h2>
+    <p class="updated">Last updated 12 October 2026</p>
+    <p>The Bespoke Bingo Card Maker is a free tool for teachers and families. By making, downloading or printing cards you agree to these terms.</p>
+    <h3>What you may use it for</h3>
+    <ul>
+      <li>Games in your own classroom, school, club or home. You may print and photocopy the cards you make as often as you like.</li>
+    </ul>
+    <h3>What you must not do</h3>
+    <ul>
+      <li>Use the cards for gambling, or for any game played for money or prizes where the law requires a licence or permit.</li>
+      <li>Copy, resell or republish this tool or its code.</li>
+    </ul>
+    <p>You are responsible for the words you put on a card and for how the cards are used.</p>
+    <h3>Your information</h3>
+    <p>Your words and design stay in your browser and are never sent to us. They are saved on your own device so they are there next time; the "Start again" button removes them. This site uses cookies for visitor statistics and to show ads, and providers such as Google may set them. See our <a href="https://modernenglish.au/privacy.html">privacy policy</a> for details.</p>
+    <h3>No guarantees</h3>
+    <p>The tool is provided free and as it is. Check your cards before you hand them out. To the extent the law allows, we are not liable for loss or damage arising from its use. Nothing in these terms limits any rights you have under the Australian Consumer Law. These terms are governed by the laws of New South Wales, Australia.</p>
+  </div>
+</section>
+
+<!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<footer>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-report-maker.html">Report maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-sentence-scramble-maker.html">Sentence scramble maker</a> · <a href="#terms">Terms of use</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+</footer>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT
+// =====================================================================
+
+// Ready-made word lists (the chips under "Words"). Add your own in the same pattern.
+const PRESETS = [
+  { label: "Food and drink", words: ["apple", "banana", "bread", "butter", "cheese", "chicken", "rice", "egg", "fish", "milk", "orange", "potato", "tomato", "carrot", "onion", "soup", "salad", "sandwich", "pizza", "pasta", "cake", "biscuit", "chocolate", "ice cream", "coffee", "tea", "juice", "water", "sugar", "salt", "lemon", "grapes", "beef", "noodles", "yoghurt", "honey"] },
+  { label: "Irregular verbs", words: ["went", "saw", "ate", "took", "made", "came", "gave", "got", "had", "said", "knew", "thought", "bought", "brought", "taught", "caught", "wrote", "read", "ran", "swam", "drank", "sang", "spoke", "broke", "chose", "drove", "flew", "forgot", "found", "felt", "left", "lost", "met", "paid", "sold", "sent", "slept", "stood", "told", "wore", "won"] },
+  { label: "Classroom", words: ["pen", "pencil", "ruler", "eraser", "book", "notebook", "desk", "chair", "board", "marker", "bag", "scissors", "glue", "paper", "dictionary", "computer", "door", "window", "clock", "map", "teacher", "student", "homework", "timetable", "folder", "calculator", "sharpener", "bin", "light", "poster", "shelf", "keyboard"] },
+  { label: "Adjectives", words: ["big", "small", "hot", "cold", "happy", "sad", "fast", "slow", "old", "new", "young", "tall", "short", "long", "easy", "difficult", "cheap", "expensive", "clean", "dirty", "early", "late", "full", "empty", "heavy", "light", "noisy", "quiet", "safe", "dangerous", "rich", "poor", "strong", "weak"] },
+  { label: "Jobs", words: ["teacher", "doctor", "nurse", "chef", "pilot", "farmer", "driver", "dentist", "builder", "plumber", "electrician", "waiter", "cleaner", "engineer", "lawyer", "artist", "singer", "actor", "police officer", "firefighter", "hairdresser", "mechanic", "scientist", "journalist", "vet", "baker", "librarian", "accountant", "receptionist", "photographer"] },
+  { label: "Numbers 1 to 75", words: Array.from({ length: 75 }, (_, i) => String(i + 1)) }
+];
+
+// Colour choices (the round buttons). The first is the default.
+const COLOURS = [
+  { name: "Deep green", c: "#16302b" },
+  { name: "Navy",       c: "#1b2a4a" },
+  { name: "Burgundy",   c: "#6b1e2e" },
+  { name: "Ocean",      c: "#0e5c7a" },
+  { name: "Violet",     c: "#4b2e83" },
+  { name: "Coral",      c: "#d9481f" },
+  { name: "Sky",        c: "#2563eb" },
+  { name: "Black (saves ink)", c: "#222222" }
+];
+
+// Fonts. f = family, w = weight.
+const FONTS = {
+  clear:    { label: "Easy to read (Atkinson)", title: { f: "Atkinson Hyperlegible", w: 700 }, body: { f: "Atkinson Hyperlegible", w: 700 } },
+  friendly: { label: "Friendly (Fredoka)",      title: { f: "Fredoka", w: 600 },               body: { f: "Fredoka", w: 500 } },
+  modern:   { label: "Modern (Montserrat)",     title: { f: "Montserrat", w: 800 },            body: { f: "Montserrat", w: 600 } },
+  rounded:  { label: "Rounded (Nunito)",        title: { f: "Nunito", w: 800 },                body: { f: "Nunito", w: 700 } }
+};
+
+const MAX_CARDS = 60;     // most cards in one PDF
+const MAX_WORDS = 200;    // most words used from the list
+
+const DEFAULTS = {
+  words: PRESETS[0].words.join("\n"),
+  size: 5, free: true, freeText: "FREE",
+  count: 24, perPage: 2, paper: "a4",
+  title: "BINGO", sub: "",
+  cMain: COLOURS[0].c, font: "clear",
+  showNum: true, callSheet: true,
+  seed: 20261012
+};
+const STORE = "bingo-card-maker.v1";
+
+// =====================================================================
+// STATE (saved in this browser only)
+// =====================================================================
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+let st = Object.assign({}, DEFAULTS);
+try { Object.assign(st, JSON.parse(localStorage.getItem(STORE) || "{}")); } catch (e) {}
+function tidy() {
+  if ([3, 4, 5].indexOf(+st.size) === -1) st.size = DEFAULTS.size; else st.size = +st.size;
+  if ([1, 2, 4].indexOf(+st.perPage) === -1) st.perPage = DEFAULTS.perPage; else st.perPage = +st.perPage;
+  if (st.paper !== "letter") st.paper = "a4";
+  if (!FONTS[st.font]) st.font = DEFAULTS.font;
+  if (!/^#[0-9a-f]{6}$/i.test(st.cMain)) st.cMain = DEFAULTS.cMain;
+  st.count = clamp(parseInt(st.count, 10) || 1, 1, MAX_CARDS);
+  st.seed = (parseInt(st.seed, 10) || DEFAULTS.seed) >>> 0;
+  ["words", "title", "sub", "freeText"].forEach(k => { if (typeof st[k] !== "string") st[k] = DEFAULTS[k]; });
+}
+tidy();
+let pageIndex = 0, saveTimer = 0;
+
+function save() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { try { localStorage.setItem(STORE, JSON.stringify(st)); } catch (e) {} }, 300);
+}
+
+// The word list: one per line (or, for a single pasted line, split at commas).
+// Repeats are removed so a word cannot appear twice on a card.
+function rawWords() {
+  let parts = st.words.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+  if (parts.length === 1 && parts[0].indexOf(",") > -1) parts = parts[0].split(",").map(s => s.trim()).filter(Boolean);
+  const seen = new Set(), out = [];
+  parts.forEach(w => { const k = w.toLowerCase(); if (!seen.has(k)) { seen.add(k); out.push(w); } });
+  return out;
+}
+const hasFree = () => st.free && st.size % 2 === 1;
+const need = () => st.size * st.size - (hasFree() ? 1 : 0);
+
+// A repeatable random number maker: the same seed always gives the same
+// cards, so the preview, the PDF and the print-out match each other.
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function shuffle(arr, r) {
+  for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); const t = arr[i]; arr[i] = arr[j]; arr[j] = t; }
+  return arr;
+}
+
+// Each card is a list of size x size entries. null marks the free space.
+function makeCards(words) {
+  const n = st.size, cells = need(), r = rng(st.seed), seen = new Set(), cards = [];
+  for (let c = 0; c < st.count; c++) {
+    let pick, key, tries = 0;
+    do { pick = shuffle(words.slice(), r).slice(0, cells); key = pick.join("\u0001"); tries++; } while (seen.has(key) && tries < 40);
+    seen.add(key);
+    while (pick.length < cells) pick.push("");
+    if (hasFree()) pick.splice((n * n - 1) / 2, 0, null);
+    cards.push(pick);
+  }
+  return cards;
+}
+function model() {
+  const all = rawWords(), words = all.slice(0, MAX_WORDS), cards = makeCards(words), pages = [];
+  for (let i = 0; i < cards.length; i += st.perPage) pages.push({ first: i });
+  if (st.callSheet && words.length) pages.push({ call: true });
+  return { total: all.length, words, cards, pages, ready: words.length >= need() };
+}
+
+// =====================================================================
+// DRAWING
+// =====================================================================
+const INK = "#14211e", GREY = "#51615c";
+function pageSize() { return st.paper === "letter" ? [816, 1056] : [794, 1123]; }   // CSS pixels at 96 dpi, upright page
+function lum(hex) {
+  const n = parseInt(hex.slice(1), 16), r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+}
+function mix(a, b, t) {
+  const x = parseInt(a.slice(1), 16), y = parseInt(b.slice(1), 16);
+  const ch = s => Math.round((x >> s & 255) * (1 - t) + (y >> s & 255) * t);
+  return "rgb(" + ch(16) + "," + ch(8) + "," + ch(0) + ")";
+}
+function fontStr(spec, px) { return spec.w + " " + px + 'px "' + spec.f + '", Verdana, "Segoe UI", Arial, sans-serif'; }
+function roundedBox(ctx, x, y, w, h, r) {
+  ctx.beginPath(); ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+// largest size (down to 40%) at which one line of text fits the width
+function fitLine(ctx, text, spec, px, maxW) {
+  let size = px;
+  for (let i = 0; i < 30; i++) { ctx.font = fontStr(spec, size); if (ctx.measureText(text).width <= maxW || size <= px * .4) break; size *= .95; }
+  return size;
+}
+function wrap(ctx, text, maxW) {
+  const out = []; let line = "";
+  text.split(/\s+/).forEach(word => {
+    const test = line ? line + " " + word : word;
+    if (line && ctx.measureText(test).width > maxW) { out.push(line); line = word; } else line = test;
+  });
+  out.push(line);
+  return out;
+}
+// wraps the text and shrinks it until it fits inside a square
+function fitCell(ctx, text, spec, start, maxW, maxH) {
+  let size = start, lines = [text];
+  for (let i = 0; i < 40; i++) {
+    ctx.font = fontStr(spec, size);
+    lines = wrap(ctx, text, maxW);
+    let wide = 0; lines.forEach(l => { wide = Math.max(wide, ctx.measureText(l).width); });
+    if ((wide <= maxW && lines.length * size * 1.18 <= maxH) || size <= start * .22) break;
+    size *= .93;
+  }
+  return { size, lines };
+}
+function cellText(ctx, text, spec, colour, x, y, cell) {
+  const pad = cell * .08, box = cell - 2 * pad;
+  const start = text.length <= 3 ? cell * .44 : text.length <= 6 ? cell * .27 : cell * .22;
+  const fit = fitCell(ctx, text, spec, start, box, box), lh = fit.size * 1.18;
+  ctx.font = fontStr(spec, fit.size); ctx.fillStyle = colour; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  const first = y + cell / 2 - (fit.lines.length - 1) * lh / 2 + fit.size * .04;
+  fit.lines.forEach((l, i) => ctx.fillText(l, x + cell / 2, first + i * lh));
+}
+
+// Draws one card inside the box (sx, sy, sw, sh).
+function drawCard(ctx, sx, sy, sw, sh, card, num) {
+  const n = st.size, F = FONTS[st.font], main = st.cMain;
+  const title = st.title.trim(), sub = st.sub.trim(), foot = st.showNum || sub;
+  const ratio = 1 + (title ? .19 : 0) + (foot ? .07 : 0);
+  const side = Math.min(sw, sh / ratio), x0 = sx + (sw - side) / 2, top = sy + (sh - side * ratio) / 2;
+  const th = title ? side * .16 : 0, gy = top + (title ? side * .19 : 0), cell = side / n;
+  const light = lum(main) > .72;                       // a very pale colour needs dark lines and text
+  const onMain = lum(main) > .6 ? INK : "#ffffff", lineCol = light ? GREY : main;
+
+  // title band; a title with one letter per column (BINGO on a 5 x 5 card) sits over the columns
+  if (title) {
+    ctx.fillStyle = main; roundedBox(ctx, x0, top, side, th, side * .025); ctx.fill();
+    ctx.fillStyle = onMain; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    const letters = Array.from(title.replace(/\s+/g, ""));
+    if (letters.length === n) {
+      ctx.font = fontStr(F.title, th * .64);
+      letters.forEach((ch, i) => ctx.fillText(ch, x0 + cell * (i + .5), top + th * .53));
+    } else {
+      const s = fitLine(ctx, title, F.title, th * .58, side * .92);
+      ctx.font = fontStr(F.title, s); ctx.fillText(title, x0 + side / 2, top + th * .53);
+    }
+  }
+
+  // squares
+  for (let i = 0; i < n * n; i++) {
+    const cx = x0 + (i % n) * cell, cy = gy + Math.floor(i / n) * cell, t = card[i];
+    if (t === null) {
+      ctx.fillStyle = mix(main, "#ffffff", .86); ctx.fillRect(cx, cy, cell, cell);
+      cellText(ctx, st.freeText.trim() || "FREE", F.title, light ? INK : main, cx, cy, cell);
+    } else if (t) cellText(ctx, t, F.body, INK, cx, cy, cell);
+  }
+
+  // grid lines
+  ctx.strokeStyle = lineCol; ctx.lineWidth = Math.max(1, side * .004);
+  ctx.beginPath();
+  for (let i = 1; i < n; i++) {
+    ctx.moveTo(x0 + i * cell, gy); ctx.lineTo(x0 + i * cell, gy + side);
+    ctx.moveTo(x0, gy + i * cell); ctx.lineTo(x0 + side, gy + i * cell);
+  }
+  ctx.stroke();
+  ctx.lineWidth = Math.max(2, side * .009); ctx.strokeRect(x0, gy, side, side);
+
+  // small line under the card
+  if (foot) {
+    const fs = Math.max(8, side * .032), fy = gy + side + side * .042;
+    ctx.fillStyle = GREY; ctx.textBaseline = "middle";
+    if (sub) { ctx.textAlign = "left"; ctx.font = fontStr({ f: F.body.f, w: F.body.w }, fitLine(ctx, sub, F.body, fs, side * .72)); ctx.fillText(sub, x0, fy); }
+    if (st.showNum) { ctx.textAlign = "right"; ctx.font = fontStr(F.body, fs); ctx.fillText("Card " + num, x0 + side, fy); }
+  }
+}
+
+// Where the cards sit on the page: [x, y, width, height] for each one.
+function slots(W, H) {
+  if (st.perPage === 1) { const m = 56; return [[m, m, W - 2 * m, H - 2 * m]]; }
+  if (st.perPage === 2) { const m = 44, g = 44, h = (H - 2 * m - g) / 2; return [[m, m, W - 2 * m, h], [m, m + h + g, W - 2 * m, h]]; }
+  const m = 36, g = 36, w = (W - 2 * m - g) / 2, h = (H - 2 * m - g) / 2;
+  return [[m, m, w, h], [m + w + g, m, w, h], [m, m + h + g, w, h], [m + w + g, m + h + g, w, h]];
+}
+
+// The caller's list: every word in a random order, with a box to tick.
+function drawCallSheet(ctx, W, H, words) {
+  const F = FONTS[st.font], m = 56, order = shuffle(words.slice(), rng((st.seed ^ 0x5bd1e995) >>> 0));
+  ctx.textAlign = "left"; ctx.textBaseline = "middle";
+  ctx.fillStyle = INK; ctx.font = fontStr(F.title, 30); ctx.fillText("Caller's list", m, m + 18);
+  const info = (st.title.trim() ? st.title.trim() + "  ·  " : "") + order.length + (order.length === 1 ? " word" : " words") + "  ·  tick each one as you call it";
+  ctx.fillStyle = GREY; ctx.font = fontStr({ f: F.body.f, w: 400 }, fitLine(ctx, info, { f: F.body.f, w: 400 }, 14, W - 2 * m)); ctx.fillText(info, m, m + 50);
+  ctx.strokeStyle = st.cMain; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(m, m + 70); ctx.lineTo(W - m, m + 70); ctx.stroke();
+
+  const top = m + 88, availH = H - m - top;
+  const cols = order.length <= 26 ? 2 : order.length <= 66 ? 3 : 4, rows = Math.ceil(order.length / cols);
+  const rowH = Math.min(34, availH / rows), colW = (W - 2 * m) / cols;
+  const fs = Math.min(17, rowH * .6), box = Math.min(16, rowH * .55), numW = fs * 2.2;
+  order.forEach((w, i) => {
+    const x = m + Math.floor(i / rows) * colW, y = top + (i % rows) * rowH + rowH / 2;
+    ctx.strokeStyle = GREY; ctx.lineWidth = 1.2; ctx.strokeRect(x, y - box / 2, box, box);
+    ctx.fillStyle = GREY; ctx.font = fontStr({ f: F.body.f, w: 400 }, fs * .8); ctx.fillText((i + 1) + ".", x + box + 8, y + fs * .04);
+    const s = fitLine(ctx, w, F.body, fs, colW - box - 8 - numW - 14);
+    ctx.fillStyle = INK; ctx.font = fontStr(F.body, s); ctx.fillText(w, x + box + 8 + numW, y + fs * .04);
+  });
+}
+
+function renderPage(canvas, scale, page, m) {
+  const [W, H] = pageSize();
+  canvas.width = Math.round(W * scale); canvas.height = Math.round(H * scale);
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
+  if (page.call) { drawCallSheet(ctx, W, H, m.words); return canvas; }
+  // dashed lines to cut along
+  if (st.perPage > 1) {
+    ctx.save(); ctx.strokeStyle = "#b8c4be"; ctx.lineWidth = 1; ctx.setLineDash([6, 6]); ctx.beginPath();
+    ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2);
+    if (st.perPage === 4) { ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); }
+    ctx.stroke(); ctx.restore();
+  }
+  slots(W, H).forEach((s, i) => { const c = page.first + i; if (c < m.cards.length) drawCard(ctx, s[0], s[1], s[2], s[3], m.cards[c], c + 1); });
+  return canvas;
+}
+
+// =====================================================================
+// SCREEN
+// =====================================================================
+const $ = id => document.getElementById(id);
+const preview = $("preview");
+let drawQueued = false;
+function say(msg) { $("status").textContent = msg; }
+function needMsg(m) { const more = need() - m.words.length; return "Add " + more + " more " + (more === 1 ? "word" : "words") + " to fill a " + st.size + " × " + st.size + " card."; }
+
+function redraw() {
+  if (drawQueued) return;
+  drawQueued = true;
+  requestAnimationFrame(() => {
+    drawQueued = false;
+    const m = model();
+    pageIndex = clamp(pageIndex, 0, m.pages.length - 1);
+    renderPage(preview, Math.min(window.devicePixelRatio || 1, 2) * 1.15, m.pages[pageIndex], m);
+    $("pager").hidden = m.pages.length < 2;
+    $("pagerText").textContent = "Page " + (pageIndex + 1) + " of " + m.pages.length;
+    $("pdfBtn").textContent = "Download PDF (" + m.pages.length + (m.pages.length === 1 ? " page)" : " pages)");
+
+    // the line under the word box
+    const hint = $("wordHint"), w = m.words.length, nd = need();
+    hint.classList.toggle("warn", !m.ready);
+    if (!w) hint.textContent = "Type at least " + nd + " words, one per line.";
+    else if (!m.ready) hint.textContent = "You have " + w + (w === 1 ? " word. " : " words. ") + needMsg(m);
+    else if (w === nd) hint.textContent = w + " words: every card has the same words in a different order. Add more so players do not all finish together.";
+    else hint.textContent = w + " words. Each card uses " + nd + " of them." + (m.total > MAX_WORDS ? " Only the first " + MAX_WORDS + " words are used." : "");
+
+    const cardPages = Math.ceil(st.count / st.perPage);
+    $("cardHint").textContent = st.count + (st.count === 1 ? " card on " : " cards on ") + cardPages + (cardPages === 1 ? " page" : " pages") + (st.callSheet && w ? ", plus the caller's list." : ".");
+  });
+}
+
+// fonts arrive after the first paint: draw again when the chosen ones are ready
+function loadFonts() {
+  if (!document.fonts || !document.fonts.load) return Promise.resolve();
+  const F = FONTS[st.font];
+  return Promise.all([F.title, F.body, { f: F.body.f, w: 400 }].map(s => document.fonts.load(fontStr(s, 20)).catch(() => {}))).then(redraw);
+}
+
+function syncForm() {
+  document.querySelectorAll("[data-k]").forEach(el => {
+    if (el.type === "checkbox") el.checked = !!st[el.dataset.k];
+    else if (el !== document.activeElement) el.value = st[el.dataset.k];     // never fight the box being typed in
+  });
+  ["size", "perPage", "paper"].forEach(n => document.querySelectorAll('input[name="' + n + '"]').forEach(r => { r.checked = r.value === String(st[n]); }));
+  $("freeWrap").hidden = st.size % 2 === 0;                                  // a 4 x 4 card has no middle square
+  document.querySelector('[data-k="freeText"]').disabled = !st.free;
+  document.querySelectorAll(".sw").forEach(b => b.setAttribute("aria-pressed", COLOURS[b.dataset.i].c.toLowerCase() === st.cMain.toLowerCase()));
+}
+function changed() { syncForm(); save(); redraw(); }
+
+// build the pickers
+PRESETS.forEach(p => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = p.label;
+  b.onclick = () => { st.words = p.words.join("\n"); pageIndex = 0; changed(); say(""); };
+  $("presets").appendChild(b);
+});
+COLOURS.forEach((p, i) => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.dataset.i = i;
+  b.title = p.name; b.setAttribute("aria-label", p.name); b.style.background = p.c;
+  b.onclick = () => { st.cMain = p.c; changed(); };
+  $("swatches").insertBefore(b, $("swatches").lastElementChild);
+});
+Object.keys(FONTS).forEach(k => { const o = document.createElement("option"); o.value = k; o.textContent = FONTS[k].label; $("fontSel").appendChild(o); });
+
+$("controls").addEventListener("input", e => {
+  const el = e.target, k = el.dataset.k;
+  if (k) st[k] = el.type === "checkbox" ? el.checked : k === "count" ? clamp(parseInt(el.value, 10) || 1, 1, MAX_CARDS) : el.value;
+  else if (el.type === "radio" && el.name) { st[el.name] = el.name === "paper" ? el.value : +el.value; pageIndex = 0; }
+  else return;
+  if (k === "font") loadFonts();
+  if (k === "count") pageIndex = 0;
+  changed();
+});
+// tidy the number box once the visitor has finished typing in it
+$("controls").addEventListener("change", e => { if (e.target.dataset.k === "count") e.target.value = st.count; });
+$("prevBtn").onclick = () => { pageIndex = Math.max(pageIndex - 1, 0); redraw(); };
+$("nextBtn").onclick = () => { pageIndex++; redraw(); };
+$("shuffleBtn").onclick = () => {
+  const buf = new Uint32Array(1);
+  (window.crypto || window.msCrypto).getRandomValues(buf);
+  st.seed = buf[0] >>> 0; changed(); say("Cards shuffled.");
+};
+$("resetBtn").onclick = () => { st = Object.assign({}, DEFAULTS); pageIndex = 0; loadFonts(); changed(); say("Back to the example cards."); };
+
+// =====================================================================
+// DOWNLOAD AND PRINT
+// =====================================================================
+function fileName() {
+  const base = (st.title.trim() || "bingo").replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "_").slice(0, 40) || "bingo";
+  return base + "_cards.pdf";
+}
+const pause = () => new Promise(r => setTimeout(r, 0));
+async function busy(job) {
+  const m = model();
+  if (!m.ready) { say(m.words.length ? needMsg(m) : "Type your words first, one per line."); document.querySelector('[data-k="words"]').focus(); return; }
+  const all = [$("pdfBtn"), $("printBtn")];
+  all.forEach(b => b.disabled = true);
+  try { await loadFonts(); await job(m); } catch (e) { console.error(e); say("Something went wrong making the file. Try again, or use Print."); }
+  all.forEach(b => b.disabled = false);
+  redraw();
+}
+
+$("pdfBtn").onclick = () => busy(async m => {
+  if (!window.jspdf) { say("The PDF tool did not load (check your connection). Use Print and choose Save as PDF."); return; }
+  const mm = st.paper === "letter" ? [215.9, 279.4] : [210, 297];
+  const pdf = new window.jspdf.jsPDF({ orientation: "portrait", unit: "mm", format: st.paper });
+  const scale = m.pages.length > 12 ? 2.2 : 3;               // about 210 or 290 dots per inch
+  const cv = document.createElement("canvas");
+  for (let i = 0; i < m.pages.length; i++) {
+    say("Making page " + (i + 1) + " of " + m.pages.length + "…");
+    await pause();
+    renderPage(cv, scale, m.pages[i], m);
+    if (i) pdf.addPage();
+    pdf.addImage(cv.toDataURL("image/jpeg", .92), "JPEG", 0, 0, mm[0], mm[1], undefined, "FAST");
+  }
+  pdf.save(fileName());
+  say("Downloaded " + st.count + (st.count === 1 ? " card." : " cards."));
+});
+
+$("printBtn").onclick = () => busy(async m => {
+  const area = $("printArea"), cv = document.createElement("canvas");
+  area.innerHTML = "";
+  let rule = $("pageRule");
+  if (!rule) { rule = document.createElement("style"); rule.id = "pageRule"; document.head.appendChild(rule); }
+  rule.textContent = "@page{size:" + (st.paper === "letter" ? "letter" : "A4") + " portrait;margin:0}";
+  const waits = [];
+  for (let i = 0; i < m.pages.length; i++) {
+    say("Getting ready to print…"); await pause();
+    renderPage(cv, 2, m.pages[i], m);
+    const img = new Image();
+    waits.push(new Promise(r => { img.onload = img.onerror = r; }));
+    img.src = cv.toDataURL("image/jpeg", .92);
+    area.appendChild(img);
+  }
+  await Promise.all(waits);
+  say("");
+  window.print();
+});
+
+// =====================================================================
+// START
+// =====================================================================
+syncForm(); redraw(); loadFonts();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+window.addEventListener("resize", redraw);
+</script>
+</body>
+</html>
