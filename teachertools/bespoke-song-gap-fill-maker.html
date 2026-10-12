@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<!-- Bespoke Song Gap-Fill Maker © Koala Spies Sydney. All rights reserved. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bespoke Song Gap-Fill Maker: Free Song Lyrics Listening Worksheet Generator | Modern English Australia</title>
+<meta name="description" content="Turn any song into an ESL listening worksheet. Paste the lyrics, click the words to blank out or gap the rhymes, and download a printable PDF with a QR code to the song and an answer key. Free for teachers, nothing uploaded or saved.">
+<link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-song-gap-fill-maker.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,700&family=Fredoka:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,700&family=Montserrat:ital,wght@0,500;0,700;1,700&family=Nunito:ital,wght@0,500;0,800;1,800&family=Playfair+Display:wght@700&display=swap">
+<style>
+/* =====================================================================
+   BESPOKE SONG GAP-FILL MAKER
+   One file, no server. The lyrics stay in the visitor's browser window
+   and are never saved; only design choices are remembered. The worksheet is drawn on a <canvas>, so the
+   preview, the PDF and the print-out are always identical.
+   ===================================================================== */
+:root{
+  --bench:#dfe7e2;      /* the work surface behind everything */
+  --panel:#ffffff;
+  --ink:#14211e;
+  --soft:#51615c;
+  --line:#c4d0ca;
+  --deep:#16302b;       /* header and primary buttons */
+  --foil:#a8781f;       /* brass, used sparingly */
+  --focus:#1d6fd6;
+  --warn:#b3261e;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Koala Spies Sydney watermark: faint, repeated across the page behind the
+   panels. It is part of the page only, never of the worksheets. To make
+   it stronger or fainter, change fill-opacity in the line below. */
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%2316302b%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* ---------- header ---------- */
+.top{background:var(--deep);color:#f3f6f4}
+.top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top h1{margin:0;font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.top p{margin:0;color:#c9d6d0;font-size:.95rem;max-width:46ch}
+
+/* ---------- the bench: controls + preview ---------- */
+.bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(300px,430px) minmax(0,1fr);gap:1.5rem;align-items:start}
+.controls{display:grid;gap:.75rem}
+details.group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+details.group>summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.group>summary::-webkit-details-marker{display:none}
+details.group>summary::after{content:"";width:.55rem;height:.55rem;border-right:2px solid var(--soft);border-bottom:2px solid var(--soft);transform:rotate(45deg);transition:transform .15s ease;flex:none;margin-right:.2rem}
+details.group[open]>summary::after{transform:rotate(-135deg)}
+.group-body{padding:0 1rem 1rem;display:grid;gap:.8rem}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft)}
+label.f>span{font-weight:700;color:var(--ink)}
+input[type=text],input[type=number],textarea,select{width:100%;padding:.55rem .65rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:1rem;min-height:44px}
+textarea{resize:vertical;min-height:8rem;line-height:1.4}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+.hint.warn{color:var(--warn);font-weight:700}
+.lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+.notice{margin:0;font-size:.85rem;line-height:1.45;color:var(--ink);background:#f3f6f4;border:1px solid var(--line);border-left:4px solid var(--foil);border-radius:6px;padding:.55rem .7rem}
+.notice a{color:var(--deep);font-weight:700}
+/* the words you click to turn into gaps */
+.picker{border:1.5px solid var(--line);border-radius:8px;background:#fff;padding:.55rem .65rem;max-height:17rem;overflow:auto;line-height:2.05}
+.picker p{margin:0 0 .5rem}
+.picker p:last-child{margin-bottom:0}
+.picker .w{border:0;background:none;padding:.1rem .22rem;margin:0 -.1rem;border-radius:5px;cursor:pointer;line-height:1.35}
+.picker .w:hover{background:#e3ece7}
+.picker .w[aria-pressed=true]{background:var(--deep);color:#fff}
+.picker .none{color:var(--soft);margin:0}
+.picker p{line-height:1.9}
+.picker .lbl{font-style:italic;font-weight:700;color:var(--soft);font-size:.9rem}
+.picker .ln.off{opacity:.45}
+.picker .w:disabled{cursor:not-allowed}
+
+.rowline{display:flex;gap:.45rem;align-items:center;flex-wrap:wrap;font-size:.95rem}
+.rowline select,.rowline input[type=number]{width:auto;min-width:4.6rem;padding:.4rem .5rem}
+.rowline .btn{padding:.4rem .8rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:.35rem .8rem;font-size:.9rem;cursor:pointer;min-height:38px}
+.chip:hover{border-color:var(--deep)}
+
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg label{position:relative;text-align:center;padding:.5rem .4rem;cursor:pointer;font-size:.95rem;min-height:44px;display:flex;align-items:center;justify-content:center}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--deep);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:-3px}
+
+.swatches{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.sw{width:44px;height:44px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep)}
+input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
+.btn:hover{background:#eef3f0}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:hover{background:#0e231f}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn[disabled]{opacity:.55;cursor:progress}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep);flex:none}
+
+/* ---------- preview ---------- */
+.stage{position:sticky;top:1rem;display:grid;gap:.8rem}
+.paper{background:#cfd9d4;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.4rem);display:flex;justify-content:center}
+#preview{display:block;max-width:100%;max-height:78vh;width:auto;height:auto;background:#fff;box-shadow:0 1px 2px rgba(20,33,30,.25),0 14px 34px -10px rgba(20,33,30,.45)}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.pager{display:flex;align-items:center;gap:.5rem;font-size:.95rem}
+.pager .btn{padding:.3rem .8rem}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+.fineprint{margin:0;font-size:.9rem;color:var(--soft)}
+.fineprint a,.terms a,.notes a{color:var(--deep);font-weight:700}
+
+/* ---------- reading matter under the tool ---------- */
+.notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+.terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
+.terms h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+footer{background:var(--deep);color:#c9d6d0;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer a{color:#fff}
+
+#printArea{display:none}
+
+/* ---------- smaller screens: preview first, download bar stays in reach ---------- */
+@media (max-width:900px){
+  .bench{grid-template-columns:1fr;padding:1rem}
+  .stage{position:static;order:-1}
+  #preview{max-height:60vh}
+  .actions{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--panel);border-top:1px solid var(--line);padding:.6rem .8rem;padding-bottom:max(.6rem,env(safe-area-inset-bottom));justify-content:center}
+  .actions .btn{flex:1 1 auto;padding:.55rem .6rem}
+  body{padding-bottom:5rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- printing: only the worksheet pages ---------- */
+@media print{
+  body>*:not(#printArea){display:none!important}
+  body{background:#fff none;padding:0}
+  #printArea{display:block}
+  #printArea img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
+  #printArea img:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+<!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
+     With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <h1>Bespoke Song Gap-Fill Maker</h1>
+    <p>Free for teachers. Paste the lyrics, click the words to blank out, and print a listening worksheet with an answer key. Nothing leaves this device.</p>
+  </div>
+</header>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<main class="bench">
+
+  <!-- ================= CONTROLS ================= -->
+  <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
+
+    <details class="group" open>
+      <summary>1. The song</summary>
+      <div class="group-body">
+        <div class="two">
+          <label class="f"><span>Song title</span><input type="text" data-k="song" maxlength="80" placeholder="e.g. Waltzing Matilda"></label>
+          <label class="f"><span>Artist</span><input type="text" data-k="artist" maxlength="80" placeholder="e.g. Banjo Paterson"></label>
+        </div>
+        <label class="f"><span>Link to the song (optional)</span><input type="text" data-k="link" maxlength="300" inputmode="url" placeholder="https://… a video or streaming link"></label>
+        <p class="hint">The link becomes a QR code on the worksheet, so students can find the song.</p>
+        <label class="f"><span>Paste the lyrics</span>
+          <textarea id="textBox" rows="10" maxlength="8000" spellcheck="false" placeholder="Paste the lyrics here. Keep the line breaks, and leave an empty line between verses."></textarea>
+        </label>
+        <p class="notice" id="lyricsNotice"><b>Your lyrics stay with you.</b> They are used only in this browser window. They are never uploaded, saved or shared by this site, and they are gone when you close or leave the page. You are responsible for having the right to copy the lyrics for your class. <a href="#terms">Terms of use</a></p>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>2. Choose the gaps</summary>
+      <div class="group-body">
+        <div>
+          <p class="lab">Click a word to blank it out. Click again to put it back.</p>
+          <div class="picker" id="picker"></div>
+        </div>
+        <p class="hint" id="gapHint" role="status"></p>
+        <div>
+          <p class="lab">Or let the tool choose</p>
+          <div class="chips">
+            <button type="button" class="chip" id="rhymeBtn">Rhymes: last word of every 2nd line</button>
+            <button type="button" class="chip" id="lastBtn">Last word of every line</button>
+          </div>
+          <div class="rowline" style="margin-top:.6rem">
+            <span>Every</span>
+            <select id="nthSel" aria-label="Blank every how many words">
+              <option value="5">5th</option><option value="6">6th</option><option value="7" selected>7th</option><option value="8">8th</option><option value="10">10th</option>
+            </select>
+            <span>word</span>
+            <button type="button" class="btn" id="nthBtn">Apply</button>
+          </div>
+          <div class="rowline" style="margin-top:.45rem">
+            <input type="number" id="randN" min="1" max="200" value="12" inputmode="numeric" aria-label="How many random words">
+            <span>random words</span>
+            <button type="button" class="btn" id="randBtn">Apply</button>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Add every</p>
+          <div class="chips" id="quick"></div>
+        </div>
+        <label class="check"><input type="checkbox" data-k="once">Gap a repeated line (like the chorus) only the first time</label>
+        <button type="button" class="btn quiet" id="clearBtn">Remove all gaps</button>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>3. Worksheet</summary>
+      <div class="group-body">
+        <label class="f"><span>Instructions</span><input type="text" data-k="instr" maxlength="160" placeholder="e.g. Listen to the song and write the missing words."></label>
+        <div>
+          <p class="lab">Word box</p>
+          <div class="seg" role="radiogroup" aria-label="Word box">
+            <label><input type="radio" name="bank" value="off">None</label>
+            <label><input type="radio" name="bank" value="top">Above</label>
+            <label><input type="radio" name="bank" value="bottom">Below</label>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Gap style</p>
+          <div class="seg" role="radiogroup" aria-label="Gap style">
+            <label><input type="radio" name="gap" value="line">Line</label>
+            <label><input type="radio" name="gap" value="first">First letter</label>
+            <label><input type="radio" name="gap" value="dash">Letter count</label>
+          </div>
+        </div>
+        <label class="f"><span>Questions after listening (optional, one per line)</span>
+          <textarea id="qBox" rows="3" maxlength="1500" placeholder="What is the song about?&#10;How does the singer feel?"></textarea>
+        </label>
+        <label class="check"><input type="checkbox" data-k="numbers">Number the gaps</label>
+        <label class="check"><input type="checkbox" data-k="nameLine">Name and date line</label>
+        <label class="check"><input type="checkbox" data-k="key">Add an answer key page</label>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary>Design</summary>
+      <div class="group-body">
+        <div>
+          <p class="lab">Colour</p>
+          <div class="swatches" id="swatches" role="group" aria-label="Colours">
+            <input type="color" data-k="cMain" aria-label="Choose your own colour">
+          </div>
+        </div>
+        <label class="f"><span>Font</span><select data-k="font" id="fontSel"></select></label>
+        <div>
+          <p class="lab">Text size</p>
+          <div class="seg" role="radiogroup" aria-label="Text size">
+            <label><input type="radio" name="tsize" value="s">Small</label>
+            <label><input type="radio" name="tsize" value="m">Medium</label>
+            <label><input type="radio" name="tsize" value="l">Large</label>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Paper size</p>
+          <div class="seg" role="radiogroup" aria-label="Paper size">
+            <label><input type="radio" name="paper" value="a4">A4</label>
+            <label><input type="radio" name="paper" value="letter">Letter</label>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <button type="button" class="btn quiet" id="resetBtn">Start again with the example song</button>
+  </form>
+
+  <!-- ================= PREVIEW ================= -->
+  <section class="stage" aria-label="Preview">
+    <div class="paper"><canvas id="preview" role="img" aria-label="Worksheet preview. The word list in step 2 does the same job as clicking here."></canvas></div>
+    <div class="stage-bar">
+      <div class="pager" id="pager" hidden>
+        <button type="button" class="btn" id="prevBtn" aria-label="Previous page">‹</button>
+        <span id="pagerText"></span>
+        <button type="button" class="btn" id="nextBtn" aria-label="Next page">›</button>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn main" id="pdfBtn">Download PDF</button>
+        <button type="button" class="btn" id="printBtn">Print</button>
+      </div>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <p class="fineprint">You can also click words on the preview. Lyrics are never uploaded or saved. <a href="#terms">Terms of use</a></p>
+  </section>
+</main>
+
+<section class="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>Paste the lyrics of the song you want to use. Keep the line breaks and the empty lines between verses.</li>
+      <li>Click the words to blank out, or let the tool pick the rhyming words at the end of the lines.</li>
+      <li>Add the song title and a link, then download the PDF. Play the song in class while students fill the gaps.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Ideas for class</h2>
+    <ul>
+      <li><strong>Predict first:</strong> students guess the missing words before they listen, then check with the song.</li>
+      <li><strong>Rhymes:</strong> blank the rhyming words. Students use the sound of the line before to help them.</li>
+      <li><strong>Grammar in songs:</strong> blank every preposition, or every <em>-ing</em> word.</li>
+      <li><strong>Mixed levels:</strong> print one copy with the word box and one with first letters only.</li>
+      <li><strong>After listening:</strong> add two or three questions about the meaning and the singer's feelings.</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Questions</h2>
+    <dl>
+      <dt>Does this site provide song lyrics?</dt>
+      <dd>No. You paste the lyrics yourself. Apart from the out-of-copyright example, this site has no lyrics of its own.</dd>
+      <dt>Are the lyrics I paste saved or uploaded?</dt>
+      <dd>No. They are used only in your browser window and are never sent to us. They are not saved on your device either: when you close or leave the page, they are gone.</dd>
+      <dt>What is remembered?</dt>
+      <dd>Only your design choices, such as the gap style, colour and font, so they are ready next time.</dd>
+      <dt>What about chorus lines that repeat?</dt>
+      <dd>Tick "Gap a repeated line only the first time" so the same word is not a gap five times.</dd>
+      <dt>Why are section names like [Chorus] shown differently?</dt>
+      <dd>Labels such as [Chorus], Verse 2: or (Bridge) are kept as headings and are never turned into gaps.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
+     the site goes public, and change the date when you edit it. -->
+<section class="terms" id="terms" tabindex="-1">
+  <div class="terms-in">
+    <h2>Terms of use</h2>
+    <p class="updated">Last updated 12 October 2026</p>
+    <p>The Bespoke Song Gap-Fill Maker is a free tool for teachers. By making, downloading or printing worksheets you agree to these terms.</p>
+    <h3>Song lyrics and copyright</h3>
+    <ul>
+      <li>This site does not provide, host, store or distribute song lyrics. Apart from the example, which is out of copyright, any lyrics in the tool are pasted in by you.</li>
+      <li>Lyrics you paste are processed only in your own browser. They are never sent to us, never stored by us and never shared with anyone. They are not saved on your device, and they are cleared when you close or leave the page.</li>
+      <li>Song lyrics are usually protected by copyright, which belongs to the songwriters and publishers. You are solely responsible for making sure you have the right to copy and use any lyrics you paste, for example under your school's or institution's copyright licence, or with the rights holder's permission.</li>
+      <li>Use the worksheets for teaching in your own class only. Do not publish, sell or share worksheets that contain copyright lyrics.</li>
+      <li>We do not check, endorse or take responsibility for lyrics you paste or the sites you copy them from.</li>
+    </ul>
+    <h3>What you must not do</h3>
+    <ul>
+      <li>Use the tool to copy or distribute lyrics you do not have the right to use.</li>
+      <li>Copy, resell or republish this tool or its code.</li>
+    </ul>
+    <h3>Your information</h3>
+    <p>Only your design choices (such as colour, font and gap style) are saved on your own device so they are there next time; the "Start again" button removes them. This site uses cookies for visitor statistics and to show ads, and providers such as Google may set them. See our <a href="https://modernenglish.au/privacy.html">privacy policy</a> for details.</p>
+    <h3>No guarantees</h3>
+    <p>The tool is provided free and as it is. Check your worksheet and answer key before you hand them out. These terms are general information and not legal advice. To the extent the law allows, we are not liable for loss or damage arising from its use, including any claim about material you paste into it. Nothing in these terms limits any rights you have under the Australian Consumer Law. These terms are governed by the laws of New South Wales, Australia.</p>
+  </div>
+</section>
+
+<!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<footer>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-report-maker.html">Report maker</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-sentence-scramble-maker.html">Sentence scramble maker</a> · <a href="#terms">Terms of use</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+</footer>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT
+// =====================================================================
+
+// The example song the page opens with. Waltzing Matilda (A. B. "Banjo" Paterson, 1895)
+// is out of copyright. Do not put copyright lyrics here: this text is published with the page.
+const EXAMPLE = {
+  song: "Waltzing Matilda", artist: "Banjo Paterson (1895)", link: "",
+  text: [
+    "Once a jolly swagman camped by a billabong,",
+    "Under the shade of a coolibah tree,",
+    "And he sang as he watched and waited till his billy boiled,",
+    "“Who'll come a-waltzing Matilda with me?”",
+    "",
+    "[Chorus]",
+    "Waltzing Matilda, waltzing Matilda,",
+    "Who'll come a-waltzing Matilda with me?",
+    "And he sang as he watched and waited till his billy boiled,",
+    "“Who'll come a-waltzing Matilda with me?”",
+    "",
+    "Down came a jumbuck to drink at that billabong,",
+    "Up jumped the swagman and grabbed him with glee,",
+    "And he sang as he shoved that jumbuck in his tucker bag,",
+    "“You'll come a-waltzing Matilda with me.”",
+    "",
+    "Up rode the squatter, mounted on his thoroughbred,",
+    "Down came the troopers, one, two, three,",
+    "“Where's that jolly jumbuck you've got in your tucker bag?",
+    "You'll come a-waltzing Matilda with me.”",
+    "",
+    "Up jumped the swagman and sprang into the billabong,",
+    "“You'll never take me alive,” said he,",
+    "And his ghost may be heard as you pass by that billabong,",
+    "“Who'll come a-waltzing Matilda with me?”"
+  ].join("\n"),
+  questions: "What is a swagman? What is a jumbuck?\nWhy does the swagman jump into the billabong?"
+};
+
+// The "Add every" buttons.
+const QUICK = [
+  { label: "Prepositions", test: w => ["in", "on", "at", "to", "for", "from", "with", "by", "of", "about", "into", "under", "over", "through", "after", "before", "behind", "near", "above", "below", "across", "around", "against", "along", "without", "until", "up", "down", "out", "off"].indexOf(w) > -1 },
+  { label: "Articles", test: w => ["a", "an", "the"].indexOf(w) > -1 },
+  { label: "-ing words", test: w => w.length > 4 && /ing$/.test(w) && ["thing", "nothing", "something", "anything", "everything", "king", "ring", "sing", "spring", "bring", "wing", "string", "sting", "swing", "morning", "evening", "ceiling"].indexOf(w) === -1 },
+  { label: "Past tense -ed", test: w => w.length > 3 && /ed$/.test(w) && ["red", "bed", "need", "feed", "seed", "speed", "bleed", "shed", "wed", "led", "fed", "sled", "indeed", "hundred"].indexOf(w) === -1 }
+];
+
+// Colour choices (the round buttons). The first is the default.
+const COLOURS = [
+  { name: "Deep green", c: "#16302b" },
+  { name: "Navy",       c: "#1b2a4a" },
+  { name: "Burgundy",   c: "#6b1e2e" },
+  { name: "Ocean",      c: "#0e5c7a" },
+  { name: "Violet",     c: "#4b2e83" },
+  { name: "Coral",      c: "#d9481f" },
+  { name: "Sky",        c: "#2563eb" },
+  { name: "Black (saves ink)", c: "#222222" }
+];
+
+// Fonts. f = family, w = normal weight, b = bold weight.
+const FONTS = {
+  clear:    { label: "Easy to read (Atkinson)", f: "Atkinson Hyperlegible", w: 400, b: 700 },
+  rounded:  { label: "Rounded (Nunito)",        f: "Nunito",                w: 500, b: 800 },
+  friendly: { label: "Friendly (Fredoka)",      f: "Fredoka",               w: 400, b: 600 },
+  modern:   { label: "Modern (Montserrat)",     f: "Montserrat",            w: 500, b: 700 },
+  book:     { label: "Book style (Lora)",       f: "Lora",                  w: 400, b: 700 }
+};
+
+const SIZES = { s: 14, m: 16, l: 19 };   // text size on the page, in pixels (96 to the inch)
+
+// Only these settings are saved in the browser. The lyrics, song details and questions are never saved.
+const SAVED = ["instr", "bank", "gap", "numbers", "nameLine", "key", "once", "cMain", "font", "tsize", "paper"];
+const DEFAULTS = {
+  instr: "Listen to the song and write the missing words.",
+  bank: "off", gap: "line", numbers: true, nameLine: true, key: true, once: true,
+  cMain: COLOURS[0].c, font: "clear", tsize: "m", paper: "a4"
+};
+const STORE = "song-gap-fill-maker.settings.v1";
+
+// =====================================================================
+// STATE
+// =====================================================================
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+let st = Object.assign({}, DEFAULTS);
+try { const saved = JSON.parse(localStorage.getItem(STORE) || "{}"); SAVED.forEach(k => { if (k in saved) st[k] = saved[k]; }); } catch (e) {}
+function tidy() {
+  if (["top", "bottom", "off"].indexOf(st.bank) === -1) st.bank = DEFAULTS.bank;
+  if (["line", "first", "dash"].indexOf(st.gap) === -1) st.gap = DEFAULTS.gap;
+  if (!SIZES[st.tsize]) st.tsize = DEFAULTS.tsize;
+  if (st.paper !== "letter") st.paper = "a4";
+  if (!FONTS[st.font]) st.font = DEFAULTS.font;
+  if (!/^#[0-9a-f]{6}$/i.test(st.cMain)) st.cMain = DEFAULTS.cMain;
+  if (typeof st.instr !== "string") st.instr = DEFAULTS.instr;
+}
+tidy();
+// the song itself lives only in this page, in memory
+Object.assign(st, { song: EXAMPLE.song, artist: EXAMPLE.artist, link: EXAMPLE.link, text: EXAMPLE.text, questions: EXAMPLE.questions, seed: 20261012 });
+try { localStorage.removeItem("song-gap-fill-maker.v1"); } catch (e) {}
+
+let saveTimer = 0;
+function save() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { const out = {}; SAVED.forEach(k => out[k] = st[k]); try { localStorage.setItem(STORE, JSON.stringify(out)); } catch (e) {} }, 300);
+}
+
+// A word is letters and numbers, with an apostrophe or hyphen allowed inside (who'll, a-waltzing).
+const WORD = /[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu;
+const LETTER = /[\p{L}\p{N}]/u;
+// Section labels that lyric sites add: [Chorus], (Bridge), Verse 2:, Chorus x2 …
+const LABEL = /^\s*(?:\[[^\]]*\]|\([^)]*\)|(?:verse|chorus|pre-chorus|bridge|intro|outro|refrain|hook|instrumental)(?:\s*\d+)?(?:\s*[x×]\s*\d+)?\s*:?)\s*$/i;
+
+// Splits the lyrics into verses > lines > chunks (the bits between spaces) > words and punctuation.
+function parse(text) {
+  const verses = [], lines = [], words = [], seen = new Set();
+  let cur = null;
+  text.replace(/\r/g, "").split("\n").forEach(raw => {
+    const line = raw.trim();
+    if (!line) { cur = null; return; }
+    if (!cur) { cur = []; verses.push(cur); }
+    const L = { idx: lines.length, label: LABEL.test(line), dup: false, chunks: [], first: -1, last: -1 };
+    lines.push(L); cur.push(L);
+    if (L.label) { L.text = line; return; }
+    line.split(/\s+/).forEach(ch => {
+      const segs = []; let last = 0, m; WORD.lastIndex = 0;
+      while ((m = WORD.exec(ch))) {
+        if (m.index > last) segs.push({ x: ch.slice(last, m.index) });
+        if (L.first < 0) L.first = words.length;
+        L.last = words.length;
+        segs.push({ w: m[0], i: words.length }); words.push({ s: m[0], line: L.idx, start: L.first === words.length });
+        last = m.index + m[0].length;
+      }
+      if (last < ch.length) segs.push({ x: ch.slice(last) });
+      if (segs.length) L.chunks.push(segs);
+    });
+    const key = line.toLowerCase().replace(/[‘’]/g, "'").replace(/[^\p{L}\p{N}\s']/gu, "").replace(/\s+/g, " ").trim();
+    if (key && seen.has(key)) L.dup = true; else if (key) seen.add(key);
+  });
+  return { verses, lines, words };
+}
+
+let doc = parse(st.text);
+let bl = new Set();                                         // the numbers of the words that are gaps
+let pageIndex = 0, lastPages = [];
+
+// A gap is shown unless it sits in a repeated line and "only the first time" is ticked.
+const hidden = i => st.once && doc.lines[doc.words[i].line].dup;
+const shownGap = i => bl.has(i) && !hidden(i);
+const usable = i => i < doc.words.length && !hidden(i);
+function order() { return Array.from(bl).filter(i => i < doc.words.length && !hidden(i)).sort((a, b) => a - b); }
+
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function shuffle(arr, r) {
+  for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); const t = arr[i]; arr[i] = arr[j]; arr[j] = t; }
+  return arr;
+}
+function newSeed() { const buf = new Uint32Array(1); (window.crypto || window.msCrypto).getRandomValues(buf); st.seed = buf[0] >>> 0; }
+
+// ---------- choosing gaps ----------
+function lastWords(every) {
+  const out = new Set();
+  doc.verses.forEach(v => {
+    let n = 0;
+    v.forEach(L => { if (L.label || L.last < 0) return; n++; if (n % every === 0 && usable(L.last)) out.add(L.last); });
+  });
+  return out;
+}
+function everyNth(n) {
+  const out = new Set(); let k = 0;
+  doc.words.forEach((w, i) => { if (!usable(i)) return; k++; if (k % n === 0) out.add(i); });
+  return out;
+}
+function randomGaps(count) {
+  const pool = [], out = new Set();
+  doc.words.forEach((w, i) => { if (usable(i)) pool.push(i); });
+  shuffle(pool, rng(st.seed));
+  pool.forEach(i => { if (out.size < count && !out.has(i - 1) && !out.has(i + 1)) out.add(i); });
+  pool.forEach(i => { if (out.size < count) out.add(i); });
+  return out;
+}
+
+// When the lyrics are edited, gaps before and after the edited part stay where they were.
+function setText(v) {
+  const old = doc.words.map(w => w.s);
+  st.text = v; doc = parse(v);
+  const nw = doc.words.map(w => w.s);
+  let p = 0; while (p < old.length && p < nw.length && old[p] === nw[p]) p++;
+  let s = 0; while (s < old.length - p && s < nw.length - p && old[old.length - 1 - s] === nw[nw.length - 1 - s]) s++;
+  const d = nw.length - old.length, next = new Set();
+  bl.forEach(i => { if (i < p) next.add(i); else if (i >= old.length - s) next.add(i + d); });
+  bl = next;
+  buildPicker();
+}
+bl = lastWords(2);
+
+// =====================================================================
+// DRAWING
+// =====================================================================
+const INK = "#14211e", GREY = "#51615c";
+function pageSize() { return st.paper === "letter" ? [816, 1056] : [794, 1123]; }   // CSS pixels at 96 dpi, upright page
+function lum(hex) {
+  const n = parseInt(hex.slice(1), 16), r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+}
+function mix(a, b, t) {
+  const x = parseInt(a.slice(1), 16), y = parseInt(b.slice(1), 16);
+  const ch = s => Math.round((x >> s & 255) * (1 - t) + (y >> s & 255) * t);
+  return "rgb(" + ch(16) + "," + ch(8) + "," + ch(0) + ")";
+}
+function fontStr(family, weight, px, italic) { return (italic ? "italic " : "") + weight + " " + px + 'px "' + family + '", Verdana, "Segoe UI", Arial, sans-serif'; }
+function roundedBox(ctx, x, y, w, h, r) {
+  ctx.beginPath(); ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+function rule(ctx, x1, x2, y, colour, width) { ctx.strokeStyle = colour; ctx.lineWidth = width; ctx.beginPath(); ctx.moveTo(x1, y); ctx.lineTo(x2, y); ctx.stroke(); }
+
+const mctx = document.createElement("canvas").getContext("2d");      // used only to measure text
+function tw(text, font) { mctx.font = font; return mctx.measureText(text).width; }
+function wrapLine(text, font, maxW) {
+  const out = []; let line = "";
+  text.split(/\s+/).forEach(word => {
+    const test = line ? line + " " + word : word;
+    if (line && tw(test, font) > maxW) { out.push(line); line = word; } else line = test;
+  });
+  out.push(line);
+  return out;
+}
+
+// The QR code for the song link, drawn once and reused.
+const qrCache = {};
+function validLink() { const u = st.link.trim(); return /^https?:\/\/\S+\.\S+/i.test(u) ? u : ""; }
+function qrFor(url) {
+  if (!url || typeof QRCode === "undefined") return null;
+  if (qrCache[url]) return qrCache[url];
+  try {
+    const box = document.createElement("div");
+    new QRCode(box, { text: url, width: 256, height: 256, correctLevel: QRCode.CorrectLevel.M });
+    const c = box.querySelector("canvas");
+    if (c) qrCache[url] = c;
+    return c || null;
+  } catch (e) { return null; }
+}
+
+// The word as it appears in the word box: the capital at the start of a line is dropped so it gives nothing away.
+function bankForm(w) {
+  const s = w.s;
+  if (!w.start || s === "I" || /^I['’]/.test(s) || (s.length > 1 && s === s.toUpperCase())) return s;
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+// Works out every line of the worksheet and the answer key, and splits them into pages.
+function layout() {
+  const [W, H] = pageSize(), M = 60, CW = W - 2 * M, F = FONTS[st.font], fs = SIZES[st.tsize];
+  const main = st.cMain, pale = lum(main) > .72, accent = lum(main) > .6 ? INK : main;
+  const fN = fontStr(F.f, F.w, fs), fB = fontStr(F.f, F.b, fs), fNum = fontStr(F.f, F.b, fs * .62);
+  const ord = order(), num = new Map(ord.map((i, k) => [i, k + 1]));
+  const song = st.song.trim(), artist = st.artist.trim(), instr = st.instr.trim(), link = validLink();
+  const sp = tw(" ", fN);
+  const start = ctx => { ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; };
+
+  function textRows(rows, text, font, size, colour, lhMul, maxW, x0) {
+    wrapLine(text, font, maxW || CW).forEach(line => rows.push({ h: size * lhMul, draw: (ctx, y) => { start(ctx); ctx.font = font; ctx.fillStyle = colour; ctx.fillText(line, x0 || M, y + size * lhMul * .74); } }));
+  }
+  const spacer = (rows, h) => rows.push({ h, space: true, draw: () => {} });
+  const plain = (s, font, colour, i) => ({ i, w: tw(s, font), draw: (ctx, x, by) => { ctx.font = font; ctx.fillStyle = colour; ctx.fillText(s, x, by); } });
+  const label = i => st.numbers ? String(num.get(i)) : "";
+
+  function gapSeg(word, i) {
+    const lab = label(i), labW = lab ? tw(lab, fNum) + fs * .16 : 0;
+    let bw, body;
+    if (st.gap === "dash") {
+      const chars = Array.from(word), dw = fs * .5, dg = fs * .2;
+      const ws = chars.map(ch => LETTER.test(ch) ? dw : tw(ch, fN));
+      bw = ws.reduce((a, b) => a + b + dg, 0) - dg;
+      body = (ctx, x, by) => chars.forEach((ch, k) => {
+        if (LETTER.test(ch)) rule(ctx, x, x + dw, by + fs * .14, INK, 1.3); else { ctx.font = fN; ctx.fillStyle = INK; ctx.fillText(ch, x, by); }
+        x += ws[k] + dg;
+      });
+    } else if (st.gap === "first") {
+      const first = Array.from(word)[0], fw = tw(first, fN) + fs * .1, lw = fs * 4.2;
+      bw = fw + lw;
+      body = (ctx, x, by) => { ctx.font = fN; ctx.fillStyle = INK; ctx.fillText(first, x, by); rule(ctx, x + fw, x + bw, by + fs * .14, INK, 1.3); };
+    } else {
+      bw = fs * 5.2;
+      body = (ctx, x, by) => rule(ctx, x, x + bw, by + fs * .14, INK, 1.3);
+    }
+    return { i, w: labW + bw, draw: (ctx, x, by) => { if (lab) { ctx.font = fNum; ctx.fillStyle = accent; ctx.fillText(lab, x, by); } body(ctx, x + labW, by); } };
+  }
+  function answerSeg(word, i) {
+    const lab = label(i), labW = lab ? tw(lab, fNum) + fs * .16 : 0, ww = tw(word, fB);
+    return { w: labW + ww, draw: (ctx, x, by) => {
+      if (lab) { ctx.font = fNum; ctx.fillStyle = accent; ctx.fillText(lab, x, by); }
+      ctx.font = fB; ctx.fillStyle = accent; ctx.fillText(word, x + labW, by);
+      rule(ctx, x + labW, x + labW + ww, by + fs * .16, accent, 1.3);
+    } };
+  }
+
+  // one lyric line; a long line wraps with a small indent so verses stay readable
+  function lineRows(rows, L, kind, lh) {
+    if (L.label) { const f = fontStr(F.f, F.b, fs * .8, true); rows.push({ h: fs * 1.55, draw: (ctx, y) => { start(ctx); ctx.font = f; ctx.fillStyle = GREY; ctx.fillText(L.text, M, y + fs * 1.15); } }); return; }
+    const indent = fs * 1.3;
+    let line = [], x = 0, wrapped = false;
+    const flush = () => {
+      const items = line, off = wrapped ? indent : 0; line = []; x = 0;
+      rows.push({ h: lh,
+        hits: kind === "sheet" ? items.filter(it => it.i !== undefined).map(it => ({ i: it.i, x: M + off + it.x - 2, w: it.w + 4 })) : null,
+        draw: (ctx, y) => { start(ctx); items.forEach(it => it.draw(ctx, M + off + it.x, y + lh * .7)); } });
+      wrapped = true;
+    };
+    L.chunks.forEach(segs => {
+      const parts = segs.map(s => s.x !== undefined ? plain(s.x, fN, INK)
+        : !shownGap(s.i) ? plain(s.w, fN, INK, s.i)
+        : kind === "sheet" ? gapSeg(s.w, s.i) : answerSeg(s.w, s.i));
+      const cw = parts.reduce((a, p) => a + p.w, 0), room = CW - (wrapped ? indent : 0);
+      if (x > 0 && x + cw > room) flush();
+      parts.forEach(p => { line.push({ x, w: p.w, i: p.i, draw: p.draw }); x += p.w; });
+      x += sp;
+    });
+    if (line.length) flush();
+  }
+  function lyrics(rows, kind, lh) {
+    doc.verses.forEach((v, n) => { if (n) spacer(rows, fs * .65); v.forEach(L => lineRows(rows, L, kind, lh)); });
+  }
+
+  function bankRow(rows) {
+    const list = shuffle(ord.map(i => bankForm(doc.words[i])), rng(st.seed));
+    const pad = fs * .75, blh = fs * 1.7, gx = fs * 1.5, inner = CW - 2 * pad, lines = [];
+    let cur = [], x = 0;
+    list.forEach(wd => { const w = tw(wd, fB); if (x > 0 && x + w > inner) { lines.push({ items: cur, w: x - gx }); cur = []; x = 0; } cur.push({ wd, x }); x += w + gx; });
+    if (cur.length) lines.push({ items: cur, w: x - gx });
+    const h = pad * 2 + lines.length * blh;
+    rows.push({ h, draw: (ctx, y) => {
+      start(ctx);
+      ctx.fillStyle = mix(main, "#ffffff", .93); roundedBox(ctx, M, y, CW, h, fs * .5); ctx.fill();
+      ctx.strokeStyle = pale ? GREY : main; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.font = fB; ctx.fillStyle = INK;
+      lines.forEach((ln, k) => { const off = M + pad + Math.max(0, (inner - ln.w) / 2); ln.items.forEach(it => ctx.fillText(it.wd, off + it.x, y + pad + k * blh + blh * .7)); });
+    } });
+  }
+
+  // the title block: song title and artist on the left, the QR code on the right
+  function heading(rows, title, sub, withQr) {
+    const qr = withQr && link ? qrFor(link) : null, qs = qr ? 74 : 0, maxW = CW - (qr ? qs + 16 : 0);
+    const tf = fontStr(F.f, F.b, fs * 1.75), sf = fontStr(F.f, F.w, fs * .9);
+    const tLines = title ? wrapLine(title, tf, maxW) : [], sLines = sub ? wrapLine(sub, sf, maxW) : [];
+    const textH = tLines.length * fs * 1.75 * 1.25 + sLines.length * fs * .9 * 1.5;
+    const h = Math.max(textH, qr ? qs + 14 : 0);
+    if (h) rows.push({ h, draw: (ctx, y) => {
+      start(ctx); let yy = y;
+      ctx.font = tf; ctx.fillStyle = INK; tLines.forEach(l => { ctx.fillText(l, M, yy + fs * 1.75 * .95); yy += fs * 1.75 * 1.25; });
+      ctx.font = sf; ctx.fillStyle = GREY; sLines.forEach(l => { ctx.fillText(l, M, yy + fs * .9 * 1.1); yy += fs * .9 * 1.5; });
+      if (qr) {
+        ctx.imageSmoothingEnabled = false; ctx.drawImage(qr, W - M - qs, y, qs, qs); ctx.imageSmoothingEnabled = true;
+        ctx.font = fontStr(F.f, F.b, 9); ctx.fillStyle = GREY; ctx.textAlign = "center"; ctx.fillText("Scan to listen", W - M - qs / 2, y + qs + 11);
+      }
+    } });
+    rows.push({ h: fs * 1.1, draw: (ctx, y) => rule(ctx, M, W - M, y + fs * .4, pale ? GREY : main, 3) });
+  }
+
+  // ---- the worksheet ----
+  const sheet = [];
+  if (!doc.words.length) {
+    textRows(sheet, "Your worksheet will appear here.", fontStr(F.f, F.b, fs * 1.3), fs * 1.3, GREY, 1.6);
+    textRows(sheet, "Paste the lyrics in step 1 to begin.", fN, fs, GREY, 1.6);
+  } else {
+    if (st.nameLine) sheet.push({ h: fs * 2.5, draw: (ctx, y) => {
+      start(ctx); const f = fontStr(F.f, F.b, fs * .85), by = y + fs * 1.1; ctx.font = f; ctx.fillStyle = INK;
+      const nx = M + tw("Name ", f), dx = M + CW * .66, dlx = dx + tw("Date ", f);
+      ctx.fillText("Name", M, by); rule(ctx, nx, dx - fs, by + fs * .14, INK, 1.2);
+      ctx.fillText("Date", dx, by); rule(ctx, dlx, W - M, by + fs * .14, INK, 1.2);
+    } });
+    heading(sheet, song || "Song gap-fill", artist, true);
+    if (instr) { textRows(sheet, instr, fB, fs, INK, 1.5); spacer(sheet, fs * .5); }
+    if (st.bank === "top" && ord.length) { bankRow(sheet); spacer(sheet, fs * .9); }
+    lyrics(sheet, "sheet", fs * 1.8);
+    if (st.bank === "bottom" && ord.length) { spacer(sheet, fs * 1.1); bankRow(sheet); }
+    const qs = st.questions.replace(/\r/g, "").split("\n").map(s => s.trim()).filter(Boolean);
+    if (qs.length) {
+      spacer(sheet, fs * 1.2);
+      textRows(sheet, "After listening", fontStr(F.f, F.b, fs * 1.15), fs * 1.15, INK, 1.5);
+      qs.forEach((q, k) => {
+        textRows(sheet, (k + 1) + ". " + q, fN, fs, INK, 1.5);
+        sheet.push({ h: fs * 1.9, draw: (ctx, y) => rule(ctx, M, W - M, y + fs * 1.55, INK, 1) });
+      });
+    }
+  }
+
+  // ---- the answer key ----
+  const key = [];
+  if (st.key && ord.length) {
+    heading(key, "Answer key", (song || "Song gap-fill") + (artist ? " · " + artist : ""), false);
+    const longest = ord.reduce((a, i) => Math.max(a, tw(doc.words[i].s, fN)), 0), numW = tw(String(ord.length) + ". ", fB) + fs * .2;
+    const cols = clamp(Math.floor(CW / (longest + numW + fs * 1.6)), 1, 5), per = Math.ceil(ord.length / cols), colW = CW / cols;
+    for (let r = 0; r < per; r++) key.push({ h: fs * 1.6, draw: (ctx, y) => {
+      start(ctx);
+      for (let c = 0; c < cols; c++) { const k = c * per + r; if (k >= ord.length) continue;
+        const x = M + c * colW, by = y + fs * 1.15;
+        ctx.font = fB; ctx.fillStyle = accent; ctx.fillText((k + 1) + ".", x, by);
+        ctx.font = fN; ctx.fillStyle = INK; ctx.fillText(doc.words[ord[k]].s, x + numW, by); }
+    } });
+    spacer(key, fs * 1.2);
+    lyrics(key, "key", fs * 1.65);
+  }
+
+  // ---- pages ----
+  function paginate(rows, kind) {
+    const out = []; let page = null, y = 0;
+    rows.forEach(r => {
+      if (!page || (y + r.h > H - M && page.rows.length)) { page = { kind, rows: [], hits: [] }; out.push(page); y = M; if (r.space) return; }
+      page.rows.push({ y, r });
+      if (r.hits) r.hits.forEach(h => page.hits.push({ i: h.i, x: h.x, w: h.w, y, h: r.h }));
+      y += r.h;
+    });
+    out.forEach((p, k) => { p.n = k + 1; p.of = out.length; });
+    return out;
+  }
+  return paginate(sheet, "sheet").concat(paginate(key, "key"));
+}
+
+function renderPage(canvas, scale, page) {
+  const [W, H] = pageSize();
+  canvas.width = Math.round(W * scale); canvas.height = Math.round(H * scale);
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
+  if (!page) return canvas;
+  page.rows.forEach(it => it.r.draw(ctx, it.y));
+  if (page.of > 1) {
+    ctx.font = fontStr(FONTS[st.font].f, FONTS[st.font].w, 11); ctx.fillStyle = GREY; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    ctx.fillText((page.kind === "key" ? "Answer key, page " : "Page ") + page.n + " of " + page.of, W / 2, H - 28);
+  }
+  return canvas;
+}
+
+// =====================================================================
+// SCREEN
+// =====================================================================
+const $ = id => document.getElementById(id);
+const preview = $("preview"), picker = $("picker");
+let drawQueued = false;
+function say(msg) { $("status").textContent = msg; }
+
+function redraw() {
+  if (drawQueued) return;
+  drawQueued = true;
+  requestAnimationFrame(() => {
+    drawQueued = false;
+    const pages = lastPages = layout();
+    pageIndex = clamp(pageIndex, 0, pages.length - 1);
+    renderPage(preview, Math.min(window.devicePixelRatio || 1, 2) * 1.15, pages[pageIndex]);
+    $("pager").hidden = pages.length < 2;
+    $("pagerText").textContent = "Page " + (pageIndex + 1) + " of " + pages.length + (pages[pageIndex].kind === "key" ? " · answer key" : "");
+    $("pdfBtn").textContent = "Download PDF (" + pages.length + (pages.length === 1 ? " page)" : " pages)");
+    const g = order().length, w = doc.words.length, hint = $("gapHint");
+    hint.classList.toggle("warn", w > 0 && !g);
+    hint.textContent = !w ? "" : !g ? "No gaps yet. Click a word above, or on the preview." : g + (g === 1 ? " gap in " : " gaps in ") + w + (w === 1 ? " word." : " words.");
+    if (st.link.trim() && !validLink()) hint.textContent += " The song link must start with https://";
+  });
+}
+
+function loadFonts() {
+  if (!document.fonts || !document.fonts.load) return Promise.resolve();
+  const F = FONTS[st.font];
+  return Promise.all([fontStr(F.f, F.w, 20), fontStr(F.f, F.b, 20), fontStr(F.f, F.b, 20, true)].map(f => document.fonts.load(f).catch(() => {}))).then(redraw);
+}
+
+// the clickable copy of the lyrics in step 2
+function buildPicker() {
+  picker.textContent = "";
+  if (!doc.words.length) { const p = document.createElement("p"); p.className = "none"; p.textContent = "Your lyrics will appear here."; picker.appendChild(p); return; }
+  doc.verses.forEach(v => {
+    const p = document.createElement("p");
+    v.forEach((L, n) => {
+      if (n) p.appendChild(document.createElement("br"));
+      if (L.label) { const s = document.createElement("span"); s.className = "lbl"; s.textContent = L.text; p.appendChild(s); return; }
+      const span = document.createElement("span"); span.className = "ln" + (L.dup ? " dup" : ""); span.dataset.line = L.idx;
+      L.chunks.forEach((segs, c) => {
+        if (c) span.appendChild(document.createTextNode(" "));
+        segs.forEach(s => {
+          if (s.x !== undefined) { span.appendChild(document.createTextNode(s.x)); return; }
+          const b = document.createElement("button"); b.type = "button"; b.className = "w"; b.dataset.i = s.i; b.textContent = s.w;
+          span.appendChild(b);
+        });
+      });
+      p.appendChild(span);
+    });
+    picker.appendChild(p);
+  });
+  syncPicker();
+}
+function syncPicker() {
+  picker.querySelectorAll(".ln").forEach(l => l.classList.toggle("off", st.once && l.classList.contains("dup")));
+  picker.querySelectorAll(".w").forEach(b => {
+    const i = +b.dataset.i, off = hidden(i);
+    b.setAttribute("aria-pressed", shownGap(i)); b.disabled = off;
+    b.title = off ? "A repeated line: untick “only the first time” to gap it" : "";
+  });
+}
+function toggle(i) { if (hidden(i)) return; if (bl.has(i)) bl.delete(i); else bl.add(i); syncPicker(); say(""); redraw(); }
+function setGaps(set, msg) { bl = set; pageIndex = 0; syncPicker(); redraw(); say(msg); }
+
+function syncForm() {
+  document.querySelectorAll("[data-k]").forEach(el => {
+    if (el.type === "checkbox") el.checked = !!st[el.dataset.k];
+    else if (el !== document.activeElement) el.value = st[el.dataset.k];
+  });
+  if ($("textBox") !== document.activeElement) $("textBox").value = st.text;
+  if ($("qBox") !== document.activeElement) $("qBox").value = st.questions;
+  ["bank", "gap", "tsize", "paper"].forEach(n => document.querySelectorAll('input[name="' + n + '"]').forEach(r => { r.checked = r.value === st[n]; }));
+  document.querySelectorAll(".sw").forEach(b => b.setAttribute("aria-pressed", COLOURS[b.dataset.i].c.toLowerCase() === st.cMain.toLowerCase()));
+}
+function changed() { syncForm(); save(); redraw(); }
+
+QUICK.forEach(q => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = q.label;
+  b.onclick = () => {
+    const next = new Set(bl); let added = 0;
+    doc.words.forEach((w, i) => { if (usable(i) && q.test(w.s.toLowerCase()) && !next.has(i)) { next.add(i); added++; } });
+    setGaps(next, added ? added + (added === 1 ? " gap added." : " gaps added.") : "No more of those in these lyrics.");
+  };
+  $("quick").appendChild(b);
+});
+COLOURS.forEach((p, i) => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.dataset.i = i;
+  b.title = p.name; b.setAttribute("aria-label", p.name); b.style.background = p.c;
+  b.onclick = () => { st.cMain = p.c; changed(); };
+  $("swatches").insertBefore(b, $("swatches").lastElementChild);
+});
+Object.keys(FONTS).forEach(k => { const o = document.createElement("option"); o.value = k; o.textContent = FONTS[k].label; $("fontSel").appendChild(o); });
+
+$("controls").addEventListener("input", e => {
+  const el = e.target, k = el.dataset.k;
+  if (el.id === "textBox") { setText(el.value); pageIndex = 0; say(""); }
+  else if (el.id === "qBox") st.questions = el.value;
+  else if (k) st[k] = el.type === "checkbox" ? el.checked : el.value;
+  else if (el.type === "radio" && el.name) { st[el.name] = el.value; if (el.name === "tsize" || el.name === "paper") pageIndex = 0; }
+  else return;
+  if (k === "font") loadFonts();
+  if (k === "once") syncPicker();
+  changed();
+});
+picker.addEventListener("click", e => { const b = e.target.closest(".w"); if (b) toggle(+b.dataset.i); });
+
+function hitAt(e) {
+  const r = preview.getBoundingClientRect(), s = pageSize(), pg = lastPages[pageIndex];
+  if (!pg || !r.width) return null;
+  const x = (e.clientX - r.left) / r.width * s[0], y = (e.clientY - r.top) / r.height * s[1];
+  const h = pg.hits.find(h => x >= h.x && x <= h.x + h.w && y >= h.y && y <= h.y + h.h);
+  return h && !hidden(h.i) ? h.i : null;
+}
+preview.addEventListener("click", e => { const i = hitAt(e); if (i !== null) toggle(i); });
+preview.addEventListener("mousemove", e => { preview.style.cursor = hitAt(e) !== null ? "pointer" : "default"; });
+
+const need = () => { if (!doc.words.length) { say("Paste the lyrics first."); return false; } return true; };
+$("rhymeBtn").onclick = () => { if (!need()) return; const s = lastWords(2); setGaps(s, s.size + " rhyming words are now gaps."); };
+$("lastBtn").onclick = () => { if (!need()) return; const s = lastWords(1); setGaps(s, "The last word of every line is now a gap."); };
+$("nthBtn").onclick = () => { if (!need()) return; const n = +$("nthSel").value, s = everyNth(n); setGaps(s, s.size ? "Every " + n + "th word is now a gap." : "The lyrics are too short for that."); };
+$("randBtn").onclick = () => {
+  if (!need()) return;
+  const n = clamp(parseInt($("randN").value, 10) || 1, 1, 200); $("randN").value = n;
+  newSeed(); const s = randomGaps(n);
+  setGaps(s, s.size + (s.size === 1 ? " random gap made." : " random gaps made."));
+};
+$("clearBtn").onclick = () => setGaps(new Set(), "All gaps removed.");
+$("prevBtn").onclick = () => { pageIndex = Math.max(pageIndex - 1, 0); redraw(); };
+$("nextBtn").onclick = () => { pageIndex++; redraw(); };
+$("resetBtn").onclick = () => {
+  st = Object.assign({}, DEFAULTS, { song: EXAMPLE.song, artist: EXAMPLE.artist, link: EXAMPLE.link, text: EXAMPLE.text, questions: EXAMPLE.questions, seed: 20261012 });
+  try { localStorage.removeItem(STORE); } catch (e) {}
+  doc = parse(st.text); bl = lastWords(2); pageIndex = 0;
+  buildPicker(); syncForm(); loadFonts(); redraw(); say("Back to the example song.");
+};
+
+// =====================================================================
+// DOWNLOAD AND PRINT
+// =====================================================================
+function fileName() {
+  const base = (st.song.trim() || "song").replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "_").slice(0, 40) || "song";
+  return base + "_gap_fill.pdf";
+}
+const pause = () => new Promise(r => setTimeout(r, 0));
+async function busy(job) {
+  if (!need()) { $("textBox").focus(); return; }
+  if (!order().length) { say("Choose at least one gap first: click a word in step 2."); return; }
+  const all = [$("pdfBtn"), $("printBtn")];
+  all.forEach(b => b.disabled = true);
+  try { await loadFonts(); await job(layout()); } catch (e) { console.error(e); say("Something went wrong making the file. Try again, or use Print."); }
+  all.forEach(b => b.disabled = false);
+  redraw();
+}
+
+$("pdfBtn").onclick = () => busy(async pages => {
+  if (!window.jspdf) { say("The PDF tool did not load (check your connection). Use Print and choose Save as PDF."); return; }
+  const mm = st.paper === "letter" ? [215.9, 279.4] : [210, 297];
+  const pdf = new window.jspdf.jsPDF({ orientation: "portrait", unit: "mm", format: st.paper });
+  const scale = pages.length > 8 ? 2.2 : 3;
+  const cv = document.createElement("canvas");
+  for (let i = 0; i < pages.length; i++) {
+    say("Making page " + (i + 1) + " of " + pages.length + "…");
+    await pause();
+    renderPage(cv, scale, pages[i]);
+    if (i) pdf.addPage();
+    pdf.addImage(cv.toDataURL("image/jpeg", .93), "JPEG", 0, 0, mm[0], mm[1], undefined, "FAST");
+  }
+  pdf.save(fileName());
+  say("Downloaded your worksheet" + (pages.some(p => p.kind === "key") ? " and answer key." : "."));
+});
+
+$("printBtn").onclick = () => busy(async pages => {
+  const area = $("printArea"), cv = document.createElement("canvas");
+  area.innerHTML = "";
+  let pr = $("pageRule");
+  if (!pr) { pr = document.createElement("style"); pr.id = "pageRule"; document.head.appendChild(pr); }
+  pr.textContent = "@page{size:" + (st.paper === "letter" ? "letter" : "A4") + " portrait;margin:0}";
+  const waits = [];
+  for (let i = 0; i < pages.length; i++) {
+    say("Getting ready to print…"); await pause();
+    renderPage(cv, 2, pages[i]);
+    const img = new Image();
+    waits.push(new Promise(r => { img.onload = img.onerror = r; }));
+    img.src = cv.toDataURL("image/jpeg", .93);
+    area.appendChild(img);
+  }
+  await Promise.all(waits);
+  say("");
+  window.print();
+  // the printed copy of the lyrics is removed from the page once the print dialog closes
+  setTimeout(() => { area.innerHTML = ""; }, 1000);
+});
+
+// =====================================================================
+// START
+// =====================================================================
+buildPicker(); syncForm(); redraw(); loadFonts();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+window.addEventListener("resize", redraw);
+</script>
+</body>
+</html>
