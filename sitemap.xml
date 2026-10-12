@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://modernenglish.au/</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -62,12 +62,32 @@
   </url>
   <url>
     <loc>https://modernenglish.au/teachertools/bespoke-certificate-maker.html</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://modernenglish.au/teachertools/bespoke-report-maker.html</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/teachertools/bespoke-bingo-card-maker.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/teachertools/bespoke-gap-fill-maker.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/teachertools/bespoke-sentence-scramble-maker.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/teachertools/bespoke-song-gap-fill-maker.html</loc>
+    <lastmod>2026-10-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -397,7 +417,7 @@
   </url>
   <url>
     <loc>https://modernenglish.au/microlessons.html</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -408,6 +428,26 @@
   <url>
     <loc>https://modernenglish.au/minilessons/have-make-do-lesson.html</loc>
     <lastmod>2026-10-09</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/minilessons/do-does-is-are-lesson.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/minilessons/relative-clauses-lesson.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/minilessons/relative-clauses-where-lesson.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/minilessons/relative-clauses-commas-lesson.html</loc>
+    <lastmod>2026-10-12</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
