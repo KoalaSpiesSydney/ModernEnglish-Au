@@ -262,6 +262,8 @@ body {
     .g-teach { --c: #6b2d7b; }
     .group-intro { font-size: .98rem; line-height: 1.65; color: var(--muted); margin: 0 0 14px; max-width: 62ch; }
     .group-intro b { color: var(--ink); }
+    .sub-h { font-family: var(--serif); font-size: clamp(1.12rem, 1rem + .55vw, 1.4rem); font-weight: 700; color: var(--ink); letter-spacing: 0; text-transform: none; line-height: 1.25; margin: 26px 0 6px; }
+    .group-h + .sub-h { margin-top: 4px; }
     .about-col h2 { margin-top: 0; }
     .about-col p { font-size: 1rem; line-height: 1.75; }
     .about-list { list-style: none; margin: 0 0 18px; }
@@ -438,7 +440,9 @@ body {
         <!-- ===== TEACHER TOOLS ===== -->
         <div class="group g-teach" id="teacher-tools">
           <div class="group-h"><h2>Free tools for teachers</h2></div>
-          <p class="group-intro"><b>Free, with no sign-up.</b> Every tool works entirely in your browser, so nothing you type is sent to us or stored online. What makes each certificate and report real is what you add: <b>your logo and your signature</b>.</p>
+
+          <h3 class="sub-h">Certificates and reports</h3>
+          <p class="group-intro"><b>Free, with no sign-up.</b> Both tools work entirely in your browser, so nothing you type is sent to us or stored online. What makes each certificate and report real is what you add: <b>your logo and your signature</b>.</p>
           <ul class="tool-grid">
             <li>
               <a class="tool new" href="teachertools/bespoke-certificate-maker.html">
@@ -456,6 +460,11 @@ body {
                 <span class="t-go">Make your reports</span>
               </a>
             </li>
+          </ul>
+
+          <h3 class="sub-h">Printable worksheets in minutes</h3>
+          <p class="group-intro"><b>Professional-looking worksheets, without the formatting.</b> Type or paste your own words, click to choose what to practise, and download a clean PDF with an answer key (or a caller's list for bingo), ready to print or project. <b>Free, no sign-up and no ads on your worksheets.</b> Everything stays in your browser: nothing you type is sent to us or stored online.</p>
+          <ul class="tool-grid">
             <li>
               <a class="tool new" href="teachertools/bespoke-bingo-card-maker.html">
                 <span class="t-top"><span class="t-kick">Bingo</span><span class="t-icon" aria-hidden="true">🎲</span></span>
