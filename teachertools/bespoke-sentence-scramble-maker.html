@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<!-- Bespoke Sentence Scramble Maker © Koala Spies Sydney. All rights reserved. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bespoke Sentence Scramble Maker: Free Jumbled Sentence Worksheet Generator | Modern English Australia</title>
+<meta name="description" content="Make a sentence scramble worksheet in a minute. Type your sentences and download a printable PDF of jumbled word-order exercises with writing lines and an answer key. Free for teachers, no sign-up.">
+<link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-sentence-scramble-maker.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@400;600&family=Lora:wght@400;700&family=Montserrat:wght@500;700&family=Nunito:wght@500;800&family=Playfair+Display:wght@700&display=swap">
+<style>
+/* =====================================================================
+   BESPOKE SENTENCE SCRAMBLE MAKER
+   One file, no server. Everything (sentences, design) stays in the
+   visitor's browser. The worksheet is drawn on a <canvas>, so the
+   preview, the PDF and the print-out are always identical.
+   ===================================================================== */
+:root{
+  --bench:#dfe7e2;      /* the work surface behind everything */
+  --panel:#ffffff;
+  --ink:#14211e;
+  --soft:#51615c;
+  --line:#c4d0ca;
+  --deep:#16302b;       /* header and primary buttons */
+  --foil:#a8781f;       /* brass, used sparingly */
+  --focus:#1d6fd6;
+  --warn:#b3261e;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Koala Spies Sydney watermark: faint, repeated across the page behind the
+   panels. It is part of the page only, never of the worksheets. To make
+   it stronger or fainter, change fill-opacity in the line below. */
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%2316302b%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* ---------- header ---------- */
+.top{background:var(--deep);color:#f3f6f4}
+.top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top h1{margin:0;font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.top p{margin:0;color:#c9d6d0;font-size:.95rem;max-width:46ch}
+
+/* ---------- the bench: controls + preview ---------- */
+.bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(300px,430px) minmax(0,1fr);gap:1.5rem;align-items:start}
+.controls{display:grid;gap:.75rem}
+details.group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+details.group>summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.group>summary::-webkit-details-marker{display:none}
+details.group>summary::after{content:"";width:.55rem;height:.55rem;border-right:2px solid var(--soft);border-bottom:2px solid var(--soft);transform:rotate(45deg);transition:transform .15s ease;flex:none;margin-right:.2rem}
+details.group[open]>summary::after{transform:rotate(-135deg)}
+.group-body{padding:0 1rem 1rem;display:grid;gap:.8rem}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft)}
+label.f>span{font-weight:700;color:var(--ink)}
+input[type=text],input[type=number],textarea,select{width:100%;padding:.55rem .65rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:1rem;min-height:44px}
+textarea{resize:vertical;min-height:8rem;line-height:1.4}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+.hint.warn{color:var(--warn);font-weight:700}
+.lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
+
+
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:.35rem .8rem;font-size:.9rem;cursor:pointer;min-height:38px}
+.chip:hover{border-color:var(--deep)}
+
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg label{position:relative;text-align:center;padding:.5rem .4rem;cursor:pointer;font-size:.95rem;min-height:44px;display:flex;align-items:center;justify-content:center}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--deep);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:-3px}
+
+.swatches{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.sw{width:44px;height:44px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep)}
+input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
+.btn:hover{background:#eef3f0}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:hover{background:#0e231f}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn[disabled]{opacity:.55;cursor:progress}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep);flex:none}
+
+/* ---------- preview ---------- */
+.stage{position:sticky;top:1rem;display:grid;gap:.8rem}
+.paper{background:#cfd9d4;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.4rem);display:flex;justify-content:center}
+#preview{display:block;max-width:100%;max-height:78vh;width:auto;height:auto;background:#fff;box-shadow:0 1px 2px rgba(20,33,30,.25),0 14px 34px -10px rgba(20,33,30,.45)}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.pager{display:flex;align-items:center;gap:.5rem;font-size:.95rem}
+.pager .btn{padding:.3rem .8rem}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+.fineprint{margin:0;font-size:.9rem;color:var(--soft)}
+.fineprint a,.terms a,.notes a{color:var(--deep);font-weight:700}
+
+/* ---------- reading matter under the tool ---------- */
+.notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+.terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
+.terms h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+footer{background:var(--deep);color:#c9d6d0;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer a{color:#fff}
+
+#printArea{display:none}
+
+/* ---------- smaller screens: preview first, download bar stays in reach ---------- */
+@media (max-width:900px){
+  .bench{grid-template-columns:1fr;padding:1rem}
+  .stage{position:static;order:-1}
+  #preview{max-height:60vh}
+  .actions{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--panel);border-top:1px solid var(--line);padding:.6rem .8rem;padding-bottom:max(.6rem,env(safe-area-inset-bottom));justify-content:center}
+  .actions .btn{flex:1 1 auto;padding:.55rem .6rem}
+  body{padding-bottom:5rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- printing: only the worksheet pages ---------- */
+@media print{
+  body>*:not(#printArea){display:none!important}
+  body{background:#fff none;padding:0}
+  #printArea{display:block}
+  #printArea img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
+  #printArea img:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+<!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
+     With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <h1>Bespoke Sentence Scramble Maker</h1>
+    <p>Free for teachers. Type your sentences and print a jumbled word-order worksheet with an answer key. Nothing leaves this device.</p>
+  </div>
+</header>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<main class="bench">
+
+  <!-- ================= CONTROLS ================= -->
+  <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
+
+    <details class="group" open>
+      <summary>1. Your sentences</summary>
+      <div class="group-body">
+        <div>
+          <p class="hint" style="margin-bottom:.4rem">Start from a ready-made set, or type your own:</p>
+          <div class="chips" id="presets"></div>
+        </div>
+        <label class="f"><span>Sentences, one per line</span>
+          <textarea id="textBox" rows="9" maxlength="8000" spellcheck="true" placeholder="We went to the beach last weekend.&#10;Did you see the film on Friday?"></textarea>
+        </label>
+        <p class="hint" id="countHint" role="status"></p>
+        <p class="hint">To keep words together, put a slash between the groups: <b>I have / never been / to New Zealand.</b></p>
+        <button type="button" class="btn quiet" id="splitBtn">Split a pasted paragraph into sentences</button>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>2. Scramble</summary>
+      <div class="group-body">
+        <div>
+          <p class="lab">Show the jumbled words</p>
+          <div class="seg" role="radiogroup" aria-label="Jumbled word style">
+            <label><input type="radio" name="style" value="slash">With slashes</label>
+            <label><input type="radio" name="style" value="box">In boxes</label>
+          </div>
+        </div>
+        <label class="check"><input type="checkbox" data-k="keepCap">Keep the capital letter on the first word</label>
+        <label class="check"><input type="checkbox" data-k="giveFirst">Give the first word of each answer</label>
+        <label class="check"><input type="checkbox" data-k="showEnd">Show the full stop or question mark</label>
+        <button type="button" class="btn" id="shuffleBtn">Scramble again</button>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>3. Worksheet</summary>
+      <div class="group-body">
+        <label class="f"><span>Title</span><input type="text" data-k="title" maxlength="70" placeholder="e.g. Past simple: word order"></label>
+        <label class="f"><span>Instructions</span><input type="text" data-k="instr" maxlength="160" placeholder="e.g. Put the words in the correct order."></label>
+        <div>
+          <p class="lab">Writing space for each answer</p>
+          <div class="seg" role="radiogroup" aria-label="Writing lines">
+            <label><input type="radio" name="lines" value="1">1 line</label>
+            <label><input type="radio" name="lines" value="2">2 lines</label>
+          </div>
+        </div>
+        <label class="check"><input type="checkbox" data-k="nameLine">Name and date line</label>
+        <label class="check"><input type="checkbox" data-k="key">Add an answer key page</label>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary>Design</summary>
+      <div class="group-body">
+        <div>
+          <p class="lab">Colour</p>
+          <div class="swatches" id="swatches" role="group" aria-label="Colours">
+            <input type="color" data-k="cMain" aria-label="Choose your own colour">
+          </div>
+        </div>
+        <label class="f"><span>Font</span><select data-k="font" id="fontSel"></select></label>
+        <div>
+          <p class="lab">Text size</p>
+          <div class="seg" role="radiogroup" aria-label="Text size">
+            <label><input type="radio" name="tsize" value="s">Small</label>
+            <label><input type="radio" name="tsize" value="m">Medium</label>
+            <label><input type="radio" name="tsize" value="l">Large</label>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Paper size</p>
+          <div class="seg" role="radiogroup" aria-label="Paper size">
+            <label><input type="radio" name="paper" value="a4">A4</label>
+            <label><input type="radio" name="paper" value="letter">Letter</label>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <button type="button" class="btn quiet" id="resetBtn">Start again with the example sentences</button>
+  </form>
+
+  <!-- ================= PREVIEW ================= -->
+  <section class="stage" aria-label="Preview">
+    <div class="paper"><canvas id="preview" role="img" aria-label="Worksheet preview"></canvas></div>
+    <div class="stage-bar">
+      <div class="pager" id="pager" hidden>
+        <button type="button" class="btn" id="prevBtn" aria-label="Previous page">‹</button>
+        <span id="pagerText"></span>
+        <button type="button" class="btn" id="nextBtn" aria-label="Next page">›</button>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn main" id="pdfBtn">Download PDF</button>
+        <button type="button" class="btn" id="printBtn">Print</button>
+      </div>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <p class="fineprint">For classroom and family use. <a href="#terms">Terms of use</a></p>
+  </section>
+</main>
+
+<section class="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>Pick a ready-made set or type your own sentences, one per line.</li>
+      <li>Choose slashes or boxes, and how much help to give: the capital letter, the first word, the end punctuation.</li>
+      <li>Download the PDF and print. The last page is the answer key.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Ideas for class</h2>
+    <ul>
+      <li><strong>Grammar review:</strong> use sentences with this week's structure, such as questions or the present perfect.</li>
+      <li><strong>Word groups:</strong> add slashes to keep phrases together for lower levels, or to practise collocations.</li>
+      <li><strong>Cut and sort:</strong> choose boxes and a large text size, then cut the words out for pairs to arrange.</li>
+      <li><strong>Race:</strong> teams unscramble on the board; the first correct sentence wins a point.</li>
+      <li><strong>Error correction:</strong> scramble sentences from your students' own writing, corrected.</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Questions</h2>
+    <dl>
+      <dt>What is a sentence scramble?</dt>
+      <dd>A sentence with its words in a jumbled order. Students put the words back in order and write the sentence. It is also called a jumbled sentence or word-order exercise.</dd>
+      <dt>Are my sentences uploaded anywhere?</dt>
+      <dd>No. The worksheet is drawn in your browser. Nothing you type is sent to us.</dd>
+      <dt>How many sentences can I use?</dt>
+      <dd>Up to 40. About eight to ten fit on a page, and longer sets run onto extra pages.</dd>
+      <dt>Why does the first word lose its capital letter?</dt>
+      <dd>So the capital does not show which word comes first. Tick "Keep the capital letter" if a sentence starts with a name, or if you want to give that clue.</dd>
+      <dt>Can I keep a phrase together?</dt>
+      <dd>Yes. Put a slash between the groups of words in that sentence and each group stays in one piece.</dd>
+      <dt>Will it remember my sentences?</dt>
+      <dd>Yes, on this device and browser, so your next visit opens with the same worksheet.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
+     the site goes public, and change the date when you edit it. -->
+<section class="terms" id="terms" tabindex="-1">
+  <div class="terms-in">
+    <h2>Terms of use</h2>
+    <p class="updated">Last updated 12 October 2026</p>
+    <p>The Bespoke Sentence Scramble Maker is a free tool for teachers and families. By making, downloading or printing worksheets you agree to these terms.</p>
+    <h3>What you may use it for</h3>
+    <ul>
+      <li>Worksheets for your own classroom, school, tutoring or home. You may print and photocopy the worksheets you make as often as you like.</li>
+    </ul>
+    <h3>What you must not do</h3>
+    <ul>
+      <li>Paste text that you do not have the right to copy for your students.</li>
+      <li>Copy, resell or republish this tool or its code.</li>
+    </ul>
+    <p>You are responsible for the sentences you put on a worksheet and for how the worksheets are used.</p>
+    <h3>Your information</h3>
+    <p>Your sentences and design stay in your browser and are never sent to us. They are saved on your own device so they are there next time; the "Start again" button removes them. This site uses cookies for visitor statistics and to show ads, and providers such as Google may set them. See our <a href="https://modernenglish.au/privacy.html">privacy policy</a> for details.</p>
+    <h3>No guarantees</h3>
+    <p>The tool is provided free and as it is. Check your worksheet and answer key before you hand them out. To the extent the law allows, we are not liable for loss or damage arising from its use. Nothing in these terms limits any rights you have under the Australian Consumer Law. These terms are governed by the laws of New South Wales, Australia.</p>
+  </div>
+</section>
+
+<!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<footer>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-report-maker.html">Report maker</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="#terms">Terms of use</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+</footer>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT
+// =====================================================================
+
+// Ready-made sentence sets (the buttons in step 1). Add your own in the same pattern.
+const PRESETS = [
+  { label: "Present simple", lines: ["My sister works in a hospital.", "We usually have dinner at seven o'clock.", "He doesn't like spicy food.", "Do you walk to school every day?", "The shop opens at nine in the morning.", "They play football on Saturday afternoons.", "Does your brother speak French?", "I don't watch television very often."] },
+  { label: "Past simple", lines: ["We went to the beach last weekend.", "She didn't finish her homework yesterday.", "Did you see the film on Friday?", "My parents bought a new car last year.", "I lost my keys on the way home.", "They arrived at the airport two hours early.", "Where did you go on holiday?", "He cooked dinner for the whole family."] },
+  { label: "Questions", lines: ["Where do you usually have lunch?", "What time does the lesson start?", "How long have you lived in Sydney?", "Can you help me with this exercise?", "Why were you late this morning?", "Who is your favourite singer?", "How often do you go to the gym?", "What are you doing this weekend?"] },
+  { label: "Present perfect", lines: ["I have never been to New Zealand.", "She has just finished her exam.", "Have you ever eaten kangaroo?", "We have lived here for ten years.", "He hasn't called me since Monday.", "They have already seen that film.", "How long have you known your best friend?", "I haven't decided what to study yet."] }
+];
+
+// Colour choices (the round buttons). The first is the default.
+const COLOURS = [
+  { name: "Deep green", c: "#16302b" },
+  { name: "Navy",       c: "#1b2a4a" },
+  { name: "Burgundy",   c: "#6b1e2e" },
+  { name: "Ocean",      c: "#0e5c7a" },
+  { name: "Violet",     c: "#4b2e83" },
+  { name: "Coral",      c: "#d9481f" },
+  { name: "Sky",        c: "#2563eb" },
+  { name: "Black (saves ink)", c: "#222222" }
+];
+
+// Fonts. f = family, w = normal weight, b = bold weight.
+const FONTS = {
+  clear:    { label: "Easy to read (Atkinson)", f: "Atkinson Hyperlegible", w: 400, b: 700 },
+  rounded:  { label: "Rounded (Nunito)",        f: "Nunito",                w: 500, b: 800 },
+  friendly: { label: "Friendly (Fredoka)",      f: "Fredoka",               w: 400, b: 600 },
+  modern:   { label: "Modern (Montserrat)",     f: "Montserrat",            w: 500, b: 700 },
+  book:     { label: "Book style (Lora)",       f: "Lora",                  w: 400, b: 700 }
+};
+
+const SIZES = { s: 15, m: 17.5, l: 21 };   // text size on the page, in pixels (96 to the inch)
+const MAX_SENTENCES = 40;
+
+const DEFAULTS = {
+  text: PRESETS[1].lines.join("\n"),
+  title: "Sentence scramble", instr: "Put the words in the correct order and write the sentence.",
+  style: "slash", keepCap: false, giveFirst: false, showEnd: true, lines: "1",
+  nameLine: true, key: true,
+  cMain: COLOURS[0].c, font: "clear", tsize: "m", paper: "a4",
+  seed: 20261012
+};
+const STORE = "sentence-scramble-maker.v1";
+
+// =====================================================================
+// STATE (saved in this browser only)
+// =====================================================================
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+let st = Object.assign({}, DEFAULTS);
+try { Object.assign(st, JSON.parse(localStorage.getItem(STORE) || "{}")); } catch (e) {}
+function tidy() {
+  if (st.style !== "box") st.style = "slash";
+  if (st.lines !== "2") st.lines = "1";
+  if (!SIZES[st.tsize]) st.tsize = DEFAULTS.tsize;
+  if (st.paper !== "letter") st.paper = "a4";
+  if (!FONTS[st.font]) st.font = DEFAULTS.font;
+  if (!/^#[0-9a-f]{6}$/i.test(st.cMain)) st.cMain = DEFAULTS.cMain;
+  st.seed = (parseInt(st.seed, 10) || DEFAULTS.seed) >>> 0;
+  ["text", "title", "instr"].forEach(k => { if (typeof st[k] !== "string") st[k] = DEFAULTS[k]; });
+}
+tidy();
+let pageIndex = 0, saveTimer = 0;
+
+function save() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { try { localStorage.setItem(STORE, JSON.stringify(st)); } catch (e) {} }, 300);
+}
+
+// A repeatable random number maker: the same seed always gives the same
+// jumble, so the preview, the PDF and the print-out match each other.
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function shuffle(arr, r) {
+  for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); const t = arr[i]; arr[i] = arr[j]; arr[j] = t; }
+  return arr;
+}
+
+// The typed lines, with any numbering the teacher pasted ("1." or "2)") removed.
+function rawLines() { return st.text.replace(/\r/g, "").split(/\n+/).map(s => s.trim().replace(/^\d+[.)]\s+/, "")).filter(Boolean); }
+
+// A sentence-opening capital is dropped so it does not show which word comes first.
+function lowerFirst(s) {
+  if (s === "I" || /^I['’]/.test(s) || (s.length > 1 && s === s.toUpperCase())) return s;
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+// Turns each line into: the answer, the end punctuation, the first word (if given) and the jumbled pieces.
+function sentences() {
+  return rawLines().slice(0, MAX_SENTENCES).map((line, idx) => {
+    const m = line.match(/[.!?…]+["'”’)\]]*$/), end = m ? m[0] : "";
+    const body = (m ? line.slice(0, m.index) : line).trim();
+    let parts = (/\s\/\s/.test(body) ? body.split(/\s+\/\s+/) : body.split(/\s+/)).map(s => s.trim()).filter(Boolean);
+    const answer = parts.join(" ") + end;
+    let first = "";
+    if (st.giveFirst && parts.length > 2) { first = parts[0]; parts = parts.slice(1); }
+    else if (!st.keepCap && parts.length) parts[0] = lowerFirst(parts[0]);
+    const orig = parts.join("\u0001"), mix = parts.slice(), r = rng((st.seed + idx * 7919) >>> 0);
+    let tries = 0;
+    do { shuffle(mix, r); tries++; } while (parts.length > 1 && mix.join("\u0001") === orig && tries < 20);
+    return { answer, end, first, parts: mix };
+  });
+}
+
+// =====================================================================
+// DRAWING
+// =====================================================================
+const INK = "#14211e", GREY = "#51615c";
+function pageSize() { return st.paper === "letter" ? [816, 1056] : [794, 1123]; }   // CSS pixels at 96 dpi, upright page
+function lum(hex) {
+  const n = parseInt(hex.slice(1), 16), r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+}
+function mix(a, b, t) {
+  const x = parseInt(a.slice(1), 16), y = parseInt(b.slice(1), 16);
+  const ch = s => Math.round((x >> s & 255) * (1 - t) + (y >> s & 255) * t);
+  return "rgb(" + ch(16) + "," + ch(8) + "," + ch(0) + ")";
+}
+function fontStr(family, weight, px) { return weight + " " + px + 'px "' + family + '", Verdana, "Segoe UI", Arial, sans-serif'; }
+function roundedBox(ctx, x, y, w, h, r) {
+  ctx.beginPath(); ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+function rule(ctx, x1, x2, y, colour, width) { ctx.strokeStyle = colour; ctx.lineWidth = width; ctx.beginPath(); ctx.moveTo(x1, y); ctx.lineTo(x2, y); ctx.stroke(); }
+
+const mctx = document.createElement("canvas").getContext("2d");      // used only to measure text
+function tw(text, font) { mctx.font = font; return mctx.measureText(text).width; }
+function wrapLine(text, font, maxW) {
+  const out = []; let line = "";
+  text.split(/\s+/).forEach(word => {
+    const test = line ? line + " " + word : word;
+    if (line && tw(test, font) > maxW) { out.push(line); line = word; } else line = test;
+  });
+  out.push(line);
+  return out;
+}
+
+// Works out every line of the worksheet and the answer key, and splits them into pages.
+function layout() {
+  const [W, H] = pageSize(), M = 64, CW = W - 2 * M, F = FONTS[st.font], fs = SIZES[st.tsize];
+  const main = st.cMain, pale = lum(main) > .72, accent = lum(main) > .6 ? INK : main;   // a very pale colour cannot be used for text
+  const fN = fontStr(F.f, F.w, fs), fB = fontStr(F.f, F.b, fs);
+  const list = sentences(), title = st.title.trim(), instr = st.instr.trim();
+  const indent = tw("00. ", fB) + fs * .15, IW = CW - indent, IX = M + indent;
+  const start = ctx => { ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; };
+
+  function textRows(rows, text, font, size, colour, lhMul) {
+    wrapLine(text, font, CW).forEach(line => rows.push({ h: size * lhMul, draw: (ctx, y) => { start(ctx); ctx.font = font; ctx.fillStyle = colour; ctx.fillText(line, M, y + size * lhMul * .74); } }));
+  }
+  const spacer = (rows, h) => rows.push({ h, space: true, draw: () => {} });
+  function heading(rows, text, sub) {
+    textRows(rows, text, fontStr(F.f, F.b, fs * 1.75), fs * 1.75, INK, 1.3);
+    if (sub) textRows(rows, sub, fontStr(F.f, F.w, fs * .85), fs * .85, GREY, 1.5);
+    rows.push({ h: fs * 1.1, draw: (ctx, y) => rule(ctx, M, W - M, y + fs * .4, pale ? GREY : main, 3) });
+  }
+
+  // one numbered item: the jumbled pieces, then the line(s) to write on. It never splits across two pages.
+  function itemRow(rows, it, k) {
+    const box = st.style === "box", padX = fs * .55, gapX = box ? fs * .45 : 0, sep = "  /  ", sepW = tw(sep, fN);
+    const rowH = box ? fs * 2.3 : fs * 1.75, lines = [];
+    let cur = [], x = 0;
+    it.parts.forEach((p, n) => {
+      const w = tw(p, fN) + (box ? 2 * padX : 0);
+      if (x > 0 && x + w > IW) { lines.push(cur); cur = []; x = 0; }
+      const last = n === it.parts.length - 1;
+      cur.push({ p, x, w, last });
+      x += w + (box ? gapX : sepW);
+    });
+    if (cur.length) lines.push(cur);
+    const nW = +st.lines, wlh = fs * 2.3, jh = lines.length * rowH, h = jh + nW * wlh + fs * 1.3;
+    rows.push({ h, draw: (ctx, y) => {
+      start(ctx);
+      ctx.font = fB; ctx.fillStyle = accent; ctx.fillText((k + 1) + ".", M, y + rowH * (box ? .64 : .7));
+      lines.forEach((ln, r) => ln.forEach(t => {
+        const ty = y + r * rowH;
+        if (box) {
+          const bh = fs * 1.8, by = ty + (rowH - bh) / 2 - fs * .05;
+          ctx.fillStyle = mix(main, "#ffffff", .93); roundedBox(ctx, IX + t.x, by, t.w, bh, fs * .32); ctx.fill();
+          ctx.strokeStyle = pale ? GREY : main; ctx.lineWidth = 1.3; ctx.stroke();
+          ctx.font = fN; ctx.fillStyle = INK; ctx.fillText(t.p, IX + t.x + padX, by + bh * .68);
+        } else {
+          ctx.font = fN; ctx.fillStyle = INK; ctx.fillText(t.p, IX + t.x, ty + rowH * .7);
+          if (!t.last) { ctx.fillStyle = accent; ctx.fillText(sep, IX + t.x + t.w, ty + rowH * .7); }
+        }
+      }));
+      for (let n = 0; n < nW; n++) {
+        const by = y + jh + (n + 1) * wlh - fs * .55; let x1 = IX, x2 = W - M;
+        ctx.font = fN; ctx.fillStyle = INK;
+        if (n === 0 && it.first) { ctx.fillText(it.first, x1, by); x1 += tw(it.first, fN) + fs * .3; }
+        if (n === nW - 1 && it.end && st.showEnd) { const ew = tw(it.end, fN); ctx.fillText(it.end, x2 - ew, by); x2 -= ew + fs * .12; }
+        rule(ctx, x1, x2, by + fs * .16, INK, 1.2);
+      }
+    } });
+  }
+
+  // ---- the worksheet ----
+  const sheet = [];
+  if (!list.length) {
+    textRows(sheet, "Your worksheet will appear here.", fontStr(F.f, F.b, fs * 1.3), fs * 1.3, GREY, 1.6);
+    textRows(sheet, "Type your sentences in step 1, one per line.", fN, fs, GREY, 1.6);
+  } else {
+    if (st.nameLine) sheet.push({ h: fs * 2.5, draw: (ctx, y) => {
+      start(ctx); const f = fontStr(F.f, F.b, fs * .85), by = y + fs * 1.1; ctx.font = f; ctx.fillStyle = INK;
+      const nx = M + tw("Name ", f), dx = M + CW * .66, dlx = dx + tw("Date ", f);
+      ctx.fillText("Name", M, by); rule(ctx, nx, dx - fs, by + fs * .14, INK, 1.2);
+      ctx.fillText("Date", dx, by); rule(ctx, dlx, W - M, by + fs * .14, INK, 1.2);
+    } });
+    if (title) heading(sheet, title);
+    if (instr) { textRows(sheet, instr, fB, fs, INK, 1.5); spacer(sheet, fs * .8); }
+    list.forEach((it, k) => itemRow(sheet, it, k));
+  }
+
+  // ---- the answer key ----
+  const key = [];
+  if (st.key && list.length) {
+    heading(key, "Answer key", title);
+    list.forEach((it, k) => {
+      wrapLine(it.answer, fN, IW).forEach((line, n) => key.push({ h: fs * 1.7, draw: (ctx, y) => {
+        start(ctx); const by = y + fs * 1.2;
+        if (!n) { ctx.font = fB; ctx.fillStyle = accent; ctx.fillText((k + 1) + ".", M, by); }
+        ctx.font = fN; ctx.fillStyle = INK; ctx.fillText(line, IX, by);
+      } }));
+      spacer(key, fs * .25);
+    });
+  }
+
+  // ---- pages ----
+  function paginate(rows, kind) {
+    const out = []; let page = null, y = 0;
+    rows.forEach(r => {
+      if (!page || (y + r.h > H - M && page.rows.length)) { page = { kind, rows: [] }; out.push(page); y = M; if (r.space) return; }
+      page.rows.push({ y, r }); y += r.h;
+    });
+    out.forEach((p, k) => { p.n = k + 1; p.of = out.length; });
+    return out;
+  }
+  return paginate(sheet, "sheet").concat(paginate(key, "key"));
+}
+
+function renderPage(canvas, scale, page) {
+  const [W, H] = pageSize();
+  canvas.width = Math.round(W * scale); canvas.height = Math.round(H * scale);
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
+  if (!page) return canvas;
+  page.rows.forEach(it => it.r.draw(ctx, it.y));
+  if (page.of > 1) {                                        // page numbers only when a part runs over one page
+    ctx.font = fontStr(FONTS[st.font].f, FONTS[st.font].w, 11); ctx.fillStyle = GREY; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    ctx.fillText((page.kind === "key" ? "Answer key, page " : "Page ") + page.n + " of " + page.of, W / 2, H - 30);
+  }
+  return canvas;
+}
+
+// =====================================================================
+// SCREEN
+// =====================================================================
+const $ = id => document.getElementById(id);
+const preview = $("preview");
+let drawQueued = false;
+function say(msg) { $("status").textContent = msg; }
+
+function redraw() {
+  if (drawQueued) return;
+  drawQueued = true;
+  requestAnimationFrame(() => {
+    drawQueued = false;
+    const pages = layout();
+    pageIndex = clamp(pageIndex, 0, pages.length - 1);
+    renderPage(preview, Math.min(window.devicePixelRatio || 1, 2) * 1.15, pages[pageIndex]);
+    $("pager").hidden = pages.length < 2;
+    $("pagerText").textContent = "Page " + (pageIndex + 1) + " of " + pages.length + (pages[pageIndex].kind === "key" ? " · answer key" : "");
+    $("pdfBtn").textContent = "Download PDF (" + pages.length + (pages.length === 1 ? " page)" : " pages)");
+
+    const n = rawLines().length, hint = $("countHint");
+    hint.classList.toggle("warn", n > MAX_SENTENCES);
+    hint.textContent = !n ? "" : n > MAX_SENTENCES ? n + " sentences. Only the first " + MAX_SENTENCES + " are used." : n + (n === 1 ? " sentence." : " sentences.");
+  });
+}
+
+// fonts arrive after the first paint: draw again when the chosen ones are ready
+function loadFonts() {
+  if (!document.fonts || !document.fonts.load) return Promise.resolve();
+  const F = FONTS[st.font];
+  return Promise.all([F.w, F.b].map(w => document.fonts.load(fontStr(F.f, w, 20)).catch(() => {}))).then(redraw);
+}
+
+function syncForm() {
+  document.querySelectorAll("[data-k]").forEach(el => {
+    if (el.type === "checkbox") el.checked = !!st[el.dataset.k];
+    else if (el !== document.activeElement) el.value = st[el.dataset.k];     // never fight the box being typed in
+  });
+  if ($("textBox") !== document.activeElement) $("textBox").value = st.text;
+  ["style", "lines", "tsize", "paper"].forEach(n => document.querySelectorAll('input[name="' + n + '"]').forEach(r => { r.checked = r.value === st[n]; }));
+  document.querySelectorAll(".sw").forEach(b => b.setAttribute("aria-pressed", COLOURS[b.dataset.i].c.toLowerCase() === st.cMain.toLowerCase()));
+}
+function changed() { syncForm(); save(); redraw(); }
+
+// build the pickers
+PRESETS.forEach(p => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = p.label;
+  b.onclick = () => { st.text = p.lines.join("\n"); pageIndex = 0; changed(); say(""); };
+  $("presets").appendChild(b);
+});
+COLOURS.forEach((p, i) => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.dataset.i = i;
+  b.title = p.name; b.setAttribute("aria-label", p.name); b.style.background = p.c;
+  b.onclick = () => { st.cMain = p.c; changed(); };
+  $("swatches").insertBefore(b, $("swatches").lastElementChild);
+});
+Object.keys(FONTS).forEach(k => { const o = document.createElement("option"); o.value = k; o.textContent = FONTS[k].label; $("fontSel").appendChild(o); });
+
+$("controls").addEventListener("input", e => {
+  const el = e.target, k = el.dataset.k;
+  if (el.id === "textBox") { st.text = el.value; pageIndex = 0; say(""); }
+  else if (k) st[k] = el.type === "checkbox" ? el.checked : el.value;
+  else if (el.type === "radio" && el.name) st[el.name] = el.value;
+  else return;
+  if (k === "font") loadFonts();
+  changed();
+});
+$("splitBtn").onclick = () => {
+  const before = rawLines().length;
+  st.text = st.text.replace(/\r/g, "").split(/\n+/).map(line => (line.match(/[^.!?…]+[.!?…]+["'”’)\]]*|[^.!?…]+$/g) || []).map(s => s.trim()).filter(Boolean).join("\n")).filter(Boolean).join("\n");
+  $("textBox").value = st.text; pageIndex = 0; changed();
+  const after = rawLines().length;
+  say(after > before ? "Split into " + after + " sentences. Check the list and fix any that broke in the wrong place." : "Each line is already one sentence.");
+};
+$("shuffleBtn").onclick = () => {
+  const buf = new Uint32Array(1);
+  (window.crypto || window.msCrypto).getRandomValues(buf);
+  st.seed = buf[0] >>> 0; changed(); say("Scrambled again.");
+};
+$("prevBtn").onclick = () => { pageIndex = Math.max(pageIndex - 1, 0); redraw(); };
+$("nextBtn").onclick = () => { pageIndex++; redraw(); };
+$("resetBtn").onclick = () => { st = Object.assign({}, DEFAULTS); pageIndex = 0; loadFonts(); changed(); say("Back to the example sentences."); };
+
+// =====================================================================
+// DOWNLOAD AND PRINT
+// =====================================================================
+function fileName() {
+  const base = (st.title.trim() || "sentence-scramble").replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "_").slice(0, 40) || "sentence-scramble";
+  return base + "_worksheet.pdf";
+}
+const pause = () => new Promise(r => setTimeout(r, 0));
+async function busy(job) {
+  if (!rawLines().length) { say("Type your sentences first, one per line."); $("textBox").focus(); return; }
+  const all = [$("pdfBtn"), $("printBtn")];
+  all.forEach(b => b.disabled = true);
+  try { await loadFonts(); await job(layout()); } catch (e) { console.error(e); say("Something went wrong making the file. Try again, or use Print."); }
+  all.forEach(b => b.disabled = false);
+  redraw();
+}
+
+$("pdfBtn").onclick = () => busy(async pages => {
+  if (!window.jspdf) { say("The PDF tool did not load (check your connection). Use Print and choose Save as PDF."); return; }
+  const mm = st.paper === "letter" ? [215.9, 279.4] : [210, 297];
+  const pdf = new window.jspdf.jsPDF({ orientation: "portrait", unit: "mm", format: st.paper });
+  const scale = pages.length > 8 ? 2.2 : 3;                  // about 210 or 290 dots per inch
+  const cv = document.createElement("canvas");
+  for (let i = 0; i < pages.length; i++) {
+    say("Making page " + (i + 1) + " of " + pages.length + "…");
+    await pause();
+    renderPage(cv, scale, pages[i]);
+    if (i) pdf.addPage();
+    pdf.addImage(cv.toDataURL("image/jpeg", .93), "JPEG", 0, 0, mm[0], mm[1], undefined, "FAST");
+  }
+  pdf.save(fileName());
+  say("Downloaded your worksheet" + (pages.some(p => p.kind === "key") ? " and answer key." : "."));
+});
+
+$("printBtn").onclick = () => busy(async pages => {
+  const area = $("printArea"), cv = document.createElement("canvas");
+  area.innerHTML = "";
+  let pr = $("pageRule");
+  if (!pr) { pr = document.createElement("style"); pr.id = "pageRule"; document.head.appendChild(pr); }
+  pr.textContent = "@page{size:" + (st.paper === "letter" ? "letter" : "A4") + " portrait;margin:0}";
+  const waits = [];
+  for (let i = 0; i < pages.length; i++) {
+    say("Getting ready to print…"); await pause();
+    renderPage(cv, 2, pages[i]);
+    const img = new Image();
+    waits.push(new Promise(r => { img.onload = img.onerror = r; }));
+    img.src = cv.toDataURL("image/jpeg", .93);
+    area.appendChild(img);
+  }
+  await Promise.all(waits);
+  say("");
+  window.print();
+});
+
+// =====================================================================
+// START
+// =====================================================================
+syncForm(); redraw(); loadFonts();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+window.addEventListener("resize", redraw);
+</script>
+</body>
+</html>
