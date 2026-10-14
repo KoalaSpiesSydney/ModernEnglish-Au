@@ -16,7 +16,8 @@
 /* =====================================================================
    BESPOKE PICTURE BINGO & FLASHCARDS · KIDS
    One file, no server. Pictures are Noto Emoji (Google, Apache 2.0),
-   kept in img/noto/ next to this page. Every board, card and page is
+   loaded from the official Noto set on GitHub (pinned version), with
+   any copies in this folder as a backup. Every board, card and page is
    drawn on a <canvas>, so the preview, the PDF, the PNGs and the
    print-out are always identical. Nothing the teacher types leaves
    the browser.
@@ -447,7 +448,10 @@ footer a{color:#fff}
 // =====================================================================
 // SETTINGS YOU CAN EDIT
 // =====================================================================
-const IMG_BASE = "img/noto/";               // the Noto Emoji pictures, next to this page
+// the Noto Emoji pictures, from Google's official copy, pinned to one version so a Noto update cannot break the page
+const IMG_BASE = "https://raw.githubusercontent.com/googlefonts/noto-emoji/v2026-09-24-unicode18_0/2D/svg/";
+const IMG_BACKUP = "";                     // if that fails, look for the picture in this folder
+const INDEX_URL = "noto-index.json";        // the picture search list, next to this page
 const AUDIENCE = {                          // this page is the kids' version of the engine
   id: "kids",
   levels: { 1: "First words", 2: "A1", 3: "A1–A2" },
@@ -581,7 +585,8 @@ const picCache = {}, greyCache = {};
 function loadPic(code) {
   if (!code) return Promise.resolve(null);
   if (picCache[code]) return picCache[code];
-  picCache[code] = fetch(imgUrl(code)).then(r => { if (!r.ok) throw 0; return r.text(); }).then(txt => {
+  const get = url => fetch(url).then(r => { if (!r.ok) throw 0; return r.text(); });
+  picCache[code] = get(imgUrl(code)).catch(() => get(IMG_BACKUP + "emoji_u" + code + ".svg")).then(txt => {
     // make sure the SVG has a size, so every browser can draw it
     if (!/<svg[^>]*\swidth=/.test(txt)) txt = txt.replace(/<svg/, '<svg width="512" height="512"');
     return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = URL.createObjectURL(new Blob([txt], { type: "image/svg+xml" })); });
@@ -940,7 +945,7 @@ $("allOff").onclick = () => { S.words.forEach(w => w.on = false); renderWords();
 let INDEX = null, picking = null;
 async function index() {
   if (INDEX) return INDEX;
-  try { INDEX = await (await fetch(IMG_BASE + "noto-index.json")).json(); } catch (e) { INDEX = []; $("qHint").textContent = "The picture search didn't load. You can still add words without pictures."; }
+  try { INDEX = await (await fetch(INDEX_URL)).json(); } catch (e) { INDEX = []; $("qHint").textContent = "The picture search didn't load. You can still add words without pictures."; }
   return INDEX;
 }
 function searchPics(q) {
