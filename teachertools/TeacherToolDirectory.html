@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Teacher Tool Directory: Free Video Lessons, Worksheets &amp; Certificates · Modern English Australia</title>
-  <meta name="description" content="Free tools for English teachers: interactive YouTube video lessons, gap-fill, song and sentence scramble worksheets, bingo cards, certificates and reports. No sign-up." />
+  <meta name="description" content="Free tools for English teachers: interactive YouTube video and song lessons, gap-fill, song and sentence scramble worksheets, bingo cards, certificates and reports. No sign-up." />
   <link rel="canonical" href="https://modernenglish.au/teachertools/TeacherToolDirectory.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Modern English Australia" />
@@ -32,12 +32,13 @@
       { "@type": "ItemList", "name": "Free tools for teachers",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Bespoke Video Lesson Maker", "url": "https://modernenglish.au/teachertools/bespoke-video-lesson-maker.html" },
-          { "@type": "ListItem", "position": 2, "name": "Bespoke Gap-Fill Maker", "url": "https://modernenglish.au/teachertools/bespoke-gap-fill-maker.html" },
-          { "@type": "ListItem", "position": 3, "name": "Bespoke Song Gap-Fill Maker", "url": "https://modernenglish.au/teachertools/bespoke-song-gap-fill-maker.html" },
-          { "@type": "ListItem", "position": 4, "name": "Bespoke Sentence Scramble Maker", "url": "https://modernenglish.au/teachertools/bespoke-sentence-scramble-maker.html" },
-          { "@type": "ListItem", "position": 5, "name": "Bespoke Bingo Card Maker", "url": "https://modernenglish.au/teachertools/bespoke-bingo-card-maker.html" },
-          { "@type": "ListItem", "position": 6, "name": "Bespoke Certificate Maker", "url": "https://modernenglish.au/teachertools/bespoke-certificate-maker.html" },
-          { "@type": "ListItem", "position": 7, "name": "Bespoke Report Maker", "url": "https://modernenglish.au/teachertools/bespoke-report-maker.html" }
+          { "@type": "ListItem", "position": 2, "name": "Bespoke Song Lesson Maker", "url": "https://modernenglish.au/teachertools/bespoke-song-lesson-maker.html" },
+          { "@type": "ListItem", "position": 3, "name": "Bespoke Gap-Fill Maker", "url": "https://modernenglish.au/teachertools/bespoke-gap-fill-maker.html" },
+          { "@type": "ListItem", "position": 4, "name": "Bespoke Song Gap-Fill Maker", "url": "https://modernenglish.au/teachertools/bespoke-song-gap-fill-maker.html" },
+          { "@type": "ListItem", "position": 5, "name": "Bespoke Sentence Scramble Maker", "url": "https://modernenglish.au/teachertools/bespoke-sentence-scramble-maker.html" },
+          { "@type": "ListItem", "position": 6, "name": "Bespoke Bingo Card Maker", "url": "https://modernenglish.au/teachertools/bespoke-bingo-card-maker.html" },
+          { "@type": "ListItem", "position": 7, "name": "Bespoke Certificate Maker", "url": "https://modernenglish.au/teachertools/bespoke-certificate-maker.html" },
+          { "@type": "ListItem", "position": 8, "name": "Bespoke Report Maker", "url": "https://modernenglish.au/teachertools/bespoke-report-maker.html" }
         ] }
     ]
   }
@@ -92,9 +93,19 @@
     .dir li span { color: var(--muted); font-size: .95rem; line-height: 1.55; }
     .tag { display: inline-block; margin-left: 8px; padding: 0 8px; border-radius: 999px; font-size: .68rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; vertical-align: 2px; }
     .tag.new { background: #dc2626; color: #fff; }
+    .tag.testing { background: #b45309; color: #fff; }
     .dir li.soon .name { font-weight: 700; color: var(--muted); }
     .note { font-size: .95rem; color: var(--muted); margin-top: 16px; }
     .back { display: inline-block; margin-top: 26px; font-weight: 700; }
+
+    /* A NOTE TO TEACHERS */
+    .letter { margin-top: 44px; background: rgba(255,255,255,.85); border: 1px solid var(--line); border-top: 5px solid #6b2d7b; border-radius: 12px; padding: clamp(20px, 3vw, 34px) clamp(18px, 3.5vw, 40px); box-shadow: 0 2px 2px rgba(15,23,42,.04), 0 10px 22px -12px rgba(15,23,42,.22); max-width: 76ch; }
+    .letter .dir-h { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; margin: 0 0 14px; padding: 0; border: 0; }
+    .letter p { margin: 0 0 14px; font-size: 1.02rem; line-height: 1.75; }
+    .letter h3 { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; margin: 22px 0 6px; }
+    .letter .pull { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; line-height: 1.4; color: #6b2d7b; border-left: 4px solid #6b2d7b; padding-left: 14px; margin: 18px 0; }
+    .letter .sign { margin: 18px 0 0; font-weight: 700; }
+    .letter .sign span { display: block; font-weight: 400; color: var(--muted); font-size: .95rem; }
     @media (max-width: 640px) { .dir li { grid-template-columns: 1fr; } }
 
     /* FOOTER */
@@ -141,6 +152,7 @@
       <h2>Interactive lessons</h2>
       <ul>
         <li><a href="bespoke-video-lesson-maker.html">Bespoke Video Lesson Maker<b class="tag new">New</b></a><span>Add questions that pause a YouTube video, then share a link or QR code with your class.</span></li>
+        <li><a href="bespoke-song-lesson-maker.html">Bespoke Song Lesson Maker<b class="tag testing">Testing</b></a><span>An interactive song lesson: gap the lyrics, add questions that pause the song, and share a link or QR code. Prints a worksheet and lyric sheet too. Now in testing.</span></li>
       </ul>
 
       <h2>Worksheets</h2>
@@ -167,6 +179,26 @@
         <li class="soon"><span class="name">Bespoke Flashcard Maker</span><span>Printable flashcards from your own word lists.</span></li>
       </ul>
       <p class="note">Is there a tool you'd like? <a href="../contact.html">Get in touch</a>.</p>
+
+      <!-- A NOTE TO TEACHERS -->
+      <section class="letter" aria-labelledby="letterH">
+        <h2 class="dir-h" id="letterH">A note to teachers</h2>
+        <p>Every tool on this page is <b>free for teachers</b>. There's no sign-up, no subscription and no account to create.</p>
+
+        <h3>Your work belongs to you</h3>
+        <p>Nothing you type is uploaded to us or stored in any cloud. The lessons, worksheets and tests you make are yours: download them, keep them on your own device, reuse them and change them whenever you like. Some tools remember your drafts in your own browser, on your own computer, so you don't lose your work; others forget everything the moment you close the page. Either way, we never see it, and it's never kept anywhere but with you.</p>
+
+        <h3>Why I built them this way</h3>
+        <p>Teachers often pay for several subscriptions to several tools that each do just one thing. Much of that money pays to store teachers' own work: their own intellectual property. And the clouds it is stored in cost water and electricity. I'd rather these tools set you free, so you can spend your time and energy on creative, innovative, up-to-date lessons that belong to you.</p>
+
+        <h3>AI as a companion, not a replacement</h3>
+        <p>I love AI as a companion tool. But AI cannot replace a teacher. It can't bring compassion, presence or passion to a classroom, and it can't respond to the world as it is right now, or to the moments that happen between a teacher and their students.</p>
+        <p>Many edtech companies are gathering what teachers know in the hope of replacing teachers with AI. Let's turn the tables.</p>
+        <p class="pull">Instead of collecting the tricks of teaching to replace the teacher, let teachers use AI to replace the developer.</p>
+        <p>That's how these tools were made. Let's use AI ethically, as our friend.</p>
+
+        <p class="sign">Justine Kelly<span>Koala Spies Sydney · Modern English Australia</span></p>
+      </section>
 
       <a class="back" href="../index.html">← Back to Modern English Australia</a>
     </div>
