@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="renderer" content="webkit" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#0b2a4a" />
+
+<!-- Google Search Console verification (same token as modernenglish.au) -->
+<meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
+
+<!-- Google tag (gtag.js) – same Analytics property as your other games -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+
+<title>Homophones – Mini Lesson and Practice (A1–B2) | Modern English Australia</title>
+<meta name="description" content="Free mini lesson on English homophones for K–12 and ESL classes, A1 to B2: there, their and they're, to, too and two, your and you're, its and it's, weather and whether, passed and past, principal and principle and more. An everyday block and an academic, PTE-style block, with tests to choose the right spelling, drag and drop, choose-the-word quizzes and Write from Dictation practice. Modern English Australia · Koala Spies Sydney." />
+<meta property="og:title" content="Homophones – Mini Lesson and Practice (A1–B2) | Modern English Australia" />
+<meta property="og:description" content="Words that sound the same but are spelled differently: there, their, they're and many more, with tests, practice and dictation." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Modern English Australia" />
+<meta property="og:url" content="https://modernenglish.au/minilessons/homophones-lesson.html" />
+<link rel="canonical" href="https://modernenglish.au/minilessons/homophones-lesson.html" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Loaded non-blocking so the page still opens fast where Google Fonts is slow or blocked (e.g. mainland China); falls back to Verdana -->
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"></noscript>
+
+<style>
+:root{
+  --bg:#f5f5f5;
+  --card:#0b2a4a;
+  --ink:#1e1e1e;
+  --muted:#bbbbbb;
+  --accent:#0b2a4a;
+  --line:#484141;
+  --ok:#1f7a3f;
+  --bad:#a32525;
+
+  /* Card tones while playing – change these to restyle the game.
+     Light = the "get" expression · Dark = its meaning */
+  --get-back:#d9e9f7;      /* get card, face down */
+  --get-open:#f3f9ff;      /* get card, turned over */
+  --get-ink:#0b2a4a;       /* text on a get card */
+  --get-edge:#9dbfdf;      /* border of a get card */
+  --mean-back:#0b2a4a;     /* meaning card, face down */
+  --mean-open:#12508a;     /* meaning card, turned over */
+  --mean-ink:#ffffff;      /* text on a meaning card */
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+
+body{
+  font-family:"Atkinson Hyperlegible", Verdana, "Segoe UI", Arial, sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+.bg-gif{
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  inset:0;
+  z-index:-2;
+  background:var(--bg);   /* to use a picture: background:url("yourpicture.gif") center / cover no-repeat; */
+}
+.bg-overlay{
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  inset:0;
+  z-index:-1;
+  background:rgba(245,245,245,.78);
+}
+
+header{
+  background:var(--accent);
+  color:#fff;
+  border-bottom:4px solid #0072ce;
+  text-align:center;
+  padding:1.4rem 0 1rem;
+  letter-spacing:2px;
+  font-weight:700;
+  font-size:1.2rem;
+}
+header span{
+  display:block;
+  color:#cfe0f0;
+  font-weight:300;
+  font-size:.6rem;
+  letter-spacing:3px;
+  margin-top:1px;
+}
+
+.qr-toggle{
+  position:fixed;
+  left:max(14px, env(safe-area-inset-left));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.12);
+  background:rgba(255,255,255,.92);
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  font-family:inherit;
+  font-size:.85rem;
+}
+.qr-panel{
+  position:fixed;
+  left:max(14px, env(safe-area-inset-left));
+  top:70px;
+  top:calc(max(14px, env(safe-area-inset-top)) + 56px);
+  z-index:9999;
+  width:240px;
+  max-width:calc(100% - 28px);
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  display:none;
+}
+.qr-panel .qr-title{
+  font-weight:800;
+  color:#111;
+  margin:0 0 8px;
+  font-size:.95rem;
+  letter-spacing:.5px;
+}
+.qr-panel .qr-url{
+  font-size:.72rem;
+  color:rgba(0,0,0,.65);
+  word-break:break-all;
+  margin:8px 0 0;
+  line-height:1.35;
+}
+.qr-code{
+  width:200px;
+  height:200px;
+  max-width:100%;
+  font-size:.8rem;
+  padding:.5rem;
+  text-align:center;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.10);
+}
+.home-btn{
+  position:fixed;
+  right:max(14px, env(safe-area-inset-right));
+  top:max(14px, env(safe-area-inset-top));
+  z-index:9999;
+  padding:.7rem 1rem;
+  border-radius:14px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.12);
+  color:#111;
+  text-decoration:none;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  font-family:inherit;
+  font-size:.85rem;
+}
+@media(hover:hover){
+  .home-btn:hover{ background:#ffffff; }
+  .qr-toggle:hover{ background:#ffffff; }
+}
+
+.level-badge{
+  display:inline-block;
+  background:#007a70;
+  color:#fff;
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:2px;
+  padding:3px 10px;
+  border-radius:999px;
+  margin-bottom:.5rem;
+  font-family:inherit;
+}
+
+main{
+  flex:1;
+  text-align:center;
+  padding:2rem 1rem calc(3rem + env(safe-area-inset-bottom));
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+h1{
+  color:var(--accent);
+  letter-spacing:2px;
+  margin-top:.5rem;
+  font-size:clamp(1.35rem,2.2vw,1.9rem);
+  font-weight:700;
+}
+
+p{
+  max-width:760px;
+  margin:.5rem auto 1.2rem;
+  opacity:.92;
+}
+
+.howto-link{ color:var(--accent); font-weight:600; text-underline-offset:3px; }
+
+.round-info{
+  font-size:.85rem;
+  color:#5a5a5a;
+  margin-bottom:.8rem;
+  letter-spacing:.5px;
+  font-weight:600;
+}
+
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:.8rem;
+  margin-bottom:1.2rem;
+  flex-wrap:wrap;
+}
+
+button.btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.75rem 1.4rem;
+  border-radius:45px;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+  transition:all .25s ease;
+  font-family:inherit;
+  font-size:1rem;
+}
+@media(hover:hover){ button.btn:hover{
+  background:linear-gradient(90deg,var(--accent),#f2a900);
+  transform:translateY(-2px);
+} }
+
+#game{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:10px;
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+}
+
+.card{
+  background:#0b2a4a;
+  border:2px solid var(--accent);
+  border-radius:14px;
+  padding:10px 8px;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  font-size:.82rem;
+  line-height:1.3;
+  position:relative;
+  color:#fff;
+  transition:background .3s,color .3s,transform .2s;
+  box-shadow:0 3px 6px rgba(0,0,0,.12);
+  word-break:break-word;
+  overflow-wrap:anywhere;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  -webkit-appearance:none;
+  appearance:none;
+  font-family:inherit;
+  width:100%;
+}
+.card:focus-visible{ outline:3px solid #f2a900; outline-offset:2px; }
+
+/* ── Card number badge ── */
+.card .card-num{
+  position:absolute;
+  top:5px;
+  left:7px;
+  font-size:.65rem;
+  font-weight:800;
+  line-height:1;
+  color:rgba(255,255,255,.55);
+  letter-spacing:.5px;
+  pointer-events:none;
+}
+
+/* ── Card tones: light = get expression, dark = meaning ── */
+.card.is-get{
+  background:var(--get-back);
+  color:var(--get-ink);
+  border-color:var(--get-edge);
+}
+.card.is-get .card-num{ color:rgba(11,42,74,.6); }
+.card.is-meaning{
+  background:var(--mean-back);
+  color:var(--mean-ink);
+}
+
+/* turned over: same tone, a touch brighter, with an orange ring */
+.card.flipped{
+  transform:scale(1.04);
+  box-shadow:0 0 0 3px #f2a900, 0 3px 6px rgba(0,0,0,.12);
+}
+.card.flipped.is-get{ background:var(--get-open); }
+.card.flipped.is-meaning{ background:var(--mean-open); }
+
+/* matched: both cards of the pair take the pair's colour (set in the script) */
+.card.matched{
+  cursor:default;
+  transform:none;
+  color:#fff;
+  border-color:var(--accent);
+}
+.card.matched .card-num{ color:rgba(255,255,255,.6); }
+
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
+.card.shake{ animation:shake .35s ease; }
+
+#status{
+  margin-top:1.2rem;
+  font-size:1.05rem;
+  font-weight:600;
+  min-height:1.6em;
+  color:var(--accent);
+}
+
+.score-bar{
+  display:flex;
+  justify-content:center;
+  gap:1.5rem;
+  margin:.6rem 0 0;
+  font-size:.88rem;
+  font-weight:700;
+  color:#5a5a5a;
+  flex-wrap:wrap;
+}
+.score-bar span{ color:var(--ink); }
+
+.notes{
+  width:100%;
+  max-width:760px;
+  margin:2.2rem auto 0;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:1rem 1.1rem;
+  text-align:left;
+}
+.notes summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:.5rem;
+  font-size:1rem;
+}
+.notes ul{
+  margin:.8rem 0 0 1.2rem;
+  line-height:1.7;
+}
+.notes li{ margin-bottom:.35rem; }
+
+.gapfill-wrap{
+  width:100%;
+  max-width:760px;
+  margin:2.2rem auto 0;
+  text-align:center;
+}
+.gapfill-wrap h2{
+  color:var(--accent);
+  margin-bottom:.35rem;
+  font-size:clamp(1.2rem,2vw,1.6rem);
+}
+.gapfill-intro{ max-width:700px; margin:0 auto 1.2rem; }
+.gapfill-meaning{ font-weight:400; color:#5a5a5a; }
+.gapfill-input.dict-input{ max-width:520px; }
+.gapfill-tense{
+  max-width:700px; margin:0 auto 1.2rem; padding:.7rem 1rem;
+  background:rgba(255,255,255,.9); border:1px solid rgba(0,0,0,.12);
+  border-radius:6px; text-align:left; opacity:1;
+}
+.gapfill-list{ display:grid; grid-template-columns:1fr; gap:12px; }
+.gapfill-item{
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+}
+.gapfill-item p{ margin:0 auto .85rem; max-width:680px; }
+
+.speak-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  margin:6px auto 10px;
+  padding:.55rem 1.1rem;
+  border-radius:999px;
+  border:2px solid var(--accent);
+  background:transparent;
+  color:var(--accent);
+  font-family:inherit;
+  font-size:.9rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .2s ease;
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+@media(hover:hover){ .speak-btn:hover{ background:var(--accent); color:#fff; transform:translateY(-2px); } }
+.speak-btn.speaking{
+  background:var(--accent); color:#fff;
+  animation:pulse-btn 1s ease infinite;
+}
+@keyframes pulse-btn{
+  0%,100%{ box-shadow:0 0 0 0 rgba(11,42,74,.4); }
+  50%{ box-shadow:0 0 0 8px rgba(11,42,74,0); }
+}
+.speak-btn svg{ flex-shrink:0; }
+
+.voice-bar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  margin-bottom:1rem;
+  flex-wrap:wrap;
+  font-size:.88rem;
+  color:#5a5a5a;
+  font-weight:600;
+}
+.voice-select{
+  padding:.4rem .7rem;
+  border-radius:8px;
+  border:1.5px solid rgba(11,42,74,.2);
+  font:inherit;
+  font-size:.88rem;
+  color:var(--ink);
+  background:#fff;
+  cursor:pointer;
+  outline:none;
+}
+.voice-select:focus{ border-color:var(--accent); }
+
+.gapfill-input{
+  display:block;
+  width:100%;
+  max-width:280px;
+  font-size:16px !important; /* stops iPhones zooming in */
+  margin:0 auto;
+  padding:.7rem .9rem;
+  border:2px solid rgba(11,42,74,.18);
+  border-radius:10px;
+  font:inherit;
+  outline:none;
+  text-align:center;
+}
+.gapfill-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(11,42,74,.10);
+}
+.gapfill-actions{
+  display:flex;
+  justify-content:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+  margin-top:.8rem;
+}
+.gapfill-btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  padding:.65rem 1rem;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-family:inherit;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+  transition:all .2s ease;
+  font-size:.95rem;
+}
+@media(hover:hover){ .gapfill-btn:hover{
+  background:linear-gradient(90deg,var(--accent),#f2a900);
+  transform:translateY(-2px);
+} }
+.gapfill-feedback{ min-height:1.5em; margin-top:.75rem; font-weight:700; text-align:center; }
+.gapfill-feedback.correct{ color:var(--ok); }
+.gapfill-feedback.incorrect{ color:var(--bad); }
+.gapfill-answer{ display:none; margin-top:.65rem; font-weight:700; color:var(--accent); text-align:center; }
+.gapfill-answer.show{ display:block; }
+
+.links{ display:flex; justify-content:center; gap:1rem; margin-top:2rem; flex-wrap:wrap; }
+a.btn{
+  display:inline-block;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  background:rgba(255,255,255,.75);
+  color:var(--card);
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding:.75rem 1.4rem;
+  border:1.5px solid var(--card);
+  border-radius:4px;
+  box-shadow:none;
+  transition:background .2s ease, color .2s ease;
+}
+a.btn .arrow{ display:inline-block; margin-left:.4rem; color:#0072ce; transition:transform .2s ease, color .2s ease; }
+@media(hover:hover){
+  a.btn:hover{ background:var(--card); color:#f2a900; }
+  a.btn:hover .arrow{ color:#f2a900; transform:translateX(3px); }
+}
+a.btn:active{ background:var(--card); color:#f2a900; }
+a.btn:focus-visible, button:focus-visible{ outline:3px solid #f2a900; outline-offset:2px; }
+
+/* ===== Mini lesson (plain columns – no coloured bars or boxes) ===== */
+details.mini-lesson{ max-width:980px; }
+details.mini-lesson summary{ font-size:1.05rem; }
+.lesson-intro{ margin:.6rem 0 1rem; max-width:none; }
+.lesson-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:1.2rem 2rem;
+  text-align:left;
+}
+.lesson-tag{
+  display:block;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#5a5a5a;
+  margin-bottom:.3rem;
+}
+.lesson-card h3{ font-size:1.15rem; color:var(--ink); margin-bottom:.35rem; }
+.lesson-card h3 u{ text-decoration-thickness:1px; text-underline-offset:3px; }
+.lesson-card p{ margin:0 0 .5rem; max-width:none; }
+.lesson-card ul{ margin:0 0 .6rem 1.1rem; line-height:1.55; }
+.lesson-card li{ margin-bottom:.2rem; }
+.lesson-card b{ color:var(--ink); }
+.lesson-card i{ color:#5a5a5a; }
+.lesson-tip{ font-size:.92rem; color:#5a5a5a; }
+.lesson-go{ margin:1rem 0 0; font-size:.95rem; max-width:none; }
+
+/* meaning tag on matched cards */
+.card .card-tag{
+  position:absolute;
+  bottom:4px;
+  right:6px;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:.55rem;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  background:rgba(255,255,255,.92);
+  color:#1e1e1e;
+  border-radius:3px;
+  padding:1px 5px;
+  pointer-events:none;
+}
+.card.matched{ padding-bottom:18px; }
+
+@media(max-width:900px){
+  .lesson-grid{ grid-template-columns:1fr; }
+}
+
+/* ═══ Minimal, on-brand buttons (override the older pill styles) ═══ */
+:root{ --brand-orange:#f2a900; --btn-font:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; }
+
+button.btn,
+.speak-btn,
+.gapfill-btn,
+.qr-toggle,
+.home-btn{
+  font-family:var(--btn-font);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  border-radius:4px;
+  box-shadow:none;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+/* New Round – outline */
+button.btn{
+  background:rgba(255,255,255,.75);
+  color:var(--card);
+  border:1.5px solid var(--card);
+  padding:.75rem 1.4rem;
+}
+/* Listen – outline with the speaker icon */
+.speak-btn{
+  background:rgba(255,255,255,.75);
+  color:var(--card);
+  border:1.5px solid var(--card);
+  padding:.55rem 1.1rem;
+}
+.speak-btn.speaking{
+  background:var(--card);
+  color:var(--brand-orange);
+  -webkit-animation:none;
+  animation:none;
+}
+/* Submit – the one solid button; Reveal Answer – quiet outline */
+.gapfill-btn{
+  padding:.65rem 1.1rem;
+  border:1.5px solid var(--card);
+}
+.gapfill-btn.gap-submit{ background:var(--card); color:#fff; }
+.gapfill-btn.gap-reveal{ background:rgba(255,255,255,.75); color:var(--card); }
+
+/* Floating QR + Home */
+.qr-toggle,
+.home-btn{
+  background:rgba(255,255,255,.92);
+  color:var(--card);
+  border:1.5px solid var(--card);
+}
+.qr-toggle{ font-size:.72rem; letter-spacing:1px; }
+.home-btn{ padding:.7rem 1rem; }
+
+@media(hover:hover){
+  button.btn:hover,
+  .speak-btn:hover,
+  .gapfill-btn:hover,
+  .qr-toggle:hover,
+  .home-btn:hover{
+    background:var(--card);
+    color:var(--brand-orange);
+    border-color:var(--card);
+    transform:none;
+  }
+}
+button.btn:active, .speak-btn:active, .gapfill-btn:active, .qr-toggle:active, .home-btn:active{
+  background:var(--card); color:var(--brand-orange);
+}
+
+/* Voice picker – matching thin outline */
+.voice-select{
+  font-family:var(--btn-font);
+  font-size:.85rem;
+  border:1.5px solid var(--card);
+  border-radius:4px;
+  background:rgba(255,255,255,.9);
+  padding:.45rem .7rem;
+}
+
+.gapfill-input{ border-radius:4px; border:1.5px solid rgba(42,42,42,.35); }
+.gapfill-input:focus{ border-color:var(--card); box-shadow:0 0 0 3px rgba(242,169,0,.18); }
+
+/* ===== Sound button (minimal) ===== */
+.btn-sound{
+  -webkit-appearance:none;
+  appearance:none;
+  background:none;
+  border:none;
+  box-shadow:none;
+  color:var(--accent);
+  padding:.4rem .6rem;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  opacity:.85;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+@media(hover:hover){ .btn-sound:hover{ opacity:1; } }
+.btn-sound[aria-pressed="false"]{ opacity:.5; }
+
+/* ===== Candy pop effects ===== */
+.card.pop{
+  -webkit-animation:jelly .5s ease;
+  animation:jelly .5s ease;
+}
+@keyframes jelly{
+  0%{transform:scale(1,1)}
+  30%{transform:scale(1.12,.88)}
+  50%{transform:scale(.9,1.12)}
+  70%{transform:scale(1.06,.95)}
+  100%{transform:scale(1,1)}
+}
+@-webkit-keyframes jelly{
+  0%{-webkit-transform:scale(1,1)}
+  30%{-webkit-transform:scale(1.12,.88)}
+  50%{-webkit-transform:scale(.9,1.12)}
+  70%{-webkit-transform:scale(1.06,.95)}
+  100%{-webkit-transform:scale(1,1)}
+}
+.card.win{
+  -webkit-animation:jelly .55s ease var(--wd,0s) 3, rainbowGlow 1.6s linear var(--wd,0s) 2;
+  animation:jelly .55s ease var(--wd,0s) 3, rainbowGlow 1.6s linear var(--wd,0s) 2;
+}
+@keyframes rainbowGlow{
+  0%  {box-shadow:0 0 0 3px #ff4fa3, 0 0 22px 4px rgba(255,79,163,.8)}
+  25% {box-shadow:0 0 0 3px #ffd43b, 0 0 22px 4px rgba(255,212,59,.8)}
+  50% {box-shadow:0 0 0 3px #3ddc97, 0 0 22px 4px rgba(61,220,151,.8)}
+  75% {box-shadow:0 0 0 3px #4dabf7, 0 0 22px 4px rgba(77,171,247,.8)}
+  100%{box-shadow:0 0 0 3px #ff4fa3, 0 0 22px 4px rgba(255,79,163,.8)}
+}
+@-webkit-keyframes rainbowGlow{
+  0%  {box-shadow:0 0 0 3px #ff4fa3, 0 0 22px 4px rgba(255,79,163,.8)}
+  25% {box-shadow:0 0 0 3px #ffd43b, 0 0 22px 4px rgba(255,212,59,.8)}
+  50% {box-shadow:0 0 0 3px #3ddc97, 0 0 22px 4px rgba(61,220,151,.8)}
+  75% {box-shadow:0 0 0 3px #4dabf7, 0 0 22px 4px rgba(77,171,247,.8)}
+  100%{box-shadow:0 0 0 3px #ff4fa3, 0 0 22px 4px rgba(255,79,163,.8)}
+}
+.combo{
+  position:fixed;
+  left:50%;
+  top:42%;
+  z-index:9500;
+  pointer-events:none;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-weight:900;
+  font-size:clamp(2.2rem,9vw,4.2rem);
+  letter-spacing:1px;
+  color:#fff;
+  -webkit-text-stroke:2px #0b2a4a;
+  text-shadow:0 4px 0 #0b2a4a, 0 8px 18px rgba(11,42,74,.45);
+  -webkit-transform:translate(-50%,-50%) scale(0);
+  transform:translate(-50%,-50%) scale(0);
+  -webkit-animation:comboPop 1.4s cubic-bezier(.2,1.6,.4,1) forwards;
+  animation:comboPop 1.4s cubic-bezier(.2,1.6,.4,1) forwards;
+  white-space:nowrap;
+}
+.combo.big{ font-size:clamp(3rem,13vw,6rem); color:#ffe066; }
+@keyframes comboPop{
+  0%{transform:translate(-50%,-50%) scale(0) rotate(-8deg);opacity:1}
+  35%{transform:translate(-50%,-50%) scale(1.1) rotate(3deg);opacity:1}
+  75%{transform:translate(-50%,-60%) scale(1) rotate(0);opacity:1}
+  100%{transform:translate(-50%,-80%) scale(.9);opacity:0}
+}
+@-webkit-keyframes comboPop{
+  0%{-webkit-transform:translate(-50%,-50%) scale(0) rotate(-8deg);opacity:1}
+  35%{-webkit-transform:translate(-50%,-50%) scale(1.1) rotate(3deg);opacity:1}
+  75%{-webkit-transform:translate(-50%,-60%) scale(1) rotate(0);opacity:1}
+  100%{-webkit-transform:translate(-50%,-80%) scale(.9);opacity:0}
+}
+.candy-layer{
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  z-index:9400;
+  pointer-events:none;
+  overflow:hidden;
+}
+.candy{
+  position:absolute;
+  width:26px;height:26px;
+  margin:-13px 0 0 -13px;
+  -webkit-animation:candyBurst var(--dur,2.8s) cubic-bezier(.25,.6,.45,1) var(--delay,0s) forwards;
+  animation:candyBurst var(--dur,2.8s) cubic-bezier(.25,.6,.45,1) var(--delay,0s) forwards;
+  opacity:0;
+}
+.candy.ball{ border-radius:50%; background:radial-gradient(circle at 35% 30%, #fff 0 12%, var(--c1) 30%, var(--c2) 100%); box-shadow:0 2px 4px rgba(0,0,0,.2); }
+.candy.bean{ width:34px;height:20px;margin:-10px 0 0 -17px;border-radius:50%; background:radial-gradient(ellipse at 35% 30%, #fff 0 10%, var(--c1) 30%, var(--c2) 100%); }
+.candy.stripe{ width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%; background:repeating-conic-gradient(var(--c1) 0 30deg, #fff 30deg 60deg); box-shadow:inset 0 0 0 2px rgba(0,0,0,.08); }
+.candy.wrap{ width:24px;height:24px;border-radius:50%; background:radial-gradient(circle at 35% 30%, #fff 0 12%, var(--c1) 30%, var(--c2) 100%); }
+.candy.wrap::before,.candy.wrap::after{
+  content:""; position:absolute; top:5px; width:0; height:0;
+  border-top:7px solid transparent; border-bottom:7px solid transparent;
+}
+.candy.wrap::before{ left:-10px; border-right:12px solid var(--c1); }
+.candy.wrap::after{ right:-10px; border-left:12px solid var(--c1); }
+.candy.star{ width:30px;height:30px;margin:-15px 0 0 -15px;
+  background:var(--c1);
+  -webkit-clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+@keyframes candyBurst{
+  0%{opacity:1; transform:translate(0,0) scale(.3) rotate(0)}
+  30%{opacity:1; transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(calc(var(--rot) * .4))}
+  100%{opacity:0; transform:translate(calc(var(--dx) * 1.25), 75vh) scale(1) rotate(var(--rot))}
+}
+@-webkit-keyframes candyBurst{
+  0%{opacity:1; -webkit-transform:translate(0,0) scale(.3) rotate(0)}
+  30%{opacity:1; -webkit-transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(calc(var(--rot) * .4))}
+  100%{opacity:0; -webkit-transform:translate(calc(var(--dx) * 1.25), 75vh) scale(1) rotate(var(--rot))}
+}
+#status.win{
+  font-size:1.25rem;
+  color:#0072ce;
+}
+@media (prefers-reduced-motion:reduce){
+  .card.pop, .card.win{ -webkit-animation:none; animation:none; box-shadow:0 0 0 3px #ff4fa3, 0 0 18px rgba(255,79,163,.6); }
+  .candy-layer{ display:none; }
+  .combo{ -webkit-animation-duration:.01s; animation-duration:.01s; }
+}
+
+/* ===== Drag and drop practice ===== */
+.dd-bank{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
+  min-height:58px; padding:10px;
+  background:rgba(255,255,255,.95);
+  border:1.5px dashed rgba(42,42,42,.4); border-radius:8px;
+  position:-webkit-sticky; position:sticky; top:8px; z-index:20;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+.dd-chip{
+  -webkit-appearance:none; appearance:none;
+  font-family:inherit; font-size:1rem; font-weight:600; line-height:1.2;
+  color:#fff; background:var(--accent);
+  border:2px solid var(--accent); border-radius:6px;
+  padding:.4rem .7rem; cursor:grab;
+  touch-action:none;                     /* lets a finger drag the phrase instead of scrolling */
+  -webkit-user-select:none; user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.dd-chip.selected{ background:#f2a900; border-color:#f2a900; color:#1e1e1e; box-shadow:0 0 0 3px rgba(242,169,0,.3); }
+.dd-chip.dragging{ opacity:.35; }
+.dd-chip.dd-ghost{
+  position:fixed; z-index:10001; pointer-events:none; margin:0;
+  -webkit-transform:translate(-50%,-50%) rotate(-3deg); transform:translate(-50%,-50%) rotate(-3deg);
+  box-shadow:0 8px 18px rgba(0,0,0,.3); cursor:grabbing;
+}
+.dd-list{ list-style:none; margin:14px 0 0; padding:0; display:grid; gap:10px; text-align:left; counter-reset:dd; }
+.dd-item{
+  counter-increment:dd;
+  background:rgba(255,255,255,.9); border:1px solid rgba(0,0,0,.12); border-radius:8px;
+  padding:12px 14px;
+}
+.dd-line{ font-size:1.08rem; line-height:2.5; }
+.dd-line::before{ content:counter(dd) ") "; font-weight:700; color:var(--accent); }
+.dd-slot{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:150px; min-height:42px; margin:0 6px; padding:2px;
+  vertical-align:middle; line-height:1.2;
+  border:2px dashed rgba(11,42,74,.45); border-radius:8px;
+  background:rgba(11,42,74,.05); cursor:pointer;
+}
+.dd-slot.filled{ border-style:solid; background:#fff; }
+.dd-slot.over{ border-color:#f2a900; background:rgba(242,169,0,.15); }
+.dd-slot.correct{ border-color:var(--ok); background:#eafff1; }
+.dd-slot.incorrect{ border-color:var(--bad); background:#ffecec; }
+.dd-slot:focus-visible{ outline:3px solid #f2a900; outline-offset:2px; }
+.dd-slot .dd-chip{ margin:0; }
+.dd-slot{ flex-direction:column; gap:2px; }
+.dd-literal, .dd-literal-eg{ color:#0072ce; font-weight:700; }
+.dd-literal{ padding:0 .6rem; line-height:1.3; }
+.dd-slot.filled .dd-literal{ font-size:.9rem; padding:0 .3rem; }
+.dd-slot.filled .dd-literal::after{ content:" ="; color:#5a5a5a; font-weight:400; }
+.dd-slot.filled{ padding:3px 4px 4px; }
+.dd-slot{ min-width:96px; }
+.dd-bank .dd-chip{ min-width:76px; }
+.dd-listen{
+  -webkit-appearance:none; appearance:none;
+  width:34px; height:34px; margin-left:8px; vertical-align:middle;
+  border:1.5px solid var(--card); border-radius:50%;
+  background:rgba(255,255,255,.75); color:var(--card);
+  font-size:.75rem; line-height:1; cursor:pointer;
+}
+.dd-listen.speaking{ background:var(--card); color:#f2a900; }
+.dd-note{ min-height:1.3em; font-size:.95rem; font-weight:700; }
+.dd-note.good{ color:var(--ok); }
+.dd-note.bad{ color:var(--bad); }
+body.dd-dragging{ cursor:grabbing; }
+@media(max-width:600px){
+  .dd-bank{ gap:6px; padding:8px; }
+  .dd-chip{ font-size:.92rem; padding:.4rem .55rem; }
+  .dd-slot{ min-width:84px; margin:0 4px; }
+  .dd-line{ font-size:1rem; }
+}
+@media(pointer:coarse){ .dd-chip{ min-height:40px; } .dd-listen{ width:40px; height:40px; } }
+
+/* ===== Intro / How to play screen (plain – no coloured bars or boxes) ===== */
+html.intro-open, html.intro-open body{ overflow:hidden; }
+.intro{
+  position:fixed;
+  top:0;right:0;bottom:0;left:0;
+  inset:0;
+  z-index:10000;               /* above the floating QR + Home buttons */
+  background:rgba(28,28,28,.84);
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:max(16px, env(safe-area-inset-top)) 14px max(16px, env(safe-area-inset-bottom));
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.intro[hidden]{ display:none; }
+.intro-box{
+  margin:auto;                 /* centred when it fits, scrolls when it doesn't */
+  width:100%;
+  max-width:660px;
+  background:#fff;
+  border-radius:6px;
+  padding:1.5rem 1.5rem 1.4rem;
+  text-align:left;
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+  line-height:1.5;
+}
+.intro-eyebrow{
+  font-family:var(--btn-font);
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#5a5a5a;
+}
+.intro-box h2{
+  color:var(--accent);
+  font-size:clamp(1.5rem,4.5vw,2rem);
+  letter-spacing:1px;
+  line-height:1.2;
+  margin:.15rem 0 .5rem;
+}
+.intro-box h3{
+  font-family:var(--btn-font);
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin:1.2rem 0 .4rem;
+}
+.intro-box p{ max-width:none; margin:0 0 .6rem; opacity:1; }
+.intro-box ol, .intro-box ul{ margin:0 0 0 1.25rem; }
+.intro-box li{ margin-bottom:.3rem; }
+.intro-swaps{ margin:.2rem 0 0 1.25rem; }
+.intro-swap{ display:list-item; margin-bottom:.2rem; }
+.intro-swap .old{ color:#5a5a5a; }
+.intro-swap .new{ font-weight:700; color:var(--ink); }
+.intro-swap .new::before{ content:"→ "; font-weight:400; color:#5a5a5a; }
+.intro-actions{ text-align:center; margin-top:1.3rem; }
+button.btn.intro-start{
+  background:var(--card);
+  color:#fff;
+  padding:.9rem 2rem;
+  font-size:.85rem;
+}
+@media(hover:hover){ button.btn.intro-start:hover{ color:var(--brand-orange); } }
+@media(max-width:600px){
+  .intro-box{ padding:1.2rem 1.05rem 1.1rem; }
+}
+
+footer{
+  background:var(--card);
+  color:var(--muted);
+  text-align:center;
+  padding:1rem 12px calc(1rem + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);
+  font-size:.9rem;
+}
+
+@media(min-width:901px){
+  #game{ grid-template-columns:repeat(4,1fr); max-width:760px; gap:10px; }
+  .card{ min-height:72px; font-size:.82rem; padding:10px 8px; }
+}
+@media(max-width:900px){
+  #game{ grid-template-columns:repeat(3,1fr); max-width:540px; gap:9px; }
+  .card{ min-height:76px; font-size:.80rem; padding:9px 7px; }
+}
+@media(max-width:600px){
+  header{ padding:4.4rem 1rem 1rem; font-size:1.05rem; }
+  main{ padding:1.5rem .8rem calc(2.4rem + env(safe-area-inset-bottom)); }
+  #game{ grid-template-columns:repeat(2,1fr); max-width:360px; gap:8px; }
+  .links{ flex-direction:column; align-items:center; }
+  a.btn{ width:100%; max-width:320px; text-align:center; }
+  .card{ min-height:80px; font-size:.76rem; padding:8px 6px; border-radius:12px; }
+  .qr-toggle,.home-btn{ transform:scale(.95); transform-origin:top; }
+  .gapfill-input{ width:100%; }
+}
+@media(max-width:360px){
+  #game{ gap:6px; }
+  .card{ min-height:72px; font-size:.72rem; padding:6px 5px; }
+}
+
+/* ═══ Every screen: small phones → tablets → laptops → classroom projectors ═══ */
+img, svg, select, button{ max-width:100%; }
+h1, h2, h3, p, li, summary{ overflow-wrap:break-word; }
+
+/* QR and Home sit in the top corners of the page and scroll away with it,
+   so they never cover the cards or the exercise on a small screen */
+.qr-toggle, .home-btn, .qr-panel{ position:absolute; }
+.qr-toggle, .home-btn{ min-height:44px; }
+.home-btn{ display:inline-flex; align-items:center; }
+
+/* small tablets and big phones */
+@media(max-width:900px){
+  main{ padding-left:max(1rem, env(safe-area-inset-left)); padding-right:max(1rem, env(safe-area-inset-right)); }
+  .notes{ padding:.9rem .9rem; }
+}
+/* phones */
+@media(max-width:600px){
+  .controls{ gap:.5rem; }
+  button.btn{ padding:.7rem 1rem; }
+  .score-bar{ gap:.4rem 1.2rem; }
+  .gapfill-actions .gapfill-btn{ flex:1 1 auto; min-height:44px; }
+  .gapfill-tense{ font-size:.95rem; }
+  .voice-bar{ flex-direction:column; gap:.4rem; }
+  .voice-select{ width:100%; max-width:320px; font-size:16px; }
+  .dd-item{ padding:10px 12px; }
+  .dd-line{ line-height:2.3; }
+}
+/* very small phones (320px wide) */
+@media(max-width:360px){
+  header{ font-size:.92rem; letter-spacing:1px; }
+  .dd-chip{ font-size:.86rem; padding:.4rem .45rem; }
+  .dd-slot{ min-width:76px; }
+  .intro-box{ padding:1rem .85rem; }
+  button.btn{ letter-spacing:1px; }
+}
+/* phones held sideways: the phrase box must not stay stuck over the sentences */
+@media(max-height:520px){
+  .dd-bank{ position:static; }
+  header{ padding-top:.9rem; padding-bottom:.7rem; }
+  main{ padding-top:1rem; }
+  .intro-box{ padding-top:1rem; padding-bottom:1rem; }
+  .intro-box h3{ margin-top:.8rem; }
+}
+@media(max-height:520px) and (max-width:900px){
+  #game{ grid-template-columns:repeat(4,1fr); max-width:100%; }
+  .card{ min-height:60px; }
+}
+/* touch screens: finger-sized targets */
+@media(pointer:coarse){
+  button.btn, .gapfill-btn, .btn-sound, .voice-select{ min-height:44px; }
+  a.btn{ min-height:44px; display:inline-flex; align-items:center; justify-content:center; }
+  .notes summary{ padding:.4rem 0; }
+}
+/* big screens and classroom projectors: bigger cards and text */
+@media(min-width:1400px){
+  #game{ max-width:960px; gap:14px; }
+  .card{ min-height:96px; font-size:1.02rem; }
+  .card .card-num{ font-size:.8rem; }
+  .card .card-tag{ font-size:.66rem; }
+  .gapfill-wrap, .notes:not(.mini-lesson){ max-width:900px; }
+  .dd-line{ font-size:1.2rem; }
+  .dd-chip{ font-size:1.1rem; }
+  p{ font-size:1.08rem; }
+}
+
+/* ===== Mini lesson page ===== */
+.mini-lesson h2{ color:var(--accent); font-size:clamp(1.2rem,2vw,1.6rem); margin-bottom:.2rem; }
+.mini-lesson{ margin-top:1.4rem; padding:1.2rem 1.4rem; }
+.lesson-story{ font-size:1.15rem; line-height:1.6; margin:0 0 .8rem; max-width:none; }
+.lesson-story b{ color:var(--accent); }
+.lesson-swaps{ margin:0 0 1rem 1.2rem; line-height:1.6; columns:2; column-gap:2rem; }
+.lesson-sub{ font-size:1.15rem; color:var(--accent); margin:1.4rem 0 .3rem; }
+@media(max-width:600px){ .lesson-swaps{ columns:1; } }
+/* ===== Flat layout: no boxed cards, one reading column ===== */
+.bg-overlay{ background:rgba(245,245,245,.92); }
+.notes, details.mini-lesson, .mini-lesson{
+  background:none; border:none; border-radius:0; padding:0; max-width:760px;
+}
+.lesson-grid{ display:block; }
+.lesson-card{ margin:0 0 1.3rem; }
+.lesson-swaps{ columns:1; }
+.gapfill-tense, .gapfill-item, .dd-item{ background:none; border:none; border-radius:0; }
+.gapfill-tense{ padding:0; }
+.dd-item{ padding:8px 0; border-bottom:1px solid rgba(0,0,0,.12); }
+.gapfill-item{ padding:14px 0; border-bottom:1px solid rgba(0,0,0,.12); }
+.dd-item:last-child, .gapfill-item:last-child{ border-bottom:none; }
+/* ===== Projector readability: clear sans-serif font, slightly bigger text everywhere.
+   Change the percentages to make all text bigger or smaller (100% = browser default). ===== */
+html{ font-size:112.5%; }
+@media(max-width:600px){ html{ font-size:106.25%; } }
+body{ line-height:1.5; }
+
+/* ═══════════ Added for the homophones lesson ═══════════ */
+.fam-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; margin:.4rem 0 1rem; }
+table.fam{ width:100%; border-collapse:collapse; text-align:left; font-size:.98rem; }
+table.fam th{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:.68rem; letter-spacing:2px; text-transform:uppercase; color:#5a5a5a;
+  border-bottom:2px solid var(--card); padding:.4rem .6rem .4rem 0;
+}
+table.fam td{ border-bottom:1px solid rgba(0,0,0,.12); padding:.5rem .6rem .5rem 0; vertical-align:top; }
+table.fam td:first-child{ font-weight:700; color:var(--accent); white-space:nowrap; }
+table.fam i{ color:#5a5a5a; }
+.level-tag{
+  display:inline-block; margin-left:.5rem; padding:1px 8px; vertical-align:middle;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:.62rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:#fff; background:#007a70; border-radius:999px;
+}
+.pairs{ margin:0 0 1rem 1.2rem; line-height:1.7; columns:2; column-gap:2rem; }
+.pairs li{ break-inside:avoid; }
+@media(max-width:600px){ .pairs{ columns:1; } table.fam td:first-child{ white-space:normal; } }
+.block-head{
+  margin:2.2rem 0 .6rem; padding:.7rem 1rem; text-align:left;
+  background:var(--card); color:#fff; border-left:6px solid #f2a900; border-radius:6px;
+}
+.block-head b{ display:block; font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:.68rem; letter-spacing:2.5px; text-transform:uppercase; color:#f2a900; }
+.block-head span{ font-size:1.25rem; font-weight:700; }
+.block-head.pte{ border-left-color:#3ddc97; } .block-head.pte b{ color:#3ddc97; }
+.gapfill-wrap .block-head{ max-width:760px; margin-left:auto; margin-right:auto; }
+.pte-box{ border:1.5px solid var(--card); border-radius:8px; padding:.8rem 1rem; margin:.4rem 0 1rem; background:rgba(255,255,255,.9); }
+.pte-box p{ margin:0 0 .5rem; max-width:none; opacity:1; }
+.pte-box ul{ margin:0 0 0 1.2rem; line-height:1.6; }
+.level-tag.pte{ background:#0072ce; }
+.dd-slot{ min-width:84px; }
+.dd-note{ font-weight:400; }
+.dd-note.good, .dd-note.bad{ font-weight:700; }
+
+/* choose the word */
+.ch-item p{ text-align:left; font-size:1.05rem; margin-bottom:.6rem; }
+.ch-opts{ display:flex; flex-wrap:wrap; gap:.6rem; }
+.ch-opt{
+  -webkit-appearance:none; appearance:none; cursor:pointer;
+  font-family:inherit; font-size:1rem; font-weight:700;
+  color:var(--card); background:rgba(255,255,255,.85);
+  border:1.5px solid var(--card); border-radius:6px; padding:.5rem 1rem; min-height:44px;
+}
+@media(hover:hover){ .ch-opt:hover{ background:var(--card); color:#f2a900; } }
+.ch-opt.right{ background:#eafff1; border-color:var(--ok); color:var(--ok); }
+.ch-opt.wrong{ background:#ffecec; border-color:var(--bad); color:var(--bad); }
+.ch-item .gapfill-feedback{ text-align:left; font-weight:400; }
+.ch-item .gapfill-feedback.correct, .ch-item .gapfill-feedback.incorrect{ font-weight:700; }
+.ch-score{ font-weight:700; color:var(--accent); margin-top:1rem; min-height:1.5em; }
+</style>
+</head>
+
+<body>
+
+<div class="bg-gif" aria-hidden="true"></div>
+<div class="bg-overlay" aria-hidden="true"></div>
+
+<button class="qr-toggle" id="qrToggle" type="button" aria-label="Show QR code for this page" aria-expanded="false" aria-controls="qrPanel">QR</button>
+<div class="qr-panel" id="qrPanel" aria-label="QR code panel">
+  <div class="qr-title">Open this page on your phone</div>
+  <div class="qr-code" id="qrCode"></div>
+  <div class="qr-url" id="qrUrl"></div>
+</div>
+
+<a class="home-btn" href="https://modernenglish.au/">Home</a>
+
+<header>
+  MODERN ENGLISH AUSTRALIA
+  <span>KOALA SPIES SYDNEY</span>
+</header>
+
+<main>
+  <div class="level-badge">A1–B2 · K–12, ESL &amp; PTE · MINI LESSON</div>
+  <h1>Homophones – Mini Lesson and Practice</h1>
+  <p>
+    A short lesson on words that <strong>sound the same but are spelled differently</strong>, such as
+    <em>there</em>, <em>their</em> and <em>they&rsquo;re</em>. There are two blocks: <strong>everyday</strong> homophones first,
+    then <strong>academic, PTE-style</strong> homophones. Each block has its own practice.
+  </p>
+  <!-- CHANGE THESE LINKS (here and at the bottom of the page) if the games are saved under another name or folder -->
+  <div class="links lesson-link" style="margin-top:0">
+    <a href="../game/homophones.html" class="btn">Play the Homophones Listening Game<span class="arrow" aria-hidden="true">→</span></a>
+    <a href="../game/homophone-sticky-sofa.html" class="btn">Play Homophone Sticky Sofa<span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+
+  <section class="notes mini-lesson" id="miniLesson" aria-labelledby="lessonTitle">
+    <h2 id="lessonTitle">What Is a Homophone?</h2>
+    <p class="lesson-intro">
+      <strong>Homo</strong> means <em>same</em>. <strong>Phone</strong> means <em>sound</em>.
+      Homophones are words with the <strong>same sound</strong> but a <strong>different spelling and meaning</strong>. Read this aloud:
+    </p>
+    <p class="lesson-story">
+      &ldquo;<b>Our</b> train leaves in one <b>hour</b>. I can <b>see</b> the <b>sea</b> from <b>here</b>,
+      but I can&rsquo;t <b>hear</b> it. Do you <b>know</b>? <b>No</b>.&rdquo;
+    </p>
+    <p class="lesson-intro">
+      There are four pairs. When you <strong>speak</strong>, nobody can tell them apart. When you <strong>write</strong>,
+      you must choose, and a spell-checker will not help you, because both words are real words.
+      So you need the <strong>meaning</strong> and the <strong>grammar</strong> of the sentence to decide.
+    </p>
+
+    <div class="pte-box">
+      <p><strong>Taking PTE Academic?</strong> Homophones are essential to a good score, because a computer marks your spelling and it cannot hear what you meant.</p>
+      <ul>
+        <li><b>Write from Dictation:</b> you get one point for every word spelled correctly. <em>Their</em> for <em>there</em> is a lost point, and this task counts towards both Listening and Writing.</li>
+        <li><b>Listening: Fill in the Blanks:</b> you type the words you hear. The wrong spelling scores nothing.</li>
+        <li><b>Write Essay:</b> spelling is one of the things you are marked on.</li>
+      </ul>
+    </div>
+
+    <div class="block-head"><b>Block 1</b><span>Everyday homophones</span></div>
+
+    <h3 class="lesson-sub">1 · The big four <span class="level-tag">A1–A2</span></h3>
+    <p class="lesson-intro">These cause more spelling mistakes than any other words in English, for native speakers too. Each one has a quick test.</p>
+    <div class="lesson-grid">
+      <article class="lesson-card">
+        <div class="lesson-tag">1 · there · their · they&rsquo;re</div>
+        <ul>
+          <li><b>there</b> = a place. <i>Put it over <b>there</b>.</i> It has <u>here</u> inside it.</li>
+          <li><b>their</b> = belongs to them. <i>That is <b>their</b> car.</i></li>
+          <li><b>they&rsquo;re</b> = they are. <i><b>They&rsquo;re</b> late again.</i></li>
+        </ul>
+        <p class="lesson-tip"><strong>Test:</strong> can you say <em>they are</em>? → <em>they&rsquo;re</em>. Can you say <em>our</em>? → <em>their</em>.</p>
+      </article>
+
+      <article class="lesson-card">
+        <div class="lesson-tag">2 · to · too · two</div>
+        <ul>
+          <li><b>to</b> = direction, or before a verb. <i>I&rsquo;m going <b>to</b> school. I want <b>to</b> eat.</i></li>
+          <li><b>too</b> = also, or more than you want. <i>Me <b>too</b>! It&rsquo;s <b>too</b> hot.</i></li>
+          <li><b>two</b> = the number 2. <i>I have <b>two</b> sisters.</i></li>
+        </ul>
+        <p class="lesson-tip"><strong>Remember:</strong> <em>too</em> has <strong>too</strong> many o&rsquo;s. <em>Two</em> starts like <em>twice</em> and <em>twenty</em>.</p>
+      </article>
+
+      <article class="lesson-card">
+        <div class="lesson-tag">3 · your · you&rsquo;re</div>
+        <ul>
+          <li><b>your</b> = belongs to you. <i>Is this <b>your</b> bag?</i></li>
+          <li><b>you&rsquo;re</b> = you are. <i><b>You&rsquo;re</b> my best friend.</i></li>
+        </ul>
+        <p class="lesson-tip"><strong>Test:</strong> can you say <em>you are</em>? → <em>you&rsquo;re</em> ✓</p>
+      </article>
+
+      <article class="lesson-card">
+        <div class="lesson-tag">4 · its · it&rsquo;s</div>
+        <ul>
+          <li><b>its</b> = belongs to it. <i>The cat is licking <b>its</b> paw.</i></li>
+          <li><b>it&rsquo;s</b> = it is, or it has. <i><b>It&rsquo;s</b> raining. <b>It&rsquo;s</b> been a long day.</i></li>
+        </ul>
+        <p class="lesson-tip"><strong>Test:</strong> can you say <em>it is</em> or <em>it has</em>? → <em>it&rsquo;s</em>. If not, no apostrophe – like <em>his</em> and <em>hers</em>.</p>
+      </article>
+    </div>
+
+    <h3 class="lesson-sub">2 · Everyday pairs <span class="level-tag">A1–A2</span></h3>
+    <ul class="pairs">
+      <li><b>here</b> (this place) · <b>hear</b> (with your <u>ear</u>)</li>
+      <li><b>see</b> (with your eyes) · <b>sea</b> (the ocean)</li>
+      <li><b>know</b> (in your head) · <b>no</b> (not yes)</li>
+      <li><b>write</b> (with a pen) · <b>right</b> (correct; not left)</li>
+      <li><b>buy</b> (with money) · <b>by</b> (next to) · <b>bye</b> (goodbye)</li>
+      <li><b>for</b> (a present for you) · <b>four</b> (4)</li>
+      <li><b>one</b> (1) · <b>won</b> (past of win)</li>
+      <li><b>son</b> (a boy child) · <b>sun</b> (in the sky)</li>
+      <li><b>meet</b> (a person) · <b>meat</b> (food)</li>
+      <li><b>our</b> (belongs to us) · <b>hour</b> (60 minutes)</li>
+      <li><b>eight</b> (8) · <b>ate</b> (past of eat)</li>
+      <li><b>new</b> (not old) · <b>knew</b> (past of know)</li>
+      <li><b>which</b> (what one?) · <b>witch</b> (a magic woman in stories)</li>
+      <li><b>whole</b> (all of it) · <b>hole</b> (an empty space)</li>
+      <li><b>flour</b> (for baking) · <b>flower</b> (in the garden)</li>
+      <li><b>sale</b> (selling, cheap prices) · <b>sail</b> (a boat with wind)</li>
+      <li><b>tail</b> (a dog wags it) · <b>tale</b> (a story)</li>
+      <li><b>knight</b> (a soldier on a horse) · <b>night</b> (when it&rsquo;s dark)</li>
+      <li><b>pair</b> (two of something) · <b>pear</b> (a fruit)</li>
+      <li><b>blew</b> (past of blow) · <b>blue</b> (a colour)</li>
+      <li><b>dear</b> (loved; <i>oh dear</i>) · <b>deer</b> (a wild animal)</li>
+      <li><b>mail</b> (letters) · <b>male</b> (a man or boy animal)</li>
+      <li><b>bare</b> (with nothing on) · <b>bear</b> (a big animal)</li>
+      <li><b>great</b> (very good) · <b>grate</b> (cut cheese into small pieces)</li>
+    </ul>
+
+    <h3 class="lesson-sub">3 · Pairs that need more thought <span class="level-tag">B1</span></h3>
+    <div class="fam-wrap">
+      <table class="fam">
+        <thead><tr><th>Words</th><th>How to choose</th></tr></thead>
+        <tbody>
+          <tr><td>weather · whether</td><td><b>weather</b> = rain, sun, wind. <b>whether</b> = if. <i>I don&rsquo;t know <b>whether</b> the <b>weather</b> will be fine.</i></td></tr>
+          <tr><td>where · wear</td><td><b>where</b> = which place? <b>wear</b> = clothes. <i><b>Where</b> can I <b>wear</b> this?</i></td></tr>
+          <tr><td>whose · who&rsquo;s</td><td><b>whose</b> = belongs to who? <b>who&rsquo;s</b> = who is / who has. <i><b>Who&rsquo;s</b> the boy <b>whose</b> dog ran away?</i></td></tr>
+          <tr><td>passed · past</td><td><b>passed</b> is the verb. <i>She <b>passed</b> the test.</i> <b>past</b> is everything else. <i>We walked <b>past</b> the bank. In the <b>past</b>.</i></td></tr>
+          <tr><td>piece · peace</td><td>a <b>piece</b> of <u>pie</u>. <b>peace</b> = no war, quiet.</td></tr>
+          <tr><td>break · brake</td><td><b>break</b> = damage, or a rest. <b>brake</b> = stops a car or bike.</td></tr>
+          <tr><td>allowed · aloud</td><td><b>allowed</b> = you may. <b>aloud</b> = so people can hear (it has <u>loud</u> in it).</td></tr>
+          <tr><td>threw · through</td><td><b>threw</b> = past of throw. <b>through</b> = in one side and out the other.</td></tr>
+          <tr><td>wait · weight</td><td><b>wait</b> for the bus. <b>weight</b> = how heavy.</td></tr>
+          <tr><td>plane · plain</td><td><b>plane</b> = it flies. <b>plain</b> = simple, with nothing added.</td></tr>
+          <tr><td>bored · board</td><td><b>bored</b> = not interested. <b>board</b> = whiteboard, surfboard.</td></tr>
+          <tr><td>week · weak</td><td><b>week</b> = seven days. <b>weak</b> = not strong.</td></tr>
+          <tr><td>stair · stare</td><td><b>stair</b> = one step. <b>stare</b> = look for a long time. <i>Don&rsquo;t <b>stare</b>!</i></td></tr>
+          <tr><td>fair · fare</td><td><b>fair</b> = equal and right, or a show with rides. <b>fare</b> = the price of a bus or train ticket.</td></tr>
+          <tr><td>road · rode · rowed</td><td><b>road</b> = where cars drive. <b>rode</b> = past of ride. <b>rowed</b> = past of row a boat.</td></tr>
+          <tr><td>heal · heel</td><td><b>heal</b> = get better. <b>heel</b> = the back of your foot or shoe.</td></tr>
+          <tr><td>steal · steel</td><td><b>steal</b> = take without asking. <b>steel</b> = a strong metal.</td></tr>
+          <tr><td>loan · lone</td><td><b>loan</b> = money you borrow. <b>lone</b> = alone, only one. <i>a <b>lone</b> tree</i></td></tr>
+          <tr><td>cereal · serial</td><td><b>cereal</b> = breakfast food. <b>serial</b> = in a series; a <b>serial</b> number.</td></tr>
+          <tr><td>sent · scent · cent</td><td><b>sent</b> = past of send. <b>scent</b> = a smell. <b>cent</b> = 1/100 of a dollar.</td></tr>
+          <tr><td>prince · prints</td><td><b>prince</b> = a king&rsquo;s son. <b>prints</b> = marks left behind, or what a printer does.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="lesson-tip">
+      <strong>Listen for -ed:</strong> the past tense <em>-ed</em> often sounds like <em>t</em> or <em>d</em>, so it makes new homophones.
+      If it&rsquo;s an action that happened, add <em>-ed</em>.
+    </p>
+    <ul class="pairs">
+      <li><b>missed</b> (past of miss) · <b>mist</b> (light fog)</li>
+      <li><b>guessed</b> (past of guess) · <b>guest</b> (a visitor)</li>
+      <li><b>banned</b> (not allowed) · <b>band</b> (a music group)</li>
+      <li><b>passed</b> (past of pass) · <b>past</b> (before now)</li>
+    </ul>
+
+    <h3 class="lesson-sub">4 · Same sound in Australian English <span class="level-tag">B1</span></h3>
+    <p class="lesson-intro">
+      In Australian and British English, we don&rsquo;t say the <strong>r</strong> at the end of a syllable. So <em>floor</em> and <em>flaw</em> sound exactly the same.
+      In most American accents they don&rsquo;t.
+    </p>
+    <div class="fam-wrap">
+      <table class="fam">
+        <thead><tr><th>Words</th><th>How to choose</th></tr></thead>
+        <tbody>
+          <tr><td>floor · flaw</td><td><b>floor</b> = what you stand on. <b>flaw</b> = a mistake or weak point.</td></tr>
+          <tr><td>pour · poor · paw</td><td><b>pour</b> = make water flow. <b>poor</b> = no money, or unlucky. <b>paw</b> = an animal&rsquo;s foot.</td></tr>
+          <tr><td>sore · saw · soar</td><td><b>sore</b> = it hurts. <b>saw</b> = past of see. <b>soar</b> = fly high.</td></tr>
+          <tr><td>court · caught</td><td><b>court</b> = for tennis, or a law court. <b>caught</b> = past of catch.</td></tr>
+          <tr><td>fought · fort</td><td><b>fought</b> = past of fight. <b>fort</b> = a strong building.</td></tr>
+          <tr><td>taught · taut</td><td><b>taught</b> = past of teach. <b>taut</b> = pulled tight.</td></tr>
+          <tr><td>warn · worn</td><td><b>warn</b> = tell someone about danger. <b>worn</b> = past of wear; old and used.</td></tr>
+          <tr><td>stalk · stork</td><td><b>stalk</b> = a plant&rsquo;s stem. <b>stork</b> = a tall bird.</td></tr>
+          <tr><td>aunt · aren&rsquo;t</td><td><b>aunt</b> = your mum&rsquo;s or dad&rsquo;s sister. <b>aren&rsquo;t</b> = are not.</td></tr>
+          <tr><td>father · farther</td><td><b>father</b> = your dad. <b>farther</b> = more far.</td></tr>
+          <tr><td>tuna · tuner</td><td><b>tuna</b> = a fish. <b>tuner</b> = tunes a guitar or radio.</td></tr>
+          <tr><td>sauce · source</td><td><b>sauce</b> goes on food. <b>source</b> = where something comes from.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block-head pte"><b>Block 2</b><span>Academic homophones, PTE style</span></div>
+    <p class="lesson-intro">
+      PTE sentences come from lectures, textbooks and campus life. The words are more formal, and many of the traps are
+      a <strong>plural noun</strong> that sounds exactly like an <strong>abstract noun</strong>.
+    </p>
+
+    <h3 class="lesson-sub">5 · Plural or abstract noun? <span class="level-tag pte">B2 · PTE</span></h3>
+    <p class="lesson-intro">Ask: is it <strong>people or things you can count</strong> (<em>-ts</em>), or an <strong>idea</strong> (<em>-ce</em>)?</p>
+    <div class="fam-wrap">
+      <table class="fam">
+        <thead><tr><th>Words</th><th>How to choose</th></tr></thead>
+        <tbody>
+          <tr><td>patients · patience</td><td><b>patients</b> = people in hospital. <b>patience</b> = staying calm. <i>The <b>patients</b> waited with great <b>patience</b>.</i></td></tr>
+          <tr><td>residents · residence</td><td><b>residents</b> = people who live there. <b>residence</b> = the place. <i>a hall of <b>residence</b>.</i></td></tr>
+          <tr><td>assistants · assistance</td><td><b>assistants</b> = helpers. <b>assistance</b> = help. <i>financial <b>assistance</b>.</i></td></tr>
+          <tr><td>presents · presence</td><td><b>presents</b> = gifts. <b>presence</b> = being there. <i>the <b>presence</b> of water on Mars.</i></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="lesson-sub">6 · Academic pairs <span class="level-tag pte">B2 · PTE</span></h3>
+    <div class="fam-wrap">
+      <table class="fam">
+        <thead><tr><th>Words</th><th>How to choose</th></tr></thead>
+        <tbody>
+          <tr><td>principal · principle</td><td>The <b>principal</b> reason is the main one; the <b>principal</b> is the head of a school (your <u>pal</u>). A <b>principle</b> is a ru<u>le</u> or belief.</td></tr>
+          <tr><td>cite · site · sight</td><td><b>cite</b> = name a source. <i>You must <b>cite</b> your sources.</i> A <b>site</b> is a place or website. <b>sight</b> = seeing.</td></tr>
+          <tr><td>whether · weather</td><td><b>whether</b> = if. <i>It is unclear <b>whether</b> the results are reliable.</i> <b>weather</b> = rain and sun.</td></tr>
+          <tr><td>role · roll</td><td><b>role</b> = a job or function. <i>the <b>role</b> of government.</i> <b>roll</b> = turn over; a bread roll.</td></tr>
+          <tr><td>source · sauce</td><td><b>source</b> = where something comes from. <i>a reliable <b>source</b>.</i> <b>sauce</b> goes on food. (The same sound in Australian and British English.)</td></tr>
+          <tr><td>led · lead</td><td><b>led</b> = past of the verb lead. <i>The research <b>led</b> to a discovery.</i> <b>lead</b> (same sound) is the metal.</td></tr>
+          <tr><td>complement · compliment</td><td>To <b>complement</b> is to compl<u>e</u>te or go well with. <i>The two studies <b>complement</b> each other.</i> A <b>compliment</b> is a nice comment.</td></tr>
+          <tr><td>stationary · stationery</td><td><b>stationary</b> = not moving, like a p<u>ar</u>ked c<u>ar</u>. <b>stationery</b> = pens and pap<u>er</u>.</td></tr>
+          <tr><td>discrete · discreet</td><td><b>discrete</b> = separate. <i>three <b>discrete</b> stages.</i> <b>discreet</b> = careful and private.</td></tr>
+          <tr><td>council · counsel</td><td>the local <b>council</b>. <b>counsel</b> = advice, or to advise.</td></tr>
+          <tr><td>course · coarse</td><td>a <b>course</b> of study; of <b>course</b>. <b>coarse</b> = rough.</td></tr>
+          <tr><td>minor · miner</td><td><b>minor</b> = small, not serious. <i>a <b>minor</b> change.</i> A <b>miner</b> works in a mine.</td></tr>
+          <tr><td>passed · past</td><td><b>passed</b> is the verb. <i>The law was <b>passed</b> in 2020.</i> <b>past</b> is everything else. <i>over the <b>past</b> decade.</i></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lesson-tip">
+      <strong>Nearly the same:</strong> <em>affect</em> (verb) and <em>effect</em> (noun) are not true homophones, but in fast speech they
+      sound almost identical. <i>Stress <b>affects</b> sleep. It has an <b>effect</b> on sleep.</i>
+    </p>
+
+    <h3 class="lesson-sub">Also: Australian and British spelling</h3>
+    <p class="lesson-intro">
+      In Australia, two common pairs change spelling with the grammar: the <strong>noun</strong> has <strong>c</strong> and the
+      <strong>verb</strong> has <strong>s</strong>.
+    </p>
+    <ul class="lesson-swaps">
+      <li><b>practice</b> (noun) · <b>practise</b> (verb): <i>I need more <b>practice</b>, so I <b>practise</b> every day.</i></li>
+      <li><b>licence</b> (noun) · <b>license</b> (verb): <i>a driver&rsquo;s <b>licence</b>; a <b>licensed</b> restaurant.</i></li>
+    </ul>
+    <p class="lesson-tip">
+      <strong>Remember:</strong> it works like <em>advice</em> (noun) and <em>advise</em> (verb), which you can hear.
+      American English uses <em>practice</em> and <em>license</em> for both.
+    </p>
+    <p class="lesson-tip">
+      <strong>Accents matter:</strong> in Australian English, <em>caught</em> and <em>court</em>, and <em>saw</em> and <em>sore</em>,
+      sound the same. In most American accents they do not. See section 4 for more pairs like these.
+    </p>
+  </section>
+
+  <section class="gapfill-wrap" aria-labelledby="gapfillTitle">
+    <div class="block-head"><b>Block 1 · Practice</b><span>Everyday homophones</span></div>
+    <h2 id="gapfillTitle">Practice 1: Drag and Drop <span class="level-tag">A1–A2</span></h2>
+    <p class="gapfill-intro">
+      Drag the correct word into each gap – or tap a word, then tap the gap.
+      Use the tests from the lesson: can you say <em>they are</em>, <em>you are</em> or <em>it is</em>?
+    </p>
+
+    <div class="dd-bank" id="ddBank" aria-label="Words to choose from"></div>
+
+    <ol class="dd-list" id="ddList"></ol>
+
+    <div class="gapfill-actions">
+      <button type="button" class="gapfill-btn gap-submit" id="ddCheck">Check</button>
+      <button type="button" class="gapfill-btn gap-reveal" id="ddShow">Show Answers</button>
+      <button type="button" class="gapfill-btn gap-reveal" id="ddReset">Start Again</button>
+    </div>
+    <div class="gapfill-feedback" id="ddFeedback" role="status" aria-live="polite"></div>
+
+    <div class="voice-bar" style="margin-top:1.4rem">
+      <span>Press ▶ to hear a sentence. Voice:</span>
+      <select class="voice-select" id="voiceSelect">
+        <option value="">Loading voices…</option>
+      </select>
+      <span id="voiceStatus" style="font-size:.8rem;color:#5a5a5a"></span>
+    </div>
+  </section>
+
+  <section class="gapfill-wrap" aria-labelledby="chTitle">
+    <h2 id="chTitle">Practice 2: Choose the Word <span class="level-tag">A2–B1</span></h2>
+    <p class="gapfill-intro">
+      Both words sound the same. Which spelling is correct in the sentence? Tap your answer.
+    </p>
+    <div class="gapfill-list" id="chList"></div>
+    <div class="ch-score" id="chScore" role="status" aria-live="polite"></div>
+    <div class="gapfill-actions">
+      <button type="button" class="gapfill-btn gap-reveal" id="chReset">Start Again</button>
+    </div>
+  </section>
+
+  <section class="gapfill-wrap" aria-labelledby="dictTitle">
+    <h2 id="dictTitle">Practice 3: Write from Dictation <span class="level-tag">A2–B1</span></h2>
+    <p class="gapfill-intro">
+      Press <strong>▶ Listen</strong> and type the <strong>whole sentence</strong>. You can listen again and again.
+      You cannot hear the difference, so think about the <strong>meaning</strong> before you spell each word.
+    </p>
+    <div class="gapfill-list">
+      <article class="gapfill-item dict-item" data-sentence="Their dog is over there.">
+        <p><strong>1)</strong> Listen and write the sentence.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to dictation sentence 1">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input dict-input" type="text" placeholder="Type the sentence you hear" aria-label="Dictation sentence 1"
+               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
+        <div class="gapfill-answer">Answer: Their dog is over there. <span class="gapfill-meaning">(their = belongs to them · there = a place)</span></div>
+      </article>
+
+      <article class="gapfill-item dict-item" data-sentence="It's too late to go to the park.">
+        <p><strong>2)</strong> Listen and write the sentence.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to dictation sentence 2">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input dict-input" type="text" placeholder="Type the sentence you hear" aria-label="Dictation sentence 2"
+               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
+        <div class="gapfill-answer">Answer: It's too late to go to the park. <span class="gapfill-meaning">(it's = it is · too = more than you want · to = direction)</span></div>
+      </article>
+
+      <article class="gapfill-item dict-item" data-sentence="I don't know whether the weather will be fine.">
+        <p><strong>3)</strong> Listen and write the sentence.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to dictation sentence 3">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input dict-input" type="text" placeholder="Type the sentence you hear" aria-label="Dictation sentence 3"
+               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
+        <div class="gapfill-answer">Answer: I don't know whether the weather will be fine. <span class="gapfill-meaning">(whether = if · weather = rain or sun)</span></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="gapfill-wrap" aria-labelledby="ch2Title">
+    <div class="block-head pte"><b>Block 2 · Practice</b><span>Academic homophones, PTE style</span></div>
+    <h2 id="ch2Title">Practice 4: Choose the Word <span class="level-tag pte">B2 · PTE</span></h2>
+    <p class="gapfill-intro">
+      These sentences are like the ones you hear in PTE Academic: lectures, research and campus life. Tap the correct spelling.
+    </p>
+    <div class="gapfill-list" id="ch2List"></div>
+    <div class="ch-score" id="ch2Score" role="status" aria-live="polite"></div>
+    <div class="gapfill-actions">
+      <button type="button" class="gapfill-btn gap-reveal" id="ch2Reset">Start Again</button>
+    </div>
+  </section>
+
+  <section class="gapfill-wrap" aria-labelledby="dict2Title">
+    <h2 id="dict2Title">Practice 5: Write from Dictation, PTE Style <span class="level-tag pte">B2 · PTE</span></h2>
+    <p class="gapfill-intro">
+      In the real test you hear each sentence <strong>once</strong> and score <strong>one point for every correct word</strong>.
+      Try to write each sentence after one listen. Then listen again to check the words that sound the same.
+    </p>
+    <div class="gapfill-list">
+      <article class="gapfill-item dict-item" data-sentence="The principal reason for the change was not explained.">
+        <p><strong>1)</strong> Listen and write the sentence.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to dictation sentence 4">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input dict-input" type="text" placeholder="Type the sentence you hear" aria-label="Dictation sentence 4"
+               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
+        <div class="gapfill-answer">Answer: The principal reason for the change was not explained. <span class="gapfill-meaning">(principal = main)</span></div>
+      </article>
+
+      <article class="gapfill-item dict-item" data-sentence="Students must cite their sources at the end of the essay.">
+        <p><strong>2)</strong> Listen and write the sentence.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to dictation sentence 5">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input dict-input" type="text" placeholder="Type the sentence you hear" aria-label="Dictation sentence 5"
+               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
+        <div class="gapfill-answer">Answer: Students must cite their sources at the end of the essay. <span class="gapfill-meaning">(cite = name a source · their = belongs to them · sources = where information comes from)</span></div>
+      </article>
+
+      <article class="gapfill-item dict-item" data-sentence="The lecture will cover the role of patients in medical research.">
+        <p><strong>3)</strong> Listen and write the sentence.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to dictation sentence 6">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input dict-input" type="text" placeholder="Type the sentence you hear" aria-label="Dictation sentence 6"
+               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
+        <div class="gapfill-answer">Answer: The lecture will cover the role of patients in medical research. <span class="gapfill-meaning">(role = function · patients = people in hospital)</span></div>
+      </article>
+
+      <article class="gapfill-item dict-item" data-sentence="Researchers do not know whether the weather affects the results.">
+        <p><strong>4)</strong> Listen and write the sentence.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to dictation sentence 7">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input dict-input" type="text" placeholder="Type the sentence you hear" aria-label="Dictation sentence 7"
+               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
+        <div class="gapfill-answer">Answer: Researchers do not know whether the weather affects the results. <span class="gapfill-meaning">(whether = if · weather = rain or sun · affects = the verb)</span></div>
+      </article>
+
+      <article class="gapfill-item dict-item" data-sentence="Residents were not allowed to attend the council meeting.">
+        <p><strong>5)</strong> Listen and write the sentence.</p>
+        <button type="button" class="speak-btn" aria-label="Listen to dictation sentence 8">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/></svg>
+          Listen
+        </button>
+        <input class="gapfill-input dict-input" type="text" placeholder="Type the sentence you hear" aria-label="Dictation sentence 8"
+               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <div class="gapfill-actions">
+          <button type="button" class="gapfill-btn gap-submit">Submit</button>
+          <button type="button" class="gapfill-btn gap-reveal">Reveal Answer</button>
+        </div>
+        <div class="gapfill-feedback" role="status" aria-live="polite"></div>
+        <div class="gapfill-answer">Answer: Residents were not allowed to attend the council meeting. <span class="gapfill-meaning">(residents = people who live there · allowed = may · council = local government)</span></div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="links">
+    <a href="../game/homophones.html" class="btn">Play the Homophones Listening Game<span class="arrow" aria-hidden="true">→</span></a>
+    <a href="../game/homophone-sticky-sofa.html" class="btn">Play Homophone Sticky Sofa<span class="arrow" aria-hidden="true">→</span></a>
+    <a href="https://modernenglish.au/microlessons.html" class="btn">More Mini Lessons<span class="arrow" aria-hidden="true">→</span></a>
+    <a href="https://modernenglish.au/vocabularygames.html" class="btn">More Vocabulary Games<span class="arrow" aria-hidden="true">→</span></a>
+    <a href="https://modernenglish.au/" class="btn">Home<span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</main>
+
+<footer>
+  © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script>
+(function(){
+  const toggle  = document.getElementById("qrToggle");
+  const panel   = document.getElementById("qrPanel");
+  const box     = document.getElementById("qrCode");
+  const urlLabel= document.getElementById("qrUrl");
+  if(!toggle||!panel||!box||!urlLabel) return;
+  let made = false;
+  function make(){
+    const url = window.location.href;
+    urlLabel.textContent = url;
+    box.innerHTML = "";
+    if(typeof QRCode === "undefined"){
+      box.textContent = "QR unavailable on this connection – copy the link below.";
+      made = true;
+      return;
+    }
+    new QRCode(box,{ text:url, width:200, height:200, correctLevel:QRCode.CorrectLevel.M });
+    made = true;
+  }
+  toggle.addEventListener("click",()=>{
+    const open = panel.style.display === "block";
+    panel.style.display = open ? "none" : "block";
+    toggle.setAttribute("aria-expanded", open ? "false" : "true");
+    if(!open && !made) make();
+  });
+  document.addEventListener("click",(e)=>{
+    if(panel.style.display !== "block") return;
+    if(!panel.contains(e.target) && !toggle.contains(e.target)) panel.style.display = "none";
+  });
+})();
+</script>
+
+<script>
+const voiceSelect  = document.getElementById("voiceSelect");
+const voiceStatus  = document.getElementById("voiceStatus");
+let voices         = [];
+let selectedVoice  = null;
+let currentUtter   = null;
+let activeSpeakBtn = null;
+
+function populateVoices(){
+  voices = window.speechSynthesis.getVoices();
+  if(!voices.length) return;
+  voiceSelect.innerHTML = "";
+  const priority = ["AU","GB","NZ","US","CA","IE"];
+  const english  = voices.filter(v => v.lang.startsWith("en"));
+  english.sort((a,b)=>{
+    const ai = priority.findIndex(r => a.lang.includes(r));
+    const bi = priority.findIndex(r => b.lang.includes(r));
+    return (ai===-1?99:ai) - (bi===-1?99:bi);
+  });
+  const pool = english.length ? english : voices;
+  pool.forEach((v, i) => {
+    const opt = document.createElement("option");
+    opt.value = i;
+    const region = v.lang.split("-")[1] || "";
+    const flag = { AU:"🇦🇺", GB:"🇬🇧", US:"🇺🇸", NZ:"🇳🇿", CA:"🇨🇦", IE:"🇮🇪" }[region] || "🌐";
+    opt.textContent = `${flag} ${v.name} (${v.lang})`;
+    voiceSelect.appendChild(opt);
+  });
+  const auIdx = pool.findIndex(v => v.lang.includes("AU"));
+  voiceSelect.selectedIndex = auIdx >= 0 ? auIdx : 0;
+  setVoice();
+  const chosen = pool[voiceSelect.selectedIndex];
+  voiceStatus.textContent = chosen && chosen.lang.includes("AU")
+    ? "✓ Australian English detected"
+    : "Tip: change device language to English (AU) for Australian accent";
+}
+function setVoice(){
+  const pool = voices.filter(v => v.lang.startsWith("en"));
+  const usePool = pool.length ? pool : voices;
+  selectedVoice = usePool[parseInt(voiceSelect.value)] || null;
+}
+voiceSelect.addEventListener("change", setVoice);
+if(typeof speechSynthesis !== "undefined"){
+  populateVoices();
+  speechSynthesis.onvoiceschanged = populateVoices;
+} else {
+  voiceSelect.innerHTML = "<option>Not supported in this browser</option>";
+  voiceStatus.textContent = "Use Chrome, Edge, or Safari for TTS";
+}
+
+function speakerIcon(){
+  return `<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0">
+    <path d="M3 4.5A1.5 1.5 0 0 1 4.5 3H5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5A1.5 1.5 0 0 1 3 11.5v-7zm5.293-1.207a1 1 0 0 1 1.414 0A6.978 6.978 0 0 1 12 8a6.978 6.978 0 0 1-2.293 5.207 1 1 0 0 1-1.414-1.414A4.978 4.978 0 0 0 10 8a4.978 4.978 0 0 0-1.707-3.793 1 1 0 0 1 0-1.414z"/>
+  </svg>`;
+}
+
+function speak(text, btn){
+  if(typeof speechSynthesis === "undefined") return;
+  speechSynthesis.cancel();
+  if(activeSpeakBtn){
+    activeSpeakBtn.classList.remove("speaking");
+    activeSpeakBtn.innerHTML = speakerIcon() + " Listen";
+  }
+  if(activeSpeakBtn === btn){ activeSpeakBtn = null; return; }
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate = 0.88; utter.pitch = 1.0; utter.volume = 1.0;
+  if(selectedVoice) utter.voice = selectedVoice;
+  utter.onstart = () => {
+    btn.classList.add("speaking");
+    btn.innerHTML = speakerIcon() + " Speaking…";
+    activeSpeakBtn = btn;
+  };
+  utter.onend = utter.onerror = () => {
+    btn.classList.remove("speaking");
+    btn.innerHTML = speakerIcon() + " Listen";
+    if(activeSpeakBtn === btn) activeSpeakBtn = null;
+  };
+  currentUtter = utter;
+  speechSynthesis.speak(utter);
+}
+
+function normalizeText(str){
+  return str.toLowerCase()
+    .replace(/['']/g,"'").replace(/[""]/g,'"')
+    .replace(/\s+/g," ").trim()
+    .replace(/[.,!?;:]+$/g,"");
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   DRAG AND DROP PRACTICE: the student drags a word into each gap.
+   The words can be used again and again.
+   Works with a mouse, a finger, or by tapping a word and then a gap.
+   ══════════════════════════════════════════════════════════════════════ */
+(function(){
+  const DD_BANK = ["there", "their", "they're", "to", "too", "two", "your", "you're", "its", "it's"];
+  /* To change the exercise, edit DD_ITEMS:
+       text   = the sentence, with ___ where the gap goes
+       answer = the correct word(s)
+       why    = shown when the answer is right
+       hint   = shown when the answer is wrong */
+  const DD_ITEMS = [
+    { text:"I think ___ going to the beach on Saturday.",      answer:["they're"], why:"they're = they are",          hint:"Can you say “they are”?" },
+    { text:"The children left ___ bags on the bus.",           answer:["their"],   why:"their = belongs to them",     hint:"Who do the bags belong to?" },
+    { text:"Put the books over ___, next to the window.",      answer:["there"],   why:"there = a place",             hint:"This is a place." },
+    { text:"I'm going ___ the shop. Do you want anything?",    answer:["to"],      why:"to = direction",              hint:"This shows direction." },
+    { text:"This coffee is ___ hot to drink.",                 answer:["too"],     why:"too = more than you want",    hint:"More than you want: too many o's." },
+    { text:"She has ___ brothers and one sister.",             answer:["two"],     why:"two = the number 2",          hint:"This is a number." },
+    { text:"Excuse me, is this ___ phone?",                    answer:["your"],    why:"your = belongs to you",       hint:"Can you say “you are phone”? No." },
+    { text:"I think ___ right about that.",                    answer:["you're"],  why:"you're = you are",            hint:"Can you say “you are”?" },
+    { text:"Look! The dog is wagging ___ tail.",               answer:["its"],     why:"its = belongs to it",         hint:"Can you say “it is tail”? No." },
+    { text:"Take an umbrella. I think ___ going to rain.",     answer:["it's"],    why:"it's = it is",                hint:"Can you say “it is”?" }
+  ];
+
+  const bank = document.getElementById("ddBank");
+  const list = document.getElementById("ddList");
+  const fb   = document.getElementById("ddFeedback");
+  if(!bank || !list) return;
+
+  let selected = null, drag = null, locked = false, justDragged = null;
+  const slots = [];
+
+  function select(chip){
+    if(selected) selected.classList.remove("selected");
+    selected = chip;
+    if(chip) chip.classList.add("selected");
+  }
+  function clearMark(slot){
+    slot.classList.remove("correct", "incorrect");
+    slot.closest("li").querySelector(".dd-note").textContent = "";
+  }
+  // put a phrase on a sentence (or take it off again with text = "")
+  function setSlot(slot, text){
+    const old = slot.querySelector(".dd-chip");
+    if(old) old.remove();
+    if(text) slot.appendChild(makeChip(text));
+    clearMark(slot);
+    refresh();
+  }
+  function refresh(){
+    slots.forEach((slot, n) => {
+      const chip = slot.querySelector(".dd-chip");
+      slot.classList.toggle("filled", !!chip);
+      slot.setAttribute("aria-label", "Sentence " + (n + 1) + (chip ? ": " + chip.textContent : ": gap, no word chosen yet"));
+    });
+    fb.textContent = ""; fb.classList.remove("correct", "incorrect");
+  }
+
+  function makeChip(text){
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "dd-chip";
+    chip.textContent = text;
+    chip.addEventListener("pointerdown", e => {
+      if(locked || (e.button && e.button !== 0)) return;
+      drag = { chip:chip, x:e.clientX, y:e.clientY, ghost:null };
+    });
+    chip.addEventListener("click", e => {
+      e.stopPropagation();
+      if(locked || justDragged === chip) return;
+      const slot = chip.closest(".dd-slot");
+      if(!slot) select(selected === chip ? null : chip);          // in the box: choose it
+      else if(selected) setSlot(slot, selected.textContent);      // on a sentence: swap in the chosen one
+      else setSlot(slot, "");                                     // on a sentence: take it off
+    });
+    return chip;
+  }
+
+  function build(){
+    locked = false; select(null);
+    bank.innerHTML = ""; list.innerHTML = ""; slots.length = 0;
+    DD_BANK.forEach(text => bank.appendChild(makeChip(text)));
+
+    DD_ITEMS.forEach((item, n) => {
+      const li = document.createElement("li");
+      li.className = "dd-item";
+      const line = document.createElement("div");
+      line.className = "dd-line";
+      const parts = item.text.split("___");
+      line.appendChild(document.createTextNode(parts[0]));
+      const slot = document.createElement("span");
+      slot.className = "dd-slot";
+      slot.tabIndex = 0;
+      slot.setAttribute("role", "button");
+      const act = () => { if(!locked && selected) setSlot(slot, selected.textContent); };
+      slot.addEventListener("click", act);
+      slot.addEventListener("keydown", e => { if(e.target === slot && (e.key === "Enter" || e.key === " ")){ e.preventDefault(); act(); } });
+      slots.push(slot);
+      line.appendChild(slot);
+      line.appendChild(document.createTextNode(parts[1] || ""));
+      const listen = document.createElement("button");
+      listen.type = "button";
+      listen.className = "dd-listen";
+      listen.setAttribute("aria-label", "Listen to sentence " + (n + 1));
+      listen.textContent = "▶";
+      listen.addEventListener("click", () => speakPlain(item.text.replace("___", item.answer[0]), listen));
+      line.appendChild(listen);
+      const note = document.createElement("div");
+      note.className = "dd-note";
+      li.append(line, note);
+      list.appendChild(li);
+    });
+    refresh();
+  }
+
+  let speakingBtn = null;
+  function speakPlain(text, btn){
+    if(typeof speechSynthesis === "undefined") return;
+    speechSynthesis.cancel();
+    if(speakingBtn){ speakingBtn.classList.remove("speaking"); }
+    if(speakingBtn === btn){ speakingBtn = null; return; }
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.88;
+    if(selectedVoice) u.voice = selectedVoice;
+    u.onstart = () => { btn.classList.add("speaking"); speakingBtn = btn; };
+    u.onend = u.onerror = () => { btn.classList.remove("speaking"); if(speakingBtn === btn) speakingBtn = null; };
+    speechSynthesis.speak(u);
+  }
+
+  // ----- dragging (mouse, finger or pen) -----
+  function under(x, y){
+    const el = document.elementFromPoint(x, y);
+    return el ? { slot: el.closest(".dd-slot"), bank: el.closest(".dd-bank") } : {};
+  }
+  document.addEventListener("pointermove", e => {
+    if(!drag) return;
+    if(!drag.ghost){
+      if(Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < 8) return;
+      const g = drag.chip.cloneNode(true);
+      g.classList.add("dd-ghost"); g.classList.remove("selected");
+      document.body.appendChild(g);
+      drag.ghost = g;
+      select(null);
+    }
+    drag.ghost.style.left = e.clientX + "px";
+    drag.ghost.style.top  = e.clientY + "px";
+    const over = under(e.clientX, e.clientY).slot;
+    slots.forEach(s => s.classList.toggle("over", s === over));
+  });
+  function endDrag(e, cancelled){
+    if(!drag) return;
+    const d = drag; drag = null;
+    slots.forEach(s => s.classList.remove("over"));
+    if(!d.ghost) return;                       // a tap, not a drag: the click handler deals with it
+    d.ghost.remove();
+    justDragged = d.chip;
+    setTimeout(() => { justDragged = null; }, 60);
+    if(cancelled) return;
+    const from = d.chip.closest(".dd-slot");   // null when it came from the box
+    const hit = under(e.clientX, e.clientY);
+    const text = d.chip.textContent;
+    if(hit.slot && hit.slot !== from){ if(from) setSlot(from, ""); setSlot(hit.slot, text); }
+    else if(hit.bank && from) setSlot(from, "");               // dragged back to the box: take it off
+  }
+  document.addEventListener("pointerup", e => endDrag(e, false));
+  document.addEventListener("pointercancel", e => endDrag(e, true));
+
+  // ----- Check / Show Answers / Start Again -----
+  document.getElementById("ddCheck").addEventListener("click", () => {
+    if(locked) return;
+    select(null);
+    let right = 0, empty = 0;
+    slots.forEach((slot, n) => {
+      const item = DD_ITEMS[n];
+      const chip = slot.querySelector(".dd-chip");
+      const note = slot.closest("li").querySelector(".dd-note");
+      slot.classList.remove("correct", "incorrect");
+      note.textContent = "";
+      if(!chip){ empty++; return; }
+      const t = chip.textContent;
+      if(item.answer.indexOf(t) !== -1){
+        slot.classList.add("correct");
+        note.textContent = "✓ " + item.why;
+        note.className = "dd-note good";
+        right++;
+      }else{
+        slot.classList.add("incorrect");
+        note.textContent = "✗ Not this one. " + item.hint;
+        note.className = "dd-note bad";
+      }
+    });
+    fb.classList.remove("correct", "incorrect");
+    if(right === DD_ITEMS.length){
+      fb.textContent = "✓ All " + right + " correct – well done!";
+      fb.classList.add("correct");
+      locked = true;
+    }else{
+      fb.textContent = right + " / " + DD_ITEMS.length + " correct." + (empty ? " Fill every gap." : " Fix the red ones and check again.");
+      fb.classList.add("incorrect");
+    }
+  });
+  document.getElementById("ddShow").addEventListener("click", () => {
+    select(null);
+    slots.forEach((slot, n) => {
+      const item = DD_ITEMS[n];
+      setSlot(slot, item.answer[0]);
+      slot.classList.add("correct");
+      const note = slot.closest("li").querySelector(".dd-note");
+      note.textContent = item.why;
+      note.className = "dd-note good";
+    });
+    fb.textContent = "Here are the answers. Press Start Again to try by yourself.";
+    locked = true;
+  });
+  document.getElementById("ddReset").addEventListener("click", build);
+  document.addEventListener("click", e => { if(selected && !e.target.closest(".dd-chip, .dd-slot")) select(null); });
+
+  build();
+})();
+
+/* ===== Write from dictation: type the whole sentence =====
+   To change a sentence, edit data-sentence on its <article> (and the Answer line under it). */
+(function(){
+  const clean = t => t.toLowerCase().replace(/[‘’]/g, "'").replace(/[^a-z0-9' ]+/g, " ").replace(/\s+/g, " ").trim();
+  document.querySelectorAll(".dict-item").forEach(item => {
+    const sentence  = item.dataset.sentence;
+    const input     = item.querySelector(".dict-input");
+    const feedback  = item.querySelector(".gapfill-feedback");
+    const answerBox = item.querySelector(".gapfill-answer");
+    const speakBtn  = item.querySelector(".speak-btn");
+    const submit    = item.querySelector(".gap-submit");
+
+    speakBtn.addEventListener("click", () => speak(sentence, speakBtn));
+    submit.addEventListener("click", () => {
+      const typed = clean(input.value), right = clean(sentence);
+      feedback.classList.remove("correct", "incorrect");
+      if(!typed){
+        feedback.textContent = "Please type the sentence first.";
+        feedback.classList.add("incorrect");
+        return;
+      }
+      if(typed === right){
+        feedback.textContent = "✓ Correct!";
+        feedback.classList.add("correct");
+        return;
+      }
+      feedback.classList.add("incorrect");
+      // right sounds, wrong spelling? (words in the same group sound the same)
+      const SOUND = [["there","their","they're","theyre"],["to","too","two"],["its","it's"],["your","you're","youre"],
+                     ["whether","weather"],["principal","principle"],["allowed","aloud"],["we're","were","weir"],
+                     ["know","no"],["cite","site","sight"],["role","roll"],["patients","patience"],["residents","residence"],
+                     ["council","counsel"],["sources","sauces"],["affects","effects"],["read","reed"],["be","bee"],["fine","fined"],["late","lait"],["not","knot"],["said","sed"]];
+      const sound = w => { const g = SOUND.find(a => a.indexOf(w) !== -1); return g ? g[0] : w; };
+      if(typed.split(" ").map(sound).join(" ") === right.split(" ").map(sound).join(" ")){
+        feedback.textContent = "✗ Nearly! It sounds right, but check the spelling of the words that sound the same.";
+        return;
+      }
+      // how many of the words are there?
+      const need = right.split(" "), have = typed.split(" ");
+      let found = 0;
+      need.forEach(w => { const i = have.indexOf(w); if(i !== -1){ found++; have.splice(i, 1); } });
+      feedback.textContent = "✗ Not yet. You have " + found + " of " + need.length + " words. Listen again.";
+    });
+    input.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); submit.click(); } });
+    item.querySelector(".gap-reveal").addEventListener("click", () => answerBox.classList.toggle("show"));
+  });
+})();
+
+/* ===== Practice 2: choose the word =====
+   To change the exercise, edit CH_ITEMS:
+     text    = the sentence, with ___ where the gap goes
+     options = the words to choose from (the FIRST one is the correct answer; they are shuffled on screen)
+     why     = shown after the student answers */
+(function(){
+  const CH_EVERYDAY = [
+    { text:"I don't know ___ to take a jacket or not.",          options:["whether","weather"],       why:"whether = if. Weather is rain, sun and wind." },
+    { text:"We walked ___ the bank on the way home.",            options:["past","passed"],           why:"The verb is “walked”, so you need past." },
+    { text:"She ___ her driving test the first time.",           options:["passed","past"],           why:"This is the verb: pass, passed." },
+    { text:"___ jacket is this? Is it yours?",                   options:["Whose","Who's"],           why:"Whose = belongs to who? Who's = who is." },
+    { text:"Would you like a ___ of cake?",                      options:["piece","peace"],           why:"A piece of pie." },
+    { text:"You're not ___ to use your phone in the exam.",      options:["allowed","aloud"],         why:"allowed = you may. Aloud = so people can hear." },
+    { text:"Hit the ___! There's a kangaroo on the road.",       options:["brake","break"],           why:"A brake stops a car. Break = damage, or a rest." },
+    { text:"He ___ the ball over the fence.",                    options:["threw","through"],         why:"threw = past of throw." },
+    { text:"I can't ___ you. Can you speak up?",                 options:["hear","here"],             why:"You hear with your ear." },
+    { text:"We're going to ___ a new car next year.",            options:["buy","by","bye"],          why:"buy = with money. By = next to. Bye = goodbye." }
+  ];
+  const CH_ACADEMIC = [
+    { text:"The ___ aim of the study was to reduce costs.",                    options:["principal","principle"],   why:"principal = main. A principle is a rule or belief." },
+    { text:"Remember to ___ your sources at the end of the essay.",            options:["cite","site","sight"],     why:"cite = name a source. Site = a place. Sight = seeing." },
+    { text:"Nurses need a great deal of ___ in this job.",                     options:["patience","patients"],     why:"patience = staying calm (an idea). Patients = people in hospital." },
+    { text:"The hospital treats over two hundred ___ a day.",                  options:["patients","patience"],     why:"You can count them, so they are patients." },
+    { text:"Technology plays an important ___ in modern education.",           options:["role","roll"],             why:"role = a job or function." },
+    { text:"The university offers financial ___ to new students.",             options:["assistance","assistants"], why:"assistance = help (an idea). Assistants = helpers." },
+    { text:"All ___ of the building must attend the fire drill.",              options:["residents","residence"],   why:"residents = the people. Residence = the place." },
+    { text:"The discovery ___ to a new treatment for the disease.",            options:["led","lead"],              why:"led = past of the verb lead. Lead (same sound) is a metal." },
+    { text:"It is unclear ___ the results can be repeated.",                   options:["whether","weather"],       why:"whether = if." },
+    { text:"The traffic remained ___ for almost an hour.",                     options:["stationary","stationery"], why:"stationary = not moving. Stationery = pens and paper." },
+    { text:"The process has four ___ stages.",                                 options:["discrete","discreet"],     why:"discrete = separate. Discreet = careful and private." },
+    { text:"The two theories ___ each other rather than compete.",             options:["complement","compliment"], why:"complement = complete, go well with." },
+    { text:"Always check that your ___ of information is reliable.",           options:["source","sauce"],          why:"source = where something comes from." },
+    { text:"Only ___ changes were made to the final report.",                  options:["minor","miner"],           why:"minor = small. A miner works in a mine." }
+  ];
+
+  function quiz(ITEMS, listId, scoreId, resetId){
+    const list = document.getElementById(listId), score = document.getElementById(scoreId);
+    if(!list) return;
+    let done = 0, right = 0;
+    function build(){
+      list.innerHTML = ""; score.textContent = ""; done = 0; right = 0;
+      ITEMS.forEach((item, n) => {
+        const art = document.createElement("article");
+        art.className = "gapfill-item ch-item";
+        const p = document.createElement("p");
+        const num = document.createElement("strong");
+        num.textContent = (n + 1) + ") ";
+        p.appendChild(num);
+        p.appendChild(document.createTextNode(item.text.replace("___", "__________")));
+        const opts = document.createElement("div");
+        opts.className = "ch-opts";
+        const fb = document.createElement("div");
+        fb.className = "gapfill-feedback"; fb.setAttribute("role", "status"); fb.setAttribute("aria-live", "polite");
+        const order = item.options.slice().sort(() => Math.random() - .5);
+        let answered = false;
+        order.forEach(word => {
+          const b = document.createElement("button");
+          b.type = "button"; b.className = "ch-opt"; b.textContent = word;
+          b.addEventListener("click", () => {
+            if(answered) return;
+            answered = true; done++;
+            const ok = word === item.options[0];
+            if(ok) right++;
+            opts.querySelectorAll(".ch-opt").forEach(x => {
+              x.disabled = true;
+              if(x.textContent === item.options[0]) x.classList.add("right");
+              else if(x === b) x.classList.add("wrong");
+            });
+            fb.textContent = (ok ? "✓ " : "✗ ") + item.why;
+            fb.classList.add(ok ? "correct" : "incorrect");
+            p.childNodes[1].textContent = item.text.replace("___", item.options[0]);
+            if(done === ITEMS.length) score.textContent = "You got " + right + " out of " + ITEMS.length + (right === ITEMS.length ? " – well done!" : ". Press Start Again to try once more.");
+          });
+          opts.appendChild(b);
+        });
+        art.append(p, opts, fb);
+        list.appendChild(art);
+      });
+    }
+    document.getElementById(resetId).addEventListener("click", build);
+    build();
+  }
+  quiz(CH_EVERYDAY, "chList",  "chScore",  "chReset");
+  quiz(CH_ACADEMIC, "ch2List", "ch2Score", "ch2Reset");
+})();
+</script>
+
+</body>
+</html>
