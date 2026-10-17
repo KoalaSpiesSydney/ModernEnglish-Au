@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<!-- Bespoke Grammar Test Maker © Koala Spies Sydney. All rights reserved. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bespoke Grammar Test Maker: Free ESL Grammar Quiz and Test Generator | Modern English Australia</title>
+<meta name="description" content="Write your own grammar test: multiple choice, gap fill, correct or incorrect, word order and sentence rewriting. Print it with a QR code and answer key, or share it as an online test that marks itself. Free for teachers, nothing uploaded.">
+<link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-grammar-test-maker.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Serif+4:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Fredoka:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,500;0,700;1,500;1,700&family=Nunito:ital,wght@0,500;0,800;1,500;1,800&family=Playfair+Display:wght@700&display=swap">
+<style>
+/* =====================================================================
+   BESPOKE GRAMMAR TEST MAKER
+   One file, no server. The test is drawn on a <canvas>, so the preview,
+   the PDF and the print-out are always identical. The online version
+   carries the whole test inside its link (after the #), so nothing is
+   ever uploaded: the part after # is never sent to the web server.
+   ===================================================================== */
+:root{
+  --bench:#fffce6;      /* the site's cream page colour */
+  --panel:#ffffff;
+  --ink:#0f172a;
+  --soft:#475569;
+  --line:#dcd9c6;
+  --header:#1c1c1c;     /* header and footer, as on modernenglish.au */
+  --tag:#fde047;        /* the yellow of the site's tagline, on dark only */
+  --deep:#0e2861;       /* Modern English navy: primary buttons, headings */
+  --foil:#0e7c66;       /* Modern English teal, used sparingly */
+  --focus:#3968ea;
+  --warn:#b3261e;
+  --good:#2e6b45;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Koala Spies Sydney watermark: faint, repeated across the page behind the
+   panels. It is part of the page only, never of the printed tests. */
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%230f172a%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* ---------- header ---------- */
+.top{background:var(--header);color:#f8fafc}
+.top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
+/* the QR code in the top-left corner of the header */
+.top-in{align-items:center}
+.titleblock{flex:1 1 16rem;min-width:0}
+.qrbtn{flex:none;display:grid;justify-items:center;gap:.35rem;background:none;border:0;padding:0;cursor:pointer;color:#f8fafc;font-size:.78rem;font-weight:700;letter-spacing:.04em}
+.qrthumb{display:grid;place-items:center;width:112px;height:112px;box-sizing:content-box;padding:6px;background:#fff;border-radius:6px;box-shadow:0 2px 4px rgba(0,0,0,.35),0 10px 22px -8px rgba(0,0,0,.6);transition:transform .15s ease,box-shadow .15s ease}
+.qrbtn:hover .qrthumb{transform:translateY(-2px);box-shadow:0 3px 6px rgba(0,0,0,.4),0 16px 30px -10px rgba(0,0,0,.7)}
+.qrbtn:hover .qrcap{text-decoration:underline;text-underline-offset:.2em}
+.qrthumb canvas{display:block;width:112px;height:112px;image-rendering:pixelated}
+.qrph{display:grid;place-items:center;width:100%;height:100%;border:2px dashed #c3c8d2;border-radius:4px;color:#475569;font-weight:700;letter-spacing:.1em;line-height:1;font-size:.9rem}
+@media (max-width:520px){.qrthumb,.qrthumb canvas{width:92px;height:92px}}
+.top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:46ch}
+
+/* ---------- the bench: controls + preview ---------- */
+.bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(320px,470px) minmax(0,1fr);gap:1.5rem;align-items:start}
+.controls{display:grid;gap:.75rem;min-width:0}
+details.group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+details.group>summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.group>summary::-webkit-details-marker{display:none}
+details.group>summary::after{content:"";width:.55rem;height:.55rem;border-right:2px solid var(--soft);border-bottom:2px solid var(--soft);transform:rotate(45deg);transition:transform .15s ease;flex:none;margin-right:.2rem}
+details.group[open]>summary::after{transform:rotate(-135deg)}
+.group-body{padding:0 1rem 1rem;display:grid;gap:.8rem}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft)}
+label.f>span{font-weight:700;color:var(--ink)}
+label.f>span.hint{font-weight:400;color:var(--soft)}
+input[type=text],input[type=number],textarea,select{width:100%;padding:.55rem .65rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:1rem;min-height:44px}
+textarea{resize:vertical;min-height:4.5rem;line-height:1.4}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+.hint.warn{color:var(--warn);font-weight:700}
+.lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+.notice{margin:0;font-size:.85rem;line-height:1.45;color:var(--ink);background:#eef2fb;border:1px solid var(--line);border-left:4px solid var(--foil);border-radius:6px;padding:.55rem .7rem}
+.notice a{color:var(--deep);font-weight:700}
+.notice.warn{border-left-color:var(--warn)}
+.rowline{display:flex;gap:.45rem;align-items:center;flex-wrap:wrap;font-size:.95rem}
+.rowline select{width:auto;min-width:4.6rem;padding:.4rem .5rem}
+/* plain text buttons for adding things: no border, no fill, no pill shape */
+.chips{display:flex;flex-wrap:wrap;gap:.2rem 1.4rem}
+.chip{border:0;background:none;border-radius:0;padding:.3rem 0;font-size:.95rem;font-weight:700;color:var(--deep);cursor:pointer;min-height:38px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:.25em;text-decoration-thickness:1.5px}
+.chip:hover{text-decoration-color:currentColor}
+.chip.add::before{content:"+";display:inline-block;margin-right:.35em;font-weight:700}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg label{position:relative;text-align:center;padding:.5rem .4rem;cursor:pointer;font-size:.95rem;min-height:44px;display:flex;align-items:center;justify-content:center}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--deep);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:-3px}
+.swatches{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.sw{width:44px;height:44px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep)}
+input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep);flex:none}
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.btn:hover{background:#eef2fb}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:hover{background:#0a1d47}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+
+/* ---------- question cards in the editor ---------- */
+.qlist{display:grid;gap:.6rem;counter-reset:q}
+.qcard{border:1.5px solid var(--line);border-radius:8px;background:#fffef6;padding:.6rem .7rem .75rem;display:grid;gap:.55rem}
+.qcard:focus-within{border-color:#8a96b8}
+.qhead{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+.qhead .qn{font-weight:700;min-width:2.1rem;color:var(--deep)}
+.qhead select{width:auto;min-height:38px;padding:.3rem .45rem;font-size:.92rem}
+.qhead .qtype{flex:1 1 9.5rem}
+.qhead .qlvl{flex:0 0 auto}
+.qtools{display:flex;gap:.3rem;margin-left:auto}
+.icon{border:1.5px solid var(--line);background:#fff;border-radius:6px;width:38px;height:38px;cursor:pointer;font-weight:700;color:var(--soft);display:grid;place-items:center;padding:0}
+.icon:hover{border-color:var(--deep);color:var(--deep)}
+.icon:disabled{opacity:.35;cursor:default}
+.icon svg{width:16px;height:16px}
+.optrow{display:grid;grid-template-columns:auto auto 1fr auto;gap:.4rem;align-items:center}
+.optrow input[type=radio]{width:1.15rem;height:1.15rem;accent-color:var(--good);margin:0}
+.optrow .L{font-weight:700;color:var(--deep);width:1.1rem;text-align:center}
+.optrow input[type=text]{min-height:40px;padding:.4rem .55rem}
+.mixed{font-size:.9rem;color:var(--ink);background:#fff;border:1px dashed var(--line);border-radius:6px;padding:.35rem .55rem}
+.mixed b{color:var(--soft);font-weight:700}
+.qempty{margin:0;color:var(--soft);font-size:.95rem;padding:.4rem 0}
+
+/* ---------- preview ---------- */
+.stage{position:sticky;top:1rem;display:grid;gap:.8rem;min-width:0}
+.paper{background:#ece9d6;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.4rem);display:flex;justify-content:center}
+#preview{display:block;max-width:100%;max-height:74vh;width:auto;height:auto;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.25),0 14px 34px -10px rgba(15,23,42,.45)}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.pager{display:flex;align-items:center;gap:.5rem;font-size:.95rem}
+.pager .btn{padding:.3rem .8rem}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+.share{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;display:grid;gap:.7rem}
+.share h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:1.2rem}
+.fineprint{margin:0;font-size:.9rem;color:var(--soft)}
+.fineprint a,.terms a,.notes a{color:var(--deep);font-weight:700}
+
+/* ---------- the online test (students) ---------- */
+.player-wrap{max-width:880px;margin:0 auto;padding:1.25rem;display:grid;gap:1rem}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);min-width:0}
+.test-head{display:flex;gap:1rem;align-items:center;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+.qr{flex:none;display:grid;justify-items:center;gap:.2rem;color:var(--soft);background:none;border:0;padding:0;cursor:zoom-in}
+.qr-box{width:96px;height:96px;padding:5px;background:#fff;border:1px solid var(--line);border-radius:6px;display:block}
+.qr-box canvas{display:block;width:100%;height:100%;image-rendering:pixelated}
+.qr small{font-size:.72rem;line-height:1.2;text-align:center;max-width:9.5em}
+.test-title{min-width:0;display:grid;gap:.2rem}
+.test-title h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:1.45rem;line-height:1.2;font-variant-numeric:lining-nums}
+.test-title p{margin:0;color:var(--soft);font-size:.95rem}
+.test-body{padding:1.3rem 1.2rem 1.5rem;display:grid;gap:1.1rem}
+.start-row{display:flex;gap:.75rem;align-items:end;flex-wrap:wrap}
+.start-row label.f{flex:1 1 15rem;max-width:22rem}
+.pbar{height:8px;background:#e9e6d3;border-radius:4px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--deep);transition:width .2s ease}
+.qmeta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;color:var(--soft);font-size:.95rem}
+.qmeta strong{color:var(--ink)}
+.task{margin:0;font-weight:700;color:var(--deep)}
+.sentence{margin:0;font-size:clamp(1.2rem,2.6vw,1.5rem);line-height:1.7;max-width:38ch}
+.sentence.plain{min-height:0}
+.gap{display:inline-block;min-width:5.5em;border-bottom:2.5px solid var(--foil);margin:0 .15em;height:1.1em;vertical-align:baseline}
+.gapin{display:inline-block;width:8.5em;max-width:60%;font-size:inherit;border:0;border-bottom:2.5px solid var(--foil);border-radius:0;padding:0 .2em;min-height:0;background:#fffef6;margin:0 .15em}
+.opts{display:grid;gap:.6rem;max-width:34rem}
+.opt{display:flex;gap:.8rem;align-items:center;text-align:left;width:100%;min-height:54px;padding:.55rem .9rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:1.1rem}
+.opt:hover{border-color:var(--deep);background:#eef2fb}
+.opt .k{flex:none;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;background:#eef2fb;color:var(--deep);font-weight:700}
+.opt.picked{background:var(--deep);border-color:var(--deep);color:#fff}
+.opt.picked .k{background:#fff;color:var(--deep)}
+.opts[aria-busy=true] .opt{pointer-events:none}
+.keyword{display:inline-block;font-weight:700;letter-spacing:.06em;border:1.5px solid var(--deep);border-radius:4px;padding:0 .4em;color:var(--deep)}
+.ansline{display:flex;gap:.5rem;align-items:baseline;flex-wrap:wrap;font-size:1.2rem;max-width:40rem}
+.ansline input{flex:1 1 14rem;font-size:1.1rem}
+.built{min-height:3.2rem;border:1.5px dashed var(--line);border-radius:8px;padding:.45rem;display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;background:#fffef6}
+.built:empty::before{content:"Tap the words in order";color:var(--soft);font-size:.95rem;padding:0 .3rem}
+.bank{display:flex;flex-wrap:wrap;gap:.45rem}
+.word{border:1.5px solid var(--deep);background:#fff;color:var(--ink);border-radius:8px;padding:.45rem .75rem;font-size:1.1rem;cursor:pointer;min-height:44px}
+.word:hover{background:#eef2fb}
+.word.used{visibility:hidden}
+.built .word{background:var(--deep);color:#fff}
+.nav{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.result-top{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center}
+.badge{width:7.2rem;height:7.2rem;border-radius:50%;background:var(--deep);color:#fff;display:grid;place-items:center;text-align:center;border:4px solid var(--foil)}
+.badge b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:2.2rem;line-height:1;font-variant-numeric:lining-nums}
+.badge span{display:block;font-size:.78rem;letter-spacing:.04em;margin-top:.2rem}
+.result-top h3{margin:0 0 .25rem;font-family:"Source Serif 4",Georgia,serif;font-size:1.5rem;line-height:1.2;font-variant-numeric:lining-nums}
+.result-top p{margin:0;max-width:56ch}
+.score{display:flex;gap:.5rem 1.6rem;flex-wrap:wrap;padding:.8rem 1rem;background:#eef2fb;border:1px solid var(--line);border-left:4px solid var(--foil);border-radius:6px}
+.score div{display:grid}
+.score b{font-size:1.5rem;font-variant-numeric:tabular-nums;line-height:1.2}
+.score span{font-size:.85rem;color:var(--soft)}
+.review-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.review-list li{padding:.55rem .7rem;border:1px solid var(--line);border-radius:6px;display:grid;gap:.15rem}
+.review-list .t{font-weight:700}
+.review-list .t.ok{color:var(--good)}
+.review-list .t.no{color:var(--warn)}
+.review-list .why{font-size:.9rem;color:var(--soft)}
+#copyMsg{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(14,35,31,.82);display:grid;place-items:center;padding:1rem}
+.overlay-in{background:#fff;border-radius:var(--radius);padding:1rem;display:grid;gap:.7rem;justify-items:center;max-width:94vw}
+.overlay-in canvas{width:min(78vw,72vh);height:min(78vw,72vh);image-rendering:pixelated}
+.overlay-in p{margin:0;color:var(--soft);text-align:center}
+
+/* ---------- reading matter under the tool ---------- */
+.notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+.terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
+.terms h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+footer{background:var(--header);color:#cbd5e1;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer a{color:#fff}
+
+#printArea{display:none}
+/* the student's results sheet, only seen when printing */
+.sheet{font-family:"Source Sans 3",system-ui,Arial,sans-serif;color:#0f172a;padding:14mm;font-size:11pt;line-height:1.45}
+.sheet .sh-top{display:flex;gap:6mm;align-items:center;border-bottom:1.5pt solid #0e7c66;padding-bottom:4mm;margin-bottom:6mm}
+.sheet h1{font-family:"Source Serif 4",Georgia,serif;font-size:21pt;margin:0;color:#0e2861;font-variant-numeric:lining-nums}
+.sheet h2{font-size:12pt;margin:6mm 0 2mm}
+.sheet table{border-collapse:collapse;width:100%;font-size:10pt}
+.sheet td,.sheet th{text-align:left;padding:1.2mm 2mm 1.2mm 0;border-bottom:.5pt solid #dcd9c6;vertical-align:top}
+.sheet .big{display:flex;gap:12mm;margin:2mm 0 4mm}
+.sheet .big div b{display:block;font-size:19pt}
+.sheet .ok{color:#2e6b45;font-weight:700}.sheet .no{color:#b3261e;font-weight:700}
+.sheet .foot{margin-top:6mm;font-size:8.5pt;color:#475569}
+
+/* ---------- smaller screens: preview first, download bar stays in reach ---------- */
+@media (max-width:900px){
+  .bench{grid-template-columns:1fr;padding:1rem}
+  .stage{position:static;order:-1}
+  #preview{max-height:60vh}
+  .stage-bar .actions{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--panel);border-top:1px solid var(--line);padding:.6rem .8rem;padding-bottom:max(.6rem,env(safe-area-inset-bottom));justify-content:center}
+  .stage-bar .actions .btn{flex:1 1 auto;padding:.55rem .6rem}
+  body.maker{padding-bottom:5rem}
+}
+@media (max-width:520px){
+  .test-head{padding:.8rem;gap:.8rem}
+  .qr-box{width:76px;height:76px}
+  .test-body{padding:1rem .9rem 1.2rem}
+  .result-top{grid-template-columns:1fr}
+  .player-wrap{padding:1rem .75rem}
+}
+/* ---------- open layout: no card backings, raised buttons ----------
+   Sections sit straight on the page, divided by thin lines. Remove this
+   block to bring the white cards back. */
+details.group,.panel,.share,.terms-in,.qcard,.score,.review-list li{background:none;border:0;border-radius:0;box-shadow:none}
+details.group{border-bottom:1px solid var(--line)}
+details.group>summary{padding-left:0;padding-right:0}
+.group-body,.share,.terms-in,.test-head,.test-body,.printbar,.score{padding-left:0;padding-right:0}
+.paper{background:none;padding:0}
+#preview{box-shadow:0 1px 3px rgba(15,23,42,.2),0 16px 40px -12px rgba(15,23,42,.4)}
+.qlist{gap:0}
+.qcard{padding:.9rem 0;border-top:1px solid var(--line)}
+.qcard:first-child{border-top:0;padding-top:0}
+.review-list{gap:0}
+.review-list li{padding:.6rem 0;border-bottom:1px solid var(--line)}
+.share{border-top:1px solid var(--line);padding-top:1rem}
+.score{padding-top:0;padding-bottom:0}
+.btn,.opt,.word,.icon{box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
+.btn:hover,.opt:hover,.word:hover,.icon:hover{box-shadow:0 2px 4px rgba(15,23,42,.22),0 12px 24px -8px rgba(15,23,42,.48);transform:translateY(-1px)}
+.btn:active,.opt:active,.word:active,.icon:active{box-shadow:0 1px 2px rgba(15,23,42,.28);transform:translateY(0)}
+.btn[disabled],.icon:disabled{box-shadow:none;transform:none}
+.sw{box-shadow:0 0 0 1.5px var(--line),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+/* ---------- typing fields: white, with a firm bottom edge that says "write here" ---------- */
+input[type=text],input[type=number],textarea,select{background:#fff;border:1px solid #d5d3c2;border-bottom:2px solid #94a3b8;border-radius:6px 6px 3px 3px;box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 1px 2px rgba(15,23,42,.1),0 5px 14px -5px rgba(15,23,42,.28);transition:border-color .15s ease,box-shadow .15s ease}
+input[type=text]:hover,input[type=number]:hover,textarea:hover,select:hover{border-bottom-color:var(--deep)}
+input[type=text]:focus,input[type=number]:focus,textarea:focus,select:focus{outline:none;border-color:var(--deep);box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 5px 14px -5px rgba(15,23,42,.28),0 0 0 3px rgba(57,104,234,.22)}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
+select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23475569' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right .8rem center}
+/* the gap inside a sentence in the online test: a line to write on, not a box */
+input.gapin{display:inline-block;width:8.5em;max-width:60%;min-height:0;padding:0 .25em;margin:0 .15em;font-size:inherit;line-height:1.3;box-shadow:0 5px 12px -6px rgba(15,23,42,.3);border:0;border-bottom:2.5px solid var(--foil);border-radius:4px 4px 0 0;background:#fffef6}
+input.gapin:hover{border-bottom-color:var(--deep)}
+input.gapin:focus{border:0;border-bottom:2.5px solid var(--deep);background:#fff;box-shadow:0 5px 12px -6px rgba(15,23,42,.3),0 0 0 3px rgba(57,104,234,.22)}
+/* ---------- no horizontal lines: sections are separated by space alone ----------
+   (typing fields keep their writing edge; printed pages are not affected) */
+details.group,.qcard,.share,.share .teacher,.filebar,.printrow,.test-head,.lesson-head,.review-list li,.notes h2,.tline,.ltable th,.ltable td{border-top:0!important;border-bottom:0!important}
+details.group{margin-bottom:.35rem}
+.qcard{padding:.75rem 0}
+.notes h2{padding-bottom:0}
+.test-head{padding-bottom:.4rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- printing: only the test pages or the results sheet ---------- */
+@media print{
+  body>*:not(#printArea){display:none!important}
+  body{background:#fff none;padding:0!important}
+  #printArea{display:block}
+  #printArea>img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
+  #printArea>img:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+<!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
+     With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+</head>
+<body class="maker">
+
+<header class="top">
+  <div class="top-in">
+    <!-- THE QR CODE for the online test, top left. Teachers: it updates as the test changes. Students: it opens this test on a phone. -->
+    <button type="button" class="qrbtn" id="hdrQr" aria-label="Show a large QR code for the online test">
+      <span class="qrthumb off" id="hdrQrBox"><span class="qrph">QR</span></span>
+      <span class="qrcap" id="hdrQrCap">Share with students</span>
+    </button>
+    <div class="titleblock"><p class="eyebrow">Modern English Australia</p><h1 id="pageH1">Bespoke Grammar Test Maker</h1></div>
+    <p id="pageLead">Free for teachers. Write your own grammar questions, then print the test with an answer key or share it as an online test that marks itself. Nothing is uploaded.</p>
+  </div>
+</header>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<!-- =================================================================
+     THE MAKER (for teachers)
+     ================================================================= -->
+<main class="bench" id="maker">
+
+  <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
+
+    <details class="group" open>
+      <summary>1. The test</summary>
+      <div class="group-body">
+        <label class="f"><span>Title</span><input type="text" id="tTitle" maxlength="70" placeholder="e.g. Past tenses review"></label>
+        <label class="f"><span>Second line (optional)</span><input type="text" id="tSub" maxlength="90" placeholder="e.g. Unit 4 · Intermediate"></label>
+        <label class="f"><span>Instructions (optional)</span><textarea id="tInstr" rows="2" maxlength="300"></textarea></label>
+        <label class="check"><input type="checkbox" data-k="nameLine">Name, date and score line</label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>2. Questions</summary>
+      <div class="group-body">
+        <div class="qlist" id="qlist"></div>
+        <div>
+          <p class="lab">Add a question</p>
+          <div class="chips" id="addChips"></div>
+        </div>
+        <p class="hint">Type three underscores ___ where the gap goes. Put a word to change in brackets, like ___ (go). For more than one correct answer, separate them with / like <em>went / did go</em>.</p>
+        <div class="rowline">
+          <button type="button" class="btn quiet" id="sortBtn" hidden>Sort by level, easiest first</button>
+          <button type="button" class="btn quiet" id="clearQBtn">Remove all questions</button>
+        </div>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>3. Scoring</summary>
+      <div class="group-body">
+        <div class="seg" role="radiogroup" aria-label="Scoring">
+          <label><input type="radio" name="mode" value="points">1 point each</label>
+          <label><input type="radio" name="mode" value="level">Level test</label>
+        </div>
+        <p class="hint" id="modeHint"></p>
+        <div class="rowline" id="stopRow">
+          <span>Stop after</span>
+          <select id="stopSel" aria-label="Wrong answers in a row before the test stops">
+            <option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select>
+          <span>wrong answers in a row</span>
+        </div>
+        <label class="check"><input type="checkbox" data-k="key">Add an answer key page</label>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary>4. QR code</summary>
+      <div class="group-body">
+        <div class="seg" role="radiogroup" aria-label="QR code">
+          <label><input type="radio" name="qr" value="online">Online test</label>
+          <label><input type="radio" name="qr" value="own">My own link</label>
+          <label><input type="radio" name="qr" value="none">None</label>
+        </div>
+        <label class="f" id="ownLinkRow"><span>Your link</span><input type="text" id="tLink" maxlength="300" inputmode="url" placeholder="https://…"></label>
+        <p class="hint" id="qrHint">The QR code goes in the top-left corner of the test.</p>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary>Design</summary>
+      <div class="group-body">
+        <div>
+          <p class="lab">Colour</p>
+          <div class="swatches" id="swatches" role="group" aria-label="Colours">
+            <input type="color" data-k="cMain" aria-label="Choose your own colour">
+          </div>
+        </div>
+        <label class="f"><span>Font</span><select data-k="font" id="fontSel"></select></label>
+        <div>
+          <p class="lab">Text size</p>
+          <div class="seg" role="radiogroup" aria-label="Text size">
+            <label><input type="radio" name="tsize" value="s">Small</label>
+            <label><input type="radio" name="tsize" value="m">Medium</label>
+            <label><input type="radio" name="tsize" value="l">Large</label>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Columns</p>
+          <div class="seg" role="radiogroup" aria-label="Columns">
+            <label><input type="radio" name="cols" value="1">One</label>
+            <label><input type="radio" name="cols" value="2">Two</label>
+          </div>
+        </div>
+        <div>
+          <p class="lab">Paper size</p>
+          <div class="seg" role="radiogroup" aria-label="Paper size">
+            <label><input type="radio" name="paper" value="a4">A4</label>
+            <label><input type="radio" name="paper" value="letter">Letter</label>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <div class="rowline">
+      <button type="button" class="btn quiet" id="fileSaveBtn">Save test file</button>
+      <label class="btn quiet" for="fileOpen" style="cursor:pointer">Open test file</label>
+      <input type="file" id="fileOpen" accept=".json,application/json" hidden>
+    </div>
+    <button type="button" class="btn quiet" id="resetBtn">Start again with the example test</button>
+  </form>
+
+  <section class="stage" aria-label="Preview">
+    <div class="paper"><canvas id="preview" role="img" aria-label="Preview of the printable test"></canvas></div>
+    <div class="stage-bar">
+      <div class="pager" id="pager">
+        <button type="button" class="btn" id="prevBtn" aria-label="Previous page">‹</button>
+        <span id="pagerText"></span>
+        <button type="button" class="btn" id="nextBtn" aria-label="Next page">›</button>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn main" id="pdfBtn">Download PDF</button>
+        <button type="button" class="btn" id="printBtn">Print</button>
+      </div>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+
+    <div class="share">
+      <h2>Online test</h2>
+      <p class="hint">Students open the link on a phone or computer, do the test one question at a time and see their result. The whole test is inside the link, so nothing is uploaded.</p>
+      <div class="actions">
+        <button type="button" class="btn main" id="copyLinkBtn">Copy student link</button>
+        <a class="btn" id="openLink" href="#" target="_blank" rel="noopener">Try it as a student</a>
+      </div>
+      <p class="hint" id="linkMsg" role="status" aria-live="polite"></p>
+    </div>
+    <p class="fineprint">Your test is saved on this device only, so it is still here next time. <a href="#terms">Terms of use</a></p>
+  </section>
+</main>
+
+<!-- =================================================================
+     THE ONLINE TEST (what students see when they open a test link)
+     ================================================================= -->
+<main class="player-wrap" id="player" hidden>
+  <section class="panel" aria-labelledby="pTitle">
+    <div class="test-head">
+      <div class="test-title">
+        <h2 id="pTitle">Grammar test</h2>
+        <p id="pSub"></p>
+      </div>
+    </div>
+    <div class="test-body">
+      <div id="pStart" style="display:grid;gap:1rem">
+        <p id="pInstr" style="margin:0;max-width:62ch"></p>
+        <p class="hint" id="pRule"></p>
+        <div class="start-row">
+          <label class="f"><span>Your name (optional)</span><input type="text" id="pName" maxlength="60" autocomplete="off" placeholder="It appears on your results"></label>
+          <button type="button" class="btn main" id="pStartBtn">Start the test</button>
+        </div>
+        <p class="hint">Your answers stay on this device. Nothing is sent or saved.</p>
+      </div>
+      <div id="pQ" hidden style="display:grid;gap:1rem">
+        <div class="pbar" aria-hidden="true"><i id="pBar" style="width:0"></i></div>
+        <div class="qmeta"><span><strong id="pNum">Question 1</strong> <span id="pOf"></span></span><span id="pLvl"></span></div>
+        <p class="task" id="pTask"></p>
+        <div id="pBody" style="display:grid;gap:1rem"></div>
+        <div class="nav" id="pNav"></div>
+      </div>
+      <div id="pR" hidden style="display:grid;gap:1.2rem">
+        <div class="result-top">
+          <div class="badge" aria-hidden="true"><div><b id="rBadge"></b><span id="rBadgeSub"></span></div></div>
+          <div><h3 id="rHead" tabindex="-1"></h3><p id="rSummary"></p></div>
+        </div>
+        <div class="score" id="rScore"></div>
+        <div class="nav">
+          <button type="button" class="btn" id="rPrint">Print my results</button>
+          <button type="button" class="btn" id="rCopy">Copy my results</button>
+          <button type="button" class="btn quiet" id="rAgain">Try again</button>
+        </div>
+        <p id="copyMsg" role="status" aria-live="polite"></p>
+        <div style="display:grid;gap:.5rem">
+          <p style="margin:0"><strong>Your answers</strong></p>
+          <ol class="review-list" id="rList"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+  <p class="fineprint" style="text-align:center">Made with the <a href="bespoke-grammar-test-maker.html">Bespoke Grammar Test Maker</a>. Teachers: make your own test for free.</p>
+</main>
+<div class="overlay" id="qrOverlay" hidden>
+  <div class="overlay-in" role="dialog" aria-modal="true" aria-label="QR code for this test">
+    <div id="qrBig"></div>
+    <p id="qrBigMsg">Scan to open this test on a phone.</p>
+    <div class="nav" style="justify-content:center">
+      <button type="button" class="btn" id="qrCopy" hidden>Copy student link</button>
+      <button type="button" class="btn main" id="qrClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<section class="notes" id="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>Give the test a title, then add your questions. Mix the five question types as you like.</li>
+      <li>Choose the scoring. "1 point each" is a normal test. "Level test" puts the questions in order of difficulty and stops after a few wrong answers in a row.</li>
+      <li>Download the PDF or print it. For the online test, copy the student link and share it, or put its QR code on the paper.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Question types</h2>
+    <ul>
+      <li><strong>Multiple choice:</strong> a sentence with a gap and two to four answers.</li>
+      <li><strong>Gap fill:</strong> students write the missing word. Add a word in brackets for verb forms.</li>
+      <li><strong>Correct or incorrect:</strong> students decide if a sentence is right, and correct it if not.</li>
+      <li><strong>Word order:</strong> the words are mixed up for you. Students put them back in order.</li>
+      <li><strong>Rewrite the sentence:</strong> a key word transformation, like in Cambridge exams.</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Questions</h2>
+    <dl>
+      <dt>How does the online test mark written answers?</dt>
+      <dd>It ignores capital letters, extra spaces and the full stop at the end. Anything else must match one of your answers, so list every answer you accept, separated by /.</dd>
+      <dt>The QR code for the online test is very busy. Why?</dt>
+      <dd>The whole test is inside the link, so long tests make long links. Shorten the student link with a link shortener, then choose "My own link" and paste the short link.</dd>
+      <dt>Where is my test saved?</dt>
+      <dd>Only in this browser on this device. To keep a copy, move it to another computer or share it with a colleague, use "Save test file".</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
+     the site goes public, and change the date when you edit it. -->
+<section class="terms" id="terms" tabindex="-1">
+  <div class="terms-in">
+    <h2>Terms of use</h2>
+    <p class="updated">Last updated 17 October 2026</p>
+    <p>The Bespoke Grammar Test Maker is a free tool for teachers. By making, sharing, downloading or printing tests you agree to these terms.</p>
+    <h3>Your questions</h3>
+    <ul>
+      <li>You write the questions, and you are responsible for them. Do not copy questions from published books or exams unless you have the right to use them.</li>
+      <li>Use the tests for teaching. Do not sell them or include them in a product you sell.</li>
+    </ul>
+    <h3>What you must not do</h3>
+    <ul>
+      <li>Copy, resell or republish this tool or its code.</li>
+    </ul>
+    <h3>Your information</h3>
+    <p>Your test and design choices are saved in this browser on your own device so they are there next time; the "Start again" button removes them. The online test link contains the test itself after the # sign, and that part of a link is never sent to our web server. Students' names and answers stay in their own browser window and are cleared when they close the page. This site uses cookies for visitor statistics and to show ads, and providers such as Google may set them. See our <a href="https://modernenglish.au/privacy.html">privacy policy</a> for details.</p>
+    <h3>No guarantees</h3>
+    <p>The tool is provided free and as it is. Check your test, answer key and online version before you use them with students. These terms are general information and not legal advice. To the extent the law allows, we are not liable for loss or damage arising from its use. Nothing in these terms limits any rights you have under the Australian Consumer Law. These terms are governed by the laws of New South Wales, Australia.</p>
+  </div>
+</section>
+
+<!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<footer>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-report-maker.html">Report maker</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-sentence-scramble-maker.html">Sentence scramble maker</a> · <a href="grammar-level-test.html">Grammar level test</a> · <a href="#terms">Terms of use</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+</footer>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT
+// =====================================================================
+// The address of this page. Student links point here when the page is
+// opened from a file on your computer; on the website they use the page's own address.
+const TOOL_URL = "https://modernenglish.au/teachertools/bespoke-grammar-test-maker.html";
+
+const LEVELS = [
+  { id: "A1", name: "Beginner",           pts: 1 },
+  { id: "A2", name: "Elementary",         pts: 2 },
+  { id: "B1", name: "Intermediate",       pts: 3 },
+  { id: "B2", name: "Upper-intermediate", pts: 4 },
+  { id: "C1", name: "Advanced",           pts: 5 },
+  { id: "C2", name: "Proficiency",        pts: 6 }
+];
+
+// The question types. "task" is the instruction printed above each group of questions.
+const TYPES = {
+  mc:      { label: "Multiple choice",       task: "Choose the correct answer." },
+  gap:     { label: "Gap fill",              task: "Complete the sentence." },
+  ci:      { label: "Correct or incorrect",  task: "Is the sentence correct? If it is not, correct it." },
+  order:   { label: "Word order",            task: "Put the words in the correct order." },
+  rewrite: { label: "Rewrite the sentence",  task: "Rewrite the sentence so that it means the same. Use the word given." }
+};
+
+// The example test the page opens with.
+const EXAMPLE = {
+  title: "Past tenses review", sub: "Unit 4 · Intermediate", instr: "", qr: "online", link: "", mode: "points", stop: 3,
+  qs: [
+    { y: "mc", l: 1, x: "I ___ to Perth with my family last summer.", o: ["go", "went", "have gone"], a: 1 },
+    { y: "mc", l: 2, x: "While we ___ dinner, the lights went out.", o: ["had", "were having", "have had"], a: 1 },
+    { y: "gap", l: 1, x: "Yesterday we ___ (take) the train to Bondi.", a: "took" },
+    { y: "gap", l: 2, x: "By the time the lecture started, I ___ (finish) my coffee.", a: "had finished / 'd finished" },
+    { y: "ci", l: 2, x: "When I was a child, I was used to walk to school.", c: false, f: "When I was a child, I used to walk to school." },
+    { y: "ci", l: 1, x: "Did you see the match last night?", c: true, f: "" },
+    { y: "order", l: 2, x: "I / had never seen / a kangaroo / before / I moved to Australia." },
+    { y: "rewrite", l: 3, x: "I started learning English five years ago.", k: "BEEN", b: "I", a: "have been learning English for five years\n've been learning English for five years" }
+  ]
+};
+
+const COLOURS = [
+  { name: "Modern English navy", c: "#0e2861" },
+  { name: "Modern English teal", c: "#0e7c66" },
+  { name: "Deep green", c: "#16302b" },
+  { name: "Navy",       c: "#1b2a4a" },
+  { name: "Burgundy",   c: "#6b1e2e" },
+  { name: "Ocean",      c: "#0e5c7a" },
+  { name: "Violet",     c: "#4b2e83" },
+  { name: "Coral",      c: "#d9481f" },
+  { name: "Sky",        c: "#2563eb" },
+  { name: "Black (saves ink)", c: "#222222" }
+];
+const FONTS = {
+  brand:    { label: "Modern English (Source Sans)", f: "Source Sans 3",   w: 400, b: 700 },
+  clear:    { label: "Easy to read (Atkinson)", f: "Atkinson Hyperlegible", w: 400, b: 700 },
+  rounded:  { label: "Rounded (Nunito)",        f: "Nunito",                w: 500, b: 800 },
+  friendly: { label: "Friendly (Fredoka)",      f: "Fredoka",               w: 400, b: 600 },
+  modern:   { label: "Modern (Montserrat)",     f: "Montserrat",            w: 500, b: 700 },
+  book:     { label: "Book style (Lora)",       f: "Lora",                  w: 400, b: 700 }
+};
+const SIZES = { s: 9.5, m: 10.5, l: 12 };   // text size on the paper, in points
+const DESIGN = { cMain: "#0e2861", font: "brand", tsize: "m", cols: "1", paper: "a4", key: true, nameLine: true };
+const STORE = "bespoke-grammar-test-maker.v2";
+
+// =====================================================================
+// SMALL HELPERS
+// =====================================================================
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const LETTERS = ["A", "B", "C", "D"];
+const clone = o => JSON.parse(JSON.stringify(o));
+let uid = 1;
+const newId = () => "q" + (uid++);
+
+// answers are compared without capitals, extra spaces, curly quotes or the full stop at the end
+function norm(s) {
+  return String(s || "").toLowerCase().replace(/[’‘`]/g, "'").replace(/[“”]/g, '"')
+    .replace(/\s+/g, " ").trim().replace(/\s+([,.!?;:])/g, "$1").replace(/\s+'(s|ve|re|ll|d|m|t)\b/g, "'$1").replace(/[.!?]+$/, "").trim();
+}
+const alts = s => String(s || "").split("/").map(t => t.trim()).filter(Boolean);
+const lines = s => String(s || "").split("\n").map(t => t.trim()).filter(Boolean);
+function hashStr(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+// word order: the parts, the mixed-up order and the correct sentence
+function orderParts(q) {
+  const raw = String(q.x || "").trim();
+  const end = (raw.match(/[.!?]+$/) || [""])[0];
+  const body = raw.slice(0, raw.length - end.length).trim();
+  let parts = body.includes("/") ? body.split("/") : body.split(/\s+/);
+  parts = parts.map(t => t.trim()).filter(Boolean);
+  const answer = parts.join(" ") + end;
+  const mixed = parts.slice(), r = rng(hashStr(raw));
+  for (let i = mixed.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [mixed[i], mixed[j]] = [mixed[j], mixed[i]]; }
+  if (mixed.length > 1 && mixed.join("|") === parts.join("|")) mixed.push(mixed.shift());
+  return { parts, mixed, answer, end };
+}
+
+// "I" + "'ve been…" = "I've been…"; leaves answers that already include the start alone
+function joinStart(b, a) { b = String(b || "").trim(); if (!b || norm(a).startsWith(norm(b) + " ") || norm(a) === norm(b)) return a; return b + (/^['’]/.test(a) ? "" : " ") + a; }
+// the correct answer, written out (for the key and the review)
+function answerText(q, withLetter) {
+  switch (q.y) {
+    case "mc": return (withLetter ? LETTERS[q.a] + "  " : "") + ((q.o || [])[q.a] || "");
+    case "gap": return alts(q.a).join(" / ");
+    case "ci": return q.c ? "Correct" : "Incorrect" + (q.f ? ": " + q.f : "");
+    case "order": return orderParts(q).answer;
+    case "rewrite": return lines(q.a).map(a => joinStart(q.b, a)).join("  /  ");
+  }
+  return "";
+}
+// is the student's answer right?
+function isRight(q, v) {
+  if (v == null || v === "") return false;
+  switch (q.y) {
+    case "mc": return v === q.a;
+    case "gap": return alts(q.a).some(a => norm(a) === norm(v));
+    case "ci": return (v === "yes") === !!q.c;
+    case "order": return norm(v) === norm(orderParts(q).answer);
+    case "rewrite": {
+      const tries = [norm(v)]; if (q.b) tries.push(norm(q.b + " " + v));
+      return lines(q.a).some(a => { const n = norm(a), m = q.b ? norm(q.b + " " + a) : n; return tries.includes(n) || tries.includes(m); });
+    }
+  }
+  return false;
+}
+// what is still missing from a question
+function problems(q) {
+  const p = [];
+  if (!String(q.x || "").trim()) p.push("Write the sentence.");
+  if ((q.y === "mc" || q.y === "gap") && q.x && !q.x.includes("___")) p.push("Put ___ where the gap goes.");
+  if (q.y === "mc") { if ((q.o || []).filter(o => o.trim()).length < 2) p.push("Write at least two answers."); else if (!((q.o || [])[q.a] || "").trim()) p.push("Tick the correct answer."); }
+  if (q.y === "gap" && !alts(q.a).length) p.push("Write the correct answer.");
+  if (q.y === "ci" && !q.c && !String(q.f || "").trim()) p.push("Write the corrected sentence for the answer key.");
+  if (q.y === "order" && orderParts(q).parts.length < 2) p.push("Write a sentence with at least two words.");
+  if (q.y === "rewrite" && !lines(q.a).length) p.push("Write at least one correct answer.");
+  return p;
+}
+
+// =====================================================================
+// STATE: the test, plus design choices. Both are saved on this device.
+// =====================================================================
+let test = clone(EXAMPLE), st = Object.assign({}, DESIGN);
+test.qs.forEach(q => q.id = newId());
+try {
+  const saved = JSON.parse(localStorage.getItem(STORE) || "null");
+  if (saved && saved.test && Array.isArray(saved.test.qs)) { test = saved.test; test.qs.forEach(q => q.id = newId()); }
+  if (saved && saved.st) Object.keys(DESIGN).forEach(k => { if (k in saved.st) st[k] = saved.st[k]; });
+} catch (e) {}
+let saveTimer = null;
+function save() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    const t = clone(test); t.qs.forEach(q => delete q.id);
+    try { localStorage.setItem(STORE, JSON.stringify({ test: t, st })); } catch (e) {}
+  }, 300);
+}
+let redrawTimer = null;
+function changed() { save(); clearTimeout(redrawTimer); redrawTimer = setTimeout(() => { redraw(); updateShare(); }, 120); }
+
+// the test as it travels in a link or a file (short keys, no ids)
+function packTest() {
+  const t = clone(test);
+  t.qs = t.qs.map(q => { const o = { y: q.y, x: q.x }; if (q.l >= 0 && test.mode === "level") o.l = q.l;
+    if (q.y === "mc") { o.o = q.o; o.a = q.a; }
+    if (q.y === "gap") o.a = q.a;
+    if (q.y === "ci") { o.c = !!q.c; if (!q.c) o.f = q.f; }
+    if (q.y === "rewrite") { o.k = q.k; o.b = q.b; o.a = q.a; }
+    return o; });
+  return { v: 1, t: t.title, s: t.sub, i: t.instr, m: t.mode, n: t.stop, q: t.qs };
+}
+function unpackTest(p) {
+  return { title: p.t || "Grammar test", sub: p.s || "", instr: p.i || "", mode: p.m === "level" ? "level" : "points", stop: +p.n || 3, qs: (p.q || []).map(q => Object.assign({ l: -1 }, q)) };
+}
+function baseUrl() { return /^https?:$/.test(location.protocol) ? location.origin + location.pathname : TOOL_URL; }
+function studentLink() {
+  if (typeof LZString === "undefined") return "";
+  return baseUrl() + "#t=" + LZString.compressToEncodedURIComponent(JSON.stringify(packTest()));
+}
+
+// =====================================================================
+// QR CODES (qrcodejs). Long links make busy codes, so we measure them.
+// =====================================================================
+const qrCache = {};
+function qrFor(url) {
+  if (!url || typeof QRCode === "undefined") return null;
+  if (qrCache[url]) return qrCache[url];
+  try {
+    const box = document.createElement("div");
+    const q = new QRCode(box, { text: url, width: 600, height: 600, correctLevel: QRCode.CorrectLevel.L });
+    const c = box.querySelector("canvas"); if (!c) return null;
+    const out = document.createElement("canvas"); out.width = c.width; out.height = c.height;
+    out.getContext("2d").drawImage(c, 0, 0);
+    const modules = q._oQRCode ? q._oQRCode.getModuleCount() : 0;
+    qrCache[url] = { canvas: out, modules };
+    return qrCache[url];
+  } catch (e) { return null; }
+}
+const BUSY_QR = 121;  // more modules than this is hard to scan from paper
+function qrLinkForPaper() {
+  if (test.qr === "none") return "";
+  if (test.qr === "own") return String(test.link || "").trim();
+  return studentLink();
+}
+
+// =====================================================================
+// THE EDITOR
+// =====================================================================
+const ICONS = {
+  up: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10l5-5 5 5"/></svg>',
+  down: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l5 5 5-5"/></svg>',
+  del: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>'
+};
+function blankQuestion(type) {
+  const q = { id: newId(), y: type, x: "", l: test.qs.length ? test.qs[test.qs.length - 1].l : -1 };
+  if (type === "mc") { q.o = ["", "", ""]; q.a = 0; }
+  if (type === "gap") q.a = "";
+  if (type === "ci") { q.c = false; q.f = ""; }
+  if (type === "rewrite") { q.k = ""; q.b = ""; q.a = ""; }
+  return q;
+}
+function field(label, f, value, opts) {
+  opts = opts || {};
+  const lab = el("label", "f"); lab.appendChild(el("span", null, label));
+  const inp = el(opts.area ? "textarea" : "input");
+  if (!opts.area) inp.type = "text"; else inp.rows = opts.rows || 2;
+  inp.dataset.f = f; inp.value = value || ""; inp.maxLength = opts.max || 220;
+  if (opts.ph) inp.placeholder = opts.ph;
+  lab.appendChild(inp);
+  if (opts.hint) lab.appendChild(el("span", "hint", opts.hint));
+  return lab;
+}
+function cardBody(q) {
+  const box = document.createDocumentFragment();
+  if (q.y === "mc") {
+    box.appendChild(field("Sentence", "x", q.x, { ph: "e.g. She ___ to work by bus." }));
+    const wrap = el("div"); wrap.style.cssText = "display:grid;gap:.35rem";
+    wrap.appendChild(el("p", "lab", "Answers (tick the correct one)"));
+    q.o.forEach((o, k) => {
+      const row = el("div", "optrow");
+      const r = el("input"); r.type = "radio"; r.name = "ans-" + q.id; r.checked = q.a === k; r.dataset.f = "a"; r.dataset.k = k; r.setAttribute("aria-label", "Answer " + LETTERS[k] + " is correct");
+      const t = el("input"); t.type = "text"; t.value = o; t.dataset.f = "o"; t.dataset.k = k; t.maxLength = 80; t.setAttribute("aria-label", "Answer " + LETTERS[k]);
+      const rm = el("button", "icon"); rm.type = "button"; rm.innerHTML = ICONS.del; rm.dataset.act = "rmopt"; rm.dataset.k = k; rm.disabled = q.o.length <= 2; rm.setAttribute("aria-label", "Remove answer " + LETTERS[k]);
+      row.append(r, el("span", "L", LETTERS[k]), t, rm); wrap.appendChild(row);
+    });
+    if (q.o.length < 4) { const add = el("button", "chip add", "Add an answer"); add.type = "button"; add.dataset.act = "addopt"; add.style.justifySelf = "start"; wrap.appendChild(add); }
+    box.appendChild(wrap);
+  }
+  if (q.y === "gap") {
+    box.appendChild(field("Sentence", "x", q.x, { ph: "e.g. Yesterday we ___ (take) the train." }));
+    box.appendChild(field("Correct answer", "a", q.a, { ph: "e.g. took", hint: "More than one? Separate them with /" }));
+  }
+  if (q.y === "ci") {
+    box.appendChild(field("Sentence", "x", q.x, { ph: "e.g. I am agree with you." }));
+    const seg = el("div", "seg"); seg.setAttribute("role", "radiogroup"); seg.setAttribute("aria-label", "Is the sentence correct?");
+    [["yes", "It is correct"], ["no", "It has a mistake"]].forEach(([v, t]) => {
+      const lab = el("label"); const r = el("input"); r.type = "radio"; r.name = "ci-" + q.id; r.value = v; r.dataset.f = "c"; r.checked = (v === "yes") === !!q.c;
+      lab.append(r, document.createTextNode(t)); seg.appendChild(lab);
+    });
+    box.appendChild(seg);
+    if (!q.c) box.appendChild(field("Corrected sentence (for the answer key)", "f", q.f, { ph: "e.g. I agree with you." }));
+  }
+  if (q.y === "order") {
+    box.appendChild(field("The correct sentence", "x", q.x, { ph: "e.g. I / have never been / to Perth.", hint: "The words are mixed up for you. To keep words together, put / between the parts." }));
+    const m = el("div", "mixed"); m.dataset.mixed = "1"; box.appendChild(m);
+  }
+  if (q.y === "rewrite") {
+    box.appendChild(field("Sentence to rewrite", "x", q.x, { ph: "e.g. I started learning English five years ago." }));
+    const two = el("div", "two");
+    two.appendChild(field("Word to use (optional)", "k", q.k, { max: 30, ph: "e.g. BEEN" }));
+    two.appendChild(field("Start of the answer (optional)", "b", q.b, { max: 80, ph: "e.g. I" }));
+    box.appendChild(two);
+    box.appendChild(field("Correct answers, one per line", "a", q.a, { area: true, rows: 2, max: 600, ph: "have been learning English for five years", hint: "Write what comes after the start of the answer." }));
+  }
+  const w = el("p", "hint warn"); w.dataset.warn = "1"; box.appendChild(w);
+  return box;
+}
+function refreshCard(card, q) {
+  const w = card.querySelector("[data-warn]"); const p = problems(q);
+  w.textContent = p.join(" "); w.hidden = !p.length;
+  const m = card.querySelector("[data-mixed]");
+  if (m) { const op = orderParts(q); m.textContent = ""; m.appendChild(el("b", null, "Students see: ")); m.appendChild(document.createTextNode(op.parts.length > 1 ? op.mixed.join("  /  ") : "…")); }
+}
+function buildCards() {
+  const list = $("qlist"); list.textContent = "";
+  if (!test.qs.length) list.appendChild(el("p", "qempty", "No questions yet. Add one below."));
+  test.qs.forEach((q, i) => {
+    const card = el("div", "qcard"); card.dataset.id = q.id;
+    const head = el("div", "qhead");
+    head.appendChild(el("span", "qn", "Q" + (i + 1)));
+    const ts = el("select", "qtype"); ts.dataset.f = "y"; ts.setAttribute("aria-label", "Question " + (i + 1) + " type");
+    Object.keys(TYPES).forEach(k => { const o = el("option", null, TYPES[k].label); o.value = k; o.selected = k === q.y; ts.appendChild(o); });
+    head.appendChild(ts);
+    if (test.mode === "level") {
+      const ls = el("select", "qlvl"); ls.dataset.f = "l"; ls.setAttribute("aria-label", "Question " + (i + 1) + " level");
+      [["-1", "Level"]].concat(LEVELS.map((L, k) => [String(k), L.id])).forEach(([v, t]) => { const o = el("option", null, t); o.value = v; o.selected = String(q.l) === v; ls.appendChild(o); });
+      head.appendChild(ls);
+    }
+    const tools = el("span", "qtools");
+    [["up", "Move up", i === 0], ["down", "Move down", i === test.qs.length - 1], ["del", "Delete question", false]].forEach(([a, lab, dis]) => {
+      const b = el("button", "icon"); b.type = "button"; b.dataset.act = a; b.innerHTML = ICONS[a]; b.disabled = dis; b.setAttribute("aria-label", lab + " " + (i + 1)); tools.appendChild(b);
+    });
+    head.appendChild(tools);
+    card.appendChild(head); card.appendChild(cardBody(q));
+    list.appendChild(card); refreshCard(card, q);
+  });
+  $("sortBtn").hidden = test.mode !== "level" || test.qs.length < 2;
+}
+const qOf = card => test.qs.find(q => q.id === card.dataset.id);
+
+$("qlist").addEventListener("input", e => {
+  const t = e.target, card = t.closest(".qcard"); if (!card) return; const q = qOf(card), f = t.dataset.f; if (!f) return;
+  if (f === "o") q.o[+t.dataset.k] = t.value;
+  else if (f === "x" || f === "a" || f === "f" || f === "k" || f === "b") { if (!(f === "a" && q.y === "mc")) q[f] = t.value; }
+  refreshCard(card, q); changed();
+});
+$("qlist").addEventListener("change", e => {
+  const t = e.target, card = t.closest(".qcard"); if (!card) return; const q = qOf(card), f = t.dataset.f;
+  if (f === "y") {
+    if (t.value === q.y) return;
+    const nq = blankQuestion(t.value); nq.id = q.id; nq.x = q.y === "order" ? q.x.replace(/\s*\/\s*/g, " ") : q.x; nq.l = q.l;
+    if (t.value === "order" && q.y !== "order") nq.x = q.x.replace(/_{3,}/g, "…");
+    test.qs[test.qs.indexOf(q)] = nq; buildCards(); changed();
+    const nc = $("qlist").querySelector('[data-id="' + nq.id + '"] [data-f="x"]'); if (nc) nc.focus();
+  } else if (f === "l") { q.l = +t.value; changed(); }
+  else if (f === "a" && q.y === "mc") { q.a = +t.dataset.k; refreshCard(card, q); changed(); }
+  else if (f === "c") { q.c = t.value === "yes"; const id = q.id; buildCards(); changed(); const r = $("qlist").querySelector('[data-id="' + id + '"] [data-f="c"]:checked'); if (r) r.focus(); }
+});
+$("qlist").addEventListener("click", e => {
+  const b = e.target.closest("[data-act]"); if (!b) return; const card = b.closest(".qcard"), q = qOf(card), i = test.qs.indexOf(q), a = b.dataset.act;
+  if (a === "up" && i > 0) { [test.qs[i - 1], test.qs[i]] = [test.qs[i], test.qs[i - 1]]; }
+  else if (a === "down" && i < test.qs.length - 1) { [test.qs[i + 1], test.qs[i]] = [test.qs[i], test.qs[i + 1]]; }
+  else if (a === "del") { test.qs.splice(i, 1); say("Question " + (i + 1) + " removed."); }
+  else if (a === "addopt") { q.o.push(""); }
+  else if (a === "rmopt") { const k = +b.dataset.k; q.o.splice(k, 1); if (q.a === k) q.a = 0; else if (q.a > k) q.a--; }
+  else return;
+  buildCards(); changed();
+  const again = $("qlist").querySelector('[data-id="' + q.id + '"] [data-act="' + a + '"]');
+  if (again && !again.disabled) again.focus();
+});
+
+// add-question chips
+Object.keys(TYPES).forEach(k => {
+  const c = el("button", "chip add", TYPES[k].label); c.type = "button";
+  c.onclick = () => {
+    const q = blankQuestion(k); test.qs.push(q); buildCards(); changed();
+    const inp = $("qlist").querySelector('[data-id="' + q.id + '"] [data-f="x"]'); if (inp) { inp.focus(); inp.scrollIntoView({ block: "center", behavior: "smooth" }); }
+    ps.page = 99;  // show the last page, where the new question is
+  };
+  $("addChips").appendChild(c);
+});
+$("sortBtn").onclick = () => { test.qs = test.qs.map((q, i) => [q, i]).sort((a, b) => (a[0].l - b[0].l) || (a[1] - b[1])).map(p => p[0]); buildCards(); changed(); say("Questions sorted, easiest first."); };
+$("clearQBtn").onclick = () => {
+  if (!test.qs.length) return;
+  if ($("clearQBtn").dataset.sure !== "1") { $("clearQBtn").dataset.sure = "1"; $("clearQBtn").textContent = "Click again to remove all " + test.qs.length; setTimeout(() => { $("clearQBtn").dataset.sure = ""; $("clearQBtn").textContent = "Remove all questions"; }, 4000); return; }
+  test.qs = []; $("clearQBtn").dataset.sure = ""; $("clearQBtn").textContent = "Remove all questions"; buildCards(); changed();
+};
+
+// test details, scoring, QR
+function syncForm() {
+  $("tTitle").value = test.title || ""; $("tSub").value = test.sub || ""; $("tInstr").value = test.instr || ""; $("tLink").value = test.link || "";
+  document.querySelectorAll('input[name="mode"]').forEach(r => r.checked = r.value === test.mode);
+  document.querySelectorAll('input[name="qr"]').forEach(r => r.checked = r.value === (test.qr || "online"));
+  $("stopSel").value = String(test.stop || 3);
+  ["tsize", "cols", "paper"].forEach(k => document.querySelectorAll('input[name="' + k + '"]').forEach(r => r.checked = r.value === String(st[k])));
+  document.querySelectorAll("[data-k]").forEach(i => { if (i.type === "checkbox") i.checked = !!st[i.dataset.k]; else i.value = st[i.dataset.k]; });
+  document.querySelectorAll(".sw").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.c.toLowerCase() === st.cMain.toLowerCase())));
+  syncModeUi();
+}
+function defaultInstr() {
+  return test.mode === "level"
+    ? "Work in order: the questions get harder as you go. If you don't know an answer, leave it blank."
+    : "Answer all the questions.";
+}
+function syncModeUi() {
+  $("tInstr").placeholder = defaultInstr();
+  $("stopRow").hidden = test.mode !== "level";
+  $("modeHint").textContent = test.mode === "level"
+    ? "Give each question a level. Harder questions are worth more points (A1 = 1 up to C2 = 6). The test stops after the wrong answers in a row below, and the student's level is the level of that question."
+    : "Every correct answer is worth 1 point. Students answer every question.";
+  $("ownLinkRow").hidden = test.qr !== "own";
+}
+$("tTitle").oninput = e => { test.title = e.target.value; changed(); };
+$("tSub").oninput = e => { test.sub = e.target.value; changed(); };
+$("tInstr").oninput = e => { test.instr = e.target.value; changed(); };
+$("tLink").oninput = e => { test.link = e.target.value; changed(); };
+$("stopSel").onchange = e => { test.stop = +e.target.value; changed(); };
+document.querySelectorAll('input[name="mode"]').forEach(r => r.onchange = () => { test.mode = r.value; syncModeUi(); buildCards(); changed(); });
+document.querySelectorAll('input[name="qr"]').forEach(r => r.onchange = () => { test.qr = r.value; syncModeUi(); changed(); });
+["tsize", "cols", "paper"].forEach(k => document.querySelectorAll('input[name="' + k + '"]').forEach(r => r.onchange = () => { st[k] = r.value; ps.page = 0; changed(); }));
+document.querySelectorAll("[data-k]").forEach(i => i.addEventListener(i.type === "checkbox" || i.tagName === "SELECT" ? "change" : "input", () => {
+  st[i.dataset.k] = i.type === "checkbox" ? i.checked : i.value;
+  if (i.dataset.k === "cMain") document.querySelectorAll(".sw").forEach(b => b.setAttribute("aria-pressed", "false"));
+  changed();
+}));
+COLOURS.forEach(c => {
+  const b = el("button", "sw"); b.type = "button"; b.style.background = c.c; b.dataset.c = c.c; b.title = c.name; b.setAttribute("aria-label", c.name);
+  b.onclick = () => { st.cMain = c.c; document.querySelector('[data-k="cMain"]').value = c.c; document.querySelectorAll(".sw").forEach(x => x.setAttribute("aria-pressed", String(x === b))); changed(); };
+  $("swatches").insertBefore(b, $("swatches").lastElementChild);
+});
+Object.keys(FONTS).forEach(k => { const o = el("option", null, FONTS[k].label); o.value = k; $("fontSel").appendChild(o); });
+
+// =====================================================================
+// THE PRINTABLE TEST: drawn in millimetres on a canvas
+// =====================================================================
+const PAPERS = { a4: [210, 297], letter: [215.9, 279.4] };
+const PT = 0.3528;   // millimetres in one point
+const M = 14, GUT = 9;
+const C = { ink: "#0f172a", soft: "#475569", line: "#c3c8d2", tint: "#f1f5f9" };
+const ps = { page: 0 };
+let mc = null;
+const mctx = () => mc || (mc = document.createElement("canvas").getContext("2d"));
+function fnt(ctx, pt, bold, italic) {
+  const F = FONTS[st.font] || FONTS.clear;
+  ctx.font = (italic ? "italic " : "") + (bold ? F.b : F.w) + " " + (pt * PT).toFixed(3) + 'px "' + F.f + '", Verdana, Arial, sans-serif';
+}
+function wrap(ctx, text, w) {
+  const out = [];
+  String(text).split("\n").forEach(par => {
+    const words = par.split(" "); let cur = "";
+    words.forEach(wd => { const t = cur ? cur + " " + wd : wd; if (ctx.measureText(t).width > w && cur) { out.push(cur); cur = wd; } else cur = t; });
+    out.push(cur);
+  });
+  return out;
+}
+function hline(ctx, x1, y, x2, col, wd) { ctx.strokeStyle = col; ctx.lineWidth = wd; ctx.beginPath(); ctx.moveTo(x1, y); ctx.lineTo(x2, y); ctx.stroke(); }
+const DOTS = "……………………";
+const gapText = s => String(s || "").replace(/_{3,}/g, DOTS);
+
+// One question as a stack of rows. Each row knows its height and how to draw itself.
+function questionBlock(q, n, w, heading) {
+  const ctx = mctx(), base = SIZES[st.tsize] || 10.5, LH = base * PT * 1.38, NUM = base * 0.72, OPT = base * 0.58;
+  const rows = [], cw = w - NUM, col = st.cMain;
+  const text = (s, opts) => { opts = opts || {}; fnt(ctx, opts.pt || base, opts.bold, opts.italic);
+    wrap(ctx, s, opts.w || cw).forEach((t, i) => rows.push({ h: opts.lh || LH, draw: (c, x, y) => { fnt(c, opts.pt || base, opts.bold, opts.italic); c.fillStyle = opts.col || C.ink; c.fillText(t, x + (opts.dx == null ? NUM : opts.dx), y + LH * .78); } })); };
+  const writeLine = (lead) => rows.push({ h: LH * 1.55, draw: (c, x, y) => {
+    let lx = x + NUM; if (lead) { fnt(c, base); c.fillStyle = C.ink; c.fillText(lead, lx, y + LH * 1.25); lx += c.measureText(lead).width + 1.5; }
+    hline(c, lx, y + LH * 1.3, x + w, C.line, .3); } });
+  if (heading) { text(heading, { pt: base * .92, bold: true, italic: true, col, dx: 0, w }); rows.push({ h: LH * .3, draw: () => {} }); }
+  const first = rows.length;
+  if (q.y === "mc") {
+    text(gapText(q.x));
+    fnt(ctx, base); const opts = q.o.map(o => o.trim());
+    const inline = opts.reduce((s, o) => s + ctx.measureText(o).width + OPT + base * .9, 0) <= cw;
+    if (inline) rows.push({ h: LH, draw: (c, x, y) => { let xx = x + NUM; opts.forEach((o, k) => { fnt(c, base, true); c.fillStyle = col; c.fillText(LETTERS[k], xx, y + LH * .78); fnt(c, base); c.fillStyle = C.ink; c.fillText(o, xx + OPT, y + LH * .78); xx += OPT + c.measureText(o).width + base * .9; }); } });
+    else opts.forEach((o, k) => { fnt(ctx, base); wrap(ctx, o, cw - OPT).forEach((t, i) => rows.push({ h: LH, draw: (c, x, y) => { if (!i) { fnt(c, base, true); c.fillStyle = col; c.fillText(LETTERS[k], x + NUM, y + LH * .78); } fnt(c, base); c.fillStyle = C.ink; c.fillText(t, x + NUM + OPT, y + LH * .78); } })); });
+  }
+  if (q.y === "gap") text(gapText(q.x));
+  if (q.y === "ci") {
+    text(q.x);
+    rows.push({ h: LH * 1.2, draw: (c, x, y) => { let xx = x + NUM; const b = base * .3; ["Correct", "Incorrect"].forEach(t => { c.strokeStyle = C.ink; c.lineWidth = .3; c.strokeRect(xx, y + LH * .78 - b, b, b); fnt(c, base); c.fillStyle = C.ink; c.fillText(t, xx + b + 1.6, y + LH * .78); xx += b + 1.6 + c.measureText(t).width + base * 1.2; }); } });
+    writeLine("Correction:");
+  }
+  if (q.y === "order") { const op = orderParts(q); text(op.mixed.join("  /  "), { italic: true }); writeLine(""); }
+  if (q.y === "rewrite") {
+    text(q.x);
+    if (String(q.k || "").trim()) rows.push({ h: LH * 1.25, draw: (c, x, y) => { fnt(c, base, true); const k = q.k.trim().toUpperCase(), tw = c.measureText(k).width; c.strokeStyle = col; c.lineWidth = .35; c.strokeRect(x + NUM - .8, y + LH * .78 - base * .3 - .8, tw + 1.6, base * .3 + 2.2); c.fillStyle = col; c.fillText(k, x + NUM, y + LH * .78); } });
+    writeLine(String(q.b || "").trim());
+  }
+  // question number on the first row of the question
+  const r0 = rows[first];
+  if (r0) { const d = r0.draw; r0.draw = (c, x, y) => { fnt(c, base, true); c.fillStyle = C.ink; c.fillText(String(n), x, y + LH * .78); d(c, x, y); }; }
+  return { rows, h: rows.reduce((s, r) => s + r.h, 0), LH };
+}
+
+function maxScore(t) { return t.mode === "level" ? t.qs.reduce((s, q) => s + LEVELS[Math.max(0, q.l)].pts, 0) : t.qs.length; }
+
+function layout() {
+  const [W, H] = PAPERS[st.paper] || PAPERS.a4;
+  const cols = st.cols === "2" ? 2 : 1, colW = cols === 2 ? (W - 2 * M - GUT) / 2 : W - 2 * M;
+  const bottom = H - M - 7, base = SIZES[st.tsize] || 10.5;
+  // page 1 heading
+  const link = qrLinkForPaper(), qr = link ? qrFor(link) : null;
+  const qs = qr ? (qr.modules > 100 ? 42 : qr.modules > 60 ? 36 : 30) : 0;   // longer links get a bigger QR code
+  const ctx = mctx(); fnt(ctx, 9.5);
+  const instr = String(test.instr || "").trim() || defaultInstr();
+  const tx = qr ? M + qs + 7 : M;
+  const instrLines = wrap(ctx, instr, W - M - tx - 8);
+  let headH = Math.max(qr ? qs + 6 : 0, 8 + (test.sub ? 6 : 0) + (st.nameLine ? 10 : 0) + instrLines.length * 4.3 + 9);
+  const top1 = M + headH + 5, topN = M + 12, GAP = base * .38;
+  const pages = []; let page = { kind: "test", items: [], top: top1 }, col = 0, y = top1, prev = null;
+  test.qs.forEach((q, i) => {
+    const b = questionBlock(q, i + 1, colW, q.y !== prev ? TYPES[q.y].task : null); prev = q.y;
+    if (y + b.h > bottom && y > page.top + 1) {
+      if (col < cols - 1) { col++; y = page.top; }
+      else { pages.push(page); page = { kind: "test", items: [], top: topN }; col = 0; y = topN; }
+    }
+    page.items.push({ b, x: M + col * (colW + GUT), y, w: colW }); y += b.h + GAP;
+  });
+  // two columns: share the last page's questions evenly between the columns
+  if (cols === 2 && page.items.length > 1) {
+    const hs = page.items.map(it => it.b.h + GAP), avail = bottom - page.top + GAP, sum = (f, t) => hs.slice(f, t).reduce((s, h) => s + h, 0);
+    let best = null;
+    for (let k = 1; k < hs.length; k++) { const a = sum(0, k), c = sum(k); if (a <= avail && c <= avail) { const m = Math.max(a, c); if (!best || m < best.m) best = { k, m }; } }
+    if (best) { let y0 = page.top, y1 = page.top; page.items.forEach((it, i) => { if (i < best.k) { it.x = M; it.y = y0; y0 += hs[i]; } else { it.x = M + colW + GUT; it.y = y1; y1 += hs[i]; } }); }
+  }
+  pages.push(page);
+  const nTest = pages.length; pages.forEach((p, i) => { p.n = i + 1; p.of = nTest; });
+  // answer key pages
+  if (st.key && test.qs.length) {
+    const kctx = mctx(), lev = test.mode === "level", kw = W - 2 * M - 12 - (lev ? 22 : 0);
+    let kp = { kind: "key", rows: [], first: true }, ky = M + (lev ? 40 : 18);
+    test.qs.forEach((q, i) => {
+      fnt(kctx, 10); const ls = wrap(kctx, answerText(q, true) || "—", kw);
+      const h = ls.length * 4.6 + 2.2;
+      if (ky + h > bottom) { pages.push(kp); kp = { kind: "key", rows: [], first: false }; ky = M + 12; }
+      kp.rows.push({ q, n: i + 1, ls, y: ky, h }); ky += h;
+    });
+    pages.push(kp);
+  }
+  return { pages, W, H, qr, qs, tx, instrLines, colW, cols };
+}
+
+function footer(ctx, W, H, right) {
+  fnt(ctx, 7.5); ctx.fillStyle = C.soft; ctx.textAlign = "left";
+  ctx.fillText("Made with the Bespoke Grammar Test Maker · modernenglish.au", M, H - M + 3);
+  ctx.textAlign = "right"; ctx.fillText(right, W - M, H - M + 3); ctx.textAlign = "left";
+}
+function drawTestPage(ctx, L, p) {
+  const { W, H } = L, col = st.cMain, title = test.title || "Grammar test";
+  if (p.n === 1) {
+    if (L.qr) {
+      ctx.imageSmoothingEnabled = false; ctx.drawImage(L.qr.canvas, M, M, L.qs, L.qs); ctx.imageSmoothingEnabled = true;
+      fnt(ctx, 6.8); ctx.fillStyle = C.soft; ctx.textAlign = "center";
+      ctx.fillText(test.qr === "own" ? "Scan me" : "Scan to do this test online", M + L.qs / 2, M + L.qs + 3.4); ctx.textAlign = "left";
+    }
+    let y = M + 7;
+    ctx.fillStyle = col; fnt(ctx, 20, true); ctx.fillText(title, L.tx, y);
+    if (test.sub) { y += 6; fnt(ctx, 10); ctx.fillStyle = C.soft; ctx.fillText(test.sub, L.tx, y); }
+    if (st.nameLine) {
+      y += 9; fnt(ctx, 9.5, true); ctx.fillStyle = C.ink;
+      const parts = [["Name", .5], ["Date", .24], ["Score", .26]], avail = W - M - L.tx; let fx = L.tx;
+      parts.forEach(([lab, share], i) => {
+        const fw = avail * share - (i < 2 ? 4 : 0); ctx.fillText(lab, fx, y);
+        const lw = ctx.measureText(lab).width + 2;
+        const end = lab === "Score" ? fx + fw - 9 : fx + fw;
+        hline(ctx, fx + lw, y + .8, end, C.soft, .25);
+        if (lab === "Score") { fnt(ctx, 9.5); ctx.fillText("/ " + maxScore(test), end + 1, y); fnt(ctx, 9.5, true); }
+        fx += fw + 4;
+      });
+    }
+    y += 4.5;
+    const bh = L.instrLines.length * 4.3 + 4;
+    ctx.fillStyle = C.tint; ctx.fillRect(L.tx, y, W - M - L.tx, bh); ctx.fillStyle = col; ctx.fillRect(L.tx, y, 1.1, bh);
+    fnt(ctx, 9.5); ctx.fillStyle = C.ink; L.instrLines.forEach((t, i) => ctx.fillText(t, L.tx + 4, y + 4.9 + i * 4.3));
+  } else {
+    ctx.fillStyle = col; fnt(ctx, 10.5, true); ctx.fillText(title, M, M + 4);
+    hline(ctx, M, M + 6.5, W - M, C.line, .3);
+  }
+  if (L.cols === 2 && p.items.some(it => it.x > M + 1)) { ctx.strokeStyle = C.line; ctx.lineWidth = .25; ctx.beginPath(); ctx.moveTo(W / 2, p.top - 1); ctx.lineTo(W / 2, H - M - 9); ctx.stroke(); }
+  if (!p.items.length) { fnt(ctx, 11); ctx.fillStyle = C.soft; ctx.fillText("Add your first question on the left.", M, p.top + 6); }
+  p.items.forEach(({ b, x, y }) => { let yy = y; b.rows.forEach(r => { r.draw(ctx, x, yy); yy += r.h; }); });
+  footer(ctx, W, H, "Page " + p.n + " of " + p.of + (p.n < p.of ? "  ·  Please turn over" : ""));
+}
+function drawKeyPage(ctx, L, p) {
+  const { W, H } = L, col = st.cMain, lev = test.mode === "level";
+  let y = M + 6;
+  ctx.fillStyle = col; fnt(ctx, p.first ? 16 : 11, true); ctx.fillText("Answer key" + (p.first ? "" : " (continued)"), M, y);
+  fnt(ctx, 9); ctx.fillStyle = C.soft; ctx.textAlign = "right"; ctx.fillText(test.title || "", W - M, y); ctx.textAlign = "left";
+  y += 3.5; hline(ctx, M, y, W - M, col, .5);
+  if (p.first && lev) {
+    fnt(ctx, 9.2); ctx.fillStyle = C.ink;
+    const t = "Level test. Mark in order from question 1; a blank counts as wrong. Stop at " + test.stop + " wrong answers in a row and do not count anything after that. The student's level is the level of the question where you stopped (or the highest level, if they never stopped). Score: add the points for each correct answer up to that point. Best possible score: " + maxScore(test) + ".";
+    wrap(ctx, t, W - 2 * M).forEach((s, i) => ctx.fillText(s, M, y + 5.5 + i * 4.2));
+  }
+  if (lev) { fnt(ctx, 8.3, true); ctx.fillStyle = C.soft; ctx.textAlign = "right"; ctx.fillText("Level · points", W - M, (p.rows[0] ? p.rows[0].y : y) - 2.5); ctx.textAlign = "left"; }
+  p.rows.forEach(r => {
+    fnt(ctx, 10, true); ctx.fillStyle = C.ink; ctx.fillText(String(r.n), M, r.y + 3.6);
+    fnt(ctx, 10); r.ls.forEach((s, i) => ctx.fillText(s, M + 12, r.y + 3.6 + i * 4.6));
+    if (lev) { const Lv = LEVELS[Math.max(0, r.q.l)]; fnt(ctx, 9.5); ctx.fillStyle = C.soft; ctx.textAlign = "right"; ctx.fillText((r.q.l >= 0 ? Lv.id : "–") + " · " + Lv.pts, W - M, r.y + 3.6); ctx.textAlign = "left"; }
+    hline(ctx, M, r.y + r.h - .4, W - M, "#e5e7eb", .2);
+  });
+  footer(ctx, W, H, "Answer key");
+}
+function renderPage(cv, scale, page, L) {
+  cv.width = Math.round(L.W * scale); cv.height = Math.round(L.H * scale);
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cv.width, cv.height);
+  ctx.setTransform(scale, 0, 0, scale, 0, 0); ctx.textBaseline = "alphabetic";
+  if (page.kind === "key") drawKeyPage(ctx, L, page); else drawTestPage(ctx, L, page);
+}
+function redraw() {
+  if (document.body.classList.contains("playing")) return;
+  const L = layout();
+  ps.page = Math.min(Math.max(ps.page, 0), L.pages.length - 1);
+  renderPage($("preview"), 4, L.pages[ps.page], L);
+  $("pagerText").textContent = "Page " + (ps.page + 1) + " of " + L.pages.length;
+  $("prevBtn").disabled = ps.page === 0; $("nextBtn").disabled = ps.page === L.pages.length - 1;
+  $("pdfBtn").textContent = "Download PDF (" + L.pages.length + (L.pages.length === 1 ? " page)" : " pages)");
+  // QR advice
+  const link = qrLinkForPaper(), qr = link ? qrFor(link) : null;
+  let msg = "The QR code goes in the top-left corner of the test.", warn = false;
+  if (test.qr === "own" && !link) { msg = "Paste a link above to make the QR code."; }
+  else if (test.qr === "online" && !qr) { msg = "The QR code could not be made for this test. Shorten the student link and choose \"My own link\"."; warn = true; }
+  else if (qr && qr.modules > BUSY_QR) { msg = "This link is long, so the QR code is very busy and may be hard to scan. Shorten the student link with a link shortener, then choose \"My own link\" and paste it."; warn = true; }
+  $("qrHint").textContent = msg; $("qrHint").className = "hint" + (warn ? " warn" : "");
+}
+function loadFonts() {
+  if (!document.fonts || !document.fonts.load) return Promise.resolve();
+  const F = FONTS[st.font] || FONTS.clear, px = "12px \"" + F.f + "\"";
+  return Promise.all([F.w + " " + px, F.b + " " + px, "italic " + F.w + " " + px, "italic " + F.b + " " + px].map(f => document.fonts.load(f).catch(() => {})));
+}
+const say = t => { $("status").textContent = t; };
+const pause = () => new Promise(r => setTimeout(r, 0));
+async function busy(job) {
+  if (!test.qs.length) { say("Add at least one question first."); return; }
+  const all = [$("pdfBtn"), $("printBtn")]; all.forEach(b => b.disabled = true);
+  try { await loadFonts(); await job(layout()); } catch (e) { console.error(e); say("Something went wrong making the file. Try again, or use Print."); }
+  all.forEach(b => b.disabled = false); redraw();
+}
+function fileBase() { return (test.title || "grammar test").replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "_").slice(0, 40) || "grammar_test"; }
+$("prevBtn").onclick = () => { ps.page--; redraw(); };
+$("nextBtn").onclick = () => { ps.page++; redraw(); };
+$("pdfBtn").onclick = () => busy(async L => {
+  if (!window.jspdf) { say("The PDF tool did not load (check your connection). Use Print and choose Save as PDF."); return; }
+  const pdf = new window.jspdf.jsPDF({ orientation: "portrait", unit: "mm", format: st.paper });
+  const cv = document.createElement("canvas");
+  for (let i = 0; i < L.pages.length; i++) {
+    say("Making page " + (i + 1) + " of " + L.pages.length + "…"); await pause();
+    renderPage(cv, 8, L.pages[i], L); if (i) pdf.addPage();
+    pdf.addImage(cv.toDataURL("image/jpeg", .92), "JPEG", 0, 0, L.W, L.H, undefined, "FAST");
+  }
+  pdf.save(fileBase() + ".pdf");
+  say("Downloaded your test" + (st.key ? " and answer key." : "."));
+});
+$("printBtn").onclick = () => busy(async L => {
+  const area = $("printArea"), cv = document.createElement("canvas"); area.innerHTML = "";
+  setPageRule(st.paper === "letter" ? "letter" : "A4");
+  const waits = [];
+  for (let i = 0; i < L.pages.length; i++) {
+    say("Getting ready to print…"); await pause();
+    renderPage(cv, 6, L.pages[i], L);
+    const img = new Image(); waits.push(new Promise(r => { img.onload = img.onerror = r; }));
+    img.src = cv.toDataURL("image/jpeg", .92); area.appendChild(img);
+  }
+  await Promise.all(waits); say(""); window.print();
+  setTimeout(() => { area.innerHTML = ""; }, 1000);
+});
+function setPageRule(size) {
+  let pr = $("pageRule"); if (!pr) { pr = document.createElement("style"); pr.id = "pageRule"; document.head.appendChild(pr); }
+  pr.textContent = "@page{size:" + size + " portrait;margin:0}";
+}
+
+// the QR code in the header (teachers): the online test, once every question is finished
+function updateHdrQr() {
+  const box = $("hdrQrBox"), ready = test.qs.length && test.qs.every(q => !problems(q).length);
+  const qr = ready ? qrFor(studentLink()) : null;
+  box.textContent = "";
+  if (!qr) { box.className = "qrthumb off"; box.innerHTML = '<span class="qrph">QR</span>';
+    $("hdrQr").title = ready ? "This test is too long for a QR code. Use Copy student link instead." : "The QR code appears when every question is finished."; return; }
+  box.className = "qrthumb"; const c = el("canvas"); c.width = qr.canvas.width; c.height = qr.canvas.height; c.getContext("2d").drawImage(qr.canvas, 0, 0); box.appendChild(c);
+  $("hdrQr").title = "Students scan this to open the online test. Click it to show it big on the board.";
+}
+// sharing and files
+function updateShare() {
+  updateHdrQr();
+  const link = studentLink(), ok = test.qs.length && test.qs.every(q => !problems(q).length);
+  $("openLink").href = link || "#";
+  const n = test.qs.filter(q => problems(q).length).length;
+  $("linkMsg").textContent = !test.qs.length ? "Add some questions first." : n ? n + (n === 1 ? " question needs" : " questions need") + " finishing (see the red notes) before students use the test." : "";
+  $("linkMsg").className = "hint" + (ok ? "" : " warn");
+}
+$("copyLinkBtn").onclick = () => {
+  const link = studentLink(); if (!link) { $("linkMsg").textContent = "The link tool did not load. Check your connection and reload the page."; return; }
+  const done = () => { $("linkMsg").className = "hint"; $("linkMsg").textContent = "Link copied. Paste it into your class page, email or chat. It is " + link.length + " characters long."; };
+  const fallback = () => { const ta = el("textarea"); ta.value = link; ta.style.cssText = "position:fixed;opacity:0"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (e) { $("linkMsg").textContent = "Copying is blocked here. Use \"Try it as a student\" and copy the address from the new tab."; } ta.remove(); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done, fallback); else fallback();
+};
+$("fileSaveBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify({ app: "bespoke-grammar-test-maker", test: packTest(), qr: test.qr, link: test.link }, null, 1)], { type: "application/json" });
+  const a = el("a"); a.href = URL.createObjectURL(blob); a.download = fileBase() + ".json"; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000); say("Saved the test file. Open it here any time with \"Open test file\".");
+};
+$("fileOpen").onchange = e => {
+  const f = e.target.files && e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try { const d = JSON.parse(r.result); const t = unpackTest(d.test || d); t.qr = d.qr || "online"; t.link = d.link || ""; t.qs.forEach(q => q.id = newId()); test = t; syncForm(); buildCards(); changed(); ps.page = 0; say("Opened " + f.name + "."); }
+    catch (err) { say("That file is not a test file from this tool."); }
+    e.target.value = "";
+  };
+  r.readAsText(f);
+};
+$("resetBtn").onclick = () => {
+  if ($("resetBtn").dataset.sure !== "1") { $("resetBtn").dataset.sure = "1"; $("resetBtn").textContent = "Click again: your test will be replaced"; setTimeout(() => { $("resetBtn").dataset.sure = ""; $("resetBtn").textContent = "Start again with the example test"; }, 4000); return; }
+  try { localStorage.removeItem(STORE); } catch (e) {}
+  test = clone(EXAMPLE); test.qs.forEach(q => q.id = newId()); st = Object.assign({}, DESIGN);
+  $("resetBtn").dataset.sure = ""; $("resetBtn").textContent = "Start again with the example test";
+  syncForm(); buildCards(); ps.page = 0; loadFonts().then(() => { redraw(); updateShare(); }); say("Back to the example test.");
+};
+
+// =====================================================================
+// THE ONLINE TEST (student view)
+// =====================================================================
+const play = { t: null, i: 0, answers: [], streak: 0, done: false };
+function startPlayer(t) {
+  play.t = t;
+  document.body.classList.remove("maker"); document.body.classList.add("playing");
+  $("maker").hidden = true; $("notes").hidden = true; $("player").hidden = false;
+  document.title = (t.title || "Grammar test") + " | Modern English Australia";
+  $("pageH1").textContent = t.title || "Grammar test";
+  $("pageLead").textContent = "An online grammar test. Choose or write your answers, then see your result.";
+  $("pTitle").textContent = t.title || "Grammar test";
+  $("pSub").textContent = [t.sub, t.qs.length + " questions"].filter(Boolean).join(" · ");
+  $("pInstr").textContent = String(t.instr || "").trim() || (t.mode === "level"
+    ? "The questions get harder as you go. If you don't know an answer, choose or write your best guess."
+    : "Answer all the questions. You will see your score and the correct answers at the end.");
+  $("pRule").textContent = t.mode === "level" ? "The test stops after " + t.stop + " wrong answers in a row. Harder questions are worth more points." : "";
+  const qr = qrFor(location.href);
+  const hb = $("hdrQrBox"); hb.textContent = "";
+  if (qr) { const c = el("canvas"); c.width = qr.canvas.width; c.height = qr.canvas.height; c.getContext("2d").drawImage(qr.canvas, 0, 0); hb.className = "qrthumb"; hb.appendChild(c); $("hdrQrCap").textContent = "Open on a phone"; } else $("hdrQr").hidden = true;
+}
+function pShow() {
+  const t = play.t, q = t.qs[play.i];
+  $("pStart").hidden = true; $("pR").hidden = true; $("pQ").hidden = false;
+  $("pNum").textContent = "Question " + (play.i + 1); $("pOf").textContent = "of " + t.qs.length;
+  $("pLvl").textContent = t.mode === "level" && q.l >= 0 ? "Level " + LEVELS[q.l].id : "";
+  $("pBar").style.width = (play.i / t.qs.length * 100) + "%";
+  $("pTask").textContent = TYPES[q.y].task;
+  const body = $("pBody"), nav = $("pNav"); body.textContent = ""; nav.textContent = "";
+  const nextBtn = (label, get) => { const b = el("button", "btn main", label || "Next"); b.type = "button"; b.onclick = () => answer(get()); nav.appendChild(b); return b; };
+  const sentence = (txt, input) => {
+    const p = el("p", "sentence"); const parts = String(txt).split(/_{3,}/);
+    parts.forEach((s, i) => { p.appendChild(document.createTextNode(s)); if (i < parts.length - 1) p.appendChild(input && i === 0 ? input : el("span", "gap")); });
+    return p;
+  };
+  if (q.y === "mc") {
+    body.appendChild(sentence(q.x));
+    const box = el("div", "opts"); box.setAttribute("role", "group"); box.setAttribute("aria-label", "Answers");
+    q.o.forEach((o, k) => { if (!o.trim()) return; const b = el("button", "opt"); b.type = "button"; b.append(el("span", "k", LETTERS[k]), el("span", null, o)); b.setAttribute("aria-label", LETTERS[k] + ": " + o);
+      b.onclick = () => { if (box.getAttribute("aria-busy") === "true") return; box.setAttribute("aria-busy", "true"); b.classList.add("picked"); setTimeout(() => answer(k), 260); }; box.appendChild(b); });
+    body.appendChild(box);
+    const f = box.querySelector(".opt"); if (f) f.focus({ preventScroll: true });
+  }
+  if (q.y === "gap") {
+    const inp = el("input", "gapin"); inp.type = "text"; inp.autocomplete = "off"; inp.spellcheck = false; inp.setAttribute("aria-label", "Your answer"); inp.setAttribute("autocapitalize", "off");
+    body.appendChild(sentence(q.x.includes("___") ? q.x : q.x + " ___", inp));
+    nextBtn("Next", () => inp.value); inp.onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); answer(inp.value); } };
+    inp.focus({ preventScroll: true });
+  }
+  if (q.y === "ci") {
+    body.appendChild(el("p", "sentence plain", q.x));
+    const box = el("div", "opts");
+    [["yes", "Correct"], ["no", "Incorrect"]].forEach(([v, t], k) => { const b = el("button", "opt"); b.type = "button"; b.append(el("span", "k", k ? "✗" : "✓"), el("span", null, t));
+      b.onclick = () => { if (box.getAttribute("aria-busy") === "true") return; box.setAttribute("aria-busy", "true"); b.classList.add("picked"); setTimeout(() => answer(v), 260); }; box.appendChild(b); });
+    body.appendChild(box); box.querySelector(".opt").focus({ preventScroll: true });
+  }
+  if (q.y === "order") {
+    const op = orderParts(q), built = el("div", "built"), bank = el("div", "bank"), picked = [];
+    built.setAttribute("aria-label", "Your sentence"); built.setAttribute("aria-live", "polite");
+    const sync = () => { built.textContent = ""; picked.forEach((k, pos) => { const w = el("button", "word", op.mixed[k]); w.type = "button"; w.setAttribute("aria-label", "Remove " + op.mixed[k]); w.onclick = () => { picked.splice(pos, 1); bank.children[k].classList.remove("used"); sync(); }; built.appendChild(w); }); nb.disabled = picked.length !== op.mixed.length; };
+    op.mixed.forEach((w, k) => { const b = el("button", "word", w); b.type = "button"; b.onclick = () => { if (b.classList.contains("used")) return; picked.push(k); b.classList.add("used"); sync(); }; bank.appendChild(b); });
+    body.append(built, bank);
+    const nb = nextBtn("Next", () => picked.map(k => op.mixed[k]).join(" ") + op.end);
+    const rs = el("button", "btn quiet", "Start again"); rs.type = "button"; rs.onclick = () => { picked.length = 0; [...bank.children].forEach(b => b.classList.remove("used")); sync(); }; nav.appendChild(rs);
+    const skip = el("button", "btn quiet", "Skip"); skip.type = "button"; skip.onclick = () => answer(""); nav.appendChild(skip);
+    sync(); bank.firstChild && bank.firstChild.focus({ preventScroll: true });
+  }
+  if (q.y === "rewrite") {
+    body.appendChild(el("p", "sentence plain", q.x));
+    if (String(q.k || "").trim()) { const p = el("p", null); p.style.margin = "0"; p.append(document.createTextNode("Use the word: "), el("span", "keyword", q.k.trim().toUpperCase())); body.appendChild(p); }
+    const row = el("div", "ansline"); if (q.b) row.appendChild(el("span", null, q.b));
+    const inp = el("input"); inp.type = "text"; inp.autocomplete = "off"; inp.spellcheck = false; inp.setAttribute("aria-label", "Your sentence"); inp.setAttribute("autocapitalize", "off"); row.appendChild(inp); body.appendChild(row);
+    nextBtn("Next", () => inp.value); inp.onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); answer(inp.value); } };
+    inp.focus({ preventScroll: true });
+  }
+}
+function answer(v) {
+  const t = play.t, q = t.qs[play.i];
+  if (typeof v === "string") v = v.trim();
+  const right = isRight(q, v);
+  play.answers.push({ q, n: play.i + 1, v, right });
+  play.streak = right ? 0 : play.streak + 1;
+  if (t.mode === "level" && play.streak >= t.stop) return pFinish(true);
+  if (play.i >= t.qs.length - 1) return pFinish(false);
+  play.i++; pShow();
+}
+function shown(q, v) {
+  if (v == null || v === "") return "(no answer)";
+  if (q.y === "mc") return LETTERS[v] + " " + q.o[v];
+  if (q.y === "ci") return v === "yes" ? "Correct" : "Incorrect";
+  if (q.y === "rewrite" && q.b) return joinStart(q.b, v);
+  return v;
+}
+let pResult = null;
+function pFinish(stopped) {
+  const t = play.t, A = play.answers, name = $("pName").value.trim();
+  const correct = A.filter(a => a.right).length;
+  let head, badge, badgeSub, summary, stats;
+  if (t.mode === "level") {
+    const score = A.reduce((s, a) => s + (a.right ? LEVELS[Math.max(0, a.q.l)].pts : 0), 0);
+    const li = stopped ? Math.max(0, A[A.length - 1].q.l) : Math.max(0, ...t.qs.map(q => q.l));
+    badge = LEVELS[li].id; badgeSub = LEVELS[li].name;
+    head = (name ? name + ", your" : "Your") + " level is " + LEVELS[li].id + " " + LEVELS[li].name;
+    summary = stopped ? "The test stopped at question " + A.length + " after " + t.stop + " wrong answers in a row." : "You reached the end of the test. Well done.";
+    stats = [[score, "points out of " + maxScore(t)], [correct, "correct answers"], [A.length, "questions answered"]];
+    pResult = { level: LEVELS[li].id + " " + LEVELS[li].name, score: score + " / " + maxScore(t), correct, count: A.length };
+  } else {
+    const pct = Math.round(correct / t.qs.length * 100);
+    badge = pct + "%"; badgeSub = "score";
+    head = (name ? name + ", you" : "You") + " scored " + correct + " out of " + t.qs.length;
+    summary = pct >= 90 ? "Excellent work." : pct >= 70 ? "Good work. Check the answers you missed below." : pct >= 50 ? "Not bad. Look carefully at the answers you missed below." : "Keep practising. Look carefully at the correct answers below.";
+    stats = [[correct + " / " + t.qs.length, "correct answers"], [pct + "%", "score"]];
+    pResult = { level: null, score: correct + " / " + t.qs.length + " (" + pct + "%)", correct, count: A.length };
+  }
+  $("rBadge").textContent = badge; $("rBadgeSub").textContent = badgeSub; $("rHead").textContent = head; $("rSummary").textContent = summary;
+  const sc = $("rScore"); sc.textContent = ""; stats.forEach(([b, s]) => { const d = el("div"); d.append(el("b", null, String(b)), el("span", null, s)); sc.appendChild(d); });
+  const list = $("rList"); list.textContent = "";
+  A.forEach(a => {
+    const li = el("li");
+    li.appendChild(el("span", "t " + (a.right ? "ok" : "no"), (a.right ? "✓ " : "✗ ") + "Question " + a.n + (t.mode === "level" && a.q.l >= 0 ? " · " + LEVELS[a.q.l].id : "")));
+    li.appendChild(el("span", null, a.q.y === "order" ? orderParts(a.q).mixed.join(" / ") : a.q.x.replace(/_{3,}/g, "____")));
+    li.appendChild(el("span", "why", (a.right ? "Your answer: " : "You wrote: ") + shown(a.q, a.v) + (a.right ? "" : "  ·  Correct answer: " + answerText(a.q, true))));
+    list.appendChild(li);
+  });
+  $("pQ").hidden = true; $("pR").hidden = false; $("copyMsg").textContent = "";
+  $("rHead").focus();
+}
+function resultLines() {
+  const t = play.t, name = $("pName").value.trim();
+  return [t.title || "Grammar test", name ? "Name: " + name : null, "Date: " + new Date().toLocaleDateString("en-AU"),
+    pResult.level ? "Level: " + pResult.level : null, "Score: " + pResult.score,
+    "Correct answers: " + pResult.correct + " of " + pResult.count].filter(Boolean);
+}
+$("pStartBtn").onclick = () => { play.i = 0; play.answers = []; play.streak = 0; pShow(); };
+$("rAgain").onclick = () => { $("pR").hidden = true; $("pStart").hidden = false; $("pStartBtn").focus(); };
+$("rCopy").onclick = () => {
+  const txt = resultLines().join("\n");
+  const done = () => { $("copyMsg").textContent = "Copied. Paste your results into an email or message to your teacher."; };
+  const fallback = () => { const ta = el("textarea"); ta.value = txt; ta.style.cssText = "position:fixed;opacity:0"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (e) { $("copyMsg").textContent = "Copying is blocked here. Take a screenshot instead."; } ta.remove(); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fallback); else fallback();
+};
+$("rPrint").onclick = () => {
+  const t = play.t, area = $("printArea"); area.innerHTML = "";
+  const sh = el("div", "sheet"), top = el("div", "sh-top"), tt = el("div");
+  tt.appendChild(el("h1", null, (t.title || "Grammar test") + ": results"));
+  tt.appendChild(el("div", null, resultLines().slice(1).join("  ·  ")));
+  top.appendChild(tt); sh.appendChild(top);
+  sh.appendChild(el("h2", null, "Answers"));
+  const tb = el("table"), hd = el("tr"); ["", "Q", "Question", "Answer given", "Correct answer"].forEach(s => hd.appendChild(el("th", null, s))); tb.appendChild(hd);
+  play.answers.forEach(a => { const tr = el("tr"); tr.append(el("td", a.right ? "ok" : "no", a.right ? "✓" : "✗"), el("td", null, String(a.n)), el("td", null, a.q.y === "order" ? orderParts(a.q).mixed.join(" / ") : a.q.x.replace(/_{3,}/g, "____")), el("td", null, shown(a.q, a.v)), el("td", null, answerText(a.q, true))); tb.appendChild(tr); });
+  sh.appendChild(tb);
+  sh.appendChild(el("p", "foot", "Made with the Bespoke Grammar Test Maker · modernenglish.au · © Koala Spies Sydney"));
+  area.appendChild(sh); setPageRule("A4"); window.print();
+  setTimeout(() => { area.innerHTML = ""; }, 1000);
+};
+// large QR code for the classroom screen
+$("hdrQr").onclick = () => {
+  const teacher = !document.body.classList.contains("playing");
+  if (teacher && !(test.qs.length && test.qs.every(q => !problems(q).length))) { $("linkMsg").scrollIntoView({ block: "center", behavior: "smooth" }); updateShare(); return; }
+  const qr = qrFor(teacher ? studentLink() : location.href); if (!qr) return;
+  $("qrCopy").hidden = !teacher; $("qrBigMsg").textContent = "Scan to open this test on a phone.";
+  const box = $("qrBig"); box.textContent = ""; const c = el("canvas"); c.width = qr.canvas.width; c.height = qr.canvas.height; c.getContext("2d").drawImage(qr.canvas, 0, 0); box.appendChild(c);
+  $("qrOverlay").hidden = false; $("qrClose").focus();
+};
+$("qrClose").onclick = () => { $("qrOverlay").hidden = true; $("hdrQr").focus(); };
+$("qrCopy").onclick = () => {
+  const link = studentLink(), ok = () => { $("qrBigMsg").textContent = "Student link copied. Paste it into your class page, email or chat."; };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(ok, () => $("copyLinkBtn").click()); else $("copyLinkBtn").click();
+};
+$("qrOverlay").onclick = e => { if (e.target === $("qrOverlay")) $("qrClose").click(); };
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && !$("qrOverlay").hidden) $("qrClose").click();
+  if ($("pQ").hidden || e.ctrlKey || e.metaKey || e.altKey || (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName))) return;
+  const q = play.t && play.t.qs[play.i]; if (!q || q.y !== "mc") return;
+  const k = { a: 0, b: 1, c: 2, d: 3 }[e.key.toLowerCase()]; if (k == null) return;
+  const b = document.querySelectorAll("#pBody .opt")[k]; if (b) { e.preventDefault(); b.click(); }
+});
+
+// =====================================================================
+// START: a link with #t= opens the online test, otherwise the maker
+// =====================================================================
+(function start() {
+  const h = location.hash;
+  if (h.indexOf("#t=") === 0) {
+    let t = null;
+    try { t = unpackTest(JSON.parse(LZString.decompressFromEncodedURIComponent(h.slice(3)))); } catch (e) {}
+    if (!t || !t.qs.length) {
+      document.body.classList.remove("maker"); $("maker").hidden = true; $("notes").hidden = true; $("player").hidden = false;
+      $("pTitle").textContent = "This test link is not complete";
+      $("pSub").textContent = ""; $("hdrQr").hidden = true;
+      $("pStart").textContent = ""; $("pStart").appendChild(el("p", null, "Part of the link is missing, so the test can't open. Ask your teacher to send the link again, and copy all of it."));
+      return;
+    }
+    startPlayer(t); return;
+  }
+  syncForm(); buildCards(); redraw(); updateShare();
+  loadFonts().then(redraw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+  window.addEventListener("resize", redraw);
+  document.querySelector('[data-k="font"]').addEventListener("change", () => loadFonts().then(redraw));
+})();
+</script>
+</body>
+</html>
