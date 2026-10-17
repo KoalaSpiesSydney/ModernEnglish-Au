@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<!-- Grammar Level Test © Koala Spies Sydney. All rights reserved. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grammar Level Test: Free Adaptive English Grammar Placement Test | Modern English Australia</title>
+<meta name="description" content="A free English grammar level test. 48 multiple-choice questions get harder as you go, and the test stops after three wrong answers in a row. Get your level from A1 to C2 and a score weighted by difficulty. Printable version with QR code and answer key for teachers.">
+<link rel="canonical" href="https://modernenglish.au/teachertools/grammar-level-test.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Serif+4:wght@700;800&display=swap">
+<style>
+/* =====================================================================
+   GRAMMAR LEVEL TEST
+   One file, no server. Answers stay in the visitor's browser window and
+   are never sent or saved. The printable test is drawn on a <canvas>, so
+   the PDF and the print-out are always identical.
+   ===================================================================== */
+:root{
+  --bench:#fffce6;      /* the site's cream page colour */
+  --panel:#ffffff;
+  --ink:#0f172a;
+  --soft:#475569;
+  --line:#dcd9c6;
+  --header:#1c1c1c;     /* header and footer, as on modernenglish.au */
+  --tag:#fde047;        /* the yellow of the site's tagline, on dark only */
+  --deep:#0e2861;       /* Modern English navy: primary buttons, headings */
+  --foil:#0e7c66;       /* Modern English teal, used sparingly */
+  --focus:#3968ea;
+  --warn:#b3261e;
+  --good:#2e6b45;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Koala Spies Sydney watermark: faint, repeated across the page behind the
+   panels. It is part of the page only, never of the printed test. */
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%230f172a%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* ---------- header ---------- */
+.top{background:var(--header);color:#f8fafc}
+.top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
+.top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:46ch}
+
+/* ---------- the bench: test + printable version ---------- */
+.bench{max-width:880px;margin:0 auto;padding:1.25rem;display:grid;gap:1rem}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);min-width:0}
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
+.btn:hover{background:#eef2fb}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:hover{background:#0a1d47}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn[disabled]{opacity:.55;cursor:progress}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft)}
+label.f>span{font-weight:700;color:var(--ink)}
+input[type=text],select{width:100%;padding:.55rem .65rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:1rem;min-height:44px}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep);flex:none}
+
+/* ---------- the online test ---------- */
+.test-head{display:flex;gap:1rem;align-items:center;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+.qr{flex:none;display:grid;justify-items:center;gap:.2rem;text-decoration:none;color:var(--soft)}
+.qr-box{width:96px;height:96px;padding:5px;background:#fff;border:1px solid var(--line);border-radius:6px}
+.qr-box canvas,.qr-box img{display:block;width:100%!important;height:100%!important;image-rendering:pixelated}
+.qr small{font-size:.72rem;line-height:1.2;text-align:center;max-width:9.5em}
+.test-title{min-width:0;display:grid;gap:.2rem}
+.test-title h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:1.45rem;line-height:1.2}
+.test-title p{margin:0;color:var(--soft);font-size:.95rem}
+.test-body{padding:1.3rem 1.2rem 1.5rem;display:grid;gap:1.1rem}
+
+.start ul{margin:0;padding-left:1.2rem;display:grid;gap:.35rem}
+.start li{max-width:62ch}
+.start .row{display:flex;gap:.75rem;align-items:end;flex-wrap:wrap}
+.start .row label.f{flex:1 1 15rem;max-width:22rem}
+
+/* progress: one tick per question, grouped by level */
+.progress{display:grid;grid-template-columns:repeat(6,1fr);gap:.35rem}
+.lvl{display:grid;gap:.25rem}
+.lvl b{font-size:.75rem;letter-spacing:.06em;color:var(--soft)}
+.lvl.on b{color:var(--deep)}
+.ticks{display:grid;grid-template-columns:repeat(8,1fr);gap:2px}
+.ticks i{height:7px;border-radius:2px;background:#e9e6d3}
+.ticks i.done{background:var(--deep)}
+.ticks i.now{background:var(--foil)}
+.qmeta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;color:var(--soft);font-size:.95rem}
+.qmeta strong{color:var(--ink)}
+.sentence{margin:0;font-size:clamp(1.2rem,2.6vw,1.5rem);line-height:1.6;max-width:36ch;min-height:4.8em}
+.gap{display:inline-block;min-width:5.5em;border-bottom:2.5px solid var(--foil);margin:0 .15em;height:1.1em;vertical-align:baseline}
+.opts{display:grid;gap:.6rem;max-width:34rem}
+.opt{display:flex;gap:.8rem;align-items:center;text-align:left;width:100%;min-height:54px;padding:.55rem .9rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:1.1rem}
+.opt:hover{border-color:var(--deep);background:#eef2fb}
+.opt .k{flex:none;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;background:#eef2fb;color:var(--deep);font-weight:700}
+.opt.picked{background:var(--deep);border-color:var(--deep);color:#fff}
+.opt.picked .k{background:#fff;color:var(--deep)}
+.opts[aria-busy=true] .opt{pointer-events:none}
+
+/* results */
+.result-top{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center}
+.badge{width:7.2rem;height:7.2rem;border-radius:50%;background:var(--deep);color:#fff;display:grid;place-items:center;text-align:center;border:4px solid var(--foil)}
+.badge b{font-variant-numeric:lining-nums;display:block;font-family:"Source Serif 4",Georgia,serif;font-size:2.4rem;line-height:1}
+.badge span{display:block;font-size:.78rem;letter-spacing:.04em;margin-top:.2rem}
+.result-top h3{font-variant-numeric:lining-nums;margin:0 0 .25rem;font-family:"Source Serif 4",Georgia,serif;font-size:1.5rem;line-height:1.2}
+.result-top p{margin:0;max-width:56ch}
+.score{display:flex;gap:.5rem 1.6rem;flex-wrap:wrap;padding:.8rem 1rem;background:#eef2fb;border:1px solid var(--line);border-left:4px solid var(--foil);border-radius:6px}
+.score div{display:grid}
+.score b{font-size:1.5rem;font-variant-numeric:tabular-nums;line-height:1.2}
+.score span{font-size:.85rem;color:var(--soft)}
+.bars{display:grid;gap:.4rem;max-width:34rem}
+.bar{display:grid;grid-template-columns:2.4rem 1fr 4.5rem;gap:.6rem;align-items:center;font-size:.9rem}
+.bar .track{height:12px;background:#e9e6d3;border-radius:3px;overflow:hidden}
+.bar .fill{height:100%;background:var(--deep)}
+.bar .n{color:var(--soft);font-variant-numeric:tabular-nums;text-align:right}
+.bar.stop b{color:var(--foil)}
+.sub{margin:0;font-size:1rem}
+.review-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.review-list li{padding:.55rem .7rem;border:1px solid var(--line);border-radius:6px;display:grid;gap:.15rem}
+.review-list .t{font-weight:700}
+.review-list .t.ok{color:var(--good)}
+.review-list .t.no{color:var(--warn)}
+.review-list .why{font-size:.85rem;color:var(--soft)}
+.topics{margin:0;padding-left:1.2rem;columns:2 14rem;column-gap:2rem}
+.topics li{break-inside:avoid;margin-bottom:.2rem}
+.actions-row{display:flex;gap:.5rem;flex-wrap:wrap}
+#copyMsg{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+
+/* ---------- print options under the test ---------- */
+.printbar{padding:.9rem 1.2rem;display:flex;gap:.8rem 1.2rem;align-items:center;flex-wrap:wrap}
+.printbar .lead{flex:1 1 16rem;display:grid;gap:.1rem;min-width:0}
+.printbar .lead b{font-size:1rem}
+.printbar .opts-p{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.printbar select{width:auto;min-width:7rem}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em;flex-basis:100%}
+
+/* the results sheet, only seen when printing */
+.sheet{font-family:"Source Sans 3",system-ui,Arial,sans-serif;color:#0f172a;padding:14mm;font-size:11pt;line-height:1.45}
+.sheet .sh-top{display:flex;gap:6mm;align-items:center;border-bottom:1.5pt solid #0e7c66;padding-bottom:4mm;margin-bottom:6mm}
+.sheet .sh-top img{width:26mm;height:26mm;image-rendering:pixelated}
+.sheet h1{font-family:"Source Serif 4",Georgia,serif;font-size:22pt;margin:0;color:#0e2861;font-variant-numeric:lining-nums}
+.sheet h2{font-size:12pt;margin:6mm 0 2mm}
+.sheet table{border-collapse:collapse;width:100%;font-size:10pt}
+.sheet td,.sheet th{text-align:left;padding:1.2mm 2mm 1.2mm 0;border-bottom:.5pt solid #dcd9c6;vertical-align:top}
+.sheet .big{display:flex;gap:12mm;margin:2mm 0 4mm}
+.sheet .big div b{display:block;font-size:20pt}
+.sheet .ok{color:#2e6b45;font-weight:700}.sheet .no{color:#b3261e;font-weight:700}
+.sheet .foot{margin-top:6mm;font-size:8.5pt;color:#475569}
+
+/* ---------- reading matter under the tool ---------- */
+.notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+.notes a,.terms a{color:var(--deep);font-weight:700}
+.ltable-wrap{overflow-x:auto}
+.ltable{border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+.ltable th,.ltable td{text-align:left;padding:.3rem .7rem .3rem 0;border-bottom:1px solid var(--line)}
+.ltable th{font-size:.8rem;color:var(--soft);font-weight:700}
+.terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
+.terms h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+footer{background:var(--header);color:#cbd5e1;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer a{color:#fff}
+
+#printArea{display:none}
+
+@media (max-width:900px){
+  .bench{padding:1rem}
+}
+@media (max-width:520px){
+  .test-head{padding:.8rem;gap:.8rem}
+  .qr-box{width:76px;height:76px}
+  .test-body{padding:1rem .9rem 1.2rem}
+  .result-top{grid-template-columns:1fr}
+  .progress{gap:.2rem}
+}
+/* ---------- open layout: no card backings, raised buttons ----------
+   Sections sit straight on the page, divided by thin lines. Remove this
+   block to bring the white cards back. */
+details.group,.panel,.share,.terms-in,.qcard,.score,.review-list li{background:none;border:0;border-radius:0;box-shadow:none}
+details.group{border-bottom:1px solid var(--line)}
+details.group>summary{padding-left:0;padding-right:0}
+.group-body,.share,.terms-in,.test-head,.test-body,.printbar,.score{padding-left:0;padding-right:0}
+.paper{background:none;padding:0}
+#preview{box-shadow:0 1px 3px rgba(15,23,42,.2),0 16px 40px -12px rgba(15,23,42,.4)}
+.qlist{gap:0}
+.qcard{padding:.9rem 0;border-top:1px solid var(--line)}
+.qcard:first-child{border-top:0;padding-top:0}
+.review-list{gap:0}
+.review-list li{padding:.6rem 0;border-bottom:1px solid var(--line)}
+.share{border-top:1px solid var(--line);padding-top:1rem}
+.score{padding-top:0;padding-bottom:0}
+.btn,.chip,.opt,.word,.icon{box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
+.btn:hover,.chip:hover,.opt:hover,.word:hover,.icon:hover{box-shadow:0 2px 4px rgba(15,23,42,.22),0 12px 24px -8px rgba(15,23,42,.48);transform:translateY(-1px)}
+.btn:active,.chip:active,.opt:active,.word:active,.icon:active{box-shadow:0 1px 2px rgba(15,23,42,.28);transform:translateY(0)}
+.btn[disabled],.icon:disabled{box-shadow:none;transform:none}
+.sw{box-shadow:0 0 0 1.5px var(--line),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+/* ---------- typing fields: white, with a firm bottom edge that says "write here" ---------- */
+input[type=text],input[type=number],textarea,select{background:#fff;border:1px solid #d5d3c2;border-bottom:2px solid #94a3b8;border-radius:6px 6px 3px 3px;box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 1px 2px rgba(15,23,42,.1),0 5px 14px -5px rgba(15,23,42,.28);transition:border-color .15s ease,box-shadow .15s ease}
+input[type=text]:hover,input[type=number]:hover,textarea:hover,select:hover{border-bottom-color:var(--deep)}
+input[type=text]:focus,input[type=number]:focus,textarea:focus,select:focus{outline:none;border-color:var(--deep);box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 5px 14px -5px rgba(15,23,42,.28),0 0 0 3px rgba(57,104,234,.22)}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
+select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23475569' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right .8rem center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- printing: only the test pages ---------- */
+@media print{
+  body>*:not(#printArea){display:none!important}
+  body{background:#fff none;padding:0}
+  #printArea{display:block}
+  #printArea>img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
+  #printArea>img:last-child{page-break-after:auto;break-after:auto}
+  #printArea .sheet{display:block}
+}
+</style>
+<!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
+     With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div><p class="eyebrow">Modern English Australia</p><h1>Grammar Level Test</h1></div>
+    <p>Free for students and teachers. The questions get harder as you go. Find your grammar level from A1 to C2, online or on paper.</p>
+  </div>
+</header>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<main class="bench">
+
+  <!-- ================= THE ONLINE TEST ================= -->
+  <section class="panel" aria-labelledby="testTitle">
+    <div class="test-head">
+      <a class="qr" id="qrLink" href="#" aria-label="QR code for this test. Scan it to do the test on a phone.">
+        <span class="qr-box" id="qrBox"></span>
+        <small>Scan to do the test on a phone</small>
+      </a>
+      <div class="test-title">
+        <h2 id="testTitle">Find your grammar level</h2>
+        <p>48 questions · Choose A, B or C · About 15 minutes</p>
+      </div>
+    </div>
+
+    <div class="test-body" id="testBody">
+
+      <!-- start screen -->
+      <div class="start" id="startView">
+        <div style="display:grid;gap:1rem">
+          <ul>
+            <li>Choose the correct answer, <strong>A, B or C</strong>, to complete each sentence.</li>
+            <li>The questions start easy and get harder.</li>
+            <li>The test stops when you get <strong>three answers wrong in a row</strong>. That is your grammar level.</li>
+            <li>Harder questions are worth more points, so your score shows how far you got, not only how many you got right.</li>
+            <li>If you are not sure, choose the answer that sounds best to you.</li>
+          </ul>
+          <div class="row">
+            <label class="f"><span>Your name (optional)</span><input type="text" id="nameBox" maxlength="60" autocomplete="off" placeholder="It appears on your results"></label>
+            <button type="button" class="btn main" id="startBtn">Start the test</button>
+          </div>
+          <p class="hint">Your answers stay on this device. Nothing is sent or saved.</p>
+        </div>
+      </div>
+
+      <!-- question screen -->
+      <div id="qView" hidden style="display:grid;gap:1.1rem">
+        <div class="progress" id="progress" aria-hidden="true"></div>
+        <div class="qmeta"><span><strong id="qNum">Question 1</strong> of 48</span><span id="qLvl"></span></div>
+        <p class="sentence" id="qText" aria-live="polite"></p>
+        <div class="opts" id="opts" role="group" aria-label="Answers"></div>
+        <p class="hint">Tip: you can also press A, B or C on your keyboard.</p>
+      </div>
+
+      <!-- results screen -->
+      <div id="rView" hidden style="display:grid;gap:1.2rem">
+        <div class="result-top">
+          <div class="badge" aria-hidden="true"><div><b id="rBadge">B1</b><span id="rBadgeName">Intermediate</span></div></div>
+          <div>
+            <h3 id="rHead">Your grammar level is B1</h3>
+            <p id="rSummary"></p>
+          </div>
+        </div>
+        <div class="score">
+          <div><b id="rScore">0</b><span>points out of 168</span></div>
+          <div><b id="rCorrect">0</b><span>correct answers</span></div>
+          <div><b id="rStop">0</b><span>questions answered</span></div>
+        </div>
+        <div style="display:grid;gap:.5rem">
+          <p class="sub"><strong>Your answers at each level</strong></p>
+          <div class="bars" id="rBars"></div>
+        </div>
+        <div style="display:grid;gap:.4rem" id="rTopicsWrap">
+          <p class="sub"><strong>Grammar to study next</strong></p>
+          <ul class="topics" id="rTopics"></ul>
+        </div>
+        <div class="actions-row">
+          <button type="button" class="btn" id="reviewBtn" aria-expanded="false">Check my answers</button>
+          <button type="button" class="btn" id="printResBtn">Print my results</button>
+          <button type="button" class="btn" id="copyBtn">Copy my results</button>
+          <button type="button" class="btn quiet" id="againBtn">Take the test again</button>
+        </div>
+        <p id="copyMsg" role="status" aria-live="polite"></p>
+        <ol class="review-list" id="reviewList" hidden></ol>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PRINT OPTIONS ================= -->
+  <section class="panel printbar" aria-labelledby="printTitle">
+    <div class="lead">
+      <b id="printTitle">Prefer paper?</b>
+      <span class="hint">Print the same test, with a QR code to this page in the top-left corner. Teachers can add the answer key.</span>
+    </div>
+    <div class="opts-p">
+      <label class="f" style="display:flex;gap:.4rem;align-items:center"><span>Paper</span>
+        <select id="paperSel"><option value="a4">A4</option><option value="letter">US Letter</option></select>
+      </label>
+      <label class="check"><input type="checkbox" id="keyChk"> Answer key</label>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn main" id="printBtn">Print the test</button>
+      <button type="button" class="btn" id="pdfBtn">Download PDF</button>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+  </section>
+</main>
+
+<section class="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>The 48 questions are in order of difficulty: eight at each level from A1 (beginner) to C2 (proficiency).</li>
+      <li>The test stops after three wrong answers in a row. The level of the question where it stops is the student's grammar level.</li>
+      <li>Each correct answer earns points by level: 1 point at A1, up to 6 points at C2. The best possible score is 168.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Levels and points</h2>
+    <div class="ltable-wrap">
+      <table class="ltable" id="levelTable">
+        <thead><tr><th>Level</th><th>Name</th><th>Questions</th><th>Points each</th><th>IELTS (approx.)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="hint" style="margin-top:.5rem">IELTS bands are a rough guide only. This test checks grammar, not reading, writing, listening or speaking.</p>
+  </div>
+  <div>
+    <h2>Questions</h2>
+    <dl>
+      <dt>How do I use the paper test?</dt>
+      <dd>Students answer every question they can, in order. Mark from question 1 and stop at the third wrong answer in a row. A blank counts as wrong. The answer key page explains the scoring.</dd>
+      <dt>Where does the QR code go?</dt>
+      <dd>To this page, so students can do the test on a phone or tablet instead of on paper. You can also show it on the classroom screen.</dd>
+      <dt>Are the results saved?</dt>
+      <dd>No. Names and answers stay in the student's browser window. To keep a result, use "Print my results" (or save it as a PDF from the print window), or "Copy my results" and paste it into an email.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
+     the site goes public, and change the date when you edit it. -->
+<section class="terms" id="terms" tabindex="-1">
+  <div class="terms-in">
+    <h2>Terms of use</h2>
+    <p class="updated">Last updated 17 October 2026</p>
+    <p>The Grammar Level Test is free for students and teachers. By using, downloading or printing it you agree to these terms.</p>
+    <h3>Using the test</h3>
+    <ul>
+      <li>You may print and copy the test for your own classes and students, free of charge.</li>
+      <li>The result is a guide to grammar level only. It is not an official IELTS or Cambridge score and should not be used as one.</li>
+    </ul>
+    <h3>What you must not do</h3>
+    <ul>
+      <li>Sell the test or include it in a product or course that you sell.</li>
+      <li>Copy, resell or republish this tool or its code.</li>
+    </ul>
+    <h3>Your information</h3>
+    <p>Names and answers are used only in your own browser window. They are never sent to us and are cleared when you close or leave the page. This site uses cookies for visitor statistics and to show ads, and providers such as Google may set them. See our <a href="https://modernenglish.au/privacy.html">privacy policy</a> for details.</p>
+    <h3>No guarantees</h3>
+    <p>The test is provided free and as it is. These terms are general information and not legal advice. To the extent the law allows, we are not liable for loss or damage arising from its use. Nothing in these terms limits any rights you have under the Australian Consumer Law. These terms are governed by the laws of New South Wales, Australia.</p>
+  </div>
+</section>
+
+<!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<footer>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-report-maker.html">Report maker</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-sentence-scramble-maker.html">Sentence scramble maker</a> · <a href="bespoke-grammar-test-maker.html">Grammar test maker</a> · <a href="#terms">Terms of use</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+</footer>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT
+// =====================================================================
+// The address of this page. The QR codes on the page and on the paper test point here.
+const TEST_URL = "https://modernenglish.au/teachertools/grammar-level-test.html";
+// How many wrong answers in a row end the test.
+const STOP_AFTER = 3;
+// false: the level is the level of the question where the test stopped.
+// true:  the level is one below that (the last level the student got through).
+const LEVEL_BELOW_STOP = false;
+
+const LEVELS = [
+  { id: "A1", name: "Beginner",           pts: 1, ielts: "–" },
+  { id: "A2", name: "Elementary",         pts: 2, ielts: "below 4.0" },
+  { id: "B1", name: "Intermediate",       pts: 3, ielts: "4.0–5.0" },
+  { id: "B2", name: "Upper-intermediate", pts: 4, ielts: "5.5–6.5" },
+  { id: "C1", name: "Advanced",           pts: 5, ielts: "7.0–8.0" },
+  { id: "C2", name: "Proficiency",        pts: 6, ielts: "8.5–9.0" }
+];
+
+// THE QUESTIONS, easiest first, eight per level. "___" marks the gap.
+// The correct answer is always written first here; KEY below decides where
+// it appears (A, B or C) on screen and on paper, so the answers are mixed.
+// [level index, grammar point, sentence, correct answer, wrong answer, wrong answer]
+const RAW = [
+  // A1
+  [0, "be: am / is / are", "My sister ___ a nurse at a hospital in Melbourne.", "is", "are", "am"],
+  [0, "there is / there are", "There ___ two libraries on our campus.", "are", "is", "be"],
+  [0, "Present simple: negatives", "I ___ coffee in the evening. It keeps me awake.", "don't drink", "doesn't drink", "not drink"],
+  [0, "Present simple: questions", "___ you live near the university?", "Do", "Does", "Are"],
+  [0, "Articles: a / an", "She wants to be ___ engineer.", "an", "a", "some"],
+  [0, "Present continuous", "Look! The students ___ on the grass outside.", "are sitting", "sits", "sit"],
+  [0, "Past simple of be", "We ___ at home last night because it was raining.", "were", "was", "are"],
+  [0, "Prepositions of time", "Our English class starts ___ nine o'clock.", "at", "on", "in"],
+  // A2
+  [1, "Past simple", "I ___ to Perth with my family last summer.", "went", "go", "have gone"],
+  [1, "Comparative adjectives", "Brisbane is usually ___ than Melbourne in winter.", "warmer", "more warm", "warmest"],
+  [1, "must for rules and laws", "You ___ wear a seatbelt in the car. It's the law.", "must", "might", "can"],
+  [1, "Past continuous", "I ___ dinner when my phone rang.", "was cooking", "am cooking", "cook"],
+  [1, "Verb + to-infinitive of purpose", "This weekend I'm going ___ my grandmother in Newcastle.", "to visit", "visit", "visiting"],
+  [1, "Present perfect: ever", "Have you ever ___ kangaroo meat?", "eaten", "ate", "eat"],
+  [1, "much / many", "There isn't ___ milk left in the fridge.", "much", "many", "a few"],
+  [1, "First conditional", "If it rains tomorrow, we ___ the picnic.", "will cancel", "would cancel", "cancelled"],
+  // B1
+  [2, "Present perfect continuous", "I ___ English for three years, and I still enjoy it.", "have been studying", "study", "am studying"],
+  [2, "Passive: past simple", "The report ___ by the manager yesterday.", "was written", "wrote", "has written"],
+  [2, "Reported questions", "The officer asked me where ___.", "I lived", "did I live", "do I live"],
+  [2, "Second conditional", "If I ___ more free time, I would join the tennis club.", "had", "have", "will have"],
+  [2, "Relative clauses: which", "Is this the book ___ you told me about?", "which", "who", "what"],
+  [2, "be used to + -ing", "I'm not used to ___ up so early for work.", "getting", "get", "got"],
+  [2, "Past perfect", "By the time we arrived at the cinema, the film ___.", "had already started", "already started", "has already started"],
+  [2, "Past deduction: can't have", "You ___ have seen Tom at the party. He's overseas this month.", "can't", "mustn't", "shouldn't"],
+  // B2
+  [3, "Future continuous", "This time next week, I ___ on a beach in Bali.", "will be lying", "lie", "will have lain"],
+  [3, "Third conditional", "If she had prepared properly, she ___ her interview last week.", "would have passed", "would pass", "had passed"],
+  [3, "Present perfect with since", "The number of international students at our college ___ steadily since 2015.", "has risen", "rose", "is risen"],
+  [3, "would rather + past simple", "I'd rather you ___ smoke in the car.", "didn't", "don't", "won't"],
+  [3, "Verb + -ing: deny", "The minister denied ___ the documents.", "seeing", "to see", "see"],
+  [3, "It's high time + past simple", "It's high time the council ___ something about the traffic.", "did", "does", "will do"],
+  [3, "Relative clauses: where", "The house ___ we grew up has finally been sold.", "where", "which", "that"],
+  [3, "Non-defining relative clauses", "The new timetable, ___ was introduced last term, has been very popular.", "which", "that", "what"],
+  // C1
+  [4, "Inversion: hardly … when", "Hardly had the lecture begun ___ the fire alarm went off.", "when", "than", "that"],
+  [4, "Inversion: not only", "Not only ___ the deadline, but he also ignored his tutor's emails.", "did he miss", "he missed", "he did miss"],
+  [4, "Participle prepositions: given", "___ the circumstances, I think we made the right decision.", "Given", "Giving", "To give"],
+  [4, "Adverb + adjective: sufficiently", "The results were not ___ significant to justify further funding.", "sufficiently", "sufficient", "enough"],
+  [4, "Past modals: might have", "The bridge ___ collapsed if engineers hadn't closed it in time.", "might have", "might", "must have"],
+  [4, "Mixed conditional with inversion", "___ the data been collected more carefully, the conclusions would now be more reliable.", "Had", "If", "Should"],
+  [4, "Contrast: rather than", "It was the cost, ___ the location, that made us reject the offer.", "rather than", "instead", "despite"],
+  [4, "Subjunctive after insist", "The ethics committee insisted that every participant ___ given a consent form.", "be", "was being", "to be"],
+  // C2
+  [5, "Inversion: had it not been for", "___ it not been for the scholarship, she would never have studied abroad.", "Had", "Were", "If"],
+  [5, "Hypothetical: were … to", "Were the government ___ interest rates, consumer spending would probably fall.", "to raise", "raising", "raised"],
+  [5, "Inversion: such was", "Such ___ the demand for tickets that the website crashed within minutes.", "was", "were", "did"],
+  [5, "Concession: adjective + as", "___ as it may seem, the theory is supported by strong evidence.", "Strange", "Strangely", "However"],
+  [5, "would sooner … than", "She would sooner resign than ___ the new contract.", "sign", "signing", "to sign"],
+  [5, "Relative clauses: whose", "The proposal, ___ merits few would dispute, was nevertheless rejected.", "whose", "which", "its"],
+  [5, "Inversion: not until", "Not until the final results were published ___ how serious the problem was.", "did anyone realise", "anyone realised", "anyone did realise"],
+  [5, "Passive perfect infinitive", "The climbers are believed ___ on the mountain for two days before the rescue.", "to have been trapped", "to be trapped", "having been trapped"]
+];
+// Where the correct answer goes for each question (16 each of A, B and C).
+const KEY = "BCAACBCABBACABCCBA" + "BCAACBCABBACABCCBA" + "CABBCAACBBAC";
+
+const LETTERS = ["A", "B", "C"];
+const Q = RAW.map((r, i) => {
+  const at = LETTERS.indexOf(KEY[i]), wrong = [r[4], r[5]], opts = [];
+  for (let k = 0, w = 0; k < 3; k++) opts.push(k === at ? r[3] : wrong[w++]);
+  return { n: i + 1, lvl: r[0], topic: r[1], text: r[2], opts, ans: at };
+});
+const MAX_SCORE = Q.reduce((s, q) => s + LEVELS[q.lvl].pts, 0);
+
+// =====================================================================
+// SMALL HELPERS
+// =====================================================================
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+function sentenceInto(node, text, fill) {
+  node.textContent = "";
+  const parts = text.split("___");
+  parts.forEach((p, i) => {
+    node.appendChild(document.createTextNode(p));
+    if (i < parts.length - 1) {
+      if (fill) { const b = el("strong", null, fill); node.appendChild(b); }
+      else { const g = el("span", "gap"); g.setAttribute("aria-label", "gap"); node.appendChild(g); }
+    }
+  });
+}
+
+// =====================================================================
+// THE ONLINE TEST
+// =====================================================================
+const test = { i: 0, answers: [], streak: 0 };
+
+function buildProgress() {
+  const box = $("progress"); box.textContent = "";
+  LEVELS.forEach((L, li) => {
+    const g = el("div", "lvl"); g.dataset.l = li;
+    g.appendChild(el("b", null, L.id));
+    const t = el("div", "ticks");
+    Q.filter(q => q.lvl === li).forEach(q => { const i = el("i"); i.dataset.n = q.n; t.appendChild(i); });
+    g.appendChild(t); box.appendChild(g);
+  });
+}
+function showQuestion() {
+  const q = Q[test.i];
+  $("qNum").textContent = "Question " + q.n;
+  $("qLvl").textContent = "Level " + LEVELS[q.lvl].id;
+  sentenceInto($("qText"), q.text);
+  document.querySelectorAll("#progress .lvl").forEach(g => g.classList.toggle("on", +g.dataset.l === q.lvl));
+  document.querySelectorAll("#progress i").forEach(t => {
+    const n = +t.dataset.n;
+    t.className = n < q.n ? "done" : n === q.n ? "now" : "";
+  });
+  const box = $("opts"); box.textContent = ""; box.removeAttribute("aria-busy");
+  q.opts.forEach((o, k) => {
+    const b = el("button", "opt"); b.type = "button";
+    b.appendChild(el("span", "k", LETTERS[k]));
+    b.appendChild(el("span", null, o));
+    b.setAttribute("aria-label", LETTERS[k] + ": " + o);
+    b.onclick = () => choose(k, b);
+    box.appendChild(b);
+  });
+}
+function choose(k, btn) {
+  const box = $("opts");
+  if (box.getAttribute("aria-busy") === "true") return;
+  box.setAttribute("aria-busy", "true");
+  btn.classList.add("picked");
+  const q = Q[test.i], right = k === q.ans;
+  test.answers.push({ q, pick: k, right });
+  test.streak = right ? 0 : test.streak + 1;
+  setTimeout(() => {
+    if (test.streak >= STOP_AFTER) return finish(true);
+    if (test.i >= Q.length - 1) return finish(false);
+    test.i++; showQuestion();
+    const first = document.querySelector("#opts .opt"); if (first) first.focus({ preventScroll: true });
+  }, 280);
+}
+
+// The result: level from where the test stopped, score weighted by difficulty.
+function result(answers, stopped) {
+  const last = answers[answers.length - 1];
+  let li = stopped ? last.q.lvl : LEVELS.length - 1;
+  if (stopped && LEVEL_BELOW_STOP) li -= 1;
+  const score = answers.reduce((s, a) => s + (a.right ? LEVELS[a.q.lvl].pts : 0), 0);
+  return { li, score, correct: answers.filter(a => a.right).length, count: answers.length, stopped, stopAt: last.q.n };
+}
+
+let lastResult = null;
+function finish(stopped) {
+  const r = result(test.answers, stopped); lastResult = r;
+  const L = r.li >= 0 ? LEVELS[r.li] : { id: "A1", name: "Starter" };
+  const name = $("nameBox").value.trim();
+  $("rBadge").textContent = r.li >= 0 ? L.id : "Pre-A1";
+  $("rBadgeName").textContent = L.name;
+  $("rHead").textContent = (name ? name + ", your" : "Your") + " grammar level is " + (r.li >= 0 ? L.id + " " + L.name : "below A1");
+  $("rSummary").textContent = stopped
+    ? "The test stopped at question " + r.stopAt + " after three wrong answers in a row. Study the grammar below, then try again."
+    : "You reached the end of the test without three wrong answers in a row. Excellent work.";
+  $("rScore").textContent = r.score;
+  $("rCorrect").textContent = r.correct;
+  $("rStop").textContent = r.count;
+
+  const bars = $("rBars"); bars.textContent = "";
+  LEVELS.forEach((Lv, li) => {
+    const done = test.answers.filter(a => a.q.lvl === li);
+    if (!done.length) return;
+    const ok = done.filter(a => a.right).length;
+    const row = el("div", "bar" + (stopped && li === test.answers[test.answers.length - 1].q.lvl ? " stop" : ""));
+    row.appendChild(el("b", null, Lv.id));
+    const tr = el("div", "track"), f = el("div", "fill"); f.style.width = (ok / 8 * 100) + "%"; tr.appendChild(f); row.appendChild(tr);
+    row.appendChild(el("span", "n", ok + " of " + done.length));
+    bars.appendChild(row);
+  });
+
+  // grammar to study: what they got wrong, plus the next few points they did not reach
+  const topics = $("rTopics"); topics.textContent = "";
+  const wrong = test.answers.filter(a => !a.right).map(a => a.q);
+  const next = stopped ? Q.slice(test.answers.length, test.answers.length + 3) : [];
+  const list = [...wrong, ...next];
+  list.forEach(q => topics.appendChild(el("li", null, q.topic + " (" + LEVELS[q.lvl].id + ")")));
+  $("rTopicsWrap").hidden = !list.length;
+
+  const rv = $("reviewList"); rv.textContent = ""; rv.hidden = true;
+  $("reviewBtn").setAttribute("aria-expanded", "false"); $("reviewBtn").textContent = "Check my answers";
+  test.answers.forEach(a => {
+    const li = el("li");
+    const t = el("span", "t " + (a.right ? "ok" : "no"), (a.right ? "✓ " : "✗ ") + "Question " + a.q.n + " · " + LEVELS[a.q.lvl].id);
+    const s = el("span"); sentenceInto(s, a.q.text, a.q.opts[a.q.ans]);
+    li.appendChild(t); li.appendChild(s);
+    li.appendChild(el("span", "why", (a.right ? "" : "You chose " + LETTERS[a.pick] + " (" + a.q.opts[a.pick] + "). ") + "Grammar: " + a.q.topic + "."));
+    rv.appendChild(li);
+  });
+  $("copyMsg").textContent = "";
+  $("qView").hidden = true; $("rView").hidden = false;
+  $("rHead").setAttribute("tabindex", "-1"); $("rHead").focus();
+}
+
+function resultText() {
+  const r = lastResult, name = $("nameBox").value.trim();
+  const L = r.li >= 0 ? LEVELS[r.li].id + " " + LEVELS[r.li].name : "below A1";
+  return [
+    "Grammar Level Test (Modern English Australia)",
+    name ? "Name: " + name : null,
+    "Date: " + new Date().toLocaleDateString("en-AU"),
+    "Level: " + L,
+    "Score: " + r.score + " / " + MAX_SCORE + " points",
+    "Correct answers: " + r.correct + " of " + r.count + (r.stopped ? " (stopped at question " + r.stopAt + ")" : " (completed)"),
+    TEST_URL
+  ].filter(Boolean).join("\n");
+}
+
+$("startBtn").onclick = () => {
+  test.i = 0; test.answers = []; test.streak = 0;
+  $("startView").hidden = true; $("rView").hidden = true; $("qView").hidden = false;
+  showQuestion();
+  const first = document.querySelector("#opts .opt"); if (first) first.focus({ preventScroll: true });
+};
+$("againBtn").onclick = () => { $("rView").hidden = true; $("startView").hidden = false; $("startBtn").focus(); };
+$("reviewBtn").onclick = () => {
+  const rv = $("reviewList"); rv.hidden = !rv.hidden;
+  $("reviewBtn").setAttribute("aria-expanded", String(!rv.hidden));
+  $("reviewBtn").textContent = rv.hidden ? "Check my answers" : "Hide my answers";
+};
+$("copyBtn").onclick = () => {
+  const txt = resultText();
+  const done = () => { $("copyMsg").textContent = "Copied. Paste your results into an email or message."; };
+  const fallback = () => {
+    const ta = document.createElement("textarea"); ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); done(); } catch (e) { $("copyMsg").textContent = "Copying is blocked here. Take a screenshot of your results instead."; }
+    ta.remove();
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fallback); else fallback();
+};
+document.addEventListener("keydown", e => {
+  if ($("qView").hidden || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+  const k = { a: 0, b: 1, c: 2, "1": 0, "2": 1, "3": 2 }[e.key.toLowerCase()];
+  if (k == null) return;
+  const b = document.querySelectorAll("#opts .opt")[k]; if (b) { e.preventDefault(); b.click(); }
+});
+
+// QR code in the top-left corner of the test
+$("qrLink").href = TEST_URL;
+function qrCanvas(url, size) {
+  if (typeof QRCode === "undefined") return null;
+  const box = document.createElement("div");
+  new QRCode(box, { text: url, width: size, height: size, correctLevel: QRCode.CorrectLevel.M });
+  return box.querySelector("canvas");
+}
+(function () {
+  const c = qrCanvas(TEST_URL, 256);
+  if (c) {
+    // copy onto a fresh canvas: the library hides its own canvas after drawing
+    const out = document.createElement("canvas"); out.width = c.width; out.height = c.height;
+    out.getContext("2d").drawImage(c, 0, 0); $("qrBox").appendChild(out);
+  }
+  else $("qrLink").hidden = true;
+})();
+
+// levels table in the notes
+(function () {
+  const tb = document.querySelector("#levelTable tbody");
+  LEVELS.forEach((L, li) => {
+    const tr = document.createElement("tr");
+    const nums = Q.filter(q => q.lvl === li).map(q => q.n);
+    [L.id, L.name, nums[0] + "–" + nums[nums.length - 1], String(L.pts), L.ielts].forEach(t => tr.appendChild(el("td", null, t)));
+    tb.appendChild(tr);
+  });
+})();
+
+// =====================================================================
+// THE PRINTABLE TEST: drawn in millimetres on a canvas
+// =====================================================================
+const PAPERS = { a4: [210, 297], letter: [215.9, 279.4] };
+const PT = 0.3528;                 // millimetres in one point
+const FB = '"Source Sans 3", Verdana, Arial, sans-serif';
+const FD = '"Source Serif 4", Georgia, serif';
+const C = { ink: "#0f172a", soft: "#475569", line: "#dcd9c6", deep: "#0e2861", foil: "#0e7c66", tint: "#eef2fb" };
+const M = 14, GUT = 9, NUM = 7.5, OPT = 6;
+const LH = 5.0, OLH = 4.75, QGAPS = [3.6, 3.0, 2.4], MAX_TEST_PAGES = 3;
+const ps = { paper: "a4", key: false };
+
+function setFont(ctx, pt, weight, fam) { ctx.font = (weight || "400") + " " + (pt * PT).toFixed(3) + "px " + (fam || FB); }
+function wrap(ctx, text, w) {
+  const words = text.split(" "), lines = []; let cur = "";
+  words.forEach(wd => { const t = cur ? cur + " " + wd : wd; if (ctx.measureText(t).width > w && cur) { lines.push(cur); cur = wd; } else cur = t; });
+  if (cur) lines.push(cur);
+  return lines;
+}
+const paperText = t => t.replace("___", "……………………");
+let measureCtx = null;
+function mctx() { if (!measureCtx) measureCtx = document.createElement("canvas").getContext("2d"); return measureCtx; }
+
+function qBlock(q, w) {
+  const ctx = mctx();
+  setFont(ctx, 10.5);
+  const lines = wrap(ctx, paperText(q.text), w - NUM);
+  const opts = q.opts.map(o => wrap(ctx, o, w - NUM - OPT));
+  const h = lines.length * LH + opts.reduce((s, o) => s + o.length, 0) * OLH;
+  return { q, lines, opts, h };
+}
+
+function layout() {
+  // use the roomiest spacing that still fits the test on three pages
+  let L;
+  for (const g of QGAPS) { L = layoutWith(g); if (L.nTest <= MAX_TEST_PAGES) break; }
+  return L;
+}
+function layoutWith(QGAP) {
+  const [W, H] = PAPERS[ps.paper];
+  const colW = (W - 2 * M - GUT) / 2, bottom = H - M - 7;
+  const top1 = M + 64, topN = M + 12;
+  const pages = []; let page = { kind: "test", items: [], top: top1 }, col = 0, y = top1;
+  Q.forEach(q => {
+    const b = qBlock(q, colW);
+    if (y + b.h > bottom) {
+      if (col === 0) { col = 1; y = page.top; }
+      else { pages.push(page); page = { kind: "test", items: [], top: topN }; col = 0; y = topN; }
+    }
+    page.items.push({ b, x: M + col * (colW + GUT), y, w: colW });
+    y += b.h + QGAP;
+  });
+  pages.push(page);
+  const nTest = pages.length;
+  pages.forEach((p, i) => { p.n = i + 1; p.of = nTest; });
+  if (ps.key) pages.push({ kind: "key" });
+  return { pages, W, H, nTest };
+}
+
+let qrPaper = null;
+function drawQr(ctx, x, y, s) {
+  if (!qrPaper) qrPaper = qrCanvas(TEST_URL, 512);
+  if (!qrPaper) return false;
+  ctx.imageSmoothingEnabled = false; ctx.drawImage(qrPaper, x, y, s, s); ctx.imageSmoothingEnabled = true;
+  return true;
+}
+
+function footer(ctx, W, H, right) {
+  setFont(ctx, 7.5); ctx.fillStyle = C.soft; ctx.textBaseline = "alphabetic";
+  ctx.textAlign = "left"; ctx.fillText("Grammar Level Test · © Koala Spies Sydney · modernenglish.au", M, H - M + 3);
+  ctx.textAlign = "right"; ctx.fillText(right, W - M, H - M + 3);
+  ctx.textAlign = "left";
+}
+function line(ctx, x1, y1, x2, y2, col, wdt) { ctx.strokeStyle = col; ctx.lineWidth = wdt; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }
+
+function drawTestPage(ctx, L, p) {
+  const { W, H } = L;
+  if (p.n === 1) {
+    // QR code in the top-left corner, title beside it
+    const qs = 30;
+    const hasQr = drawQr(ctx, M, M, qs);
+    const tx = hasQr ? M + qs + 7 : M;
+    if (hasQr) { setFont(ctx, 7); ctx.fillStyle = C.soft; ctx.textAlign = "center"; ctx.fillText("Scan to do this test online", M + qs / 2, M + qs + 3.6); ctx.textAlign = "left"; }
+    ctx.fillStyle = C.deep; setFont(ctx, 23, "700", FD); ctx.fillText("Grammar Level Test", tx, M + 8.5);
+    ctx.fillStyle = C.soft; setFont(ctx, 9.5); ctx.fillText("Modern English Australia  ·  48 questions  ·  about 20 minutes", tx, M + 14.5);
+    // name, class, date
+    ctx.fillStyle = C.ink; setFont(ctx, 10, "700");
+    const fy = M + 26, fields = [["Name", 0.5], ["Class", 0.25], ["Date", 0.25]];
+    let fx = tx; const avail = W - M - tx;
+    fields.forEach(([lab, share], i) => {
+      const fw = avail * share - (i < 2 ? 4 : 0);
+      ctx.fillText(lab, fx, fy);
+      const lw = ctx.measureText(lab).width + 2;
+      line(ctx, fx + lw, fy + 0.8, fx + fw, fy + 0.8, C.soft, 0.25);
+      fx += fw + 4;
+    });
+    // instructions box
+    const by = M + 37, bh = 19;
+    ctx.fillStyle = C.tint; ctx.fillRect(M, by, W - 2 * M, bh);
+    ctx.fillStyle = C.foil; ctx.fillRect(M, by, 1.2, bh);
+    ctx.fillStyle = C.ink; setFont(ctx, 9.5, "700"); ctx.fillText("Instructions", M + 4.5, by + 5.5);
+    setFont(ctx, 9.5);
+    const ins = "Choose the correct answer, A, B or C, and circle it. Work in order: the questions get harder as you go. If you don't know an answer, leave it blank. Your teacher will mark the test in order and stop after three wrong answers in a row.";
+    wrap(ctx, ins, W - 2 * M - 9).forEach((t, i) => ctx.fillText(t, M + 4.5, by + 10 + i * 4.3));
+  } else {
+    ctx.fillStyle = C.deep; setFont(ctx, 11, "700", FD); ctx.fillText("Grammar Level Test", M, M + 4);
+    line(ctx, M, M + 6.5, W - M, M + 6.5, C.line, 0.3);
+  }
+  // column rule
+  const colTop = p.top - 2, colBot = H - M - 9;
+  line(ctx, W / 2, colTop, W / 2, colBot, C.line, 0.25);
+  // questions
+  p.items.forEach(({ b, x, y }) => {
+    ctx.textBaseline = "alphabetic";
+    let yy = y + 3.7;
+    ctx.fillStyle = C.ink; setFont(ctx, 10.5, "700"); ctx.fillText(String(b.q.n), x, yy);
+    setFont(ctx, 10.5);
+    b.lines.forEach(t => { ctx.fillText(t, x + NUM, yy); yy += LH; });
+    b.opts.forEach((ol, k) => {
+      setFont(ctx, 10.5, "700"); ctx.fillStyle = C.deep; ctx.fillText(LETTERS[k], x + NUM, yy);
+      setFont(ctx, 10.5); ctx.fillStyle = C.ink;
+      ol.forEach(t => { ctx.fillText(t, x + NUM + OPT, yy); yy += OLH; });
+    });
+  });
+  footer(ctx, W, H, p.n < p.of ? "Page " + p.n + " of " + p.of + "  ·  Please turn over" : "Page " + p.n + " of " + p.of + "  ·  End of the test");
+}
+
+function drawKeyPage(ctx, L) {
+  const { W, H } = L, fullW = W - 2 * M;
+  let y = M + 6;
+  ctx.fillStyle = C.deep; setFont(ctx, 19, "700", FD); ctx.fillText("Answer key and scoring", M, y);
+  setFont(ctx, 9); ctx.fillStyle = C.soft; ctx.textAlign = "right"; ctx.fillText("For teachers. Keep this page away from students.", W - M, y); ctx.textAlign = "left";
+  y += 4; line(ctx, M, y, W - M, y, C.foil, 0.6); y += 6.5;
+
+  // how to mark
+  const levelRule = LEVEL_BELOW_STOP
+    ? "Level: one level below the question where you stopped. If there are never three wrong answers in a row, the level is C2."
+    : "Level: the level of the question where you stopped (the third wrong answer in a row). If there are never three wrong answers in a row, the level is C2.";
+  const steps = [
+    "Mark the answers in order, starting at question 1. A blank answer counts as wrong.",
+    "Stop marking when the student has three wrong answers in a row. Do not count any answers after that.",
+    levelRule,
+    "Score: add the points for every correct answer up to where you stopped. Harder questions are worth more (see the table). The best possible score is " + MAX_SCORE + "."
+  ];
+  ctx.fillStyle = C.ink; setFont(ctx, 10, "700"); ctx.fillText("How to mark the test", M, y); y += 5.2;
+  setFont(ctx, 9.3);
+  steps.forEach((s, i) => {
+    setFont(ctx, 9.3, "700"); ctx.fillStyle = C.deep; ctx.fillText((i + 1) + ".", M, y);
+    setFont(ctx, 9.3); ctx.fillStyle = C.ink;
+    wrap(ctx, s, fullW - 6).forEach(t => { ctx.fillText(t, M + 6, y); y += 4.3; });
+    y += 0.8;
+  });
+  y += 2.5;
+
+  // levels table
+  const cols = [["Level", 0], ["Name", 16], ["Questions", 58], ["Points each", 84], ["IELTS (approx.)", 110]];
+  setFont(ctx, 8.5, "700"); ctx.fillStyle = C.soft;
+  cols.forEach(([t, dx]) => ctx.fillText(t, M + dx, y));
+  y += 1.6; line(ctx, M, y, M + 150, y, C.line, 0.3); y += 4.2;
+  LEVELS.forEach((Lv, li) => {
+    const nums = Q.filter(q => q.lvl === li).map(q => q.n);
+    const vals = [Lv.id, Lv.name, nums[0] + "–" + nums[nums.length - 1], String(Lv.pts), Lv.ielts];
+    vals.forEach((t, i) => { setFont(ctx, 9.3, i === 0 ? "700" : "400"); ctx.fillStyle = C.ink; ctx.fillText(t, M + cols[i][1], y); });
+    y += 1.5; line(ctx, M, y, M + 150, y, C.line, 0.2); y += 3.6;
+  });
+  y += 3;
+
+  // result box for one student
+  const bh = 12;
+  ctx.fillStyle = C.tint; ctx.fillRect(M, y, fullW, bh); ctx.fillStyle = C.foil; ctx.fillRect(M, y, 1.2, bh);
+  ctx.fillStyle = C.ink; setFont(ctx, 9.5, "700");
+  const parts = [["Student", 52], ["Stopped at question", 50], ["Level", 26], ["Score", 30]];
+  let bx = M + 4.5; const by = y + 7.5;
+  parts.forEach(([lab, w], i) => {
+    ctx.fillText(lab, bx, by);
+    const lw = ctx.measureText(lab).width + 2;
+    line(ctx, bx + lw, by + 0.8, bx + w - 3, by + 0.8, C.soft, 0.25);
+    bx += w + (i === 0 ? 2 : 1);
+  });
+  setFont(ctx, 9.5); ctx.fillText("/ " + MAX_SCORE, bx - 2, by);
+  y += bh + 7;
+
+  // the answers, in two halves
+  const half = Math.ceil(Q.length / 2), hw = (fullW - GUT) / 2;
+  const kc = [["Q", 0], ["Answer", 7], ["Level", 20], ["Pts", 31], ["Grammar point", 39]];
+  const rowH = (H - M - 9 - y - 6) / half;
+  const rh = Math.min(4.7, rowH);
+  [0, 1].forEach(h => {
+    const x0 = M + h * (hw + GUT); let yy = y;
+    setFont(ctx, 8.3, "700"); ctx.fillStyle = C.soft;
+    kc.forEach(([t, dx]) => ctx.fillText(t, x0 + dx, yy));
+    yy += 1.5; line(ctx, x0, yy, x0 + hw, yy, C.line, 0.3); yy += rh - 0.6;
+    Q.slice(h * half, h * half + half).forEach((q, i) => {
+      if (i % 8 === 0 && i) line(ctx, x0, yy - rh + 1.2, x0 + hw, yy - rh + 1.2, C.foil, 0.35);
+      setFont(ctx, 8.6, "700"); ctx.fillStyle = C.ink; ctx.fillText(String(q.n), x0, yy);
+      ctx.fillStyle = C.deep; ctx.fillText(LETTERS[q.ans], x0 + 10, yy);
+      setFont(ctx, 8.6); ctx.fillStyle = C.ink;
+      ctx.fillText(LEVELS[q.lvl].id, x0 + 20, yy);
+      ctx.fillText(String(LEVELS[q.lvl].pts), x0 + 32, yy);
+      let topic = q.topic; const tw = hw - 39;
+      while (ctx.measureText(topic).width > tw && topic.length > 4) topic = topic.slice(0, -2) + "…";
+      ctx.fillStyle = C.soft; ctx.fillText(topic, x0 + 39, yy);
+      yy += rh;
+    });
+  });
+  footer(ctx, W, H, "Answer key");
+}
+
+function renderPage(cv, scale, page, L) {
+  cv.width = Math.round(L.W * scale); cv.height = Math.round(L.H * scale);
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cv.width, cv.height);
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  ctx.textBaseline = "alphabetic";
+  if (page.kind === "key") drawKeyPage(ctx, L); else drawTestPage(ctx, L, page);
+}
+
+function redraw() {
+  $("pdfBtn").textContent = "Download PDF (" + layout().pages.length + " pages)";
+}
+function loadFonts() {
+  if (!document.fonts || !document.fonts.load) return Promise.resolve();
+  return Promise.all(["400 12px " + FB, "700 12px " + FB, "700 12px " + FD].map(f => document.fonts.load(f).catch(() => {})));
+}
+const say = t => { $("status").textContent = t; };
+const pause = () => new Promise(r => setTimeout(r, 0));
+async function busy(job) {
+  const all = [$("pdfBtn"), $("printBtn")];
+  all.forEach(b => b.disabled = true);
+  try { await loadFonts(); await job(layout()); } catch (e) { console.error(e); say("Something went wrong making the file. Try again, or use Print."); }
+  all.forEach(b => b.disabled = false);
+  redraw();
+}
+
+$("paperSel").onchange = e => { ps.paper = e.target.value; redraw(); };
+$("keyChk").onchange = e => { ps.key = e.target.checked; redraw(); };
+
+$("pdfBtn").onclick = () => busy(async L => {
+  if (!window.jspdf) { say("The PDF tool did not load (check your connection). Use Print and choose Save as PDF."); return; }
+  const pdf = new window.jspdf.jsPDF({ orientation: "portrait", unit: "mm", format: ps.paper });
+  const cv = document.createElement("canvas");
+  for (let i = 0; i < L.pages.length; i++) {
+    say("Making page " + (i + 1) + " of " + L.pages.length + "…");
+    await pause();
+    renderPage(cv, 8, L.pages[i], L);
+    if (i) pdf.addPage();
+    pdf.addImage(cv.toDataURL("image/jpeg", .92), "JPEG", 0, 0, L.W, L.H, undefined, "FAST");
+  }
+  pdf.save("grammar_level_test" + (ps.key ? "_with_key" : "") + ".pdf");
+  say("Downloaded the test" + (ps.key ? " and answer key." : "."));
+});
+
+$("printBtn").onclick = () => busy(async L => {
+  const area = $("printArea"), cv = document.createElement("canvas");
+  area.innerHTML = "";
+  let pr = $("pageRule");
+  if (!pr) { pr = document.createElement("style"); pr.id = "pageRule"; document.head.appendChild(pr); }
+  pr.textContent = "@page{size:" + (ps.paper === "letter" ? "letter" : "A4") + " portrait;margin:0}";
+  const waits = [];
+  for (let i = 0; i < L.pages.length; i++) {
+    say("Getting ready to print…"); await pause();
+    renderPage(cv, 6, L.pages[i], L);
+    const img = new Image();
+    waits.push(new Promise(r => { img.onload = img.onerror = r; }));
+    img.src = cv.toDataURL("image/jpeg", .92);
+    area.appendChild(img);
+  }
+  await Promise.all(waits);
+  say("");
+  window.print();
+  setTimeout(() => { area.innerHTML = ""; }, 1000);
+});
+
+// A one-page results sheet for the student, printed from the results screen
+$("printResBtn").onclick = () => {
+  const r = lastResult; if (!r) return;
+  const name = $("nameBox").value.trim();
+  const L = r.li >= 0 ? LEVELS[r.li].id + " " + LEVELS[r.li].name : "below A1";
+  const area = $("printArea"); area.innerHTML = "";
+  const sh = el("div", "sheet");
+  const top = el("div", "sh-top");
+  const qr = $("qrBox").querySelector("canvas");
+  if (qr) { const im = new Image(); im.src = qr.toDataURL("image/png"); im.alt = ""; top.appendChild(im); }
+  const tt = el("div"); tt.appendChild(el("h1", null, "Grammar Level Test: results"));
+  tt.appendChild(el("div", null, (name ? name + " · " : "") + new Date().toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" })));
+  top.appendChild(tt); sh.appendChild(top);
+  const big = el("div", "big");
+  [["Level", L], ["Score", r.score + " / " + MAX_SCORE], ["Correct", r.correct + " of " + r.count]].forEach(([k, v]) => { const d = el("div"); d.appendChild(el("span", null, k)); d.appendChild(el("b", null, v)); big.appendChild(d); });
+  sh.appendChild(big);
+  sh.appendChild(el("p", null, $("rSummary").textContent));
+  const topics = [...document.querySelectorAll("#rTopics li")].map(li => li.textContent);
+  if (topics.length) { sh.appendChild(el("h2", null, "Grammar to study next")); sh.appendChild(el("p", null, topics.join(" · "))); }
+  sh.appendChild(el("h2", null, "My answers"));
+  const tb = el("table"), hd = el("tr");
+  ["Q", "Level", "", "Sentence (correct answer in bold)", "My answer"].forEach(t => hd.appendChild(el("th", null, t)));
+  tb.appendChild(hd);
+  test.answers.forEach(a => {
+    const tr = el("tr");
+    tr.appendChild(el("td", null, String(a.q.n)));
+    tr.appendChild(el("td", null, LEVELS[a.q.lvl].id));
+    tr.appendChild(el("td", a.right ? "ok" : "no", a.right ? "✓" : "✗"));
+    const td = el("td"); sentenceInto(td, a.q.text, a.q.opts[a.q.ans]); tr.appendChild(td);
+    tr.appendChild(el("td", null, LETTERS[a.pick] + " " + a.q.opts[a.pick]));
+    tb.appendChild(tr);
+  });
+  sh.appendChild(tb);
+  sh.appendChild(el("p", "foot", "Modern English Australia · " + TEST_URL + " · © Koala Spies Sydney"));
+  area.appendChild(sh);
+  let pr = $("pageRule");
+  if (!pr) { pr = document.createElement("style"); pr.id = "pageRule"; document.head.appendChild(pr); }
+  pr.textContent = "@page{size:A4 portrait;margin:0}";
+  window.print();
+  setTimeout(() => { area.innerHTML = ""; }, 1000);
+};
+
+// =====================================================================
+// START
+// =====================================================================
+buildProgress(); redraw(); loadFonts().then(redraw);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+</script>
+</body>
+</html>
