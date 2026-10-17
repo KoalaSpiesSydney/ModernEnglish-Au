@@ -13,7 +13,7 @@
 <link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-video-lesson-maker.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,700&family=Fredoka:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,700&family=Montserrat:ital,wght@0,500;0,700;1,700&family=Nunito:ital,wght@0,500;0,800;1,800&family=Playfair+Display:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Serif+4:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,700&family=Fredoka:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,700&family=Montserrat:ital,wght@0,500;0,700;1,700&family=Nunito:ital,wght@0,500;0,800;1,800&display=swap">
 <style>
 /* =====================================================================
    BESPOKE VIDEO LESSON MAKER
@@ -23,34 +23,37 @@
    player: a link ending in #play=… opens the lesson for students.
    ===================================================================== */
 :root{
-  --bench:#dfe7e2;      /* the work surface behind everything */
+  --bench:#fffce6;      /* the site's cream page colour */
   --panel:#ffffff;
-  --ink:#14211e;
-  --soft:#51615c;
-  --line:#c4d0ca;
-  --deep:#16302b;       /* header and primary buttons */
-  --foil:#a8781f;       /* brass, used sparingly */
-  --focus:#1d6fd6;
+  --ink:#0f172a;
+  --soft:#475569;
+  --line:#dcd9c6;
+  --header:#1c1c1c;     /* header and footer, as on modernenglish.au */
+  --tag:#fde047;        /* the yellow of the site's tagline, on dark only */
+  --deep:#0e2861;       /* Modern English navy: primary buttons, headings */
+  --foil:#0e7c66;       /* Modern English teal, used sparingly */
+  --focus:#3968ea;
   --warn:#b3261e;
   --good:#1f7a4d;
-  --accent:#16302b;     /* the lesson's own colour, chosen under Design */
-  --qfont:"Atkinson Hyperlegible";
+  --accent:#0e2861;     /* the lesson's own colour, chosen under Design */
+  --qfont:"Source Sans 3";
   --radius:10px;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 /* Koala Spies Sydney watermark: faint, repeated across the page behind the panels. */
-body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%2316302b%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
-body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%230f172a%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
 /* ---------- header ---------- */
-.top{background:var(--deep);color:#f3f6f4}
+.top{background:var(--header);color:#f8fafc}
 .top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
-.top h1{margin:0;font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
-.top p{margin:0;color:#c9d6d0;font-size:.95rem;max-width:46ch}
+.top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
+.top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:46ch}
 
 /* ---------- the bench: controls + preview ---------- */
 .bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(300px,460px) minmax(0,1fr);gap:1.5rem;align-items:start}
@@ -70,11 +73,12 @@ textarea{resize:vertical;min-height:5rem;line-height:1.4}
 .lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 @media (max-width:420px){.two{grid-template-columns:1fr}}
-.notice{margin:0;font-size:.85rem;line-height:1.45;color:var(--ink);background:#f3f6f4;border:1px solid var(--line);border-left:4px solid var(--foil);border-radius:6px;padding:.55rem .7rem}
+.notice{margin:0;font-size:.85rem;line-height:1.45;color:var(--ink);background:#eef2fb;border:1px solid var(--line);border-left:4px solid var(--foil);border-radius:6px;padding:.55rem .7rem}
 .notice a{color:var(--deep);font-weight:700}
 .chips{display:flex;flex-wrap:wrap;gap:.4rem}
-.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:.35rem .8rem;font-size:.9rem;cursor:pointer;min-height:38px}
-.chip:hover{border-color:var(--deep)}
+/* plain text buttons: no border, no fill, no pill shape */
+.chip{border:0;background:none;border-radius:0;padding:.3rem 0;font-size:.95rem;font-weight:700;color:var(--deep);cursor:pointer;min-height:38px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:.25em;text-decoration-thickness:1.5px}
+.chip:hover{text-decoration-color:currentColor}
 .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
 .seg label{position:relative;text-align:center;padding:.5rem .4rem;cursor:pointer;font-size:.95rem;min-height:44px;display:flex;align-items:center;justify-content:center}
 .seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
@@ -85,9 +89,9 @@ textarea{resize:vertical;min-height:5rem;line-height:1.4}
 .sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep)}
 input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
 .btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
-.btn:hover{background:#eef3f0}
+.btn:hover{background:#eef2fb}
 .btn.main{background:var(--deep);color:#fff}
-.btn.main:hover{background:#0e231f}
+.btn.main:hover{background:#0a1d47}
 .btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
 .btn.small{min-height:38px;padding:.3rem .7rem;font-size:.9rem}
 .btn[disabled]{opacity:.55;cursor:not-allowed}
@@ -130,22 +134,22 @@ input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--li
 .olist .mv:disabled{opacity:.35;cursor:default}
 .picker{border:1.5px solid var(--line);border-radius:8px;background:#fff;padding:.45rem .6rem;line-height:2.05}
 .picker .w{border:0;background:none;padding:.1rem .22rem;margin:0 -.1rem;border-radius:5px;cursor:pointer;line-height:1.35}
-.picker .w:hover{background:#e3ece7}
+.picker .w:hover{background:#eef2fb}
 .picker .w[aria-pressed=true]{background:var(--deep);color:#fff}
 .picker .none{color:var(--soft)}
 .empty{margin:0;padding:.8rem;border:1.5px dashed var(--line);border-radius:8px;color:var(--soft);text-align:center}
 .tlines{max-height:15rem;overflow:auto;border:1.5px solid var(--line);border-radius:8px;background:#fff}
-.tline{display:grid;grid-template-columns:3.4rem 1fr;gap:.5rem;width:100%;text-align:left;border:0;border-bottom:1px solid #eef2f0;background:none;padding:.4rem .6rem;cursor:pointer;font-size:.92rem}
-.tline:hover{background:#eef3f0}
+.tline{display:grid;grid-template-columns:3.4rem 1fr;gap:.5rem;width:100%;text-align:left;border:0;border-bottom:1px solid #eef0f3;background:none;padding:.4rem .6rem;cursor:pointer;font-size:.92rem}
+.tline:hover{background:#eef2fb}
 .tline b{color:var(--soft);font-weight:700}
 .tline.used{opacity:.5}
 
 /* ---------- the video stage ---------- */
 .stage{position:sticky;top:1rem;display:grid;gap:.8rem}
-.screen{position:relative;background:#0c1513;border-radius:var(--radius);overflow:hidden;aspect-ratio:16/9;box-shadow:0 1px 2px rgba(20,33,30,.25),0 14px 34px -10px rgba(20,33,30,.45)}
+.screen{position:relative;background:#0b1220;border-radius:var(--radius);overflow:hidden;aspect-ratio:16/9;box-shadow:0 1px 2px rgba(15,23,42,.25),0 14px 34px -10px rgba(15,23,42,.45)}
 .screen iframe,#player{position:absolute;inset:0;width:100%;height:100%;border:0}
-.screen-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem;color:#dfe7e2;font-size:1rem;line-height:1.5}
-.veil{position:absolute;inset:0;background:rgba(12,21,19,.55);display:flex;align-items:flex-end;justify-content:center;padding:1rem;color:#fff;font-weight:700;letter-spacing:.02em}
+.screen-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem;color:#cbd5e1;font-size:1rem;line-height:1.5}
+.veil{position:absolute;inset:0;background:rgba(11,18,32,.55);display:flex;align-items:flex-end;justify-content:center;padding:1rem;color:#fff;font-weight:700;letter-spacing:.02em}
 .veil span{background:var(--accent);padding:.35rem .9rem;border-radius:999px;font-size:.95rem}
 .timeline{position:relative;height:30px;background:#fff;border:1px solid var(--line);border-radius:8px}
 .timeline .track{position:absolute;left:12px;right:12px;top:50%;height:4px;margin-top:-2px;background:var(--line);border-radius:2px}
@@ -168,7 +172,7 @@ input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--li
 
 /* ---------- reading matter under the tool ---------- */
 .notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
-.notes h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
 .notes p,.notes li{max-width:62ch}
 .notes ol,.notes ul{margin:0;padding-left:1.2rem}
 .notes li{margin-bottom:.35rem}
@@ -176,12 +180,12 @@ input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--li
 .notes dd{margin:0}
 .terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
 .terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
-.terms h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
 .terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
 .terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
 .terms ul{margin:0;padding-left:1.2rem}
 .terms .updated{color:var(--soft);font-size:.9rem}
-footer{background:var(--deep);color:#c9d6d0;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer{background:var(--header);color:#cbd5e1;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
 footer a{color:#fff}
 
 /* ---------- the student player (a link ending in #play=…) ---------- */
@@ -189,7 +193,7 @@ body.play .maker{display:none!important}
 body:not(.play) .player-only{display:none!important}
 .play-wrap{max-width:900px;margin:0 auto;padding:1.25rem;display:grid;gap:1rem}
 .lesson-head{background:var(--panel);border:1px solid var(--line);border-top:5px solid var(--accent);border-radius:var(--radius);padding:.9rem 1.1rem}
-.lesson-head h2{margin:0;font-family:var(--qfont),"Atkinson Hyperlegible",Verdana,sans-serif;font-size:clamp(1.25rem,3vw,1.6rem);line-height:1.2}
+.lesson-head h2{margin:0;font-family:var(--qfont),"Source Sans 3",Verdana,sans-serif;font-size:clamp(1.25rem,3vw,1.6rem);line-height:1.2}
 .lesson-head p{margin:.35rem 0 0;color:var(--soft)}
 .dots{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center;font-size:.9rem;color:var(--soft)}
 .dot{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--line)}
@@ -198,8 +202,8 @@ body:not(.play) .player-only{display:none!important}
 .dot.done{background:var(--soft);border-color:var(--soft)}
 .dot.half{background:var(--foil);border-color:var(--foil)}
 .dot.now{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,0,0,.08)}
-.qpanel{background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:var(--radius);padding:1.1rem 1.2rem 1.2rem;display:grid;gap:.85rem;font-family:var(--qfont),"Atkinson Hyperlegible",Verdana,sans-serif;font-size:1.08rem;scroll-margin-top:1rem}
-.qpanel .qn{font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);font-family:"Atkinson Hyperlegible",Verdana,sans-serif}
+.qpanel{background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:var(--radius);padding:1.1rem 1.2rem 1.2rem;display:grid;gap:.85rem;font-family:var(--qfont),"Source Sans 3",Verdana,sans-serif;font-size:1.08rem;scroll-margin-top:1rem}
+.qpanel .qn{font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);font-family:"Source Sans 3",system-ui,Arial,sans-serif}
 .qpanel .prompt{margin:0;font-weight:700;font-size:1.15rem;line-height:1.4}
 .choices{display:grid;gap:.5rem}
 .choice{display:flex;gap:.7rem;align-items:flex-start;border:1.5px solid var(--line);border-radius:8px;padding:.6rem .75rem;cursor:pointer;background:#fff;text-align:left;width:100%;min-height:48px}
@@ -208,15 +212,15 @@ body:not(.play) .player-only{display:none!important}
 .choice.right{border-color:var(--good);background:#eaf5ef}
 .choice.wrong{border-color:var(--warn);background:#fbecea}
 .gapline{margin:0;line-height:2.4}
-.gapline input{display:inline-block;width:auto;min-width:5.5em;min-height:38px;padding:.25rem .45rem;margin:0 .15rem;border:none;border-bottom:2.5px solid var(--accent);border-radius:4px 4px 0 0;background:#f4f7f5;font-size:1.02rem;text-align:center}
+.gapline input{display:inline-block;width:auto;min-width:5.5em;min-height:38px;padding:.25rem .45rem;margin:0 .15rem;border:none;border-bottom:2.5px solid var(--accent);border-radius:4px 4px 0 0;background:#fffef6;font-size:1.02rem;text-align:center}
 .gapline input.right{border-bottom-color:var(--good);background:#eaf5ef}
 .gapline input.wrong{border-bottom-color:var(--warn);background:#fbecea}
-.feedback{margin:0;padding:.6rem .8rem;border-radius:8px;font-weight:700;font-family:"Atkinson Hyperlegible",Verdana,sans-serif;font-size:1rem}
+.feedback{margin:0;padding:.6rem .8rem;border-radius:8px;font-weight:700;font-family:"Source Sans 3",system-ui,Arial,sans-serif;font-size:1rem}
 .feedback.ok{background:#eaf5ef;color:var(--good)}
 .feedback.no{background:#fbecea;color:var(--warn)}
-.feedback.info{background:#f3f6f4;color:var(--ink);font-weight:400}
+.feedback.info{background:#eef2fb;color:var(--ink);font-weight:400}
 .qbtns{display:flex;gap:.5rem;flex-wrap:wrap}
-.qpanel .btn{font-family:"Atkinson Hyperlegible",Verdana,sans-serif}
+.qpanel .btn{font-family:"Source Sans 3",system-ui,Arial,sans-serif}
 .btn.go{background:var(--accent);border-color:var(--accent);color:#fff}
 .results ul{margin:0;padding:0;list-style:none;display:grid;gap:.35rem}
 .results li{display:flex;gap:.6rem;align-items:baseline;font-size:1rem}
@@ -228,10 +232,10 @@ body:not(.play) .player-only{display:none!important}
 .filebar{display:flex;align-items:center;justify-content:space-between;gap:.5rem .8rem;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:.55rem .7rem .55rem 1rem}
 .savestate{font-size:.9rem;color:var(--soft);font-weight:700}
 .savestate.dirty{color:var(--foil)}
-.lib{position:fixed;inset:0;z-index:40;background:rgba(12,21,19,.5);display:flex;align-items:flex-start;justify-content:center;padding:6vh 1rem 1rem;overflow:auto}
+.lib{position:fixed;inset:0;z-index:40;background:rgba(11,18,32,.5);display:flex;align-items:flex-start;justify-content:center;padding:6vh 1rem 1rem;overflow:auto}
 .lib-in{background:var(--panel);border-radius:var(--radius);width:min(640px,100%);padding:1.1rem 1.2rem 1.2rem;display:grid;gap:.8rem;box-shadow:0 20px 50px rgba(0,0,0,.35)}
 .lib-head{display:flex;justify-content:space-between;align-items:center}
-.lib-head h2{margin:0;font-family:"Playfair Display",Georgia,serif;font-size:1.4rem}
+.lib-head h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:1.4rem}
 .lib-list{list-style:none;margin:0;padding:0;display:grid;gap:.45rem;max-height:52vh;overflow:auto}
 .lib-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem .6rem;align-items:center;border:1.5px solid var(--line);border-radius:8px;padding:.55rem .7rem}
 .lib-list li.current{border-color:var(--deep)}
@@ -241,7 +245,7 @@ body:not(.play) .player-only{display:none!important}
 .lib-list .none{border-style:dashed;color:var(--soft);display:block;text-align:center}
 @media (max-width:520px){.lib-list li{grid-template-columns:1fr}.lib-list .row-btns{justify-content:flex-start}}
 .board{position:fixed;inset:0;z-index:50;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:1.5rem;text-align:center}
-.board h2{margin:0;font-family:"Playfair Display",Georgia,serif;font-size:clamp(1.6rem,4vw,3rem);color:var(--ink);max-width:24ch;line-height:1.15}
+.board h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:clamp(1.6rem,4vw,3rem);color:var(--ink);max-width:24ch;line-height:1.15}
 .board p{margin:0;font-size:clamp(1rem,2vw,1.5rem);color:var(--soft)}
 .board #boardQr canvas,.board #boardQr img{width:min(68vh,86vw);height:min(68vh,86vw);image-rendering:pixelated;display:block}
 
@@ -250,24 +254,83 @@ body:not(.play) .player-only{display:none!important}
   .bench{grid-template-columns:minmax(0,1fr);padding:1rem}
   .stage{position:static;order:-1}
 }
+/* ---------- open layout: no card backings, raised buttons ----------
+   Sections sit straight on the page, divided by thin lines. Remove this
+   block to bring the white cards back. */
+details.group,.share,.terms-in,.qcard,.filebar,.lesson-head,.qpanel{background:none;border:0;border-radius:0;box-shadow:none}
+details.group{border-bottom:1px solid var(--line)}
+details.group>summary{padding-left:0;padding-right:0}
+.group-body,.share,.terms-in,.filebar{padding-left:0;padding-right:0}
+.share{border-top:1px solid var(--line);padding-top:1rem}
+.filebar{border-top:0;padding-top:.4rem;padding-bottom:.2rem}
+
+.qlist{gap:0}
+.qcard{padding:.9rem 0;border-top:1px solid var(--line)}
+.qcard:first-child{border-top:0;padding-top:.2rem}
+@keyframes flash{0%{background:#fff3c4}100%{background:transparent}}
+.lesson-head{padding:0 0 .8rem;border-bottom:3px solid var(--accent)}
+.qpanel{padding:.3rem 0 0}
+.veil span{border-radius:4px}
+/* share with students: the QR code in the top-left corner of the header */
+.top-in{align-items:center}
+.titleblock{flex:1 1 16rem;min-width:0}
+.qrbtn{flex:none;display:grid;justify-items:center;gap:.35rem;background:none;border:0;padding:0;cursor:pointer;color:#f8fafc;font-size:.78rem;font-weight:700;letter-spacing:.04em}
+.qrthumb{display:grid;place-items:center;width:112px;height:112px;box-sizing:content-box;padding:6px;background:#fff;border-radius:6px;box-shadow:0 2px 4px rgba(0,0,0,.35),0 10px 22px -8px rgba(0,0,0,.6);transition:transform .15s ease,box-shadow .15s ease}
+.qrbtn:hover .qrthumb{transform:translateY(-2px);box-shadow:0 3px 6px rgba(0,0,0,.4),0 16px 30px -10px rgba(0,0,0,.7)}
+.qrbtn:hover .qrcap{text-decoration:underline;text-underline-offset:.2em}
+.qrthumb canvas,.qrthumb img{width:112px!important;height:112px!important;image-rendering:pixelated}
+.qrph{display:grid;place-items:center;width:100%;height:100%;border:2px dashed #c3c8d2;border-radius:4px;color:var(--soft);font-weight:700;letter-spacing:.1em;line-height:1;font-size:.9rem}
+.notready{margin:0;font-size:.9rem;color:var(--soft)}
+.notready b{color:var(--ink)}
+.share{border-top:0;padding-top:0}
+#qrOut{display:none}   /* the header QR code is the one students scan; this copy is kept for "Download QR code" */
+@media (max-width:520px){.qrthumb,.qrthumb canvas,.qrthumb img{width:92px!important;height:92px!important}}
+.printrow{display:flex;gap:.5rem 1rem;align-items:center;flex-wrap:wrap;padding-top:.9rem;border-top:1px solid var(--line)}
+.notice{background:none;border:0;border-radius:0;padding:0}
+.btn,.iconbtn,.choice,.mv{box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
+.btn:hover,.iconbtn:hover,.choice:hover,.mv:hover:not(:disabled){box-shadow:0 2px 4px rgba(15,23,42,.22),0 12px 24px -8px rgba(15,23,42,.48);transform:translateY(-1px)}
+.btn:active,.iconbtn:active,.choice:active,.mv:active{box-shadow:0 1px 2px rgba(15,23,42,.28);transform:translateY(0)}
+.btn[disabled],.mv:disabled{box-shadow:none;transform:none}
+.sw{box-shadow:0 0 0 1.5px var(--line),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+
+/* ---------- typing fields: white, with a firm bottom edge that says "write here" ---------- */
+input[type=text],input[type=number],input[type=url],textarea,select{background:#fff;border:1px solid #d5d3c2;border-bottom:2px solid #94a3b8;border-radius:6px 6px 3px 3px;box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 1px 2px rgba(15,23,42,.1),0 5px 14px -5px rgba(15,23,42,.28);transition:border-color .15s ease,box-shadow .15s ease}
+input[type=text]:hover,input[type=number]:hover,input[type=url]:hover,textarea:hover,select:hover{border-bottom-color:var(--deep)}
+input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,textarea:focus,select:focus{outline:none;border-color:var(--deep);box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 5px 14px -5px rgba(15,23,42,.28),0 0 0 3px rgba(57,104,234,.22)}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
+select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23475569' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right .8rem center}
+/* the gaps in a gap-fill question: a line to write on, not a box */
+p.gapline input{border:0;border-bottom:2.5px solid var(--accent);border-radius:4px 4px 0 0;background:#fffef6;box-shadow:0 5px 12px -6px rgba(15,23,42,.3)}
+p.gapline input:hover{border-bottom-color:var(--deep)}
+p.gapline input:focus{border:0;border-bottom:2.5px solid var(--deep);background:#fff;box-shadow:0 5px 12px -6px rgba(15,23,42,.3),0 0 0 3px rgba(57,104,234,.22)}
+p.gapline input.right{border-bottom-color:var(--good);background:#eaf5ef}
+p.gapline input.wrong{border-bottom-color:var(--warn);background:#fbecea}
+/* ---------- no horizontal lines: sections are separated by space alone ----------
+   (typing fields keep their writing edge; printed pages are not affected) */
+details.group,.qcard,.share,.share .teacher,.filebar,.printrow,.test-head,.lesson-head,.review-list li,.notes h2,.tline,.ltable th,.ltable td{border-top:0!important;border-bottom:0!important}
+details.group{margin-bottom:.35rem}
+.qcard{padding:.75rem 0}
+.notes h2{padding-bottom:0}
+.test-head{padding-bottom:.4rem}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 /* ---------- printing: only the worksheet ---------- */
 @media print{
   body>*:not(#printArea){display:none!important}
   body{background:#fff none;padding:0}
-  #printArea{display:block;font-family:var(--qfont),"Atkinson Hyperlegible",Verdana,sans-serif;color:#14211e;font-size:12pt}
+  #printArea{display:block;font-family:var(--qfont),"Source Sans 3",Verdana,sans-serif;color:#0f172a;font-size:12pt}
   #printArea .pg{page-break-after:always;break-after:page}
   #printArea .pg:last-child{page-break-after:auto;break-after:auto}
   #printArea .ph{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;border-bottom:3px solid var(--accent);padding-bottom:.5rem;margin-bottom:.8rem}
   #printArea h1{margin:0;font-size:20pt;line-height:1.2}
-  #printArea .sub{margin:.2rem 0 0;color:#51615c;font-size:10pt}
-  #printArea .qr{width:2.6cm;text-align:center;font-size:8pt;color:#51615c}
+  #printArea .sub{margin:.2rem 0 0;color:#475569;font-size:10pt}
+  #printArea .qr{width:2.6cm;text-align:center;font-size:8pt;color:#475569}
   #printArea .qr img{width:2.6cm;height:2.6cm;image-rendering:pixelated}
   #printArea .namel{display:flex;gap:2rem;margin:0 0 .8rem;font-weight:700}
-  #printArea .namel span{flex:1;border-bottom:1px solid #14211e}
+  #printArea .namel span{flex:1;border-bottom:1px solid #0f172a}
   #printArea .pq{margin:0 0 .9rem;break-inside:avoid}
-  #printArea .pq .at{color:#51615c;font-size:9pt;font-weight:700}
+  #printArea .pq .at{color:#475569;font-size:9pt;font-weight:700}
   #printArea .pq p{margin:.1rem 0 .3rem;font-weight:700}
   #printArea .pq ol{margin:0;padding-left:1.4rem;list-style:upper-alpha}
   #printArea .pq ol.num{list-style:decimal}
@@ -275,9 +338,9 @@ body:not(.play) .player-only{display:none!important}
   #printArea .pq ul.plain li{margin:.15rem 0}
   #printArea .mt{border-collapse:collapse}
   #printArea .mt td{padding:.15rem .6rem .15rem 0;vertical-align:top}
-  #printArea .mt td.blank{color:#51615c}
-  #printArea .pq .ln{border-bottom:1px solid #14211e;height:1.5em}
-  #printArea .gapw{display:inline-block;min-width:3cm;border-bottom:1px solid #14211e}
+  #printArea .mt td.blank{color:#475569}
+  #printArea .pq .ln{border-bottom:1px solid #0f172a;height:1.5em}
+  #printArea .gapw{display:inline-block;min-width:3cm;border-bottom:1px solid #0f172a}
   #printArea .ans{color:var(--accent);font-weight:700}
 }
 </style>
@@ -297,7 +360,12 @@ body:not(.play) .player-only{display:none!important}
 
 <header class="top">
   <div class="top-in">
-    <h1 id="pageTitle">Bespoke Video Lesson Maker</h1>
+    <!-- SHARE WITH STUDENTS: the lesson's QR code, top left. It updates as the lesson changes. -->
+    <button type="button" class="qrbtn maker" id="shareBtn" aria-label="Share with students: show the student link and QR code">
+      <span class="qrthumb off" id="qrThumb"><span class="qrph">QR</span></span>
+      <span class="qrcap">Share with students</span>
+    </button>
+    <div class="titleblock"><p class="eyebrow">Modern English Australia</p><h1 id="pageTitle">Bespoke Video Lesson Maker</h1></div>
     <p id="pageSub">Free for teachers. Choose a YouTube video, add questions that pause it, and share a link or QR code with your class. No sign-up.</p>
   </div>
 </header>
@@ -311,14 +379,20 @@ body:not(.play) .player-only{display:none!important}
 
   <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
 
-    <div class="filebar">
-      <span class="savestate" id="saveState" role="status" aria-live="polite">New lesson</span>
-      <div class="actions">
-        <button type="button" class="btn main small" id="saveBtn" title="Save (Ctrl+S)">Save</button>
-        <button type="button" class="btn small" id="libBtn">My lessons</button>
-        <button type="button" class="btn small quiet" id="newBtn">New lesson</button>
+    <p class="notready" id="shareTileHint" role="status" hidden></p>
+    <section class="share" id="shareBox" hidden aria-labelledby="shareH">
+      <h2 id="shareH">Share this lesson</h2>
+      <p class="lab" style="margin:0">Student link: give this to your class</p>
+      <div class="row"><input type="text" id="linkOut" readonly aria-label="Student link"><button type="button" class="btn main" id="copyBtn">Copy link</button></div>
+      <div class="qrwrap"><div id="qrOut"></div><div><p class="hint" id="qrHint">Each student scans this with their own phone or tablet and answers on their own.</p><div class="actions"><button type="button" class="btn small main" id="qrBigBtn">Show QR on the board</button><button type="button" class="btn small" id="qrSaveBtn">Download QR code</button></div></div></div>
+      <div class="teacher">
+        <p class="lab" style="margin:0">Teacher link: keep this one for yourself</p>
+        <p class="hint" style="margin:0 0 .4rem">It opens the lesson ready to change, on any computer. Save it in your email, notes or bookmarks.</p>
+        <div class="row"><input type="text" id="editOut" readonly aria-label="Teacher link"><button type="button" class="btn" id="copyEditBtn">Copy teacher link</button></div>
       </div>
-    </div>
+      <p class="hint">The whole lesson is inside these links, so it is never stored on this site. If you change the lesson, share the new student link.</p>
+    </section>
+
 
     <details class="group" open>
       <summary>1. The video</summary>
@@ -353,6 +427,7 @@ body:not(.play) .player-only{display:none!important}
             <div class="tlines" id="tlines" hidden></div>
           </div>
         </details>
+        <label class="check keyopt"><input type="checkbox" id="keyChk">Add an answer key to the worksheet</label>
       </div>
     </details>
 
@@ -375,11 +450,17 @@ body:not(.play) .player-only{display:none!important}
           </div>
         </div>
         <label class="f"><span>Font for the questions</span><select data-k="font" id="fontSel"></select></label>
-        <label class="check"><input type="checkbox" id="keyChk">Add an answer key when printing</label>
       </div>
     </details>
 
-    <button type="button" class="btn quiet" id="resetBtn">Start again with the example lesson</button>
+    <div class="filebar">
+      <span class="savestate" id="saveState" role="status" aria-live="polite">New lesson</span>
+      <div class="actions">
+        <button type="button" class="btn main small" id="saveBtn" title="Saves this lesson and shows all your saved lessons. Ctrl+S saves without opening the list.">Save to My lessons</button>
+        <button type="button" class="btn small" id="printBtn">Print worksheet</button>
+        <button type="button" class="btn small quiet" id="newBtn">New lesson</button>
+      </div>
+    </div>
   </form>
 
   <section class="stage" aria-label="Video">
@@ -387,25 +468,9 @@ body:not(.play) .player-only{display:none!important}
     <div class="timeline" id="timeline" aria-label="Questions on the video timeline"><div class="track"><div class="played" id="played"></div></div></div>
     <div class="stage-bar">
       <span class="clock" id="clock">0:00</span>
-      <div class="actions">
-        <button type="button" class="btn main" id="shareBtn">Share with students</button>
-        <button type="button" class="btn" id="printBtn">Print worksheet</button>
-      </div>
     </div>
     <p id="status" role="status" aria-live="polite"></p>
-    <section class="share" id="shareBox" hidden aria-labelledby="shareH">
-      <h2 id="shareH">Share this lesson</h2>
-      <p class="lab" style="margin:0">Student link: give this to your class</p>
-      <div class="row"><input type="text" id="linkOut" readonly aria-label="Student link"><button type="button" class="btn main" id="copyBtn">Copy link</button></div>
-      <div class="qrwrap"><div id="qrOut"></div><div><p class="hint" id="qrHint">Each student scans this with their own phone or tablet and answers on their own.</p><div class="actions"><button type="button" class="btn small main" id="qrBigBtn">Show QR on the board</button><button type="button" class="btn small" id="qrSaveBtn">Download QR code</button></div></div></div>
-      <div class="teacher">
-        <p class="lab" style="margin:0">Teacher link: keep this one for yourself</p>
-        <p class="hint" style="margin:0 0 .4rem">It opens the lesson ready to change, on any computer. Save it in your email, notes or bookmarks.</p>
-        <div class="row"><input type="text" id="editOut" readonly aria-label="Teacher link"><button type="button" class="btn" id="copyEditBtn">Copy teacher link</button></div>
-      </div>
-      <p class="hint">The whole lesson is inside these links, so it is never stored on this site. If you change the lesson, share the new student link.</p>
-    </section>
-    <p class="fineprint">Click a numbered dot on the timeline to jump to that question. <a href="#terms">Terms of use</a></p>
+    <p class="fineprint">Click a numbered dot on the timeline to jump to that question.</p>
   </section>
 </main>
 
@@ -426,7 +491,7 @@ body:not(.play) .player-only{display:none!important}
     <ol>
       <li>Paste a YouTube link. The video plays on the right.</li>
       <li>Pause it where you want a question and pick a question type. Each question stops the video at that moment.</li>
-      <li>Press <b>Share with students</b> and copy the link, or show the QR code on the board. Students answer as they watch and see their score at the end.</li>
+      <li>Click the QR code in the top-left corner (<b>Share with students</b>) to copy the link or show the QR code on the board. Students answer as they watch and see their score at the end.</li>
     </ol>
   </div>
   <div>
@@ -447,7 +512,7 @@ body:not(.play) .player-only{display:none!important}
       <dt>Do students need an account?</dt>
       <dd>No. They open the link or scan the QR code and start watching.</dd>
       <dt>How do I save a lesson?</dt>
-      <dd>Press <b>Save</b>. The lesson goes into <b>My lessons</b> in this browser, ready to open next time. To keep a copy anywhere else, use <b>My lessons › Download this lesson</b>: you get a small file that opens the lesson.</dd>
+      <dd>Press <b>Save to My lessons</b>. The lesson is saved in this browser and the list of all your saved lessons opens, ready for next time. To keep a copy anywhere else, press <b>Download this lesson</b> in that list: you get a small file that opens the lesson.</dd>
       <dt>Where is my lesson stored?</dt>
       <dd>On your own computer and inside the links you share. Nothing is uploaded to this site.</dd>
       <dt>How do I change a lesson later?</dt>
@@ -553,6 +618,8 @@ const EXAMPLE = {
 
 // Colour choices (the round buttons). The first is the default.
 const COLOURS = [
+  { name: "Modern English navy", c: "#0e2861" },
+  { name: "Modern English teal", c: "#0e7c66" },
   { name: "Deep green", c: "#16302b" },
   { name: "Navy",       c: "#1b2a4a" },
   { name: "Burgundy",   c: "#6b1e2e" },
@@ -565,6 +632,7 @@ const COLOURS = [
 
 // Fonts for the questions.
 const FONTS = {
+  brand:    { label: "Modern English (Source Sans)", f: "Source Sans 3" },
   clear:    { label: "Easy to read (Atkinson)", f: "Atkinson Hyperlegible" },
   rounded:  { label: "Rounded (Nunito)",        f: "Nunito" },
   friendly: { label: "Friendly (Fredoka)",      f: "Fredoka" },
@@ -594,7 +662,7 @@ function clean(o) {
     title: str(o.title, 90), vid: /^[\w-]{11}$/.test(o.vid || "") ? o.vid : "", instr: str(o.instr, 200),
     noSkip: o.noSkip !== false, retry: o.retry !== false, reveal: o.reveal !== false,
     cMain: /^#[0-9a-f]{6}$/i.test(o.cMain || "") ? o.cMain : COLOURS[0].c,
-    font: FONTS[o.font] ? o.font : "clear", qs: []
+    font: FONTS[o.font] ? o.font : "brand", qs: []
   };
   (Array.isArray(o.qs) ? o.qs : []).slice(0, MAX_Q).forEach(q => {
     if (!q || !TYPES[q.type]) return;
@@ -710,11 +778,12 @@ let L = null, player = null, playerVid = "", duration = 0, set = { key: true };
 try { Object.assign(set, JSON.parse(localStorage.getItem(STORE_SET) || "{}")); } catch (e) {}
 let saveTimer = 0;
 // save() keeps the working draft safe on this device after every change (so nothing is lost if the page closes);
-// the Save button puts the lesson into My lessons. "quiet" means: not a change by the teacher.
+// the Save to My lessons button puts the lesson into My lessons, then shows the list. "quiet" means: not a change by the teacher.
 function save(quiet) {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => { try { localStorage.setItem(STORE, JSON.stringify(L)); localStorage.setItem(STORE_SET, JSON.stringify(set)); } catch (e) {} }, 300);
   $("shareBox").hidden = true;            // an old link no longer matches the lesson
+  updateShareQr();                        // ...but the QR code in the corner keeps up
   if (!quiet) { dirty = true; showState(); }
 }
 // ---------- My lessons (saved in this browser) ----------
@@ -739,7 +808,7 @@ function saveLesson() {
 const okToLeave = () => !dirty || !(L.vid || L.qs.length) || window.confirm("This lesson has changes that aren't saved. Continue anyway?");
 function renderLib() {
   const box = $("libList"), all = lib(); box.textContent = "";
-  if (!all.length) { box.appendChild(el("li", "none", "No saved lessons yet. Press Save to keep a lesson here.")); return; }
+  if (!all.length) { box.appendChild(el("li", "none", "No saved lessons yet. Add a video or a question, then press Save to My lessons.")); return; }
   all.forEach(x => {
     const li = el("li" , x.id === L.id ? "current" : ""), info = el("div");
     const n = (x.lesson.qs || []).length;
@@ -758,7 +827,7 @@ function renderLib() {
   });
 }
 function openLib() { renderLib(); $("lib").hidden = false; $("libClose").focus(); }
-function closeLib() { $("lib").hidden = true; $("libBtn").focus(); }
+function closeLib() { $("lib").hidden = true; $("saveBtn").focus(); }
 function say(msg) { $("status").textContent = msg; }
 const now = () => (player && player.getCurrentTime ? Math.floor(player.getCurrentTime() || 0) : 0);
 
@@ -1026,12 +1095,28 @@ function problems() {
   });
   return out;
 }
-function tidyForSharing() { L.qs.forEach(q => {
+function tidyForSharing(X) { (X || L).qs.forEach(q => {
   if (q.type === "match") q.pairs = q.pairs.filter(x => x[0].trim() && x[1].trim());
   if (q.type === "order") q.items = q.items.filter(x => x.trim());
   if (q.type === "mc") { const right = q.opts[q.ans]; const keep = q.opts.filter((o, k) => o.trim() || k === q.ans); q.opts = keep; q.ans = keep.indexOf(right); } }); }
 
 async function links() { tidyForSharing(); const c = await pack(L); return { play: pageUrl() + "#play=" + c, edit: pageUrl() + "#edit=" + c }; }
+// the live QR code in the top-left corner: drawn from a tidied copy, so the teacher's half-typed rows are left alone
+let qrTimer = 0, qrSeq = 0;
+const READY_HINT = "Students scan this code to open the lesson. Click it for the student link, a big QR code for the board and your teacher link.";
+function updateShareQr() {
+  clearTimeout(qrTimer);
+  qrTimer = setTimeout(async () => {
+    const seq = ++qrSeq, box = $("qrThumb"), hint = $("shareTileHint"), p = problems();
+    if (p.length) { box.className = "qrthumb off"; box.innerHTML = '<span class="qrph">QR</span>'; hint.innerHTML = ""; hint.append(el("b", "", "Share with students: "), document.createTextNode("the QR code appears when the lesson is ready. Still to do: " + p[0])); hint.hidden = false; return; }
+    const C = JSON.parse(JSON.stringify(L)); tidyForSharing(C);
+    const link = pageUrl() + "#play=" + await pack(C);
+    if (seq !== qrSeq) return;
+    box.className = "qrthumb"; box.textContent = "";
+    try { if (typeof QRCode === "undefined") throw 0; new QRCode(box, { text: link, width: 300, height: 300, correctLevel: QRCode.CorrectLevel.L }); hint.hidden = true; $("shareBtn").title = READY_HINT; }
+    catch (e) { box.className = "qrthumb off"; box.innerHTML = '<span class="qrph">LINK</span>'; hint.textContent = "This lesson is too long for a QR code. Click the box in the top-left corner for the student link."; hint.hidden = false; }
+  }, 500);
+}
 $("shareBtn").onclick = async () => {
   const p = problems(); if (p.length) { say(p[0] + (p.length > 1 ? " (and " + (p.length - 1) + " more)" : "")); return; }
   const both = await links(), link = both.play; renderQs(); save(true);
@@ -1079,9 +1164,10 @@ const escH = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;"
 async function lessonFile(lesson) {
   const c = await pack(lesson), t = escH(lesson.title || "Video lesson"), base = pageUrl(), n = lesson.qs.length;
   return '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>' + t + ' · Video lesson</title>\n'
+    + '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&family=Source+Serif+4:wght@800&display=swap">\n'
     + '<!-- A lesson from the Bespoke Video Lesson Maker. Open it in the maker with "Open a lesson file" to change it. -->\n'
     + '<meta name="bespoke-video-lesson" content="' + c + '">\n'
-    + '<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#dfe7e2;font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;color:#14211e;padding:1rem}main{background:#fff;border-radius:12px;border-top:6px solid ' + lesson.cMain + ';padding:1.6rem 1.6rem 1.4rem;max-width:520px;width:100%;box-shadow:0 14px 34px -10px rgba(20,33,30,.45)}.k{margin:0;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#51615c}h1{margin:.3rem 0 .3rem;font-family:Georgia,serif;font-size:1.7rem;line-height:1.2}p{margin:0 0 1rem;color:#51615c}a.b{display:block;text-align:center;padding:.8rem 1rem;border-radius:8px;font-weight:700;text-decoration:none;margin:.5rem 0;border:1.5px solid #16302b;color:#16302b}a.b.main{background:' + lesson.cMain + ';border-color:' + lesson.cMain + ';color:#fff}.s{font-size:.85rem;margin:1rem 0 0}</style>\n</head>\n<body>\n<main>\n'
+    + '<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fffce6;font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;color:#0f172a;padding:1rem}main{background:#fff;border-radius:12px;border-top:6px solid ' + lesson.cMain + ';padding:1.6rem 1.6rem 1.4rem;max-width:520px;width:100%;box-shadow:0 14px 34px -10px rgba(15,23,42,.45)}.k{margin:0;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#475569}h1{margin:.3rem 0 .3rem;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:1.7rem;line-height:1.2}p{margin:0 0 1rem;color:#475569}a.b{display:block;text-align:center;padding:.8rem 1rem;border-radius:8px;font-weight:700;text-decoration:none;margin:.75rem 0;border:1.5px solid #0e2861;color:#0e2861;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38)}a.b.main{background:' + lesson.cMain + ';border-color:' + lesson.cMain + ';color:#fff}.s{font-size:.85rem;margin:1rem 0 0}</style>\n</head>\n<body>\n<main>\n'
     + '<p class="k">Video lesson</p>\n<h1>' + t + '</h1>\n<p>' + n + (n === 1 ? ' question' : ' questions') + (lesson.instr ? ' · ' + escH(lesson.instr) : '') + '</p>\n'
     + '<a class="b main" href="' + base + '#play=' + c + '">Open the lesson for students</a>\n'
     + '<a class="b" href="' + base + '#edit=' + c + '">Change this lesson</a>\n'
@@ -1107,13 +1193,13 @@ $("fileIn").onchange = e => {
     if (!okToLeave()) return;
     const same = lib().find(x => x.lesson.title === next.title && x.lesson.vid === next.vid);
     loadLesson(next); dirty = true; showState(); closeLib();
-    say("Opened “" + (next.title || "Untitled lesson") + "”. Press Save to keep it in My lessons" + (same ? " (it will be saved as a new copy)." : "."));
+    say("Opened “" + (next.title || "Untitled lesson") + "”. Press Save to My lessons to keep it" + (same ? " (it will be saved as a new copy)." : "."));
   };
   r.readAsText(f);
 };
 function loadLesson(next) { L = next; syncForm(); renderQs(); renderTranscript(); makerPlayer(); save(true); dirty = false; showState(); }
-$("saveBtn").onclick = saveLesson;
-$("libBtn").onclick = openLib;
+// one button: save the lesson (if there is anything to save), then show all saved lessons
+$("saveBtn").onclick = () => { if (L.vid || L.qs.length) saveLesson(); openLib(); };
 $("libClose").onclick = closeLib;
 $("lib").addEventListener("click", e => { if (e.target === $("lib")) closeLib(); });
 $("newBtn").onclick = () => { if (!okToLeave()) return; $("transBox").value = ""; loadLesson(clean({})); say("New lesson. Paste a YouTube link in step 1 to start."); };
@@ -1121,11 +1207,6 @@ document.addEventListener("keydown", e => {
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s" && !document.body.classList.contains("play")) { e.preventDefault(); saveLesson(); }
   if (e.key === "Escape" && !$("lib").hidden) closeLib();
 });
-$("resetBtn").onclick = () => {
-  if (!okToLeave()) return;
-  try { localStorage.removeItem(STORE); localStorage.removeItem(STORE_SET); } catch (e) {}
-  set = { key: true }; $("transBox").value = ""; loadLesson(clean(EXAMPLE)); say("Back to the example lesson. Your saved lessons are still in My lessons.");
-};
 
 // ---------- the printed worksheet ----------
 $("printBtn").onclick = () => {
@@ -1408,8 +1489,9 @@ function results() {
   else { L.id = ""; dirty = !!draft && !fromLink && (L.vid !== "" || L.qs.length > 0) && JSON.stringify(L) !== JSON.stringify(clean(EXAMPLE)); }
   if (fromLink) dirty = true;
   showState();
-  if (fromLink) { save(true); say("Lesson opened from your teacher link. Press Save to keep it in My lessons."); }
+  if (fromLink) { save(true); say("Lesson opened from your teacher link. Press Save to My lessons to keep it."); }
   else if (/^#edit=/.test(h)) say("That teacher link is incomplete, so your last lesson on this device is open instead.");
+  updateShareQr();
   setInterval(tick, 250);
 })();
 </script>
