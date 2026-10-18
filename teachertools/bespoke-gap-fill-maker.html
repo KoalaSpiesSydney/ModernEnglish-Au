@@ -1,34 +1,37 @@
 <!DOCTYPE html>
-<!-- Bespoke Gap-Fill Maker © Koala Spies Sydney. All rights reserved. -->
+<!-- Bespoke Gap-Fill Paper Print Maker © Koala Spies Sydney. All rights reserved. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="Koala Spies Sydney">
 <meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bespoke Gap-Fill Maker: Free Cloze Worksheet Generator with Answer Key | Modern English Australia</title>
+<title>Bespoke Gap-Fill Paper Print Maker: Free Cloze Worksheet Generator with Answer Key | Modern English Australia</title>
 <meta name="description" content="Make a gap-fill (cloze) worksheet in a minute. Paste any text, click the words to blank out, and download a printable PDF with a word box and an answer key. Free for teachers, no sign-up.">
 <link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-gap-fill-maker.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@400;600&family=Lora:wght@400;700&family=Montserrat:wght@500;700&family=Nunito:wght@500;800&family=Playfair+Display:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Serif+4:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,700&family=Fredoka:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,700&family=Montserrat:ital,wght@0,500;0,700;1,700&family=Nunito:ital,wght@0,500;0,800;1,800&display=swap">
 <style>
 /* =====================================================================
-   BESPOKE GAP-FILL MAKER
+   BESPOKE GAP-FILL PAPER PRINT MAKER
    One file, no server. Everything (text, gaps, design) stays in the
    visitor's browser. The worksheet is drawn on a <canvas>, so the
    preview, the PDF and the print-out are always identical.
    ===================================================================== */
 :root{
-  --bench:#dfe7e2;      /* the work surface behind everything */
+  --bench:#fffce6;      /* the site's cream page colour */
   --panel:#ffffff;
-  --ink:#14211e;
-  --soft:#51615c;
-  --line:#c4d0ca;
-  --deep:#16302b;       /* header and primary buttons */
-  --foil:#a8781f;       /* brass, used sparingly */
-  --focus:#1d6fd6;
+  --ink:#0f172a;
+  --soft:#475569;
+  --line:#dcd9c6;
+  --header:#1c1c1c;     /* header and footer, as on modernenglish.au */
+  --tag:#fde047;        /* the yellow of the site's tagline, on dark only */
+  --deep:#0e2861;       /* Modern English navy: primary buttons, headings */
+  --foil:#0e7c66;       /* Modern English teal, used sparingly */
+  --focus:#3968ea;
   --warn:#b3261e;
+  --good:#1f7a4d;
   --radius:10px;
 }
 *{box-sizing:border-box}
@@ -37,16 +40,18 @@ html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 /* Koala Spies Sydney watermark: faint, repeated across the page behind the
    panels. It is part of the page only, never of the worksheets. To make
    it stronger or fainter, change fill-opacity in the line below. */
-body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%2316302b%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
-body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%230f172a%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
-/* ---------- header ---------- */
-.top{background:var(--deep);color:#f3f6f4}
-.top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
-.top h1{margin:0;font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
-.top p{margin:0;color:#c9d6d0;font-size:.95rem;max-width:46ch}
+/* ---------- header (no QR code: this tool is for teachers' preparation only) ---------- */
+.top{background:var(--header);color:#f8fafc}
+.top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
+.top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.titleblock{flex:1 1 16rem;min-width:0}
+.top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:46ch}
 
 /* ---------- the bench: controls + preview ---------- */
 .bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(300px,430px) minmax(0,1fr);gap:1.5rem;align-items:start}
@@ -70,7 +75,7 @@ textarea{resize:vertical;min-height:8rem;line-height:1.4}
 .picker p{margin:0 0 .5rem}
 .picker p:last-child{margin-bottom:0}
 .picker .w{border:0;background:none;padding:.1rem .22rem;margin:0 -.1rem;border-radius:5px;cursor:pointer;line-height:1.35}
-.picker .w:hover{background:#e3ece7}
+.picker .w:hover{background:#eef2fb}
 .picker .w[aria-pressed=true]{background:var(--deep);color:#fff}
 .picker .none{color:var(--soft);margin:0}
 
@@ -78,8 +83,9 @@ textarea{resize:vertical;min-height:8rem;line-height:1.4}
 .rowline select,.rowline input[type=number]{width:auto;min-width:4.6rem;padding:.4rem .5rem}
 .rowline .btn{padding:.4rem .8rem}
 .chips{display:flex;flex-wrap:wrap;gap:.4rem}
-.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:.35rem .8rem;font-size:.9rem;cursor:pointer;min-height:38px}
-.chip:hover{border-color:var(--deep)}
+/* plain text buttons: no border, no fill, no pill shape */
+.chip{border:0;background:none;border-radius:0;padding:.3rem 0;font-size:.95rem;font-weight:700;color:var(--deep);cursor:pointer;min-height:38px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:.25em;text-decoration-thickness:1.5px}
+.chip:hover{text-decoration-color:currentColor}
 
 .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
 .seg label{position:relative;text-align:center;padding:.5rem .4rem;cursor:pointer;font-size:.95rem;min-height:44px;display:flex;align-items:center;justify-content:center}
@@ -93,9 +99,9 @@ textarea{resize:vertical;min-height:8rem;line-height:1.4}
 input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
 
 .btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
-.btn:hover{background:#eef3f0}
+.btn:hover{background:#eef2fb}
 .btn.main{background:var(--deep);color:#fff}
-.btn.main:hover{background:#0e231f}
+.btn.main:hover{background:#0a1d47}
 .btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
 .btn[disabled]{opacity:.55;cursor:progress}
 .check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
@@ -103,8 +109,8 @@ input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--li
 
 /* ---------- preview ---------- */
 .stage{position:sticky;top:1rem;display:grid;gap:.8rem}
-.paper{background:#cfd9d4;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.4rem);display:flex;justify-content:center}
-#preview{display:block;max-width:100%;max-height:78vh;width:auto;height:auto;background:#fff;box-shadow:0 1px 2px rgba(20,33,30,.25),0 14px 34px -10px rgba(20,33,30,.45)}
+.paper{background:#ebe7cf;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.4rem);display:flex;justify-content:center}
+#preview{display:block;max-width:100%;max-height:78vh;width:auto;height:auto;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.25),0 14px 34px -10px rgba(15,23,42,.45)}
 .stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
 .pager{display:flex;align-items:center;gap:.5rem;font-size:.95rem}
 .pager .btn{padding:.3rem .8rem}
@@ -115,7 +121,7 @@ input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--li
 
 /* ---------- reading matter under the tool ---------- */
 .notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
-.notes h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
 .notes p,.notes li{max-width:62ch}
 .notes ol,.notes ul{margin:0;padding-left:1.2rem}
 .notes li{margin-bottom:.35rem}
@@ -123,12 +129,12 @@ input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--li
 .notes dd{margin:0}
 .terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
 .terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
-.terms h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
 .terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
 .terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
 .terms ul{margin:0;padding-left:1.2rem}
 .terms .updated{color:var(--soft);font-size:.9rem}
-footer{background:var(--deep);color:#c9d6d0;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer{background:var(--header);color:#cbd5e1;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
 footer a{color:#fff}
 
 #printArea{display:none}
@@ -142,6 +148,26 @@ footer a{color:#fff}
   .actions .btn{flex:1 1 auto;padding:.55rem .6rem}
   body{padding-bottom:5rem}
 }
+/* ---------- open layout: no card backings, no horizontal lines, raised buttons ---------- */
+details.group,.terms-in{background:none;border:0!important;border-radius:0;box-shadow:none}
+details.group{margin-bottom:.35rem}
+details.group>summary{padding-left:0;padding-right:0}
+.group-body,.terms-in{padding-left:0;padding-right:0}
+.notes h2{border-bottom:0;padding-bottom:0}
+.notice{background:none;border:0;border-radius:0;padding:0}
+.btn{box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
+.btn:not([disabled]):hover{box-shadow:0 2px 4px rgba(15,23,42,.22),0 12px 24px -8px rgba(15,23,42,.48);transform:translateY(-1px)}
+.btn:not([disabled]):active{box-shadow:0 1px 2px rgba(15,23,42,.28);transform:translateY(0)}
+.btn[disabled]{box-shadow:none;transform:none}
+.sw{box-shadow:0 0 0 1.5px var(--line),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+
+/* ---------- typing fields: white, with a firm bottom edge that says "write here" ---------- */
+input[type=text],input[type=number],input[type=url],textarea,select{background:#fff;border:1px solid #d5d3c2;border-bottom:2px solid #94a3b8;border-radius:6px 6px 3px 3px;box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 1px 2px rgba(15,23,42,.1),0 5px 14px -5px rgba(15,23,42,.28);transition:border-color .15s ease,box-shadow .15s ease}
+input[type=text]:hover,input[type=number]:hover,input[type=url]:hover,textarea:hover,select:hover{border-bottom-color:var(--deep)}
+input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,textarea:focus,select:focus{outline:none;border-color:var(--deep);box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 5px 14px -5px rgba(15,23,42,.28),0 0 0 3px rgba(57,104,234,.22)}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
+select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23475569' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right .8rem center}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 /* ---------- printing: only the worksheet pages ---------- */
@@ -169,7 +195,7 @@ footer a{color:#fff}
 
 <header class="top">
   <div class="top-in">
-    <h1>Bespoke Gap-Fill Maker</h1>
+    <div class="titleblock"><p class="eyebrow">Modern English Australia</p><h1>Bespoke Gap-Fill Paper Print Maker</h1></div>
     <p>Free for teachers. Paste a text, click the words to blank out, and print a worksheet with an answer key. Nothing leaves this device.</p>
   </div>
 </header>
@@ -344,7 +370,7 @@ footer a{color:#fff}
   <div class="terms-in">
     <h2>Terms of use</h2>
     <p class="updated">Last updated 12 October 2026</p>
-    <p>The Bespoke Gap-Fill Maker is a free tool for teachers and families. By making, downloading or printing worksheets you agree to these terms.</p>
+    <p>The Bespoke Gap-Fill Paper Print Maker is a free tool for teachers and families. By making, downloading or printing worksheets you agree to these terms.</p>
     <h3>What you may use it for</h3>
     <ul>
       <li>Worksheets for your own classroom, school, tutoring or home. You may print and photocopy the worksheets you make as often as you like.</li>
@@ -393,6 +419,8 @@ const QUICK = [
 
 // Colour choices (the round buttons). The first is the default.
 const COLOURS = [
+  { name: "Modern English navy", c: "#0e2861" },
+  { name: "Modern English teal", c: "#0e7c66" },
   { name: "Deep green", c: "#16302b" },
   { name: "Navy",       c: "#1b2a4a" },
   { name: "Burgundy",   c: "#6b1e2e" },
@@ -405,6 +433,7 @@ const COLOURS = [
 
 // Fonts. f = family, w = normal weight, b = bold weight.
 const FONTS = {
+  brand:    { label: "Modern English (Source Sans)", f: "Source Sans 3", w: 400, b: 700 },
   clear:    { label: "Easy to read (Atkinson)", f: "Atkinson Hyperlegible", w: 400, b: 700 },
   rounded:  { label: "Rounded (Nunito)",        f: "Nunito",                w: 500, b: 800 },
   friendly: { label: "Friendly (Fredoka)",      f: "Fredoka",               w: 400, b: 600 },
@@ -418,7 +447,7 @@ const DEFAULTS = {
   text: EXAMPLE_TEXT, blanks: null,
   title: EXAMPLE_TITLE, instr: "Complete the text with the words from the box.",
   bank: "top", gap: "line", numbers: true, nameLine: true, key: true, skipFirst: true,
-  cMain: COLOURS[0].c, font: "clear", tsize: "m", paper: "a4",
+  cMain: COLOURS[0].c, font: "brand", tsize: "m", paper: "a4",
   seed: 20261012
 };
 const STORE = "gap-fill-maker.v1";
@@ -521,7 +550,7 @@ else bl = everyNth(7);
 // =====================================================================
 // DRAWING
 // =====================================================================
-const INK = "#14211e", GREY = "#51615c";
+const INK = "#0f172a", GREY = "#475569";
 function pageSize() { return st.paper === "letter" ? [816, 1056] : [794, 1123]; }   // CSS pixels at 96 dpi, upright page
 function lum(hex) {
   const n = parseInt(hex.slice(1), 16), r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
