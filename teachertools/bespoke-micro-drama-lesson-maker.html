@@ -12,7 +12,7 @@
 <link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-micro-drama-lesson-maker.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,700&family=Fredoka:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,700&family=Montserrat:ital,wght@0,500;0,700;1,700&family=Nunito:ital,wght@0,500;0,800;1,800&family=Playfair+Display:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Serif+4:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,700&family=Fredoka:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,700&family=Montserrat:ital,wght@0,500;0,700;1,700&family=Nunito:ital,wght@0,500;0,800;1,800&display=swap">
 <style>
 /* =====================================================================
    BESPOKE MICRO DRAMA LESSON MAKER
@@ -24,34 +24,37 @@
    A link ending in #play=… opens the lesson for students.
    ===================================================================== */
 :root{
-  --bench:#dfe7e2;
+  --bench:#fffce6;      /* the site's cream page colour */
   --panel:#ffffff;
-  --ink:#14211e;
-  --soft:#51615c;
-  --line:#c4d0ca;
-  --deep:#16302b;
-  --foil:#a8781f;
-  --focus:#1d6fd6;
+  --ink:#0f172a;
+  --soft:#475569;
+  --line:#dcd9c6;
+  --header:#1c1c1c;     /* header and footer, as on modernenglish.au */
+  --tag:#fde047;        /* the yellow of the site's tagline, on dark only */
+  --deep:#0e2861;       /* Modern English navy: primary buttons, headings */
+  --foil:#0e7c66;       /* Modern English teal, used sparingly */
+  --focus:#3968ea;
   --warn:#b3261e;
   --good:#1f7a4d;
-  --accent:#16302b;
-  --qfont:"Atkinson Hyperlegible";
+  --accent:#0e2861;     /* the lesson's own colour, chosen under Design */
+  --qfont:"Source Sans 3";
   --radius:10px;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%2316302b%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
-body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%230f172a%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 
 /* ---------- header ---------- */
-.top{background:var(--deep);color:#f3f6f4}
+.top{background:var(--header);color:#f8fafc}
+.top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
 .top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
-.top h1{margin:0;font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
-.top p{margin:0;color:#c9d6d0;font-size:.95rem;max-width:50ch}
-.top .beta{display:inline-block;vertical-align:middle;margin-left:.6rem;padding:.1rem .6rem;border-radius:999px;background:#b45309;color:#fff;font-family:"Atkinson Hyperlegible",Verdana,sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:46ch}
+.top .beta{display:inline-block;vertical-align:middle;margin-left:.6rem;padding:.1rem .6rem;border-radius:999px;background:#b45309;color:#fff;font-family:"Source Sans 3",system-ui,Arial,sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .testing-note{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem}
 .testing-note p{margin:0;font-size:.9rem;background:#fff7ed;border:1px solid #f3d3a8;border-left:4px solid #b45309;border-radius:6px;padding:.55rem .8rem}
 .testing-note a{color:var(--deep);font-weight:700}
@@ -72,7 +75,7 @@ textarea{resize:vertical;min-height:5rem;line-height:1.4}
 .hint{margin:0;font-size:.85rem;color:var(--soft)}
 .hint.warn{color:var(--warn);font-weight:700}
 .lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
-.notice{margin:0;font-size:.85rem;line-height:1.45;color:var(--ink);background:#f3f6f4;border:1px solid var(--line);border-left:4px solid var(--foil);border-radius:6px;padding:.55rem .7rem}
+.notice{margin:0;font-size:.85rem;line-height:1.45;color:var(--ink);background:#eef2fb;border:1px solid var(--line);border-left:4px solid var(--foil);border-radius:6px;padding:.55rem .7rem}
 .notice a{color:var(--deep);font-weight:700}
 .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
 .seg label{position:relative;text-align:center;padding:.5rem .4rem;cursor:pointer;font-size:.95rem;min-height:44px;display:flex;align-items:center;justify-content:center}
@@ -84,9 +87,9 @@ textarea{resize:vertical;min-height:5rem;line-height:1.4}
 .sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep)}
 input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
 .btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
-.btn:hover{background:#eef3f0}
+.btn:hover{background:#eef2fb}
 .btn.main{background:var(--deep);color:#fff}
-.btn.main:hover{background:#0e231f}
+.btn.main:hover{background:#0a1d47}
 .btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
 .btn.small{min-height:38px;padding:.3rem .7rem;font-size:.9rem}
 .btn[disabled]{opacity:.55;cursor:not-allowed}
@@ -103,7 +106,7 @@ input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--li
 .eprow .who{grid-column:2/4;font-size:.82rem;color:var(--soft);margin:0}
 .eprow .who.warn{color:var(--warn);font-weight:700}
 .eprow .who strong{color:var(--ink)}
-.sources{border:1.5px solid var(--line);border-radius:8px;background:#f7f9f8;padding:.6rem .75rem}
+.sources{border:1.5px solid var(--line);border-radius:8px;background:#ffffff;padding:.6rem .75rem}
 .sources summary{cursor:pointer;font-weight:700;font-size:.95rem}
 .sources ul{margin:.5rem 0 .3rem;padding-left:1.1rem;font-size:.92rem}
 .sources li{margin-bottom:.35rem}
@@ -113,7 +116,7 @@ input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--li
 /* ---------- question cards (step 2) ---------- */
 .picker{border:1.5px solid var(--line);border-radius:8px;background:#fff;padding:.45rem .6rem;line-height:2.05}
 .picker .w{border:0;background:none;padding:.1rem .22rem;margin:0 -.1rem;border-radius:5px;cursor:pointer;line-height:1.35}
-.picker .w:hover{background:#e3ece7}
+.picker .w:hover{background:#eef2fb}
 .picker .w[aria-pressed=true]{background:var(--deep);color:#fff}
 .picker .none{color:var(--soft);margin:0}
 .addrow{display:grid;grid-template-columns:repeat(2,1fr);gap:.45rem}
@@ -142,11 +145,11 @@ input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--li
 /* ---------- the video stage: TikTok videos are tall (9:16) ---------- */
 .stage{position:sticky;top:1rem;display:grid;gap:.8rem;justify-items:center}
 .stage>*{width:100%}
-.screen{position:relative;background:#0c1513;border-radius:var(--radius);overflow:hidden;aspect-ratio:var(--ar,9/16);width:min(100%,380px,calc((100vh - 230px) * 9 / 16))!important;min-width:220px;margin:0 auto;box-shadow:0 1px 2px rgba(20,33,30,.25),0 14px 34px -10px rgba(20,33,30,.45)}
+.screen{position:relative;background:#0b1220;border-radius:var(--radius);overflow:hidden;aspect-ratio:var(--ar,9/16);width:min(100%,380px,calc((100vh - 230px) * 9 / 16))!important;min-width:220px;margin:0 auto;box-shadow:0 1px 2px rgba(15,23,42,.25),0 14px 34px -10px rgba(15,23,42,.45)}
 .screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 body.wide .screen{width:100%!important;max-width:760px}
-.screen-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem;color:#dfe7e2;font-size:1rem;line-height:1.5;z-index:2;background:#0c1513}
-.veil{position:absolute;inset:0;background:rgba(12,21,19,.55);display:flex;align-items:flex-end;justify-content:center;padding:1rem;color:#fff;font-weight:700;letter-spacing:.02em;z-index:3;pointer-events:none}
+.screen-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem;color:#cbd5e1;font-size:1rem;line-height:1.5;z-index:2;background:#0b1220}
+.veil{position:absolute;inset:0;background:rgba(11,18,32,.55);display:flex;align-items:flex-end;justify-content:center;padding:1rem;color:#fff;font-weight:700;letter-spacing:.02em;z-index:3;pointer-events:none}
 .veil span{background:var(--accent);padding:.35rem .9rem;border-radius:999px;font-size:.95rem}
 .eptabs{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center}
 .eptab{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:.25rem .8rem;font-weight:700;font-size:.9rem;cursor:pointer;min-height:38px}
@@ -174,7 +177,7 @@ body.wide .screen{width:100%!important;max-width:760px}
 
 /* ---------- reading matter under the tool ---------- */
 .notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
-.notes h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
 .notes p,.notes li{max-width:62ch}
 .notes ol,.notes ul{margin:0;padding-left:1.2rem}
 .notes li{margin-bottom:.35rem}
@@ -182,12 +185,12 @@ body.wide .screen{width:100%!important;max-width:760px}
 .notes dd{margin:0}
 .terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
 .terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
-.terms h2{font-family:"Playfair Display",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
 .terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
 .terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
 .terms ul{margin:0;padding-left:1.2rem}
 .terms .updated{color:var(--soft);font-size:.9rem}
-footer{background:var(--deep);color:#c9d6d0;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer{background:var(--header);color:#cbd5e1;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
 footer a{color:#fff}
 
 /* ---------- the student player (a link ending in #play=…) ---------- */
@@ -204,7 +207,7 @@ body:not(.play) .player-only{display:none!important}
   body.wide .play-left{width:auto;min-width:0}
 }
 .lesson-head{background:var(--panel);border:1px solid var(--line);border-top:5px solid var(--accent);border-radius:var(--radius);padding:.9rem 1.1rem}
-.lesson-head h2{margin:0;font-family:var(--qfont),"Atkinson Hyperlegible",Verdana,sans-serif;font-size:clamp(1.25rem,3vw,1.6rem);line-height:1.2}
+.lesson-head h2{margin:0;font-family:var(--qfont),"Source Sans 3",system-ui,Arial,sans-serif;font-size:clamp(1.25rem,3vw,1.6rem);line-height:1.2}
 .lesson-head p{margin:.35rem 0 0;color:var(--soft)}
 .source{margin:0;font-size:.85rem;color:var(--soft);text-align:center}
 .source a{color:var(--deep);font-weight:700}
@@ -216,13 +219,13 @@ body:not(.play) .player-only{display:none!important}
 .dot.half{background:var(--foil);border-color:var(--foil)}
 .dot.now{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,0,0,.08)}
 .dot.gap{width:6px;border:0;background:none}
-.qpanel,.talk{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);font-family:var(--qfont),"Atkinson Hyperlegible",Verdana,sans-serif;font-size:1.08rem}
+.qpanel,.talk{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);font-family:var(--qfont),"Source Sans 3",system-ui,Arial,sans-serif;font-size:1.08rem}
 .qpanel{border-left:6px solid var(--accent);padding:1.1rem 1.2rem 1.2rem;display:grid;gap:.85rem;scroll-margin-top:1rem}
 .qpanel.cliff{border-left-color:var(--foil)}
-.qpanel .qn{font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);font-family:"Atkinson Hyperlegible",Verdana,sans-serif}
+.qpanel .qn{font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);font-family:"Source Sans 3",system-ui,Arial,sans-serif}
 .qpanel .prompt{margin:0;font-weight:700;font-size:1.15rem;line-height:1.4}
-.qpanel .big{margin:0;font-weight:700;font-size:1.6rem;line-height:1.2;font-family:"Playfair Display",Georgia,serif}
-.guess{margin:0;padding:.6rem .8rem;border-left:4px solid var(--foil);background:#fbf5e6;border-radius:6px;font-style:italic}
+.qpanel .big{margin:0;font-weight:700;font-size:1.6rem;line-height:1.2;font-family:"Source Serif 4",Georgia,serif}
+.guess{margin:0;padding:.6rem .8rem;border-left:4px solid var(--foil);background:#e7f3f0;border-radius:6px;font-style:italic}
 .choices{display:grid;gap:.5rem}
 .choice{display:flex;gap:.7rem;align-items:flex-start;border:1.5px solid var(--line);border-radius:8px;padding:.6rem .75rem;cursor:pointer;background:#fff;text-align:left;width:100%;min-height:48px}
 .choice:hover{border-color:var(--accent)}
@@ -230,7 +233,7 @@ body:not(.play) .player-only{display:none!important}
 .choice.right{border-color:var(--good);background:#eaf5ef}
 .choice.wrong{border-color:var(--warn);background:#fbecea}
 .gapline{margin:0;line-height:2.4}
-.gapline input{display:inline-block;width:auto;min-width:5.5em;min-height:38px;padding:.25rem .45rem;margin:0 .15rem;border:none;border-bottom:2.5px solid var(--accent);border-radius:4px 4px 0 0;background:#f4f7f5;font-size:1.02rem;text-align:center}
+.gapline input{display:inline-block;width:auto;min-width:5.5em;min-height:38px;padding:.25rem .45rem;margin:0 .15rem;border:none;border-bottom:2.5px solid var(--accent);border-radius:4px 4px 0 0;background:#fffef6;font-size:1.02rem;text-align:center}
 .gapline input.right{border-bottom-color:var(--good);background:#eaf5ef}
 .gapline input.wrong{border-bottom-color:var(--warn);background:#fbecea}
 .mrows{display:grid;gap:.5rem}
@@ -246,12 +249,12 @@ body:not(.play) .player-only{display:none!important}
 .olist li.wrong{border-color:var(--warn);background:#fbecea}
 .olist .mv{min-width:44px;min-height:44px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:1rem}
 .olist .mv:disabled{opacity:.35;cursor:default}
-.feedback{margin:0;padding:.6rem .8rem;border-radius:8px;font-weight:700;font-family:"Atkinson Hyperlegible",Verdana,sans-serif;font-size:1rem}
+.feedback{margin:0;padding:.6rem .8rem;border-radius:8px;font-weight:700;font-family:"Source Sans 3",system-ui,Arial,sans-serif;font-size:1rem}
 .feedback.ok{background:#eaf5ef;color:var(--good)}
 .feedback.no{background:#fbecea;color:var(--warn)}
-.feedback.info{background:#f3f6f4;color:var(--ink);font-weight:400}
+.feedback.info{background:#eef2fb;color:var(--ink);font-weight:400}
 .qbtns{display:flex;gap:.5rem;flex-wrap:wrap}
-.qpanel .btn{font-family:"Atkinson Hyperlegible",Verdana,sans-serif}
+.qpanel .btn{font-family:"Source Sans 3",system-ui,Arial,sans-serif}
 .btn.go{background:var(--accent);border-color:var(--accent);color:#fff}
 .results ul{margin:0;padding:0;list-style:none;display:grid;gap:.35rem}
 .results li{display:flex;gap:.6rem;align-items:baseline;font-size:1rem}
@@ -268,10 +271,10 @@ body:not(.play) .player-only{display:none!important}
 .filebar{display:flex;align-items:center;justify-content:space-between;gap:.5rem .8rem;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:.55rem .7rem .55rem 1rem}
 .savestate{font-size:.9rem;color:var(--soft);font-weight:700}
 .savestate.dirty{color:var(--foil)}
-.lib{position:fixed;inset:0;z-index:40;background:rgba(12,21,19,.5);display:flex;align-items:flex-start;justify-content:center;padding:6vh 1rem 1rem;overflow:auto}
+.lib{position:fixed;inset:0;z-index:40;background:rgba(11,18,32,.5);display:flex;align-items:flex-start;justify-content:center;padding:6vh 1rem 1rem;overflow:auto}
 .lib-in{background:var(--panel);border-radius:var(--radius);width:min(640px,100%);padding:1.1rem 1.2rem 1.2rem;display:grid;gap:.8rem;box-shadow:0 20px 50px rgba(0,0,0,.35)}
 .lib-head{display:flex;justify-content:space-between;align-items:center}
-.lib-head h2{margin:0;font-family:"Playfair Display",Georgia,serif;font-size:1.4rem}
+.lib-head h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:1.4rem}
 .lib-list{list-style:none;margin:0;padding:0;display:grid;gap:.45rem;max-height:52vh;overflow:auto}
 .lib-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem .6rem;align-items:center;border:1.5px solid var(--line);border-radius:8px;padding:.55rem .7rem}
 .lib-list li.current{border-color:var(--deep)}
@@ -281,7 +284,7 @@ body:not(.play) .player-only{display:none!important}
 .lib-list .none{border-style:dashed;color:var(--soft);display:block;text-align:center}
 @media (max-width:520px){.lib-list li{grid-template-columns:1fr}.lib-list .row-btns{justify-content:flex-start}}
 .board{position:fixed;inset:0;z-index:50;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:1.5rem;text-align:center}
-.board h2{margin:0;font-family:"Playfair Display",Georgia,serif;font-size:clamp(1.6rem,4vw,3rem);color:var(--ink);max-width:24ch;line-height:1.15}
+.board h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:clamp(1.6rem,4vw,3rem);color:var(--ink);max-width:24ch;line-height:1.15}
 .board p{margin:0;font-size:clamp(1rem,2vw,1.5rem);color:var(--soft)}
 .board #boardQr canvas,.board #boardQr img{width:min(68vh,86vw);height:min(68vh,86vw);image-rendering:pixelated;display:block}
 
@@ -290,27 +293,90 @@ body:not(.play) .player-only{display:none!important}
   .stage{position:static;order:-1}
   .screen{width:min(100%,320px,calc((100vh - 200px) * 9 / 16))!important}
 }
+/* ---------- open layout: no card backings, no horizontal lines, raised buttons ---------- */
+details.group,.share,.terms-in,.qcard,.filebar,.lesson-head,.qpanel,.talk{background:none;border:0!important;border-radius:0;box-shadow:none}
+details.group{margin-bottom:.35rem}
+details.group>summary{padding-left:0;padding-right:0}
+.group-body,.share,.terms-in,.filebar{padding-left:0;padding-right:0}
+.share .teacher{border-top:0;padding-top:.4rem}
+.filebar{padding-top:.4rem;padding-bottom:.2rem}
+.qlist{gap:0}
+.qcard{padding:.75rem 0}
+@keyframes flash{0%{background:#fff3c4}100%{background:transparent}}
+.lesson-head{padding:0 0 .6rem}
+.qpanel{padding:.3rem 0 0}
+.talk{padding:.3rem 0 0}
+.notes h2{border-bottom:0;padding-bottom:0}
+.notice{background:none;border:0;border-radius:0;padding:0}
+.testing-note p{background:none;border:0;border-radius:0;padding:0;color:#92400e}
+.top .beta{border-radius:4px}
+.veil span{border-radius:4px}
+.btn,.iconbtn,.choice,.mv{box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
+.btn:hover,.iconbtn:hover,.choice:hover,.mv:hover:not(:disabled){box-shadow:0 2px 4px rgba(15,23,42,.22),0 12px 24px -8px rgba(15,23,42,.48);transform:translateY(-1px)}
+.btn:active,.iconbtn:active,.choice:active,.mv:active{box-shadow:0 1px 2px rgba(15,23,42,.28);transform:translateY(0)}
+.btn[disabled],.mv:disabled{box-shadow:none;transform:none}
+.sw{box-shadow:0 0 0 1.5px var(--line),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+
+/* share with students: the QR code in the top-left corner of the header */
+.top-in{align-items:center}
+.titleblock{flex:1 1 16rem;min-width:0}
+.qrbtn{flex:none;display:grid;justify-items:center;gap:.35rem;background:none;border:0;padding:0;cursor:pointer;color:#f8fafc;font-size:.78rem;font-weight:700;letter-spacing:.04em}
+.qrthumb{display:grid;place-items:center;width:112px;height:112px;box-sizing:content-box;padding:6px;background:#fff;border-radius:6px;box-shadow:0 2px 4px rgba(0,0,0,.35),0 10px 22px -8px rgba(0,0,0,.6);transition:transform .15s ease,box-shadow .15s ease}
+.qrbtn:hover .qrthumb{transform:translateY(-2px);box-shadow:0 3px 6px rgba(0,0,0,.4),0 16px 30px -10px rgba(0,0,0,.7)}
+.qrcap{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .6rem;border:1px solid rgba(255,255,255,.45);border-radius:4px;transition:background-color .15s ease,border-color .15s ease}
+.qrbtn:hover .qrcap,.qrbtn[aria-expanded=true] .qrcap{background:rgba(255,255,255,.12);border-color:#fff}
+.qrcap .arr{display:inline-block;font-size:.9em;transition:transform .15s ease}
+.qrbtn[aria-expanded=true] .arr{transform:rotate(180deg)}
+.share-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem}
+.share-note{margin:0;font-size:.85rem;font-weight:700;color:var(--foil)}
+.qrthumb canvas,.qrthumb img{width:112px!important;height:112px!important;image-rendering:pixelated}
+.qrph{display:grid;place-items:center;width:100%;height:100%;border:2px dashed #c3c8d2;border-radius:4px;color:var(--soft);font-weight:700;letter-spacing:.1em;line-height:1;font-size:.9rem}
+#qrOut{display:none}   /* the header QR code is the one students scan; this copy is kept for "Download QR code" */
+@media (max-width:520px){.qrthumb,.qrthumb canvas,.qrthumb img{width:92px!important;height:92px!important}}
+.notready{margin:0;font-size:.9rem;color:var(--soft)}
+.notready b{color:var(--ink)}
+
+/* ---------- typing fields: white, with a firm bottom edge that says "write here" ---------- */
+input[type=text],input[type=number],input[type=url],textarea,select{background:#fff;border:1px solid #d5d3c2;border-bottom:2px solid #94a3b8;border-radius:6px 6px 3px 3px;box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 1px 2px rgba(15,23,42,.1),0 5px 14px -5px rgba(15,23,42,.28);transition:border-color .15s ease,box-shadow .15s ease}
+input[type=text]:hover,input[type=number]:hover,input[type=url]:hover,textarea:hover,select:hover{border-bottom-color:var(--deep)}
+input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,textarea:focus,select:focus{outline:none;border-color:var(--deep);box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 5px 14px -5px rgba(15,23,42,.28),0 0 0 3px rgba(57,104,234,.22)}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
+select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23475569' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right .8rem center}
+/* the gaps students write in: a line to write on, not a box */
+p.gapline input{border:0;border-bottom:2.5px solid var(--accent);border-radius:4px 4px 0 0;background:#fffef6;box-shadow:0 5px 12px -6px rgba(15,23,42,.3)}
+p.gapline input:hover{border-bottom-color:var(--deep)}
+p.gapline input:focus{border:0;border-bottom:2.5px solid var(--deep);background:#fff;box-shadow:0 5px 12px -6px rgba(15,23,42,.3),0 0 0 3px rgba(57,104,234,.22)}
+p.gapline input.right{border-bottom-color:var(--good);background:#eaf5ef}
+p.gapline input.wrong{border-bottom-color:var(--warn);background:#fbecea}
+/* the drama maker's own touches, in the house style */
+.qcard.predict .qtype,.qpanel.cliff .qn{color:var(--foil)}
+.sources{background:none;border:0;padding:0}
+.check.rights{background:none;border:0;padding:0}
+.check.rights.need{color:var(--warn);font-weight:700}
+.eptab{border-radius:6px}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 /* ---------- printing: only the worksheet ---------- */
 @media print{
   body>*:not(#printArea){display:none!important}
   body{background:#fff none;padding:0}
-  #printArea{display:block;font-family:var(--qfont),"Atkinson Hyperlegible",Verdana,sans-serif;color:#14211e;font-size:12pt}
+  #printArea{display:block;font-family:var(--qfont),"Source Sans 3",system-ui,Arial,sans-serif;color:#0f172a;font-size:12pt}
   #printArea .pg{page-break-after:always;break-after:page}
   #printArea .pg:last-child{page-break-after:auto;break-after:auto}
   #printArea .ph{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;border-bottom:3px solid var(--accent);padding-bottom:.5rem;margin-bottom:.8rem}
   #printArea h1{margin:0;font-size:20pt;line-height:1.2}
   #printArea h2{margin:1rem 0 .4rem;font-size:13pt;color:var(--accent);break-after:avoid}
-  #printArea .sub{margin:.2rem 0 0;color:#51615c;font-size:10pt}
-  #printArea .by{margin:.15rem 0 0;color:#51615c;font-size:11pt;font-weight:700}
-  #printArea .qr{width:2.6cm;text-align:center;font-size:8pt;color:#51615c;flex:none}
+  #printArea .sub{margin:.2rem 0 0;color:#475569;font-size:10pt}
+  #printArea .by{margin:.15rem 0 0;color:#475569;font-size:11pt;font-weight:700}
+  #printArea .qr{width:2.6cm;text-align:center;font-size:8pt;color:#475569;flex:none}
   #printArea .qr img{width:2.6cm;height:2.6cm;image-rendering:pixelated}
   #printArea .namel{display:flex;gap:2rem;margin:0 0 .8rem;font-weight:700}
-  #printArea .namel span{flex:1;border-bottom:1px solid #14211e}
+  #printArea .namel span{flex:1;border-bottom:1px solid #0f172a}
   #printArea .instr{margin:0 0 .6rem;font-weight:700}
   #printArea .pq{margin:0 0 .9rem;break-inside:avoid}
-  #printArea .pq .at{color:#51615c;font-size:9pt;font-weight:700}
+  #printArea .pq .at{color:#475569;font-size:9pt;font-weight:700}
   #printArea .pq p{margin:.1rem 0 .3rem;font-weight:700}
   #printArea .pq ol{margin:0;padding-left:1.4rem;list-style:upper-alpha}
   #printArea .pq ol.num{list-style:decimal}
@@ -318,9 +384,9 @@ body:not(.play) .player-only{display:none!important}
   #printArea .pq ul.plain li{margin:.15rem 0}
   #printArea .mt{border-collapse:collapse}
   #printArea .mt td{padding:.15rem .6rem .15rem 0;vertical-align:top}
-  #printArea .mt td.blank{color:#51615c}
-  #printArea .ln{border-bottom:1px solid #14211e;height:1.6em}
-  #printArea .gapw{display:inline-block;min-width:3cm;border-bottom:1px solid #14211e}
+  #printArea .mt td.blank{color:#475569}
+  #printArea .ln{border-bottom:1px solid #0f172a;height:1.6em}
+  #printArea .gapw{display:inline-block;min-width:3cm;border-bottom:1px solid #0f172a}
   #printArea .ans{color:var(--accent);font-weight:700}
 }
 </style>
@@ -338,12 +404,21 @@ body:not(.play) .player-only{display:none!important}
 
 <header class="top">
   <div class="top-in">
-    <h1 id="pageTitle">Bespoke Micro Drama Lesson Maker<span class="beta maker">Testing</span></h1>
+    <!-- SHARE WITH STUDENTS: the lesson's QR code, top left. It updates as the lesson changes.
+         Clicking it (or the caption under it) shows the share options; clicking again hides them. -->
+    <button type="button" class="qrbtn maker" id="shareBtn" aria-expanded="false" aria-controls="shareBox">
+      <span class="qrthumb off" id="qrThumb"><span class="qrph">QR</span></span>
+      <span class="qrcap"><span id="qrCapText">Share options</span><span class="arr" aria-hidden="true">▾</span></span>
+    </button>
+    <div class="titleblock"><p class="eyebrow">Modern English Australia</p><h1 id="pageTitle">Bespoke Micro Drama Lesson Maker<span class="beta maker">Testing</span></h1></div>
     <p id="pageSub">Free for teachers. Add the episodes of a short drama series on TikTok, put questions that pause the video and end each episode on a cliffhanger. Share a link or QR code, or print a worksheet. No sign-up.</p>
   </div>
 </header>
 
+<!-- TESTING: remove this block and the "Testing" badge in the header when the tool leaves testing. -->
 <div class="testing-note maker"><p><b>This tool is new and in testing.</b> Please check your lesson with <b>Try it as a student</b> before you share it. Found a problem or have an idea? <a href="https://modernenglish.au/contact.html">Tell us</a>.</p></div>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
 
 <!-- ===================================================================
      THE MAKER (for teachers)
@@ -352,14 +427,20 @@ body:not(.play) .player-only{display:none!important}
 
   <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
 
-    <div class="filebar">
-      <span class="savestate" id="saveState" role="status" aria-live="polite">New lesson</span>
-      <div class="actions">
-        <button type="button" class="btn main small" id="saveBtn" title="Save (Ctrl+S)">Save</button>
-        <button type="button" class="btn small" id="libBtn">My lessons</button>
-        <button type="button" class="btn small quiet" id="newBtn">New lesson</button>
+    <p class="notready" id="shareTileHint" role="status" hidden></p>
+    <section class="share" id="shareBox" hidden aria-labelledby="shareH">
+      <div class="share-head"><h2 id="shareH">Share with students</h2><button type="button" class="iconbtn" id="shareClose" aria-label="Hide share options" title="Hide share options">✕</button></div>
+      <p class="share-note" id="shareNote" role="status" hidden></p>
+      <p class="lab" style="margin:0">Student link: give this to your class</p>
+      <div class="row"><input type="text" id="linkOut" readonly aria-label="Student link"><button type="button" class="btn main" id="copyBtn">Copy link</button></div>
+      <div class="qrwrap"><div id="qrOut"></div><div><p class="hint" id="qrHint">Each student scans this with their own phone or tablet and answers on their own.</p><div class="actions"><button type="button" class="btn small main" id="qrBigBtn">Show QR on the board</button><button type="button" class="btn small" id="qrSaveBtn">Download QR code</button></div></div></div>
+      <div class="teacher">
+        <p class="lab" style="margin:0">Teacher link: keep this one for yourself</p>
+        <p class="hint" style="margin:0 0 .4rem">It opens the lesson ready to change, on any computer. Save it in your email, notes or bookmarks.</p>
+        <div class="row"><input type="text" id="editOut" readonly aria-label="Teacher link"><button type="button" class="btn" id="copyEditBtn">Copy teacher link</button></div>
       </div>
-    </div>
+      <p class="hint">The whole lesson is inside these links, so it is never stored on this site. The links and QR code update as you change the lesson.</p>
+    </section>
 
     <details class="group" open>
       <summary>1. The drama</summary>
@@ -441,7 +522,15 @@ body:not(.play) .player-only{display:none!important}
       </div>
     </details>
 
-    <button type="button" class="btn quiet" id="resetBtn">Start again with the example</button>
+    <div class="filebar">
+      <span class="savestate" id="saveState" role="status" aria-live="polite">New lesson</span>
+      <div class="actions">
+        <button type="button" class="btn main small" id="saveBtn" title="Saves this lesson and shows all your saved lessons. Ctrl+S saves without opening the list.">Save to My lessons</button>
+        <button type="button" class="btn small" id="printBtn">Print worksheet</button>
+        <button type="button" class="btn small quiet" id="newBtn">New lesson</button>
+        <button type="button" class="btn small quiet" id="resetBtn">Start again with the example</button>
+      </div>
+    </div>
   </form>
 
   <section class="stage" aria-label="Video">
@@ -451,26 +540,10 @@ body:not(.play) .player-only{display:none!important}
     <div class="stage-bar">
       <span class="clock" id="clock">0:00</span>
       <div class="actions">
-        <button type="button" class="btn main" id="shareBtn">Share with students</button>
         <button type="button" class="btn" id="tryBtn">Try it as a student</button>
       </div>
     </div>
-    <div class="actions">
-      <button type="button" class="btn" id="printBtn">Print worksheet</button>
-    </div>
     <p id="status" role="status" aria-live="polite"></p>
-    <section class="share" id="shareBox" hidden aria-labelledby="shareH">
-      <h2 id="shareH">Share this lesson</h2>
-      <p class="lab" style="margin:0">Student link: give this to your class</p>
-      <div class="row"><input type="text" id="linkOut" readonly aria-label="Student link"><button type="button" class="btn main" id="copyBtn">Copy link</button></div>
-      <div class="qrwrap"><div id="qrOut"></div><div><p class="hint" id="qrHint">Each student scans this with their own phone or tablet and answers on their own.</p><div class="actions"><button type="button" class="btn small main" id="qrBigBtn">Show QR on the board</button><button type="button" class="btn small" id="qrSaveBtn">Download QR code</button></div></div></div>
-      <div class="teacher">
-        <p class="lab" style="margin:0">Teacher link: keep this one for yourself</p>
-        <p class="hint" style="margin:0 0 .4rem">It opens the lesson ready to change, on any computer. Save it in your email, notes or bookmarks.</p>
-        <div class="row"><input type="text" id="editOut" readonly aria-label="Teacher link"><button type="button" class="btn" id="copyEditBtn">Copy teacher link</button></div>
-      </div>
-      <p class="hint">The whole lesson is inside these links, so it is never stored on this site. If you change the lesson, share the new student link.</p>
-    </section>
     <p class="fineprint">Click a numbered dot on the timeline to jump to that question. <a href="#terms">Terms of use</a></p>
   </section>
 </main>
@@ -501,7 +574,7 @@ body:not(.play) .player-only{display:none!important}
       <li>Paste the TikTok link of each episode, in order. They play on the right.</li>
       <li>Pause an episode where you want a question and pick a question type. Each question stops the episode at that moment.</li>
       <li>End an episode with a <b>cliffhanger</b> question. Students guess what happens next, then watch the next episode to find out.</li>
-      <li>Press <b>Share with students</b> and copy the link, or show the QR code. Students answer as they watch and see their score at the end.</li>
+      <li>Students scan the QR code in the top-left corner. Click it, or the <b>Share options</b> button under it, to copy the link, show the QR code on the board or keep your teacher link. Click it again, or the ✕, to hide them. Students answer as they watch and see their score at the end.</li>
     </ol>
   </div>
   <div>
@@ -526,7 +599,7 @@ body:not(.play) .player-only{display:none!important}
       <dt>The video won't load at school. Why?</dt>
       <dd>Many school networks block TikTok. Check the lesson on your school's network before class. Students can also use it at home.</dd>
       <dt>How do I save a lesson?</dt>
-      <dd>Press <b>Save</b>. The lesson goes into <b>My lessons</b> in this browser. To keep a copy anywhere else, use <b>My lessons › Download this lesson</b>.</dd>
+      <dd>Press <b>Save to My lessons</b>. The lesson is saved in this browser and the list of all your saved lessons opens. To keep a copy anywhere else, use <b>My lessons › Download this lesson</b>.</dd>
       <dt>Where is my lesson stored?</dt>
       <dd>On your own computer and inside the links you share. Nothing is uploaded to this site.</dd>
       <dt>Can I see my students' scores?</dt>
@@ -631,6 +704,8 @@ function example() {
 
 // Colour choices (the round buttons). The first is the default.
 const COLOURS = [
+  { name: "Modern English navy", c: "#0e2861" },
+  { name: "Modern English teal", c: "#0e7c66" },
   { name: "Deep green", c: "#16302b" },
   { name: "Navy",       c: "#1b2a4a" },
   { name: "Burgundy",   c: "#6b1e2e" },
@@ -641,6 +716,7 @@ const COLOURS = [
   { name: "Black (saves ink)", c: "#222222" }
 ];
 const FONTS = {
+  brand:    { label: "Modern English (Source Sans)", f: "Source Sans 3" },
   clear:    { label: "Easy to read (Atkinson)", f: "Atkinson Hyperlegible" },
   rounded:  { label: "Rounded (Nunito)",        f: "Nunito" },
   friendly: { label: "Friendly (Fredoka)",      f: "Fredoka" },
@@ -693,7 +769,7 @@ function clean(o) {
     ok: o.ok === true, shape: ["tall", "wide", "tv"].indexOf(o.shape) > -1 ? o.shape : "tall",
     noSkip: o.noSkip !== false, retry: o.retry !== false, reveal: o.reveal !== false,
     cMain: /^#[0-9a-f]{6}$/i.test(o.cMain || "") ? o.cMain : COLOURS[0].c,
-    font: FONTS[o.font] ? o.font : "clear", qs: []
+    font: FONTS[o.font] ? o.font : "brand", qs: []
   };
   const lastEp = Math.max(0, L.eps.length - 1);
   (Array.isArray(o.qs) ? o.qs : []).slice(0, MAX_Q).forEach(q => {
@@ -841,7 +917,8 @@ let saveTimer = 0, dirty = false, savedAt = 0;
 function save(quiet) {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => { try { localStorage.setItem(STORE, JSON.stringify(L)); localStorage.setItem(STORE_SET, JSON.stringify(set)); } catch (e) {} }, 300);
-  $("shareBox").hidden = true;
+  if (!$("shareBox").hidden) refreshShare();   // the share options stay open and keep up with the lesson
+  updateShareQr();                             // the QR code in the corner keeps up too
   if (!quiet) { dirty = true; showState(); }
 }
 // ---------- My lessons (saved in this browser) ----------
@@ -883,7 +960,7 @@ function renderLib() {
   });
 }
 function openLib() { renderLib(); $("lib").hidden = false; $("libClose").focus(); }
-function closeLib() { $("lib").hidden = true; $("libBtn").focus(); }
+function closeLib() { $("lib").hidden = true; $("saveBtn").focus(); }
 function say(msg) { $("status").textContent = msg; }
 const now = () => (player ? Math.floor(player.getCurrentTime() || 0) : 0);
 
@@ -1203,7 +1280,7 @@ function problems() {
   });
   return out;
 }
-function tidyForSharing() { L.qs.forEach(q => {
+function tidyForSharing(X) { (X || L).qs.forEach(q => {
   if (q.type === "match") q.pairs = q.pairs.filter(x => x[0].trim() && x[1].trim());
   if (q.type === "order") q.items = q.items.filter(x => x.trim());
   if (q.type === "mc") { const right = q.opts[q.ans]; const keep = q.opts.filter((o, k) => o.trim() || k === q.ans); q.opts = keep; q.ans = keep.indexOf(right); } }); }
@@ -1214,24 +1291,77 @@ function ready() {
   if (!L.ok) { $("okLab").classList.add("need"); $("okLab").closest("details").open = true; }
   return false;
 }
-$("shareBtn").onclick = async () => {
-  if (!ready()) return;
-  const both = await links(), link = both.play; renderQs(); save(true);
-  $("linkOut").value = link; $("editOut").value = both.edit; $("shareBox").hidden = false;
+// the live QR code in the top-left corner: drawn from a tidied copy, so the teacher's half-typed rows are left alone
+let qrTimer = 0, qrSeq = 0, askedToShare = false;
+// shown under the QR code only after the teacher clicks it while the lesson isn't ready yet
+function notReady(p) {
+  const hint = $("shareTileHint"); hint.textContent = "";
+  hint.append(el("b", "", "QR code not ready yet. "), document.createTextNode(p[0] + (p.length > 1 ? " (and " + (p.length - 1) + " more)" : "")));
+  hint.hidden = false;
+}
+const READY_HINT = "Students scan this code to open the lesson. Click it to show or hide the share options: the student link, a big QR code for the board and your teacher link.";
+function updateShareQr() {
+  clearTimeout(qrTimer);
+  qrTimer = setTimeout(async () => {
+    const seq = ++qrSeq, box = $("qrThumb"), hint = $("shareTileHint"), p = problems();
+    if (p.length) { box.className = "qrthumb off"; box.innerHTML = '<span class="qrph">QR</span>'; if (askedToShare) notReady(p); else hint.hidden = true; return; }
+    askedToShare = false;                 // ready now, so the "not ready" hint goes away
+    const C = JSON.parse(JSON.stringify(L)); tidyForSharing(C);
+    const link = pageUrl() + "#play=" + await pack(C);
+    if (seq !== qrSeq) return;
+    box.className = "qrthumb"; box.textContent = "";
+    try { if (typeof QRCode === "undefined") throw 0; new QRCode(box, { text: link, width: 300, height: 300, correctLevel: QRCode.CorrectLevel.L }); hint.hidden = true; $("shareBtn").title = READY_HINT; }
+    catch (e) { box.className = "qrthumb off"; box.innerHTML = '<span class="qrph">LINK</span>'; hint.textContent = "This lesson is too long for a QR code. Click the box in the top-left corner for the student link."; hint.hidden = false; }
+  }, 500);
+}
+// ---------- the share options under the QR code: open, close and keep up to date ----------
+let shareTimer = 0;
+// fill the panel from a tidied copy, so the teacher's half-typed rows are left alone
+async function fillShare(note) {
+  const C = JSON.parse(JSON.stringify(L)); tidyForSharing(C);
+  const c = await pack(C), link = pageUrl() + "#play=" + c;
+  $("linkOut").value = link; $("editOut").value = pageUrl() + "#edit=" + c;
   const box = $("qrOut"); box.textContent = ""; $("qrSaveBtn").hidden = true; $("qrBigBtn").hidden = true;
   try {
     if (typeof QRCode === "undefined") throw 0;
     new QRCode(box, { text: link, width: 300, height: 300, correctLevel: QRCode.CorrectLevel.L });
     $("qrHint").textContent = "Each student scans this with their own phone or tablet and answers on their own."; $("qrSaveBtn").hidden = false; $("qrBigBtn").hidden = false;
   } catch (e) { box.textContent = ""; $("qrHint").textContent = "This lesson is too long for a QR code. Share the link instead, for example in your class chat or learning platform."; }
+  const n = $("shareNote"); n.textContent = note || ""; n.hidden = !note;
+}
+function refreshShare() {
+  clearTimeout(shareTimer);
+  shareTimer = setTimeout(() => {
+    if ($("shareBox").hidden) return;
+    const p = problems(), n = $("shareNote");
+    if (p.length) {   // not ready: don't show a link that no longer matches the lesson
+      $("linkOut").value = ""; $("editOut").value = ""; $("qrOut").textContent = ""; $("qrSaveBtn").hidden = true; $("qrBigBtn").hidden = true;
+      n.textContent = "Lesson changed. The links come back when it's ready. Still to do: " + p[0]; n.hidden = false; return;
+    }
+    fillShare("Lesson changed: the links and QR code are up to date.");
+  }, 500);
+}
+function setShareOpen(open) {
+  $("shareBox").hidden = !open;
+  $("shareBtn").setAttribute("aria-expanded", open ? "true" : "false");
+  $("qrCapText").textContent = open ? "Hide share options" : "Share options";
+}
+function closeShare(focusBtn) { clearTimeout(shareTimer); setShareOpen(false); if (focusBtn) $("shareBtn").focus(); }
+$("shareBtn").onclick = async () => {
+  if (!$("shareBox").hidden) { closeShare(); say("Share options hidden."); return; }
+  const p = problems(); if (p.length) { askedToShare = true; notReady(p); if (!L.ok) { $("okLab").classList.add("need"); $("okLab").closest("details").open = true; } $("shareTileHint").scrollIntoView({ block: "nearest", behavior: "smooth" }); return; }
+  tidyForSharing(); renderQs(); save(true);
+  await fillShare("");
+  setShareOpen(true);
   $("shareBox").scrollIntoView({ block: "nearest", behavior: "smooth" });
   say("Your student link is ready.");
 };
+$("shareClose").onclick = () => { closeShare(true); say("Share options hidden."); };
 $("tryBtn").onclick = async () => {
   if (!ready()) return;
   const w = window.open("about:blank", "_blank");
   const both = await links(); renderQs();
-  if (w) w.location.href = both.play; else say("Your browser blocked the new tab. Use Share with students and open the student link.");
+  if (w) w.location.href = both.play; else say("Your browser blocked the new tab. Use Share options under the QR code and open the student link.");
 };
 async function copyFrom(id, msg) {
   const v = $(id).value;
@@ -1263,8 +1393,9 @@ async function lessonFile(lesson) {
   const c = await pack(lesson), t = escH(lesson.title || "Drama lesson"), base = pageUrl(), n = lesson.qs.length, e = lesson.eps.filter(x => x.id).length;
   return '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>' + t + ' · Drama lesson</title>\n'
     + '<!-- A lesson from the Bespoke Micro Drama Lesson Maker. Open it in the maker with "Open a lesson file" to change it. -->\n'
+    + '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&family=Source+Serif+4:wght@800&display=swap">\n'
     + '<meta name="bespoke-drama-lesson" content="' + c + '">\n'
-    + '<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#dfe7e2;font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;color:#14211e;padding:1rem}main{background:#fff;border-radius:12px;border-top:6px solid ' + lesson.cMain + ';padding:1.6rem 1.6rem 1.4rem;max-width:520px;width:100%;box-shadow:0 14px 34px -10px rgba(20,33,30,.45)}.k{margin:0;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#51615c}h1{margin:.3rem 0 .3rem;font-family:Georgia,serif;font-size:1.7rem;line-height:1.2}p{margin:0 0 1rem;color:#51615c}a.b{display:block;text-align:center;padding:.8rem 1rem;border-radius:8px;font-weight:700;text-decoration:none;margin:.5rem 0;border:1.5px solid #16302b;color:#16302b}a.b.main{background:' + lesson.cMain + ';border-color:' + lesson.cMain + ';color:#fff}.s{font-size:.85rem;margin:1rem 0 0}</style>\n</head>\n<body>\n<main>\n'
+    + '<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fffce6;font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;color:#0f172a;padding:1rem}main{background:#fff;border-radius:12px;border-top:6px solid ' + lesson.cMain + ';padding:1.6rem 1.6rem 1.4rem;max-width:520px;width:100%;box-shadow:0 14px 34px -10px rgba(15,23,42,.45)}.k{margin:0;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#475569}h1{margin:.3rem 0 .3rem;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:1.7rem;line-height:1.2}p{margin:0 0 1rem;color:#475569}a.b{display:block;text-align:center;padding:.8rem 1rem;border-radius:8px;font-weight:700;text-decoration:none;margin:.75rem 0;border:1.5px solid #0e2861;color:#0e2861;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38)}a.b.main{background:' + lesson.cMain + ';border-color:' + lesson.cMain + ';color:#fff}.s{font-size:.85rem;margin:1rem 0 0}</style>\n</head>\n<body>\n<main>\n'
     + '<p class="k">Micro drama lesson</p>\n<h1>' + t + '</h1>\n<p>' + e + (e === 1 ? ' episode · ' : ' episodes · ') + n + (n === 1 ? ' question' : ' questions') + '</p>\n'
     + '<a class="b main" href="' + base + '#play=' + c + '">Open the lesson for students</a>\n'
     + '<a class="b" href="' + base + '#edit=' + c + '">Change this lesson</a>\n'
@@ -1289,20 +1420,23 @@ $("fileIn").onchange = e => {
     if (!next || (!next.eps.some(x => x.id) && !next.qs.length)) { say("That file isn't a lesson from this tool."); return; }
     if (!okToLeave()) return;
     loadLesson(next); dirty = true; showState(); closeLib();
-    say("Opened “" + (next.title || "Untitled lesson") + "”. Press Save to keep it in My lessons.");
+    say("Opened “" + (next.title || "Untitled lesson") + "”. Press Save to My lessons to keep it.");
   };
   r.readAsText(f);
 };
 function loadLesson(next) { L = next; mEp = 0; syncForm(); renderEps(); renderQs(); makerPlayer(); save(true); dirty = false; showState(); }
-$("saveBtn").onclick = saveLesson;
-$("libBtn").onclick = openLib;
+// one button: save the lesson (if there is anything to save), then show all saved lessons
+$("saveBtn").onclick = () => { if (hasWork()) saveLesson(); openLib(); };
 $("libClose").onclick = closeLib;
 $("lib").addEventListener("click", e => { if (e.target === $("lib")) closeLib(); });
 $("newBtn").onclick = () => { if (!okToLeave()) return; loadLesson(clean({})); say("New lesson. Paste the TikTok link for episode 1 to start."); };
 document.addEventListener("keydown", e => {
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s" && !document.body.classList.contains("play")) { e.preventDefault(); saveLesson(); }
-  if (e.key === "Escape" && !$("lib").hidden) closeLib();
-  if (e.key === "Escape" && !$("board").hidden) closeBoard();
+  if (e.key === "Escape") {
+    if (!$("board").hidden) closeBoard();
+    else if (!$("lib").hidden) closeLib();
+    else if (!$("shareBox").hidden) closeShare(true);
+  }
 });
 $("resetBtn").onclick = () => {
   if (!okToLeave()) return;
@@ -1696,8 +1830,9 @@ function results() {
   else { L.id = ""; dirty = !!draft && !fromLink && hasWork() && JSON.stringify(L) !== JSON.stringify(ex); }
   if (fromLink) dirty = true;
   showState();
-  if (fromLink) { save(true); say("Lesson opened from your teacher link. Press Save to keep it in My lessons."); }
+  if (fromLink) { save(true); say("Lesson opened from your teacher link. Press Save to My lessons to keep it."); }
   else if (/^#edit=/.test(h)) say("That teacher link is incomplete, so your last lesson on this device is open instead.");
+  updateShareQr();
   setInterval(tick, 250);
 })();
 </script>
