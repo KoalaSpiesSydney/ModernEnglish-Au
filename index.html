@@ -245,7 +245,7 @@ body {
       text-decoration: none; color: var(--ink);
       transition: transform .15s ease, box-shadow .15s ease;
     }
-    .tool:hover { transform: translateY(-3px); box-shadow: 0 4px 6px rgba(15,23,42,.06), 0 16px 30px -12px rgba(15,23,42,.3); color: var(--ink); }
+    .tool:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(15,23,42,.12), 0 24px 44px -10px rgba(15,23,42,.45); color: var(--ink); }
     .tool:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
     .tool .t-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .tool .t-kick { font-size: .7rem; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--c, var(--accent)); }
@@ -258,6 +258,7 @@ body {
     .tool.soon:hover { transform: none; box-shadow: none; }
     .tool.soon .t-go { color: var(--muted); }
     .tool.soon .t-go::after { content: ""; }
+    .tool .t-kick::before { content: "Free"; margin-right: 8px; padding: 0 7px; border: 1.5px solid currentColor; border-radius: 3px; letter-spacing: 1px; }
     .tool.new .t-kick::after { content: "New"; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: #dc2626; color: #fff; letter-spacing: 1px; }
     .tool.testing .t-kick::after { content: "Testing"; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: #b45309; color: #fff; letter-spacing: 1px; }
     .g-games { --c: #0e7c66; }
@@ -343,9 +344,11 @@ body {
 
       <!-- LEFT (first on a phone): THE GAMES, TESTS AND COURSES -->
       <div>
+        <div class="group g-games">
+          <ul class="tool-grid">
             <li>
               <a class="tool" href="vocabularygames.html">
-                <span class="t-top"><span class="t-kick">Vocabulary</span></span><img class="emoji" src="match-emoji.svg" alt="">
+                <span class="t-top"><span class="t-kick">Vocabulary</span><span class="t-icon" aria-hidden="true"><img class="emoji" src="match-emoji.svg" alt=""></span></span>
                 <h3 class="t-name">Matching Vocab Games</h3>
                 <p class="t-desc">Idioms, phrasal verbs, collocations and more. Play in teams, on your own, or as solitaire.</p>
                 <span class="t-go">Play the games</span>
@@ -600,4 +603,4 @@ body {
   </div>
 </footer>
 </body>
-</html
+</html>
