@@ -1227,6 +1227,32 @@ p.sub{font-family:var(--gothic);font-size:clamp(1.25rem,3vw,1.6rem);letter-spaci
 .turn-card .pick{font-size:clamp(1.35rem,3.4vw,1.6rem);padding:.45rem 1.2rem}
 .turn-card .hear-rules{display:block;margin:.7rem auto 0;background:none;border:0;box-shadow:none;color:var(--ink);font-family:var(--gothic);font-size:1.15rem;cursor:pointer;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:.25em;text-decoration-thickness:2px}
 .turn-card .hear-rules:hover{text-decoration-color:var(--pumpkin)}
+/* ===== Teachers' vocabulary list ===== */
+.teacher-vocab{max-width:860px;margin:2.4rem auto 0}
+.teacher-vocab p,.teacher-vocab ol{max-width:none;text-align:left}
+.teacher-vocab h4{font-family:var(--gothic);font-weight:400;font-size:1.4rem;margin:1.4rem 0 .3rem}
+.vt{width:100%;border-collapse:collapse;font-size:1rem;text-align:left;table-layout:fixed}
+.vt th:nth-child(1){width:24%}.vt th:nth-child(2){width:42%}
+.vt th{font-family:var(--gothic);font-weight:400;font-size:1.1rem;padding:.35rem .5rem;border-bottom:2px solid var(--accent)}
+.vt td{padding:.35rem .5rem;border-bottom:1px dashed rgba(52,52,58,.25);vertical-align:top}
+.vt td.w{font-weight:700}
+.vt tr.bonus td{background:rgba(255,243,227,.45)}
+.star{color:#9a6a12}
+@media(max-width:600px){
+  .vt,.vt tbody,.vt tr,.vt td{display:block;width:100%}
+  .vt tr:first-child{display:none}
+  .vt tr{padding:.45rem 0;border-bottom:1px dashed rgba(52,52,58,.3)}
+  .vt td{border:0;padding:.1rem 0}
+  .vt td.w{white-space:normal;font-size:1.1rem}
+  .vt td[data-label]:empty{display:none}
+  .vt td[data-label="Teacher note"]{font-style:italic;color:#55555c}
+}
+@media print{
+  body.print-vocab > *:not(main), body.print-vocab main > *:not(#teacherVocab){display:none!important}
+  body.print-vocab #teacherVocab{background:#fff;border:0;max-width:none}
+  body.print-vocab #printVocab{display:none}
+  body.print-vocab .vt tr{break-inside:avoid}
+}
 </style>
 </head>
 
@@ -1343,6 +1369,89 @@ p.sub{font-family:var(--gothic);font-size:clamp(1.25rem,3vw,1.6rem);letter-spaci
       <span class="clock-num" id="clockNum">1:00</span>
     </div>
   </div>
+
+
+  <!-- TEACHERS: vocabulary to pre-teach before the game -->
+  <details class="dictation-teacher-notes teacher-vocab" id="teacherVocab">
+    <summary>Teachers: vocabulary to pre-teach before the game</summary>
+    <p>Each round picks 7 pairs at random, so it helps if students already know the core words. Words marked <span class="star">★</span> are the bonus trivia words: pre-teach them for a weaker class, or leave them as a challenge.</p>
+    <h4>A quick pre-teach (10 minutes)</h4>
+    <ol>
+      <li>Show the three groups and ask students which words they already know.</li>
+      <li>Drill the tricky pronunciations together (see the teacher notes).</li>
+      <li>Read a meaning aloud and let pairs race to say the word.</li>
+      <li>Then play the game: the meanings under the headstones are the same ones.</li>
+    </ol>
+    <p><button type="button" class="dictation-btn light" id="printVocab">🖨️ Print this list</button></p>
+      <h4>Halloween traditions</h4>
+      <table class="vt">
+        <tr><th>Word</th><th>Meaning</th><th>Teacher note</th></tr>
+<tr><td class="w">trick or treat</td><td data-label="Meaning">What children say when you open the door on Halloween</td><td data-label="Teacher note">Practise the chant: children say it at the door.</td></tr>
+<tr><td class="w">treat</td><td data-label="Meaning">Something sweet you&#x27;re given at the door</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">trick</td><td data-label="Meaning">A naughty joke you play if you don&#x27;t get a treat</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">candy</td><td data-label="Meaning">The American word for lollies</td><td data-label="Teacher note">Australians say lollies; the game uses the American word.</td></tr>
+<tr><td class="w">jack-o&#x27;-lantern</td><td data-label="Meaning">A carved pumpkin with a candle inside</td><td data-label="Teacher note">Say: JACK-uh-lan-tern.</td></tr>
+<tr><td class="w">costume</td><td data-label="Meaning">Clothes you wear to look like someone or something else</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">bobbing for apples</td><td data-label="Meaning">Catching apples in a bowl of water with only your mouth</td><td data-label="Teacher note">A party game: hands behind your back!</td></tr>
+<tr><td class="w">haunted house</td><td data-label="Meaning">A house you visit to get scared on purpose</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">bonfire</td><td data-label="Meaning">A big outdoor fire, once lit to scare spirits away</td><td data-label="Teacher note"></td></tr>
+
+<tr class="bonus"><td class="w">Samhain <span class="star" title="bonus word">★</span></td><td data-label="Meaning">The old Celtic festival that became Halloween</td><td data-label="Teacher note">Irish word. Say: SOW-in (sow rhymes with cow).</td></tr>
+<tr class="bonus"><td class="w">cauldron <span class="star" title="bonus word">★</span></td><td data-label="Meaning">A witch&#x27;s big black pot for making potions</td><td data-label="Teacher note">Say: CAWL-dron.</td></tr>
+<tr class="bonus"><td class="w">turnip <span class="star" title="bonus word">★</span></td><td data-label="Meaning">What the Irish carved before pumpkins</td><td data-label="Teacher note"></td></tr>
+<tr class="bonus"><td class="w">souling <span class="star" title="bonus word">★</span></td><td data-label="Meaning">Going door to door for soul cakes, centuries ago</td><td data-label="Teacher note">Say: SOLE-ing. Soul cakes were small spiced cakes.</td></tr>
+<tr class="bonus"><td class="w">Día de los Muertos <span class="star" title="bonus word">★</span></td><td data-label="Meaning">Mexico&#x27;s Day of the Dead</td><td data-label="Teacher note">Spanish. Say: DEE-ah day los MWAIR-tos.</td></tr>
+      </table>
+      <h4>Superstitions</h4>
+      <table class="vt">
+        <tr><th>Word</th><th>Meaning</th><th>Teacher note</th></tr>
+<tr><td class="w">ladder</td><td data-label="Meaning">It&#x27;s bad luck to walk under one</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">broken mirror</td><td data-label="Meaning">Break one and you get seven years of bad luck</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">Friday the 13th</td><td data-label="Meaning">The unluckiest day of the year</td><td data-label="Teacher note">Say: Friday the thir-TEENTH.</td></tr>
+<tr><td class="w">horseshoe</td><td data-label="Meaning">Hang one over your door for good luck</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">four-leaf clover</td><td data-label="Meaning">A lucky plant that&#x27;s very hard to find</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">knock on wood</td><td data-label="Meaning">What people do so their good luck doesn&#x27;t change</td><td data-label="Teacher note">Australians and Brits also say touch wood.</td></tr>
+<tr><td class="w">crossed fingers</td><td data-label="Meaning">What you show when you&#x27;re hoping for good luck</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">black cat</td><td data-label="Meaning">Bad luck if one crosses your path. In the game, it&#x27;s the trick card that ends your turn.</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">lucky rabbit&#x27;s foot</td><td data-label="Meaning">A good-luck charm. In the game, it doubles your points.</td><td data-label="Teacher note"></td></tr>
+<tr class="bonus"><td class="w">spilled salt <span class="star" title="bonus word">★</span></td><td data-label="Meaning">Throw some over your left shoulder for luck</td><td data-label="Teacher note"></td></tr>
+<tr class="bonus"><td class="w">umbrella <span class="star" title="bonus word">★</span></td><td data-label="Meaning">Bad luck if you open one inside the house</td><td data-label="Teacher note"></td></tr>
+<tr class="bonus"><td class="w">garlic <span class="star" title="bonus word">★</span></td><td data-label="Meaning">Hang it by the door to keep vampires away</td><td data-label="Teacher note"></td></tr>
+<tr class="bonus"><td class="w">full moon <span class="star" title="bonus word">★</span></td><td data-label="Meaning">The night a werewolf changes shape</td><td data-label="Teacher note">Key word for the reading lesson.</td></tr>
+<tr class="bonus"><td class="w">sunlight <span class="star" title="bonus word">★</span></td><td data-label="Meaning">This will kill a vampire</td><td data-label="Teacher note"></td></tr>
+<tr class="bonus"><td class="w">silver bullet <span class="star" title="bonus word">★</span></td><td data-label="Meaning">The only thing that can kill a werewolf</td><td data-label="Teacher note"></td></tr>
+      </table>
+      <h4>Mythical creatures</h4>
+      <table class="vt">
+        <tr><th>Word</th><th>Meaning</th><th>Teacher note</th></tr>
+<tr><td class="w">vampire</td><td data-label="Meaning">A creature that sleeps all day and drinks blood at night</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">werewolf</td><td data-label="Meaning">A person who turns into a wolf</td><td data-label="Teacher note">Say: WAIR-wolf. Key word for the reading lesson.</td></tr>
+<tr><td class="w">zombie</td><td data-label="Meaning">A dead body that gets up and walks</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">ghost</td><td data-label="Meaning">The spirit of a dead person</td><td data-label="Teacher note">Silent h: GOST.</td></tr>
+<tr><td class="w">witch</td><td data-label="Meaning">A woman with magic powers who flies on a broomstick</td><td data-label="Teacher note">Same sound as which.</td></tr>
+<tr><td class="w">mummy</td><td data-label="Meaning">A body wrapped in bandages in an Egyptian tomb</td><td data-label="Teacher note">Also a word for mum: talk about the double meaning.</td></tr>
+<tr><td class="w">goblin</td><td data-label="Meaning">A small, ugly creature that loves causing trouble</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">troll</td><td data-label="Meaning">A big, ugly creature that lives under a bridge</td><td data-label="Teacher note"></td></tr>
+<tr><td class="w">the bogeyman</td><td data-label="Meaning">The monster parents warn naughty children about</td><td data-label="Teacher note">Say: BOH-gee-man.</td></tr>
+<tr><td class="w">skeleton</td><td data-label="Meaning">A walking pile of bones</td><td data-label="Teacher note"></td></tr>
+
+<tr class="bonus"><td class="w">banshee <span class="star" title="bonus word">★</span></td><td data-label="Meaning">An Irish spirit whose scream means someone will die</td><td data-label="Teacher note">Say: BAN-shee. Key word for the reading lesson.</td></tr>
+<tr class="bonus"><td class="w">ghoul <span class="star" title="bonus word">★</span></td><td data-label="Meaning">A monster that eats the dead in graveyards</td><td data-label="Teacher note">Say: GOOL (rhymes with cool).</td></tr>
+<tr class="bonus"><td class="w">poltergeist <span class="star" title="bonus word">★</span></td><td data-label="Meaning">A noisy ghost that throws things around</td><td data-label="Teacher note">German word. Say: POLE-ter-guyst.</td></tr>
+<tr class="bonus"><td class="w">bunyip <span class="star" title="bonus word">★</span></td><td data-label="Meaning">A monster that lives in Australian swamps and billabongs</td><td data-label="Teacher note">From Aboriginal Australian legend. Say: BUN-yip.</td></tr>
+<tr class="bonus"><td class="w">yowie <span class="star" title="bonus word">★</span></td><td data-label="Meaning">Australia&#x27;s tall, hairy, ape-like monster</td><td data-label="Teacher note">Australian. Say: YOW-ee (rhymes with how).</td></tr>
+<tr class="bonus"><td class="w">Dracula <span class="star" title="bonus word">★</span></td><td data-label="Meaning">The world&#x27;s most famous vampire, from Transylvania</td><td data-label="Teacher note">Say: DRAK-yoo-lah.</td></tr>
+<tr class="bonus"><td class="w">Headless Horseman <span class="star" title="bonus word">★</span></td><td data-label="Meaning">A ghost who rides a horse at night and has no head</td><td data-label="Teacher note">From the story The Legend of Sleepy Hollow.</td></tr>
+<tr class="bonus"><td class="w">Freddy Krueger <span class="star" title="bonus word">★</span></td><td data-label="Meaning">The burnt killer who attacks people in their dreams</td><td data-label="Teacher note">From the A Nightmare on Elm Street films.</td></tr>
+<tr class="bonus"><td class="w">Grim Reaper <span class="star" title="bonus word">★</span></td><td data-label="Meaning">Death in a black hooded cloak, carrying a scythe</td><td data-label="Teacher note"></td></tr>
+<tr class="bonus"><td class="w">Frankenstein&#x27;s monster <span class="star" title="bonus word">★</span></td><td data-label="Meaning">A creature made from dead bodies and brought to life</td><td data-label="Teacher note">Frankenstein is the scientist, not the monster.</td></tr>
+<tr class="bonus"><td class="w">Bloody Mary <span class="star" title="bonus word">★</span></td><td data-label="Meaning">Say her name three times in a mirror and she appears</td><td data-label="Teacher note"></td></tr>
+<tr class="bonus"><td class="w">Medusa <span class="star" title="bonus word">★</span></td><td data-label="Meaning">A woman with snakes for hair who turns people to stone</td><td data-label="Teacher note">From Greek myth. Say: meh-DYOO-sah.</td></tr>
+<tr class="bonus"><td class="w">Loch Ness Monster <span class="star" title="bonus word">★</span></td><td data-label="Meaning">A creature said to live in a Scottish lake</td><td data-label="Teacher note">Loch is Scottish for lake. Locals call it Nessie.</td></tr>
+<tr class="bonus"><td class="w">Bigfoot <span class="star" title="bonus word">★</span></td><td data-label="Meaning">A huge, hairy creature said to live in North American forests</td><td data-label="Teacher note"></td></tr>
+<tr class="bonus"><td class="w">Pennywise <span class="star" title="bonus word">★</span></td><td data-label="Meaning">The scary clown from the film It</td><td data-label="Teacher note">From the film It, based on Stephen King&#x27;s novel.</td></tr>
+      </table>
+  </details>
 
   <section class="dictation-wrap" aria-labelledby="dictationTitle">
     <h2 id="dictationTitle">Write from Dictation</h2>
@@ -2436,6 +2545,17 @@ newGame();
   }
   make();
   let t = 0; window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(make, 300); });
+})();
+</script>
+<script>
+/* print only the teachers' vocabulary list */
+(function(){
+  const b = document.getElementById("printVocab"), d = document.getElementById("teacherVocab"); if(!b || !d) return;
+  b.addEventListener("click", () => {
+    d.open = true; document.body.classList.add("print-vocab");
+    const done = () => { document.body.classList.remove("print-vocab"); window.removeEventListener("afterprint", done); };
+    window.addEventListener("afterprint", done); window.print(); setTimeout(done, 1500);
+  });
 })();
 </script>
 </body>
