@@ -1468,6 +1468,7 @@ p.sub{font-family:var(--gothic);font-size:clamp(1.25rem,3vw,1.6rem);letter-spaci
   </section>
 
   <div class="links">
+    <a href="https://modernenglish.au/game/halloweenreading.html" class="btn">Mini lesson: The Girl in the Graveyard</a>
     <a href="https://modernenglish.au/game/weatheridioms.html" class="btn">Weather Idioms Game</a>
     <a href="https://modernenglish.au/Microlessons%26Games.html" class="btn">MicroLessons &amp; Games</a>
     <a href="https://modernenglish.au/vocabularygames.html" class="btn">More Vocabulary Games</a>
@@ -2548,6 +2549,14 @@ newGame();
 })();
 </script>
 <script>
+/* arriving from a "Pre-teach list" link (…halloweenmatching.html#teacherVocab): open the list, skip the doors, and scroll to it */
+(function(){
+  if(location.hash !== "#teacherVocab") return;
+  const d = document.getElementById("teacherVocab"); if(!d) return;
+  d.open = true;
+  const doors = document.getElementById("doors"); if(doors) doors.remove();
+  setTimeout(() => d.scrollIntoView({ block: "start" }), 100);
+})();
 /* print only the teachers' vocabulary list */
 (function(){
   const b = document.getElementById("printVocab"), d = document.getElementById("teacherVocab"); if(!b || !d) return;
