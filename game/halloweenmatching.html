@@ -1253,6 +1253,8 @@ p.sub{font-family:var(--gothic);font-size:clamp(1.25rem,3vw,1.6rem);letter-spaci
   body.print-vocab #printVocab{display:none}
   body.print-vocab .vt tr{break-inside:avoid}
 }
+.round-tag{font-family:var(--gothic);font-size:1.3rem;letter-spacing:.08em;margin:0 auto .1rem!important;color:#7a1f1f!important}
+.result-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:.8rem}
 </style>
 </head>
 
@@ -1468,7 +1470,7 @@ p.sub{font-family:var(--gothic);font-size:clamp(1.25rem,3vw,1.6rem);letter-spaci
   </section>
 
   <div class="links">
-    <a href="https://modernenglish.au/game/halloweenreading.html" class="btn">Mini lesson: The Girl in the Graveyard</a>
+    <a href="https://modernenglish.au/minilessons/halloweenreading.html" class="btn">Mini lesson: The Girl in the Graveyard</a>
     <a href="https://modernenglish.au/game/weatheridioms.html" class="btn">Weather Idioms Game</a>
     <a href="https://modernenglish.au/Microlessons%26Games.html" class="btn">MicroLessons &amp; Games</a>
     <a href="https://modernenglish.au/vocabularygames.html" class="btn">More Vocabulary Games</a>
@@ -2065,7 +2067,7 @@ const level = "medium";
 game.dataset.level = level;
 
 let picked = null, lock = false, matched = 0, colorMap = {}, mult = 1;   // mult = 2 after the lucky rabbit's foot
-let teamCount = 2, teams = [], turn = 0, timeLeft = ROUND_SECONDS, tick = null, playing = false;
+let round = 1, teamCount = 2, teams = [], turn = 0, timeLeft = ROUND_SECONDS, tick = null, playing = false;
 
 function shuffle(arr){
   const a = [...arr];
@@ -2268,14 +2270,14 @@ function drawClock(){
 /* ---------- turns ---------- */
 function newGame(){
   stopClock(); hideStorm(); hideHorde();
-  playing = false; teams = []; turn = 0;
+  playing = false; teams = []; turn = 0; round = 1;
   game.innerHTML = ""; game.classList.remove("locked"); statusEl.textContent = "";
   hud.classList.remove("on"); turnCard.classList.remove("on"); setupEl.hidden = false;
   drawSetup();
 }
 function startGame(){
   if(!choice.length) return;
-  teams = choice.map(k => ({ persona: k, pairs: 0, score: 0, lost: 0, done: false }));
+  teams = choice.map(k => ({ persona: k, pairs: 0, score: 0, lost: 0, done: false, startScore: 0 }));
   turn = 0;
   setupEl.hidden = true; hud.classList.add("on");
   showTurnCard();
@@ -2284,17 +2286,20 @@ function showTurnCard(){
   const p = PERSONAS[teams[turn].persona];
   timeLeft = ROUND_SECONDS; drawClock(); drawTeams();
   game.innerHTML = ""; statusEl.textContent = "";
-  turnCard.innerHTML = "<h2>" + p.emoji + " " + p.name + (teams.length > 1 ? ", your turn!" : ", are you ready?") + "</h2>" +
-    "<p>You have 1 minute to match all 7. Every pair scores points, and the ★ bonus ones score double. Find the lucky rabbit's foot for double points, but the black cat ends your turn, and if you run out of time, you lose all your points!</p>" +
+  teams[turn].startScore = teams[turn].score;           // what the team had before this turn
+  const loseWhat = round === 1 ? "you lose all your points!" : "you lose all your points from this round!";
+  turnCard.innerHTML = (round > 1 ? '<p class="round-tag">Round ' + round + "</p>" : "") +
+    "<h2>" + p.emoji + " " + p.name + (teams.length > 1 ? ", your turn!" : ", are you ready?") + "</h2>" +
+    "<p>You have 1 minute to match all 7. Every pair scores points, and the ★ bonus ones score double. Find the lucky rabbit's foot for double points, but the black cat ends your turn, and if you run out of time, " + loseWhat + "</p>" +
     '<button type="button" class="pick" id="goBtn">⏱️ Start the clock</button>';
   turnCard.classList.add("on");
   document.getElementById("goBtn").addEventListener("click", startTurn);
   document.getElementById("goBtn").focus({ preventScroll: true });
   // the posh zombie voice reads the card aloud
-  const words = p.name + (teams.length > 1 ? ", your turn!" : ", are you ready?") +
+  const words = (round > 1 ? "Round " + round + ". " : "") + p.name + (teams.length > 1 ? ", your turn!" : ", are you ready?") +
     " You have one minute to match all seven. Every pair scores points, and the bonus ones score double." +
     " Find the lucky rabbit's foot for double points, but the black cat ends your turn." +
-    " And if you run out of time… you lose all your points!";
+    " And if you run out of time… " + loseWhat;
   const hear = document.createElement("button");
   hear.type = "button"; hear.className = "btn btn-sound hear-rules"; hear.textContent = "🔊 Hear it again";
   hear.addEventListener("click", () => creepy(words, 0.1, 0.8));
@@ -2327,7 +2332,7 @@ function finishTurn(won){
   const tm = teams[turn];
   tm.pairs = matched;
   if(won && TIME_BONUS) tm.score += timeLeft * mult;   // +1 point for every second left (doubled after the rabbit's foot)
-  if(!won){ tm.lost = tm.score; tm.score = 0; }       // didn't finish in time: all points are lost
+  if(!won){ tm.lost = tm.score - tm.startScore; tm.score = tm.startScore; }   // didn't finish in time: the points from this turn are lost (in round 1, that's all of them)
   tm.done = true;
   if(picked){ picked.classList.remove("picked"); picked = null; }
   drawTeams(); drawClock();
@@ -2399,14 +2404,22 @@ function showResults(){
   }else{
     title = PERSONAS[winners[0].persona].emoji + " The " + PERSONAS[winners[0].persona].name + " win!";
   }
-  turnCard.innerHTML = "<h2>" + title + "</h2>" +
+  turnCard.innerHTML = '<p class="round-tag">After round ' + round + "</p><h2>" + title + "</h2>" +
     '<ul class="results">' + teams.map(t => '<li class="' + (t.score === best && teams.length > 1 ? "win" : "") + '"><span>' + PERSONAS[t.persona].emoji + " " + PERSONAS[t.persona].name +
-      "</span><span>" + (t.cat ? '<span class="cat-mini">' + CAT_SVG + "</span>" : "") + t.pairs + "/" + PAIRS + " pairs · " + (t.lost ? "0 points (lost " + t.lost + ")" : t.score + " points") + "</span></li>").join("") + "</ul>" +
-    "<p>" + POINTS_PER_MATCH + " points a pair, +" + TRIVIA_BONUS + " bonus for a tricky trivia pair" + (TIME_BONUS ? ", +1 for every second left if you finish" : "") + ". Find the lucky rabbit's foot and every point after it is doubled. Turn over the black cat and your turn ends. Run out of time and you lose all your points!</p>" +
-    '<button type="button" class="pick" id="againBtn">🔄 Play again</button>';
+      "</span><span>" + (t.cat ? '<span class="cat-mini">' + CAT_SVG + "</span>" : "") + t.pairs + "/" + PAIRS + " pairs" + (t.lost ? " (lost " + t.lost + ")" : "") + " · <b>" + t.score + " points</b></span></li>").join("") + "</ul>" +
+    "<p>" + POINTS_PER_MATCH + " points a pair, +" + TRIVIA_BONUS + " bonus for a tricky trivia pair" + (TIME_BONUS ? ", +1 for every second left if you finish" : "") + ". Find the lucky rabbit's foot and every point after it is doubled. Turn over the black cat and your turn ends. Run out of time and you lose that round's points. Play as many rounds as you like: the scores carry on.</p>" +
+    '<div class="result-btns"><button type="button" class="pick" id="nextRoundBtn">👻 Another round</button><button type="button" class="pick" id="againBtn">🔄 New game</button></div>';
   turnCard.classList.add("on");
   drawTeams();
   document.getElementById("againBtn").addEventListener("click", newGame);
+  document.getElementById("nextRoundBtn").addEventListener("click", anotherRound);
+}
+/* keep the scores and play another round: every team gets a new turn with 7 new pairs */
+function anotherRound(){
+  round++;
+  teams.forEach(t => { t.pairs = 0; t.lost = 0; t.done = false; t.cat = false; });
+  turn = 0;
+  showTurnCard();
 }
 
 /* ---------- the horde: zombies, vampires and ghouls descend when time runs out ---------- */
