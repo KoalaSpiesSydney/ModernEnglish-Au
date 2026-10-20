@@ -179,6 +179,7 @@ section.step{margin:2.6rem 0 0}
 .cmp > i{display:block;font-size:1.15rem;margin-bottom:.3rem}
 .cmp > span{display:block;font-size:1rem}
 @media(max-width:560px){.compare{grid-template-columns:1fr}}
+.ref{margin-top:1.4rem!important;padding-top:.8rem;border-top:3px solid var(--accent);font-size:1rem}
 .slate-intro{text-align:center;max-width:600px;margin:0 auto 1rem!important}
 .rule ul{margin:.3rem 0 0 1.1rem}
 .rule li{margin:.5rem 0}
@@ -384,6 +385,7 @@ footer{background:rgba(42,42,42,.85);color:var(--muted);text-align:center;paddin
         <div class="cmp pc-cmp"><i>A vampire <span class="pc-t">was jumping</span> out at me…</i><span>This sounds like the background. It isn't finished, and we are waiting for something more important… <i>when I <span class="ps-t">woke up</span>!</i></span></div>
       </div>
       <p>Look at the end of the story: <i>The full moon <span class="pc-t">was rising</span> over the trees.</i> The moon is still rising, so we wait for the main action… <i>Then he <span class="ps-t">heard</span> a howl.</i></p>
+      <p class="ref">📘 <b>More practice:</b> <i>English Grammar in Use</i> (intermediate, Raymond Murphy, Cambridge, 5th edition): <b>Unit 5</b> Past simple (I did) and <b>Unit 6</b> Past continuous (I was doing).</p>
     </div>
   </section>
 
@@ -452,7 +454,8 @@ footer{background:rgba(42,42,42,.85);color:var(--muted);text-align:center;paddin
   </details>
 
   <div class="links">
-    <a href="https://modernenglish.au/game/halloweenmatching.html" class="feature"> Halloween Matching Game</a
+    <a href="https://modernenglish.au/game/halloweenmatching.html" class="feature">🎃 Halloween Matching Game</a>
+    <a href="https://modernenglish.au/Microlessons%26Games.html">MicroLessons &amp; Games</a>
     <a href="https://modernenglish.au/vocabularygames.html">More Vocabulary Games</a>
   </div>
 </main>
@@ -506,7 +509,7 @@ const SFX = (function(){
 (function(){
   const b = document.getElementById("soundBtn");
   const paint = () => { const on = SFX.isOn(); b.textContent = on ? "🔊 Sound on" : "🔇 Sound off"; b.setAttribute("aria-pressed", String(on)); };
-  b.addEventListener("click", () => { SFX.setOn(!SFX.isOn()); paint(); });
+  b.addEventListener("click", () => { SFX.setOn(!SFX.isOn()); if(!SFX.isOn()) Reader.stop(); paint(); });
   paint();
 })();
 document.getElementById("printBtn").addEventListener("click", () => window.print());
@@ -516,20 +519,59 @@ function pickVoice(){
   const v = speechSynthesis.getVoices();
   return v.find(x => /en-AU/i.test(x.lang)) || v.find(x => /en-GB/i.test(x.lang)) || v.find(x => /^en/i.test(x.lang)) || null;
 }
-function speak(text, rate){
-  if(!("speechSynthesis" in window)) { alert("This browser can't read aloud. Ask your teacher to read it."); return; }
-  speechSynthesis.cancel();
+function makeUtterance(text, rate){
   const u = new SpeechSynthesisUtterance(text), voice = pickVoice();
   if(voice){ u.voice = voice; u.lang = voice.lang; } else u.lang = "en-AU";
   u.rate = rate || .9;
-  speechSynthesis.speak(u);
+  return u;
+}
+function speak(text, rate){            // one-off: a single vocabulary word
+  if(!("speechSynthesis" in window)) { alert("This browser can't read aloud. Ask your teacher to read it."); return; }
+  Reader.stop();
+  speechSynthesis.cancel();
+  speechSynthesis.speak(makeUtterance(text, rate));
 }
 if("speechSynthesis" in window) speechSynthesis.getVoices();
 
+/* ===== Play / pause reader =====
+   The text is read one sentence at a time. Pause stops the voice and remembers the sentence;
+   pressing the same button again carries on from the start of that sentence.
+   (This works in every browser, including phones, where the built-in pause is unreliable.) */
+const Reader = (function(){
+  let btn = null, labels = null, parts = [], idx = 0, rate = .9, state = "idle", run = 0;
+  const split = t => (t.replace(/\s+/g, " ").trim().match(/[^.!?…]+[.!?…]+["”’)]*\s*|[^.!?…]+$/g) || []).map(s => s.trim()).filter(Boolean);
+  function paint(){
+    if(!btn) return;
+    btn.textContent = state === "playing" ? labels.pause : state === "paused" ? labels.resume : labels.play;
+    btn.setAttribute("aria-pressed", String(state === "playing"));
+  }
+  function next(myRun){
+    if(myRun !== run || state !== "playing") return;
+    if(idx >= parts.length){ stop(); return; }
+    const u = makeUtterance(parts[idx], rate);
+    u.onend = () => { if(myRun !== run || state !== "playing") return; idx++; next(myRun); };
+    u.onerror = e => { if(myRun !== run) return; if(e.error !== "interrupted" && e.error !== "canceled"){ idx++; next(myRun); } };
+    speechSynthesis.speak(u);
+  }
+  function play(){ state = "playing"; paint(); run++; speechSynthesis.cancel(); next(run); }
+  function pause(){ state = "paused"; run++; speechSynthesis.cancel(); paint(); }
+  function stop(){ run++; const b = btn; state = "idle"; paint(); btn = null; idx = 0; return b; }
+  function toggle(button, text, r, lab){
+    if(!("speechSynthesis" in window)) { alert("This browser can't read aloud. Ask your teacher to read it."); return; }
+    if(button === btn && state === "playing"){ pause(); return; }
+    if(button === btn && state === "paused"){ play(); return; }
+    if(btn){ stop(); speechSynthesis.cancel(); }
+    btn = button; labels = lab; rate = r; parts = split(text); idx = 0;
+    if(!parts.length) return;
+    play();
+  }
+  return { toggle, stop: () => { if(btn){ stop(); if("speechSynthesis" in window) speechSynthesis.cancel(); } } };
+})();
+
 const storyEl = document.getElementById("story");
 const storyText = () => [...storyEl.querySelectorAll("p")].map(p => p.textContent).join(" ");
-document.getElementById("listenBtn").addEventListener("click", () => speak(storyText(), .88));
-document.getElementById("slowBtn").addEventListener("click", () => speak(storyText(), .65));
+document.getElementById("listenBtn").addEventListener("click", e => Reader.toggle(e.currentTarget, storyText(), .88, { play: "🔊 Listen", pause: "⏸️ Pause", resume: "▶️ Carry on" }));
+document.getElementById("slowBtn").addEventListener("click", e => Reader.toggle(e.currentTarget, storyText(), .65, { play: "🐢 Slowly", pause: "⏸️ Pause", resume: "▶️ Carry on slowly" }));
 document.querySelectorAll(".vw").forEach(b => b.addEventListener("click", () => speak(b.textContent, .8)));
 document.getElementById("grammarBtn").addEventListener("click", e => {
   const on = storyEl.classList.toggle("show");
@@ -637,7 +679,7 @@ document.getElementById("gapReset").addEventListener("click", () => {
 })();
 
 /* ===== Homework: live checklist ===== */
-const WORDS = ["werewolf","full moon","banshee","ghoul","Grim Reaper","poltergeist","ghost","witch","vampire","zombie","skeleton","black cat","jack-o'-lantern","haunted house","costume","cackle","shriek","creep","glimpse","vanish","bloodcurdling"];
+const WORDS = ["werewolf","full moon","ghost","witch","vampire","zombie","skeleton","black cat","jack-o'-lantern","haunted house","costume","cackle","shriek","creep","glimpse","vanish","bloodcurdling"];
 const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const bank = document.getElementById("wordbank");
 bank.innerHTML = WORDS.map(w => '<span data-w="' + w.toLowerCase() + '">' + w + '</span>').join("");
@@ -659,11 +701,12 @@ function check(){
 }
 ta.addEventListener("input", check);
 check();
-document.getElementById("hearBtn").addEventListener("click", () => {
+document.getElementById("hearBtn").addEventListener("click", e => {
   const t = ta.value.trim(), fb = document.getElementById("writeFb");
   if(!t){ fb.className = "fb no"; fb.textContent = "Write your story first."; return; }
-  fb.textContent = ""; speak(t, .9);
+  fb.textContent = ""; Reader.toggle(e.currentTarget, t, .9, { play: "🔊 Hear my story", pause: "⏸️ Pause", resume: "▶️ Carry on" });
 });
+ta.addEventListener("input", () => { if(document.getElementById("hearBtn").textContent.includes("Carry on")) Reader.stop(); });
 document.getElementById("copyBtn").addEventListener("click", async () => {
   const fb = document.getElementById("writeFb"), t = ta.value.trim();
   if(!t){ fb.className = "fb no"; fb.textContent = "Write your story first."; return; }
