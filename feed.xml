@@ -10,12 +10,21 @@
     <description>Notes on teaching English, classroom games, and the state of online ESL resources — from a native-speaker English teacher in Sydney.</description>
     <language>en-AU</language>
     <copyright>Koala Spies Sydney · Modern English Australia</copyright>
-    <lastBuildDate>Thu, 15 Oct 2026 09:00:00 +1100</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 09:00:00 +1100</lastBuildDate>
     <pubDate>Thu, 15 Oct 2026 09:00:00 +1100</pubDate>
     <generator>Hand-built</generator>
     <ttl>1440</ttl>
 
-    <item>
+             <item>
+      <title>Can AI Write Good English Teaching Materials? Only If It Learns From Experts</title>
+      <link>https://modernenglish.au/blog/ai-english-teaching-materials-expertise.html</link>
+      <guid isPermaLink="true">https://modernenglish.au/blog/ai-english-teaching-materials-expertise.html</guid>
+      <pubDate>Thu, 22 Oct 2026 09:00:00 +1100</pubDate>
+      <dc:creator>Modern English Australia</dc:creator>
+      <category>EdTech</category>
+      <description>AI learns from what is online, not from what is best. Why teacher expertise matters more than ever in AI-generated ESL materials.</description>
+    </item>
+       <item>
       <title>The Expertise Paradox: Why Good ESL Resources Are Getting Harder to Find</title>
       <link>https://modernenglish.au/blog/expertise-paradox-esl-resources.html</link>
       <guid isPermaLink="true">https://modernenglish.au/blog/expertise-paradox-esl-resources.html</guid>
