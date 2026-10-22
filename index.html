@@ -235,18 +235,80 @@ body {
     .group-h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; }
     .group-h h2 { margin: 0; }
     .group-h .count { font-size: .8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
-    .tool-grid { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-    .tool {
-      display: flex; flex-direction: column; height: 100%;
-      padding: 16px 18px 16px; border-radius: 4px;
-      background: rgba(255,255,255,.85); border: 1px solid var(--line);
-      border-top: 5px solid var(--c, var(--accent));
-      box-shadow: 0 2px 4px rgba(15,23,42,.10), 0 16px 32px -8px rgba(15,23,42,.38);
-      text-decoration: none; color: var(--ink);
-      transition: transform .15s ease, box-shadow .15s ease;
+
+    /* ── PAPER-NOTE CARDS ────────────────────────────────────────── */
+    /* Extra gap and top padding leave room for the tape and the tilt */
+    .tool-grid { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 24px; padding: 12px 8px 8px 0; }
+    /* Each note is built in three layers on its list item:
+       li::before = the solid shadow, .tool = the paper, li::after = the tape.
+       The paper and the shadow share one rough outline, so the shadow follows the torn edge. */
+    .tool-grid > li {
+      --tilt: -0.6deg;
+      --rough: polygon(
+        0 3px, 5% 0, 9% 2px, 14% 1px, 20% 3px, 26% 0, 31% 2px, 37% 1px, 43% 3px, 49% 0, 55% 2px,
+        61% 1px, 66% 3px, 72% 0, 78% 2px, 84% 1px, 90% 3px, 95% 0, 100% 2px,
+        calc(100% - 2px) 8%, 100% 15%, calc(100% - 3px) 23%, calc(100% - 1px) 31%, 100% 40%,
+        calc(100% - 2px) 48%, calc(100% - 3px) 57%, 100% 65%, calc(100% - 1px) 74%,
+        calc(100% - 3px) 82%, 100% 91%, calc(100% - 2px) 100%,
+        95% calc(100% - 3px), 89% 100%, 83% calc(100% - 2px), 77% calc(100% - 1px), 71% 100%,
+        65% calc(100% - 3px), 59% calc(100% - 1px), 53% 100%, 47% calc(100% - 2px), 41% calc(100% - 3px),
+        35% 100%, 29% calc(100% - 1px), 23% calc(100% - 3px), 17% 100%, 11% calc(100% - 2px),
+        5% calc(100% - 1px), 0 100%,
+        2px 92%, 0 84%, 3px 76%, 1px 67%, 0 58%, 2px 49%, 0 40%, 3px 31%, 1px 22%, 0 13%
+      );
+      position: relative;
+      transform: rotate(var(--tilt));
+      /* soft ambient shadow under the whole note; it follows the rough edge */
+      filter: drop-shadow(1px 2px 2px rgba(15,23,42,.10)) drop-shadow(4px 10px 14px rgba(15,23,42,.16));
+      transition: transform .18s ease, filter .18s ease;
     }
-    .tool:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(15,23,42,.12), 0 24px 44px -10px rgba(15,23,42,.45); color: var(--ink); }
-    .tool:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+    /* a slightly different angle for each note, so they look hand-placed */
+    .tool-grid > li:nth-child(2n) { --tilt: 0.7deg; }
+    .tool-grid > li:nth-child(3n) { --tilt: -0.3deg; }
+    /* solid lift shadow in the group colour, with the same rough edge */
+    .tool-grid > li::before {
+      content: ""; position: absolute; inset: 0; z-index: 0;
+      /* see-through group colour, deepening towards the far corner */
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--c, var(--accent)) 38%, transparent) 0%,
+        color-mix(in srgb, var(--c, var(--accent)) 58%, transparent) 55%,
+        color-mix(in srgb, var(--c, var(--accent)) 75%, transparent) 100%);
+      clip-path: var(--rough);
+      transform: translate(6px, 6px);
+      transition: transform .18s ease;
+      pointer-events: none;
+    }
+    /* tape strip holding the note on */
+    .tool-grid > li::after {
+      content: ""; position: absolute; top: -11px; left: 50%; z-index: 2;
+      width: 92px; height: 22px;
+      transform: translateX(-50%) rotate(-2deg);
+      background: color-mix(in srgb, var(--c, var(--accent)) 26%, rgba(255,255,255,.6));
+      border-left: 1px dashed rgba(255,255,255,.7); border-right: 1px dashed rgba(255,255,255,.7);
+      box-shadow: 0 1px 2px rgba(15,23,42,.10);
+      pointer-events: none;
+    }
+    .tool {
+      --paper: #fffef7;                    /* warm note-paper white */
+      --rule: rgba(57,104,234,.10);        /* faint blue ruled lines */
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; height: 100%;
+      padding: 24px 20px 18px;
+      background-color: var(--paper);
+      background-image: repeating-linear-gradient(to bottom, transparent 0 27px, var(--rule) 27px 28px);
+      background-position: 0 16px;
+      box-shadow: inset 0 0 7px rgba(120,100,60,.14);  /* slightly aged paper edge */
+      clip-path: var(--rough);
+      text-decoration: none; color: var(--ink);
+    }
+    .tool-grid > li:hover {
+      transform: translate(-2px, -3px) rotate(0deg);
+      filter: drop-shadow(2px 3px 3px rgba(15,23,42,.12)) drop-shadow(8px 18px 24px rgba(15,23,42,.22));
+    }
+    .tool-grid > li:hover::before { transform: translate(9px, 10px); }
+    .tool:hover { color: var(--ink); }
+    .tool:focus-visible { outline: none; }
+    .tool-grid > li:has(.tool:focus-visible) { outline: 3px solid var(--link); outline-offset: 6px; }
     .tool .t-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .tool .t-kick { font-size: .7rem; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--c, var(--accent)); }
     .tool .t-icon { font-size: 1.5rem; line-height: 1; }
@@ -254,8 +316,10 @@ body {
     .tool .t-desc { font-size: .9rem; line-height: 1.55; color: var(--muted); margin: 0 0 12px; flex: 1; }
     .tool .t-go { font-weight: 800; font-size: .9rem; color: var(--c, var(--link)); }
     .tool .t-go::after { content: " →"; }
-    .tool.soon { border-style: dashed; border-top-style: solid; background: rgba(255,255,255,.55); box-shadow: none; cursor: default; }
-    .tool.soon:hover { transform: none; box-shadow: none; }
+    .tool.soon { background-color: rgba(255,254,247,.6); cursor: default; }
+    .tool-grid > li:has(.tool.soon)::before,
+    .tool-grid > li:has(.tool.soon):hover::before { background: rgba(15,23,42,.15); transform: translate(4px, 4px); }
+    .tool-grid > li:has(.tool.soon):hover { transform: rotate(var(--tilt)); }
     .tool.soon .t-go { color: var(--muted); }
     .tool.soon .t-go::after { content: ""; }
     .tool .t-kick::before { content: "Free"; margin-right: 8px; padding: 0 7px; border: 1.5px solid currentColor; border-radius: 3px; letter-spacing: 1px; }
@@ -282,8 +346,12 @@ body {
       .two-col.games-first { grid-template-columns: 1fr; gap: 44px; }
       .hero { padding-top: 26px; }
     }
-    @media (max-width: 560px) { .tool-grid { grid-template-columns: 1fr; gap: 12px; } }
-    @media (prefers-reduced-motion: reduce) { .tool { transition: none; } .tool:hover { transform: none; } }
+    @media (max-width: 560px) { .tool-grid { grid-template-columns: 1fr; gap: 28px; } }
+    @media (prefers-reduced-motion: reduce) {
+      .tool-grid > li, .tool-grid > li::before { transition: none; }
+      .tool-grid > li:hover { transform: rotate(var(--tilt)); }
+      .tool-grid > li:hover::before { transform: translate(6px, 6px); }
+    }
     /* FOOTER */
     footer { background: var(--header); color: var(--header-ink); border-top: 1px solid rgba(255,255,255,.08); padding: 20px 0 calc(20px + var(--safe-bottom)); }
     .footer-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; text-align: center; font-family: var(--sans); font-size: 0.87rem; color: rgba(248,250,252,.60); }
