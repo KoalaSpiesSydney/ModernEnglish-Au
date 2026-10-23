@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Cambridge C1 Advanced (CAE) Practice Tests | Modern English Australia</title>
-  <meta name="description" content="Free Cambridge C1 Advanced (CAE) mini tests: Reading and Use of English, plus Listening and Writing. Timed, auto-scored and mobile-friendly." />
+  <meta name="description" content="Free Cambridge C1 Advanced (CAE) mini tests: Reading and Use of English, plus combined listening and essay writing. Timed, auto-scored and mobile-friendly." />
   <link rel="canonical" href="https://modernenglish.au/tests-cambridge.html" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Cambridge C1 Advanced (CAE) Mini Tests · Modern English Australia" />
-  <meta property="og:description" content="Free Cambridge C1 Advanced mini tests — Reading and Use of English, plus Listening and Writing. Timed and auto-scored." />
+  <meta property="og:description" content="Free Cambridge C1 Advanced mini tests — Reading and Use of English, plus combined listening and essay writing. Timed and auto-scored." />
   <meta property="og:url" content="https://modernenglish.au/tests-cambridge.html" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -174,6 +174,26 @@
       display: inline-flex; align-items: center; gap: 4px;
     }
     .game-card:hover .game-card-arrow { gap: 8px; }
+    /* NEW badge on the latest test */
+    .game-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .badge-new {
+      flex: 0 0 auto; font-family: var(--sans); font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 1.5px; text-transform: uppercase; line-height: 1;
+      color: #0f172a; background: #fde047; border-radius: 999px; padding: 6px 10px;
+    }
+    .game-card.is-new { border-color: rgba(14,40,97,.28); box-shadow: 0 6px 22px rgba(14,40,97,.10); }
+    .game-card.is-new::before { opacity: 1; }
+    /* COMING SOON cards: not links yet */
+    .game-card.is-soon { background: rgba(255,255,255,.55); border-style: dashed; border-color: rgba(15,23,42,.18); cursor: default; }
+    .game-card.is-soon:hover { box-shadow: none; transform: none; border-color: rgba(15,23,42,.18); }
+    .game-card.is-soon:hover::before { opacity: 0; }
+    .game-card.is-soon .game-card-label { color: var(--muted); }
+    .game-card.is-soon .game-card-title { color: var(--muted); }
+    .badge-soon {
+      flex: 0 0 auto; font-family: var(--sans); font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 1.5px; text-transform: uppercase; line-height: 1;
+      color: var(--muted); border: 1px solid rgba(15,23,42,.22); border-radius: 999px; padding: 5px 10px;
+    }
     /* TIPS PILLS (same component as the IELTS page) */
     .tips-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin: 18px 0 0; }
     .tips-pill {
@@ -310,7 +330,7 @@
         </h1>
         <p class="role-line">C1 Advanced &middot; Timed &middot; Instant Feedback</p>
         <p class="intro-text">
-          Mini Cambridge C1 Advanced tests covering Reading and Use of English, plus Listening and Writing. Each one is a 30-minute snapshot of the real exam &mdash; use it as a quick warm-up, a mid-course check, or a short diagnostic before students commit to a full CAE course. The skills, themes and vocabulary also carry straight over to IELTS and PTE.
+          Mini Cambridge C1 Advanced tests covering Reading and Use of English, plus combined listening and essay-writing practice, with Listening tests on the way. Each one is a 30-minute snapshot of the real exam &mdash; use it as a quick warm-up, a mid-course check, or a short diagnostic before students commit to a full CAE course. The skills, themes and vocabulary also carry straight over to IELTS and PTE.
         </p>
         <div class="tips-row" id="topTipsRow" style="justify-content:flex-start;">
           <button type="button" class="tips-pill" data-panel="panel-howto" aria-expanded="false">How to use <span class="chev">&#9662;</span></button>
@@ -332,16 +352,19 @@
       <h2 style="margin-bottom: 6px;">Mini CAE Reading &amp; Use of English Tests</h2>
       <p class="intro-text" style="margin-top:0;">Short snapshots of the C1 Advanced Reading and Use of English paper &mdash; every part is timed and auto-scored, with an answer key and explanations.</p>
       <div class="game-grid">
-        <a class="game-card" href="CAEtest/1UseofEnglish/index.html">
-          <span class="game-card-label">CAE Use of English &middot; Mini Test 1</span>
-          <span class="game-card-title">The Media</span>
-          <p class="game-card-desc">4 parts &middot; 30 questions &middot; multiple-choice cloze, open cloze, word formation, key word transformations.</p>
+        <a class="game-card is-new" href="CAEtest/5Reading%26UseofEnglish/index.html">
+          <span class="game-card-top">
+            <span class="game-card-label">CAE Reading &amp; Use of English &middot; Mini Test 5</span>
+            <span class="badge-new">New</span>
+          </span>
+          <span class="game-card-title">Modern Families &amp; the Generation Gap</span>
+          <p class="game-card-desc">4 parts &middot; 30 questions &middot; open cloze, key word transformations, reading comprehension, multiple matching.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
-        <a class="game-card" href="CAEtest/2UseofEnglish/index.html">
-          <span class="game-card-label">CAE Use of English &middot; Mini Test 2</span>
-          <span class="game-card-title">History</span>
-          <p class="game-card-desc">4 parts &middot; 26 questions &middot; multiple-choice cloze, open cloze, word formation, key word transformations, plus a tips pre-lesson.</p>
+        <a class="game-card" href="CAEtest/5useofEnglish/index.html">
+          <span class="game-card-label">CAE Reading &amp; Use of English &middot; Mini Test 4</span>
+          <span class="game-card-title">Tech &amp; Social Media</span>
+          <p class="game-card-desc">2 parts &middot; 9 questions &middot; key word transformations, gapped text (put the paragraphs in order).</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="CAEtest/3UseofEnglishandreading/index.html">
@@ -350,26 +373,56 @@
           <p class="game-card-desc">3 parts &middot; 21 questions &middot; multiple-choice cloze, word formation, reading comprehension.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
-           <a class="game-card" href="CAEtest/5useofEnglish/index.html">
-          <span class="game-card-label">CAE Reading &amp; Use of English &middot; Mini Test 4</span>
-          <span class="game-card-title">Tech & Social Media </span>
-          <p class="game-card-desc">3 parts &middot; 21 questions &middot; arrange paragraph and gapfil</p>
+        <a class="game-card" href="CAEtest/2UseofEnglish/index.html">
+          <span class="game-card-label">CAE Use of English &middot; Mini Test 2</span>
+          <span class="game-card-title">History</span>
+          <p class="game-card-desc">4 parts &middot; 26 questions &middot; multiple-choice cloze, open cloze, word formation, key word transformations, plus a tips pre-lesson.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
-           <a class="game-card" href="    CAEtest/5Reading&UseofEnglish/index.html">
-          <span class="game-card-label">CAE Reading &amp; Use of English &middot; Mini Test 5</span>
-          <span class="game-card-title">Modern Families & the Generation Gap </span>
-          <p class="game-card-desc">3 parts &middot; 20 questions &middot; including a reading and 4 Use of English tasks</p>
+        <a class="game-card" href="CAEtest/1UseofEnglish/index.html">
+          <span class="game-card-label">CAE Use of English &middot; Mini Test 1</span>
+          <span class="game-card-title">The Media</span>
+          <p class="game-card-desc">4 parts &middot; 30 questions &middot; multiple-choice cloze, open cloze, word formation, key word transformations.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
+        </a>
       </div>
       <hr class="divider">
-      <h2 style="margin-bottom: 6px;">Mini CAE Listening &amp; Writing Tests</h2>
-      <p class="intro-text" style="margin-top:0;">Listen to an essay being read aloud and fill in the missing words, then plan and write your own essay.</p>
+      <h2 style="margin-bottom: 6px;">Mini CAE Listening Tests</h2>
+      <p class="intro-text" style="margin-top:0;">Short snapshots of the C1 Advanced Listening paper, timed and auto-scored with audio included. Coming soon.</p>
+      <div class="game-grid">
+        <div class="game-card is-soon" aria-label="CAE Listening Mini Test 1, coming soon">
+          <span class="game-card-top">
+            <span class="game-card-label">CAE Listening &middot; Mini Test 1</span>
+            <span class="badge-soon">Coming soon</span>
+          </span>
+          <span class="game-card-title">Topic to be announced</span>
+          <p class="game-card-desc">Timed listening practice &middot; audio included &middot; auto-scored.</p>
+        </div>
+        <div class="game-card is-soon" aria-label="CAE Listening Mini Test 2, coming soon">
+          <span class="game-card-top">
+            <span class="game-card-label">CAE Listening &middot; Mini Test 2</span>
+            <span class="badge-soon">Coming soon</span>
+          </span>
+          <span class="game-card-title">Topic to be announced</span>
+          <p class="game-card-desc">Timed listening practice &middot; audio included &middot; auto-scored.</p>
+        </div>
+        <div class="game-card is-soon" aria-label="CAE Listening Mini Test 3, coming soon">
+          <span class="game-card-top">
+            <span class="game-card-label">CAE Listening &middot; Mini Test 3</span>
+            <span class="badge-soon">Coming soon</span>
+          </span>
+          <span class="game-card-title">Topic to be announced</span>
+          <p class="game-card-desc">Timed listening practice &middot; audio included &middot; auto-scored.</p>
+        </div>
+      </div>
+      <hr class="divider">
+      <h2 style="margin-bottom: 6px;">Combined Skills</h2>
+      <p class="intro-text" style="margin-top:0;">Practice that links skills together: listen to a model essay read aloud and fill in the missing words, then plan and write your own essay.</p>
       <div class="game-grid">
         <a class="game-card" href="CAEtest/CAEtest/4listeningandwriting/index.html">
-          <span class="game-card-label">CAE Listening &amp; Writing &middot; Mini Test 4</span>
+          <span class="game-card-label">Combined Skills &middot; Listening &amp; Essay Writing</span>
           <span class="game-card-title">Accommodation</span>
-          <p class="game-card-desc">10 listening questions &middot; one essay-writing task &middot; audio included.</p>
+          <p class="game-card-desc">10 listening gap-fill questions &middot; one essay-writing task &middot; audio included.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
       </div>
