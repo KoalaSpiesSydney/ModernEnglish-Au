@@ -17,10 +17,10 @@
 <meta property="og:description" content="Altruism, cynicism, xenophobia, megalomania: match the -isms, -phobias, -philias and -manias to their meanings." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Modern English Australia" />
-<meta property="og:url" content="https://modernenglish.au/game/isms.html" />
-<link rel="canonical" href="https://modernenglish.au/game/isms.html" />
-<link rel="preload" href="people.mp3" as="video">
-<link rel="preload" href="babyface.mp3" as="audio">
+<meta property="og:url" content="https://modernenglish.au/game/loversandhaters.html" />
+<link rel="canonical" href="https://modernenglish.au/game/loversandhaters.html" />
+<link rel="preload" href="people.mp4" as="video">
+<link rel="preload" href="BabyFace.mp3" as="audio">
 
 <!-- Google tag (gtag.js) – same Analytics property as your other games -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
@@ -784,11 +784,11 @@
   <div class="bg-love" aria-hidden="true"></div>
   <!-- Background video (always silent): put people.mp3 (or people.mp4) in the same folder as this page -->
   <video class="bg-video" id="bgVideo" autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5-page" preload="auto" aria-hidden="true" tabindex="-1">
-    <source src="people.mp3">
+    <source src="people.mp4" type="video/mp4">
     <source src="people.mp4" type="video/mp4">
   </video>
-  <!-- Game music: babyface.mp3 in the same folder – soft while playing, louder after a win -->
-  <audio id="bgMusic" src="babyface.mp3" loop preload="auto"></audio>
+  <!-- Game music: BabyFace.mp3 in the same folder – soft while playing, louder after a win -->
+  <audio id="bgMusic" src="BabyFace.mp3" loop preload="auto"></audio>
 
   <div class="gold-flash" id="goldFlash" aria-hidden="true"></div>
 
@@ -888,7 +888,7 @@
     <!-- The lesson for this game is on the mini lessons page. Change the link if you save the lesson under another name. -->
     <p class="lesson-go">How do <em>cynic</em>, <em>cynicism</em> and <em>cynical</em> fit together? The mini lesson covers the word families, the grammar and the collocations behind these words, with practice and IELTS Speaking Part 3 questions.</p>
     <div class="links" style="margin-top:.6rem">
-      <a href="../minilessons/isms-lesson.html" class="btn">Go to the -isms Mini Lesson<span class="arrow" aria-hidden="true">→</span></a>
+      <!-- -isms lesson not uploaded yet: <a href="../minilessons/isms-lesson.html" class="btn">Go to the -isms Mini Lesson<span class="arrow" aria-hidden="true">→</span></a> -->
       <a href="https://modernenglish.au/vocabularygames.html" class="btn">More Vocabulary Games<span class="arrow" aria-hidden="true">→</span></a>
       <a href="https://modernenglish.au/" class="btn">Home<span class="arrow" aria-hidden="true">→</span></a>
     </div>
@@ -977,7 +977,7 @@ var SFX = (function(){
     }
   }
 
-  /* ── Music: babyface.mp3 (the background video always stays silent) ──────
+  /* ── Music: BabyFace.mp3 (the background video always stays silent) ──────
      Soft while playing, louder when the round is won. The volume goes through
      the browser's sound system, because iPhones ignore a video's own volume. */
   var SOFT = 0.15, LOUD = 0.9;                       // ← change these to taste
@@ -1015,7 +1015,7 @@ var SFX = (function(){
   }
   if(vid){
     vid.addEventListener("error", function(){
-      if(window.console) console.warn("Music file could not be loaded: " + vid.currentSrc + " – check it is called babyface.mp3 and sits next to this page.");
+      if(window.console) console.warn("Music file could not be loaded: " + vid.currentSrc + " – check it is called BabyFace.mp3 and sits next to this page.");
     });
   }
   function startMusic(){
