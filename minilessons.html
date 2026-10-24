@@ -13,7 +13,7 @@
 
   <!-- ===== SEO ===== -->
   <title>Free English Mini Lessons: Vocabulary and Grammar | Modern English Australia</title>
-  <meta name="description" content="Free mini lessons for English vocabulary and grammar, written by a native speaker. Each short lesson states its level, the coursebook level it fits, and links to practice and a game." />
+  <meta name="description" content="Free mini lessons for English vocabulary and grammar, written by a native speaker. Each short lesson states its level and links to practice and a game." />
   <meta name="author" content="Modern English Australia" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 
@@ -26,13 +26,15 @@
   <meta property="og:site_name" content="Modern English Australia" />
   <meta property="og:locale" content="en_AU" />
   <meta property="og:title" content="Free English Mini Lessons: Vocabulary and Grammar" />
-  <meta property="og:description" content="Short vocabulary and grammar lessons with a clear level, coursebook alignment, practice and a linked game." />
+  <meta property="og:description" content="Short vocabulary and grammar lessons with a clear level, practice and a linked game." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free English Mini Lessons: Vocabulary and Grammar" />
-  <meta name="twitter:description" content="Short vocabulary and grammar lessons with a clear level, coursebook alignment, practice and a linked game. No sign-up." />
+  <meta name="twitter:description" content="Short vocabulary and grammar lessons with a clear level, practice and a linked game. No sign-up." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet">
+  <!-- Chalk handwriting for the blackboard cards -->
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #fffce6;
@@ -501,18 +503,12 @@
       .new-badge { animation: none; }
     }
 
-    /* ===== MINI LESSON CARDS (same card as the games page, with level + coursebook blocks) ===== */
+    /* ===== MINI LESSON CARDS (same card as the games page, with a level block) ===== */
     .game-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); }
     h3.game-card-title { margin: 0; }
     .game-card-title a { color: inherit; text-decoration: none; }
     .game-card-title a:hover { color: var(--accent); text-decoration: underline; }
     .game-card-level { font-size: 0.92rem; line-height: 1.6; margin: 0; color: var(--ink); }
-    .game-card-books {
-      font-size: 0.88rem; line-height: 1.55; color: var(--muted);
-      border-top: 1px solid var(--line); padding-top: 10px; margin-top: 4px;
-    }
-    .game-card-books strong { color: var(--ink); }
-    .game-card-books ul { padding-left: 1.2em; margin: 4px 0 0; }
     .game-card-links { display: flex; flex-wrap: wrap; gap: 0 22px; margin-top: 4px; }
     .game-card-links a {
       display: inline-flex; align-items: center; gap: 4px; min-height: 44px;
@@ -522,6 +518,125 @@
     .game-card-links a:focus-visible, .game-card-title a:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
     @supports not (inset: 0) { .game-card-links a { margin-right: 22px; } }
     .wip-note { font-size: 0.95rem; font-style: italic; color: var(--muted); margin: 0 0 16px; }
+
+    /* ══════════════════════════════════════════════════════════════════
+       BLACKBOARD CARDS — every mini lesson is a chalkboard in a wooden frame
+       ══════════════════════════════════════════════════════════════════
+       Same box shape as the games pages (a side edge underneath, a lift on
+       hover, even rows), drawn as a classroom board with a chalk tray.
+       The board colour comes from a class on the card:
+         board-vocab    green board   (vocabulary lessons)
+         board-grammar  black slate   (grammar lessons)
+         board-spell    blue slate    (spelling lessons)
+       data-chalk="…" on the card writes a faint chalk word in the corner.  */
+    .game-card.board {
+      --wood: #8b5e34; --wood-dark: #5c3a1b; --wood-light: #b07b47;
+      --slate: #2f4b3a; --slate-2: #253d2f; --slate-3: #1d3226;
+      --chalk: #f7f5ec; --chalk-soft: #d9e0d5; --chalk-yellow: #f6e27a;
+      --chalk-blue: #a9dcff;
+      color: var(--chalk);
+      background:
+        radial-gradient(ellipse at 18% 12%, rgba(255,255,255,.09) 0%, rgba(255,255,255,0) 42%),
+        radial-gradient(ellipse at 85% 75%, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 48%),
+        linear-gradient(104deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.045) 38%, rgba(255,255,255,0) 50%),   /* an old eraser swipe */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),  /* chalk dust */
+        linear-gradient(160deg, var(--slate) 0%, var(--slate-2) 55%, var(--slate-3) 100%);
+      border: 11px solid var(--wood) !important;
+      border-radius: 9px;
+      padding: 22px 24px 34px;               /* room at the bottom for the chalk tray */
+      box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.45),     /* where the board meets the frame */
+        inset 0 0 22px rgba(0,0,0,.35),      /* soft shadow inside the frame */
+        0 0 0 1px var(--wood-dark),          /* outer edge of the frame */
+        0 7px 0 var(--wood-dark),            /* box side / depth */
+        0 9px 0 rgba(0,0,0,.12),
+        0 18px 26px -6px rgba(15,23,42,.32),
+        0 4px 10px rgba(15,23,42,.12);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .game-card.board.board-grammar { --slate: #33393a; --slate-2: #262b2c; --slate-3: #1b1f20; }
+    .game-card.board.board-spell   { --slate: #2f4459; --slate-2: #253749; --slate-3: #1c2b3a; }
+    .game-card.board.is-new { border-color: var(--wood) !important; }
+
+    /* the chalk tray along the bottom, with two sticks of chalk on it */
+    .game-card.board::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 13px;
+      background:
+        linear-gradient(180deg, #fbf9f1, #d8d3c4) no-repeat right 24% top 2px / 36px 6px,
+        linear-gradient(180deg, #f9e996, #d6bd55) no-repeat right 13% top 2px / 22px 6px,
+        linear-gradient(180deg, var(--wood-light) 0%, var(--wood) 45%, var(--wood-dark) 100%);
+      box-shadow: 0 -2px 5px rgba(0,0,0,.35);
+      pointer-events: none;
+    }
+    /* the faint chalk word in the corner (the accent strip of the old cards is not used) */
+    .game-card.board::before {
+      content: attr(data-chalk); opacity: 1; width: auto; top: auto; left: auto;
+      right: 20px; bottom: 22px; background: none;
+      font-family: "Patrick Hand", "Comic Sans MS", cursive; font-size: 2.1rem; line-height: 1;
+      color: rgba(247,245,236,.20); transform: rotate(-6deg); pointer-events: none;
+    }
+    .game-card.board:hover::before { opacity: 1; }
+
+    .game-card.board:hover {
+      transform: translateY(-4px) rotate(-.4deg);
+      border-color: var(--wood) !important;
+      box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.45), inset 0 0 22px rgba(0,0,0,.35),
+        0 0 0 1px var(--wood-dark),
+        0 9px 0 var(--wood-dark), 0 11px 0 rgba(0,0,0,.12),
+        0 28px 34px -8px rgba(15,23,42,.36), 0 6px 14px rgba(15,23,42,.14);
+    }
+
+    /* chalk writing */
+    .game-card.board .game-card-label { color: var(--chalk-yellow); text-shadow: 0 0 1px rgba(246,226,122,.55); }
+    .game-card.board.is-new .game-card-label { padding-right: 66px; }
+    .game-card.board .game-card-title {
+      font-family: "Patrick Hand", "Comic Sans MS", cursive; font-weight: 400;
+      font-size: 1.65rem; font-size: clamp(1.45rem, 1.2rem + .7vw, 1.8rem); line-height: 1.15;
+      color: var(--chalk); letter-spacing: .3px;
+      text-shadow: 0 0 1px rgba(255,255,255,.7), 0 0 8px rgba(255,255,255,.12);
+    }
+    .game-card.board .game-card-title a:hover { color: #ffffff; text-decoration: underline wavy rgba(246,226,122,.8) 1.5px; text-underline-offset: 5px; }
+    .game-card.board .game-card-level { color: var(--chalk); }
+    .game-card.board .game-card-level strong { color: #ffffff; }
+    .game-card.board .game-card-desc { color: var(--chalk-soft); }
+    .game-card.board .game-card-desc strong { color: #ffffff; }
+    .game-card.board em { color: #fff3c2; }
+    .game-card.board .game-card-links { padding-right: 70px; position: relative; z-index: 1; }
+    .game-card.board .game-card-links a { color: var(--chalk-blue); }
+    .game-card.board .game-card-links a:hover { color: #ffffff; }
+    .game-card.board .game-card-links a:focus-visible,
+    .game-card.board .game-card-title a:focus-visible { outline-color: var(--chalk-yellow); }
+
+    .game-grid { gap: 34px 24px; }
+
+    /* Even rows: every card shares five row tracks (label / title / level /
+       description / links) with the card beside it, so the parts line up
+       and the links sit on one line. */
+    @supports (grid-template-rows: subgrid) {
+      .game-card.board {
+        display: grid; grid-row: span 5; grid-template-rows: subgrid;
+        row-gap: 8px; align-content: start;
+      }
+      .game-card.board > .game-card-label { align-self: end; }
+      .game-card.board > .game-card-links { align-self: end; }
+    }
+
+    @media (max-width: 540px) {
+      .game-card.board { padding: 18px 18px 32px; border-width: 9px !important; }
+      .game-card.board::before { font-size: 1.8rem; }
+    }
+    @media (hover: none) {
+      .game-card.board:hover { transform: none; border-color: var(--wood) !important;
+        box-shadow:
+          inset 0 0 0 1px rgba(0,0,0,.45), inset 0 0 22px rgba(0,0,0,.35),
+          0 0 0 1px var(--wood-dark), 0 7px 0 var(--wood-dark), 0 9px 0 rgba(0,0,0,.12),
+          0 18px 26px -6px rgba(15,23,42,.32), 0 4px 10px rgba(15,23,42,.12); }
+      .game-card.board:active { transform: translateY(3px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .game-card.board:hover { transform: none; }
+    }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -566,7 +681,7 @@
 
         <p class="role-line">10-minute lessons for all levels</p>
         <p class="role-line">Vocabulary · Grammar · One idea at a time</p>
-        <p class="role-line">Level · Coursebook alignment · Practice · Game</p>
+        <p class="role-line">Level · Practice · Game</p>
       </div>
 
       <h2 id="lessons" class="games-h">Free Mini Lessons for English Vocabulary and Grammar</h2>
@@ -574,9 +689,11 @@
 
         <!-- MINI LESSON CARD — copy this whole <article> for each new lesson.
              Change: the label (type + level), title, level description, short description,
-             coursebook list, and the two links (lesson page + game page).
+             and the two links (lesson page + game page).
+             Board colour: board-vocab (green), board-grammar (black) or board-spell (blue).
+             data-chalk: a short word to write faintly in chalk in the corner.
              Then add the lesson to the ItemList at the bottom of the page. -->
-        <article class="game-card" id="get-beginners">
+        <article class="game-card board board-vocab" id="get-beginners" data-chalk="get">
           <span class="game-card-label">Vocabulary Mini Lesson · A1–A2</span>
           <h3 class="game-card-title"><a href="minilessons/get-lesson.html">A Beginner&rsquo;s Guide to &lsquo;Get&rsquo;</a></h3>
           <p class="game-card-level">
@@ -591,21 +708,13 @@
             Three meanings, a short note on phrasal verbs, a drag-and-drop exercise and three dictation sentences.
           </p>
 
-          <div class="game-card-books">
-            <strong>Coursebook alignment:</strong>
-            <ul>
-              <li>Beginner and Elementary coursebooks (A1–A2): everyday vocabulary with <em>get</em></li>
-              <li>Suitable for A1-A2 vocabulary and speaking practice</li>
-            </ul>
-          </div>
-
           <div class="game-card-links">
             <a href="minilessons/get-lesson.html">Open the lesson <span aria-hidden="true">→</span></a>
             <a href="game1/geta2.html">Play the game <span aria-hidden="true">→</span></a>
           </div>
         </article>
 
-        <article class="game-card" id="have-make-do">
+        <article class="game-card board board-vocab" id="have-make-do" data-chalk="make">
           <span class="game-card-label">Vocabulary Mini Lesson · A1–A2</span>
           <h3 class="game-card-title"><a href="minilessons/have-make-do-lesson.html">Have, Make or Do?</a></h3>
           <p class="game-card-level">
@@ -621,22 +730,13 @@
             and nine dictation sentences.
           </p>
 
-          <div class="game-card-books">
-            <strong>Coursebook alignment:</strong>
-            <ul>
-              <li>Elementary and Pre-intermediate coursebooks (A2–B1): collocations with <em>have</em>, <em>make</em> and <em>do</em></li>
-              <li>Intermediate and exam-preparation coursebooks (B1–B2): a clear collocation review</li>
-              <li>Suitable for A1-A2 vocabulary and speaking practice</li>
-            </ul>
-          </div>
-
           <div class="game-card-links">
             <a href="minilessons/have-make-do-lesson.html">Open the lesson <span aria-hidden="true">→</span></a>
             <a href="game/make-have-do-colloations.html">Play the game <span aria-hidden="true">→</span></a>
           </div>
         </article>
 
-        <article class="game-card" id="do-does-is-are">
+        <article class="game-card board board-grammar" id="do-does-is-are" data-chalk="do?">
           <span class="game-card-label">Grammar Mini Lesson · A1–A2</span>
           <h3 class="game-card-title"><a href="minilessons/do-does-is-are-lesson.html">Do, Does, Is or Are?</a></h3>
           <p class="game-card-level">
@@ -650,21 +750,13 @@
             exercise, eight questions to fix, speaking cards to interview a partner, and a printable worksheet with answers.
           </p>
 
-          <div class="game-card-books">
-            <strong>Coursebook alignment:</strong>
-            <ul>
-              <li>Beginner and Elementary coursebooks (A1–A2): questions with <em>be</em> and the present simple</li>
-              <li>Suitable for A1–A2 grammar, first lessons and getting-to-know-you speaking practice</li>
-            </ul>
-          </div>
-
           <div class="game-card-links">
             <a href="minilessons/do-does-is-are-lesson.html">Open the lesson <span aria-hidden="true">→</span></a>
             <a href="minilessons/do-does-is-are-worksheet.pdf">Print the worksheet (PDF) <span aria-hidden="true">→</span></a>
           </div>
         </article>
 
-        <article class="game-card is-new" id="halloween-past-tenses">
+        <article class="game-card board board-grammar is-new" id="halloween-past-tenses" data-chalk="boo!">
           <span class="new-badge">New</span>
           <span class="game-card-label">Grammar Mini Lesson · B1 · Halloween</span>
           <h3 class="game-card-title"><a href="minilessons/halloweenreading.html">The Girl in the Graveyard: Past Simple and Past Continuous</a></h3>
@@ -680,15 +772,6 @@
             <em>what happened next?</em> It follows the Halloween Matching Game, which has a pre-teach vocabulary list for teachers.
           </p>
 
-          <div class="game-card-books">
-            <strong>Coursebook alignment:</strong>
-            <ul>
-              <li>Cambridge <em>English Grammar in Use</em> (5th ed.): Unit 5, Past simple, and Unit 6, Past continuous</li>
-              <li>Intermediate coursebooks (B1): narrative tenses and telling stories</li>
-              <li>Suitable for B1 reading, grammar and creative writing around Halloween</li>
-            </ul>
-          </div>
-
           <div class="game-card-links">
             <a href="minilessons/halloweenreading.html">Open the lesson <span aria-hidden="true">→</span></a>
             <a href="game/halloweenmatching.html">Play the game <span aria-hidden="true">→</span></a>
@@ -696,7 +779,7 @@
           </div>
         </article>
 
-        <article class="game-card" id="relative-clauses">
+        <article class="game-card board board-grammar" id="relative-clauses" data-chalk="who?">
           <span class="game-card-label">Grammar Mini Lesson · B1–B2</span>
           <h3 class="game-card-title"><a href="minilessons/relative-clauses-lesson.html">Relative Clauses: Who, Which, That or Whose?</a></h3>
           <p class="game-card-level">
@@ -710,21 +793,13 @@
             sentence joining, speaking cards about people and things that matter to you, and a printable worksheet with answers.
           </p>
 
-          <div class="game-card-books">
-            <strong>Coursebook alignment:</strong>
-            <ul>
-              <li>Pre-intermediate and Intermediate coursebooks (B1–B2): defining relative clauses</li>
-              <li>Suitable for B1–B2 grammar, writing and IELTS / PTE preparation</li>
-            </ul>
-          </div>
-
           <div class="game-card-links">
             <a href="minilessons/relative-clauses-lesson.html">Open the lesson <span aria-hidden="true">→</span></a>
             <a href="minilessons/relative-clauses-worksheet.pdf">Print the worksheet (PDF) <span aria-hidden="true">→</span></a>
           </div>
         </article>
 
-        <article class="game-card" id="relative-clauses-where">
+        <article class="game-card board board-grammar" id="relative-clauses-where" data-chalk="where?">
           <span class="game-card-label">Grammar Mini Lesson · B1–B2</span>
           <h3 class="game-card-title"><a href="minilessons/relative-clauses-where-lesson.html">Relative Clauses with Where</a></h3>
           <p class="game-card-level">
@@ -738,21 +813,13 @@
             sentence joining, speaking cards about the places in your life, and a printable worksheet with answers.
           </p>
 
-          <div class="game-card-books">
-            <strong>Coursebook alignment:</strong>
-            <ul>
-              <li>Intermediate coursebooks (B1–B2): relative clauses with <em>where</em></li>
-              <li>Suitable for B1–B2 grammar, describing places and IELTS Speaking Part 2 practice</li>
-            </ul>
-          </div>
-
           <div class="game-card-links">
             <a href="minilessons/relative-clauses-where-lesson.html">Open the lesson <span aria-hidden="true">→</span></a>
             <a href="minilessons/relative-clauses-where-worksheet.pdf">Print the worksheet (PDF) <span aria-hidden="true">→</span></a>
           </div>
         </article>
 
-        <article class="game-card" id="relative-clauses-commas">
+        <article class="game-card board board-grammar" id="relative-clauses-commas" data-chalk=", , ,">
           <span class="game-card-label">Grammar Mini Lesson · B2</span>
           <h3 class="game-card-title"><a href="minilessons/relative-clauses-commas-lesson.html">Commas in Relative Clauses</a></h3>
           <p class="game-card-level">
@@ -766,21 +833,13 @@
             A short lesson, a commas-or-no-commas exercise, six mistakes to fix, speaking practice with pauses, and a printable worksheet with answers.
           </p>
 
-          <div class="game-card-books">
-            <strong>Coursebook alignment:</strong>
-            <ul>
-              <li>Upper-intermediate coursebooks (B2): defining and non-defining relative clauses</li>
-              <li>Suitable for B2 writing, academic English and IELTS / PTE writing preparation</li>
-            </ul>
-          </div>
-
           <div class="game-card-links">
             <a href="minilessons/relative-clauses-commas-lesson.html">Open the lesson <span aria-hidden="true">→</span></a>
             <a href="minilessons/relative-clauses-commas-worksheet.pdf">Print the worksheet (PDF) <span aria-hidden="true">→</span></a>
           </div>
         </article>
 
-        <article class="game-card" id="homophones">
+        <article class="game-card board board-spell" id="homophones" data-chalk="their">
           <span class="game-card-label">Spelling Mini Lesson · A1–B2 · K–12 &amp; ESL</span>
           <h3 class="game-card-title"><a href="minilessons/homophones-lesson.html">Homophones: There, Their or They&rsquo;re?</a></h3>
           <p class="game-card-level">
@@ -795,15 +854,6 @@
             pairs like <em>principal</em> and <em>principle</em>. Drag and drop, choose-the-word quizzes and
             Write from Dictation practice, with a PTE-style block for B2.
           </p>
-
-          <div class="game-card-books">
-            <strong>Coursebook alignment:</strong>
-            <ul>
-              <li>Primary and secondary English (K–12): spelling of common homophones</li>
-              <li>Cambridge <em>English Vocabulary in Use Upper-intermediate</em> (4th ed.): Unit 82, Homophones and homographs</li>
-              <li>Suitable for all levels as a warm-up, and for PTE Write from Dictation practice</li>
-            </ul>
-          </div>
 
           <div class="game-card-links">
             <a href="minilessons/homophones-lesson.html">Open the lesson <span aria-hidden="true">→</span></a>
@@ -821,7 +871,6 @@
         <ol class="tips-list">
           <li><strong>One idea, 10 minutes</strong> — each lesson teaches one small piece of vocabulary or grammar in about 10 minutes.</li>
           <li><strong>A clear level</strong> — every lesson says who it is for and what students can do afterwards.</li>
-          <li><strong>Coursebook alignment</strong> — each lesson says which coursebook level it fits, so it can slot into a class as a warm-up, extension or revision.</li>
           <li><strong>Practice, then play</strong> — short exercises on the lesson page, then a linked game or speaking cards to recycle the language. Grammar lessons also print as a worksheet with answers.</li>
         </ol>
       </div>
@@ -856,7 +905,7 @@
     {
       "@type": "CollectionPage",
       "name": "Free English Mini Lessons: Vocabulary and Grammar",
-      "description": "Short vocabulary and grammar lessons with a clear level, coursebook alignment, practice and a linked game.",
+      "description": "Short vocabulary and grammar lessons with a clear level, practice and a linked game.",
       "inLanguage": "en-AU",
       "isPartOf": { "@type": "WebSite", "name": "Modern English Australia" },
       "about": ["ESL mini lessons", "English vocabulary lessons", "English grammar lessons", "lessons for English teachers"]
