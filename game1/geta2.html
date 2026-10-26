@@ -323,6 +323,19 @@ button.btn{
   border-color:var(--get-edge);
 }
 .card.is-get .card-num{ color:rgba(11,42,74,.6); }
+
+/* the word "get" on a light card that has not been turned over yet */
+.card .back-word{
+  font-family:"Newsreader", Georgia, serif;
+  font-size:2em;
+  font-weight:700;
+  font-style:italic;
+  line-height:1;
+  letter-spacing:.5px;
+  color:var(--get-ink);
+  text-shadow:0 2px 0 rgba(255,255,255,.85);
+  pointer-events:none;
+}
 .card.is-meaning{
   background:var(--mean-back);
   color:var(--mean-ink);
@@ -818,13 +831,75 @@ button.btn:active, .speak-btn:active, .gapfill-btn:active, .qr-toggle:active, .h
   30%{opacity:1; -webkit-transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(calc(var(--rot) * .4))}
   100%{opacity:0; -webkit-transform:translate(calc(var(--dx) * 1.25), 75vh) scale(1) rotate(var(--rot))}
 }
+/* ===== Music button on the How to play screen ===== */
+.intro-music-row{ text-align:center; margin-top:1.1rem; }
+.btn-sound.intro-music{
+  border:1.5px solid var(--card); border-radius:4px; opacity:1;
+  padding:.55rem 1rem;
+}
+.btn-sound.intro-music[aria-pressed="false"]{ opacity:.6; }
+.intro-music-note{ display:block; margin-top:.3rem; font-size:.85rem; color:#5a5a5a; }
+
+/* ===== End-of-round celebration: spinning sun rays + a shower of candy ===== */
+.sunburst{
+  position:fixed; left:50%; top:42%;
+  width:170vmax; height:170vmax; margin:-85vmax 0 0 -85vmax;
+  z-index:9300; pointer-events:none; border-radius:50%;
+  background:repeating-conic-gradient(rgba(255,212,59,.42) 0 9deg, rgba(255,95,162,.18) 9deg 18deg, transparent 18deg 27deg);
+  -webkit-mask:radial-gradient(circle, #000 0 14%, rgba(0,0,0,.6) 30%, transparent 58%);
+          mask:radial-gradient(circle, #000 0 14%, rgba(0,0,0,.6) 30%, transparent 58%);
+  -webkit-animation:burstSpin var(--sun,7s) linear forwards;
+          animation:burstSpin var(--sun,7s) linear forwards;
+}
+@keyframes burstSpin{
+  0%{opacity:0; transform:scale(.15) rotate(0deg)}
+  10%{opacity:1; transform:scale(1) rotate(25deg)}
+  85%{opacity:1}
+  100%{opacity:0; transform:scale(1.08) rotate(220deg)}
+}
+@-webkit-keyframes burstSpin{
+  0%{opacity:0; -webkit-transform:scale(.15) rotate(0deg)}
+  10%{opacity:1; -webkit-transform:scale(1) rotate(25deg)}
+  85%{opacity:1}
+  100%{opacity:0; -webkit-transform:scale(1.08) rotate(220deg)}
+}
+.candy-rain{
+  position:fixed; top:0;right:0;bottom:0;left:0;
+  z-index:9450; pointer-events:none; overflow:hidden;
+}
+.candy-rain .candy{
+  top:-50px; opacity:1;
+  -webkit-animation:candyFall var(--dur,3s) linear var(--delay,0s) both;
+          animation:candyFall var(--dur,3s) linear var(--delay,0s) both;
+}
+@keyframes candyFall{
+  0%{transform:translate(0,0) rotate(0)}
+  100%{transform:translate(var(--dx,0), calc(100vh + 100px)) rotate(var(--rot,360deg))}
+}
+@-webkit-keyframes candyFall{
+  0%{-webkit-transform:translate(0,0) rotate(0)}
+  100%{-webkit-transform:translate(var(--dx,0), calc(100vh + 100px)) rotate(var(--rot,360deg))}
+}
+.combo.stay{
+  -webkit-animation:comboStay 3.2s cubic-bezier(.2,1.6,.4,1) forwards;
+          animation:comboStay 3.2s cubic-bezier(.2,1.6,.4,1) forwards;
+}
+@keyframes comboStay{
+  0%{transform:translate(-50%,-50%) scale(0) rotate(-8deg);opacity:1}
+  12%{transform:translate(-50%,-50%) scale(1.12) rotate(3deg)}
+  20%,30%,40%,50%,60%,70%{transform:translate(-50%,-50%) scale(1) rotate(0)}
+  25%,35%,45%,55%,65%{transform:translate(-50%,-50%) scale(1.07) rotate(0)}
+  85%{transform:translate(-50%,-55%) scale(1);opacity:1}
+  100%{transform:translate(-50%,-75%) scale(.9);opacity:0}
+}
+
 #status.win{
   font-size:1.25rem;
   color:#0072ce;
 }
 @media (prefers-reduced-motion:reduce){
   .card.pop, .card.win{ -webkit-animation:none; animation:none; box-shadow:0 0 0 3px #ff4fa3, 0 0 18px rgba(255,79,163,.6); }
-  .candy-layer{ display:none; }
+  .candy-layer, .candy-rain, .sunburst{ display:none; }
   .combo{ -webkit-animation-duration:.01s; animation-duration:.01s; }
 }
 
@@ -1097,7 +1172,7 @@ h1, h2, h3, p, li, summary{ overflow-wrap:break-word; }
     <p>This game is like the children's card game <strong>Memory</strong>.</p>
     <ol>
       <li>Turn over <strong>two cards</strong>: one <strong>light</strong> card (a <strong>get</strong> expression) and one <strong>dark</strong> card (a meaning).</li>
-      <li>A <strong>get</strong> expression and its meaning? That's a <strong>pair</strong> – the cards change colour, you hear a click, and they stay open.</li>
+      <li>A <strong>get</strong> expression and its meaning? That's a <strong>pair</strong> – the cards change colour, you hear a sweet chime, and they stay open. Get several pairs in a row and the chime climbs higher!</li>
       <li>Not a pair? The cards turn back. Remember where they are!</li>
       <li>Find all <strong>6 pairs</strong> to finish the round.</li>
     </ol>
@@ -1109,8 +1184,16 @@ h1, h2, h3, p, li, summary{ overflow-wrap:break-word; }
       <li>Press <strong>New Round</strong> for new cards. You can play again and again.</li>
     </ul>
 
+    <h3>Music</h3>
+    <p>The song plays loud here and softly during the game, then gets louder when you finish a round. Use the <strong>🎵 Music</strong> button to turn it on or off.</p>
+
     <h3>After the game</h3>
     <p>Open the <strong>Mini Lesson and Practice</strong> page (the link is under the game). Learn three meanings of <strong>get</strong>, do a drag-and-drop exercise, then listen and write three sentences.</p>
+
+    <div class="intro-music-row">
+      <button type="button" class="btn-sound intro-music" id="introMusicBtn" data-music-btn aria-pressed="true">🎵 Play the song</button>
+      <span class="intro-music-note" id="introMusicNote">Tap to hear the music. You can turn it off any time.</span>
+    </div>
 
     <div class="intro-actions">
       <button class="btn intro-start" id="introStart" type="button">Start the game →</button>
@@ -1149,6 +1232,7 @@ h1, h2, h3, p, li, summary{ overflow-wrap:break-word; }
     <button class="btn" id="howToBtn" type="button">How to Play</button>
   </div>
   <div class="controls" style="margin-top:-.6rem">
+    <button type="button" class="btn-sound" id="musicBtn" data-music-btn aria-pressed="true">🎵 Music on</button>
     <button type="button" class="btn-sound" id="soundBtn" aria-pressed="true" aria-label="Sound effects on">🔊 Sound on</button>
   </div>
 
@@ -1252,13 +1336,14 @@ h1, h2, h3, p, li, summary{ overflow-wrap:break-word; }
 <script>
 /* ══════════════════════════════════════════════════════════════════════
    CANDY SOUNDS — made in the browser, no audio files needed.
-   pop (turn a card) · click (a pair is matched) ·
-   soft boing (no match) · fanfare + fizz (round complete) ·
+   deal (cards drop in) · pop (turn a card) ·
+   click + sugar crunch + a candy chime that climbs higher with every
+   match in a row (a pair is matched) · combo run (3 and 5 in a row) ·
+   soft boing (no match) · sugar rush + fanfare + fizz (round complete) ·
    a deep voice cheers "Sweet!", "Tasty!", "Delicious!" for streaks and wins.
-   (The older sparkle chime is still here as CandySFX.match if you want it back.)
    ══════════════════════════════════════════════════════════════════════ */
 var CandySFX = (function(){
-  var ctx = null, on = true;
+  var ctx = null, on = true, bus = null;
   try{ if(localStorage.getItem("candySfx") === "off") on = false; }catch(e){}
 
   function ac(){
@@ -1269,6 +1354,17 @@ var CandySFX = (function(){
     if(ctx.state === "suspended" && ctx.resume) ctx.resume();
     return ctx;
   }
+  function out(c){
+    if(!bus){
+      try{
+        bus = c.createDynamicsCompressor();
+        bus.threshold.value = -14; bus.knee.value = 10; bus.ratio.value = 6;
+        bus.attack.value = 0.003; bus.release.value = 0.2;
+        bus.connect(c.destination);
+      }catch(e){ bus = c.destination; }
+    }
+    return bus;
+  }
   function sweep(c, t, f1, f2, dur, vol, type){
     var o = c.createOscillator(), g = c.createGain();
     o.type = type || "sine";
@@ -1277,7 +1373,7 @@ var CandySFX = (function(){
     g.gain.setValueAtTime(0.0001, t);
     g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
     g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    o.connect(g); g.connect(c.destination);
+    o.connect(g); g.connect(out(c));
     o.start(t); o.stop(t + dur + 0.05);
   }
   function bell(c, t, f, dur, vol){
@@ -1295,6 +1391,67 @@ var CandySFX = (function(){
     sweep(c, t + 0.02, base * 3, base * 4, 0.05, 0.05, "triangle");
   }
 
+  // A candy-shop marimba note: a round "plink" with a bright top
+  function plink(c, t, f, vol, len){
+    len = len || 0.35;
+    sweep(c, t, f, f, len, vol, "sine");
+    sweep(c, t, f * 4, f * 4, len * 0.22, vol * 0.25, "sine");
+    sweep(c, t, f * 1.5, f * 1.5, len * 0.5, vol * 0.18, "triangle");
+  }
+
+  // A sugary crunch: a short burst of noise, like biting a boiled sweet
+  var noise = null;
+  function crunch(c, t, vol){
+    if(!noise){
+      noise = c.createBuffer(1, Math.floor(c.sampleRate * 0.2), c.sampleRate);
+      var d = noise.getChannelData(0);
+      for(var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 2);
+    }
+    var src = c.createBufferSource(), bp = c.createBiquadFilter(), g = c.createGain();
+    src.buffer = noise;
+    bp.type = "bandpass"; bp.frequency.value = 2400; bp.Q.value = 0.9;
+    g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.14);
+    src.connect(bp); bp.connect(g); g.connect(out(c));
+    src.start(t); src.stop(t + 0.16);
+  }
+
+  // Candy notes: a bright pentatonic scale, so any run of them sounds sweet
+  var PENTA = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21, 24, 26, 28];
+  function note(step, root){ return (root || 523.25) * Math.pow(2, PENTA[Math.min(step, PENTA.length - 1)] / 12); }
+
+  // New round: candies dropping into the board, high to low
+  function deal(){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime + 0.02;
+    for(var i = 0; i < 12; i++){
+      plink(c, t + i * 0.045, note(11 - (i % 12)) * (Math.random() < 0.5 ? 1 : 0.5), 0.07, 0.18);
+    }
+  }
+
+  // Match: the click, a crunch, then a two-note chime. Every match in a
+  // row starts the chime one step higher, the way a cascade climbs.
+  function sweet(streak){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime;
+    click();
+    crunch(c, t + 0.05, 0.35);
+    var s = Math.max(0, (streak || 1) - 1) * 2;
+    plink(c, t + 0.12, note(s), 0.2, 0.45);
+    plink(c, t + 0.21, note(s + 2), 0.2, 0.6);
+    for(var i = 0; i < 4; i++){                                      // sugar sparkles
+      sweep(c, t + 0.28 + i * 0.04, 3000 + Math.random() * 2000, 3600 + Math.random() * 2000, 0.07, 0.03, "sine");
+    }
+  }
+
+  // 3 or 5 in a row: a quick run up the scale before the voice
+  function combo(level){
+    var c = ac(); if(!c) return;
+    var t = c.currentTime + 0.45;
+    var n = level > 1 ? 8 : 6;
+    for(var i = 0; i < n; i++) plink(c, t + i * 0.055, note(i + 2), 0.12, i === n - 1 ? 0.6 : 0.2);
+  }
+
   // Match: a crisp "click-clack", like two pieces locking together
   function tick(c, t, freq, vol){
     var o = c.createOscillator(), g = c.createGain();
@@ -1304,7 +1461,7 @@ var CandySFX = (function(){
     g.gain.setValueAtTime(0.0001, t);
     g.gain.exponentialRampToValueAtTime(vol, t + 0.002);
     g.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
-    o.connect(g); g.connect(c.destination);
+    o.connect(g); g.connect(out(c));
     o.start(t); o.stop(t + 0.07);
   }
   function click(){
@@ -1340,14 +1497,17 @@ var CandySFX = (function(){
     g.gain.setValueAtTime(0.0001, t);
     g.gain.exponentialRampToValueAtTime(0.22, t + 0.015);
     g.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
-    o.connect(g); g.connect(c.destination);
+    o.connect(g); g.connect(out(c));
     o.start(t); lfo.start(t); o.stop(t + 0.45); lfo.stop(t + 0.45);
   }
 
-  // Round complete: a happy fanfare, a fizzy glissando and popping candy
+  // Round complete: a sugar rush up the scale, a happy fanfare, a fizzy
+  // glissando and popping candy
   function win(){
     var c = ac(); if(!c) return;
-    var t = c.currentTime + 0.25;                                    // starts just after the last click
+    var rush = c.currentTime + 0.3;                                  // starts just after the last match
+    for(var r = 0; r < 13; r++) plink(c, rush + r * 0.045, note(r), 0.1, 0.22);
+    var t = rush + 0.7;
     [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5, 1318.5].forEach(function(f, i){
       var at = t + i * 0.1 + (i > 3 ? 0.08 : 0);
       bell(c, at, f, i === 6 ? 1.2 : 0.4, 0.14);
@@ -1376,7 +1536,7 @@ var CandySFX = (function(){
     try{ localStorage.setItem("candySfx", v ? "on" : "off"); }catch(e){}
     if(v) pop(); else if(typeof speechSynthesis !== "undefined") speechSynthesis.cancel();
   }
-  return { pop:pop, click:click, match:match, miss:miss, win:win, cheer:cheer, setOn:setOn, isOn:function(){ return on; } };
+  return { pop:pop, click:click, sweet:sweet, combo:combo, deal:deal, match:match, miss:miss, win:win, cheer:cheer, setOn:setOn, isOn:function(){ return on; } };
 })();
 
 /* ===== Sound on/off ===== */
@@ -1401,7 +1561,7 @@ function showCombo(word, big){
   el.setAttribute("aria-hidden", "true");
   el.textContent = word;
   document.body.appendChild(el);
-  setTimeout(function(){ el.remove(); }, 1500);
+  setTimeout(function(){ if(!el.classList.contains("stay")) el.remove(); }, 1500);
 }
 
 var CANDY_COLOURS = [
@@ -1436,6 +1596,213 @@ function candyBurst(){
   }
   document.body.appendChild(layer);
   setTimeout(function(){ layer.remove(); }, 4000);
+}
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   THE SONG
+   ══════════════════════════════════════════════════════════════════════
+   Put the song next to this page (same folder) and keep the name exactly
+   as it is here — web servers care about capital letters.
+
+     MUSIC_LOUD ........ volume on the How to play screen (0 to 1)
+     MUSIC_SOFT ........ volume under the game, so players can hear the
+                         card sounds and think
+     MUSIC_PUMP ........ volume when a round is finished
+     MUSIC_PUMP_SECONDS  how long it stays pumped up before going soft again
+
+   Browsers will not play music until someone taps or clicks the page, so
+   the song starts on the first tap. The 🎵 button turns it on and off, and
+   the page remembers the choice.                                         */
+var MUSIC_FILE         = "getoveryou.mp3";
+var MUSIC_LOUD         = 0.8;
+var MUSIC_SOFT         = 0.15;
+var MUSIC_PUMP         = 1.0;
+var MUSIC_PUMP_SECONDS = 9;
+
+var GameMusic = (function(){
+  var el = null, ctx = null, gain = null;
+  var on = true, mode = "intro", level = 0, fade = null, pumpTimer = null, broken = false;
+  try{ if(localStorage.getItem("getMusic") === "off") on = false; }catch(e){}
+
+  /* On a web server the volume goes through Web Audio, which iPhones and
+     iPads respect (they ignore an ordinary volume setting). Opened straight
+     from a folder on your computer, browsers block that route, so the plain
+     volume is used instead. */
+  var useGraph = /^https?:$/.test(location.protocol);
+
+  function make(){
+    if(el) return el;
+    el = new Audio(MUSIC_FILE);
+    el.loop = true;
+    el.preload = "auto";
+    el.addEventListener("error", function(){
+      broken = true;
+      console.warn('Music: "' + MUSIC_FILE + '" would not play. Is it in the same folder as this page?');
+      paint();
+    });
+    el.addEventListener("playing", paint);
+    el.addEventListener("pause", paint);
+    if(useGraph){
+      try{
+        var AC = window.AudioContext || window.webkitAudioContext;
+        ctx = new AC();
+        var src = ctx.createMediaElementSource(el);
+        gain = ctx.createGain();
+        gain.gain.value = 0;
+        src.connect(gain); gain.connect(ctx.destination);
+        ctx.onstatechange = function(){ paint(); };
+      }catch(e){ ctx = null; gain = null; }
+    }
+    return el;
+  }
+  function setVol(v){
+    level = Math.max(0, Math.min(1, v));
+    if(gain) gain.gain.value = level;
+    else if(el){ try{ el.volume = level; }catch(e){} }
+  }
+  function wanted(){
+    if(!on) return 0;
+    return mode === "intro" ? MUSIC_LOUD : mode === "pump" ? MUSIC_PUMP : MUSIC_SOFT;
+  }
+  function fadeTo(goal, secs){
+    clearInterval(fade);
+    var from = level, steps = Math.max(1, Math.round(secs * 25)), i = 0;
+    fade = setInterval(function(){
+      i++;
+      setVol(from + (goal - from) * (i / steps));
+      if(i >= steps){
+        clearInterval(fade);
+        if(!on && el) el.pause();
+      }
+    }, 40);
+  }
+  function playing(){ return !!el && !el.paused && (!ctx || ctx.state === "running"); }
+
+  /* Start (or wake) the song. Must run inside a tap or click. */
+  function start(){
+    if(!on || broken) return;
+    make();
+    if(ctx && ctx.state === "suspended" && ctx.resume) ctx.resume();
+    if(el.paused){
+      setVol(0);
+      var p = el.play();
+      if(p && p.then) p.then(function(){ fadeTo(wanted(), 1); paint(); }, function(){ paint(); });
+      else fadeTo(wanted(), 1);
+    } else {
+      fadeTo(wanted(), .6);
+    }
+  }
+  function setMode(m){
+    clearTimeout(pumpTimer);
+    mode = m;
+    if(el && !el.paused) fadeTo(wanted(), m === "pump" ? .5 : 1.4);
+  }
+  function pump(){
+    setMode("pump");
+    pumpTimer = setTimeout(function(){
+      var intro = document.getElementById("intro");
+      setMode(intro && !intro.hidden ? "intro" : "game");
+    }, MUSIC_PUMP_SECONDS * 1000);
+  }
+  function toggle(){
+    on = !on;
+    try{ localStorage.setItem("getMusic", on ? "on" : "off"); }catch(e){}
+    if(on) start(); else if(el && !el.paused) fadeTo(0, .5);
+    paint();
+  }
+
+  var btn = document.getElementById("musicBtn");
+  var introBtn = document.getElementById("introMusicBtn");
+  var introNote = document.getElementById("introMusicNote");
+  function paint(){
+    var label = on ? "🎵 Music on" : "🎵 Music off";
+    if(btn){ btn.textContent = label; btn.setAttribute("aria-pressed", on ? "true" : "false"); }
+    if(introBtn){
+      var waiting = on && !broken && !playing();
+      introBtn.textContent = waiting ? "🎵 Play the song" : label;
+      introBtn.setAttribute("aria-pressed", on ? "true" : "false");
+      if(introNote) introNote.textContent = broken ? "The song could not load." :
+        waiting ? "Tap to hear the music. You can turn it off any time." : "Turn the music on or off any time.";
+    }
+  }
+  function onBtn(){
+    if(on && !playing()) start();     // first tap on "Play the song" just starts it
+    else toggle();
+    paint();
+  }
+  if(btn) btn.addEventListener("click", onBtn);
+  if(introBtn) introBtn.addEventListener("click", onBtn);
+
+  /* Any tap or key starts the song (except the music buttons themselves,
+     which handle their own tap). */
+  ["pointerup", "touchend", "click", "keydown"].forEach(function(ev){
+    document.addEventListener(ev, function(e){
+      if(e.target && e.target.closest && e.target.closest("[data-music-btn]")) return;
+      if(on && !broken && !playing()) start();
+    }, true);
+  });
+
+  /* Loud while the How to play screen is open, soft while playing. */
+  var intro = document.getElementById("intro");
+  if(intro && window.MutationObserver){
+    new MutationObserver(function(){
+      if(mode === "pump") return;
+      setMode(intro.hidden ? "game" : "intro");
+    }).observe(intro, { attributes:true, attributeFilter:["hidden"] });
+  }
+  mode = intro && !intro.hidden ? "intro" : "game";
+
+  /* Some browsers allow music straight away for sites you visit often. */
+  if(on){
+    try{
+      make();
+      var p = el.play();
+      if(p && p.then) p.then(function(){ if(!ctx || ctx.state === "running") fadeTo(wanted(), 1); paint(); }, function(){});
+    }catch(e){}
+  }
+  paint();
+
+  return { start:start, setMode:setMode, pump:pump, toggle:toggle, isOn:function(){ return on; }, level:function(){ return level; } };
+})();
+
+/* ===== End-of-round celebration ===== */
+function celebrateBig(seconds){
+  var old;
+  old = document.querySelector(".sunburst"); if(old) old.remove();
+  old = document.querySelector(".candy-rain"); if(old) old.remove();
+
+  var sun = document.createElement("div");
+  sun.className = "sunburst";
+  sun.setAttribute("aria-hidden", "true");
+  sun.style.setProperty("--sun", seconds + "s");
+  document.body.appendChild(sun);
+
+  var rain = document.createElement("div");
+  rain.className = "candy-rain";
+  rain.setAttribute("aria-hidden", "true");
+  var count = window.innerWidth < 600 ? 45 : 85;
+  for(var i = 0; i < count; i++){
+    var el = document.createElement("span");
+    var col = CANDY_COLOURS[Math.floor(Math.random() * CANDY_COLOURS.length)];
+    el.className = "candy " + CANDY_SHAPES[Math.floor(Math.random() * CANDY_SHAPES.length)];
+    el.style.left = (Math.random() * 100) + "%";
+    el.style.setProperty("--c1", col[0]);
+    el.style.setProperty("--c2", col[1]);
+    el.style.setProperty("--dx", (Math.random() * 160 - 80) + "px");
+    el.style.setProperty("--rot", (Math.random() * 1080 - 540) + "deg");
+    el.style.setProperty("--dur", (2.4 + Math.random() * 2) + "s");
+    el.style.setProperty("--delay", (Math.random() * Math.max(1, seconds - 4)) + "s");
+    rain.appendChild(el);
+  }
+  document.body.appendChild(rain);
+  setTimeout(function(){ sun.remove(); rain.remove(); }, seconds * 1000 + 600);
+}
+function endCelebration(){
+  var old;
+  old = document.querySelector(".sunburst"); if(old) old.remove();
+  old = document.querySelector(".candy-rain"); if(old) old.remove();
 }
 </script>
 
@@ -1562,11 +1929,12 @@ function buildRound(){
     div.dataset.role = data.role;
     div.dataset.cat = data.cat;
 
-    // ── Step 2: create the number badge ──
+    // ── Step 2: the number badge, and "get" on the light cards ──
     const num = document.createElement("span");
     num.className = "card-num";
     num.textContent = idx + 1;
     div.appendChild(num);
+    showBack(div);
     // ─────────────────────────────────────
 
     gameEl.appendChild(div);
@@ -1605,14 +1973,14 @@ function onCardClick(div, data){
       matched++;
       streak++;
       scoreMatchedEl.textContent = matched;
-      CandySFX.click();
+      if(matched === PAIRS_PER_ROUND){ CandySFX.click(); } else { CandySFX.sweet(streak); }
       if(matched === PAIRS_PER_ROUND){
         statusEl.textContent = "🍬 Delicious! All matched – press New Round to play again.";
         statusEl.classList.add("win");
         celebrateWin();
       }else{
-        if(streak === 3){ showCombo("Sweet!"); CandySFX.cheer("Sweet!"); }
-        else if(streak === 5){ showCombo("Tasty!"); CandySFX.cheer("Tasty!"); }
+        if(streak === 3){ showCombo("Sweet!"); CandySFX.combo(1); setTimeout(() => CandySFX.cheer("Sweet!"), 450); }
+        else if(streak === 5){ showCombo("Tasty!"); CandySFX.combo(2); setTimeout(() => CandySFX.cheer("Tasty!"), 550); }
       }
       first = null; second = null; lock = false;
     }, 500);
@@ -1627,16 +1995,27 @@ function onCardClick(div, data){
         setTimeout(()=> c.classList.remove("shake"), 360);
         c.classList.remove("flipped");                   // back to its light or dark face-down tone
 
-        // ── Step 3: clear text but keep the number badge ──
+        // ── Step 3: clear text but keep the number badge, and put "get" back ──
         const num = c.querySelector(".card-num");
         c.textContent = "";
         if(num) c.appendChild(num);
+        showBack(c);
         c.setAttribute("aria-label", faceDownLabel(num ? num.textContent : "", c.dataset.role));
         // ──────────────────────────────────────────────────
       });
       first = null; second = null; lock = false;
     }, 700);
   }
+}
+
+// The side that faces up before a card is turned: light cards say "get"
+function showBack(div){
+  if(div.dataset.role !== "expression") return;
+  const w = document.createElement("span");
+  w.className = "back-word";
+  w.setAttribute("aria-hidden", "true");
+  w.textContent = "get";
+  div.appendChild(w);
 }
 
 function flip(div, text){
@@ -1652,9 +2031,13 @@ function celebrateWin(){
   const words = ["Delicious!", "Divine!", "Sweet!", "Tasty!"];
   const word = streak >= PAIRS_PER_ROUND ? "Divine!" : words[Math.floor(Math.random() * words.length)];
   CandySFX.win();
-  setTimeout(() => CandySFX.cheer(word), 700);
+  setTimeout(() => CandySFX.cheer(word), 1700);   // after the sugar rush and fanfare
   showCombo(word, true);
+  var combo = document.querySelector(".combo");
+  if(combo){ combo.classList.add("stay"); setTimeout(() => combo.remove(), 3300); }
   candyBurst();
+  GameMusic.pump();
+  celebrateBig(MUSIC_PUMP_SECONDS);
   gameEl.querySelectorAll(".card").forEach((c, i) => {
     c.classList.remove("pop");
     c.style.setProperty("--wd", (i * 0.05) + "s");
@@ -1662,7 +2045,10 @@ function celebrateWin(){
   });
 }
 
-newRoundBtn.addEventListener("click", buildRound);
+newRoundBtn.addEventListener("click", () => { buildRound(); CandySFX.deal(); endCelebration(); GameMusic.setMode("game"); });
+// the cards drop in with a sound when the How to Play screen is closed
+const introStartBtn = document.getElementById("introStart");
+if(introStartBtn) introStartBtn.addEventListener("click", () => CandySFX.deal());
 buildRound();
 </script>
 
