@@ -522,6 +522,144 @@
     .game-card-links a:focus-visible, .game-card-title a:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
     @supports not (inset: 0) { .game-card-links a { margin-right: 22px; } }
     .wip-note { font-size: 0.95rem; font-style: italic; color: var(--muted); margin: 0 0 16px; }
+
+    /* ===== OLD TEXTBOOK COVERS (2:3 portrait) =====
+       Each course card is a cloth-bound book: a hinged spine on the left, raised bands,
+       gold-foil double frame, and page edges peeking out on the right. */
+    .game-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 290px));
+      justify-content: start;
+      gap: 44px 36px;
+      margin: 32px 0 44px;
+      padding: 4px 10px 14px 0;
+    }
+    .game-card {
+      --cloth: #5e1a1a;                 /* oxblood */
+      --foil: #d6b366;                  /* gold foil */
+      --foil-soft: rgba(214,179,102,.65);
+      --cream: rgba(244,234,208,.86);
+      --book-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.35),
+        inset 0 0 22px rgba(0,0,0,.38),
+        4px 0 0 -1px #efe6cf,           /* page edges */
+        5px 1px 0 -1px #d6cbb0,
+        7px 2px 0 -1px #efe6cf,
+        8px 3px 0 -1px #c9bd9f,
+        12px 16px 26px -8px rgba(0,0,0,.42);
+      aspect-ratio: 2 / 3;
+      padding: 0; gap: 0;
+      border: 0; border-radius: 3px 7px 7px 3px;
+      overflow: visible;
+      color: var(--foil);
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.5) 0, rgba(0,0,0,.18) 7px, rgba(255,255,255,.10) 11px, rgba(0,0,0,.12) 15px, transparent 20px),
+        repeating-linear-gradient(45deg, rgba(255,255,255,.028) 0 2px, rgba(0,0,0,.035) 2px 4px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.02) 0 2px, rgba(0,0,0,.03) 2px 4px),
+        radial-gradient(ellipse at 30% 18%, rgba(255,255,255,.12), transparent 60%),
+        radial-gradient(ellipse at 85% 95%, rgba(0,0,0,.32), transparent 60%),
+        var(--cloth);
+      box-shadow: var(--book-shadow);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .game-grid > .game-card:nth-child(3n+2) { --cloth: #1e3a2a; }  /* bottle green */
+    .game-grid > .game-card:nth-child(3n)   { --cloth: #1b2a4a; }  /* navy */
+
+    /* raised bands across the spine */
+    .game-card::before {
+      left: 0; top: 0; bottom: 0; width: 20px; opacity: 1;
+      border-radius: 3px 0 0 3px;
+      background:
+        linear-gradient(to bottom,
+          transparent 7%, rgba(0,0,0,.4) 7%, rgba(0,0,0,.4) 7.6%, rgba(255,255,255,.14) 7.6%, rgba(255,255,255,.14) 8.4%, transparent 8.4%,
+          transparent 91.6%, rgba(0,0,0,.4) 91.6%, rgba(0,0,0,.4) 92.2%, rgba(255,255,255,.14) 92.2%, rgba(255,255,255,.14) 93%, transparent 93%);
+    }
+    /* worn corners */
+    .game-card::after {
+      content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+      border-radius: inherit; pointer-events: none;
+      background:
+        radial-gradient(circle at 100% 0, rgba(255,236,200,.20), transparent 16px),
+        radial-gradient(circle at 100% 100%, rgba(255,236,200,.16), transparent 18px),
+        radial-gradient(circle at 0 100%, rgba(255,236,200,.10), transparent 14px);
+    }
+
+    .book-frame {
+      position: relative; flex: 1;
+      margin: 14px 12px 14px 28px;
+      border: 1.5px solid var(--foil);
+      padding: 22px 12px 16px;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
+    }
+    .book-frame::before {
+      content: ""; position: absolute; top: 4px; right: 4px; bottom: 4px; left: 4px;
+      border: 1px solid var(--foil-soft); pointer-events: none;
+    }
+
+    .game-card .game-card-label,
+    .game-card .game-card-title,
+    .game-card .game-card-arrow,
+    .book-imprint {
+      color: var(--foil);
+      text-shadow: 0 1px 0 rgba(0,0,0,.55), 0 -1px 0 rgba(255,240,190,.18);  /* stamped look */
+    }
+    .game-card .game-card-label {
+      font-size: .62rem; letter-spacing: 2.4px; line-height: 1.5; opacity: .9;
+    }
+    .game-card .game-card-title {
+      font-family: var(--serif); font-weight: 800;
+      font-size: 1.2rem; font-size: clamp(1.1rem, .95rem + .55vw, 1.35rem);
+      text-transform: uppercase; letter-spacing: 1.2px; line-height: 1.18;
+    }
+    .book-orn {
+      position: relative; width: 64%; height: 10px; flex: 0 0 auto;
+      background: linear-gradient(var(--foil), var(--foil)) center / 100% 1px no-repeat;
+    }
+    .book-orn::after {
+      content: ""; position: absolute; left: 50%; top: 50%;
+      width: 8px; height: 8px; margin: -4px 0 0 -4px;
+      background: var(--cloth); border: 1px solid var(--foil);
+      transform: rotate(45deg);
+    }
+    .game-card .game-card-desc {
+      font-family: var(--serif); font-style: italic;
+      font-size: .86rem; line-height: 1.5; color: var(--cream);
+    }
+    .game-card .game-card-arrow {
+      margin-top: auto;
+      font-size: .66rem; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; white-space: nowrap;
+      border: 1px solid var(--foil); border-radius: 2px; padding: 5px 10px;
+      transition: background .2s, color .2s;
+    }
+    .book-imprint {
+      font-family: var(--serif); font-size: .66rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; opacity: .75;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px) rotate(-1deg);
+      box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.35), inset 0 0 22px rgba(0,0,0,.38),
+        4px 0 0 -1px #efe6cf, 5px 1px 0 -1px #d6cbb0, 7px 2px 0 -1px #efe6cf, 8px 3px 0 -1px #c9bd9f,
+        18px 26px 34px -10px rgba(0,0,0,.48);
+    }
+    .game-card:hover .game-card-arrow { background: var(--foil); color: var(--cloth); text-shadow: none; gap: 8px; }
+    .game-card:focus-visible { outline: 3px solid var(--link); outline-offset: 5px; }
+
+    /* one book per row on phones and small tablets: centre it */
+    @media (max-width: 700px) {
+      .game-grid { grid-template-columns: minmax(0, 300px); justify-content: center; gap: 36px; padding-right: 8px; }
+    }
+    @media (max-width: 540px) {
+      .game-card { padding: 0; }
+    }
+    @media (hover: none) {
+      .game-card:hover { transform: none; box-shadow: var(--book-shadow); }
+      .game-card:hover::before { opacity: 1; }
+      .game-card:active { transform: scale(.98); box-shadow: var(--book-shadow); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .game-card:hover { transform: none; }
+    }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -574,17 +712,25 @@
         <!-- COURSE CARD — copy one whole <a class="game-card"> block for each new course,
              then add it to the ItemList at the bottom of the page. -->
         <a class="game-card" href="All-about-phrasal-verbs_1.html">
-          <span class="game-card-label">Course · Advanced grammar</span>
-          <span class="game-card-title">All About Phrasal Verbs</span>
-          <p class="game-card-desc">Every kind of phrasal verb: why they exist and how native speakers use them.</p>
-          <span class="game-card-arrow">Start the course <span>→</span></span>
+          <span class="book-frame">
+            <span class="game-card-label">Course · Advanced grammar</span>
+            <span class="game-card-title">All About Phrasal Verbs</span>
+            <span class="book-orn" aria-hidden="true"></span>
+            <span class="game-card-desc">Every kind of phrasal verb: why they exist and how native speakers use them.</span>
+            <span class="game-card-arrow">Start the course <span>→</span></span>
+            <span class="book-imprint">Modern English Au</span>
+          </span>
         </a>
 
         <a class="game-card" href="allaboutgreekandlatininEnglish">
-          <span class="game-card-label">Course · Advanced vocabulary</span>
-          <span class="game-card-title">Greek &amp; Latin Root Words</span>
-          <p class="game-card-desc">Grow your academic vocabulary with Greek and Latin prefixes and suffixes: lessons, games and raps.</p>
-          <span class="game-card-arrow">Start the course <span>→</span></span>
+          <span class="book-frame">
+            <span class="game-card-label">Course · Advanced vocabulary</span>
+            <span class="game-card-title">Greek &amp; Latin Root Words</span>
+            <span class="book-orn" aria-hidden="true"></span>
+            <span class="game-card-desc">Grow your academic vocabulary with Greek and Latin prefixes and suffixes: lessons, games and raps.</span>
+            <span class="game-card-arrow">Start the course <span>→</span></span>
+            <span class="book-imprint">Modern English Au</span>
+          </span>
         </a>
 
       </div>
