@@ -289,11 +289,21 @@ body {
     .tool:hover { color: var(--ink); }
     .tool:focus-visible { outline: none; }
     .tool-grid > li:has(.tool:focus-visible) { outline: 3px solid var(--link); outline-offset: 6px; }
-    .tool .t-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .tool .t-kick { font-size: .7rem; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--c, var(--accent)); }
-    .tool .t-icon { font-size: 1.5rem; line-height: 1; }
-    .tool h3.t-name { font-family: var(--serif); font-size: 1.22rem; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--ink); line-height: 1.25; margin: 6px 0 4px; }
-    .tool .t-desc { font-size: .9rem; line-height: 1.55; color: var(--muted); margin: 0 0 12px; flex: 1; }
+    .tool .t-top { display: flex; align-items: center; justify-content: flex-start; gap: 10px; min-height: 24px; }
+    /* "Free" stamp, set at an angle */
+    .tool .t-free {
+      display: inline-block;
+      font-size: .74rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.4;
+      color: var(--c, var(--accent));
+      padding: 1px 9px;
+      border: 2px solid currentColor; border-radius: 3px;
+      transform: rotate(-10deg);
+      transform-origin: left center;
+    }
+    .tool h3.t-name { font-family: var(--serif); font-size: 1.22rem; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--ink); line-height: 1.25; text-align: center; margin: 8px 0 10px; }
+    .tool .t-desc { list-style: disc; padding-left: 1.15em; font-size: .9rem; line-height: 1.55; color: var(--muted); margin: 0 0 12px; flex: 1; }
+    .tool .t-desc li { margin-bottom: 4px; }
+    .tool .t-desc li::marker { color: var(--c, var(--accent)); }
     .tool .t-go { font-weight: 800; font-size: .9rem; color: var(--c, var(--link)); }
     .tool .t-go::after { content: " →"; }
     .tool.soon { background-color: rgba(255,254,247,.6); cursor: default; box-shadow: inset 0 0 7px rgba(120,100,60,.10), 0 2px 6px rgba(0,0,0,.10); }
@@ -301,9 +311,7 @@ body {
     .tool-grid > li:has(.tool.soon):hover .tool { box-shadow: inset 0 0 7px rgba(120,100,60,.10), 0 2px 6px rgba(0,0,0,.10); }
     .tool.soon .t-go { color: var(--muted); }
     .tool.soon .t-go::after { content: ""; }
-    .tool .t-kick::before { content: "Free"; margin-right: 8px; padding: 0 7px; border: 1.5px solid currentColor; border-radius: 3px; letter-spacing: 1px; }
-    .tool.new .t-kick::after { content: "New"; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: #dc2626; color: #fff; letter-spacing: 1px; }
-    .tool.testing .t-kick::after { content: "Testing"; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: #b45309; color: #fff; letter-spacing: 1px; }
+    .tool.testing .t-top::after { content: "Testing"; font-size: .7rem; font-weight: 800; text-transform: uppercase; line-height: 1.6; padding: 1px 8px; border-radius: 999px; background: #b45309; color: #fff; letter-spacing: 1px; }
     .g-games { --c: #0e7c66; }
     .g-tests { --c: #0e2861; }
     .g-course { --c: #9a3412; }
@@ -349,7 +357,6 @@ body {
     }
     .cookie-note { width: 100%; font-size: 0.78rem; color: rgba(248,250,252,.55); margin-top: 4px; }
     .cookie-note a { color: rgba(248,250,252,.75); }
-    img.emoji { display: inline-block; height: 1em; width: 1em; vertical-align: -0.12em; }
   </style>
     <!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
@@ -394,33 +401,47 @@ body {
           <ul class="tool-grid">
             <li>
               <a class="tool" href="vocabularygames.html">
-                <span class="t-top"><span class="t-kick">Vocabulary</span><span class="t-icon" aria-hidden="true"><img class="emoji" src="match-emoji.svg" alt=""></span></span>
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Vocab Games</h3>
-                <p class="t-desc">Idioms, phrasal verbs, collocations and more. Play in teams, on your own, or as solitaire.</p>
+                <ul class="t-desc">
+                  <li>Idioms, phrasal verbs, collocations and more</li>
+                  <li>Play in teams, on your own, or as solitaire</li>
+                </ul>
                 <span class="t-go">Play the games</span>
               </a>
             </li>
             <li>
-              <a class="tool new" href="grammargames.html">
-                <span class="t-top"><span class="t-kick">Grammar</span><span class="t-icon" aria-hidden="true"><img class="emoji" src="grammar-emoji.png" alt=""></span></span>
+              <a class="tool" href="grammargames.html">
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Grammar Games</h3>
-                <p class="t-desc">Start with The Great Conjugator, a team game for past verbs. State verbs, articles, prepositions and more are on the way.</p>
+                <ul class="t-desc">
+                  <li>Start with The Great Conjugator, a team game for past verbs</li>
+                  <li>State verbs, articles, prepositions and more on the way</li>
+                </ul>
                 <span class="t-go">Play the games</span>
               </a>
             </li>
             <li>
-              <a class="tool new" href="https://koalaspies-games.site/">
-                <span class="t-top"><span class="t-kick">Conversation</span><span class="t-icon" aria-hidden="true">🎤</span></span>
+              <a class="tool" href="https://koalaspies-games.site/">
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Conversation &amp; Speaking Games</h3>
-                <p class="t-desc">Speaking games for IELTS speaking practice and critical thinking, from our sister site Koalaspies.</p>
+                <ul class="t-desc">
+                  <li>Speaking games for IELTS speaking practice</li>
+                  <li>Build critical thinking</li>
+                  <li>From our sister site Koalaspies</li>
+                </ul>
                 <span class="t-go">Play speaking games</span>
               </a>
             </li>
             <li>
               <a class="tool" href="learnEnglishwithMusic.html">
-                <span class="t-top"><span class="t-kick">Music</span><span class="t-icon" aria-hidden="true">🎵</span></span>
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Learning through Music</h3>
-                <p class="t-desc">Practise, build your vocabulary and understand English in context. Music is the best teacher.</p>
+                <ul class="t-desc">
+                  <li>Practise and build your vocabulary</li>
+                  <li>Understand English in context</li>
+                  <li>Music is the best teacher</li>
+                </ul>
                 <span class="t-go">Start listening</span>
               </a>
             </li>
@@ -432,25 +453,35 @@ body {
           <ul class="tool-grid">
             <li>
               <a class="tool" href="tests-ielts-reading.html">
-                <span class="t-top"><span class="t-kick">IELTS</span><span class="t-icon" aria-hidden="true">📖</span></span>
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">IELTS Reading Tests</h3>
-                <p class="t-desc">Scored Academic and General tests, written by Cambridge-trained IELTS professionals.</p>
+                <ul class="t-desc">
+                  <li>Scored Academic and General tests</li>
+                  <li>Written by Cambridge-trained IELTS professionals</li>
+                </ul>
                 <span class="t-go">Start a test</span>
               </a>
             </li>
             <li>
               <a class="tool" href="tests-cambridge.html">
-                <span class="t-top"><span class="t-kick">Cambridge</span><span class="t-icon" aria-hidden="true">🎓</span></span>
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Cambridge CAE Tests</h3>
-                <p class="t-desc">CAE tests that will challenge and refine your English for every other exam.</p>
+                <ul class="t-desc">
+                  <li>CAE tests that challenge and refine your English</li>
+                  <li>Great preparation for every other exam</li>
+                </ul>
                 <span class="t-go">Start a test</span>
               </a>
             </li>
             <li>
               <a class="tool" href="tests-pte-respond-to-situation.html">
-                <span class="t-top"><span class="t-kick">PTE Speaking</span><span class="t-icon" aria-hidden="true">💬</span></span>
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">PTE: Respond to a Situation</h3>
-                <p class="t-desc">Realistic, scored speaking drills: apologies, complaints, requests and more. Great training for IELTS General Writing too.</p>
+                <ul class="t-desc">
+                  <li>Realistic, scored speaking drills</li>
+                  <li>Apologies, complaints, requests and more</li>
+                  <li>Great training for IELTS General Writing too</li>
+                </ul>
                 <span class="t-go">Start practising</span>
               </a>
             </li>
@@ -461,18 +492,25 @@ body {
           <div class="group-h"><h2>Lessons and courses</h2></div>
           <ul class="tool-grid">
             <li>
-              <a class="tool new" href="minilessons.html">
-                <span class="t-top"><span class="t-kick">Mini lessons</span><span class="t-icon" aria-hidden="true">⏱️</span></span>
+              <a class="tool" href="minilessons.html">
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Grammar &amp; Vocab Mini Lessons</h3>
-                <p class="t-desc">10-minute lessons for all levels, with links to games, songs and other resources.</p>
+                <ul class="t-desc">
+                  <li>10-minute lessons for all levels</li>
+                  <li>Links to games, songs and other resources</li>
+                </ul>
                 <span class="t-go">Start a lesson</span>
               </a>
             </li>
             <li>
-              <a class="tool new" href="advanced-grammar-vocab.html">
-                <span class="t-top"><span class="t-kick">Advanced courses</span><span class="t-icon" aria-hidden="true">🏛️</span></span>
+              <a class="tool" href="advanced-grammar-vocab.html">
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Advanced Grammar &amp; Vocab for IELTS 9 / PTE 90</h3>
-                <p class="t-desc">3-hour vocabulary courses for IELTS 9, PTE 90 and similar exams: All About Phrasal Verbs, and Greek and Latin Root Words.</p>
+                <ul class="t-desc">
+                  <li>3-hour vocabulary courses for IELTS 9, PTE 90 and similar exams</li>
+                  <li>All About Phrasal Verbs</li>
+                  <li>Greek and Latin Root Words</li>
+                </ul>
                 <span class="t-go">See the courses</span>
               </a>
             </li>
@@ -488,18 +526,28 @@ body {
           <p class="group-intro"><b>Free, with no sign-up.</b> Both tools work entirely in your browser, so nothing you type is sent to us or stored online. What makes each certificate and report real is what you add: <b>your logo and your signature</b>.</p>
           <ul class="tool-grid">
             <li>
-              <a class="tool new" href="teachertools/bespoke-certificate-maker.html">
-                <span class="t-top"><span class="t-kick">Certificates</span><span class="t-icon" aria-hidden="true">🏅</span></span>
+              <a class="tool" href="teachertools/bespoke-certificate-maker.html">
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Bespoke Certificate Maker</h3>
-                <p class="t-desc">Free certificates for one student or a whole class. Nothing you enter is uploaded or kept by us, and students' names are gone as soon as you close the browser. You add your school's logo and sign each certificate by hand, and that is what makes it unique and meaningful to your students.</p>
+                <ul class="t-desc">
+                  <li>Certificates for one student or a whole class</li>
+                  <li>Nothing you enter is uploaded or kept by us</li>
+                  <li>Students' names are gone as soon as you close the browser</li>
+                  <li>Add your school's logo and sign each one by hand to make it unique and meaningful</li>
+                </ul>
                 <span class="t-go">Make a certificate</span>
               </a>
             </li>
             <li>
-              <a class="tool new" href="teachertools/bespoke-report-maker.html">
-                <span class="t-top"><span class="t-kick">Reports</span><span class="t-icon" aria-hidden="true">📝</span></span>
+              <a class="tool" href="teachertools/bespoke-report-maker.html">
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Bespoke Report Maker</h3>
-                <p class="t-desc">Free Word reports with your own headings and sections. Nothing you enter is uploaded or kept by us, and your class list is gone as soon as you close the browser. Your logo and your signature are what give each report its credibility.</p>
+                <ul class="t-desc">
+                  <li>Word reports with your own headings and sections</li>
+                  <li>Nothing you enter is uploaded or kept by us</li>
+                  <li>Your class list is gone as soon as you close the browser</li>
+                  <li>Your logo and signature give each report its credibility</li>
+                </ul>
                 <span class="t-go">Make your reports</span>
               </a>
             </li>
@@ -510,18 +558,28 @@ body {
           <p class="group-intro"><b>Professional-looking worksheets, without the formatting.</b> Type or paste your own words, click to choose what to practise, and download a clean PDF with an answer key (or a caller's list for bingo), ready to print or project. <b>Free, no sign-up and no ads on your worksheets.</b> Everything stays in your browser: nothing you type is sent to us or stored online.</p>
           <ul class="tool-grid">
             <li>
-              <a class="tool new" href="teachertools/bespoke-bingo-card-maker.html">
-                <span class="t-top"><span class="t-kick">Bingo</span><span class="t-icon" aria-hidden="true">🎲</span></span>
+              <a class="tool" href="teachertools/bespoke-bingo-card-maker.html">
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Bespoke Bingo Card Maker</h3>
-                <p class="t-desc">Free printable bingo cards from your own words, or from ready-made vocabulary lists. Every student gets a different card, in 3 × 3, 4 × 4 or 5 × 5, with a caller's list for you. Nothing you type is uploaded or kept by us.</p>
+                <ul class="t-desc">
+                  <li>Printable cards from your own words or ready-made vocabulary lists</li>
+                  <li>A different card for every student</li>
+                  <li>3 × 3, 4 × 4 or 5 × 5, with a caller's list for you</li>
+                  <li>Nothing you type is uploaded or kept by us</li>
+                </ul>
                 <span class="t-go">Make bingo cards</span>
               </a>
             </li>
             <li>
-              <a class="tool new" href="teachertools/bespoke-gap-fill-maker.html">
-                <span class="t-top"><span class="t-kick">Worksheets</span><span class="t-icon" aria-hidden="true">🧾</span></span>
+              <a class="tool" href="teachertools/bespoke-gap-fill-maker.html">
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Bespoke Gap-Fill Maker</h3>
-                <p class="t-desc">Free gap-fill (cloze) worksheets from any text. Paste it, click the words to blank out, and print a worksheet with a word box and an answer key. Nothing you paste is uploaded or kept by us.</p>
+                <ul class="t-desc">
+                  <li>Gap-fill (cloze) worksheets from any text</li>
+                  <li>Paste it, then click the words to blank out</li>
+                  <li>Print with a word box and an answer key</li>
+                  <li>Nothing you paste is uploaded or kept by us</li>
+                </ul>
                 <span class="t-go">Make a worksheet</span>
               </a>
             </li>
@@ -532,18 +590,29 @@ body {
           <p class="group-intro"><b>For students on their own devices.</b> Turn a YouTube video or a song into a lesson, then share a link or QR code. Each student answers at their own pace and sees their score at the end.</p>
           <ul class="tool-grid">
             <li>
-              <a class="tool new" href="teachertools/bespoke-video-lesson-maker.html">
-                <span class="t-top"><span class="t-kick">Video lessons</span><span class="t-icon" aria-hidden="true">🎬</span></span>
+              <a class="tool" href="teachertools/bespoke-video-lesson-maker.html">
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Bespoke Video Lesson Maker</h3>
-                <p class="t-desc">Add questions that pause any YouTube video: multiple choice, gap-fill, true or false, matching, put in order and short answer. Share a link or QR code with your class. No sign-up, and nothing is stored online.</p>
+                <ul class="t-desc">
+                  <li>Add questions that pause any YouTube video</li>
+                  <li>Multiple choice, gap-fill, true or false, matching, put in order and short answer</li>
+                  <li>Share a link or QR code with your class</li>
+                  <li>No sign-up, and nothing is stored online</li>
+                </ul>
                 <span class="t-go">Make a video lesson</span>
               </a>
             </li>
             <li>
               <a class="tool testing" href="teachertools/bespoke-song-lesson-maker.html">
-                <span class="t-top"><span class="t-kick">Song lessons</span><span class="t-icon" aria-hidden="true">🎶</span></span>
+                <span class="t-top"><span class="t-free">Free</span></span>
                 <h3 class="t-name">Bespoke Song Lesson Maker</h3>
-                <p class="t-desc">Turn a song on YouTube into an interactive lesson. Paste the lyrics, click the words to gap, add questions that pause the song, and share a link or QR code. Print a worksheet and a lyric sheet too. Now in testing: tell us what you think.</p>
+                <ul class="t-desc">
+                  <li>Turn a song on YouTube into an interactive lesson</li>
+                  <li>Paste the lyrics and click the words to gap</li>
+                  <li>Add questions that pause the song</li>
+                  <li>Share a link or QR code, or print a worksheet and lyric sheet</li>
+                  <li>Now in testing: tell us what you think</li>
+                </ul>
                 <span class="t-go">Make a song lesson</span>
               </a>
             </li>
