@@ -13,7 +13,7 @@
 
   <!-- ===== SEO ===== -->
   <title>Free Online English Grammar Games for Class | Modern English Australia</title>
-  <meta name="description" content="Free online grammar games for English classes, written by a native speaker: The Great Conjugator, a team game for elementary past verbs, and its History Edition for the past simple, present perfect and past perfect. Project them or play on a phone." />
+  <meta name="description" content="Free online grammar games for English classes, written by a native speaker: The Great Conjugator for elementary past verbs, its History Edition for the past simple, present perfect and past perfect, and its Advanced Future edition for the future continuous and future perfect. Project them or play on a phone." />
   <meta name="author" content="Modern English Australia" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 
@@ -26,10 +26,10 @@
   <meta property="og:site_name" content="Modern English Australia" />
   <meta property="og:locale" content="en_AU" />
   <meta property="og:title" content="Free Online English Grammar Games for Class" />
-  <meta property="og:description" content="Free online grammar games for English classes, written by a native speaker: The Great Conjugator, a team game for elementary past verbs, and its History Edition for the past simple, present perfect and past perfect. Project them or play on a phone." />
+  <meta property="og:description" content="Free online grammar games for English classes, written by a native speaker: The Great Conjugator for elementary past verbs, its History Edition for the past simple, present perfect and past perfect, and its Advanced Future edition for the future continuous and future perfect. Project them or play on a phone." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Online English Grammar Games for Class" />
-  <meta name="twitter:description" content="Free online grammar games for English classes, written by a native speaker: The Great Conjugator, a team game for elementary past verbs, and its History Edition for the past simple, present perfect and past perfect. Project them or play on a phone." />
+  <meta name="twitter:description" content="Free online grammar games for English classes, written by a native speaker: The Great Conjugator for elementary past verbs, its History Edition for the past simple, present perfect and past perfect, and its Advanced Future edition for the future continuous and future perfect. Project them or play on a phone." />
   <!-- TODO: add a 1200x630 image and uncomment:
   <meta property="og:image" content="https://modernenglish.au/og-vocab-games.jpg" />
   <meta name="twitter:image" content="https://modernenglish.au/og-vocab-games.jpg" /> -->
@@ -578,6 +578,11 @@
     /* Relative clauses: joining ideas */
     .theme-relative { --t-bg: #eefaf3; --t-border: #a8d8bd; --t-accent: #1f6e46; --t-ink: #173b2a; --t-muted: #44574c; --t-font: "Newsreader", var(--serif); --t-motif: "🔗"; }
 
+    /* Grammar Auction: an auction house with gilt frames */
+    .theme-auction { --t-bg: linear-gradient(90deg, #8a5a1c, #f2d58a 30%, #c8922f 55%, #f2d58a 80%, #8a5a1c) top / 100% 8px no-repeat, #fbf3e2;
+      --t-border: #d8c6a4; --t-accent: #a8412b; --t-ink: #2b2118; --t-muted: #5a4a38; --t-font: "Special Elite", var(--serif); --t-motif: "🔨"; }
+    .theme-auction .game-card-title { font-weight: 400; }
+
     /* More grammar games */
     .theme-more { --t-bg: #fbf5ff; --t-border: #dcc6ef; --t-accent: #6f3596; --t-ink: #33204a; --t-muted: #574a66; --t-motif: "✨"; }
 
@@ -728,10 +733,17 @@
            To add a game: copy an <article class="game-card"> block below, change the links, label, title
            and description, give it a theme class (theme-… — the themes are in the <style> block, under
            "one theme per grammar game"), and add it to the ItemList at the bottom of the page.
-           Move "is-new" and the new-badge line to whichever game is newest. -->
+           Keep the cards in order of difficulty (A2 at the top, C1 at the bottom). -->
       <h2 id="games" class="games-h">Free Online Grammar Games for English Class</h2>
       <div class="game-grid">
+        <!-- Cards run in order of difficulty: elementary at the top, advanced at the bottom.
+             Live games are <article> blocks; COMING SOON cards are <div class="game-card is-soon …"> blocks.
+             To make a coming-soon card live: change it to an <article class="game-card theme-…"> block like
+             The Great Conjugator below (copy one and change its text and links), delete the soon-badge line,
+             and add it to the ItemList at the bottom of the page.
+             To flag the newest game, add "is-new" to its class and <span class="new-badge">New</span> as its first line. -->
 
+        <!-- A2 · Elementary -->
         <article class="game-card theme-post">
           <span class="game-card-label">Team Game · A2</span>
           <h3 class="game-card-title"><a href="grammargames/the-great-conjugator-letters.html">The Great Conjugator</a></h3>
@@ -741,8 +753,34 @@
           </div>
         </article>
 
-        <article class="game-card theme-history is-new">
-          <span class="new-badge">New</span>
+        <div class="game-card is-soon theme-state" aria-label="To Be or Being, state verbs, elementary A2 level, coming soon">
+          <span class="soon-badge">Coming soon</span>
+          <span class="game-card-label">State Verbs · A2</span>
+          <span class="game-card-title">To Be or Being?</span>
+          <p class="game-card-desc">Elementary state verbs. Some verbs describe a state, not an action, and don&rsquo;t usually take <em>-ing</em>: <em>I know</em>, not <em>I am knowing</em>.</p>
+          <span class="game-card-arrow">Coming soon</span>
+        </div>
+
+        <!-- B1–B2 · Intermediate -->
+        <div class="game-card is-soon theme-relative" aria-label="Relative Clauses, B1 to B2 level, coming soon">
+          <span class="soon-badge">Coming soon</span>
+          <span class="game-card-label">Sentence Building · B1–B2</span>
+          <span class="game-card-title">Relative Clauses</span>
+          <p class="game-card-desc">Join two ideas with <em>who</em>, <em>which</em>, <em>that</em>, <em>whose</em> and <em>where</em>, and learn when the clause needs commas.</p>
+          <span class="game-card-arrow">Coming soon</span>
+        </div>
+
+        <!-- All levels -->
+        <div class="game-card is-soon theme-auction" aria-label="Grammar Auction: Homophones, all levels, coming soon">
+          <span class="soon-badge">Coming soon</span>
+          <span class="game-card-label">Team Game · All levels</span>
+          <span class="game-card-title">Grammar Auction: Homophones</span>
+          <p class="game-card-desc">Every sentence is for sale, but some are forgeries. Teams bid on the sentences they think are correct, then the reveal shows who bought a fake: <em>their</em> or <em>there</em>, <em>it&rsquo;s</em> or <em>its</em>, <em>principal</em> or <em>principle</em>. Beginner, intermediate and advanced levels.</p>
+          <span class="game-card-arrow">Coming soon</span>
+        </div>
+
+        <!-- B2 · Upper intermediate -->
+        <article class="game-card theme-history">
           <span class="game-card-label">Team Game · B2</span>
           <h3 class="game-card-title"><a href="grammargames/great-conjugator-history.html">The Great Conjugator: History Edition</a></h3>
           <p class="game-card-desc">
@@ -756,27 +794,22 @@
           </div>
         </article>
 
-        <!-- COMING SOON cards.
-             To make one live: change <div class="game-card is-soon theme-…" ...> to an <article class="game-card theme-…"> block
-             like the two above (copy one and change its text and links), delete the soon-badge line,
-             and add it to the ItemList at the bottom of the page. -->
+        <!-- B2–C1 · Upper intermediate to advanced -->
+        <article class="game-card theme-future">
+          <span class="game-card-label">Team Game · B2–C1</span>
+          <h3 class="game-card-title"><a href="grammargames/the-great-conjugator-future.html">The Great Conjugator: Advanced Future</a></h3>
+          <p class="game-card-desc">
+            Future continuous, future perfect or future perfect continuous? Teams choose a floating science-fiction film
+            and complete the transmission to Captain Nova:
+            <em>In WALL-E, in 2805 humans <strong>will be living</strong> on a giant spaceship. By then, a little robot
+            <strong>will have cleaned</strong> the rubbish from whole cities.</em>
+          </p>
+          <div class="game-card-links">
+            <a href="grammargames/the-great-conjugator-future.html">Play <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
 
-        <div class="game-card is-soon theme-state" aria-label="To Be or Being, state verbs, elementary A2 level, coming soon">
-          <span class="soon-badge">Coming soon</span>
-          <span class="game-card-label">State Verbs · A2</span>
-          <span class="game-card-title">To Be or Being?</span>
-          <p class="game-card-desc">Elementary state verbs. Some verbs describe a state, not an action, and don&rsquo;t usually take <em>-ing</em>: <em>I know</em>, not <em>I am knowing</em>.</p>
-          <span class="game-card-arrow">Coming soon</span>
-        </div>
-
-        <div class="game-card is-soon theme-future" aria-label="The Great Conjugator Future Tenses, intermediate B1 level, coming soon">
-          <span class="soon-badge">Coming soon</span>
-          <span class="game-card-label">Team Game · B1</span>
-          <span class="game-card-title">The Great Conjugator: Future Tenses</span>
-          <p class="game-card-desc">The same team game for the future: <em>will</em>, <em>be going to</em>, the present continuous for plans, and the future continuous and future perfect.</p>
-          <span class="game-card-arrow">Coming soon</span>
-        </div>
-
+        <!-- C1 · Advanced -->
         <div class="game-card is-soon theme-grade" aria-label="Gradable Adjectives, advanced C1 level, for IELTS and PTE, coming soon">
           <span class="soon-badge">Coming soon</span>
           <span class="game-card-label">Adjectives · C1 · IELTS &amp; PTE</span>
@@ -785,14 +818,7 @@
           <span class="game-card-arrow">Coming soon</span>
         </div>
 
-        <div class="game-card is-soon theme-relative" aria-label="Relative Clauses, B1 to B2 level, coming soon">
-          <span class="soon-badge">Coming soon</span>
-          <span class="game-card-label">Sentence Building · B1–B2</span>
-          <span class="game-card-title">Relative Clauses</span>
-          <p class="game-card-desc">Join two ideas with <em>who</em>, <em>which</em>, <em>that</em>, <em>whose</em> and <em>where</em>, and learn when the clause needs commas.</p>
-          <span class="game-card-arrow">Coming soon</span>
-        </div>
-
+        <!-- All levels -->
         <div class="game-card is-soon theme-more" aria-label="More grammar games, coming soon">
           <span class="soon-badge">Coming soon</span>
           <span class="game-card-label">All levels</span>
@@ -947,10 +973,10 @@
     {
       "@type": "CollectionPage",
       "name": "Free Online English Grammar Games for Class",
-      "description": "Free online grammar games for English classes, including The Great Conjugator for elementary past verbs and its History Edition for intermediate narrative tenses, written by a native speaker.",
+      "description": "Free online grammar games for English classes, including The Great Conjugator for elementary past verbs, its History Edition for narrative tenses and its Advanced Future edition for future forms, written by a native speaker.",
       "inLanguage": "en-AU",
       "isPartOf": { "@type": "WebSite", "name": "Modern English Australia" },
-      "about": ["ESL grammar games", "past tense games", "irregular verb games", "present perfect and past perfect games", "classroom games for English teachers"],
+      "about": ["ESL grammar games", "past tense games", "irregular verb games", "present perfect and past perfect games", "future tense games", "classroom games for English teachers"],
       "hasPart": { "@type": "Blog", "@id": "https://modernenglish.au/blog.html", "name": "Modern English Australia Blog" }
     },
     {
@@ -958,7 +984,8 @@
       "name": "Grammar games",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "The Great Conjugator: elementary past verbs (A2)", "url": "https://modernenglish.au/grammargames/the-great-conjugator-letters.html" },
-        { "@type": "ListItem", "position": 2, "name": "The Great Conjugator: History Edition, past simple, present perfect and past perfect (B2)", "url": "https://modernenglish.au/grammargames/great-conjugator-history.html" }
+        { "@type": "ListItem", "position": 2, "name": "The Great Conjugator: History Edition, past simple, present perfect and past perfect (B2)", "url": "https://modernenglish.au/grammargames/great-conjugator-history.html" },
+        { "@type": "ListItem", "position": 3, "name": "The Great Conjugator: Advanced Future, future continuous, future perfect and future perfect continuous (B2–C1)", "url": "https://modernenglish.au/grammargames/the-great-conjugator-future.html" }
       ]
     }
   ]
