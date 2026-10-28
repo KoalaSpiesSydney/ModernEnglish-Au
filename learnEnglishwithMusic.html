@@ -25,8 +25,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- loads without holding the page up: where Google is blocked (mainland
        China, some school networks) the page shows at once in the phone's own fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet"></noscript>
 
   <style>
     :root {
@@ -344,77 +344,339 @@
     }
     .grid-label + .av-grid { margin-bottom: 44px; }
 
-    /* Card list — one full-width row per song */
+    /* ===========================================================
+       SONG CARDS — retro EP record sleeves
+       Each card: a square cover on the left, a vinyl record sliding
+       out of it, and the details printed like liner notes on the
+       back of the sleeve. Every cover has its own design: the class
+       on .ep-sleeve (ep-a … ep-g) picks it; .ep-blank is the plain
+       cardboard sleeve for songs that aren't ready yet.
+       =========================================================== */
     .av-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 18px;
+      gap: 26px;
     }
     .av-card {
-      display: block;
+      --cov: 200px;                 /* cover size */
+      --peek: 54px;                 /* how far the record sticks out */
+      display: grid;
+      grid-template-columns: calc(var(--cov) + var(--peek)) minmax(0, 1fr);
+      align-items: center;
+      column-gap: 26px;
       position: relative;
-      background: var(--surface);
-      border-radius: 10px;
-      border-top: 4px solid var(--highlight);
-      padding: 20px 22px 18px;
+      padding: 18px 24px 18px 18px;
       text-decoration: none;
-      color: var(--ink);
-      box-shadow: 0 4px 12px rgba(15,23,42,0.08);
-      transition: transform .18s ease, box-shadow .18s ease;
+      color: #2b2118;
+      /* back of the sleeve: cream card stock, a little grain */
+      background-color: #fbf5e6;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      border: 1px solid rgba(90,60,30,.18);
+      border-radius: 4px;
+      box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 6px 16px rgba(60,40,20,.10);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
     .av-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(15,23,42,0.16);
+      transform: translateY(-3px) rotate(-.25deg);
+      box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 14px 28px rgba(60,40,20,.18);
     }
-    /* only the card's own title is a block — a <strong> inside the
-       description stays inline where it belongs */
-    .av-card > strong {
+    .av-card:focus-visible { outline: 3px solid #d4a017; outline-offset: 4px; }
+
+    /* ---- the sleeve, the cover and the record ---- */
+    .ep-sleeve {
+      position: relative;
+      display: block;
+      width: calc(var(--cov) + var(--peek));
+      height: var(--cov);
+    }
+    .ep-disc {
+      position: absolute;
+      top: 4%;
+      left: calc(var(--peek) + var(--cov) * .06);
+      width: calc(var(--cov) * .92);
+      height: calc(var(--cov) * .92);
+      border-radius: 50%;
+      background:
+        conic-gradient(from 20deg, transparent 0 8%, rgba(255,255,255,.13) 12%, transparent 17% 50%, rgba(255,255,255,.10) 61%, transparent 66%),
+        radial-gradient(circle, #0b0b0b 0 2.4%, var(--label, #fde047) 2.6% 31%, rgba(0,0,0,.35) 31.5%, transparent 32.5%),
+        repeating-radial-gradient(circle, #141414 0 1.5px, #232323 1.5px 3px);
+      box-shadow: 0 3px 10px rgba(0,0,0,.35);
+      transition: transform .5s cubic-bezier(.2,.8,.2,1);
+    }
+    .av-card:hover .ep-disc { transform: translateX(10px) rotate(70deg); }
+
+    .ep-art {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      width: var(--cov);
+      height: var(--cov);
+      box-sizing: border-box;
+      padding: calc(var(--cov) * .07);
+      overflow: hidden;
+      border-radius: 3px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.25), 4px 6px 14px rgba(40,25,10,.28);
+      font-family: "Archivo Black", "Arial Black", var(--sans);
+      color: #f6ecd6;
+      line-height: .95;
+      text-transform: uppercase;
+    }
+    /* a worn, printed-on-card look: grain and a faint ring where the record has rubbed */
+    .ep-art::after {
+      content: "";
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 54% 52%, transparent 0 41%, rgba(255,255,255,.10) 42%, transparent 44.5%),
+        linear-gradient(135deg, rgba(255,255,255,.10), transparent 40%, rgba(0,0,0,.10)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .35 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .ep-top {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: calc(var(--cov) * .045);
+      letter-spacing: .14em;
+      opacity: .85;
+    }
+    .ep-title {
+      display: block;
+      margin-top: auto;
+      font-size: calc(var(--cov) * .125 * var(--ts, 1));
+      letter-spacing: -.01em;
+      overflow-wrap: normal;
+    }
+    .ep-sub {
+      display: block;
+      margin-top: calc(var(--cov) * .035);
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: calc(var(--cov) * .052);
+      letter-spacing: .1em;
+      line-height: 1.2;
+    }
+    .ep-level {
+      position: absolute;
+      z-index: 2;
+      top: calc(var(--cov) * .17);
+      right: calc(var(--cov) * .06);
+      width: calc(var(--cov) * .2);
+      height: calc(var(--cov) * .2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: calc(var(--cov) * .046);
+      letter-spacing: 0;
+      background: #f6ecd6;
+      color: #2b2118;
+      transform: rotate(12deg);
+      box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    }
+
+    /* ---- the seven covers ---- */
+    /* A · I Think About You: reggae sun over red, gold and green */
+    .ep-a { --label: #f2c230; }
+    .ep-a .ep-art {
+      background:
+        radial-gradient(circle at 72% 64%, #f2c230 0 15%, transparent 15.5%),
+        linear-gradient(#1d3a2a 0 74%, #e0a91c 74% 82%, #b8322a 82% 90%, #23703f 90%);
+    }
+    .ep-a .ep-title { margin-top: calc(var(--cov) * .1); }
+    .ep-a .ep-sub { margin-bottom: auto; }
+    .ep-a .ep-level { top: auto; bottom: calc(var(--cov) * .3); right: auto; left: calc(var(--cov) * .08); }
+
+    /* B · Get Up, Stand Up: bold diagonal bands on black */
+    .ep-b { --label: #c0392b; }
+    .ep-b .ep-art {
+      background: linear-gradient(135deg, #171512 0 30%, #c0392b 30% 41%, #e2b33c 41% 52%, #2e7d4f 52% 63%, #171512 63%);
+    }
+    .ep-b .ep-title, .ep-b .ep-sub { text-shadow: 2px 2px 0 #171512; }
+
+    /* C · It Is Written: gold rings rising on deep green */
+    .ep-c { --label: #c9a227; }
+    .ep-c .ep-art {
+      color: #e9c95a;
+      background:
+        radial-gradient(circle at 50% -20%, transparent 0 82%, #14352a 82.5%),
+        repeating-radial-gradient(circle at 50% -20%, rgba(201,162,39,.7) 0 3px, transparent 3px 14px),
+        #14352a;
+    }
+
+    /* D · Dance, Think, Flirt, Remember: Latin-pop sunburst */
+    .ep-d { --label: #e5487a; }
+    .ep-d .ep-art {
+      color: #3a1030;
+      background:
+        linear-gradient(#f6e7cc 0 0) top / 100% 46% no-repeat,
+        repeating-conic-gradient(from -90deg at 50% 100%, #f08a24 0 9deg, #e5487a 9deg 18deg);
+    }
+    .ep-d .ep-title { margin-top: 0; order: -1; padding-top: calc(var(--cov) * .02); }
+    .ep-d .ep-top { order: 2; margin-top: auto; color: #fff3df; }
+    .ep-d .ep-sub { order: -1; margin: calc(var(--cov) * .03) 0 0; }
+    .ep-d .ep-level { top: auto; bottom: calc(var(--cov) * .2); }
+
+    /* E · Sydney from a 747: seventies rainbow bands */
+    .ep-e { --label: #c4541c; }
+    .ep-e .ep-art {
+      color: #5a2a12;
+      background:
+        radial-gradient(circle at 0 100%, #6e3417 0 34%, #c4541c 34% 45%, #e39b2a 45% 56%, #f2c94c 56% 67%, transparent 67.5%),
+        #f4e7cc;
+    }
+    .ep-e .ep-title { margin-top: calc(var(--cov) * .05); text-align: right; }
+    .ep-e .ep-sub { text-align: right; }
+    .ep-e .ep-level { top: auto; bottom: calc(var(--cov) * .07); background: #5a2a12; color: #f4e7cc; }
+
+    /* F · Waltzing Matilda: old sepia print with a framed border */
+    .ep-f { --label: #6b8e7f; }
+    .ep-f .ep-art {
+      color: #4a3420;
+      font-family: var(--serif);
+      font-weight: 800;
+      text-transform: none;
+      line-height: 1;
+      background:
+        radial-gradient(circle at 50% 120%, #6b8e7f 0 38%, transparent 38.5%),
+        #eadcbd;
+      box-shadow: inset 0 0 0 8px #eadcbd, inset 0 0 0 10px #4a3420,
+                  0 1px 2px rgba(0,0,0,.25), 4px 6px 14px rgba(40,25,10,.28);
+    }
+    .ep-f .ep-title { margin-top: calc(var(--cov) * .1); font-style: italic; }
+    .ep-f .ep-top, .ep-f .ep-sub { text-transform: uppercase; }
+    .ep-f .ep-level { background: #4a3420; color: #eadcbd; }
+
+    /* G · If I Were a Boy: pop halftone */
+    .ep-g { --label: #ff5fa2; }
+    .ep-g .ep-art {
+      background:
+        radial-gradient(circle, #ff5fa2 0 26%, transparent 29%) 0 0 / 13px 13px,
+        #3b1f6b;
+    }
+    .ep-g .ep-title { text-shadow: 3px 3px 0 #3b1f6b; }
+
+    /* Coming soon: a plain cardboard sleeve with a die-cut hole */
+    .ep-blank { --label: #e8e2d4; }
+    .ep-blank .ep-art {
+      align-items: center;
+      justify-content: center;
+      color: rgba(60,40,20,.55);
+      background:
+        radial-gradient(circle at 50% 50%, #e8e2d4 0 8%, #161616 8.5% 19%, transparent 19.5% 30%, rgba(60,40,20,.25) 30.5% 31.5%, transparent 32%),
+        radial-gradient(circle at 50% 50%, transparent 0 19%, #c8a77a 19.5%);
+    }
+    .ep-blank .ep-art::before {      /* the hole is cut through: the record shows behind */
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 38%; height: 38%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, #0b0b0b 0 6%, #e8e2d4 6.5% 42%, transparent 43%),
+        repeating-radial-gradient(circle, #141414 0 1.5px, #232323 1.5px 3px);
+    }
+    .ep-stamp {
+      position: absolute;
+      bottom: calc(var(--cov) * .08);
+      left: 50%;
+      transform: translateX(-50%) rotate(-6deg);
+      padding: 2px 8px;
+      border: 2px solid rgba(150,40,30,.55);
+      border-radius: 3px;
+      color: rgba(150,40,30,.7);
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: calc(var(--cov) * .055);
+      letter-spacing: .16em;
+      white-space: nowrap;
+    }
+
+    /* ---- the liner notes ---- */
+    .ep-notes { display: block; min-width: 0; }
+    .ep-notes > strong {
       display: block;
       font-family: var(--serif);
-      font-size: 1.12rem;
+      font-size: 1.15rem;
       line-height: 1.3;
       margin-bottom: 6px;
     }
     .av-meta {
-      font-size: 0.85rem;
-      color: var(--muted);
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #8a5a2b;
       margin-bottom: 8px;
     }
     .av-desc {
-      font-size: 0.95rem;
+      font-size: .95rem;
       line-height: 1.55;
     }
-
     .av-langs {
       margin-top: 12px;
       padding-top: 10px;
-      border-top: 1px solid var(--line);
+      border-top: 1px dashed rgba(90,60,30,.3);
       font-size: .82rem;
-      color: var(--muted);
+      color: #5c4a38;
       letter-spacing: .04em;
+    }
+    .av-langs::before {             /* the track list, like the back of a record */
+      content: "Side A";
+      display: inline-block;
+      margin-right: 10px;
+      padding: 0 6px;
+      border-radius: 2px;
+      background: #2b2118;
+      color: #fbf5e6;
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      vertical-align: 1px;
     }
 
     /* not built yet: quieter, and not clickable */
     .av-card.soon {
-      background: rgba(255,255,255,.55);
+      background-color: rgba(251,245,230,.55);
       box-shadow: none;
-      border: 1px dashed var(--line);
-      border-top: 4px solid rgba(15,23,42,.14);
+      border: 1px dashed rgba(90,60,30,.25);
       cursor: default;
     }
     .av-card.soon:hover { transform: none; box-shadow: none; }
-    .av-card.soon > strong { color: var(--muted); }
+    .av-card.soon .ep-notes > strong { color: #7a6a58; }
     .soon-tag {
       display: inline-block;
       font-size: .66rem;
       font-weight: 700;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: var(--muted);
-      border: 1px solid var(--line);
+      color: #7a6a58;
+      border: 1px solid rgba(90,60,30,.25);
       border-radius: 3px;
       padding: 1px 7px;
       margin-bottom: 10px;
+    }
+
+    /* phones: the cover sits on top, the notes underneath */
+    @media (max-width: 620px) {
+      .av-card {
+        --cov: 230px;
+        --cov: min(62vw, 240px);
+        --peek: 40px;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        row-gap: 18px;
+        padding: 18px 18px 16px;
+      }
+      .ep-notes { justify-self: stretch; }
     }
 
     /* Footer navigation */
@@ -542,6 +804,8 @@
       .shop-promo { transition: none; }
       .shop-promo:hover { transform: none; }
       body, header::before, .brand-top { animation: none; }
+      .av-card, .ep-disc { transition: none; }
+      .av-card:hover, .av-card:hover .ep-disc { transform: none; }
       .brand-top { -webkit-text-fill-color: var(--header-ink); }
     }
 
@@ -560,7 +824,7 @@
     img { max-width: 100%; }
     h1, h2 { line-height: 1.2; }
     h1 { margin-top: 0; }
-    .av-card > strong, .brand-top { overflow-wrap: break-word; }
+    .ep-notes > strong, .brand-top { overflow-wrap: break-word; }
     .shop-img { height: auto; }
 
     /* older browsers (iPhones before iOS 14.5, older Android, UC, QQ and
@@ -592,7 +856,7 @@
     /* very small phones (iPhone SE 1st gen, small Android) */
     @media (max-width: 360px) {
       .brand-top { font-size: 1.7rem; letter-spacing: 1px; }
-      .av-card { padding: 16px 16px 14px; }
+      .av-card { padding: 16px 14px 14px; }
       main.wrap { padding-block: 32px 40px; }
     }
 
@@ -650,45 +914,89 @@ Original songs & classic songs turned into listening activities and grammar less
 
     <!-- ─── 3. prepositions ─── -->
     <a class="av-card" href="songs/Ithinkaboutyou.html">
-      <strong>I think about you — A Preposition Song</strong>
-      <div class="av-meta">Theme: Reggae · Level: A1–A2 · Elementary</div>
-      <div class="av-desc">
-        How to use: a slow reggae beat with one preposition to the bar, so beginners have time to hear
-        it and write it. Listen and fill in the missing preposition — place first, then time.
-      </div>
-      <div class="av-langs">Place · Time · Movement</div>
+      <span class="ep-sleeve ep-a" aria-hidden="true">
+        <span class="ep-disc"></span>
+        <span class="ep-art">
+          <span class="ep-top"><span>MEA 001</span><span>EP · 33⅓</span></span>
+          <span class="ep-title" style="--ts:.72">Prepositions</span>
+          <span class="ep-sub">I Think About You</span>
+          <span class="ep-level">A1–A2</span>
+        </span>
+      </span>
+      <span class="ep-notes">
+        <strong>I think about you — A Preposition Song</strong>
+        <div class="av-meta">Theme: Reggae · Level: A1–A2 · Elementary</div>
+        <div class="av-desc">
+          How to use: a slow reggae beat with one preposition to the bar, so beginners have time to hear
+          it and write it. Listen and fill in the missing preposition — place first, then time.
+        </div>
+        <div class="av-langs">Place · Time · Movement</div>
+      </span>
     </a>
 
     <!-- ─── 3. prepositions ─── -->
     <a class="av-card" href="songs/getupstandup.html">
-      <strong>Get Up, Stand Up by Bob Marley — Phrasal Verbs</strong>
-      <div class="av-meta">Theme: Reggae · Level: A1–A2 · Elementary</div>
-      <div class="av-desc">
-        How to use: the original song and music video with pauses to check comprehension and discuss meaning. Follow up lesson on phrasal verbs and 'ism' words.
-      </div>
-      <div class="av-langs">Phrasal verbs · 'ism' words· Discussion  </div>
+      <span class="ep-sleeve ep-b" aria-hidden="true">
+        <span class="ep-disc"></span>
+        <span class="ep-art">
+          <span class="ep-top"><span>MEA 002</span><span>EP · 33⅓</span></span>
+          <span class="ep-title" style="--ts:1.05">Get Up!<br>Stand Up!</span>
+          <span class="ep-sub">Phrasal verbs</span>
+          <span class="ep-level">A1–A2</span>
+        </span>
+      </span>
+      <span class="ep-notes">
+        <strong>Get Up, Stand Up by Bob Marley — Phrasal Verbs</strong>
+        <div class="av-meta">Theme: Reggae · Level: A1–A2 · Elementary</div>
+        <div class="av-desc">
+          How to use: the original song and music video with pauses to check comprehension and discuss meaning. Follow up lesson on phrasal verbs and 'ism' words.
+        </div>
+        <div class="av-langs">Phrasal verbs · 'ism' words· Discussion  </div>
+      </span>
     </a>
 
     <!-- ─── passives ─── -->
     <a class="av-card" href="songs/itiswritten.html">
-      <strong>It is written — Passives in all tenses</strong>
-      <div class="av-meta">Theme: Reggae · Level: A2–B1 · Pre-intermediate </div>
-      <div class="av-desc">
-        How to use: a slow reggae beat with one past participles and passives in all tenses- from present to past, perfect, continuous, with modals and the future.Listen and fill in the missing preposition — place first, then time.
-      </div>
-      <div class="av-langs">Passive tenses (all) · Past participles </div>
+      <span class="ep-sleeve ep-c" aria-hidden="true">
+        <span class="ep-disc"></span>
+        <span class="ep-art">
+          <span class="ep-top"><span>MEA 003</span><span>EP · 33⅓</span></span>
+          <span class="ep-title">It Is Written</span>
+          <span class="ep-sub">Passives · all tenses</span>
+          <span class="ep-level">A2–B1</span>
+        </span>
+      </span>
+      <span class="ep-notes">
+        <strong>It is written — Passives in all tenses</strong>
+        <div class="av-meta">Theme: Reggae · Level: A2–B1 · Pre-intermediate </div>
+        <div class="av-desc">
+          How to use: a slow reggae beat with one past participles and passives in all tenses- from present to past, perfect, continuous, with modals and the future.Listen and fill in the missing preposition — place first, then time.
+        </div>
+        <div class="av-langs">Passive tenses (all) · Past participles </div>
+      </span>
     </a>
 
     <a class="av-card" href="songs/in-3-languages-and-all-tenses.html">
-      <strong>Dance, Think, Flirt, Remember — All the Tenses</strong>
-      <div class="av-meta">Theme: Latin pop · Level: B2–C1 · Listening gap-fill</div>
-      <div class="av-desc">
-        How to use: one song, three languages, the same four verbs in every tense. Listen and type the
-        English verbs into the gaps. The focus is <strong>when</strong> to use each tense, not only how
-        to form it — the Spanish and Portuguese lines are there so you can see what your own language
-        does at the same moment.
-      </div>
-      <div class="av-langs">English · Español · Português</div>
+      <span class="ep-sleeve ep-d" aria-hidden="true">
+        <span class="ep-disc"></span>
+        <span class="ep-art">
+          <span class="ep-top"><span>MEA 004</span><span>EP · 33⅓</span></span>
+          <span class="ep-title" style="--ts:0.92">Dance Think Flirt Remember</span>
+          <span class="ep-sub">All the tenses</span>
+          <span class="ep-level">B2–C1</span>
+        </span>
+      </span>
+      <span class="ep-notes">
+        <strong>Dance, Think, Flirt, Remember — All the Tenses</strong>
+        <div class="av-meta">Theme: Latin pop · Level: B2–C1 · Listening gap-fill</div>
+        <div class="av-desc">
+          How to use: one song, three languages, the same four verbs in every tense. Listen and type the
+          English verbs into the gaps. The focus is <strong>when</strong> to use each tense, not only how
+          to form it — the Spanish and Portuguese lines are there so you can see what your own language
+          does at the same moment.
+        </div>
+        <div class="av-langs">English · Español · Português</div>
+      </span>
     </a>
 
     <!-- ═══ AD SPACE 1 (after song 3): your own shop ═══════════ -->
@@ -708,37 +1016,70 @@ Original songs & classic songs turned into listening activities and grammar less
 
     <!-- ─── 4. present perfect ─── -->
     <a class="av-card" href="songs/sydneyfroma747.html">
-      <strong>Sydney from a 747 by Paul Kelly — The Present Perfect for Experience</strong>
-      <div class="av-meta">Theme: Australian rock · Level: A2–B1 · Pre-intermediate · Interactive video</div>
-      <div class="av-desc">
-        How to use: Paul Kelly sings his own song live. The video stops after each verse for a
-        vocabulary gap-fill on the lyrics and discussion questions about the story. Follow up with a
-        practice lesson on <strong>Have you ever…?</strong> — the present perfect for experience, past
-        participles, and when to choose the past simple instead — then ask a partner about their own
-        experiences and write a verse about your own city.
-      </div>
-      <div class="av-langs">Vocabulary · Discussion · Present perfect · Past participles · Present perfect vs past simple</div>
+      <span class="ep-sleeve ep-e" aria-hidden="true">
+        <span class="ep-disc"></span>
+        <span class="ep-art">
+          <span class="ep-top"><span>MEA 005</span><span>EP · 33⅓</span></span>
+          <span class="ep-title">Sydney from a 747</span>
+          <span class="ep-sub">Present perfect</span>
+          <span class="ep-level">A2–B1</span>
+        </span>
+      </span>
+      <span class="ep-notes">
+        <strong>Sydney from a 747 by Paul Kelly — The Present Perfect for Experience</strong>
+        <div class="av-meta">Theme: Australian rock · Level: A2–B1 · Pre-intermediate · Interactive video</div>
+        <div class="av-desc">
+          How to use: Paul Kelly sings his own song live. The video stops after each verse for a
+          vocabulary gap-fill on the lyrics and discussion questions about the story. Follow up with a
+          practice lesson on <strong>Have you ever…?</strong> — the present perfect for experience, past
+          participles, and when to choose the past simple instead — then ask a partner about their own
+          experiences and write a verse about your own city.
+        </div>
+        <div class="av-langs">Vocabulary · Discussion · Present perfect · Past participles · Present perfect vs past simple</div>
+      </span>
     </a>
 
         <a class="av-card" href="songs/waltzingmatilda.html">
-      <strong>Waltzing Matilda by Slim Dusty — Story telling in the past tense</strong>
-      <div class="av-meta">Theme: Australian Folk Song · Level: A1–A2 · Elementary</div>
-      <div class="av-desc">
-        How to use: a beloved Australian 'bush ballad' a poem set to music. Learn some old Australian slang and history while practcing past simple verbs for storytelling.
-      </div>
-      <div class="av-langs">Place · Time · Movement</div>
+      <span class="ep-sleeve ep-f" aria-hidden="true">
+        <span class="ep-disc"></span>
+        <span class="ep-art">
+          <span class="ep-top"><span>MEA 006</span><span>EP · 33⅓</span></span>
+          <span class="ep-title" style="--ts:1.15">Waltzing Matilda</span>
+          <span class="ep-sub">Past simple stories</span>
+          <span class="ep-level">A1–A2</span>
+        </span>
+      </span>
+      <span class="ep-notes">
+        <strong>Waltzing Matilda by Slim Dusty — Story telling in the past tense</strong>
+        <div class="av-meta">Theme: Australian Folk Song · Level: A1–A2 · Elementary</div>
+        <div class="av-desc">
+          How to use: a beloved Australian 'bush ballad' a poem set to music. Learn some old Australian slang and history while practcing past simple verbs for storytelling.
+        </div>
+        <div class="av-langs">Place · Time · Movement</div>
+      </span>
     </a>
 
 
 
             <a class="av-card" href="songs/ifiwereaboy.html">
-      <strong>If I Were A Boy by Beyonce —  2nd Relative Clause</strong>
-      <div class="av-meta">Theme: American HipHop/ Popl· Level: B2–C1 · Upper Intermediate</div>
-      <div class="av-desc">
-        How to use: a slow reggae beat with one preposition to the bar, so beginners have time to hear
-        it and write it. Listen and fill in the missing preposition — place first, then time.
-      </div>
-      <div class="av-langs">Place · Time · Movement</div>
+      <span class="ep-sleeve ep-g" aria-hidden="true">
+        <span class="ep-disc"></span>
+        <span class="ep-art">
+          <span class="ep-top"><span>MEA 007</span><span>EP · 33⅓</span></span>
+          <span class="ep-title" style="--ts:1.05">If I Were a Boy</span>
+          <span class="ep-sub">2nd conditional</span>
+          <span class="ep-level">B2–C1</span>
+        </span>
+      </span>
+      <span class="ep-notes">
+        <strong>If I Were A Boy by Beyonce —  2nd Relative Clause</strong>
+        <div class="av-meta">Theme: American HipHop/ Popl· Level: B2–C1 · Upper Intermediate</div>
+        <div class="av-desc">
+          How to use: a slow reggae beat with one preposition to the bar, so beginners have time to hear
+          it and write it. Listen and fill in the missing preposition — place first, then time.
+        </div>
+        <div class="av-langs">Place · Time · Movement</div>
+      </span>
     </a>
 
     <!-- ═══ AD SPACE 2 (after song 6): Google AdSense ══════════
@@ -762,33 +1103,55 @@ Original songs & classic songs turned into listening activities and grammar less
          These are suggestions — change the titles and wording to
          whatever you are actually making.
 
-         To turn one live: change the opening <div class="av-card soon">
-         to <a class="av-card" href="songs/new-song-name/">, change the
-         closing </div> to </a>, and delete its <span class="soon-tag">.
+         To turn one live:
+         1. change the opening <div class="av-card soon"> to
+            <a class="av-card" href="songs/new-song-name.html">, and
+            its last </div> to </a>
+         2. delete its <span class="soon-tag">
+         3. swap the plain cardboard sleeve for a printed cover: copy
+            a whole <span class="ep-sleeve …"> … </span> block from a
+            live song, change the words, and give it a design class
+            (ep-a to ep-g). To shrink a long cover title, add
+            style="--ts:.85" to its ep-title.
          ════════════════════════════════════════════════════════ -->
 
     <div class="av-card soon">
-      <span class="soon-tag">Coming soon</span>
-      <strong>Song 7 — title to come</strong>
-      <div class="av-meta">Theme: XXX · Level: XX</div>
-      <div class="av-desc">How to use: one or two lines saying what the song practises and what the
-        student does. Replace this text when the activity is ready.</div>
+      <span class="ep-sleeve ep-blank" aria-hidden="true">
+        <span class="ep-art"><span class="ep-stamp">Coming soon</span></span>
+      </span>
+      <span class="ep-notes">
+        <span class="soon-tag">Coming soon</span>
+        <strong>Song 7 — title to come</strong>
+        <div class="av-meta">Theme: XXX · Level: XX</div>
+        <div class="av-desc">How to use: one or two lines saying what the song practises and what the
+          student does. Replace this text when the activity is ready.</div>
+      </span>
     </div>
 
     <div class="av-card soon">
-      <span class="soon-tag">Coming soon</span>
-      <strong>Song 8 — title to come</strong>
-      <div class="av-meta">Theme: XXX · Level: XX</div>
-      <div class="av-desc">How to use: one or two lines saying what the song practises and what the
-        student does. Replace this text when the activity is ready.</div>
+      <span class="ep-sleeve ep-blank" aria-hidden="true">
+        <span class="ep-art"><span class="ep-stamp">Coming soon</span></span>
+      </span>
+      <span class="ep-notes">
+        <span class="soon-tag">Coming soon</span>
+        <strong>Song 8 — title to come</strong>
+        <div class="av-meta">Theme: XXX · Level: XX</div>
+        <div class="av-desc">How to use: one or two lines saying what the song practises and what the
+          student does. Replace this text when the activity is ready.</div>
+      </span>
     </div>
 
     <div class="av-card soon">
-      <span class="soon-tag">Coming soon</span>
-      <strong>Song 9 — title to come</strong>
-      <div class="av-meta">Theme: XXX · Level: XX</div>
-      <div class="av-desc">How to use: one or two lines saying what the song practises and what the
-        student does. Replace this text when the activity is ready.</div>
+      <span class="ep-sleeve ep-blank" aria-hidden="true">
+        <span class="ep-art"><span class="ep-stamp">Coming soon</span></span>
+      </span>
+      <span class="ep-notes">
+        <span class="soon-tag">Coming soon</span>
+        <strong>Song 9 — title to come</strong>
+        <div class="av-meta">Theme: XXX · Level: XX</div>
+        <div class="av-desc">How to use: one or two lines saying what the song practises and what the
+          student does. Replace this text when the activity is ready.</div>
+      </span>
     </div>
 
     <!-- ═══ AD SPACE 3 (after song 9): Google AdSense ══════════
@@ -802,11 +1165,16 @@ Original songs & classic songs turned into listening activities and grammar less
     </aside>
 
     <div class="av-card soon">
-      <span class="soon-tag">Coming soon</span>
-      <strong>Song 10 — title to come</strong>
-      <div class="av-meta">Theme: XXX · Level: XX</div>
-      <div class="av-desc">How to use: one or two lines saying what the song practises and what the
-        student does. Replace this text when the activity is ready.</div>
+      <span class="ep-sleeve ep-blank" aria-hidden="true">
+        <span class="ep-art"><span class="ep-stamp">Coming soon</span></span>
+      </span>
+      <span class="ep-notes">
+        <span class="soon-tag">Coming soon</span>
+        <strong>Song 10 — title to come</strong>
+        <div class="av-meta">Theme: XXX · Level: XX</div>
+        <div class="av-desc">How to use: one or two lines saying what the song practises and what the
+          student does. Replace this text when the activity is ready.</div>
+      </span>
     </div>
 
   </div>
