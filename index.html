@@ -27,6 +27,15 @@
     "@context": "https://schema.org",
     "@graph": [
       { "@type": "WebSite", "name": "Modern English Australia", "url": "https://modernenglish.au/", "inLanguage": "en-AU" },
+      { "@type": "VideoObject",
+        "name": "How to use Modern English Australia: free English games, mini lessons and practice tests",
+        "description": "A 45-second tour of Modern English Australia: free vocabulary and grammar games, 10-minute mini lessons, IELTS, PTE and CAE practice tests and ESL songs, how they link together, and three ways to use them: project a game like a game show, share one phone or tablet with a QR code, or study on your own.",
+        "thumbnailUrl": "https://modernenglish.au/video/modern-english-australia-intro.jpg",
+        "contentUrl": "https://modernenglish.au/video/modern-english-australia-intro.mp4",
+        "uploadDate": "2026-10-28",
+        "duration": "PT44S",
+        "inLanguage": "en-AU",
+        "publisher": { "@type": "Organization", "name": "Modern English Australia", "url": "https://modernenglish.au/" } },
       { "@type": "ItemList", "name": "Free English games and practice tests",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Vocabulary Games", "url": "https://modernenglish.au/vocabularygames.html" },
@@ -223,7 +232,7 @@ body {
     .post-date { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
     .right-col h2 { margin-top: 0; }
     /* ===== GAMES FIRST ===== */
-    .hero { padding: 40px 0 8px; }
+    .hero { padding: 0; }
     .hero .hero-headline { font-size: clamp(2.4rem, 1.2rem + 4.4vw, 4.6rem); margin-bottom: 10px; }
     .hero-sub { font-size: 1.08rem; color: var(--muted); max-width: 60ch; margin: 0; }
     .hero-sub b { color: var(--ink); }
@@ -355,6 +364,49 @@ body {
       .sponsor { transition: none; }
       .sponsor:hover { transform: none; }
     }
+    /* ── HERO VIDEO: top right, beside the headline, above the About column ── */
+    /* Two independent columns: intro + games on the left, video + about on the right.
+       The right column spans both rows, so the video never pushes the games down. */
+    .section.main.home { padding-top: clamp(24px, 4vw, 44px); }
+    .home-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); column-gap: clamp(32px, 4.5vw, 56px); align-items: start; }
+    .hl-hero { grid-column: 1; grid-row: 1; padding: 0 0 clamp(18px, 2.4vw, 30px); }
+    .hl-main { grid-column: 1; grid-row: 2; min-width: 0; }
+    .hl-side { grid-column: 2; grid-row: 1 / span 2; min-width: 0; }
+    .hl-side .about-col { margin-top: clamp(30px, 3.5vw, 44px); }
+    .hero-video { --c: #0e2861; --tilt: 0.7deg; position: relative; width: 100%; max-width: 420px; margin: 14px 0 0; transform: rotate(var(--tilt)); transition: transform .2s ease; }
+    .hero-video:hover { transform: rotate(0deg); }
+    .hero-video::after {
+      content: ""; position: absolute; top: -11px; left: 50%; z-index: 2; width: 92px; height: 22px;
+      transform: translateX(-50%) rotate(-2deg);
+      background: color-mix(in srgb, var(--c) 26%, rgba(255,255,255,.6));
+      border-left: 1px dashed rgba(255,255,255,.7); border-right: 1px dashed rgba(255,255,255,.7);
+      box-shadow: 0 1px 2px rgba(15,23,42,.10); pointer-events: none;
+    }
+    .hero-video .paper {
+      background: #fffef7; border-radius: 3px; padding: 12px 12px 16px;
+      box-shadow: inset 0 0 7px rgba(120,100,60,.12), 0 1px 1px rgba(0,0,0,.06), 0 3px 6px -1px rgba(0,0,0,.10), 0 12px 20px -6px rgba(0,0,0,.16), 0 26px 40px -16px rgba(0,0,0,.24);
+    }
+    .hero-video video { width: 100%; aspect-ratio: 16 / 9; height: auto; border-radius: 2px; background: #5a7bb4; }
+    .hero-video figcaption { padding: 12px 6px 0; }
+    .hero-video .v-title { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.3; color: var(--ink); margin: 0 0 4px; }
+    .hero-video details { font-size: .86rem; line-height: 1.55; color: var(--muted); }
+    .hero-video summary { cursor: pointer; font-weight: 700; color: var(--link); }
+    .hero-video details p { margin: 8px 0 0; }
+    /* Tablets and phones: one column, in this order: intro, video, games, about */
+    @media (max-width: 860px) {
+      .home-layout { grid-template-columns: minmax(0, 1fr); }
+      .hl-side { display: contents; }
+      .hl-hero, .hl-main, .hero-video, .hl-side .about-col { grid-column: 1; grid-row: auto; }
+      .hl-hero { order: 1; padding-bottom: 6px; }
+      .hero-video { order: 2; max-width: 520px; margin: 22px auto 34px; }
+      .hl-main { order: 3; }
+      .hl-side .about-col { order: 4; margin-top: 44px; }
+    }
+    @media (max-width: 560px) {
+      .hero-video { max-width: 100%; margin: 18px 0 30px; }
+      .hero-video .paper { padding: 10px 10px 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .hero-video, .hero-video:hover { transform: none; transition: none; } }
     .cookie-note { width: 100%; font-size: 0.78rem; color: rgba(248,250,252,.55); margin-top: 4px; }
     .cookie-note a { color: rgba(248,250,252,.75); }
   </style>
@@ -382,21 +434,21 @@ body {
 </header>
 <main>
   <!-- ===== SHORT INTRO: one line, so the games are near the top ===== -->
-  <section class="hero">
-    <div class="wrap">
-      <h3>Meaningful learning, purposeful connection — free for everyone</h3>
-      <h1 class="hero-headline" aria-label="meaningful English">
-        <span class="hero-word">meaningful&nbsp;</span><span class="hero-word">English</span>
-      </h1>
-      <p class="hero-sub"><b>Free</b> English games, <b>IELTS, PTE &amp; CAE</b> practice tests and mini-courses from Sydney, for classrooms and self-study.</p>
-    </div>
-  </section>
+  <section class="section main home">
+    <div class="wrap home-layout">
 
-  <section class="section main">
-    <div class="wrap two-col games-first">
+      <!-- INTRO (top left) -->
+      <div class="hl-hero hero">
 
-      <!-- LEFT (first on a phone): THE GAMES, TESTS AND COURSES -->
-      <div>
+        <h3>Meaningful learning, purposeful connection — free for everyone</h3>
+        <h1 class="hero-headline" aria-label="meaningful English">
+          <span class="hero-word">meaningful&nbsp;</span><span class="hero-word">English</span>
+        </h1>
+        <p class="hero-sub"><b>Free</b> English games, <b>IELTS, PTE &amp; CAE</b> practice tests and mini-courses from Sydney, for classrooms and self-study.</p>
+      </div>
+
+      <!-- GAMES, TESTS AND COURSES (left column) -->
+      <div class="hl-main">
         <div class="group g-games">
           <ul class="tool-grid">
             <li>
@@ -621,7 +673,32 @@ body {
         </div>
       </div>
 
-      <!-- RIGHT (after the games on a phone): ABOUT, BLOG, SPONSOR, CONTACT -->
+      <!-- RIGHT COLUMN: video, then about, blog, sponsor, contact -->
+      <div class="hl-side">
+        <!-- HERO VIDEO: a 45-second tour of the site -->
+      <figure class="hero-video">
+        <div class="paper">
+          <video id="introVideo" controls muted playsinline preload="metadata"
+                 poster="video/modern-english-australia-intro.jpg"
+                 aria-describedby="introVideoTranscript">
+            <source src="video/modern-english-australia-intro.mp4" type="video/mp4">
+            Your browser can't play this video. <a href="video/modern-english-australia-intro.mp4">Download the video (MP4)</a>.
+          </video>
+          <figcaption>
+            <h2 class="v-title">How to use Modern English Australia</h2>
+            <details id="introVideoTranscript">
+              <summary>Read the video transcript</summary>
+              <p><b>Games, lessons and tests that work together.</b> Free for everyone, with no sign-up.</p>
+              <p><b>What's here:</b> vocabulary, grammar and speaking games; 10-minute grammar and vocabulary mini lessons; IELTS, PTE and Cambridge CAE practice tests, scored for you; and grammar lessons set to music.</p>
+              <p><b>It all connects:</b> learn it in a mini lesson, play it in a game, hear it in a song and check it in a practice test. For example, the <a href="minilessons/have-make-do-lesson.html">Have, Make or Do? mini lesson</a> teaches the collocations, then links straight to the <a href="game/make-have-do-colloations.html">Have, Make &amp; Do game</a>.</p>
+              <p><b>Three ways to use it:</b> project it and play like a game show, with the teacher or a student as host; share a device by scanning the QR code in the top-left corner, with one phone or tablet per group; or study on your own, on a phone at home or on the train.</p>
+              <p>Pick a game, a lesson or a test at modernenglish.au.</p>
+            </details>
+          </figcaption>
+        </div>
+      </figure>
+
+        
       <div class="about-col">
         <h2>About Modern English Australia</h2>
         <ul class="about-list">
@@ -684,6 +761,7 @@ body {
         <hr class="divider">
         <a class="cta-link" href="contact.html">Contact me today</a>
       </div>
+      </div>
     </div>
   </section>
 </main>
@@ -700,5 +778,20 @@ body {
     <div class="cookie-note">This site uses cookies for analytics and to show ads from Google. <a href="privacy.html">Learn more</a>.</div>
   </div>
 </footer>
+<script>
+  // Play the intro video muted when it scrolls into view, unless the visitor prefers reduced motion.
+  (function () {
+    var v = document.getElementById('introVideo');
+    if (!v || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var started = false;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !started) { started = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else if (!e.isIntersecting && !v.paused && v.muted) { v.pause(); started = false; }
+      });
+    }, { threshold: 0.5 }).observe(v);
+  })();
+</script>
 </body>
 </html>
