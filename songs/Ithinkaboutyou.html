@@ -689,6 +689,214 @@ button.pdf-button { border: none; cursor: pointer; }
   .card-actions .check-btn { display: block; width: 100%; }
   .card-actions .check-btn + .check-btn { margin-left: 0; }
 }
+
+/* ===========================================================
+   KARAOKE  —  a full-screen sing-along for the projector.
+   Opens from the 🎤 Karaoke button. It plays the same <audio>
+   as the player above, so the two always stay in step.
+   =========================================================== */
+.kara-btn { background: #23703f; }
+.kara-btn[hidden] { display: none; }
+
+.kara {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 45%, rgba(35,112,63,.28), transparent 70%),
+    #0b0d10;
+  color: #f8fafc;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  overflow: hidden;
+}
+.kara[hidden] { display: none; }
+/* the reggae stripe along the top */
+.kara::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #23703f 0 33.3%, #e0a91c 33.3% 66.6%, #b8322a 66.6%);
+}
+
+.kara-top {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  flex-wrap: wrap;
+  padding: 1.2rem clamp(16px, 4vw, 40px) .4rem;
+}
+.kara-name { margin-right: auto; line-height: 1.15; }
+.kara-name b {
+  display: block;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+}
+.kara-name span {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--highlight);
+}
+.kara-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 40px;
+  padding: 0 1rem;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  color: #f8fafc;
+  font: inherit;
+  font-size: .92rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.kara-chip:hover { background: rgba(255,255,255,.14); }
+.kara-chip[aria-pressed="true"] { background: var(--highlight); border-color: var(--highlight); color: #111; }
+.kara-chip:focus-visible, .kara-play:focus-visible, .kara-line:focus-visible { outline: 2px solid var(--highlight); outline-offset: 3px; }
+.kara-x { width: 40px; padding: 0; justify-content: center; font-size: 1.1rem; }
+
+/* ---- the lyrics: a column that slides so the current line sits in the middle ---- */
+.kara-stage {
+  position: relative;
+  flex: 1 1 auto;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(transparent, #000 22%, #000 78%, transparent);
+          mask-image: linear-gradient(transparent, #000 22%, #000 78%, transparent);
+}
+.kara-list {
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  padding: 0 clamp(16px, 5vw, 60px);
+  text-align: center;
+  transition: transform .55s cubic-bezier(.2,.7,.2,1);
+}
+.kara-line {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .18em 0;
+  background: none;
+  border: none;
+  color: rgba(248,250,252,.32);
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(1.4rem, 3.6vw, 2.6rem);
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color .3s ease, font-size .3s ease, opacity .3s ease;
+}
+.kara-line:hover { color: rgba(248,250,252,.55); }
+.kara-line.near { color: rgba(248,250,252,.55); }
+.kara-line.cur {
+  color: #f8fafc;
+  font-size: clamp(2rem, 6.4vw, 4.6rem);
+}
+.kara-line.next-up { color: rgba(248,250,252,.85); font-size: clamp(1.7rem, 4.6vw, 3.4rem); }
+.kara-line.sung { color: rgba(253,224,71,.5); }
+
+.kara-w { display: inline-block; margin: 0 .12em; }
+/* sung words turn yellow; the word being sung fills from left to right */
+.kara-w.done { color: var(--highlight); }
+.kara-w.now {
+  color: transparent;
+  background: linear-gradient(90deg, var(--highlight) var(--p, 0%), #f8fafc var(--p, 0%));
+  -webkit-background-clip: text;
+          background-clip: text;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .kara-w.now { color: var(--highlight); background: none; }
+}
+/* the preposition in each line */
+.kara-w.prep { text-decoration: underline; text-decoration-color: #60a5fa; text-decoration-thickness: .08em; text-underline-offset: .14em; }
+/* "Hide the prepositions": a gap until it's sung, then it pops in */
+.kara.hide-prep .kara-w.prep:not(.done):not(.now) {
+  color: transparent;
+  text-decoration: none;
+  border-bottom: .09em solid rgba(248,250,252,.55);
+  min-width: 2.2em;
+}
+.kara.hide-prep .kara-line:not(.cur) .kara-w.prep:not(.done) { border-bottom-color: rgba(248,250,252,.3); }
+.kara.hide-prep .kara-w.prep.done { animation: kara-pop .35s ease both; }
+@keyframes kara-pop { from { transform: scale(1.35); } to { transform: scale(1); } }
+
+/* instrumental: "next line in 3, 2, 1" */
+.kara-cue {
+  position: absolute;
+  left: 0; right: 0;
+  top: calc(50% - clamp(2.4rem, 5.6vw, 3.8rem));
+  transform: translateY(-100%);
+  text-align: center;
+  font-size: clamp(.9rem, 1.8vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--highlight);
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+.kara-cue.on { opacity: 1; }
+/* during a break, the lines already sung step back so the countdown has room */
+.kara.in-gap .kara-line.sung { opacity: 0; }
+.kara-dots { display: inline-flex; gap: .45em; margin-left: .6em; vertical-align: middle; }
+.kara-dots i { width: .6em; height: .6em; border-radius: 50%; background: rgba(253,224,71,.25); }
+.kara-dots i.lit { background: var(--highlight); }
+
+/* ---- bottom controls ---- */
+.kara-bottom {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .6rem clamp(16px, 4vw, 40px) 1.4rem;
+}
+.kara-play {
+  flex: 0 0 auto;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: var(--highlight);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,.4);
+}
+.kara-play svg { width: 30px; height: 30px; fill: #111; }
+.kara-play svg[hidden] { display: none; }
+.kara-track { flex: 1 1 auto; min-width: 0; }
+.kara-bar {
+  position: relative;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,.16);
+  cursor: pointer;
+}
+.kara-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 3px; background: var(--highlight); }
+.kara-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .5rem;
+  font-size: .8rem;
+  letter-spacing: .08em;
+  color: rgba(248,250,252,.6);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .kara-top { padding-top: 1rem; }
+  .kara-name { flex-basis: 100%; }
+  .kara-chip { font-size: .85rem; padding: 0 .8rem; }
+  .kara-play { width: 56px; height: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kara-list, .kara-line { transition: none; }
+  .kara.hide-prep .kara-w.prep.done { animation: none; }
+}
 </style>
 </head>
 
@@ -714,6 +922,7 @@ button.pdf-button { border: none; cursor: pointer; }
   <a class="pdf-button back-button" href="https://modernenglish.au/learnEnglishwithMusic.html">← All song lessons</a>
   <a class="pdf-button" href="LESSONPrep.pdf" target="_blank" rel="noopener">📘 Review Prepositions (PDF)</a>
   <button type="button" class="pdf-button" id="open-instructions">ℹ️ Instructions</button>
+  <button type="button" class="pdf-button kara-btn" id="kara-open" hidden>🎤 Karaoke</button>
 </section>
 
 <!-- AUDIO: the <audio> keeps its own controls, so if the script fails
@@ -788,9 +997,34 @@ button.pdf-button { border: none; cursor: pointer; }
          <em>think about</em>, <em>rely on</em>, <em>belong to</em>, <em>believe in</em>.</p>
       <p>The song is slow, with one preposition in each line, so you have time to hear it and write it.</p>
       <p class="tile-task">Play the song and write the missing prepositions.</p>
+      <p>Then press <strong>🎤 Karaoke</strong> and sing along — or hide the prepositions and sing the missing words.</p>
     </div>
     <div class="tile-actions">
       <button type="button" class="tile-start" id="start-activity">Start the activity</button>
+    </div>
+  </div>
+</div>
+
+<!-- KARAOKE: opens from the 🎤 button at the top -->
+<div class="kara" id="kara" role="dialog" aria-modal="true" aria-label="Karaoke: I Think About You" hidden>
+  <div class="kara-top">
+    <div class="kara-name"><span>Karaoke</span><b>I Think About You</b></div>
+    <button type="button" class="kara-chip" id="kara-hide" aria-pressed="false">Hide the prepositions</button>
+    <button type="button" class="kara-chip" id="kara-full">⛶ Full screen</button>
+    <button type="button" class="kara-chip kara-x" id="kara-close" aria-label="Close karaoke">✕</button>
+  </div>
+  <div class="kara-stage">
+    <div class="kara-cue" id="kara-cue">♪ Instrumental ♪<span class="kara-dots"><i></i><i></i><i></i></span></div>
+    <div class="kara-list" id="kara-list"></div>
+  </div>
+  <div class="kara-bottom">
+    <button type="button" class="kara-play" id="kara-play" aria-label="Play">
+      <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M7 5h3.2v14H7zM13.8 5H17v14h-3.2z"/></svg>
+    </button>
+    <div class="kara-track">
+      <div class="kara-bar" id="kara-bar"><div class="kara-fill" id="kara-fill"></div></div>
+      <div class="kara-meta"><span id="kara-count">Line 1 of 14</span><span id="kara-time">0:00</span></div>
     </div>
   </div>
 </div>
@@ -1095,6 +1329,204 @@ if (tileBackdrop) {
        } catch (e) { openTile(); }
   */
 }
+
+// ===============================
+// KARAOKE
+// The lyrics with the time (in seconds) each word is sung, timed
+// against Ithinkaboutyou.mp3. The song sings the 14 lines twice:
+// the second time starts exactly 60.75 seconds after the first.
+// If a line ever feels early or late, change its numbers here.
+// ===============================
+const KARAOKE_PASS = [
+  [[["I",2.29],["think",2.48],["about",2.87],["you.",3.45]], 3.67, "about"],
+  [[["I",5.27],["care",5.52],["about",5.9],["you.",6.52]], 6.75, "about"],
+  [[["I",8.34],["rely",8.5],["on",9.11],["you.",10.62]], 11.1, "on"],
+  [[["I",11.39],["depend",11.52],["on",12.15],["you.",12.48]], 13.07, "on"],
+  [[["I",14.42],["complain",14.56],["to",15.27],["you.",15.6]], 16.24, "to"],
+  [[["I",17.09],["apologise",17.23],["to",18.35],["you.",18.92]], 19.58, "to"],
+  [[["I",20.88],["belong",21.04],["to",21.76],["you.",21.99]], 22.29, "to"],
+  [[["I",23.9],["believe",24.13],["in",24.84],["you.",25.0]], 25.29, "in"],
+  [[["I",27.08],["think",27.22],["about",27.65],["you.",28.47]], 29.8, "about"],
+  [[["I",30.12],["dream",30.22],["about",30.7],["you.",31.56]], 32.2, "about"],
+  [[["I",33.78],["call",34.08],["you.",34.49],["I",35.45],["pay",35.59],["for",36.33],["you.",36.83]], 37.54, "for"],
+  [[["I",39.13],["hate",39.43],["you.",40.35],["I",41.94],["can’t",42.18],["cope",42.57],["with",43.06],["you.",43.27]], 44.74, "with"],
+  [[["I",45.19],["don’t",45.33],["worry",45.56],["about",45.94],["you.",46.83]], 46.98, "about"],
+  [[["I",47.28],["succeed",47.42],["in",48.4],["leaving",48.56],["you.",49.15]], 49.23, "in"]
+];
+const KARAOKE_REPEAT = 60.75;
+
+(function () {
+  const song = document.getElementById("song");
+  const box  = document.getElementById("kara");
+  const open = document.getElementById("kara-open");
+  if (!song || !box || !open) return;
+
+  // both passes, as { t: start, end, words: [[text, time]], prep }
+  const LINES = [];
+  [0, KARAOKE_REPEAT].forEach(off => KARAOKE_PASS.forEach(([w, end, prep]) => {
+    LINES.push({ t: w[0][1] + off, end: end + off, prep: prep,
+                 words: w.map(([txt, s]) => [txt, s + off]) });
+  }));
+
+  const list  = document.getElementById("kara-list");
+  const cue   = document.getElementById("kara-cue");
+  const dots  = cue.querySelectorAll(".kara-dots i");
+  const fill  = document.getElementById("kara-fill");
+  const bar   = document.getElementById("kara-bar");
+  const clock = document.getElementById("kara-time");
+  const count = document.getElementById("kara-count");
+  const play  = document.getElementById("kara-play");
+  const iPlay = play.querySelector(".icon-play");
+  const iPause = play.querySelector(".icon-pause");
+  const hideBtn = document.getElementById("kara-hide");
+  const fullBtn = document.getElementById("kara-full");
+
+  // ---- build the lines once ----
+  const rows = LINES.map((line, i) => {
+    const row = document.createElement("button");
+    row.type = "button";
+    row.className = "kara-line";
+    row.setAttribute("aria-label", "Sing from: " + line.words.map(w => w[0]).join(" "));
+    let prepMarked = false;
+    line.words.forEach(([txt]) => {
+      const s = document.createElement("span");
+      s.className = "kara-w";
+      s.textContent = txt;
+      // the preposition gets marked (only the first match, so "I" or "you" never do)
+      if (!prepMarked && txt.replace(/[.,]/g, "").toLowerCase() === line.prep) { s.classList.add("prep"); prepMarked = true; }
+      row.appendChild(s);
+    });
+    // tap a line to jump to it
+    row.addEventListener("click", () => { song.currentTime = Math.max(0, line.t - 0.6); draw(); });
+    list.appendChild(row);
+    return row;
+  });
+
+  function mmss(s) {
+    if (!isFinite(s)) return "0:00";
+    return Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+  }
+
+  let lastFocus = -1;
+  function draw() {
+    const t = song.currentTime;
+    // the line being sung, or the next one coming up
+    let cur = -1, next = LINES.findIndex(l => l.t > t + 0.15);
+    for (let i = 0; i < LINES.length; i++) {
+      if (t + 0.15 >= LINES[i].t && t < (LINES[i + 1] ? LINES[i + 1].t - 0.15 : LINES[i].end + 1.5)) { cur = i; break; }
+    }
+    // in a long gap (instrumental), stop on the next line and count down to it
+    const ended = next < 0 && t > LINES[LINES.length - 1].end + 1.2;
+    const singing = (cur >= 0 && t < LINES[cur].end + 1.2) || ended;
+    const focus = ended ? LINES.length - 1 : singing ? cur : (next >= 0 ? next : LINES.length - 1);
+    const wait = next >= 0 ? LINES[next].t - t : 0;
+    const inGap = !singing && next >= 0 && (cur < 0 || wait > 1.5);
+
+    rows.forEach((row, i) => {
+      const line = LINES[i];
+      row.classList.toggle("cur", i === focus && singing);
+      row.classList.toggle("next-up", i === focus && !singing);
+      row.classList.toggle("near", Math.abs(i - focus) === 1);
+      row.classList.toggle("sung", i < focus);
+      const spans = row.children;
+      line.words.forEach(([, s], k) => {
+        const e = k + 1 < line.words.length ? line.words[k + 1][1] : line.end;
+        const sp = spans[k];
+        const done = t >= e, now = t >= s && t < e;
+        sp.classList.toggle("done", done || (i < focus));
+        sp.classList.toggle("now", now && i === focus);
+        if (now) sp.style.setProperty("--p", Math.round(Math.min(1, (t - s) / Math.max(0.15, e - s)) * 100) + "%");
+      });
+    });
+
+    if (focus !== lastFocus) {
+      const r = rows[focus];
+      list.style.transform = "translateY(" + (-(r.offsetTop + r.offsetHeight / 2)) + "px)";
+      lastFocus = focus;
+    }
+
+    // "next line" countdown during the instrumental breaks
+    const showCue = inGap && !song.paused && wait < 8;
+    cue.classList.toggle("on", inGap || ended);
+    box.classList.toggle("in-gap", inGap || ended);
+    cue.firstChild.textContent = ended ? "♪ Well sung! ♪" : (cur < 0 && t < LINES[0].t ? "Get ready to sing" : "♪ Instrumental ♪");
+    dots.forEach((d, k) => d.classList.toggle("lit", showCue && wait <= 3 - k));
+
+    fill.style.width = (song.duration ? t / song.duration * 100 : 0) + "%";
+    clock.textContent = mmss(t) + " / " + mmss(song.duration);
+    count.textContent = "Line " + (focus % KARAOKE_PASS.length + 1) + " of " + KARAOKE_PASS.length +
+                        (focus >= KARAOKE_PASS.length ? " · second time" : "");
+  }
+
+  let raf = 0;
+  function loop() { draw(); raf = (!box.hidden && !song.paused) ? requestAnimationFrame(loop) : 0; }
+  function kick() { if (!raf) loop(); }
+
+  function setIcons() {
+    iPlay.hidden = !song.paused; iPause.hidden = song.paused;
+    play.setAttribute("aria-label", song.paused ? "Play" : "Pause");
+  }
+  song.addEventListener("play", () => { setIcons(); kick(); });
+  song.addEventListener("pause", () => { setIcons(); draw(); });
+  song.addEventListener("seeked", draw);
+  song.addEventListener("timeupdate", () => { if (!box.hidden && song.paused) draw(); });
+  play.addEventListener("click", () => { if (song.paused) song.play(); else song.pause(); });
+
+  bar.addEventListener("click", e => {
+    const b = bar.getBoundingClientRect();
+    if (song.duration) { song.currentTime = (e.clientX - b.left) / b.width * song.duration; draw(); }
+  });
+
+  hideBtn.addEventListener("click", () => {
+    const on = hideBtn.getAttribute("aria-pressed") !== "true";
+    hideBtn.setAttribute("aria-pressed", on);
+    box.classList.toggle("hide-prep", on);
+  });
+
+  // full screen, for the projector (not every phone allows it)
+  const canFull = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
+  if (!canFull) fullBtn.hidden = true;
+  fullBtn.addEventListener("click", () => {
+    const d = document;
+    if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d);
+    else (box.requestFullscreen || box.webkitRequestFullscreen).call(box);
+  });
+
+  let lastFocused = null;
+  function openKara() {
+    lastFocused = document.activeElement;
+    box.hidden = false;
+    document.body.style.overflow = "hidden";
+    lastFocus = -1; draw(); kick();
+    play.focus();
+  }
+  function closeKara() {
+    const d = document;
+    if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d);
+    box.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+  open.hidden = false;
+  open.addEventListener("click", openKara);
+  document.getElementById("kara-close").addEventListener("click", closeKara);
+  window.addEventListener("resize", () => { lastFocus = -1; if (!box.hidden) draw(); });
+
+  // keys: space plays/pauses, arrows jump a line, Esc closes
+  document.addEventListener("keydown", e => {
+    if (box.hidden) return;
+    if (e.key === "Escape") { closeKara(); return; }
+    if (e.target.closest && e.target.closest("button") && (e.key === " " || e.key === "Enter")) return;
+    if (e.key === " ") { e.preventDefault(); if (song.paused) song.play(); else song.pause(); }
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      const t = song.currentTime;
+      let i = e.key === "ArrowRight" ? LINES.findIndex(l => l.t > t + 0.7) : -1;
+      if (e.key === "ArrowLeft") for (let k = LINES.length - 1; k >= 0; k--) if (LINES[k].t < t - 1.2) { i = k; break; }
+      if (i >= 0) { song.currentTime = Math.max(0, LINES[i].t - 0.6); draw(); }
+    }
+  });
+})();
 
 </script>
 
