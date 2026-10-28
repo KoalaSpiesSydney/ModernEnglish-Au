@@ -708,6 +708,40 @@
     }
     @media (prefers-reduced-motion: reduce) { .vg-video, .vg-video:hover { transform: none; transition: none; } }
 
+    /* ── MAKE YOUR OWN: a blank sleeve at the end of the songs ── */
+    .make-own {
+      --cov: 170px; --peek: 46px;
+      display: grid;
+      grid-template-columns: calc(var(--cov) + var(--peek)) minmax(0, 1fr);
+      align-items: center;
+      column-gap: 26px;
+      margin-top: 44px;
+      padding: 22px 26px 22px 20px;
+      background: #1c1c1c;
+      color: #f8fafc;
+      border-radius: 4px;
+      border-top: 4px solid var(--highlight);
+      box-shadow: 0 8px 22px rgba(15,23,42,.18);
+    }
+    .make-own .ep-disc { --label: var(--highlight); }
+    .make-own .ep-blank .ep-art { background: radial-gradient(circle at 50% 50%, transparent 0 19%, #f4ecd8 19.5%); }
+    .make-own .ep-stamp { border-color: rgba(28,28,28,.6); color: #1c1c1c; }
+    .make-own h2 { margin: 0 0 6px; color: #fff; }
+    .make-own p { margin: 0 0 14px; font-size: 1rem; line-height: 1.55; color: rgba(248,250,252,.8); max-width: 60ch; }
+    .make-links { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+    .make-btn {
+      display: inline-flex; align-items: center; min-height: 44px;
+      padding: 0 18px; border-radius: 6px;
+      background: var(--highlight); color: #1c1c1c;
+      font-weight: 700; text-decoration: none;
+    }
+    .make-btn:hover { background: #fef08a; }
+    .make-alt { color: #bfdbfe; font-size: .95rem; text-decoration: underline; text-underline-offset: 3px; }
+    @media (max-width: 620px) {
+      .make-own { --cov: min(56vw, 210px); --peek: 36px; grid-template-columns: 1fr; justify-items: center; row-gap: 18px; padding: 20px 18px; }
+      .make-own > div:last-child { justify-self: stretch; }
+    }
+
     /* Footer navigation */
     footer {
       background: var(--header);
@@ -1234,6 +1268,22 @@ Original songs & classic songs turned into listening activities and grammar less
     </div>
 
   </div>
+
+  <!-- MAKE YOUR OWN: links to the song makers in Teacher Tools -->
+  <section class="make-own" aria-labelledby="make-own-h">
+    <span class="ep-sleeve ep-blank" aria-hidden="true">
+      <span class="ep-disc" style="left:calc(var(--peek) + var(--cov) * .06)"></span>
+      <span class="ep-art"><span class="ep-stamp">Your song here</span></span>
+    </span>
+    <div>
+      <h2 id="make-own-h">Can't find a song you like? Make your own.</h2>
+      <p>Pick any song on YouTube and turn it into a lesson: add gap-fill, multiple-choice, true or false and short-answer questions that pause the video, then share it with your class by link or QR code. Free, no sign-up.</p>
+      <div class="make-links">
+        <a class="make-btn" href="teachertools/bespoke-video-lesson-maker.html">Make a song lesson →</a>
+        <a class="make-alt" href="teachertools/bespoke-song-gap-fill-maker.html">or print a song gap-fill worksheet</a>
+      </div>
+    </div>
+  </section>
 
 </main>
 
