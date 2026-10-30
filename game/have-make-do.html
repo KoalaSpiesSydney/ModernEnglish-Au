@@ -221,6 +221,15 @@ body{
   transition:all .25s ease;
 }
 @media(hover:hover){ .slide-start:hover{ background:linear-gradient(90deg,var(--accent),#2196f3); transform:translateY(-2px); } }
+/* "Play the song" on the opening slide: browsers only allow music after a tap */
+.slide-music{
+  display:block; margin:0 auto .7rem;
+  font-family:inherit; font-size:.95rem; font-weight:600;
+  color:var(--accent); background:transparent;
+  border:2px solid var(--accent); border-radius:var(--r);
+  padding:.5rem 1.2rem; min-height:44px; cursor:pointer;
+}
+.slide-music[aria-pressed="true"]{ background:var(--accent); color:#fff; }
 .slide-foot{
   margin-top:1rem;
   font-size:.85rem;
@@ -1027,6 +1036,57 @@ footer{
   .face{ font-size:.55rem; padding:3px 1px; }
   .tile.verbtile .face{ font-size:.58rem; letter-spacing:0; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   HIERARCHY (added 30 Oct 2026)
+   The verb mix is the main choice, so it is bigger, as plain words with
+   an underline on the one in play: no box round them. New Board,
+   How to play and Sound are small, quiet buttons underneath.
+   This block comes last so it wins over the sizes above.
+   ══════════════════════════════════════════════════════════════════ */
+.filter-bar{ gap:.2rem 1.6rem; margin:.8rem 0 .9rem; }
+.filter-btn{
+  background:none; border:0; border-radius:0; box-shadow:none;
+  padding:.25rem .1rem .35rem;
+  font-size:1.2rem; font-weight:700; letter-spacing:.3px;
+  color:rgba(10,61,98,.55);
+  border-bottom:3px solid transparent;
+}
+.filter-btn.active{ background:none; color:var(--accent); border-bottom-color:#f2a900; }
+@media(hover:hover){ .filter-btn:not(.active):hover{ color:var(--accent); } }
+.filter-btn:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+/* New Board, How to play, Sound: quiet text links, nothing like the tiles */
+.controls{ gap:0; margin-bottom:.8rem; align-items:center; }
+button.btn, button.btn.ghost{
+  background:none; border:0; box-shadow:none; border-radius:0;
+  padding:.2rem .7rem; font-size:.78rem; font-weight:600; letter-spacing:.2px;
+  color:#5f7186;
+}
+.controls button.btn + button.btn{ border-left:1px solid rgba(95,113,134,.35); }
+@media(hover:hover){
+  button.btn:hover, button.btn.ghost:hover{ background:none; color:var(--accent); transform:none;
+    text-decoration:underline; text-underline-offset:3px; }
+}
+button.btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+@media(max-width:600px){
+  .filter-bar{ gap:.1rem .8rem; margin:.5rem 0 .5rem; }
+  .filter-btn{ font-size:.92rem; padding:.2rem 0 .3rem; }
+  button.btn, button.btn.ghost{ padding:.2rem .55rem; font-size:.72rem; }
+}
+@media(min-width:601px) and (max-height:860px){
+  .filter-btn{ font-size:1.1rem; }
+}
+@media(max-height:500px){
+  .filter-bar{ gap:.1rem .9rem; margin:.25rem 0 .2rem; }
+  .filter-btn{ font-size:.85rem; padding:.1rem 0 .2rem; border-bottom-width:2px; }
+  button.btn, button.btn.ghost{ padding:.1rem .45rem; font-size:.66rem; }
+}
+@media(pointer:coarse){
+  .filter-btn{ min-height:40px; }
+  button.btn, button.btn.ghost{ min-height:34px; }
+}
 </style>
 </head>
 <body>
@@ -1067,6 +1127,7 @@ footer{
       <strong>make</strong> + <strong>a shower</strong> → ✗ we say “have a shower”
     </div>
 
+    <button class="slide-music" id="slideMusic" type="button">🎵 Play the song</button>
     <button class="slide-start" id="slideStart" type="button">Start playing</button>
     <div class="slide-foot">Clear all 20 cards to finish the board.</div>
   </div>
@@ -1107,18 +1168,6 @@ footer{
 <main>
   <div class="level-badge">A1–A2 BEGINNER</div>
   <h1>Have, Make &amp; Do – Build the Collocation</h1>
-  <p>
-    Choose a verb, then turn over a card. If the word goes with your verb, you keep it.
-    Each board has <strong>25 tiles</strong> — 5 verb tiles and 20 cards to clear.
-  </p>
-
-  <!-- Verb colour legend -->
-  <div class="verb-legend">
-    <span class="verb-badge have">HAVE</span>
-    <span class="verb-badge make">MAKE</span>
-    <span class="verb-badge do">DO</span>
-  </div>
-
   <!-- Verb mix buttons -->
   <div class="filter-bar">
     <button class="filter-btn active" data-mix="have,make,do">All three</button>
@@ -1127,23 +1176,24 @@ footer{
     <button class="filter-btn" data-mix="make,do">Make + Do</button>
   </div>
 
-  <div class="round-info" id="roundInfo">Round 1</div>
-
-  <div class="score-bar">
-    <div>Matched: <span id="scoreMatched">0</span> / 20</div>
-    <div>Score: <span id="scorePoints">0</span></div>
-    <div>Mistakes: <span id="scoreMisses">0</span></div>
-  </div>
-
   <div class="controls">
     <button class="btn" id="newRoundBtn">New Board ↻</button>
     <button class="btn ghost" id="howToBtn" type="button">How to play</button>
     <button class="btn ghost" id="soundBtn" type="button" aria-pressed="true">🔊 Sound on</button>
   </div>
 
-  <div id="prompt" role="status" aria-live="polite">Choose a verb to start.</div>
+  <div id="prompt" role="status" aria-live="polite"></div>
 
   <div id="game"></div>
+
+  <!-- the round and the score, under the cards -->
+  <div class="round-info" id="roundInfo" style="margin-top:1.2rem">Round 1</div>
+  <div class="score-bar">
+    <div>Matched: <span id="scoreMatched">0</span> / 20</div>
+    <div>Score: <span id="scorePoints">0</span></div>
+    <div>Mistakes: <span id="scoreMisses">0</span></div>
+  </div>
+
   <div id="status"></div>
 
   <div class="made">
@@ -1244,7 +1294,7 @@ footer{
      game:   while you are playing the board
      win:    the winner screen
      ══════════════════════════════════════════════════════════════════ */
-  const MUSIC = { intro:0.5, game:0.15, win:0.95 };
+  const MUSIC = { intro:0.6, game:0.3, win:0.95 };
 
   const a = document.getElementById("bgMusic");   /* the music player (the video itself stays silent) */
   let musicOn = true, unlocked = false, gain = null, actx = null, useGraph = false;
@@ -1288,6 +1338,14 @@ footer{
   }, 100);
   ["touchstart","pointerdown","keydown"].forEach(evt=>{
     document.addEventListener(evt, unlock, {once:true, passive:true, capture:true});
+  });
+  /* "Play the song" on the opening slide: the tap itself starts the music */
+  const songBtn = document.getElementById("slideMusic");
+  if(songBtn) songBtn.addEventListener("click", ()=>{
+    unlock(); musicOn = true;
+    if(a.paused){ const p = a.play(); if(p && p.catch) p.catch(()=>{}); }
+    songBtn.setAttribute("aria-pressed","true");
+    songBtn.textContent = "🎵 Song playing";
   });
   /* the game's Sound button calls this */
   window.bgMusic = { setOn(on){ musicOn = !!on; } };
@@ -1603,7 +1661,7 @@ function buildRound(resetAll){
   render();
   fitAll();
   updateScore();
-  say("Choose a verb to start.");
+  say("");
 }
 
 function render(){
@@ -1673,20 +1731,20 @@ function onTap(t, el){
   if(t.kind === "verb"){
     if(selected && selected.id === t.id){
       clearSelection();
-      say("Choose a verb to start.");
+      say("");
       return;
     }
     clearSelection();
     selected = t;
     el.classList.add("selected");
     playSelect(t.verb);
-    say("“" + t.text + "” — now turn over a card.");
+    say("");
     return;
   }
 
   /* ---- word card ---- */
   if(!selected){
-    say("Choose a verb first, then turn over a card.", true);
+    say("Choose a verb first.", true);
     el.classList.add("shake");
     setTimeout(()=>el.classList.remove("shake"), 380);
     return;
@@ -1726,7 +1784,7 @@ function onTap(t, el){
       updateScore();
       lock = false;
       if(matched === CARDS) finishRound();
-      else say("Choose a verb.");
+      else say("");
     }, 900);
 
   } else {
@@ -1735,7 +1793,7 @@ function onTap(t, el){
     misses++;
     points = Math.max(0, points - 2);
     updateScore();
-    say("✗ Not “" + phrase + "”. We say “" + t.verb + " " + t.text + "”.", true);
+    say("✗ We say “" + t.verb + " " + t.text + "”.", true);
 
     setTimeout(()=>{
       el.classList.add("wrong","shake");
@@ -1752,7 +1810,7 @@ function onTap(t, el){
       verbTile.el.classList.remove("wrong");
       clearSelection();
       lock = false;
-      say("Remember where that one was. Choose a verb.");
+      say("");
     }, REVEAL_MS);
   }
 }
@@ -1773,8 +1831,6 @@ function track(name, params){ try { if (typeof gtag === "function") gtag("event"
 
 function finishRound(){
   track("board_complete", { game: "have_make_do", round: roundNo, mistakes: misses, verbs: mix.join("+") });
-  statusEl.textContent = "🎉 Board cleared! " + misses +
-    (misses === 1 ? " mistake" : " mistakes") + " so far.";
   say("");
   playWin();
 
