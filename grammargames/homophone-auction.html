@@ -309,6 +309,7 @@
   @media (max-width:600px){ .dialog{ padding:1.3rem 1.1rem 1.1rem; } }
 
   /* ===== Footer ===== */
+  .music-credit{ display:block; margin-top:.35rem; font-size:.72rem; opacity:.6; letter-spacing:.02em; }
   footer{ width:100%; text-align:center; background:var(--card); color:var(--muted); padding-block:1rem; border-top:1px solid var(--line); font-size:.9rem;
     padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); }
 
@@ -319,6 +320,11 @@
   .panel, .wall-label, .trow{ padding-left:0; padding-right:0; }
   .tablewrap{ padding:0; }
   .panel, .wall-label, .trow, .tablewrap, .empty, .rules, .lede, .bidline{ text-shadow:0 1px 1px rgba(251,243,226,.7); }
+
+  /* ===== Teachers: make your own (links to the Grammar Auction Maker) ===== */
+  .makeown{ margin:1.6rem auto 0; max-width:640px; font-family:var(--body-font); font-size:1rem; color:var(--headline); text-shadow:0 1px 1px rgba(255,255,255,.6); }
+  .makeown strong{ display:block; font-family:var(--display-font); font-weight:400; font-size:1.2rem; letter-spacing:1px; margin-bottom:.2rem; }
+  .makeown a{ color:var(--h2); font-weight:700; text-underline-offset:4px; }
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -343,8 +349,14 @@
      To remove a video, delete its <video> block. Brightness: ".bg-video { opacity }".
      Sound settings for each film are in FILM SETTINGS in the script below.
      ══════════════════════════════════════════════════════════════════════ -->
-<!-- CELEBRATION SONG — plays once on the Rich List screen. Put the mp3 in the same folder as this page. -->
-<audio id="celebSong" src="the-great-conjugator.mp3" preload="auto"></audio>
+<!-- GAME MUSIC — Handel, "Arrival of the Queen of Sheba" (public domain). Put queen-of-sheba.mp3
+     (and queen-of-sheba.ogg as a spare) in the same folder as this page.
+     Medium on the setup screen, soft during the game, full volume for the Rich List celebration.
+     Volumes are in MUSIC SETTINGS in the script below. -->
+<audio id="gameMusic" loop preload="auto">
+  <source src="queen-of-sheba.mp3" type="audio/mpeg">
+  <source src="queen-of-sheba.ogg" type="audio/ogg">
+</audio>
 <video class="bg-video" id="filmSetup" muted loop playsinline webkit-playsinline preload="auto" aria-hidden="true" tabindex="-1" hidden>
   <source src="hammer.mp4" type="video/mp4">
 </video>
@@ -389,6 +401,10 @@
     <a href="https://modernenglish.au/vocabularygames.html" class="linkbtn" target="_blank" rel="noopener">More Vocabulary Games<span class="arrow" aria-hidden="true">→</span></a>
     <a href="https://modernenglish.au/" class="linkbtn" target="_blank" rel="noopener">Home<span class="arrow" aria-hidden="true">→</span></a>
   </div>
+
+  <!-- TEACHERS: MAKE YOUR OWN -->
+  <p class="makeown"><strong>Teachers: make your own</strong>Write your own right and wrong sentences and run an auction like this one with the free <a href="https://modernenglish.au/teachertools/bespoke-grammar-auction-maker.html" target="_blank" rel="noopener">Grammar Auction Maker</a>, or browse all our <a href="https://modernenglish.au/teachertools/TeacherToolDirectory.html" target="_blank" rel="noopener">teacher tools</a>.</p>
+
 </main>
 
 <!-- ══════════════════════════════════════════════════════════════════════
@@ -412,7 +428,8 @@
 </div>
 
 <!-- ===== Footer ===== -->
-<footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</footer>
+<footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved
+  <span class="music-credit">Music: G. F. Handel, <em>Arrival of the Queen of Sheba</em> (public domain)</span></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 
@@ -825,7 +842,7 @@ function render(){
   const v = {setup:vSetup, preview:vPreview, auction:vAuction, reveal:vReveal, redeem:vRedeem, results:vResults}[S.screen] || vSetup;
   $app.innerHTML = stepbar() + v();
   try{ Film.sync(S.screen, userAction); }catch(e){}   /* a missing film never stops the game */
-  try{ CelebSong.sync(S.screen); }catch(e){}
+  try{ Music.sync(S.screen); }catch(e){}
   save();
 }
 function go(screen){ S.screen = screen; render(); const top = $app.getBoundingClientRect().top + window.scrollY - 12; if(window.scrollY > top) window.scrollTo({top, behavior:"auto"}); }
@@ -901,7 +918,7 @@ helpOverlay.addEventListener("click", e => { if(e.target === helpOverlay) closeH
     btn.textContent = on ? "🔊 Sound on" : "🔇 Sound off";
     btn.setAttribute("aria-pressed", on ? "true" : "false");
   }
-  btn.addEventListener("click", () => { AuctionSFX.setOn(!AuctionSFX.isOn()); if(!AuctionSFX.isOn()){ Film.silence(); CelebSong.stop(); } paint(); });
+  btn.addEventListener("click", () => { AuctionSFX.setOn(!AuctionSFX.isOn()); if(!AuctionSFX.isOn()){ Film.silence(); Music.stop(); } else Music.kick(); paint(); });
   paint();
 })();
 
@@ -940,14 +957,14 @@ document.addEventListener("keydown", e => {
 const FILMS = [
   { id:"filmSetup",   screen:"setup",   soundSeconds:10, volume:0.8 },
   { id:"filmAuction", screen:"auction", soundSeconds:15, volume:0.8 },
-  { id:"filmWinner",  screen:"results", soundSeconds:0,  volume:0.9 }   /* silent: the celebration song plays instead */
+  { id:"filmWinner",  screen:"results", soundSeconds:0,  volume:0.9 }   /* silent: the music swells instead */
 ];
 const Film = (function(){
   const timers = {};
-  let current = null;
+  let current = null, loudNow = false;   /* loudNow: a film is playing its own sound (the music dips under it) */
   function fadeOut(v){
     let vol = v.volume;
-    const f = setInterval(() => { vol = Math.max(0, vol - 0.1); v.volume = vol; if(vol <= 0){ clearInterval(f); v.muted = true; } }, 80);
+    const f = setInterval(() => { vol = Math.max(0, vol - 0.1); v.volume = vol; if(vol <= 0){ clearInterval(f); v.muted = true; loudNow = false; } }, 80);
   }
   /* withSound = true only when a click brought us to this screen (browsers allow sound then) */
   function sync(screen, withSound){
@@ -964,32 +981,56 @@ const Film = (function(){
         const p = v.play();
         if(p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); });
         clearTimeout(timers[cfg.id]);
+        loudNow = loud;
         if(loud) timers[cfg.id] = setTimeout(() => fadeOut(v), cfg.soundSeconds * 1000);
       } else {
         clearTimeout(timers[cfg.id]);
         v.pause(); v.muted = true; v.hidden = true;
-        if(current === cfg.id) current = null;
+        if(current === cfg.id){ current = null; loudNow = false; }
       }
     });
   }
-  function silence(){ FILMS.forEach(cfg => { const v = document.getElementById(cfg.id); if(v) v.muted = true; }); }
-  return { sync, silence };
+  function silence(){ loudNow = false; FILMS.forEach(cfg => { const v = document.getElementById(cfg.id); if(v) v.muted = true; }); }
+  return { sync, silence, isLoud: () => loudNow };
 })();
 
-/* ===== CELEBRATION SONG — starts from the beginning when the Rich List appears, stops when you leave it ===== */
-const CelebSong = (function(){
-  let playing = false;
-  function sync(screen){
-    const a = document.getElementById("celebSong"); if(!a) return;
-    if(screen === "results" && AuctionSFX.isOn()){
-      if(playing) return;
-      playing = true; a.volume = 0.9;
-      try{ a.currentTime = 0; }catch(e){}
-      const p = a.play(); if(p && p.catch) p.catch(() => { playing = false; });
-    } else stop();
+/* ══════════════════════════════════════════════════════════════════════
+   ▶▶▶  MUSIC SETTINGS — volumes from 0 (silent) to 1 (full)
+   intro:   the setup screen (choosing level and families)
+   game:    everything from the catalogue to the redemption round
+   finale:  the Rich List celebration (the track restarts from the top and swells up)
+   filmDip: how quiet the music goes while a background film plays its own sound
+   ══════════════════════════════════════════════════════════════════════ */
+const MUSIC = { intro:0.45, game:0.12, finale:1.0, filmDip:0.08 };
+const Music = (function(){
+  const el = () => document.getElementById("gameMusic");
+  let unlocked = false, screen = "setup", last = null;
+  function target(){
+    if(!AuctionSFX.isOn()) return 0;
+    if(screen === "results") return MUSIC.finale;
+    const base = screen === "setup" ? MUSIC.intro : MUSIC.game;
+    return Film.isLoud() ? Math.min(base, MUSIC.filmDip) : base;
   }
-  function stop(){ const a = document.getElementById("celebSong"); playing = false; if(a && !a.paused) a.pause(); }
-  return { sync, stop };
+  /* browsers only allow music after a tap or key press, so it starts on the first one */
+  function kick(){
+    const a = el(); if(!a || !unlocked) return;
+    if(!AuctionSFX.isOn()){ if(!a.paused) a.pause(); return; }
+    if(a.paused){ if(a.currentTime === 0) a.volume = 0; const p = a.play(); if(p && p.catch) p.catch(() => {}); }
+  }
+  function sync(s){
+    const a = el(); if(!a) return;
+    if(s === "results" && last !== "results"){ try{ a.currentTime = 0; }catch(e){} a.volume = MUSIC.game; }   /* fanfare from the top */
+    last = s; screen = s; kick();
+  }
+  function stop(){ const a = el(); if(a && !a.paused) a.pause(); }
+  /* smooth volume changes: a gentle glide between screens, a quicker swell for the celebration */
+  setInterval(() => {
+    const a = el(); if(!a || a.paused) return;
+    const t = target(), v = a.volume, step = (screen === "results" && t > v) ? 0.06 : 0.03;
+    a.volume = Math.abs(t - v) <= step ? t : Math.min(1, Math.max(0, v + Math.sign(t - v) * step));
+  }, 100);
+  ["pointerdown","keydown","touchstart"].forEach(ev => document.addEventListener(ev, () => { if(!unlocked){ unlocked = true; kick(); } }, {capture:true, passive:true}));
+  return { sync, stop, kick };
 })();
 
 /* ===== Start ===== */
