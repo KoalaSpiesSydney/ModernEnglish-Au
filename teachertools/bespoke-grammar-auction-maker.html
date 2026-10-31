@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<!-- Bespoke Grammar Auction Maker © Koala Spies Sydney. All rights reserved. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bespoke Grammar Auction Maker: Free Classroom Grammar Auction Game Generator | Modern English Australia</title>
+<meta name="description" content="Make your own grammar auction in minutes. Type your correct and incorrect sentences (or true and false claims), pick a theme, and run a full classroom auction with paddles, a gavel, a reveal and a Rich List. Free for teachers, no sign-up.">
+<link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-grammar-auction-maker.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Serif+4:wght@700;800&family=Limelight&family=Bevan&family=Special+Elite&family=Bitter:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap">
+<style>
+/* =====================================================================
+   BESPOKE GRAMMAR AUCTION MAKER
+   One file, no server. Everything (sentences, theme, game) stays in the
+   visitor's browser. The auction itself is drawn by the AUCTION ENGINE
+   further down, so the preview, the classroom game and the downloaded
+   game are always identical.
+   ===================================================================== */
+:root{
+  --bench:#fffce6;      /* the site's cream page colour */
+  --panel:#ffffff;
+  --ink:#0f172a;
+  --soft:#475569;
+  --line:#dcd9c6;
+  --header:#1c1c1c;     /* header and footer, as on modernenglish.au */
+  --tag:#fde047;        /* the yellow of the site's tagline, on dark only */
+  --deep:#0e2861;       /* Modern English navy: primary buttons, headings */
+  --foil:#0e7c66;       /* Modern English teal, used sparingly */
+  --focus:#3968ea;
+  --warn:#b3261e;
+  --good:#1f7a4d;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Koala Spies Sydney watermark: faint, repeated across the page behind the panels. */
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%230f172a%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+body.playing{overflow:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* ---------- header (no QR code: this tool is for teachers' preparation only) ---------- */
+.top{background:var(--header);color:#f8fafc}
+.top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
+.top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.titleblock{flex:1 1 16rem;min-width:0}
+.top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:46ch}
+
+/* ---------- the bench: controls + preview ---------- */
+.bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(320px,480px) minmax(0,1fr);gap:1.5rem;align-items:start}
+.controls{display:grid;gap:.75rem;min-width:0}
+details.group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+details.group>summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.group>summary::-webkit-details-marker{display:none}
+details.group>summary::after{content:"";width:.55rem;height:.55rem;border-right:2px solid var(--soft);border-bottom:2px solid var(--soft);transform:rotate(45deg);transition:transform .15s ease;flex:none;margin-right:.2rem}
+details.group[open]>summary::after{transform:rotate(-135deg)}
+.group-body{padding:0 1rem 1rem;display:grid;gap:.8rem}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft);min-width:0}
+label.f>span{font-weight:700;color:var(--ink)}
+label.f>span em{font-weight:400;color:var(--soft)}
+input[type=text],input[type=number],textarea,select{width:100%;padding:.55rem .65rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:1rem;min-height:44px}
+textarea{resize:vertical;min-height:4.2rem;line-height:1.4}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+.hint.warn{color:var(--warn);font-weight:700}
+.hint:empty{display:none}
+.lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
+
+.rowline{display:flex;gap:.45rem;align-items:center;flex-wrap:wrap;font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:.2rem 1rem}
+/* plain text buttons: no border, no fill, no pill shape */
+.chip{border:0;background:none;border-radius:0;padding:.3rem 0;font-size:.95rem;font-weight:700;color:var(--deep);cursor:pointer;min-height:38px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:.25em;text-decoration-thickness:1.5px}
+.chip:hover{text-decoration-color:currentColor}
+
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg label{position:relative;text-align:center;padding:.5rem .4rem;cursor:pointer;font-size:.95rem;min-height:44px;display:flex;align-items:center;justify-content:center}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--deep);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:-3px}
+
+.swatches{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center}
+.sw{width:44px;height:44px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep)}
+input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+#themeName{margin:.35rem 0 0;font-size:.9rem;color:var(--soft)}
+
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
+.btn:hover{background:#eef2fb}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:hover{background:#0a1d47}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep);flex:none}
+
+/* ---------- the lot editor ---------- */
+.lots{display:grid;gap:1.6rem;counter-reset:lot}
+.lot{display:grid;gap:.6rem;padding-left:.85rem;border-left:4px solid var(--line);transition:border-color .15s ease}
+.lot:focus-within,.lot.on{border-left-color:var(--deep)}
+.lot.bad{border-left-color:var(--warn)}
+.lot-head{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}
+.lot-n{font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:1.05rem}
+.lot-n small{font-family:"Source Sans 3",sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;margin-left:.4rem;padding:.1rem .45rem;border-radius:4px}
+.lot-n small.g{background:#dcefe3;color:var(--good)}
+.lot-n small.f{background:#f6d6d0;color:var(--warn)}
+.lot-tools{display:flex;gap:.1rem .7rem;flex-wrap:wrap}
+.mini{border:0;background:none;padding:.2rem 0;font-size:.88rem;font-weight:700;color:var(--deep);cursor:pointer;min-height:32px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:.2em}
+.mini:hover{text-decoration-color:currentColor}
+.mini[disabled]{color:#a3aab5;cursor:default;text-decoration:none}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media (max-width:420px){.pair{grid-template-columns:1fr}}
+.addrow{display:flex;gap:.5rem;flex-wrap:wrap}
+#summary{margin:0;font-weight:700}
+
+/* ---------- preview ---------- */
+.stage{position:sticky;top:1rem;display:grid;gap:.8rem;min-width:0}
+.paper{background:#ebe7cf;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.4rem)}
+.pvbox{position:relative;overflow:hidden;border-radius:6px;box-shadow:0 1px 2px rgba(15,23,42,.25),0 14px 34px -10px rgba(15,23,42,.45)}
+.pvinner{width:1000px;transform-origin:0 0;position:absolute;left:0;top:0}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.pager{display:flex;align-items:center;gap:.5rem;font-size:.95rem;flex-wrap:wrap}
+.pager .btn{padding:.3rem .8rem}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+#status.warn{color:var(--warn);font-weight:700}
+.fineprint{margin:0;font-size:.9rem;color:var(--soft)}
+.fineprint a,.terms a,.notes a{color:var(--deep);font-weight:700}
+
+/* ---------- reading matter under the tool ---------- */
+.notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+.terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
+.terms h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+footer{background:var(--header);color:#cbd5e1;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer a{color:#fff}
+
+/* ---------- the classroom game: fills the whole screen ---------- */
+.play{position:fixed;inset:0;z-index:1000;overflow:auto;background:#111;-webkit-overflow-scrolling:touch}
+
+/* ---------- smaller screens: preview first, action bar stays in reach ---------- */
+@media (max-width:900px){
+  .bench{grid-template-columns:1fr;padding:1rem}
+  .stage{position:static;order:-1}
+  .actions{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--panel);border-top:1px solid var(--line);padding:.6rem .8rem;padding-bottom:max(.6rem,env(safe-area-inset-bottom));justify-content:center}
+  .actions .btn{flex:1 1 auto;padding:.55rem .6rem}
+  body{padding-bottom:6.5rem}
+}
+/* ---------- open layout: no card backings, no horizontal lines, raised buttons ---------- */
+details.group,.terms-in{background:none;border:0!important;border-radius:0;box-shadow:none}
+details.group{margin-bottom:.35rem}
+details.group>summary{padding-left:0;padding-right:0}
+.group-body,.terms-in{padding-left:0;padding-right:0}
+.notes h2{border-bottom:0;padding-bottom:0}
+.btn{box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
+.btn:not([disabled]):hover{box-shadow:0 2px 4px rgba(15,23,42,.22),0 12px 24px -8px rgba(15,23,42,.48);transform:translateY(-1px)}
+.btn:not([disabled]):active{box-shadow:0 1px 2px rgba(15,23,42,.28);transform:translateY(0)}
+.btn[disabled]{box-shadow:none;transform:none}
+.sw{box-shadow:0 0 0 1.5px var(--line),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+
+/* ---------- typing fields: white, with a firm bottom edge that says "write here" ---------- */
+input[type=text],input[type=number],input[type=url],textarea,select{background:#fff;border:1px solid #d5d3c2;border-bottom:2px solid #94a3b8;border-radius:6px 6px 3px 3px;box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 1px 2px rgba(15,23,42,.1),0 5px 14px -5px rgba(15,23,42,.28);transition:border-color .15s ease,box-shadow .15s ease}
+input[type=text]:hover,input[type=number]:hover,input[type=url]:hover,textarea:hover,select:hover{border-bottom-color:var(--deep)}
+input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,textarea:focus,select:focus{outline:none;border-color:var(--deep);box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 5px 14px -5px rgba(15,23,42,.28),0 0 0 3px rgba(57,104,234,.22)}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
+select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23475569' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right .8rem center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<!-- =====================================================================
+     AUCTION ENGINE STYLES. Everything is inside .ga so it never touches
+     the maker page. The same styles go into every downloaded game.
+     ===================================================================== -->
+<style id="gaCss">
+.ga{--good:#2e7d5b;--bad:#b3261e;--good-soft:#dcefe3;--bad-soft:#f6d6d0;--key-soft:#fbe8b8;
+  --display-font:'Limelight','Bevan',Georgia,serif;--accent-font:'Special Elite','Courier New',monospace;--body-font:'Bitter',Georgia,'Times New Roman',serif;
+  position:relative;min-height:100vh;display:flex;flex-direction:column;text-align:center;
+  background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg) 60%,var(--bg-bottom) 100%);color:var(--ink);font-family:var(--body-font);line-height:1.5;font-size:17px;-webkit-text-size-adjust:100%}
+.ga *{box-sizing:border-box}
+.ga button{font:inherit;cursor:pointer;color:inherit}
+.ga [hidden]{display:none!important}
+.ga :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ga.ga-preview{min-height:0}
+
+/* top bar */
+.ga-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem 1rem;flex-wrap:wrap;background:var(--top-grad);color:#fff;padding:.7rem max(16px,env(safe-area-inset-left,0px));border-bottom:2px solid var(--metal);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 2px 10px rgba(0,0,0,.3);text-align:left}
+.ga-title{min-width:0}
+.ga-eyebrow{display:block;font-family:var(--accent-font);font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.ga-title b{display:block;font-family:var(--display-font);font-weight:400;font-size:clamp(1.15rem,2.6vw,1.55rem);letter-spacing:1px;line-height:1.2;overflow-wrap:anywhere}
+.ga-tools{display:flex;gap:.4rem;flex-wrap:wrap}
+.ga-tool{appearance:none;border:1px solid rgba(255,255,255,.35);background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.04));color:#fff!important;border-radius:8px;padding:.45rem .75rem;font-family:var(--accent-font);font-size:.85rem;line-height:1.2}
+.ga-tool.warn{border-color:#ffb4a8;color:#ffd9d2!important}
+.ga-main{flex:1;width:100%;max-width:1200px;margin:0 auto;padding:1.6rem max(16px,env(safe-area-inset-left,0px)) 3rem}
+.ga-foot{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:.8rem;background:var(--card);color:var(--muted);padding:.8rem 1rem;border-top:2px solid var(--metal)}
+.ga-foot a{color:#fff}
+
+/* type */
+.ga h2.sec{font-family:var(--display-font);font-weight:400;color:var(--headline);letter-spacing:1px;font-size:clamp(1.4rem,3.5vw,2rem);margin:0;text-shadow:0 1px 0 rgba(255,255,255,.8)}
+.ga .kicker{font-family:var(--accent-font);color:var(--h2);font-size:.8rem;letter-spacing:3px;text-transform:uppercase;margin:0 0 .4rem}
+.ga .lede{max-width:62ch;margin:.6rem auto 0}
+.ga .label{font-family:var(--accent-font);color:var(--h2);font-size:.85rem;letter-spacing:3px;text-transform:uppercase;margin:2rem 0 .9rem;font-weight:400}
+.ga .note{color:var(--grey);font-size:.92rem;margin:0}
+.ga .gap{height:1.6rem}
+.ga .grow{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:center}
+
+/* glossy buttons */
+.ga .gbtn{font-family:var(--accent-font);background:var(--gloss);color:var(--accent-text);border:1px solid var(--accent-deep);border-radius:8px;padding:.75rem 1.4rem;font-size:1rem;text-shadow:var(--accent-shadow);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 4px rgba(0,0,0,.12),0 3px 8px rgba(0,0,0,.25);transition:all .25s ease}
+@media (hover:hover){.ga .gbtn:not(:disabled):hover{background:var(--gloss-hover);transform:translateY(-2px)}}
+.ga .gbtn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.ga .gbtn.ghost{background:var(--gloss-light);color:var(--headline);border-color:var(--metal);text-shadow:0 1px 0 #fff;box-shadow:inset 0 1px 0 #fff,0 2px 6px rgba(0,0,0,.12)}
+.ga .linkish{font-family:var(--accent-font);background:none;border:0;color:var(--h2);text-decoration:underline;text-underline-offset:4px;font-weight:700;padding:0}
+
+/* setup */
+.ga .stepper{display:flex;align-items:center;gap:12px}
+.ga .stepper button{width:40px;height:40px;border-radius:50%;border:1px solid var(--metal);background:var(--gloss-light);color:var(--headline);font-size:1.2rem;line-height:1;box-shadow:inset 0 1px 0 #fff,0 2px 5px rgba(0,0,0,.15)}
+.ga .stepper .n{font-family:var(--display-font);font-size:2rem;min-width:1.4em;text-align:center;color:var(--headline)}
+.ga .teams{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin:14px auto 0;max-width:980px;text-align:left}
+.ga .trow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;padding:8px 4px}
+.ga .pdisc{width:42px;height:42px;border-radius:50%;background:var(--disc);color:var(--accent-text);border:2px solid var(--metal);display:grid;place-items:center;font-family:'Bevan',Georgia,serif;font-size:1.1rem;box-shadow:inset 0 2px 3px rgba(255,255,255,.4),0 2px 5px rgba(0,0,0,.25)}
+.ga select{width:100%;background:#fff;color:#1a1a1a;border:1px solid var(--edge);border-radius:8px;padding:10px 12px;font-family:var(--body-font);font-size:16px;min-height:44px}
+.ga .hero{font-family:var(--display-font);font-weight:400;color:var(--headline);letter-spacing:2px;margin:.4rem 0 0;font-size:clamp(1.6rem,4vw,2.6rem);text-shadow:0 1px 0 rgba(255,255,255,.8);overflow-wrap:anywhere}
+.ga .heroline{max-width:640px;margin:.5rem auto 0}
+
+/* frames */
+.ga .catalogue{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:26px 20px;margin-top:1.6rem;text-align:left}
+.ga .gstage{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;max-width:960px;margin:0 auto;text-align:left}
+.ga .frame-wrap{padding-top:calc(var(--fw) * .3);margin:0;--fw:46px;--matp:clamp(16px,3vw,30px)}
+.ga .frame-wrap.lg{width:100%;max-width:820px;margin-inline:auto}
+.ga .frame-wrap.md{width:100%;max-width:740px;margin-inline:auto;--fw:34px;--matp:clamp(12px,2.4vw,22px)}
+.ga .frame-wrap.sm{--fw:22px;--matp:9px}
+.ga .frame{position:relative;border:var(--fw) solid var(--metal);border-image:var(--frame-img) 60 round;filter:drop-shadow(0 16px 22px rgba(0,0,0,.3))}
+.ga .frame::before,.ga .frame::after{content:"";position:absolute;left:50%;width:calc(var(--fw) * 2.6);height:calc(var(--fw) * 1.3);background:var(--crest-img) center / contain no-repeat;pointer-events:none;z-index:1}
+.ga .frame::after{top:calc(var(--fw) * -1.3);transform:translateX(-50%)}
+.ga .frame::before{bottom:calc(var(--fw) * -1.3);transform:translateX(-50%) rotate(180deg)}
+.ga .frame-mat{padding:var(--matp);background:repeating-linear-gradient(0deg,rgba(0,0,0,.035) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(0,0,0,.035) 0 1px,transparent 1px 3px),var(--mat);box-shadow:inset 0 5px 12px rgba(0,0,0,.35),inset 0 -1px 3px rgba(0,0,0,.12)}
+.ga .frame-canvas{position:relative;overflow:hidden;padding:clamp(.4rem,2vw,1rem);text-align:center;min-height:5em;display:grid;align-content:center}
+.ga .frame-wrap.sm .frame-canvas{padding:.2rem;min-height:3.2em;gap:.4rem}
+.ga .plaque{display:table;position:relative;margin:calc(var(--fw) * .3 + 14px) auto 0;padding:.35rem 1.5rem;background:var(--plaque);color:var(--plaque-ink);font-family:var(--display-font);letter-spacing:2px;text-transform:uppercase;font-size:1rem;border-radius:4px;text-shadow:0 1px 0 rgba(255,255,255,.6);border:1px solid var(--metal-dark);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -1px 0 rgba(0,0,0,.2),0 3px 6px rgba(0,0,0,.3)}
+.ga .plaque span{font-family:var(--accent-font);letter-spacing:1px;text-transform:none;font-size:.85em}
+.ga .plaque::before,.ga .plaque::after{content:"";position:absolute;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--gem-dot)}
+.ga .plaque::before{left:7px}.ga .plaque::after{right:7px}
+.ga .frame-wrap.sm .plaque{font-size:.75rem;padding:.2rem 1.1rem}
+.ga .mini-s{margin:0;font-size:.98rem}
+.ga .mini-c{margin:0;font-size:.88rem;font-style:italic;color:var(--h2)}
+@media (max-width:520px){.ga .frame-wrap{--fw:30px}}
+
+/* sentence, claim, highlights */
+.ga .sentence{font-family:var(--body-font);font-weight:600;font-size:clamp(1.25rem,3vw,1.95rem);line-height:1.4;margin:0;color:#1d1a17;overflow-wrap:anywhere}
+.ga .sentence mark{background:none;color:inherit;padding:0 .1em;border-radius:2px}
+.ga .sentence mark.ok{background:var(--good-soft);border-bottom:3px solid var(--good)}
+.ga .sentence mark.bad{background:var(--bad-soft);border-bottom:3px solid var(--bad);text-decoration:line-through;text-decoration-thickness:2px}
+.ga .sentence mark.key{background:var(--key-soft);border-bottom:3px solid var(--metal)}
+.ga .claim{margin:1.1rem auto 0;max-width:40ch;padding:.6rem 1rem 0;border-top:1px solid rgba(0,0,0,.12);font-size:clamp(1.05rem,2.3vw,1.35rem);font-style:italic;color:#2a2622}
+.ga .claim b{display:block;font-family:var(--accent-font);font-style:normal;font-weight:400;font-size:.72em;letter-spacing:3px;text-transform:uppercase;color:var(--h2);margin-bottom:.15rem}
+.ga .claim.struck span{text-decoration:line-through;text-decoration-color:var(--bad);text-decoration-thickness:2px;opacity:.75}
+.ga .stamp{position:absolute;right:.4rem;bottom:.4rem;transform:rotate(-9deg);border:4px double currentColor;padding:.15rem .8rem;font-family:var(--display-font);font-size:clamp(1rem,2.4vw,1.45rem);letter-spacing:3px;text-transform:uppercase;background:rgba(255,255,255,.88);animation:gaThud .35s ease-out}
+.ga .stamp.sold{color:var(--h2)}.ga .stamp.genuine{color:var(--good)}.ga .stamp.forgery{color:var(--bad)}
+@keyframes gaThud{from{transform:rotate(-9deg) scale(1.8);opacity:0}to{transform:rotate(-9deg) scale(1);opacity:1}}
+.ga .wall-label{max-width:640px;margin:16px auto 0;padding:.9rem 0;text-align:left;display:grid;gap:10px}
+.ga .owner{font-family:var(--accent-font);font-size:.9rem;color:var(--grey);margin:0}
+.ga .vote{margin:0;font-style:italic;color:var(--grey)}
+.ga .verdict{padding-top:.8rem;border-top:1px solid var(--edge);display:grid;gap:6px}
+.ga .verdict .fix{font-family:var(--accent-font)}
+.ga .verdict .fix span{font-family:var(--body-font);font-weight:700;background:var(--good-soft);padding:1px 8px;border-radius:4px}
+.ga .verdict .fix s{font-family:var(--body-font);text-decoration-color:var(--bad);text-decoration-thickness:2px}
+.ga .verdict p{margin:0}
+.ga .legend{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.85rem;color:var(--grey)}
+.ga .legend mark{padding:0 .4em;border-radius:2px;color:#1d1a17}
+.ga .legend .ok{background:var(--good-soft);border-bottom:2px solid var(--good)}
+.ga .legend .bad{background:var(--bad-soft);border-bottom:2px solid var(--bad)}
+.ga .legend .key{background:var(--key-soft);border-bottom:2px solid var(--metal)}
+
+/* bidding */
+.ga .gstage .grow{justify-content:center}
+.ga .bidline{text-align:center;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:1.4rem 0 1rem}
+.ga .bidline>div{display:grid;gap:2px;min-width:0}
+.ga .k{font-family:var(--accent-font);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--grey)}
+.ga .money{font-family:var(--accent-font)}
+.ga .big{font-size:clamp(1.8rem,4.5vw,2.6rem);color:var(--h2);line-height:1.1}
+.ga .holder{font-family:var(--display-font);font-size:clamp(1.1rem,2.6vw,1.5rem);color:var(--headline);overflow-wrap:anywhere;letter-spacing:1px}
+.ga .nextbid{font-size:1.35rem}
+@media (max-width:520px){.ga .bidline{grid-template-columns:1fr 1fr}.ga .bidline>div:first-child{grid-column:1 / -1}}
+.ga .soldline{text-align:center;font-family:var(--accent-font);font-size:1.15rem;margin:0 0 .8rem;color:var(--h2)}
+
+/* paddles */
+.ga .paddles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,170px));justify-content:center;gap:18px 14px;margin-top:1.4rem;padding-top:24px;justify-items:center}
+.ga .pslot{display:grid;justify-items:center;gap:8px;width:100%;max-width:170px}
+.ga .paddle-btn{appearance:none;background:none;border:0;padding:0;display:grid;justify-items:center;width:100%;transition:transform .2s ease;transform-origin:50% 100%}
+.ga .paddle-head{position:relative;overflow:hidden;width:100%;aspect-ratio:1 / 1.08;border-radius:50% / 46%;background:radial-gradient(ellipse at 50% 20%,#ffffff 0%,var(--paper) 38%,var(--paddle-edge) 100%);border:5px solid var(--card);box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 5px var(--metal),inset 0 -10px 18px rgba(0,0,0,.1),0 6px 14px rgba(0,0,0,.3);display:grid;align-content:center;justify-items:center;gap:2px;padding:12px}
+.ga .paddle-head::before{content:"";position:absolute;left:14%;right:14%;top:5%;height:34%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));pointer-events:none}
+.ga .pnum{position:relative;font-family:'Bevan',Georgia,serif;font-size:clamp(2rem,5vw,2.6rem);line-height:1;color:#1d1a17}
+.ga .pname{position:relative;font-family:var(--display-font);font-size:.95rem;letter-spacing:1px;color:#2a2622;line-height:1.1;text-align:center;overflow-wrap:anywhere}
+.ga .pbid{position:relative;font-family:var(--accent-font);font-size:.85rem;background:var(--gloss);color:var(--accent-text);padding:.15rem .6rem;border-radius:999px;margin-top:4px;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+.ga .paddle-handle{width:22px;height:62px;margin-top:-3px;border-radius:2px 2px 10px 10px;background:var(--handle);box-shadow:0 4px 8px rgba(0,0,0,.25)}
+@media (hover:hover){.ga .paddle-btn:not(:disabled):hover{transform:translateY(-6px) rotate(-3deg)}}
+.ga .paddle-btn:disabled{cursor:not-allowed}
+.ga .paddle-btn:disabled .paddle-head{opacity:.55}
+.ga .paddle-btn:disabled .pbid{background:var(--grey);color:#fff}
+.ga .pslot.high .paddle-btn{transform:translateY(-20px) rotate(-6deg)}
+.ga .pslot.high .paddle-btn .paddle-head{opacity:1;background:var(--paddle-high)}
+.ga .pslot.high .pnum,.ga .pslot.high .pname{color:var(--accent-text);text-shadow:var(--accent-shadow)}
+.ga .pslot.high .pbid{background:var(--card);color:#fff}
+.ga .pstats{width:100%;display:flex;justify-content:center;gap:.4rem;font-family:var(--accent-font);font-size:.88rem;color:var(--grey)}
+
+/* side panels */
+.ga .side{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px 28px;align-items:start}
+.ga .panel{padding:14px 0}
+.ga .panel h3{font-family:var(--accent-font);font-size:.8rem;letter-spacing:3px;text-transform:uppercase;color:var(--h2);font-weight:400;margin:0 0 .7rem}
+.ga .panel.script p{margin:0;font-family:var(--accent-font);font-size:1.05rem;line-height:1.45}
+.ga .record,.ga .tally{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.92rem}
+.ga .record li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--edge);padding-bottom:5px}
+.ga .muted{color:var(--grey);font-style:italic}
+.ga .tally li{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.ga .tally .g{color:var(--good);font-weight:700}.ga .tally .f{color:var(--bad);font-weight:700}
+
+/* redemption */
+.ga .redeem{display:grid;gap:36px;margin-top:1.4rem;text-align:left}
+.ga .who{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-family:var(--accent-font);font-size:.82rem;letter-spacing:1px;text-transform:uppercase;color:var(--grey)}
+.ga .ritem .sentence{font-size:clamp(1.1rem,2.5vw,1.45rem)}
+.ga .opts{display:grid;gap:8px;font-family:var(--accent-font);color:var(--grey)}
+.ga .opts span{font-family:var(--body-font);font-weight:600;background:var(--gloss-light);border:1px solid var(--edge);color:#1d1a17;padding:4px 12px;border-radius:6px;font-size:1rem;box-shadow:inset 0 1px 0 #fff}
+.ga .rbtn{font-family:var(--accent-font);border:1px solid var(--edge);background:var(--gloss-light);color:#1d1a17;padding:.45rem .9rem;border-radius:6px;box-shadow:inset 0 1px 0 #fff}
+.ga .rbtn[aria-pressed="true"].yes{background:linear-gradient(180deg,#5fb98f 0%,#2e7d5b 50%,#266c4e 52%,#2e7d5b 100%);border-color:#1f5a40;color:#fff}
+.ga .rbtn[aria-pressed="true"].no{background:linear-gradient(180deg,#d9776c 0%,#b3261e 50%,#9a1f18 52%,#b3261e 100%);border-color:#7a1712;color:#fff}
+.ga .empty{border:2px dashed var(--h2);border-radius:16px;padding:1.4rem;color:var(--headline);margin-top:1.4rem}
+
+/* rich list */
+.ga .tablewrap{overflow-x:auto;margin-top:1.4rem}
+.ga table{width:100%;border-collapse:collapse;min-width:560px;text-align:left}
+.ga th{font-family:var(--accent-font);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--h2);font-weight:400;padding:10px;border-bottom:1px solid var(--edge)}
+.ga td{padding:14px 10px;border-bottom:1px solid var(--edge);vertical-align:middle}
+.ga tr:last-child td{border-bottom:0}
+.ga td.pts{font-family:var(--display-font);font-size:1.5rem;color:var(--h2)}
+.ga td.num,.ga th.num{text-align:right;font-family:var(--accent-font)}
+.ga .rank{font-family:var(--display-font);font-size:1.6rem;color:var(--grey);width:3ch}
+.ga tr.win .rank{color:var(--h2)}
+.ga tr.win td{background:linear-gradient(180deg,rgba(255,255,255,.85),var(--tint))}
+.ga tr.win{animation:gaWin 1.1s ease-in-out 4}
+@keyframes gaWin{0%,100%{box-shadow:none}50%{box-shadow:0 0 0 3px var(--metal),0 0 30px 6px var(--glow)}}
+.ga .celebrate{font-family:var(--display-font);color:var(--h2);font-size:clamp(1.3rem,3.5vw,1.9rem);letter-spacing:1px;margin:1rem 0 0}
+.ga .fam{font-family:var(--display-font);font-size:1.2rem;letter-spacing:1px;color:var(--headline)}
+.ga .crown{font-family:var(--accent-font);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--plaque-ink);background:var(--plaque);padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:middle}
+
+/* how-to-play pop-up */
+.ga .overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.55);z-index:50}
+.ga .dialog{width:100%;max-width:640px;max-height:86vh;overflow:auto;text-align:left;background:linear-gradient(180deg,#ffffff 0%,var(--paper) 30%,var(--mat) 100%);border:1px solid var(--metal);border-radius:18px;padding:1.6rem 1.8rem 1.4rem;box-shadow:inset 0 1px 0 #fff,0 0 0 4px var(--metal-soft),0 18px 50px rgba(0,0,0,.5)}
+.ga .dialog h2{font-family:var(--display-font);font-weight:400;color:var(--headline);font-size:clamp(1.3rem,3.5vw,1.7rem);text-align:center;margin:0 0 .1rem;letter-spacing:1px}
+.ga .dialog .kicker{text-align:center;margin-bottom:1.1rem}
+.ga .dialog p{margin:0 0 .8rem}
+.ga .dialog .grow{margin-top:1.3rem}
+
+.ga .panel,.ga .wall-label,.ga .trow,.ga .tablewrap,.ga .lede,.ga .bidline{text-shadow:0 1px 1px rgba(255,255,255,.6)}
+@media (prefers-reduced-motion:reduce){.ga .gbtn,.ga .paddle-btn{transition:none}.ga .stamp{animation:none}.ga tr.win{animation:none}.ga .pslot.high .paddle-btn{transform:none}}
+</style>
+
+<!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
+     With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="titleblock"><p class="eyebrow">Modern English Australia</p><h1>Bespoke Grammar Auction Maker</h1></div>
+    <p>Free for teachers. Type your right and wrong sentences, choose a theme, and run a classroom auction. Nothing leaves this device.</p>
+  </div>
+</header>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<main class="bench">
+
+  <!-- ================= CONTROLS ================= -->
+  <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
+
+    <details class="group" open>
+      <summary>1. Your auction</summary>
+      <div class="group-body">
+        <label class="f"><span>Title</span><input type="text" data-k="title" maxlength="70" placeholder="e.g. Past Tense Auction"></label>
+        <label class="f"><span>Level or class <em>(optional)</em></span><input type="text" data-k="level" maxlength="50" placeholder="e.g. B1 · Year 9 English"></label>
+        <div>
+          <p class="lab">Type of auction</p>
+          <div class="seg" role="radiogroup" aria-label="Type of auction">
+            <label><input type="radio" name="mode" value="mistake">Spot the mistake</label>
+            <label><input type="radio" name="mode" value="claim">True or false claim</label>
+          </div>
+          <p class="hint" id="modeHint"></p>
+        </div>
+        <div>
+          <p class="lab">Start from an example</p>
+          <div class="chips" id="examples"></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>2. Your sentences</summary>
+      <div class="group-body">
+        <p id="summary" role="status"></p>
+        <div class="lots" id="lots"></div>
+        <div class="addrow">
+          <button type="button" class="btn" id="addBtn">+ Add a sentence</button>
+          <button type="button" class="btn quiet" id="clearBtn">Remove all</button>
+        </div>
+        <details>
+          <summary class="lab" style="cursor:pointer">Add several at once</summary>
+          <div class="group-body" style="padding-top:.6rem">
+            <label class="f"><span>One sentence per line</span>
+              <textarea id="bulkBox" rows="5" maxlength="8000" placeholder="She don't like coffee.&#10;He has lived here since 2019.&#10;They was late again."></textarea>
+            </label>
+            <p class="hint" id="bulkHint">Each line becomes a new lot marked as correct. Then mark the ones with mistakes. For claims, put a | between the sentence and the claim.</p>
+            <div><button type="button" class="btn" id="bulkBtn">Add these lines</button></div>
+          </div>
+        </details>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>3. Bidding</summary>
+      <div class="group-body">
+        <div class="pair">
+          <label class="f"><span>Money per team</span>
+            <select data-k="budget"><option value="100">$100</option><option value="500">$500</option><option value="1000">$1,000</option><option value="5000">$5,000</option><option value="1000000">$1,000,000</option></select>
+          </label>
+          <label class="f"><span>Bids go up by</span><select data-k="step" id="stepSel"></select></label>
+        </div>
+        <label class="check"><input type="checkbox" data-k="choices">Give two choices in the redemption round (easier)</label>
+        <label class="f"><span>Your own team names <em>(optional, one per line)</em></span>
+          <textarea data-k="teamNames" rows="3" maxlength="600" placeholder="Leave empty for the rich families: the Rothschilds, the Gatsbys…"></textarea>
+        </label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>Design</summary>
+      <div class="group-body">
+        <div>
+          <p class="lab">Theme</p>
+          <div class="swatches" id="swatches" role="group" aria-label="Themes"></div>
+          <p id="themeName"></p>
+        </div>
+        <div id="customBox" hidden>
+          <p class="lab">Your own colours</p>
+          <div class="rowline">
+            <label class="rowline">Main colour <input type="color" id="cAccent" aria-label="Main colour"></label>
+            <label class="rowline">Dark colour <input type="color" id="cCard" aria-label="Dark colour for the top bar"></label>
+          </div>
+          <p class="lab" style="margin-top:.6rem">Frames</p>
+          <div class="seg" role="radiogroup" aria-label="Frame metal">
+            <label><input type="radio" name="metal" value="gold">Gold</label>
+            <label><input type="radio" name="metal" value="silver">Silver</label>
+            <label><input type="radio" name="metal" value="bronze">Bronze</label>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <button type="button" class="btn quiet" id="resetBtn">Start again with the example</button>
+  </form>
+
+  <!-- ================= PREVIEW ================= -->
+  <section class="stage" aria-label="Preview">
+    <div class="paper"><div class="pvbox" id="pvBox"><div class="pvinner" id="pvInner"><div id="pvGame"></div></div></div></div>
+    <div class="stage-bar">
+      <div class="pager">
+        <button type="button" class="btn" id="prevBtn" aria-label="Previous lot">‹</button>
+        <span id="pagerText"></span>
+        <button type="button" class="btn" id="nextBtn" aria-label="Next lot">›</button>
+        <label class="check"><input type="checkbox" id="pvReveal">Show the reveal</label>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn main" id="playBtn">Start the auction</button>
+      <button type="button" class="btn" id="dlBtn">Download game</button>
+      <button type="button" class="btn quiet" id="saveBtn">Save file</button>
+      <button type="button" class="btn quiet" id="openBtn">Open file</button>
+      <input type="file" id="openInput" accept=".json,application/json" hidden>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <p class="fineprint">The game fills the screen: connect to your projector first. For classroom use. <a href="#terms">Terms of use</a></p>
+  </section>
+</main>
+
+<section class="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>Give your auction a title and choose the type: spot the mistake, or true or false claims about a sentence.</li>
+      <li>Type your sentences. Mark each one as correct or wrong, and add the correction. Explanations are optional.</li>
+      <li>Choose a theme, then press <strong>Start the auction</strong>. The game fills the screen, ready for the projector.</li>
+      <li>Use <strong>Download game</strong> to keep a copy that runs on any computer, even offline, or share it with colleagues.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Running the auction</h2>
+    <ul>
+      <li><strong>The auctioneer</strong> (you or a student) reads each lot aloud and taps a team's paddle when they bid.</li>
+      <li><strong>Teams</strong> bid on sentences they think are correct. Forgeries hide a mistake.</li>
+      <li><strong>The reveal</strong> comes after the last lot. The class votes, then the stamp shows Genuine or Forgery.</li>
+      <li><strong>Redemption:</strong> a team that bought a forgery scores double if it fixes the mistake.</li>
+      <li>Genuine = 1 point · corrected forgery = 2 points. Most points tops the Rich List.</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Questions</h2>
+    <dl>
+      <dt>How many sentences should I write?</dt>
+      <dd>Eight to twelve works well for a lesson. Aim for about half with mistakes, so teams can't win by bidding on everything.</dd>
+      <dt>What does "Highlight at the reveal" do?</dt>
+      <dd>The words you list are shaded at the reveal, so students can see what the sentence turned on. The wrong word in a forgery is crossed out automatically.</dd>
+      <dt>Are my sentences uploaded anywhere?</dt>
+      <dd>No. The auction runs in your browser and nothing you type is sent to us.</dd>
+      <dt>Will it remember my auction?</dt>
+      <dd>Yes, on this device and browser. To move it to another computer, use Save file, then Open file there, or download the game.</dd>
+      <dt>Can students play on their own devices?</dt>
+      <dd>The auction is designed for one screen at the front of the room, with teams bidding out loud.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
+     the site goes public, and change the date when you edit it. -->
+<section class="terms" id="terms" tabindex="-1">
+  <div class="terms-in">
+    <h2>Terms of use</h2>
+    <p class="updated">Last updated 31 October 2026</p>
+    <p>The Bespoke Grammar Auction Maker is a free tool for teachers and families. By making, running or downloading auctions you agree to these terms.</p>
+    <h3>What you may use it for</h3>
+    <ul>
+      <li>Auctions for your own classroom, school, tutoring or home. You may run, download and share the games you make with colleagues for teaching.</li>
+    </ul>
+    <h3>What you must not do</h3>
+    <ul>
+      <li>Type text that you do not have the right to use with your students.</li>
+      <li>Copy, resell or republish this tool or its code.</li>
+    </ul>
+    <p>You are responsible for the sentences in your auctions and for how the games are used.</p>
+    <h3>Your information</h3>
+    <p>Your sentences and settings stay in your browser and are never sent to us. They are saved on your own device so they are there next time; the "Start again" button removes them. This site uses cookies for visitor statistics and to show ads, and providers such as Google may set them. See our <a href="https://modernenglish.au/privacy.html">privacy policy</a> for details.</p>
+    <h3>No guarantees</h3>
+    <p>The tool is provided free and as it is. Check your sentences and answers before you run an auction. To the extent the law allows, we are not liable for loss or damage arising from its use. Nothing in these terms limits any rights you have under the Australian Consumer Law. These terms are governed by the laws of New South Wales, Australia.</p>
+  </div>
+</section>
+
+<!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<footer>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-report-maker.html">Report maker</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="bespoke-sentence-scramble-maker.html">Sentence scramble maker</a> · <a href="#terms">Terms of use</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+</footer>
+
+<div class="play" id="play" hidden><div id="gameRoot"></div></div>
+
+<!-- =====================================================================
+     AUCTION ENGINE. GrammarAuction(element, data, options) runs a whole
+     game inside one element. The same code goes into every downloaded game.
+     ===================================================================== -->
+<script id="gaJs">
+(function (global) {
+"use strict";
+
+/* ---------- THEMES: add or change one here and it appears in the maker ---------- */
+var METALS = {
+  gold:   { m:["#3b2408","#9a6a22","#fff1c2","#d9a640","#7a4e14","#b8842c","#f2d58a","#a8762a","#5a3a12","#2a1a06"], bead:["#fff6cf","#e2b453","#6e4512"], line:"#4a2e0a", ink:"#3b1f08" },
+  silver: { m:["#1c2430","#6f7c8c","#ffffff","#c3ccd8","#5a6676","#9aa6b5","#eef2f7","#8894a4","#3e4856","#141a22"], bead:["#ffffff","#c9d3df","#4b5666"], line:"#2a3340", ink:"#16243a" },
+  bronze: { m:["#2a1608","#7a4a26","#f6d2ae","#b8794a","#5e3417","#9c6236","#e6b68d","#8a5530","#4a2810","#1e0f05"], bead:["#fbe1c8","#c58a5c","#5e3417"], line:"#3a1f0c", ink:"#3a1a08" }
+};
+var THEMES = {
+  kodak:    { name:"Kodak sepia",          accent:"#c8781f", card:"#241c14", bg:"#e6d9bd", metal:"gold",   gem:["#fff3c4","#e3a21c","#7a4e14"] },
+  royal:    { name:"Royal red and gold",   accent:"#b0122b", card:"#3d0a12", bg:"#f1e2df", metal:"gold",   gem:["#ffd6dc","#d0213f","#5e0614"] },
+  sapphire: { name:"Silver and sapphire",  accent:"#2f6fd1", card:"#0f1d33", bg:"#dde4ec", metal:"silver", gem:["#e8f1ff","#4f8ae6","#123a7a"] },
+  emerald:  { name:"Emerald and gold",     accent:"#11795a", card:"#0b2a20", bg:"#e2ede6", metal:"gold",   gem:["#d9fbe9","#1fae7a","#064530"] },
+  deco:     { name:"Art deco noir",        accent:"#b8892d", card:"#111111", bg:"#e8e3d8", metal:"gold",   gem:["#c9d1da","#2b2f36","#050608"] },
+  amethyst: { name:"Amethyst and silver",  accent:"#6b3fa0", card:"#22123a", bg:"#eae3f2", metal:"silver", gem:["#f0dcff","#9a5ad6","#3d1468"] },
+  ocean:    { name:"Ocean teal",           accent:"#0e7c86", card:"#0a2a33", bg:"#deedef", metal:"silver", gem:["#d6fbff","#22b3c2","#08434b"] },
+  copper:   { name:"Copper and slate",     accent:"#b5552b", card:"#1f2a30", bg:"#ece4dc", metal:"bronze", gem:["#ffe1cc","#d2703f","#5a240b"] },
+  candy:    { name:"Candy pastel",         accent:"#d94f7c", card:"#4a2340", bg:"#fbeef3", metal:"silver", gem:["#ffe0ec","#f07aa3","#7a1f45"] },
+  navy:     { name:"Modern English navy",  accent:"#1d4ed8", card:"#1c1c1c", bg:"#fffce6", metal:"gold",   gem:["#dbe6ff","#3968ea","#0e2861"] }
+};
+var POOL = ["Rothschilds","Gatsbys","Medicis","Crawleys","Vanderbilts","Waynes","Rockefellers","Carnegies","Windsors","Roys","Lannisters","Moneybags"];
+
+/* ---------- small helpers ---------- */
+var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
+var escRe = function (s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); };
+var fmt = function (n) { return "$" + Number(n).toLocaleString("en-AU"); };
+function rgb(h) { var n = parseInt(h.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+function mix(a, b, t) { var x = rgb(a), y = rgb(b); return "#" + x.map(function (v, i) { return Math.round(v * (1 - t) + y[i] * t).toString(16).padStart(2, "0"); }).join(""); }
+function lum(h) { var c = rgb(h); return (0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]) / 255; }
+function okHex(h) { return typeof h === "string" && /^#[0-9a-f]{6}$/i.test(h); }
+var the = function (n) { return /^the\s/i.test(n) ? "the" + n.slice(3) : "the " + n; };
+var The = function (n) { return /^the\s/i.test(n) ? "The" + n.slice(3) : "The " + n; };
+
+/* Finds a word or phrase in a sentence, whole words first, and skips parts already taken. */
+function findWord(text, needle, taken) {
+  taken = taken || []; needle = String(needle || "").trim();
+  if (!needle) return -1;
+  var free = function (a) { var b = a + needle.length; return !taken.some(function (r) { return a < r.b && b > r.a; }); };
+  try {
+    var re = new RegExp("(^|[^\\p{L}\\p{N}])(" + escRe(needle) + ")(?=$|[^\\p{L}\\p{N}])", "giu"), m;
+    while ((m = re.exec(text))) { var a = m.index + m[1].length; if (free(a)) return a; re.lastIndex = a + 1; }
+  } catch (e) {}
+  var low = text.toLowerCase(), q = needle.toLowerCase(), i = low.indexOf(q);
+  while (i > -1) { if (free(i)) return i; i = low.indexOf(q, i + 1); }
+  return -1;
+}
+function highlight(text, marks) {
+  var ranges = [];
+  marks.forEach(function (mk) { var a = findWord(text, mk.n, ranges); if (a > -1) ranges.push({ a:a, b:a + mk.n.trim().length, c:mk.c }); });
+  ranges.sort(function (x, y) { return x.a - y.a; });
+  var out = "", p = 0;
+  ranges.forEach(function (r) { out += esc(text.slice(p, r.a)) + '<mark class="' + r.c + '">' + esc(text.slice(r.a, r.b)) + "</mark>"; p = r.b; });
+  return out + esc(text.slice(p));
+}
+
+/* ---------- theme: colours and the picture frames ---------- */
+function resolveTheme(t) {
+  if (t && typeof t === "object" && okHex(t.accent) && okHex(t.card) && okHex(t.bg)) {
+    return { name:t.name || "Custom", accent:t.accent, card:t.card, bg:t.bg, metal:METALS[t.metal] ? t.metal : "gold",
+      gem:Array.isArray(t.gem) && t.gem.length === 3 && t.gem.every(okHex) ? t.gem : [mix(t.accent, "#ffffff", .7), t.accent, mix(t.accent, "#000000", .55)] };
+  }
+  return THEMES[t] || THEMES.kodak;
+}
+function customTheme(accent, card, metal) {
+  return { name:"Your colours", accent:accent, card:card, bg:mix(accent, "#f7f3ea", .88), metal:metal,
+    gem:[mix(accent, "#ffffff", .7), accent, mix(accent, "#000000", .55)] };
+}
+function themeVars(th) {
+  var M = METALS[th.metal], m = M.m, a = th.accent, card = th.card, bg = th.bg;
+  var light = lum(a) > .6, text = light ? "#1a1a1a" : "#ffffff";
+  var ink = mix(card, "#000000", .3), paper = mix(bg, "#ffffff", .72);
+  return {
+    "--bg":bg, "--bg-top":mix(bg, "#ffffff", .55), "--bg-bottom":mix(bg, card, .1),
+    "--paper":paper, "--mat":mix(bg, "#ffffff", .6), "--tint":mix(a, "#ffffff", .8),
+    "--card":card, "--ink":ink, "--muted":mix(card, "#ffffff", .62),
+    "--accent":a, "--accent-deep":mix(a, "#000000", .38), "--accent-text":text,
+    "--accent-shadow":light ? "0 1px 0 rgba(255,255,255,.5)" : "0 -1px 0 rgba(0,0,0,.3)",
+    "--h2":lum(a) > .42 ? mix(a, "#000000", .42) : a,
+    "--headline":mix(ink, card, .35), "--edge":mix(bg, ink, .2), "--grey":mix(ink, bg, .36),
+    "--gloss":"linear-gradient(180deg," + mix(a, "#ffffff", .38) + " 0%," + a + " 48%," + mix(a, "#000000", .16) + " 52%," + mix(a, "#ffffff", .08) + " 100%)",
+    "--gloss-hover":"linear-gradient(180deg," + mix(a, "#ffffff", .52) + " 0%," + mix(a, "#ffffff", .1) + " 48%," + a + " 52%," + mix(a, "#ffffff", .18) + " 100%)",
+    "--gloss-light":"linear-gradient(180deg,#ffffff 0%," + paper + " 46%," + mix(paper, ink, .07) + " 54%," + paper + " 100%)",
+    "--top-grad":"linear-gradient(180deg," + mix(card, "#ffffff", .16) + " 0%," + card + " 50%," + mix(card, "#000000", .25) + " 51%," + card + " 100%)",
+    "--disc":"radial-gradient(circle at 35% 28%," + mix(a, "#ffffff", .4) + " 0%," + a + " 55%," + card + " 100%)",
+    "--paddle-edge":mix(bg, card, .12),
+    "--paddle-high":"radial-gradient(ellipse at 50% 20%," + mix(a, "#ffffff", .62) + " 0%," + a + " 45%," + mix(a, "#000000", .3) + " 100%)",
+    "--glow":"rgba(" + rgb(a).join(",") + ",.45)",
+    "--metal":m[3], "--metal-dark":m[4], "--metal-soft":"rgba(" + rgb(m[3]).join(",") + ",.45)",
+    "--plaque":"linear-gradient(180deg," + m[2] + " 0%," + m[6] + " 30%," + m[3] + " 52%," + m[2] + " 72%," + m[7] + " 100%)",
+    "--plaque-ink":M.ink,
+    "--handle":"linear-gradient(90deg," + m[8] + "," + m[3] + " 35%," + m[2] + " 52%," + m[7] + " 100%)",
+    "--gem-dot":"radial-gradient(circle at 35% 35%," + th.gem[0] + "," + th.gem[1] + " 60%," + th.gem[2] + ")"
+  };
+}
+var frameCache = {};
+function frameImages(th) {
+  var key = th.metal + th.gem.join("");
+  if (frameCache[key]) return frameCache[key];
+  var M = METALS[th.metal], G = th.gem;
+  var stops = M.m.map(function (c, i) { return '<stop offset="' + (i / (M.m.length - 1)).toFixed(3) + '" stop-color="' + c + '"/>'; }).join("");
+  var radial = function (id, a, b, c) { return '<radialGradient id="' + id + '" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="' + a + '"/><stop offset=".45" stop-color="' + b + '"/><stop offset="1" stop-color="' + c + '"/></radialGradient>'; };
+  var beads = "", gems = "", petals = "", rays = "", x, a;
+  for (x = 65; x <= 175; x += 10) beads += '<circle cx="' + x + '" cy="9" r="3.2" fill="url(#bd)" stroke="' + M.bead[2] + '" stroke-width=".5"/>';
+  [75, 105, 135, 165].forEach(function (x) { gems += '<ellipse cx="' + x + '" cy="39" rx="12.5" ry="7.6" fill="url(#bd)" stroke="' + M.line + '" stroke-width=".8"/><ellipse cx="' + x + '" cy="39" rx="8.5" ry="5" fill="url(#gm)" stroke="' + G[2] + '" stroke-width=".6"/><ellipse cx="' + (x - 2.5) + '" cy="37" rx="2.6" ry="1.4" fill="#fff" opacity=".85"/>'; });
+  [60, 90, 120, 150, 180].forEach(function (x) { gems += '<path d="M' + x + ' 31 L' + (x + 2.2) + ' 39 L' + x + ' 47 L' + (x - 2.2) + ' 39Z" fill="' + M.line + '" opacity=".7"/>'; });
+  for (a = 0; a < 360; a += 45) petals += '<ellipse cx="27" cy="13" rx="6.5" ry="3.4" fill="url(#bd)" stroke="' + M.line + '" stroke-width=".6" transform="rotate(' + a + ' 27 27)"/>';
+  var frame = '<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240"><defs>'
+    + '<linearGradient id="m" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="60">' + stops + '</linearGradient>'
+    + radial("bd", M.bead[0], M.bead[1], M.bead[2]) + radial("gm", G[0], G[1], G[2])
+    + '<g id="side"><polygon points="0,0 240,0 180,60 60,60" fill="url(#m)"/><path d="M0 0L60 60M240 0L180 60" stroke="' + M.line + '" stroke-width=".8" opacity=".5"/>' + beads + gems + '</g>'
+    + '<g id="corner"><path d="M4 4 Q30 0 56 10 Q34 18 22 30 Q14 40 10 56 Q0 30 4 4Z" fill="url(#bd)" stroke="' + M.line + '" stroke-width=".9"/>' + petals + '<circle cx="27" cy="27" r="9" fill="url(#gm)" stroke="' + G[2] + '" stroke-width="1"/><circle cx="24.5" cy="24" r="2.8" fill="#fff" opacity=".9"/></g></defs>'
+    + '<use href="#side"/><use href="#side" transform="rotate(90 120 120)"/><use href="#side" transform="rotate(180 120 120)"/><use href="#side" transform="rotate(270 120 120)"/>'
+    + '<use href="#corner"/><use href="#corner" transform="translate(240,0) scale(-1,1)"/><use href="#corner" transform="translate(0,240) scale(1,-1)"/><use href="#corner" transform="translate(240,240) scale(-1,-1)"/></svg>';
+  for (var i = 1; i < 8; i++) { var an = Math.PI * i / 8; rays += '<path d="M60 46 L' + (60 + 27 * Math.cos(an)).toFixed(1) + ' ' + (46 - 27 * Math.sin(an)).toFixed(1) + '" stroke="' + M.bead[2] + '" stroke-width="1.1" opacity=".8"/>'; }
+  var crest = '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 120 60"><defs>'
+    + radial("b", M.bead[0], M.bead[1], M.bead[2]) + radial("g", G[0], G[1], G[2])
+    + '<linearGradient id="l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + M.bead[0] + '"/><stop offset=".55" stop-color="' + M.bead[1] + '"/><stop offset="1" stop-color="' + M.bead[2] + '"/></linearGradient></defs>'
+    + '<path d="M60 44 Q36 46 14 36 Q4 30 8 24 Q14 20 20 26 Q16 30 22 32 Q40 36 52 30Z" fill="url(#l)" stroke="' + M.line + '" stroke-width="1"/>'
+    + '<path d="M60 44 Q84 46 106 36 Q116 30 112 24 Q106 20 100 26 Q104 30 98 32 Q80 36 68 30Z" fill="url(#l)" stroke="' + M.line + '" stroke-width="1"/>'
+    + '<path d="M32 46 A28 28 0 0 1 88 46 Z" fill="url(#b)" stroke="' + M.line + '" stroke-width="1.2"/>' + rays
+    + '<circle cx="60" cy="44" r="7" fill="url(#g)" stroke="' + G[2] + '" stroke-width="1"/><circle cx="58" cy="42" r="2" fill="#fff" opacity=".9"/></svg>';
+  var url = function (s) { return 'url("data:image/svg+xml,' + encodeURIComponent(s) + '")'; };
+  return (frameCache[key] = { frame:url(frame), crest:url(crest) });
+}
+function applyTheme(el, t) {
+  var th = resolveTheme(t), v = themeVars(th), f = frameImages(th);
+  Object.keys(v).forEach(function (k) { el.style.setProperty(k, v[k]); });
+  el.style.setProperty("--frame-img", f.frame); el.style.setProperty("--crest-img", f.crest);
+  return th;
+}
+
+/* ---------- the auction data, tidied ---------- */
+function normalise(data) {
+  data = data || {};
+  var mode = data.mode === "claim" ? "claim" : "mistake";
+  var lots = (Array.isArray(data.lots) ? data.lots : []).map(function (l) {
+    l = l || {};
+    return { s:String(l.s || "").trim(), ok:!!l.ok, wrong:String(l.wrong || "").trim(), fix:String(l.fix || "").trim(),
+      claim:String(l.claim || "").trim(), exp:String(l.exp || "").trim(),
+      keys:String(l.keys || "").split(",").map(function (k) { return k.trim(); }).filter(Boolean) };
+  }).filter(function (l) { return l.s; });
+  var budget = Math.max(10, parseInt(data.budget, 10) || 1000);
+  var step = Math.max(1, Math.min(budget, parseInt(data.step, 10) || Math.round(budget / 20)));
+  var own = (Array.isArray(data.teams) ? data.teams : []).map(function (s) { return String(s).trim().slice(0, 40); }).filter(Boolean);
+  var pool = [];
+  own.concat(POOL).forEach(function (n) { if (!pool.some(function (p) { return p.toLowerCase() === n.toLowerCase(); })) pool.push(n); });
+  return { title:String(data.title || "").trim() || "Grammar Auction", level:String(data.level || "").trim(), mode:mode,
+    budget:budget, step:step, choices:!!data.choices, pool:pool, own:own.length, theme:data.theme, lots:lots };
+}
+
+/* ---------- pieces shared by the game and the maker's preview ---------- */
+function marked(D, lot) {
+  var mk = [];
+  if (D.mode === "mistake") { if (!lot.ok && lot.wrong) mk.push({ n:lot.wrong, c:"bad" }); lot.keys.forEach(function (k) { mk.push({ n:k, c:"ok" }); }); }
+  else lot.keys.forEach(function (k) { mk.push({ n:k, c:"key" }); });
+  return highlight(lot.s, mk);
+}
+function lotBody(D, lot, show, struck) {
+  return '<p class="sentence">' + (show ? marked(D, lot) : esc(lot.s)) + "</p>"
+    + (D.mode === "claim" ? '<p class="claim' + (struck ? " struck" : "") + '"><b>Claim</b><span>' + esc(lot.claim) + "</span></p>" : "");
+}
+function framed(inner, size, plaque) {
+  return '<figure class="frame-wrap ' + size + '"><div class="frame"><div class="frame-mat"><div class="frame-canvas">' + inner + "</div></div></div>"
+    + (plaque ? '<figcaption class="plaque">' + plaque + "</figcaption>" : "") + "</figure>";
+}
+function stamp(lot) { return '<span class="stamp ' + (lot.ok ? "genuine" : "forgery") + '">' + (lot.ok ? "Genuine" : "Forgery") + "</span>"; }
+function legend(D, lot) {
+  var parts = [];
+  if (D.mode === "mistake") {
+    if (!lot.ok && lot.wrong) parts.push('<span><mark class="bad">crossed out</mark> = the mistake</span>');
+    if (lot.keys.length) parts.push('<span><mark class="ok">green</mark> = used correctly</span>');
+  } else if (lot.keys.length) parts.push('<span><mark class="key">shaded</mark> = the key words</span>');
+  return parts.length ? '<div class="legend">' + parts.join("") + "</div>" : "";
+}
+function verdict(D, lot) {
+  var fix = "";
+  if (!lot.ok) fix = D.mode === "claim"
+    ? '<div class="fix">True claim: <span>' + esc(lot.fix) + "</span></div>"
+    : '<div class="fix">Correction: ' + (lot.wrong ? "<s>" + esc(lot.wrong) + "</s> → " : "") + "<span>" + esc(lot.fix) + "</span></div>";
+  var body = lot.exp ? "<p>" + esc(lot.exp) + "</p>" : (!fix ? "<p>" + (D.mode === "claim" ? "The claim matches the sentence." : "This sentence is correct.") + "</p>" : "");
+  return legend(D, lot) + '<div class="verdict">' + fix + body + "</div>";
+}
+function paddle(n, name, label, high, can, cash, owned, id) {
+  return '<div class="pslot' + (high ? " high" : "") + '"><button class="paddle-btn" data-a="bid" data-v="' + id + '"' + (can ? "" : " disabled") + ' aria-label="Paddle ' + n + ", " + esc(the(name)) + ": " + label + '">'
+    + '<span class="paddle-head"><span class="pnum">' + n + '</span><span class="pname">' + esc(name) + '</span><span class="pbid">' + label + "</span></span>"
+    + '<span class="paddle-handle" aria-hidden="true"></span></button>'
+    + '<div class="pstats"><span>' + fmt(cash) + "</span><span>·</span><span>" + owned + " lot" + (owned === 1 ? "" : "s") + "</span></div></div>";
+}
+function topBar(D, tools) {
+  return '<div class="ga-top"><div class="ga-title">' + (D.level ? '<span class="ga-eyebrow">' + esc(D.level) + "</span>" : '<span class="ga-eyebrow">Grammar Auction</span>')
+    + "<b>" + esc(D.title) + '</b></div><div class="ga-tools">' + tools + "</div></div>";
+}
+
+/* ---------- sound effects, made in the browser ---------- */
+var SFX = (function () {
+  var ctx = null, on = true, buf = null;
+  try { if (localStorage.getItem("auctionSfx") === "off") on = false; } catch (e) {}
+  function ac() {
+    if (!on) return null;
+    var AC = global.AudioContext || global.webkitAudioContext; if (!AC) return null;
+    if (!ctx) { try { ctx = new AC(); } catch (e) { return null; } }
+    if (ctx.state === "suspended" && ctx.resume) ctx.resume();
+    return ctx;
+  }
+  function noise(c) { if (buf) return buf; var len = c.sampleRate * 2; buf = c.createBuffer(1, len, c.sampleRate); var d = buf.getChannelData(0); for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1; return buf; }
+  function burst(c, dest, t, dur, freq, q, vol) {
+    var s = c.createBufferSource(); s.buffer = noise(c);
+    var f = c.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = freq; f.Q.value = q;
+    var g = c.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.002); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(dest || c.destination); s.start(t, Math.random() * 1.5); s.stop(t + dur + 0.02);
+  }
+  function tone(c, t, freq, dur, vol, type) {
+    var o = c.createOscillator(), g = c.createGain(); o.type = type || "triangle"; o.frequency.value = freq;
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(c.destination); o.start(t); o.stop(t + dur + 0.05);
+  }
+  return {
+    bid: function () { var c = ac(); if (!c) return; var t = c.currentTime; burst(c, null, t, 0.035, 1900, 3, 0.25); tone(c, t, 880, 0.08, 0.06, "sine"); },
+    gavel: function (n) { var c = ac(); if (!c) return; var t = c.currentTime; for (var i = 0; i < (n || 2); i++) { var at = t + i * 0.2; burst(c, null, at, 0.12, 320, 1.2, 0.55); burst(c, null, at, 0.02, 2400, 1, 0.2); tone(c, at, 150, 0.16, 0.25, "sine"); } },
+    genuine: function () { var c = ac(); if (!c) return; var t = c.currentTime; [523.25, 659.25, 783.99, 1046.5].forEach(function (f, i) { tone(c, t + i * 0.085, f, 0.35, 0.16); tone(c, t + i * 0.085, f * 2, 0.18, 0.04, "sine"); }); },
+    forgery: function () { var c = ac(); if (!c) return; var t = c.currentTime; [392, 370, 349, 262].forEach(function (f, i) { tone(c, t + i * 0.18, f, i === 3 ? 0.6 : 0.2, 0.14); }); },
+    applause: function () {
+      var c = ac(); if (!c) return; var t0 = c.currentTime + 0.1, len = 4.2, bus = c.createGain(); bus.gain.value = 0.9; bus.connect(c.destination);
+      for (var p = 0; p < 26; p++) { var rate = 3.2 + Math.random() * 2.2, freq = 900 + Math.random() * 1600, t = t0 + Math.random() * 0.4;
+        while (t < t0 + len) { var pr = (t - t0) / len, env = pr < 0.12 ? pr / 0.12 : (pr > 0.7 ? Math.max(0, (1 - pr) / 0.3) : 1); if (Math.random() < 0.9) burst(c, bus, t, 0.018 + Math.random() * 0.012, freq, 1.1, 0.02 + 0.07 * env); t += (1 / rate) * (0.85 + Math.random() * 0.3); } }
+      tone(c, t0, 523.25, 0.5, 0.1); tone(c, t0 + 0.12, 659.25, 0.5, 0.1); tone(c, t0 + 0.24, 783.99, 0.9, 0.12);
+    },
+    set: function (v) { on = v; try { localStorage.setItem("auctionSfx", v ? "on" : "off"); } catch (e) {} },
+    isOn: function () { return on; }
+  };
+})();
+
+/* =====================================================================
+   THE GAME
+   ===================================================================== */
+function GrammarAuction(root, data, opts) {
+  opts = opts || {};
+  var D = normalise(data);
+  root.classList.add("ga"); root.classList.remove("ga-preview");
+  applyTheme(root, D.theme);
+  var sig = D.title + "|" + D.lots.length + "|" + D.lots.map(function (l) { return l.s.length; }).join(".");
+  var S;
+  var mistake = D.mode === "mistake";
+
+  function fresh() {
+    return { sig:sig, screen:"setup", help:true, count:Math.min(4, D.pool.length), names:D.pool.slice(0, 6), teams:[],
+      lot:0, bids:[], going:0, flash:false, sold:{}, rv:0, shown:{}, red:{}, ans:{}, confirm:false };
+  }
+  S = fresh();
+  if (opts.storeKey) { try { var v = JSON.parse(localStorage.getItem(opts.storeKey)); if (v && v.sig === sig && v.screen) { S = v; S.help = false; } } catch (e) {} }
+  function save() { if (opts.storeKey) { try { localStorage.setItem(opts.storeKey, JSON.stringify(S)); } catch (e) {} } }
+
+  var lots = D.lots;
+  var team = function (id) { return S.teams.filter(function (t) { return t.id === id; })[0]; };
+
+  function startGame() {
+    S.teams = S.names.slice(0, S.count).map(function (n, i) { return { id:i, paddle:i + 1, name:n, cash:D.budget }; });
+    S.lot = 0; S.bids = []; S.going = 0; S.flash = false; S.sold = {}; S.rv = 0; S.shown = {}; S.red = {}; S.ans = {};
+  }
+
+  /* ----- views ----- */
+  function tools() {
+    return '<button type="button" class="ga-tool" data-a="help">How to play</button>'
+      + '<button type="button" class="ga-tool" data-a="sound" aria-pressed="' + SFX.isOn() + '">' + (SFX.isOn() ? "🔊 Sound on" : "🔇 Sound off") + "</button>"
+      + '<button type="button" class="ga-tool" data-a="full">Full screen</button>'
+      + (S.screen !== "setup" ? '<button type="button" class="ga-tool' + (S.confirm ? " warn" : "") + '" data-a="reset">' + (S.confirm ? "Click again to start over" : "Start over") + "</button>" : "")
+      + (opts.onExit ? '<button type="button" class="ga-tool" data-a="exit">← Back to the maker</button>' : "");
+  }
+  function vSetup() {
+    var used = S.names.slice(0, S.count);
+    return "<section>"
+      + '<p class="kicker">' + lots.length + " lots · " + fmt(D.budget) + " per team · bids rise in " + fmt(D.step) + "</p>"
+      + '<h1 class="hero">' + esc(D.title) + "</h1>"
+      + '<p class="heroline">' + (mistake ? "Every sentence is for sale. Some are forgeries." : "Every claim is for sale. Some are forgeries.") + ' <button type="button" class="linkish" data-a="help">How to play</button></p>'
+      + '<h3 class="label">Pick your teams</h3>'
+      + '<div class="grow"><div class="stepper"><button type="button" data-a="count" data-v="-1" aria-label="Fewer teams">−</button><span class="n">' + S.count + '</span><button type="button" data-a="count" data-v="1" aria-label="More teams">+</button></div>'
+      + '<p class="note">Four to six teams works best, with 3–4 students each.</p></div>'
+      + '<div class="teams">' + used.map(function (nm, i) {
+          return '<div class="trow"><span class="pdisc" aria-hidden="true">' + (i + 1) + '</span><select data-team="' + i + '" aria-label="Team name for paddle ' + (i + 1) + '">'
+            + D.pool.map(function (p) { return '<option value="' + esc(p) + '"' + (p === nm ? " selected" : "") + (p !== nm && used.indexOf(p) > -1 ? " disabled" : "") + ">" + esc(The(p)) + "</option>"; }).join("")
+            + "</select></div>";
+        }).join("") + "</div>"
+      + '<div class="gap"></div><button type="button" class="gbtn" data-a="start">Open the catalogue →</button></section>';
+  }
+  function vPreview() {
+    return "<section>"
+      + '<p class="kicker">' + lots.length + " lots</p>"
+      + '<h2 class="sec">Catalogue Preview</h2>'
+      + '<p class="lede">' + (mistake ? "Read every lot with your team. Which sentences are genuine, and which are forgeries?" : "Read every sentence and its claim with your team. Which claims are genuine, and which are forgeries?") + "</p>"
+      + '<div class="catalogue">' + lots.map(function (l, i) {
+          return framed('<p class="mini-s">' + esc(l.s) + "</p>" + (mistake ? "" : '<p class="mini-c">Claim: ' + esc(l.claim) + "</p>"), "sm", "Lot " + (i + 1));
+        }).join("") + "</div>"
+      + '<div class="gap"></div><button type="button" class="gbtn" data-a="open">Open the bidding →</button></section>';
+  }
+  function saleRecord() {
+    var rows = lots.map(function (l, i) {
+      if (!(i in S.sold)) return "";
+      var s = S.sold[i];
+      return "<li><span>Lot " + (i + 1) + "</span>" + (s ? "<span>" + esc(team(s.team).name) + ' · <span class="money">' + fmt(s.price) + "</span></span>" : '<span class="muted">No sale</span>') + "</li>";
+    }).join("");
+    return '<div class="panel"><h3>Sale record</h3>' + (rows ? '<ul class="record">' + rows + "</ul>" : '<p class="note">Sold lots appear here.</p>') + "</div>";
+  }
+  function script(high, next) {
+    var line, sale = S.sold[S.lot];
+    if (S.flash) line = sale ? '"Sold to ' + esc(the(team(sale.team).name)) + " for " + fmt(sale.price) + '!"' : '"No bids? This lot is withdrawn."';
+    else if (!high) line = '"Lot ' + (S.lot + 1) + ". " + (mistake ? "Read it with your team…" : "Read the sentence, then the claim…") + " Do I hear " + fmt(next) + '?"';
+    else if (!S.going) line = '"I have ' + fmt(high.amount) + " from " + esc(the(team(high.team).name)) + ". Do I hear " + fmt(next) + '?"';
+    else if (S.going === 1) line = '"' + fmt(high.amount) + ', going once…"';
+    else line = '"' + fmt(high.amount) + ', going twice… last chance!"';
+    return '<div class="panel script"><h3>Auctioneer\'s script</h3><p>' + line + "</p></div>";
+  }
+  function vAuction() {
+    var lot = lots[S.lot], high = S.bids[S.bids.length - 1], next = high ? high.amount + D.step : D.step, sale = S.sold[S.lot], last = S.lot === lots.length - 1;
+    var controls = S.flash
+      ? '<p class="soldline">' + (sale ? "Sold to " + esc(the(team(sale.team).name)) + " for " + fmt(sale.price) : "No sale. The lot is withdrawn.") + "</p>"
+        + '<div class="grow"><button type="button" class="gbtn" data-a="next">' + (last ? "Go to the reveal →" : "Next lot →") + '</button><button type="button" class="gbtn ghost" data-a="reopen">Reopen bidding</button></div>'
+      : '<div class="grow"><button type="button" class="gbtn" data-a="sold">' + (!high ? "No sale" : !S.going ? "Going once…" : S.going === 1 ? "Going twice…" : "Sold for " + fmt(high.amount) + "!")
+        + '</button><button type="button" class="gbtn ghost" data-a="undo"' + (S.bids.length ? "" : " disabled") + ">Undo last bid</button></div>";
+    return '<div class="gstage"><section>'
+      + framed(lotBody(D, lot, false) + (S.flash && sale ? '<span class="stamp sold">Sold</span>' : ""), "lg", "Lot " + (S.lot + 1) + " <span>of " + lots.length + "</span>")
+      + '<div class="bidline"><div><span class="k">Current bid</span><span class="money big">' + (high ? fmt(high.amount) : "—") + "</span></div>"
+      + '<div><span class="k">Held by</span><span class="holder">' + (high ? esc(The(team(high.team).name)) : "No bids yet") + "</span></div>"
+      + '<div><span class="k">Next bid</span><span class="money nextbid">' + (S.flash ? "—" : fmt(next)) + "</span></div></div>"
+      + controls
+      + '<div class="paddles">' + S.teams.map(function (t) {
+          var isHigh = high && high.team === t.id, owned = Object.keys(S.sold).filter(function (k) { return S.sold[k] && S.sold[k].team === t.id; }).length;
+          var can = !S.flash && !isHigh && t.cash >= next;
+          var label = isHigh ? "Highest bid" : (!S.flash && t.cash < next) ? "Can't afford" : "Bid " + fmt(next);
+          return paddle(t.paddle, t.name, label, isHigh, can, t.cash, owned, t.id);
+        }).join("") + "</div>"
+      + '</section><aside class="side">' + script(high, next) + saleRecord() + "</aside></div>";
+  }
+  function tallyFor(t) { var g = 0, f = 0; lots.forEach(function (l, i) { var s = S.sold[i]; if (s && s.team === t.id && S.shown[i]) { if (l.ok) g++; else f++; } }); return { g:g, f:f }; }
+  function vReveal() {
+    var i = S.rv, lot = lots[i], shown = !!S.shown[i], sale = S.sold[i], last = i === lots.length - 1;
+    return '<div class="gstage"><section>'
+      + framed(lotBody(D, lot, shown, shown && !lot.ok) + (shown ? stamp(lot) : ""), "lg", "Lot " + (i + 1) + " <span>of " + lots.length + "</span>")
+      + '<div class="wall-label"><p class="owner">' + (sale ? "Bought by " + esc(the(team(sale.team).name)) + " for " + fmt(sale.price) : "Unsold") + "</p>"
+      + (shown ? verdict(D, lot) : '<p class="vote">Class vote first: genuine or forgery?</p>') + "</div>"
+      + '<div class="gap"></div><div class="grow">'
+      + '<button type="button" class="gbtn ghost" data-a="rvprev"' + (i === 0 ? " disabled" : "") + ">← Previous lot</button>"
+      + (shown ? (last ? '<button type="button" class="gbtn" data-a="toredeem">Go to redemption →</button>' : '<button type="button" class="gbtn" data-a="rvnext">Next lot →</button>') : '<button type="button" class="gbtn" data-a="reveal">Reveal</button>')
+      + '</div></section><aside class="side"><div class="panel"><h3>Revealed so far</h3><ul class="tally">'
+      + S.teams.map(function (t) { var x = tallyFor(t); return "<li><span>" + esc(t.name) + '</span><span><span class="g">' + x.g + ' genuine</span> · <span class="f">' + x.f + " forged</span></span></li>"; }).join("")
+      + "</ul></div></aside></div>";
+  }
+  function vRedeem() {
+    var items = lots.map(function (l, i) { return { l:l, i:i, s:S.sold[i] }; }).filter(function (x) { return x.s && !x.l.ok; });
+    var task = mistake ? "Correct the mistake and explain why it is wrong." : "Rewrite the claim so it matches the sentence, and explain what in the sentence tells you.";
+    return "<section>"
+      + '<h2 class="sec">Redemption Round</h2><p class="lede">' + task + "</p>"
+      + (items.length ? '<div class="redeem">' + items.map(function (x, n) {
+          var l = x.l, i = x.i, r = S.red[i];
+          var pair = mistake ? (l.wrong ? [l.fix, l.wrong] : null) : [l.fix, l.claim];
+          if (pair && n % 2) pair = pair.slice().reverse();
+          return '<div class="ritem">' + framed(lotBody(D, l, !!S.ans[i], true), "md", "Lot " + (i + 1))
+            + '<div class="wall-label"><div class="who"><span>' + esc(team(x.s.team).name) + "</span><span>paid " + fmt(x.s.price) + " · worth 2 points if corrected</span></div>"
+            + (D.choices && pair ? '<div class="opts">' + (mistake ? "Which is right?" : "Which claim is true?") + pair.map(function (o) { return "<span>" + esc(o) + "</span>"; }).join("") + "</div>" : "")
+            + (S.ans[i] ? verdict(D, l) : "")
+            + '<div class="grow" style="justify-content:flex-start">'
+            + '<button type="button" class="rbtn yes" data-a="red" data-lot="' + i + '" data-v="yes" aria-pressed="' + (r === "yes") + '">Corrected · 2 points</button>'
+            + '<button type="button" class="rbtn no" data-a="red" data-lot="' + i + '" data-v="no" aria-pressed="' + (r === "no") + '">Not corrected</button>'
+            + '<button type="button" class="linkish" data-a="ans" data-lot="' + i + '">' + (S.ans[i] ? "Hide answer" : "Show answer") + "</button></div></div></div>";
+        }).join("") + "</div>" : '<div class="empty">No team bought a forgery. Sharp bidding all round.</div>')
+      + '<div class="gap"></div><button type="button" class="gbtn" data-a="results">Show the Rich List →</button></section>';
+  }
+  function standings() {
+    return S.teams.map(function (t) {
+      var g = 0, fixed = 0, missed = 0;
+      lots.forEach(function (l, i) { var s = S.sold[i]; if (s && s.team === t.id) { if (l.ok) g++; else if (S.red[i] === "yes") fixed++; else missed++; } });
+      return { t:t, g:g, fixed:fixed, missed:missed, points:g + fixed * 2 };
+    }).sort(function (a, b) { return b.points - a.points || b.t.cash - a.t.cash; });
+  }
+  function vResults() {
+    var rows = standings();
+    return '<section><p class="kicker">Final standings</p><h2 class="sec">The Rich List</h2>'
+      + (rows.length ? '<p class="celebrate">Congratulations to ' + esc(The(rows[0].t.name)) + "!</p>" : "")
+      + '<div class="tablewrap"><table><thead><tr><th></th><th>Team</th><th class="num">Genuine</th><th class="num">Corrected</th><th class="num">Not corrected</th><th class="num">Cash</th><th class="num">Points</th></tr></thead><tbody>'
+      + rows.map(function (r, i) {
+          return '<tr class="' + (i === 0 ? "win" : "") + '"><td class="rank">' + (i + 1) + '</td><td class="fam">' + esc(The(r.t.name)) + (i === 0 ? '<span class="crown">Winner</span>' : "") + "</td>"
+            + '<td class="num">' + r.g + '</td><td class="num">' + r.fixed + '</td><td class="num">' + r.missed + '</td><td class="num">' + fmt(r.t.cash) + '</td><td class="num pts">' + r.points + "</td></tr>";
+        }).join("")
+      + '</tbody></table></div><div class="gap"></div><div class="grow"><button type="button" class="gbtn" data-a="again">Play again</button><button type="button" class="gbtn ghost" data-a="newteams">Change teams</button></div></section>';
+  }
+  function helpBox() {
+    return '<div class="overlay" data-a="helpbg"><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="gaHelpT">'
+      + '<h2 id="gaHelpT">How to Play</h2><div class="kicker">' + esc(D.title) + "</div>"
+      + "<p><strong>" + (mistake ? "Every sentence is for sale. Some are forgeries." : "Every claim is for sale. Some are forgeries.") + "</strong></p>"
+      + (mistake
+        ? "<p>Teams bid on the sentences they believe are <strong>genuine</strong> (correct). A <strong>forgery</strong> hides a grammar mistake.</p>"
+        : "<p>Each lot is a sentence plus a <strong>claim</strong> about what it means. Teams bid on the claims they believe are <strong>genuine</strong> (true). A <strong>forgery</strong> is a claim the sentence does not support.</p>")
+      + "<p><strong>One person is the auctioneer:</strong> the teacher or a student. The auctioneer reads each lot aloud, taps a team's paddle when they bid, and calls \"Going once, going twice, sold!\"</p>"
+      + "<p>Read the catalogue first and agree as a team before you raise your paddle. Nobody finds out what they bought until the last lot is sold.</p>"
+      + "<p>At the reveal, the class votes on each lot before the answer appears. A team that bought a forgery scores <strong>double points</strong> if it can " + (mistake ? "correct the mistake" : "rewrite the claim so it matches the sentence") + " in the redemption round.</p>"
+      + "<p>Genuine lot = 1 point · corrected forgery = 2 points. The team with the most points tops the Rich List.</p>"
+      + '<div class="grow"><button type="button" class="gbtn" data-a="helpclose">Open the auction house →</button></div></div></div>';
+  }
+
+  function render() {
+    var v = { setup:vSetup, preview:vPreview, auction:vAuction, reveal:vReveal, redeem:vRedeem, results:vResults }[S.screen] || vSetup;
+    root.innerHTML = topBar(D, tools()) + '<main class="ga-main">' + v() + "</main>"
+      + (opts.footer ? '<div class="ga-foot">' + opts.footer + "</div>" : "")
+      + (S.help ? helpBox() : "");
+    save();
+    if (S.help) { var b = root.querySelector('[data-a="helpclose"]'); if (b) b.focus(); }
+  }
+  function go(screen) { S.screen = screen; render(); var sc = opts.scroller || global; try { if (sc === global) global.scrollTo(0, root.getBoundingClientRect().top + global.scrollY); else sc.scrollTop = 0; } catch (e) {} }
+
+  /* ----- actions ----- */
+  function act(a, d) {
+    if (a !== "reset") S.confirm = false;
+    var high, next, t, s;
+    switch (a) {
+      case "help": S.help = true; render(); break;
+      case "helpclose": S.help = false; render(); break;
+      case "sound": SFX.set(!SFX.isOn()); if (SFX.isOn()) SFX.bid(); render(); break;
+      case "full": {
+        var el = opts.fullscreenEl || root, doc = global.document;
+        if (doc.fullscreenElement || doc.webkitFullscreenElement) (doc.exitFullscreen || doc.webkitExitFullscreen).call(doc);
+        else if (el.requestFullscreen) el.requestFullscreen().catch(function () {}); else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+        break; }
+      case "exit": if (opts.onExit) opts.onExit(); break;
+      case "count": S.count = Math.max(2, Math.min(6, Math.min(D.pool.length, S.count + Number(d.v)))); fixNames(); render(); break;
+      case "start": startGame(); go("preview"); break;
+      case "open": go("auction"); break;
+      case "bid":
+        high = S.bids[S.bids.length - 1]; next = high ? high.amount + D.step : D.step; t = team(Number(d.v));
+        if (!S.flash && t && t.cash >= next && !(high && high.team === t.id)) { S.bids.push({ team:t.id, amount:next }); S.going = 0; SFX.bid(); }
+        render(); break;
+      case "undo": S.bids.pop(); S.going = 0; render(); break;
+      case "sold":
+        high = S.bids[S.bids.length - 1];
+        if (high && S.going < 2) { S.going++; SFX.gavel(1); render(); break; }
+        S.going = 0;
+        if (high) { S.sold[S.lot] = { team:high.team, price:high.amount }; team(high.team).cash -= high.amount; SFX.gavel(2); }
+        else { S.sold[S.lot] = null; SFX.gavel(1); }
+        S.flash = true; render(); break;
+      case "reopen": s = S.sold[S.lot]; if (s) team(s.team).cash += s.price; delete S.sold[S.lot]; S.flash = false; render(); break;
+      case "next":
+        if (S.lot >= lots.length - 1) { S.rv = 0; go("reveal"); }
+        else { S.lot++; S.bids = []; S.flash = false; S.going = 0; render(); }
+        break;
+      case "reveal": S.shown[S.rv] = true; if (lots[S.rv].ok) SFX.genuine(); else SFX.forgery(); render(); break;
+      case "rvprev": S.rv = Math.max(0, S.rv - 1); render(); break;
+      case "rvnext": S.rv = Math.min(lots.length - 1, S.rv + 1); render(); break;
+      case "toredeem": go("redeem"); break;
+      case "red": S.red[d.lot] = S.red[d.lot] === d.v ? undefined : d.v; if (S.red[d.lot] === "yes") SFX.genuine(); render(); break;
+      case "ans": S.ans[d.lot] = !S.ans[d.lot]; render(); break;
+      case "results": go("results"); SFX.applause(); break;
+      case "again": startGame(); go("preview"); break;
+      case "newteams": go("setup"); break;
+      case "reset":
+        if (S.confirm) { var keep = { count:S.count, names:S.names }; S = fresh(); S.count = keep.count; S.names = keep.names; S.help = false; go("setup"); }
+        else { S.confirm = true; render(); setTimeout(function () { if (S.confirm) { S.confirm = false; render(); } }, 3500); }
+        break;
+    }
+  }
+  function fixNames() {
+    var seen = [];
+    for (var i = 0; i < S.count; i++) {
+      if (!S.names[i] || seen.indexOf(S.names[i]) > -1) { var free = D.pool.filter(function (p) { return seen.indexOf(p) === -1 && S.names.slice(0, S.count).indexOf(p) === -1; })[0]; if (free) S.names[i] = free; }
+      seen.push(S.names[i]);
+    }
+  }
+
+  function onClick(e) {
+    var b = e.target.closest("[data-a]");
+    if (!b || b.disabled || !root.contains(b)) return;
+    if (b.dataset.a === "helpbg" && e.target !== b) return;   /* clicks inside the dialog */
+    act(b.dataset.a === "helpbg" ? "helpclose" : b.dataset.a, b.dataset);
+  }
+  function onChange(e) { var el = e.target; if (el.matches && el.matches("select[data-team]")) { S.names[Number(el.dataset.team)] = el.value; render(); } }
+  function onKey(e) { if (e.key === "Escape" && S.help) { S.help = false; render(); } }
+  root.addEventListener("click", onClick); root.addEventListener("change", onChange); global.document.addEventListener("keydown", onKey);
+  fixNames();
+  render();
+  return { destroy:function () { root.removeEventListener("click", onClick); root.removeEventListener("change", onChange); global.document.removeEventListener("keydown", onKey); root.innerHTML = ""; } };
+}
+
+/* A still picture of one lot, for the maker's preview. */
+GrammarAuction.preview = function (root, data, index, reveal) {
+  var D = normalise(data);
+  root.classList.add("ga", "ga-preview");
+  applyTheme(root, D.theme);
+  var lot = D.lots[index], body;
+  if (!lot) body = '<section style="padding:3rem 0"><h1 class="hero">' + esc(D.title) + '</h1><p class="heroline">Add a sentence in step 2 and it will appear here.</p></section>';
+  else {
+    var names = D.pool.slice(0, 4), step = D.step;
+    body = '<div class="gstage"><section>'
+      + framed(lotBody(D, lot, reveal, reveal && !lot.ok) + (reveal ? stamp(lot) : ""), "lg", "Lot " + (index + 1) + " <span>of " + D.lots.length + "</span>")
+      + (reveal
+        ? '<div class="wall-label">' + verdict(D, lot) + "</div>"
+        : '<div class="bidline"><div><span class="k">Current bid</span><span class="money big">' + fmt(step * 2) + '</span></div><div><span class="k">Held by</span><span class="holder">' + esc(The(names[1])) + '</span></div><div><span class="k">Next bid</span><span class="money nextbid">' + fmt(step * 3) + "</span></div></div>"
+          + '<div class="paddles">' + names.map(function (n, i) { return paddle(i + 1, n, i === 1 ? "Highest bid" : "Bid " + fmt(step * 3), i === 1, i !== 1, D.budget, 0, i); }).join("") + "</div>")
+      + "</section></div>";
+  }
+  root.innerHTML = topBar(D, '<span class="ga-tool">How to play</span><span class="ga-tool">🔊 Sound on</span><span class="ga-tool">Full screen</span>') + '<main class="ga-main">' + body + "</main>";
+};
+GrammarAuction.THEMES = THEMES;
+GrammarAuction.METALS = METALS;
+GrammarAuction.customTheme = customTheme;
+GrammarAuction.resolveTheme = resolveTheme;
+GrammarAuction.findWord = findWord;
+global.GrammarAuction = GrammarAuction;
+})(window);
+</script>
+
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT: the examples teachers can start from
+// =====================================================================
+const EXAMPLES = {
+  homophones: { label: "Homophones", title: "Homophone Auction", level: "B1–B2", mode: "mistake", theme: "kodak", lots: [
+    { s: "It's been a long day.", ok: true, keys: "It's", exp: "It's = it has here. Test: it is or it has → it's." },
+    { s: "The students said there going to submit the assignment late.", ok: false, wrong: "there", fix: "they're", exp: "Test: can you say \"they are\"? They are going to submit → they're." },
+    { s: "The company changed it's logo last year.", ok: false, wrong: "it's", fix: "its", exp: "The logo belongs to the company, so we need its, with no apostrophe, like his and hers." },
+    { s: "Who's the boy whose dog ran away?", ok: true, keys: "Who's, whose", exp: "Who's = who is. Whose = belongs to who?" },
+    { s: "I'm not sure weather I can come.", ok: false, wrong: "weather", fix: "whether", exp: "Whether = if. Weather is rain, sun and wind." },
+    { s: "She passed the test and walked past the bank to celebrate.", ok: true, keys: "passed, past", exp: "Passed is the verb. Past is everything else: walked past, in the past." },
+    { s: "The test was to difficult for most of the class.", ok: false, wrong: "to", fix: "too", exp: "Too = more than you want, before an adjective: too difficult." },
+    { s: "You're welcome to stay for dinner.", ok: true, keys: "You're", exp: "Test: can you say \"you are\"? You are welcome → you're." }
+  ] },
+  stateverbs: { label: "State verbs", title: "State Verb Auction", level: "B1–B2", mode: "mistake", theme: "sapphire", lots: [
+    { s: "I think you're right about the film.", ok: true, keys: "think", exp: "Think = have an opinion here. An opinion is a state, so no -ing." },
+    { s: "This soup is tasting amazing!", ok: false, wrong: "is tasting", fix: "tastes", exp: "Taste = has a flavour here. That is a state: the soup tastes amazing." },
+    { s: "The chef is tasting the sauce before it goes out.", ok: true, keys: "is tasting", exp: "Taste = try with your mouth. That is an action, so -ing is fine." },
+    { s: "I am preferring tea to coffee.", ok: false, wrong: "am preferring", fix: "prefer", exp: "Prefer is a feeling or opinion, so it is a state verb: I prefer tea." },
+    { s: "We are having a great time at the party.", ok: true, keys: "are having", exp: "Have a good time = experience something. That is an activity, so -ing is fine." },
+    { s: "This box is containing old family photos.", ok: false, wrong: "is containing", fix: "contains", exp: "Contain = have inside. It is a state verb." },
+    { s: "You seem tired today.", ok: true, keys: "seem", exp: "Seem is a state verb, correctly in the simple form." },
+    { s: "I am agreeing with everything you said.", ok: false, wrong: "am agreeing", fix: "agree", exp: "Agree is an opinion, so it is a state verb: I agree with you." }
+  ] },
+  relative: { label: "Relative clauses (claims)", title: "Relative Clause Auction", level: "B2–C1", mode: "claim", theme: "royal", lots: [
+    { s: "My brother, who lives in Perth, is a doctor.", claim: "I have only one brother.", ok: true, keys: "who lives in Perth", exp: "The commas make the clause non-defining: extra information, so there is only one brother." },
+    { s: "My brother who lives in Perth is a doctor.", claim: "I have only one brother.", ok: false, fix: "I probably have more than one brother; the one in Perth is a doctor.", keys: "who lives in Perth", exp: "No commas: the clause is defining. It tells us which brother, so there is probably more than one." },
+    { s: "The dog that bit my brother belongs to Mr Hall.", claim: "My brother bit Mr Hall's dog.", ok: false, fix: "Mr Hall's dog bit my brother.", keys: "that bit my brother", exp: "The clause describes the dog. The dog did the biting." },
+    { s: "I met the chef whose restaurant won the award.", claim: "The award-winning restaurant belongs to the chef.", ok: true, keys: "whose", exp: "Whose shows possession: the restaurant belongs to the chef." },
+    { s: "She finally passed her driving test, which surprised everyone.", claim: "Everyone was surprised by the driving test.", ok: false, fix: "Everyone was surprised that she passed.", keys: "which surprised everyone", exp: "Which after a comma can refer to the whole idea: the surprise was that she passed." },
+    { s: "The witnesses, most of whom were tourists, gave conflicting accounts.", claim: "At least one witness may not have been a tourist.", ok: true, keys: "most of whom", exp: "Most of whom means the majority, not all." },
+    { s: "The car that the police stopped was speeding.", claim: "The police were speeding.", ok: false, fix: "The car was speeding.", keys: "that the police stopped", exp: "The police is the subject of the clause. The main sentence is: the car … was speeding." },
+    { s: "The horse raced past the barn fell.", claim: "Someone raced the horse past the barn, and it fell.", ok: true, keys: "raced past the barn", exp: "A reduced passive clause (= the horse that was raced past the barn). Fell is the main verb." }
+  ] }
+};
+const STEPS = { 100: [5, 10, 20], 500: [10, 25, 50], 1000: [25, 50, 100], 5000: [100, 250, 500], 1000000: [10000, 50000, 100000] };
+const STORE = "grammar-auction-maker.v1";
+const blankLot = mode => ({ s: "", ok: true, wrong: "", fix: "", claim: "", keys: "", exp: "" });
+const clone = o => JSON.parse(JSON.stringify(o));
+function fromExample(k) {
+  const e = EXAMPLES[k];
+  return { title: e.title, level: e.level, mode: e.mode, theme: e.theme, lots: e.lots.map(l => Object.assign(blankLot(), l)) };
+}
+const DEFAULTS = () => Object.assign({ budget: 1000, step: 50, choices: false, teamNames: "", custom: { accent: "#7a3fb8", card: "#1f1430", metal: "gold" } }, fromExample("homophones"));
+
+// =====================================================================
+// STATE (saved in this browser only)
+// =====================================================================
+let st = DEFAULTS();
+try { const saved = JSON.parse(localStorage.getItem(STORE) || "null"); if (saved && Array.isArray(saved.lots)) st = Object.assign(DEFAULTS(), saved); } catch (e) {}
+function tidy() {
+  if (st.mode !== "claim") st.mode = "mistake";
+  if (!STEPS[st.budget]) st.budget = 1000;
+  st.budget = +st.budget; st.step = +st.step;
+  if (STEPS[st.budget].indexOf(st.step) === -1) st.step = STEPS[st.budget][1];
+  if (!GrammarAuction.THEMES[st.theme] && st.theme !== "custom") st.theme = "kodak";
+  st.custom = Object.assign({ accent: "#7a3fb8", card: "#1f1430", metal: "gold" }, st.custom || {});
+  if (!/^#[0-9a-f]{6}$/i.test(st.custom.accent)) st.custom.accent = "#7a3fb8";
+  if (!/^#[0-9a-f]{6}$/i.test(st.custom.card)) st.custom.card = "#1f1430";
+  if (!GrammarAuction.METALS[st.custom.metal]) st.custom.metal = "gold";
+  st.lots = (Array.isArray(st.lots) ? st.lots : []).slice(0, 40).map(l => { const o = Object.assign(blankLot(), l || {}); o.ok = !!o.ok; ["s", "wrong", "fix", "claim", "keys", "exp"].forEach(k => { o[k] = String(o[k] || ""); }); return o; });
+  ["title", "level", "teamNames"].forEach(k => { if (typeof st[k] !== "string") st[k] = ""; });
+  st.choices = !!st.choices;
+}
+tidy();
+let saveTimer = 0, pvIndex = 0, game = null;
+function save() { clearTimeout(saveTimer); saveTimer = setTimeout(() => { try { localStorage.setItem(STORE, JSON.stringify(st)); } catch (e) {} }, 300); }
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+function say(msg, warn) { $("status").textContent = msg; $("status").classList.toggle("warn", !!warn); }
+
+// The auction as the game engine wants it.
+function themeObj() { return st.theme === "custom" ? GrammarAuction.customTheme(st.custom.accent, st.custom.card, st.custom.metal) : st.theme; }
+function gameData() {
+  return { title: st.title, level: st.level, mode: st.mode, budget: st.budget, step: st.step, choices: st.choices,
+    teams: st.teamNames.split(/\n+/).map(s => s.trim()).filter(Boolean), theme: themeObj(),
+    lots: st.lots.map(l => ({ s: l.s, ok: l.ok, wrong: st.mode === "mistake" ? l.wrong : "", fix: l.fix, claim: st.mode === "claim" ? l.claim : "", keys: l.keys, exp: l.exp })) };
+}
+
+// =====================================================================
+// CHECKING THE LOTS
+// =====================================================================
+function problems(l) {
+  const out = [], claim = st.mode === "claim";
+  if (!l.s.trim()) { out.push({ m: "Type the sentence.", block: true }); return out; }
+  if (claim && !l.claim.trim()) out.push({ m: "Add a claim about the sentence.", block: true });
+  if (!l.ok) {
+    if (claim) { if (!l.fix.trim()) out.push({ m: "Add the true claim, for the answer.", block: true }); }
+    else {
+      if (!l.fix.trim()) out.push({ m: "Add the correction.", block: true });
+      if (!l.wrong.trim()) out.push({ m: "Type the wrong word(s) too, so they can be crossed out at the reveal." });
+      else if (GrammarAuction.findWord(l.s, l.wrong) < 0) out.push({ m: "We can't find “" + l.wrong.trim() + "” in the sentence, so it won't be crossed out." });
+    }
+  }
+  const missing = l.keys.split(",").map(k => k.trim()).filter(k => k && GrammarAuction.findWord(l.s, k) < 0);
+  if (missing.length) out.push({ m: "Not in the sentence, so not highlighted: " + missing.join(", ") + "." });
+  return out;
+}
+
+// =====================================================================
+// THE LOT EDITOR
+// =====================================================================
+function lotCard(l, i) {
+  const claim = st.mode === "claim", d = document.createElement("div");
+  d.className = "lot" + (i === pvIndex ? " on" : ""); d.dataset.i = i;
+  const tag = claim ? (l.ok ? "True" : "False") : (l.ok ? "Genuine" : "Forgery");
+  d.innerHTML =
+    '<div class="lot-head"><span class="lot-n">Lot ' + (i + 1) + '<small class="' + (l.ok ? "g" : "f") + '">' + tag + '</small></span><span class="lot-tools">' +
+      '<button type="button" class="mini" data-do="up"' + (i === 0 ? " disabled" : "") + ' aria-label="Move lot ' + (i + 1) + ' up">Up</button>' +
+      '<button type="button" class="mini" data-do="down"' + (i === st.lots.length - 1 ? " disabled" : "") + ' aria-label="Move lot ' + (i + 1) + ' down">Down</button>' +
+      '<button type="button" class="mini" data-do="dup" aria-label="Copy lot ' + (i + 1) + '">Copy</button>' +
+      '<button type="button" class="mini" data-do="del" aria-label="Delete lot ' + (i + 1) + '">Delete</button></span></div>' +
+    '<label class="f"><span>Sentence</span><textarea rows="2" maxlength="300" data-f="s" placeholder="' + (claim ? "e.g. The dog that bit my brother belongs to Mr Hall." : "e.g. She don't like coffee.") + '">' + esc(l.s) + "</textarea></label>" +
+    (claim ? '<label class="f"><span>Claim about the sentence</span><input type="text" maxlength="200" data-f="claim" value="' + esc(l.claim) + '" placeholder="e.g. My brother bit the dog."></label>' : "") +
+    '<div class="seg" role="radiogroup" aria-label="Lot ' + (i + 1) + ': right or wrong">' +
+      '<label><input type="radio" name="ok' + i + '" value="1" data-f="ok"' + (l.ok ? " checked" : "") + ">" + (claim ? "Claim is true" : "Sentence is correct") + "</label>" +
+      '<label><input type="radio" name="ok' + i + '" value="0" data-f="ok"' + (!l.ok ? " checked" : "") + ">" + (claim ? "Claim is false" : "Has a mistake") + "</label></div>" +
+    (!l.ok ? (claim
+      ? '<label class="f"><span>The true claim</span><input type="text" maxlength="200" data-f="fix" value="' + esc(l.fix) + '" placeholder="e.g. The dog bit my brother."></label>'
+      : '<div class="pair"><label class="f"><span>Wrong word(s)</span><input type="text" maxlength="80" data-f="wrong" value="' + esc(l.wrong) + '" placeholder="e.g. don\'t"></label>' +
+        '<label class="f"><span>Correction</span><input type="text" maxlength="120" data-f="fix" value="' + esc(l.fix) + '" placeholder="e.g. doesn\'t"></label></div>') : "") +
+    '<label class="f"><span>Highlight at the reveal <em>(optional)</em></span><input type="text" maxlength="160" data-f="keys" value="' + esc(l.keys) + '" placeholder="Words to shade, separated by commas"></label>' +
+    '<label class="f"><span>Explanation <em>(optional)</em></span><input type="text" maxlength="300" data-f="exp" value="' + esc(l.exp) + '" placeholder="Shown at the reveal"></label>' +
+    '<p class="hint warn" data-warn></p>';
+  return d;
+}
+function warnFor(card) {
+  const i = +card.dataset.i, p = problems(st.lots[i]);
+  card.querySelector("[data-warn]").textContent = p.map(x => x.m).join(" ");
+  card.classList.toggle("bad", p.some(x => x.block));
+}
+function renderLots() {
+  const box = $("lots"); box.textContent = "";
+  st.lots.forEach((l, i) => { const c = lotCard(l, i); box.appendChild(c); warnFor(c); });
+  summary();
+}
+function summary() {
+  const n = st.lots.length, bad = st.lots.filter(l => !l.ok).length, claim = st.mode === "claim";
+  $("summary").textContent = !n ? "No sentences yet. Add one below." :
+    n + (n === 1 ? " lot · " : " lots · ") + (n - bad) + (claim ? " true · " : " genuine · ") + bad + (claim ? " false" : (bad === 1 ? " forgery" : " forgeries")) +
+    (n >= 4 && (bad === 0 || bad === n) ? ". Mix them up so teams can't win by bidding on everything." : "");
+}
+
+$("lots").addEventListener("input", e => {
+  const el = e.target, f = el.dataset.f, card = el.closest(".lot"); if (!f || !card) return;
+  const i = +card.dataset.i, l = st.lots[i];
+  if (f === "ok") { l.ok = el.value === "1"; pvIndex = i; renderLots(); }
+  else { l[f] = el.value; warnFor(card); summary(); }
+  save(); preview();
+});
+$("lots").addEventListener("focusin", e => {
+  const card = e.target.closest(".lot"); if (!card) return;
+  const i = +card.dataset.i; if (i === pvIndex) return;
+  pvIndex = i; document.querySelectorAll(".lot").forEach(c => c.classList.toggle("on", +c.dataset.i === i)); preview();
+});
+$("lots").addEventListener("click", e => {
+  const b = e.target.closest("[data-do]"); if (!b) return;
+  const i = +b.closest(".lot").dataset.i, L = st.lots;
+  if (b.dataset.do === "up" && i > 0) { [L[i - 1], L[i]] = [L[i], L[i - 1]]; pvIndex = i - 1; }
+  else if (b.dataset.do === "down" && i < L.length - 1) { [L[i + 1], L[i]] = [L[i], L[i + 1]]; pvIndex = i + 1; }
+  else if (b.dataset.do === "dup") { if (L.length >= 40) { say("Forty lots is the most one auction can hold.", true); return; } L.splice(i + 1, 0, clone(L[i])); pvIndex = i + 1; }
+  else if (b.dataset.do === "del") { L.splice(i, 1); pvIndex = Math.min(pvIndex, L.length - 1); say("Lot " + (i + 1) + " deleted."); }
+  renderLots(); save(); preview();
+});
+$("addBtn").onclick = () => {
+  if (st.lots.length >= 40) { say("Forty lots is the most one auction can hold.", true); return; }
+  st.lots.push(blankLot()); pvIndex = st.lots.length - 1; renderLots(); save(); preview();
+  const last = $("lots").lastElementChild; if (last) last.querySelector("textarea").focus();
+};
+$("clearBtn").onclick = () => {
+  if (st.lots.length && !confirm("Remove all " + st.lots.length + " sentences?")) return;
+  st.lots = []; pvIndex = 0; renderLots(); save(); preview(); say("All sentences removed.");
+};
+$("bulkBtn").onclick = () => {
+  const lines = $("bulkBox").value.split(/\n+/).map(s => s.trim()).filter(Boolean);
+  if (!lines.length) { say("Type or paste some sentences first, one per line.", true); return; }
+  const room = 40 - st.lots.length, take = lines.slice(0, room);
+  take.forEach(line => { const l = blankLot(); if (st.mode === "claim" && line.indexOf("|") > -1) { const p = line.split("|"); l.s = p[0].trim(); l.claim = p.slice(1).join("|").trim(); } else l.s = line; st.lots.push(l); });
+  $("bulkBox").value = ""; pvIndex = st.lots.length - take.length; renderLots(); save(); preview();
+  say(take.length + (take.length === 1 ? " sentence added." : " sentences added.") + (take.length < lines.length ? " Forty lots is the most one auction can hold." : " Now mark the ones that are wrong."));
+};
+
+// =====================================================================
+// THE OTHER SETTINGS
+// =====================================================================
+function fillSteps() {
+  const sel = $("stepSel"); sel.textContent = "";
+  STEPS[st.budget].forEach(v => { const o = document.createElement("option"); o.value = v; o.textContent = "$" + v.toLocaleString("en-AU"); sel.appendChild(o); });
+}
+function buildSwatches() {
+  const box = $("swatches"); box.textContent = "";
+  const add = (key, th, label) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.dataset.theme = key; b.title = label; b.setAttribute("aria-label", label);
+    const metal = GrammarAuction.METALS[th.metal].m[3];
+    b.style.background = "linear-gradient(135deg," + th.accent + " 0 50%," + th.card + " 50% 100%)"; b.style.borderColor = metal;
+    box.appendChild(b);
+  };
+  Object.keys(GrammarAuction.THEMES).forEach(k => add(k, GrammarAuction.THEMES[k], GrammarAuction.THEMES[k].name));
+  add("custom", GrammarAuction.customTheme(st.custom.accent, st.custom.card, st.custom.metal), "Your own colours");
+}
+$("swatches").addEventListener("click", e => { const b = e.target.closest(".sw"); if (!b) return; st.theme = b.dataset.theme; changed(); });
+["cAccent", "cCard"].forEach(id => $(id).addEventListener("input", e => { st.custom[id === "cAccent" ? "accent" : "card"] = e.target.value; st.theme = "custom"; buildSwatches(); changed(); }));
+
+function syncForm() {
+  document.querySelectorAll("[data-k]").forEach(el => {
+    if (el.type === "checkbox") el.checked = !!st[el.dataset.k];
+    else if (el !== document.activeElement) el.value = st[el.dataset.k];
+  });
+  document.querySelectorAll('input[name="mode"]').forEach(r => { r.checked = r.value === st.mode; });
+  document.querySelectorAll('input[name="metal"]').forEach(r => { r.checked = r.value === st.custom.metal; });
+  $("cAccent").value = st.custom.accent; $("cCard").value = st.custom.card;
+  document.querySelectorAll(".sw").forEach(b => b.setAttribute("aria-pressed", b.dataset.theme === st.theme));
+  $("customBox").hidden = st.theme !== "custom";
+  $("themeName").textContent = st.theme === "custom" ? "Your own colours" : GrammarAuction.THEMES[st.theme].name;
+  $("modeHint").textContent = st.mode === "claim"
+    ? "Each lot is a sentence plus a claim about its meaning. Teams bid on the claims they think are true."
+    : "Each lot is a sentence. Teams bid on the sentences they think are correct.";
+}
+function changed() { syncForm(); save(); preview(); }
+
+$("controls").addEventListener("input", e => {
+  const el = e.target, k = el.dataset.k;
+  if (el.closest("#lots") || el.id === "bulkBox" || el.id === "cAccent" || el.id === "cCard") return;
+  if (k) {
+    st[k] = el.type === "checkbox" ? el.checked : el.value;
+    if (k === "budget") { st.budget = +el.value; fillSteps(); st.step = STEPS[st.budget][1]; }
+    if (k === "step") st.step = +el.value;
+  } else if (el.name === "mode") { st.mode = el.value; renderLots(); }
+  else if (el.name === "metal") { st.custom.metal = el.value; st.theme = "custom"; buildSwatches(); }
+  else return;
+  changed();
+});
+Object.keys(EXAMPLES).forEach(k => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = EXAMPLES[k].label;
+  b.onclick = () => {
+    if (st.lots.some(l => l.s.trim()) && !confirm("Replace your sentences with the " + EXAMPLES[k].label + " example?")) return;
+    Object.assign(st, fromExample(k)); pvIndex = 0; renderLots(); changed(); say("Loaded the " + EXAMPLES[k].label + " example. Edit it any way you like.");
+  };
+  $("examples").appendChild(b);
+});
+$("resetBtn").onclick = () => {
+  if (!confirm("Start again? This removes your sentences and settings from this browser.")) return;
+  st = DEFAULTS(); tidy(); pvIndex = 0; fillSteps(); buildSwatches(); renderLots(); changed(); say("Back to the example.");
+};
+
+// =====================================================================
+// PREVIEW
+// =====================================================================
+let pvQueued = false;
+function preview() {
+  if (pvQueued) return; pvQueued = true;
+  requestAnimationFrame(() => {
+    pvQueued = false;
+    const n = st.lots.length; pvIndex = Math.max(0, Math.min(pvIndex, n - 1));
+    const data = gameData(), real = data.lots.findIndex((l, i) => i === pvIndex);
+    // the engine skips empty lots, so show the lot the teacher is working on
+    const shown = Object.assign({}, data, { lots: data.lots.map(l => Object.assign({}, l, { s: l.s.trim() || "(Your sentence)", claim: l.claim })) });
+    GrammarAuction.preview($("pvGame"), shown, real, $("pvReveal").checked);
+    $("pagerText").textContent = n ? "Lot " + (pvIndex + 1) + " of " + n : "No lots yet";
+    $("prevBtn").disabled = pvIndex <= 0; $("nextBtn").disabled = pvIndex >= n - 1;
+    fit();
+  });
+}
+function fit() {
+  const box = $("pvBox"), inner = $("pvInner"), s = Math.min(1, box.clientWidth / 1000);
+  inner.style.transform = "scale(" + s + ")"; box.style.height = Math.ceil(inner.offsetHeight * s) + "px";
+}
+$("prevBtn").onclick = () => { pvIndex--; markOn(); preview(); };
+$("nextBtn").onclick = () => { pvIndex++; markOn(); preview(); };
+$("pvReveal").onchange = preview;
+function markOn() { document.querySelectorAll(".lot").forEach(c => c.classList.toggle("on", +c.dataset.i === pvIndex)); }
+window.addEventListener("resize", fit);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+
+// =====================================================================
+// PLAY, DOWNLOAD, SAVE, OPEN
+// =====================================================================
+function ready() {
+  const ready = st.lots.filter(l => l.s.trim());
+  if (ready.length < 2) { say("Add at least two sentences first.", true); return false; }
+  const i = st.lots.findIndex(l => problems(l).some(p => p.block));
+  if (i > -1) { say("Lot " + (i + 1) + " needs finishing: " + problems(st.lots[i]).filter(p => p.block)[0].m, true); pvIndex = i; renderLots(); preview(); const c = $("lots").children[i]; if (c) c.scrollIntoView({ block: "center", behavior: "smooth" }); return false; }
+  return true;
+}
+function closeGame() {
+  if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  if (game) game.destroy(); game = null;
+  $("play").hidden = true; document.body.classList.remove("playing"); $("playBtn").focus();
+}
+$("playBtn").onclick = () => {
+  if (!ready()) return;
+  say(""); $("play").hidden = false; document.body.classList.add("playing"); $("play").scrollTop = 0;
+  game = GrammarAuction($("gameRoot"), gameData(), { onExit: closeGame, fullscreenEl: $("play"), scroller: $("play") });
+};
+
+function slug() { return (st.title.trim() || "grammar-auction").replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "_").slice(0, 40) || "grammar-auction"; }
+function download(name, text, type) {
+  const a = document.createElement("a"), url = URL.createObjectURL(new Blob([text], { type }));
+  a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+$("dlBtn").onclick = () => {
+  if (!ready()) return;
+  const data = JSON.stringify(gameData()).replace(/</g, "\\u003c");
+  const title = esc(st.title.trim() || "Grammar Auction");
+  const key = "ga-" + slug() + "-" + Date.now().toString(36);
+  const foot = "Made with the <a href=\"https://modernenglish.au/teachertools/bespoke-grammar-auction-maker.html\" target=\"_blank\" rel=\"noopener\">Bespoke Grammar Auction Maker</a> · Modern English Australia · © Koala Spies Sydney";
+  const html = '<!DOCTYPE html>\n<!-- Made with the Bespoke Grammar Auction Maker © Koala Spies Sydney. -->\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>' + title + ' | Grammar Auction</title>\n'
+    + '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
+    + '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Limelight&family=Bevan&family=Special+Elite&family=Bitter:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap">\n'
+    + '<style>html,body{margin:0;min-height:100%}\n' + $("gaCss").textContent + '</style>\n</head>\n<body>\n<div id="game"></div>\n'
+    + '<script>' + $("gaJs").textContent + '<\/script>\n'
+    + '<script>GrammarAuction(document.getElementById("game"), ' + data + ', { storeKey: ' + JSON.stringify(key) + ', footer: ' + JSON.stringify(foot) + ' });<\/script>\n</body>\n</html>\n';
+  download(slug() + "_auction.html", html, "text/html");
+  say("Downloaded " + slug() + "_auction.html. Open it in any browser to play, even offline.");
+};
+$("saveBtn").onclick = () => {
+  download(slug() + "_auction.json", JSON.stringify({ app: "grammar-auction-maker", version: 1, auction: st }, null, 1), "application/json");
+  say("Saved " + slug() + "_auction.json. Use Open file to load it again, on this or another computer.");
+};
+$("openBtn").onclick = () => $("openInput").click();
+$("openInput").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const j = JSON.parse(r.result), a = j && j.auction;
+      if (!a || !Array.isArray(a.lots)) throw new Error("not an auction");
+      st = Object.assign(DEFAULTS(), a); tidy(); pvIndex = 0; fillSteps(); buildSwatches(); renderLots(); changed();
+      say("Opened " + f.name + ".");
+    } catch (err) { say("That file isn't a saved auction. Choose a .json file made with Save file.", true); }
+    e.target.value = "";
+  };
+  r.readAsText(f);
+};
+
+// =====================================================================
+// START
+// =====================================================================
+fillSteps(); buildSwatches(); renderLots(); syncForm(); preview();
+</script>
+</body>
+</html>
