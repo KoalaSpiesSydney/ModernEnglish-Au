@@ -229,6 +229,10 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
   #printArea>img:last-child{page-break-after:auto;break-after:auto}
   #printArea .sheet{display:block}
 }
+/* For schools: one quiet line at the end of the notes. Never shown in print. */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+@media print{.school-cta{display:none!important}}
 </style>
 <!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
      With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
@@ -382,6 +386,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
       <dd>No. Names and answers stay in the student's browser window. To keep a result, use "Print my results" (or save it as a PDF from the print window), or "Copy my results" and paste it into an email.</dd>
     </dl>
   </div>
+  <p class="school-cta">For schools and colleges: want a level test like this built around your own levels, courses and logo? <a href="custom-tools.html">Custom tools for your school →</a></p>
 </section>
 
 <!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
