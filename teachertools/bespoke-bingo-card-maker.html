@@ -161,6 +161,9 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
 @media (max-width:420px){.two{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* For schools: one quiet line at the end of the notes */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+
 /* ---------- printing: only the bingo pages ---------- */
 @media print{
   body>*:not(#printArea){display:none!important}
@@ -325,6 +328,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
       <dd>A pencil works for one game. For reuse, laminate the cards or use counters, buttons or scraps of paper.</dd>
     </dl>
   </div>
+  <p class="school-cta">For schools and colleges: want bingo cards with your logo, colours and course word lists built in? <a href="custom-tools.html">Custom tools for your school →</a></p>
 </section>
 
 <!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
