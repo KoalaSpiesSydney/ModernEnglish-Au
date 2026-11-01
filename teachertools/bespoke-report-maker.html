@@ -215,6 +215,10 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
 .pg-sig{display:grid;grid-template-columns:1fr 1fr;gap:6cqw;margin-top:4cqw;text-align:center;font-size:1.5cqw}
 .pg-sig i{display:block;border-bottom:.2cqw solid #666;height:3cqw;margin-bottom:.7cqw}
 @media (max-width:420px){.row{grid-template-columns:1fr auto}.row input:first-child{grid-column:1/-1}}
+/* For schools: one quiet line at the end of the notes. Never shown in print. */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+@media print{.school-cta{display:none!important}}
 </style>
 <!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
      With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
@@ -351,6 +355,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
       <dd>Not yet. This tool builds the report for each student; you write the comments in Word.</dd>
     </dl>
   </div>
+  <p class="school-cta">For schools and colleges: want student reports with your school's headings, wording and logo built in? <a href="custom-tools.html">Custom tools for your school →</a></p>
 </section>
 
 <!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before the site goes public. -->
