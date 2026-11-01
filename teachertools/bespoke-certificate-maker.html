@@ -182,6 +182,10 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
 input[type=color]{box-shadow:0 1px 2px rgba(15,23,42,.12),0 5px 12px -5px rgba(15,23,42,.3)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* For schools: one quiet line at the end of the notes */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+
 /* ---------- printing: only the certificates ---------- */
 @media print{
   body>*:not(#printArea){display:none!important}
@@ -365,6 +369,7 @@ input[type=color]{box-shadow:0 1px 2px rgba(15,23,42,.12),0 5px 12px -5px rgba(1
       <dd>A5, A4, A3 or US Letter, wide or tall, at print quality. A3 suits display certificates and A5 suits small awards.</dd>
     </dl>
   </div>
+  <p class="school-cta">For schools and colleges: want certificates in your school's design, with your logo and course names built in? <a href="custom-tools.html">Custom tools for your school →</a></p>
 </section>
 
 <!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
