@@ -389,6 +389,11 @@ p.gapline input.wrong{border-bottom-color:var(--warn);background:#fbecea}
   #printArea .gapw{display:inline-block;min-width:3cm;border-bottom:1px solid #0f172a}
   #printArea .ans{color:var(--accent);font-weight:700}
 }
+/* For schools: one quiet line at the end of the notes. Never shown to students, in play mode or in print. */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+body.playing .school-cta,body.play .school-cta{display:none!important}
+@media print{.school-cta{display:none!important}}
 </style>
 <!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID. -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
@@ -608,6 +613,7 @@ p.gapline input.wrong{border-bottom-color:var(--warn);background:#fbecea}
       <dd>Many are written for adults, with romance, revenge and some violence. Watch the whole series before you choose it.</dd>
     </dl>
   </div>
+  <p class="school-cta">For schools and colleges: want interactive video lessons made from your own materials, with your branding? <a href="custom-tools.html">Custom tools for your school →</a></p>
 </section>
 
 <!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before

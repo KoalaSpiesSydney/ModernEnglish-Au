@@ -181,6 +181,11 @@ input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,textarea:f
 input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
 select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23475569' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right .8rem center}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* For schools: one quiet line at the end of the notes. Never shown to students, in play mode or in print. */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+body.playing .school-cta,body.play .school-cta{display:none!important}
+@media print{.school-cta{display:none!important}}
 </style>
 
 <!-- =====================================================================
@@ -541,6 +546,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
       <dd>The auction is designed for one screen at the front of the room, with teams bidding out loud.</dd>
     </dl>
   </div>
+  <p class="school-cta">For schools and colleges: want a classroom game like this built around your own courses and branding? <a href="custom-tools.html">Custom tools for your school →</a></p>
 </section>
 
 <!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before

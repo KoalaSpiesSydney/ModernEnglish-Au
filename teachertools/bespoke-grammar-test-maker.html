@@ -304,6 +304,11 @@ details.group{margin-bottom:.35rem}
   #printArea>img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
   #printArea>img:last-child{page-break-after:auto;break-after:auto}
 }
+/* For schools: one quiet line at the end of the notes. Never shown to students, in play mode or in print. */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+body.playing .school-cta,body.play .school-cta{display:none!important}
+@media print{.school-cta{display:none!important}}
 </style>
 <!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
      With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
@@ -559,6 +564,7 @@ details.group{margin-bottom:.35rem}
       <dd>Only in this browser on this device. To keep a copy, move it to another computer or share it with a colleague, use "Save test file".</dd>
     </dl>
   </div>
+  <p class="school-cta">For schools and colleges: want a placement or level test built around your own levels, courses and logo? <a href="custom-tools.html">Custom tools for your school →</a></p>
 </section>
 
 <!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
