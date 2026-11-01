@@ -104,6 +104,15 @@
     .note { font-size: .95rem; color: var(--muted); margin-top: 16px; }
     .back { display: inline-block; margin-top: 26px; font-weight: 700; }
 
+    /* FOR SCHOOLS: a quiet strip above the tools, same plain look as the note to teachers */
+    .schools { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); gap: 6px 28px; align-items: baseline;
+      background: rgba(255,255,255,.85); border: 1px solid var(--line); border-radius: 3px; padding: 14px 20px; margin-bottom: 8px; }
+    .schools .label { font-size: .72rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .schools a { font-weight: 700; text-decoration: none; }
+    .schools a:hover { text-decoration: underline; }
+    .schools span.d { display: block; color: var(--muted); font-size: .9rem; line-height: 1.45; }
+    @media (max-width: 760px) { .schools { grid-template-columns: 1fr; } }
+
     /* A NOTE TO TEACHERS: plain panel, no coloured rule, no shadow, near-square corners */
     .letter { margin-top: 44px; background: rgba(255,255,255,.85); border: 1px solid var(--line); border-radius: 3px; padding: clamp(20px, 3vw, 34px) clamp(18px, 3.5vw, 40px); max-width: 76ch; }
     .letter .dir-h { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; margin: 0 0 14px; padding: 0; border: 0; }
@@ -153,6 +162,12 @@
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> › Teacher Tool Directory</nav>
     <h1>Teacher Tool Directory</h1>
     <p class="lead">Free tools for English teachers. No sign-up, and everything works in your browser, so nothing you type is stored online.</p>
+
+    <aside class="schools" aria-label="For schools and colleges">
+      <span class="label">For schools &amp; colleges</span>
+      <p><a href="custom-tools.html">Custom tools for your school →</a><span class="d">Any of these tools built around your own courses, levels and branding.</span></p>
+      <p><a href="workshops.html">Workshop: build your own classroom tools with AI →</a><span class="d">No coding needed. For teachers and staff training days.</span></p>
+    </aside>
 
     <div class="dir">
       <h2>Interactive lessons</h2>
@@ -209,6 +224,7 @@
         <li class="soon"><span class="name">Bespoke Progress Test Maker</span><span>Short, regular tests to check how your class is going.</span></li>
         <li class="soon"><span class="name">Bespoke Reading Test Maker</span><span>Reading tests from your own texts, with comprehension questions.</span></li>      </ul>
       <p class="note">Is there a tool you'd like? <a href="../contact.html">Get in touch</a>.</p>
+      <p class="note">Does your college or company want to reach English teachers? <a href="sponsor.html">Sponsor these tools</a>.</p>
 
       <!-- A NOTE TO TEACHERS -->
       <section class="letter" aria-labelledby="letterH">
@@ -241,6 +257,9 @@
     <div class="footer-links">
       <a href="../index.html">Home</a>
       <a href="TeacherToolDirectory.html">Teacher tools</a>
+      <a href="custom-tools.html">Custom tools for schools</a>
+      <a href="workshops.html">Workshops</a>
+      <a href="sponsor.html">Sponsor</a>
       <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/">Koala Spies Sydney</a>
       <a href="../blog.html">Blog</a>
       <a href="../contact.html">Contact</a>
