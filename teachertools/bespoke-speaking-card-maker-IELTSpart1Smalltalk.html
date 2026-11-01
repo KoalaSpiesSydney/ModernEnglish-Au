@@ -249,6 +249,11 @@ dialog.editor::backdrop{background:rgba(15,23,42,.45)}
   #printArea .sheet:last-child{break-after:auto;page-break-after:auto}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+/* For schools: one quiet line at the end of the notes. Never shown to students, on the board or in print. */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+body.play .school-cta{display:none!important}
+@media print{.school-cta{display:none!important}}
 </style>
 <!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
      With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
@@ -379,6 +384,7 @@ dialog.editor::backdrop{background:rgba(15,23,42,.45)}
       <dd>A few topics, such as pets and family, keep their teacher-written questions only, because they don't fit the pattern neatly.</dd>
     </dl>
   </div>
+  <p class="school-cta">For schools and colleges: want speaking cards built from your own syllabus or exam focus, with your logo? <a href="custom-tools.html">Custom tools for your school →</a></p>
 </section>
 
 <!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before the site goes public. -->

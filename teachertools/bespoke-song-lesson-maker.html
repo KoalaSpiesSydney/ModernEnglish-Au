@@ -406,6 +406,11 @@ p.gapline input.wrong,.song input.lgap.wrong{border-bottom-color:var(--warn);bac
   #printArea .keylist li{break-inside:avoid}
   #printArea .credit{margin-top:1rem;font-size:8pt;color:#475569}
 }
+/* For schools: one quiet line at the end of the notes. Never shown to students, on the board or in print. */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+body.play .school-cta{display:none!important}
+@media print{.school-cta{display:none!important}}
 </style>
 <!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
      With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
@@ -673,6 +678,7 @@ p.gapline input.wrong,.song input.lgap.wrong{border-bottom-color:var(--warn);bac
       <dd>Some owners, often record labels, don't allow their videos to play on other websites. Try another upload of the song, such as an official lyric video.</dd>
     </dl>
   </div>
+  <p class="school-cta">For schools and colleges: want interactive song lessons made for your courses, with your branding? <a href="custom-tools.html">Custom tools for your school →</a></p>
 </section>
 
 <!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before

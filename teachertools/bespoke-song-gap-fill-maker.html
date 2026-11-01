@@ -186,6 +186,11 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
   #printArea img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
   #printArea img:last-child{page-break-after:auto;break-after:auto}
 }
+/* For schools: one quiet line at the end of the notes. Never shown to students, on the board or in print. */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+body.play .school-cta{display:none!important}
+@media print{.school-cta{display:none!important}}
 </style>
 <!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
      With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
@@ -381,6 +386,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
       <dd>Labels such as [Chorus], Verse 2: or (Bridge) are kept as headings and are never turned into gaps.</dd>
     </dl>
   </div>
+  <p class="school-cta">For schools and colleges: want song worksheets built around your own courses and themes, with your logo? <a href="custom-tools.html">Custom tools for your school →</a></p>
 </section>
 
 <!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
