@@ -118,11 +118,7 @@ strong{
   text-underline-offset: 3px;
   text-decoration-thickness: 2px;
 }
-
-.submit-block{
-  margin-top:1.6rem; padding:1rem;
-  border:1px solid var(--line); border-radius:5px;
-  background: rgba(30,38,48,0.03);
+.submit-block{ margin-top:1.6rem; }
 }
 .submit-row{
   display:flex; gap:12px; flex-wrap:wrap;
@@ -131,7 +127,6 @@ strong{
 .score-pill{
   display:inline-flex; align-items:center; gap:.5rem;
   padding:.55rem .95rem; border-radius:5px;
-  border:1px solid var(--line); background: rgba(30,38,48,0.05);
   font-weight:900; min-height:46px;
 }
 .score-pill b{ color: var(--accent-soft); }
@@ -165,7 +160,7 @@ strong{
   border:1px solid var(--line); background: rgba(30,38,48,0.03);
   border-radius:5px; padding:10px; color:var(--muted);
 }
-.key-grid strong{ text-decoration:none; color:var(--ink); }
+.key-grid div{ padding:4px 0; color:var(--muted); }
 
 .bottom-nav{
   position:fixed; bottom:0; left:0; right:0;
@@ -207,7 +202,6 @@ footer span{ font-weight:800; color:var(--ink); }
 @media print{
   header,footer,.submit-block,.bottom-nav,.ad-space{ display:none; }
   body{ background:#fff; color:#000; padding-bottom:0; }
-  .container,.wrapper{ box-shadow:none; border:1px solid #ccc; background:#fff; }
 }
 
 
@@ -219,6 +213,8 @@ footer span{ font-weight:800; color:var(--ink); }
   border-radius:var(--radius);
   box-shadow:var(--shadow);
   padding: clamp(22px, 5vw, 42px);
+
+  
 }
 .container p{ margin:0 0 1rem; font-size:1.05rem; }
 .passage{ line-height:2.6; }
@@ -244,11 +240,8 @@ select.gap:disabled{
 }
 .gapno{ font-weight:800; color:var(--accent-soft); }
 
-.example-line{
-  margin:14px 0 20px; padding:12px 16px;
-  border-left:5px solid var(--accent);
-  background: rgba(30,38,48,0.03);
-  border-radius:0 5px 5px 0;
+    .example-line{
+  margin:14px 0 20px;
   font-size:1.02rem;
 }
 
@@ -412,9 +405,6 @@ select.gap:disabled{
 .timer.idle .timer-clock{ color:var(--muted); }
 
 /* No card behind the test: the questions sit straight on the page */
-.container, .wrapper{
-  background:none !important; border:0 !important; box-shadow:none !important;
-  border-radius:0 !important; -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
 }
 </style>
 </head>
