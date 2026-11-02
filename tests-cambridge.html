@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-AU">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -10,7 +10,87 @@
   <meta property="og:title" content="Cambridge C1 Advanced (CAE) Mini Tests · Modern English Australia" />
   <meta property="og:description" content="Free Cambridge C1 Advanced mini tests — Reading and Use of English, plus combined listening and essay writing. Timed and auto-scored." />
   <meta property="og:url" content="https://modernenglish.au/tests-cambridge.html" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:site_name" content="Modern English Australia" />
+  <meta property="og:locale" content="en_AU" />
+  <meta property="og:image" content="https://modernenglish.au/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "CollectionPage",
+   "name": "Cambridge C1 Advanced (CAE) Practice Tests",
+   "url": "https://modernenglish.au/tests-cambridge.html",
+   "description": "Free Cambridge C1 Advanced (CAE) mini tests: Reading and Use of English, plus combined listening and essay writing. Timed, auto-scored and mobile-friendly.",
+   "inLanguage": "en-AU",
+   "publisher": {
+    "@type": "Organization",
+    "name": "Modern English Australia",
+    "url": "https://modernenglish.au/"
+   },
+   "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+     {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "CAE Reading & Use of English Mini Test 5: Modern Families",
+      "url": "https://modernenglish.au/CAEtest/5readingUofE/family.html"
+     },
+     {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "CAE Use of English Mini Test 4: History",
+      "url": "https://modernenglish.au/CAEtest/4readingUofE/history.html"
+     },
+     {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "CAE Reading & Use of English Mini Test 3: The Brain",
+      "url": "https://modernenglish.au/CAEtest/3UseofEnglishandreading/brain.html"
+     },
+     {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "CAE Reading & Use of English Mini Test 2: Tech & Social Media",
+      "url": "https://modernenglish.au/CAEtest/2UseofEnglish/technology.html"
+     },
+     {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "CAE Use of English Mini Test 1: The Media",
+      "url": "https://modernenglish.au/CAEtest/1UseofEnglish/media.html"
+     },
+     {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "CAE Listening & Essay Writing: Accommodation",
+      "url": "https://modernenglish.au/CAEtest/6listen%26write.html"
+     }
+    ]
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://modernenglish.au/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Cambridge C1 Advanced (CAE) Practice Tests"
+    }
+   ]
+  }
+ ]
+}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet">
@@ -292,7 +372,47 @@
       body { animation: none; }
       .game-card { transition: none; }
     }
+    .ee-schools .ad-body p { margin: 4px 0 14px; }
+    .ee-schools .ad-cta { display: inline-block; }
+    /* ═══ Essay-cover look (2 Nov 2026): no coloured lines, paper cards ═══ */
+    header::after { display: none; }
+    .hero-word:nth-child(2)::after { display: none; }
+    .game-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 34px 30px; }
+    .game-card, .game-card.is-new {
+      position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+      aspect-ratio: 1 / 1.3; padding: 34px 24px 26px;
+      background: #ffffff; border: 1px solid #dedad0; border-radius: 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 6px 12px -4px rgba(30,25,15,.10), 0 22px 40px -14px rgba(30,25,15,.36);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .game-card::before, .game-card.is-new::before, .game-card:hover::before { display: none; }
+    .game-card:hover { transform: translateY(-4px); border-color: #dedad0; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 10px 18px -6px rgba(30,25,15,.14), 0 30px 52px -16px rgba(30,25,15,.42); }
+    .game-card-top { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .game-card-label { color: var(--muted); font-size: .7rem; letter-spacing: 2.5px; line-height: 1.6; }
+    .game-card-title { margin: auto 0 10px; font-size: clamp(1.35rem, 1.1rem + .7vw, 1.7rem); line-height: 1.2; color: var(--ink); }
+    .game-card-desc { font-size: .86rem; color: var(--muted); line-height: 1.55; margin: 0 0 auto; }
+    .game-card-arrow { margin-top: 18px; color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+    .badge-new { background: none; border-radius: 0; padding: 0; color: var(--ink); font-style: italic; letter-spacing: 2px; }
+    /* plain text links instead of buttons */
+    .tips-pill, .tips-pill.is-active, .page-nav a {
+      background: none; border: 0; border-radius: 0; box-shadow: none; padding: 4px 0;
+      color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 4px;
+    }
+    .tips-pill:hover, .tips-pill.is-active:hover, .page-nav a:hover { background: none; border: 0; box-shadow: none; color: var(--accent); }
+    .page-nav { gap: 6px 28px; }
+    .page-nav a::after { content: " \2192"; text-decoration: none; display: inline-block; margin-left: 4px; }
+    .tips-panel, [class*="tips-body"] { border-radius: 2px; }
+    .ad-card { background: #ffffff; border: 1px solid #dedad0; border-radius: 0; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 6px 12px -4px rgba(30,25,15,.10), 0 22px 40px -14px rgba(30,25,15,.36); }
+    .ad-card::before { display: none; }
+    .ad-mark { border-radius: 0; background: none; color: var(--ink); border: 1px solid var(--ink); }
+    .ad-kicker { color: var(--muted); }
+    .ad-cta { border-radius: 2px; background: var(--ink); }
+    @media (max-width: 640px) {
+      .game-card, .game-card.is-new { aspect-ratio: auto; min-height: 320px; padding: 28px 20px 22px; }
+    }
   </style>
+  <!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
   <script>
@@ -325,8 +445,8 @@
       </nav>
       <div class="one-col">
         <h3>Assessment</h3>
-        <h1 class="hero-headline" aria-label="cambridge english">
-          <span class="hero-word">cambridge&nbsp;</span><span class="hero-word">english</span>
+        <h1 class="hero-headline" aria-label="cambridge English">
+          <span class="hero-word">cambridge&nbsp;</span><span class="hero-word">English</span>
         </h1>
         <p class="role-line">C1 Advanced &middot; Timed &middot; Instant Feedback</p>
         <p class="intro-text">
@@ -352,7 +472,7 @@
       <h2 style="margin-bottom: 6px;">Mini CAE Reading &amp; Use of English Tests</h2>
       <p class="intro-text" style="margin-top:0;">Short snapshots of the C1 Advanced Reading and Use of English paper &mdash; every part is timed and auto-scored, with an answer key and explanations.</p>
       <div class="game-grid">
-        <a class="game-card is-new" href="CAEtest/5Reading%26UseofEnglish/index.html">
+        <a class="game-card is-new" href="CAEtest/5readingUofE/family.html">
           <span class="game-card-top">
             <span class="game-card-label">CAE Reading &amp; Use of English &middot; Mini Test 5</span>
             <span class="badge-new">New</span>
@@ -361,25 +481,25 @@
           <p class="game-card-desc">4 parts &middot; 30 questions &middot; open cloze, key word transformations, reading comprehension, multiple matching.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
-        <a class="game-card" href="CAEtest/5useofEnglish/index.html">
-          <span class="game-card-label">CAE Reading &amp; Use of English &middot; Mini Test 4</span>
-          <span class="game-card-title">Tech &amp; Social Media</span>
-          <p class="game-card-desc">2 parts &middot; 9 questions &middot; key word transformations, gapped text (put the paragraphs in order).</p>
+        <a class="game-card" href="CAEtest/4readingUofE/history.html">
+          <span class="game-card-label">CAE Use of English &middot; Mini Test 4</span>
+          <span class="game-card-title">History</span>
+          <p class="game-card-desc">4 parts &middot; 26 questions &middot; multiple-choice cloze, open cloze, word formation, key word transformations, plus a tips pre-lesson.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
-        <a class="game-card" href="CAEtest/3UseofEnglishandreading/index.html">
+        <a class="game-card" href="CAEtest/3UseofEnglishandreading/brain.html">
           <span class="game-card-label">CAE Reading &amp; Use of English &middot; Mini Test 3</span>
           <span class="game-card-title">The Brain</span>
           <p class="game-card-desc">3 parts &middot; 21 questions &middot; multiple-choice cloze, word formation, reading comprehension.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
-        <a class="game-card" href="CAEtest/2UseofEnglish/index.html">
-          <span class="game-card-label">CAE Use of English &middot; Mini Test 2</span>
-          <span class="game-card-title">History</span>
-          <p class="game-card-desc">4 parts &middot; 26 questions &middot; multiple-choice cloze, open cloze, word formation, key word transformations, plus a tips pre-lesson.</p>
+        <a class="game-card" href="CAEtest/2UseofEnglish/technology.html">
+          <span class="game-card-label">CAE Reading &amp; Use of English &middot; Mini Test 2</span>
+          <span class="game-card-title">Tech &amp; Social Media</span>
+          <p class="game-card-desc">2 parts &middot; 9 questions &middot; key word transformations, gapped text (put the paragraphs in order).</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
-        <a class="game-card" href="CAEtest/1UseofEnglish/index.html">
+        <a class="game-card" href="CAEtest/1UseofEnglish/media.html">
           <span class="game-card-label">CAE Use of English &middot; Mini Test 1</span>
           <span class="game-card-title">The Media</span>
           <p class="game-card-desc">4 parts &middot; 30 questions &middot; multiple-choice cloze, open cloze, word formation, key word transformations.</p>
@@ -387,39 +507,10 @@
         </a>
       </div>
       <hr class="divider">
-      <h2 style="margin-bottom: 6px;">Mini CAE Listening Tests</h2>
-      <p class="intro-text" style="margin-top:0;">Short snapshots of the C1 Advanced Listening paper, timed and auto-scored with audio included. Coming soon.</p>
-      <div class="game-grid">
-        <div class="game-card is-soon" aria-label="CAE Listening Mini Test 1, coming soon">
-          <span class="game-card-top">
-            <span class="game-card-label">CAE Listening &middot; Mini Test 1</span>
-            <span class="badge-soon">Coming soon</span>
-          </span>
-          <span class="game-card-title">Topic to be announced</span>
-          <p class="game-card-desc">Timed listening practice &middot; audio included &middot; auto-scored.</p>
-        </div>
-        <div class="game-card is-soon" aria-label="CAE Listening Mini Test 2, coming soon">
-          <span class="game-card-top">
-            <span class="game-card-label">CAE Listening &middot; Mini Test 2</span>
-            <span class="badge-soon">Coming soon</span>
-          </span>
-          <span class="game-card-title">Topic to be announced</span>
-          <p class="game-card-desc">Timed listening practice &middot; audio included &middot; auto-scored.</p>
-        </div>
-        <div class="game-card is-soon" aria-label="CAE Listening Mini Test 3, coming soon">
-          <span class="game-card-top">
-            <span class="game-card-label">CAE Listening &middot; Mini Test 3</span>
-            <span class="badge-soon">Coming soon</span>
-          </span>
-          <span class="game-card-title">Topic to be announced</span>
-          <p class="game-card-desc">Timed listening practice &middot; audio included &middot; auto-scored.</p>
-        </div>
-      </div>
-      <hr class="divider">
       <h2 style="margin-bottom: 6px;">Combined Skills</h2>
       <p class="intro-text" style="margin-top:0;">Practice that links skills together: listen to a model essay read aloud and fill in the missing words, then plan and write your own essay.</p>
       <div class="game-grid">
-        <a class="game-card" href="CAEtest/CAEtest/4listeningandwriting/index.html">
+        <a class="game-card" href="CAEtest/6listen%26write.html">
           <span class="game-card-label">Combined Skills &middot; Listening &amp; Essay Writing</span>
           <span class="game-card-title">Accommodation</span>
           <p class="game-card-desc">10 listening gap-fill questions &middot; one essay-writing task &middot; audio included.</p>
@@ -436,21 +527,19 @@
         <a class="cta-link" href="contact.html">Get in touch about custom tests</a>
       </p>
       <hr class="divider">
-      <!-- ═══ PLACEHOLDER ADVERTISEMENT ═══
-           Fictional sponsor, used to show how a paid slot sits on the page.
-           Replace the kicker, title, text, initials and href with the real sponsor's details. -->
-      <aside class="ad-slot" aria-label="Advertisement">
-        <span class="ad-label">Advertisement</span>
+      <aside class="ad-slot ee-schools" aria-labelledby="schoolsTitle">
+        <span class="ad-label">From Modern English Australia</span>
         <div class="ad-card">
-          <div class="ad-mark" aria-hidden="true">TR</div>
+          <div class="ad-mark" aria-hidden="true">ME</div>
           <div class="ad-body">
-            <p class="ad-kicker">Sponsored &middot; ELICOS</p>
-            <h2 class="ad-title">Two Rivers Academy of English</h2>
-            <p class="ad-text">Cambridge C1 Advanced preparation over 10 weeks, with weekly mock papers and written feedback on every task. Teacher development short courses also run each term.</p>
-            <a class="ad-cta" href="#" onclick="return false">View the timetable</a>
+            <p class="ad-kicker">For schools &amp; colleges</p>
+            <h2 class="ad-title" id="schoolsTitle">Custom tools and teacher workshops</h2>
+            <p class="ad-text">Any of these tools built around your own courses, levels and branding.</p>
+            <a class="ad-cta" href="teachertools/custom-tools.html">Custom tools for your school</a>
+            <p class="ad-text" style="margin-top:16px">No coding needed. For teachers and staff training days.</p>
+            <a class="ad-cta" href="teachertools/workshops.html">Workshop: build your own classroom tools with AI</a>
           </div>
         </div>
-        <p class="ad-note">Sample advertisement — fictional sponsor, shown as a placeholder for a paid slot.</p>
       </aside>
     </div>
   </section>
