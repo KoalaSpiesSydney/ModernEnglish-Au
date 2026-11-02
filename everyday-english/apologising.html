@@ -471,6 +471,15 @@
     .letterWrite textarea{width:100%;min-height:220px}
     .letterCount{margin-top:.35rem;font-size:var(--fs-hint);color:var(--muted2)}
     .letterCount.ok{color:#15803d;font-weight:700}
+    /* ═══ Cards in the Everyday English paper style (match the landing page) ═══ */
+    .panel.keep-card{background:#fff;border:1px solid #dedad0;border-top:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.06),0 6px 12px -4px rgba(30,25,15,.10),0 22px 40px -14px rgba(30,25,15,.30)}
+    .prompt{padding:16px 20px;background:#fff;border:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 22px -12px rgba(30,25,15,.24)}
+    .checkItem{border-radius:0;border-color:#e3dfd5;background:#fff}
+    .checkItem:hover{border-color:#bfb9aa;background:#fff}
+    .letterTask{background:#fff;border:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 22px -12px rgba(30,25,15,.24)}
+    .guide .modelAnswer{background:#fff;border:1px solid #dedad0;border-left:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 22px -12px rgba(30,25,15,.24)}
+    .phraseCard{background:#fff;border:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 16px -10px rgba(30,25,15,.22)}
+    .phraseCard h3{border-bottom:0;padding-bottom:0}
   </style>
 </head>
 <body>
@@ -708,7 +717,7 @@ Thanks for being so understanding, and please let me know if there's anything el
 </main>
 <footer>
   © Koala Spies Sydney · Modern English Australia · All Rights Reserved
-  <div class="footnav"><a href="../index.html">Home</a><a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/about.html">About</a><a href="../contact.html">Contact</a><a href="../privacy.html">Privacy</a></div>
+  <div class="footnav"><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../contact.html">Contact</a><a href="../privacy.html">Privacy</a></div>
 </footer>
 <!-- Introduction tile -->
 <div class="overlay" id="introOverlay" hidden></div>
@@ -948,17 +957,17 @@ w.drawQRToCanvas=function(text,canvas,size){
     apologising:'Apologising', suggesting:'Suggesting', explaining:'Explaining'
   };
   const SITS = [
-    { n:1, audio:'audio/apology1.mp3', taskType:'apologising', channel:'In person',
+    { n:1, audio:'apology1.mp3', taskType:'apologising', channel:'In person',
       text:'You missed an important team deadline because you wrote the wrong date in your calendar, and a colleague had to finish your section at the last minute. Your manager asks you to explain. Describe what you would say to apologise and take responsibility.' },
-    { n:2, audio:'audio/apology2.mp3', taskType:'apologising', channel:'Phone call',
+    { n:2, audio:'apology2.mp3', taskType:'apologising', channel:'Phone call',
       text:"You completely forgot a close friend's birthday dinner last night, and they had saved you a seat. You call them the next morning to apologise and make it up to them. Explain what you would say." },
-    { n:3, audio:'audio/apology3.mp3', taskType:'apologising', channel:'Email',
+    { n:3, audio:'apology3.mp3', taskType:'apologising', channel:'Email',
       text:'You sent a client the wrong version of a report, and it contained figures that had not been checked. They have already forwarded it to their own team. You write to apologise and correct the mistake. Describe what you would write in your email.' },
-    { n:4, audio:'audio/apology4.mp3', taskType:'apologising', channel:'In person',
+    { n:4, audio:'apology4.mp3', taskType:'apologising', channel:'In person',
       text:"You reversed out of your driveway and scraped your neighbour's car, leaving a long mark along the door. Nobody saw it happen, but you decide to knock on their door straight away. Explain what you would say to apologise." },
-    { n:5, audio:'audio/apology5.mp3', taskType:'apologising', channel:'Phone call',
+    { n:5, audio:'apology5.mp3', taskType:'apologising', channel:'Phone call',
       text:'A colleague asked you to pass on an urgent message, but it slipped your mind, and as a result they missed an important meeting with a client. You call them to apologise. Explain what you would say.' },
-    { n:6, audio:'audio/apology6.mp3', taskType:'apologising', channel:'Customer call',
+    { n:6, audio:'apology6.mp3', taskType:'apologising', channel:'Customer call',
       text:"You work in customer service, and a customer's order arrived damaged for the second time because of a packing error at your warehouse. You call the customer to apologise on behalf of the company and offer a solution. Explain what you would say." },
   ];
   /* ── elements ── */

@@ -471,6 +471,15 @@
     .letterWrite textarea{width:100%;min-height:220px}
     .letterCount{margin-top:.35rem;font-size:var(--fs-hint);color:var(--muted2)}
     .letterCount.ok{color:#15803d;font-weight:700}
+    /* ═══ Cards in the Everyday English paper style (match the landing page) ═══ */
+    .panel.keep-card{background:#fff;border:1px solid #dedad0;border-top:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.06),0 6px 12px -4px rgba(30,25,15,.10),0 22px 40px -14px rgba(30,25,15,.30)}
+    .prompt{padding:16px 20px;background:#fff;border:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 22px -12px rgba(30,25,15,.24)}
+    .checkItem{border-radius:0;border-color:#e3dfd5;background:#fff}
+    .checkItem:hover{border-color:#bfb9aa;background:#fff}
+    .letterTask{background:#fff;border:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 22px -12px rgba(30,25,15,.24)}
+    .guide .modelAnswer{background:#fff;border:1px solid #dedad0;border-left:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 22px -12px rgba(30,25,15,.24)}
+    .phraseCard{background:#fff;border:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 16px -10px rgba(30,25,15,.22)}
+    .phraseCard h3{border-bottom:0;padding-bottom:0}
   </style>
 </head>
 <body>
@@ -709,7 +718,7 @@ Thanks so much for your understanding. I'm happy to [help / discuss it further /
 </main>
 <footer>
   © Koala Spies Sydney · Modern English Australia · All Rights Reserved
-  <div class="footnav"><a href="../index.html">Home</a><a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/about.html">About</a><a href="../contact.html">Contact</a><a href="../privacy.html">Privacy</a></div>
+  <div class="footnav"><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../contact.html">Contact</a><a href="../privacy.html">Privacy</a></div>
 </footer>
 <!-- Introduction tile -->
 <div class="overlay" id="introOverlay" hidden></div>
@@ -957,17 +966,17 @@ w.drawQRToCanvas=function(text,canvas,size){
     apologising:'Apologising', suggesting:'Suggesting', explaining:'Explaining'
   };
   const SITS = [
-    { n:1, taskType:'explaining', channel:'Team meeting', audio:'audio/situation1.mp3',
+    { n:1, taskType:'explaining', channel:'Team meeting', audio:'situation1.mp3',
       text:'You arrive at work and discover that an important meeting has been moved forward by two hours. Your manager asks you to update the team immediately so everyone can adjust their plans. Explain what you would say to the team in this situation.' },
-    { n:2, taskType:'complaining', channel:'Phone call', audio:'audio/situation2.mp3',
+    { n:2, taskType:'complaining', channel:'Phone call', audio:'situation2.mp3',
       text:"You recently bought a new pair of headphones online, but they arrived damaged and don't work properly. You contact customer service to explain the issue and request a replacement or refund. Describe what you would say to the customer service representative." },
-    { n:3, taskType:'advising', channel:'In person', audio:'audio/situation3.mp3',
+    { n:3, taskType:'advising', channel:'In person', audio:'situation3.mp3',
       text:"You've just been offered two job opportunities — one with a higher salary but longer hours, and another with better work-life balance but lower pay. You're unsure which to choose and decide to speak with a trusted mentor. Explain what you would say to ask for their advice." },
-    { n:4, taskType:'requesting', channel:'In person', audio:'audio/situation4.mp3',
+    { n:4, taskType:'requesting', channel:'In person', audio:'situation4.mp3',
       text:"You've been working on a major project for several weeks and now need to take two days off for a personal matter. You decide to speak with your manager to request this time off without disrupting the team's progress. Explain what you would say to your manager." },
-    { n:5, taskType:'suggesting', channel:'In person', audio:'audio/situation5.mp3',
+    { n:5, taskType:'suggesting', channel:'In person', audio:'situation5.mp3',
       text:'Your team has been facing delays in completing a project due to unclear communication. You believe that holding a short daily meeting could help everyone stay aligned and address issues quickly. Explain what you would say to your manager to suggest this idea.' },
-    { n:6, taskType:'apologising', channel:'In person', audio:'audio/situation6.mp3',
+    { n:6, taskType:'apologising', channel:'In person', audio:'situation6.mp3',
       text:'You missed an important deadline because of a scheduling error on your part. Your manager asks for an explanation and wants to know how you will prevent it from happening again. Explain what you would say to apologise and take responsibility.' },
   ];
   /* ── elements ── */
