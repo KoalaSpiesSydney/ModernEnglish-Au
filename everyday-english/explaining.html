@@ -480,6 +480,17 @@
     .guide .modelAnswer{background:#fff;border:1px solid #dedad0;border-left:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 10px 22px -12px rgba(30,25,15,.24)}
     .phraseCard{background:#fff;border:1px solid #dedad0;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 16px -10px rgba(30,25,15,.22)}
     .phraseCard h3{border-bottom:0;padding-bottom:0}
+    /* ── save and print the letter ── */
+    .letterTools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:.9rem}
+    .letterStatus{font-size:var(--fs-hint);color:var(--muted2)}
+    .letterPrintCopy{display:none}
+    @media print{
+      .noPrint{display:none !important}
+      body.printLetter .letterWrite label,body.printLetter #letterBox,body.printLetter .letterCount,body.printLetter .letterTools{display:none !important}
+      body.printLetter .letterPrintCopy{display:block;color:#000}
+      body.printLetter #letterPrintText{white-space:pre-wrap;font-size:12pt;line-height:1.8}
+      body.printLetter #letterPractice{box-shadow:none;border:0}
+    }
   </style>
 </head>
 <body>
@@ -653,7 +664,7 @@ Does that make sense? Just let me know if you'd like me to go over any of it aga
         </ul>
     </div>
   </section>
-<section class="panel guide" aria-labelledby="letterTitle">
+<section class="panel guide" id="letterPractice" aria-labelledby="letterTitle">
     <div class="panelHeader"><div><h2 id="letterTitle">IELTS General Training letter practice</h2><div class="hint">Writing Task 1: spend about 20 minutes and write at least 150 words.</div></div></div>
     <div class="panelBody">
       <p class="letterIntro">Turn what you have just practised into writing. Plan each letter with the same four parts as your spoken answer, one paragraph each, and match your tone to the opening line: <em>Dear Sir or Madam</em> for formal, a title and surname for semi-formal, and a first name for informal. You do not need to write any addresses.</p>
@@ -694,6 +705,15 @@ Does that make sense? Just let me know if you'd like me to go over any of it aga
         <label for="letterBox">Write your letter here</label>
         <textarea id="letterBox" placeholder="Dear …"></textarea>
         <div class="letterCount" id="letterCount" aria-live="polite">0 words · aim for at least 150</div>
+        <div class="letterTools">
+          <button type="button" class="primary" id="letterSave">Save to my device</button>
+          <button type="button" id="letterPrint">Print</button>
+          <span class="letterStatus" id="letterStatus" aria-live="polite"></span>
+        </div>
+        <div class="letterPrintCopy" id="letterPrintCopy">
+          <p>Name: ______________________________ &nbsp; Date: ______________</p>
+          <div id="letterPrintText"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -702,6 +722,31 @@ Does that make sense? Just let me know if you'd like me to go over any of it aga
     var box=document.getElementById('letterBox'),out=document.getElementById('letterCount');
     function count(){var n=(box.value.trim().match(/\S+/g)||[]).length;out.textContent=n+(n===1?' word':' words')+(n>=150?' · you have reached 150':' · aim for at least 150');out.classList.toggle('ok',n>=150);}
     box.addEventListener('input',count);
+
+    /* Keep the draft in this browser, save it as a file, or print it */
+    var KEY='me-ee-explaining-letter',st=document.getElementById('letterStatus'),timer;
+    try{var old=localStorage.getItem(KEY);if(old&&!box.value){box.value=old;count();}}catch(e){}
+    box.addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(function(){try{localStorage.setItem(KEY,box.value);st.textContent='Draft kept in this browser';}catch(e){}},400);});
+    document.getElementById('letterSave').addEventListener('click',function(){
+      var n=(box.value.trim().match(/\S+/g)||[]).length,tasks=[];
+      document.querySelectorAll('#letterPractice .letterTask').forEach(function(d){tasks.push(d.innerText.trim());});
+      var text='IELTS General Training letter practice: Explaining clearly\n'+location.href.split('#')[0]+'\n\nTASKS\n'+tasks.join('\n\n')+'\n\nMY LETTER ('+n+(n===1?' word':' words')+')\n'+box.value+'\n';
+      var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
+      a.download='IELTS-letter-explaining-'+new Date().toISOString().slice(0,10)+'.txt';
+      document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+      st.textContent='Saved as a text file';
+    });
+    var hidden=[];
+    function done(){hidden.forEach(function(el){el.classList.remove('noPrint');});hidden=[];document.body.classList.remove('printLetter');}
+    document.getElementById('letterPrint').addEventListener('click',function(){
+      document.getElementById('letterPrintText').textContent=box.value||'(No letter written yet.)';
+      for(var el=document.getElementById('letterPractice');el&&el!==document.body;el=el.parentElement){
+        Array.prototype.forEach.call(el.parentElement.children,function(s){if(s!==el&&!s.classList.contains('noPrint')&&s.tagName!=='SCRIPT'&&s.tagName!=='STYLE'){s.classList.add('noPrint');hidden.push(s);}});
+      }
+      document.body.classList.add('printLetter');
+      window.print();
+    });
+    window.addEventListener('afterprint',done);
   })();
   </script>
   <nav class="more" aria-label="More Everyday English Situations">
