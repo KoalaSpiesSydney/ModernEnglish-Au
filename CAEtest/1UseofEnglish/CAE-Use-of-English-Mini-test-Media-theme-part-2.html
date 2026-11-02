@@ -382,13 +382,15 @@ input.gap:disabled{
   font-size:12.5px; font-weight:800; color:var(--accent-soft);
   letter-spacing:.03em;
 }
-.timer-btn{
+
+  .timer-btn{
   font: inherit; font-size:.72rem; font-weight:900;
   letter-spacing:.1em; text-transform:uppercase;
-  border:1px solid var(--accent-line); border-radius:999px;
-  background:var(--accent); color:#fff;
-  padding:.32rem .72rem; cursor:pointer; line-height:1.15;
-  transition: filter .2s ease, transform .15s ease;
+  border:0; background:none; color:var(--accent-soft);
+  padding:0; cursor:pointer; line-height:1.15;
+  text-decoration:underline; text-underline-offset:3px;
+}
+.timer-btn:hover{ color:var(--ink); }
 }
 .timer-btn:hover{ filter:brightness(1.08); transform:translateY(-1px); }
 .timer-btn[hidden]{ display:none; }
