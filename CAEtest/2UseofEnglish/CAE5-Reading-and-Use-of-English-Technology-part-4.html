@@ -383,35 +383,47 @@ input.gap:disabled{
 .question.wrong{ border-color:var(--err); box-shadow:0 0 0 3px rgba(192,57,43,.14); }
 
 
-    .timer{
-  position:absolute;
-  top:5px;
-  right: var(--pad);
-  display:inline-flex; align-items:center; gap:.55rem;
-  padding:.35rem .85rem;
-  min-height:46px;
-  border:1px solid var(--line);
-  border-radius:4px;
-  background:transparent;
-}
-.timer-label{
-  font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
-  font-weight:800; color:var(--muted); line-height:1;
-}
-.timer-clock{
-  font-weight:900; font-size:1.08rem; letter-spacing:.04em;
-  color:var(--ink); line-height:1;
-  font-variant-numeric: tabular-nums;
-}
-.timer-btn{
-  font: inherit; font-size:.72rem; font-weight:900;
-  letter-spacing:.1em; text-transform:uppercase;
-  border:1px solid var(--line); border-radius:999px;
-  background:transparent; color:var(--ink);
-  padding:.32rem .72rem; cursor:pointer; line-height:1.15;
-}
-.timer-btn:hover{ background:rgba(30,38,48,.05); }
-.timer-btn[hidden]{ display:none; }
+timer{
+      position:absolute;
+      top:14px;
+      right: var(--pad);
+      display:inline-flex; align-items:center; gap:.55rem;
+      padding:.35rem .85rem;
+      min-height:46px;
+      border:1px solid var(--accent-line);
+      border-radius:5px;
+      background:#fff;
+      box-shadow:0 2px 10px rgba(80,66,40,.10);
+      transition: background-color .25s ease, border-color .25s ease;
+    }
+    .timer-label{
+      font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
+      font-weight:800; color:var(--muted); line-height:1;
+    }
+    .timer-clock{
+      font-weight:900; font-size:1.08rem; letter-spacing:.04em;
+      color:var(--accent-soft); line-height:1;
+      font-variant-numeric: tabular-nums;
+    }
+    .timer.warn{ border-color:rgba(192,57,43,.45); background:rgba(192,57,43,.07); }
+    .timer.warn .timer-clock{ color:var(--err); }
+    .timer.over{ border-color:rgba(192,57,43,.60); background:rgba(192,57,43,.12); }
+    .timer.over .timer-clock{ color:var(--err); }
+    .timer.done{ border-color:rgba(31,122,85,.50); background:rgba(31,122,85,.09); }
+    .timer.done .timer-clock{ color:var(--ok); }
+    .timer.idle{ background:rgba(30,38,48,.03); }
+    .timer.idle .timer-clock{ color:var(--muted); }
+    .timer-btn{
+      font: inherit; font-size:.72rem; font-weight:900;
+      letter-spacing:.1em; text-transform:uppercase;
+      border:0; background:none; color:var(--accent-soft);
+      padding:0; cursor:pointer; line-height:1.15;
+      text-decoration:underline; text-underline-offset:3px;
+    }
+    .timer-btn:hover{ color:var(--ink); }
+    .timer-btn[hidden]{ display:none; }
+
+    @media print{ .timer{ display:none; } }
 
     /* ===== Countdown timer ===== */
     /* Room for the QR tile (left) and the timer (right) */
