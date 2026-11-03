@@ -205,7 +205,6 @@ strong{
   width:min(92%, 920px);
   margin: clamp(16px, 4vw, 32px) auto;
 }
-}
 .container p{ margin:0 0 1rem; font-size:1.05rem; }
 .passage{ line-height:2.6; }
 .gapno{ font-weight:800; color:var(--accent-soft); }
@@ -388,18 +387,18 @@ input.gap:disabled{
 .opt input:disabled{ cursor:default; }
 .question.correct{ border-color:var(--ok); box-shadow:0 0 0 3px rgba(31,122,85,.16); }
 .question.wrong{ border-color:var(--err); box-shadow:0 0 0 3px rgba(192,57,43,.14); }
-    
-timer{
+
+    /* ===== Countdown timer: simple rectangle, top right ===== */
+    .timer{
       position:absolute;
       top:14px;
       right: var(--pad);
       display:inline-flex; align-items:center; gap:.55rem;
       padding:.35rem .85rem;
       min-height:46px;
-      border:1px solid var(--accent-line);
+      border:1px solid var(--line);
       border-radius:5px;
       background:#fff;
-      box-shadow:0 2px 10px rgba(80,66,40,.10);
       transition: background-color .25s ease, border-color .25s ease;
     }
     .timer-label{
@@ -429,9 +428,6 @@ timer{
     .timer-btn:hover{ color:var(--ink); }
     .timer-btn[hidden]{ display:none; }
 
-    @media print{ .timer{ display:none; } }
-
-
     /* Room for the QR tile (left) and the timer (right) */
     @media (min-width:521px){
       .header-inner{ padding-left:104px; padding-right:168px; }
@@ -447,12 +443,6 @@ timer{
   margin:0 0 1rem; }
 .gap-slot .gapno{ font-size:1.02rem; }
 .gap-slot select.gap{ margin:0; min-width:16ch; }
-
-
-
-    
-    .gap-slot{ display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-  margin:0 0 1rem; }
 .gap-preview{ flex:1 1 260px; font-size:.95rem; color:var(--muted); line-height:1.6; }
 .text-title{ text-align:center; font-weight:900; font-size:1.2rem; color:var(--ink); margin:6px 0 14px; }
 .opts h3{ text-align:center; color:var(--accent-soft); margin:26px 0 8px; }
