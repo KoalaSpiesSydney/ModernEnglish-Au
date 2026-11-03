@@ -444,12 +444,15 @@ timer{
   
 /* ===== Part 7: gapped text ===== */
 .gap-slot{ display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-  margin:0 0 1rem; padding:12px 14px; border:2px dashed var(--accent-line);
-  border-radius:12px; background:#fff; }
+  margin:0 0 1rem; }
 .gap-slot .gapno{ font-size:1.02rem; }
 .gap-slot select.gap{ margin:0; min-width:16ch; }
-.gap-slot.correct{ border-style:solid; border-color:var(--ok); background:rgba(31,122,85,.06); }
-.gap-slot.wrong{ border-style:solid; border-color:var(--err); }
+
+
+
+    
+    .gap-slot{ display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:0 0 1rem; }
 .gap-preview{ flex:1 1 260px; font-size:.95rem; color:var(--muted); line-height:1.6; }
 .text-title{ text-align:center; font-weight:900; font-size:1.2rem; color:var(--ink); margin:6px 0 14px; }
 .opts h3{ text-align:center; color:var(--accent-soft); margin:26px 0 8px; }
