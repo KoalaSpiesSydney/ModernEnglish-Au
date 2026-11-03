@@ -114,7 +114,17 @@
       font-size: clamp(1.1rem,3.6vw,1.35rem); letter-spacing:.02em;
     }
     .paper-meta{ margin:0 0 4px; color:var(--muted); font-size:.95rem; font-weight:600; }
-    .paper-time{ margin:0 0 22px; color:var(--muted); font-size:.86rem; }
+    .paper-time{ margin:0 0 6px; color:var(--muted); font-size:.86rem; }
+
+    /* Warm-up link: plain bold underlined text */
+    .warmup-link{ margin:0 0 22px; }
+    .warmup-link a{
+      font-weight:800;
+      color:var(--ink);
+      text-decoration:underline;
+      text-underline-offset:3px;
+    }
+    .warmup-link a:hover{ color:var(--accent); }
 
     .nav-grid{ display:grid; grid-template-columns:1fr; gap:16px; max-width:760px; margin:0 auto; }
     .nav-button{
@@ -367,6 +377,7 @@
     <h2>Choose a Part</h2>
     <p class="paper-meta">2 parts &middot; 9 questions &middot; 18 marks</p>
     <p class="paper-time">Each part is timed separately &mdash; 22 minutes of exam time in total. Press Start on each page when you are ready.</p>
+    <p class="warmup-link"><a href="CAE5-Reading-and-Use-of-English-Technology-warm-up.html">Warm-up &ndash; Organising paragraphs</a></p>
 
     <div class="nav-grid">
       <a href="CAE5-Reading-and-Use-of-English-Technology-part-4.html" class="nav-button p4">
