@@ -4304,7 +4304,7 @@ const ESSAY_TYPES = {
     catch (e) { return ''; }
   }
   const BASEKEY = 'bespoke-essay.base', isWeb = /^https?:$/.test(location.protocol);
-  const DEFAULT_BASE = 'https://modernenglish.au/teachertools/Bespoke_Essay_Question_%26_Writer.html';
+  const DEFAULT_BASE = 'https://modernenglish.au/teachertools/Bespoke_Essay_Question__Writer.html';
   function baseURL() { return isWeb ? location.href.split('#')[0] : (load(BASEKEY) || DEFAULT_BASE); }
   function shareURL(mode) {
     const b = baseURL();
