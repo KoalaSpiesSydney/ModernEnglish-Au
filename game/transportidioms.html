@@ -1095,28 +1095,47 @@ const LEVELS = {
   elementary: {
     label: "Elementary", badge: "A2 ELEMENTARY", simile: true,
     /* transport phrases (collocations): [start, ending, picture, meaning] – the picture goes on the ending card.
-       Each start only goes with ONE ending in this list, so every pair has a single right answer. */
-    idioms: [
-      ["fasten …", "your seatbelt", "seatbelt", "close your seatbelt so it holds you safely"],
-      ["hail …", "a taxi", "taxi", "wave your hand to stop a taxi"],
-      ["pump up …", "the tyres", "wheel", "fill the tyres with air"],
-      ["ring …", "the bell", "bell", "make the bell on your bike (or the bus) ring"],
-      ["honk …", "the horn", "horn", "make the car horn sound: beep beep!"],
-      ["wait at …", "the bus stop", "busstop", "stand at the place where the bus stops"],
-      ["cross …", "the road", "crossing", "walk from one side of the road to the other"],
-      ["row …", "a boat", "boat", "move a small boat with oars"],
-      ["ride …", "a bike", "bicycle", "sit on a bike and make it go"],
-      ["fly …", "a plane", "plane", "be the pilot of a plane"],
-      ["buy …", "a ticket", "ticket", "pay for the right to travel"],
-      ["go through …", "airport security", "tower", "be checked before you get on a plane"],
-      ["fill up …", "with petrol", "petrolpump", "put petrol in the car until it is full"],
-      ["read …", "the map", "map", "look at a map to find the way"],
-      ["get stuck in …", "traffic", "trafficjam", "can’t move because there are too many cars"],
-      ["drive on …", "the left", "keepleft", "drive on the left side of the road, as in Australia and the UK"],
-      ["pack …", "your suitcase", "suitcase", "put your clothes and things in your suitcase"],
-      ["obey …", "the speed limit", "speedlimit", "don’t drive faster than the sign says"],
-      ["turn on …", "the headlights", "carfront", "switch on the lights at the front of the car"],
-      ["pay …", "the toll", "barrier", "pay money to use a road, bridge or tunnel"]
+/* Each start only goes with ONE ending in this list, so every pair has a single right answer. */
+idioms: [
+  // Existing entries
+  ["fasten …", "your seatbelt", "seatbelt", "close your seatbelt so it holds you safely"],
+  ["hail …", "a taxi", "taxi", "wave your hand to stop a taxi"],
+  ["pump up …", "the tyres", "wheel", "fill the tyres with air"],
+  ["ring …", "the bell", "bell", "make the bell on your bike (or the bus) ring"],
+  ["honk …", "the horn", "horn", "make the car horn sound: beep beep!"],
+  ["wait at …", "the bus stop", "busstop", "stand at the place where the bus stops"],
+  ["cross …", "the road", "crossing", "walk from one side of the road to the other"],
+  ["row …", "a boat", "boat", "move a small boat with oars"],
+  ["ride …", "a bike", "bicycle", "sit on a bike and make it go"],
+  ["fly …", "a plane", "plane", "be the pilot of a plane"],
+  ["buy …", "a ticket", "ticket", "pay for the right to travel"],
+  ["go through …", "airport security", "tower", "be checked before you get on a plane"],
+  ["fill up …", "with petrol", "petrolpump", "put petrol in the car until it is full"],
+  ["read …", "the map", "map", "look at a map to find the way"],
+  ["get stuck in …", "traffic", "trafficjam", "can’t move because there are too many cars"],
+  ["drive on …", "the left", "keepleft", "drive on the left side of the road, as in Australia and the UK"],
+  ["pack …", "your suitcase", "suitcase", "put your clothes and things in your suitcase"],
+  ["obey …", "the speed limit", "speedlimit", "don’t drive faster than the sign says"],
+  ["turn on …", "the headlights", "carfront", "switch on the lights at the front of the car"],
+  ["pay …", "the toll", "barrier", "pay money to use a road, bridge or tunnel"],
+
+
+  ["go by …", "bus", "bus", "travel somewhere using the bus"],
+  ["go on …", "foot", "walking", "walk to your destination"],
+  ["drive …", "a car", "car", "control a car and make it move"],
+  ["ride …", "a motorbike", "motorbike", "sit on a motorbike and drive it"],
+  ["get on …", "the train", "train", "board or step onto a train"],
+  ["get off …", "the bus", "busstop", "exit or leave a bus"],
+  ["get in …", "the taxi", "taxi", "step inside a car or taxi"],
+  ["get out of …", "the car", "car", "exit or step outside a car"],
+  ["take …", "a taxi", "taxi", "pay for a taxi ride to travel somewhere"],
+  ["catch …", "the train", "train", "arrive in time to get on the train"],
+  ["miss …", "the bus", "busstop", "arrive too late to catch the bus"],
+  ["wait for …", "the bus", "busstop", "stay in a place until the bus comes"],
+  ["change …", "trains", "train", "get off one train and get on another"],
+  ["look at …", "the timetable", "schedule", "check the times for buses or trains"],
+  ["arrive at …", "the airport", "airport", "reach the airport at the end of a journey"]
+]
     ],
     gaps: [
       ["Before the car starts, please ______.", ["fasten your seatbelt", "fasten your seat belt", "fasten your seatbelts", "fasten your seat belts"]],
@@ -1155,6 +1174,32 @@ const LEVELS = {
       ["drive someone up the wall", "make someone very annoyed", "car"],
       ["get on board", "agree to support a plan", "bus"],
       ["learn the ropes", "learn how to do a new job", "anchor"]
+     /* Intermediate & Upper-Intermediate Transportation Idioms / Collocations */
+idioms: [
+  // --- B1 (Intermediate): Daily Commuting & Air Travel Logistics ---
+  ["set off on …", "a journey", "departure", "start travelling toward a destination"],
+  ["pick up …", "a passenger", "car", "stop the car to collect someone"],
+  ["drop off …", "a friend", "car", "stop the car so someone can get out"],
+  ["check in for …", "a flight", "airport", "show your ticket and register your luggage at the airport"],
+  ["board …", "the plane", "airplane", "get onto a plane or ship before departure"],
+  ["commute to …", "work", "train", "travel back and forth between home and work every day"],
+  ["miss …", "a connection", "transfer", "arrive too late to catch your next train or flight"],
+  ["carpool with …", "colleagues", "car", "share a car ride to work with other people"],
+  ["go through …", "passport control", "passport", "show your official papers when entering or leaving a country"],
+  ["reclaim …", "your baggage", "luggage", "collect your bags from the belt after a flight"],
+
+  // --- B2 (Upper-Intermediate): Driving Hazards, Traffic & Urban Transit ---
+  ["pull over to …", "the side of the road", "carstop", "move your vehicle to the roadside and stop"],
+  ["pull in to …", "the station", "trainstation", "arrive and stop at a train platform"],
+  ["cut off …", "another driver", "warning", "drive dangerously close in front of another vehicle"],
+  ["get held up in …", "traffic", "trafficjam", "be delayed because of heavy road traffic"],
+  ["run out of …", "petrol", "fuelempty", "use all your fuel so the engine stops working"],
+  ["break down on …", "the motorway", "towtruck", "stop working because of a mechanical problem"],
+  ["charge …", "an electric vehicle", "evcharge", "plug a battery car into power to recharge it"],
+  ["avoid …", "the rush hour", "clock", "travel at times when roads and trains are less busy"],
+  ["get stuck in …", "gridlock", "gridlock", "be unable to move because traffic is completely blocked"],
+  ["pay …", "a congestion charge", "tollcharge", "pay a daily fee to drive into a busy city center"]
+]
     ],
     gaps: [
       ["Everyone in the class is worried about the exam. We’re all ______.", ["in the same boat"]],
