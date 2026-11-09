@@ -420,6 +420,35 @@
     }
 
     /* COMING SOON cards — not clickable until the game page is live */
+        /* ===== NEW & COMING SOON ROW ===== */
+    .games-subh {
+      font-family: var(--sans); font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted);
+      margin: 8px 0 0;
+    }
+    .game-grid.game-grid-next { margin-top: 18px; }
+
+    /* Coming-soon cards keep their dashed edge and don't lift on hover */
+    .game-card.is-soon[class*="theme-"] { border-style: dashed; }
+    .game-card.is-soon[class*="theme-"]:hover { transform: none; border-color: var(--t-border); }
+    .game-card.is-soon .game-card-desc { opacity: .9; }
+
+    .theme-transport {
+      --t-bg:
+        repeating-linear-gradient(90deg, #f2c94c 0 18px, transparent 18px 32px) 0 6px / 100% 3px no-repeat,
+        linear-gradient(#2b2f36, #2b2f36) top / 100% 15px no-repeat,
+        #f3f7fb;
+      --t-border: #9fb4cc; --t-accent: #a83c00; --t-ink: #1b2a3d; --t-muted: #435266; --t-motif: "🚂";
+    }
+    .game-card.theme-transport.is-new { border-color: #9fb4cc; }
+
+    .theme-flora { --t-bg: linear-gradient(170deg, #eef7e8 0%, #f8fbf2 60%, #fdf3f6 100%); --t-border: #b5d6a7;
+      --t-accent: #2f6b2a; --t-ink: #1f3a1d; --t-muted: #4a5a46; --t-font: "Newsreader", var(--serif); --t-motif: "🌿"; }
+    .theme-flora .game-card-title { font-style: italic; }
+
+    .theme-citycountry { --t-bg: linear-gradient(135deg, #e4e8f0 0 50%, #eaf4dd 50% 100%); --t-border: #c3ccd8;
+      --t-accent: #3d5a26; --t-ink: #1f2933; --t-muted: #4a5360; --t-motif: "🏙️"; }
+    
     .game-card.is-soon {
       background: rgba(255,255,255,.6);
       border-style: dashed; border-color: rgba(14,40,97,.28);
@@ -982,6 +1011,37 @@ crossorigin="anonymous"></script>
       </div>
 
       <p class="wip-note">More coming. Like language learning, this page is a work in progress.</p>
+            <!-- NEW & COMING SOON -->
+      <h3 class="games-subh" id="new-games">New &amp; coming soon</h3>
+      <div class="game-grid game-grid-next">
+
+        <article class="game-card theme-transport is-new">
+          <span class="new-badge">New</span>
+          <span class="game-card-label">Matching Game · B1–B2</span>
+          <h3 class="game-card-title"><a href="game/transportidioms.html">Transport Idioms &amp; Phrases</a></h3>
+          <p class="game-card-desc">Miss the boat, a back-seat driver, on the right track, in the same boat. Match idioms and phrases about trains, cars, boats and planes to their meanings.</p>
+          <div class="game-card-links">
+            <a href="game/transportidioms.html">Play <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="game-card theme-flora is-soon">
+          <span class="soon-badge">Coming soon</span>
+          <span class="game-card-label">Matching Game · Flora</span>
+          <h3 class="game-card-title">Flower, Plant &amp; Tree Idioms</h3>
+          <p class="game-card-desc">Nip it in the bud, a late bloomer, beat around the bush, can't see the wood for the trees. Idioms that grow from the garden.</p>
+          <div class="game-card-links"><span class="game-card-arrow">In the works</span></div>
+        </article>
+
+        <article class="game-card theme-citycountry is-soon">
+          <span class="soon-badge">Coming soon</span>
+          <span class="game-card-label">Matching Game · City &amp; Country</span>
+          <h3 class="game-card-title">City &amp; Country Idioms</h3>
+          <p class="game-card-desc">Paint the town red, the concrete jungle, the back of beyond, out in the sticks. Bright lights, big city, and life beyond the black stump.</p>
+          <div class="game-card-links"><span class="game-card-arrow">In the works</span></div>
+        </article>
+
+      </div>
 
       <p><a class="cta-link" href="minilessons.html">Mini lessons: short vocabulary and grammar lessons that go with the games</a></p>
 
@@ -1165,6 +1225,7 @@ crossorigin="anonymous"></script>
         { "@type": "ListItem", "position": 14, "name": "Casual vs Academic Language (C2)", "url": "https://modernenglish.au/game/Casualvsacademic.html" },
         { "@type": "ListItem", "position": 15, "name": "Get Expressions (C2)", "url": "https://modernenglish.au/game1/getC2.html" },
         { "@type": "ListItem", "position": 16, "name": "Lovers & Haters (B2–C2)", "url": "https://modernenglish.au/game/loversandhaters.html" }
+          { "@type": "ListItem", "position": 17, "name": "Transport Idioms & Phrases (B1–B2)", "url": "https://modernenglish.au/game/transportidioms.html" }
       ]
     }
   ]
