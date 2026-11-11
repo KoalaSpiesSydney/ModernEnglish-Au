@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<!-- Bespoke Matching Game Maker © Koala Spies Sydney. All rights reserved. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bespoke Matching Game Maker: Free Memory Card Game Generator for Teachers | Modern English Australia</title>
+
+<meta name="description" content="Make your own flip-and-match memory game in a minute. Type or paste pairs (words and meanings, idioms, verbs, pictures), then play it on the board, share it with students by link or QR code, or download it. Free, no sign-up.">
+<link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-matching-game-maker.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700;800&family=Source+Serif+4:wght@700;800&display=swap">
+<style>
+/* =====================================================================
+   BESPOKE MATCHING GAME MAKER
+   One file, no server. The pairs stay in the visitor's browser. The
+   game itself is a small page (kept at the bottom of this file) that
+   is shown in the preview, opened full screen, shared inside a link,
+   or downloaded as its own file.
+   ===================================================================== */
+:root{
+  --bench:#fffce6;      /* the site's cream page colour */
+  --panel:#ffffff;
+  --ink:#0f172a;
+  --soft:#475569;
+  --line:#dcd9c6;
+  --header:#1c1c1c;     /* header and footer, as on modernenglish.au */
+  --tag:#fde047;        /* the yellow of the site's tagline, on dark only */
+  --deep:#0e2861;       /* Modern English navy: primary buttons, headings */
+  --foil:#0e7c66;       /* Modern English teal, used sparingly */
+  --focus:#3968ea;
+  --warn:#b3261e;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+/* Koala Spies Sydney watermark: faint, repeated across the page behind the
+   panels. It is part of the page only, never of the game. */
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%230f172a%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* ---------- header ---------- */
+.top{background:var(--header);color:#f8fafc}
+.top-in{max-width:1320px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
+.top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
+.top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:46ch}
+
+/* ---------- the bench: controls + preview ---------- */
+.bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(300px,420px) minmax(0,1fr);gap:1.5rem;align-items:start}
+.controls{display:grid;gap:.75rem}
+details.group{margin-bottom:.35rem}
+details.group>summary{cursor:pointer;list-style:none;padding:.8rem 0;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.group>summary::-webkit-details-marker{display:none}
+details.group>summary::after{content:"";width:.55rem;height:.55rem;border-right:2px solid var(--soft);border-bottom:2px solid var(--soft);transform:rotate(45deg);transition:transform .15s ease;flex:none;margin-right:.2rem}
+details.group[open]>summary::after{transform:rotate(-135deg)}
+.group-body{padding:0 0 1rem;display:grid;gap:.8rem}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft)}
+label.f>span{font-weight:700;color:var(--ink)}
+textarea{resize:vertical;min-height:13rem;line-height:1.45}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+.hint.warn{color:var(--warn);font-weight:700}
+.lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
+code{background:#f1efe2;border-radius:4px;padding:0 .3em;font-size:.92em}
+
+
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg label{position:relative;text-align:center;padding:.5rem .4rem;cursor:pointer;font-size:.95rem;min-height:44px;display:flex;align-items:center;justify-content:center}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--deep);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:-3px}
+
+.swatches{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.sw{width:44px;height:44px;border-radius:50%;border:2px solid #fff;cursor:pointer;padding:0;box-shadow:0 0 0 1.5px var(--line),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+input[type=color]{width:64px;height:44px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px;box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
+.btn:hover{background:#eef2fb;box-shadow:0 2px 4px rgba(15,23,42,.22),0 12px 24px -8px rgba(15,23,42,.48);transform:translateY(-1px)}
+.btn:active{box-shadow:0 1px 2px rgba(15,23,42,.28);transform:translateY(0)}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:hover{background:#0a1d47}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn[disabled]{opacity:.55;cursor:default;box-shadow:none;transform:none}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep);flex:none}
+
+/* typing fields: white, with a firm bottom edge that says "write here" */
+input[type=text],textarea,select{width:100%;padding:.55rem .65rem;font-size:1rem;min-height:44px;background:#fff;border:1px solid #d5d3c2;border-bottom:2px solid #94a3b8;border-radius:6px 6px 3px 3px;box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 1px 2px rgba(15,23,42,.1),0 5px 14px -5px rgba(15,23,42,.28);transition:border-color .15s ease,box-shadow .15s ease}
+input[type=text]:hover,textarea:hover,select:hover{border-bottom-color:var(--deep)}
+input[type=text]:focus,textarea:focus,select:focus{outline:none;border-color:var(--deep);box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 5px 14px -5px rgba(15,23,42,.28),0 0 0 3px rgba(57,104,234,.22)}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
+
+/* ---------- preview ---------- */
+.stage{position:sticky;top:1rem;display:grid;gap:.8rem}
+.frame{position:relative;width:100%;height:min(74vh,720px);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.2),0 16px 40px -12px rgba(15,23,42,.4)}
+#game{display:block;width:100%;height:100%;border:0;background:#fff}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+.fineprint{margin:0;font-size:.9rem;color:var(--soft)}
+.fineprint a,.terms a,.notes a{color:var(--deep);font-weight:700}
+
+/* ---------- share dialog ---------- */
+.modal{position:fixed;inset:0;z-index:70;background:rgba(15,23,42,.5);display:flex;align-items:flex-start;justify-content:center;padding:40px 12px;overflow:auto}
+.modal-card{background:#fff;width:600px;max-width:100%;border-radius:var(--radius);box-shadow:0 10px 40px rgba(0,0,0,.3);padding:1.1rem 1.25rem 1.3rem;display:grid;gap:.8rem}
+.modal-head{display:flex;align-items:center;gap:.5rem}
+.modal-head h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:1.3rem}
+.grow{flex:1}
+.x{border:1.5px solid var(--line);background:#fff;border-radius:8px;min-width:40px;min-height:40px;cursor:pointer;color:var(--soft)}
+.sh-note{margin:0;font-size:.9rem;padding:.5rem .7rem;border-radius:6px;background:#fbefdc;color:#7a4a0a}
+.qr-box{display:grid;justify-items:center;gap:.4rem}
+.qr-box .qr{width:240px;height:240px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:8px}
+.qr svg{width:100%;height:100%;display:block}
+#qrFull{position:fixed;inset:0;z-index:80;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2vh;padding:3vh}
+#qrBig{width:min(78vh,92vw);aspect-ratio:1}
+#qrBig svg{width:100%;height:100%;display:block}
+#qrFull p{margin:0;font:700 clamp(18px,2.4vw,40px) "Source Sans 3",sans-serif;color:var(--deep);text-align:center}
+#qrFull .btn{position:absolute;top:14px;right:14px}
+
+/* ---------- reading matter under the tool ---------- */
+.notes{max-width:1320px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;display:inline-block}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+.terms{max-width:1320px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+footer.site{background:var(--header);color:#cbd5e1;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer.site a{color:#fff}
+
+/* ---------- smaller screens: preview first, action bar stays in reach ---------- */
+@media (max-width:900px){
+  .bench{grid-template-columns:1fr;padding:1rem}
+  .stage{position:static;order:-1}
+  .frame{height:62vh}
+  .actions{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--panel);box-shadow:0 -6px 18px -8px rgba(15,23,42,.3);padding:.6rem .8rem;padding-bottom:max(.6rem,env(safe-area-inset-bottom));justify-content:center}
+  .actions{flex-wrap:nowrap;gap:.4rem}
+  .actions .btn{flex:1 1 0;padding:.5rem .4rem;font-size:.92rem;white-space:nowrap}
+  body{padding-bottom:5rem}
+}
+@media (max-width:560px){.actions .long{display:none}}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div><p class="eyebrow">Modern English Australia</p><h1>Bespoke Matching Game Maker</h1></div>
+    <p>Free for teachers. Type your pairs and get a flip-and-match game to play on the board or share with students. Nothing leaves this device.</p>
+  </div>
+</header>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<main class="bench">
+
+  <!-- ================= CONTROLS ================= -->
+  <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
+
+    <details class="group" open>
+      <summary>Pairs</summary>
+      <div class="group-body">
+        <label class="f"><span>Topic</span><input type="text" data-k="title" maxlength="60" placeholder="e.g. Opposites, Food idioms, Irregular verbs"></label>
+        <label class="f"><span>Pairs, one per line</span>
+          <textarea data-k="pairs" rows="12" spellcheck="true" placeholder="hot = cold&#10;big = small&#10;happy = sad"></textarea>
+        </label>
+        <p class="hint" id="pairHint" role="status"></p>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>Game</summary>
+      <div class="group-body">
+        <label class="f"><span>Level or small line under the title <em>(optional)</em></span><input type="text" data-k="sub" maxlength="60" placeholder="e.g. A2 Elementary"></label>
+        <div>
+          <p class="lab">Tiles on the screen</p>
+          <div class="seg" role="radiogroup" aria-label="Tiles on the screen">
+            <label><input type="radio" name="perRound" value="6">12 tiles</label>
+            <label><input type="radio" name="perRound" value="8">16 tiles</label>
+            <label><input type="radio" name="perRound" value="12">24 tiles</label>
+          </div>
+        </div>
+        <p class="hint" id="roundHint"></p>
+        <label class="f"><span>Instructions for students</span>
+          <textarea data-k="instr" rows="3" style="min-height:5.5rem" maxlength="400"></textarea>
+        </label>
+        <label class="check"><input type="checkbox" data-k="nums">Number the cards (handy when students call out cards on the board)</label>
+        <label class="check"><input type="checkbox" data-k="sound">Sound effects</label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>Colour</summary>
+      <div class="group-body">
+        <div class="swatches" id="swatches" role="group" aria-label="Colours">
+          <input type="color" data-k="colour" aria-label="Choose your own colour">
+        </div>
+      </div>
+    </details>
+
+    <button type="button" class="btn quiet" id="resetBtn">Start again with the example game</button>
+  </form>
+
+  <!-- ================= PREVIEW ================= -->
+  <section class="stage" aria-label="Preview">
+    <div class="frame"><iframe id="game" title="Your matching game"></iframe></div>
+    <div class="stage-bar">
+      <p class="hint" style="font-size:.9rem">This is your game. Try it here – it updates as you type.</p>
+      <div class="actions">
+        <button type="button" class="btn main" id="fullBtn">▣ Play<span class="long"> full screen</span></button>
+        <button type="button" class="btn" id="shareBtn">▦ Share<span class="long"> with students</span></button>
+        <button type="button" class="btn" id="downloadBtn">Download<span class="long"> game</span></button>
+      </div>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <p class="fineprint">For classroom and family use. <a href="#terms">Terms of use</a></p>
+  </section>
+</main>
+
+<section class="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>Type a topic, then your pairs, one per line, with <code>=</code> in the middle.</li>
+      <li>Choose 12, 16 or 24 tiles. Every round picks new pairs from your list.</li>
+      <li>Press <strong>Play full screen</strong> to play on the board, <strong>Share with students</strong> for a link or QR code, or <strong>Download game</strong> to keep it as a file.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Ideas for class</h2>
+    <ul>
+      <li><strong>Words and meanings:</strong> <code>reluctant = not wanting to do something</code></li>
+      <li><strong>Idioms:</strong> <code>spill the beans = tell a secret</code></li>
+      <li><strong>Collocations:</strong> <code>fasten … = your seatbelt</code></li>
+      <li><strong>Verb forms:</strong> <code>go = went</code></li>
+      <li><strong>Pictures:</strong> <code>🐘 = elephant</code></li>
+      <li><strong>Questions and answers:</strong> <code>How old are you? = I’m twelve.</code></li>
+      <li><strong>On the board:</strong> turn on card numbers and let teams call out two numbers each turn.</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Questions</h2>
+    <dl>
+      <dt>How many pairs do I need?</dt>
+      <dd>At least one round’s worth: 6 pairs for 12 tiles, 8 for 16 tiles, 12 for 24 tiles. Add more and each round uses a different mix, so students can play again and again.</dd>
+      <dt>Do students need to sign up?</dt>
+      <dd>No. They scan the QR code or open the link and play straight away, on a phone, tablet or computer.</dd>
+      <dt>Is my game stored online?</dt>
+      <dd>No. The whole game travels inside the link, so nothing is uploaded or kept on a server. Very long lists may be too big for a QR code; send the link instead or download the game.</dd>
+      <dt>Can I keep the game?</dt>
+      <dd>Yes. <strong>Download game</strong> saves it as a single page you can open in any browser, put on your class website or send by email. Your list is also remembered in this browser for next time.</dd>
+      <dt>What if two cards could match the same card?</dt>
+      <dd>Students will be marked wrong for a sensible answer, so make each pair clearly different. The tool warns you when the same card appears twice.</dd>
+    </dl>
+  </div>
+  <p class="school-cta">For schools and colleges: want matching games with your logo, colours and course word lists built in? <a href="custom-tools.html">Custom tools for your school →</a></p>
+</section>
+
+<!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
+     the site goes public, and change the date when you edit it. -->
+<section class="terms" id="terms" tabindex="-1">
+  <h2>Terms of use</h2>
+  <p class="updated">Last updated 8 November 2026</p>
+  <p>The Bespoke Matching Game Maker is a free tool for teachers and families. By making, sharing or downloading games you agree to these terms.</p>
+  <h3>What you may use it for</h3>
+  <ul>
+    <li>Games for your own classroom, school, club or home. You may share the games you make with your students and colleagues.</li>
+  </ul>
+  <h3>What you must not do</h3>
+  <ul>
+    <li>Copy, resell or republish this tool or its code.</li>
+    <li>Put content in a game that you do not have the right to use, or that is unsuitable for your students.</li>
+  </ul>
+  <p>You are responsible for the pairs you put in a game and for how the game is used.</p>
+  <h3>Your information</h3>
+  <p>Your pairs and settings stay in your browser and are never sent to us. They are saved on your own device so they are there next time; the "Start again" button removes them. When you share a game, the game is stored inside the link itself. The QR code is made in your browser. This site uses cookies for visitor statistics and to show ads, and providers such as Google may set them. See our <a href="https://modernenglish.au/privacy.html">privacy policy</a> for details.</p>
+  <h3>No guarantees</h3>
+  <p>The tool is provided free and as it is. Check your game before students use it. To the extent the law allows, we are not liable for loss or damage arising from its use. Nothing in these terms limits any rights you have under the Australian Consumer Law. These terms are governed by the laws of New South Wales, Australia.</p>
+</section>
+
+<!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<footer class="site">
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-sentence-scramble-maker.html">Sentence scramble maker</a> · <a href="bespoke-reading-lesson-maker.html">Reading lesson maker</a> · <a href="bespoke-ielts-reading-test-maker.html">IELTS reading test maker</a> · <a href="bespoke-grammar-test-maker.html">Grammar test maker</a> · <a href="#terms">Terms of use</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+</footer>
+
+<!-- share dialog -->
+<div class="modal" id="shareWrap" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="shTitle">
+    <div class="modal-head"><h2 id="shTitle">Share with students</h2><span class="grow"></span><button type="button" class="x" id="shClose" aria-label="Close">✕</button></div>
+    <p class="hint">Students scan the QR code with their phone camera, or open the link (send it by email or put it on your class page). The whole game is inside the link, so nothing is stored online.</p>
+    <p class="sh-note" id="shNote" hidden></p>
+    <div class="qr-box" id="qrBox"><div class="qr" id="qrSmall"></div></div>
+    <label class="f"><span>Link</span><input type="text" id="shLink" readonly></label>
+    <div class="actions" style="position:static;box-shadow:none;padding:0;background:none">
+      <button type="button" class="btn main" id="shFull">▦ Show QR code on the board</button>
+      <button type="button" class="btn" id="shCopy">Copy link</button>
+      <button type="button" class="btn quiet" id="shDownload">Download QR code</button>
+    </div>
+  </div>
+</div>
+<div id="qrFull" hidden>
+  <button type="button" class="btn main" id="qrClose">✕ Close</button>
+  <div id="qrBig"></div>
+  <p id="qrCaption"></p>
+  <p class="hint" style="font-size:clamp(14px,1.4vw,22px)">Open your phone camera and point it at the code.</p>
+</div>
+
+<!-- =====================================================================
+     THE GAME PAGE
+     This is the page students see. The maker fills in GAME_DATA and shows
+     it in the preview, in full screen, inside a shared link, or as a
+     downloaded file. (Closing script tags are written as <\/script> here
+     and put back when the page is made.)
+     ===================================================================== -->
+<script type="text/plain" id="gameTemplate"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700;800&family=Source+Serif+4:wght@700;800&display=swap">
+<style>
+:root{ --accent:#0e2861; --back:#15254a; --tag:#fde047; --ink:#0f172a; --soft:#5b6472; --bg:#fffce6; }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.45}
+button{font:inherit}
+:focus-visible{outline:3px solid #3968ea;outline-offset:2px}
+.top{background:#1c1c1c;color:#f8fafc;text-align:center;padding:.7rem 1rem .8rem}
+.top .eyebrow{margin:0;color:var(--tag);font-weight:700;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase}
+main{flex:1;width:100%;max-width:min(1100px,100%);margin:0 auto;padding:1.1rem 1rem 1.5rem;text-align:center}
+.badge{display:inline-block;margin:0 0 .4rem;padding:.12rem .7rem;border-radius:999px;background:var(--tag);color:#1c1c1c;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+h1{margin:0 0 .2rem;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.35rem,3.2vw,2rem);line-height:1.2;color:var(--accent)}
+.howto{background:none;border:0;padding:.2rem .3rem;color:var(--accent);font-weight:700;font-size:.9rem;cursor:pointer;text-decoration:underline;text-underline-offset:4px;margin-bottom:.8rem}
+#grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem;margin:0 auto}
+.card{position:relative;min-height:96px;border-radius:12px;background:var(--back);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25rem;padding:.6rem .5rem;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  box-shadow:0 2px 3px rgba(15,23,42,.2),0 10px 22px -10px rgba(15,23,42,.55);transition:transform .15s ease,background-color .2s ease;overflow:hidden;font-weight:700;font-size:var(--fs,clamp(.82rem,1.5vw,1.05rem));line-height:1.22}
+.card:not(.flipped):not(.matched){background-image:radial-gradient(circle at 18% 22%,rgba(255,255,255,.13) 0 18%,transparent 19%),radial-gradient(circle at 86% 86%,rgba(0,0,0,.18) 0 22%,transparent 23%)}
+.card:hover{transform:translateY(-2px)}
+.card.flipped{background:var(--accent)}
+.card.matched{cursor:default;animation:pop .35s ease}
+.card .num{position:absolute;top:4px;left:7px;font-size:.66rem;font-weight:700;opacity:.6}
+.card:has(.num){padding-top:.95rem;padding-bottom:.45rem}
+/* short cards: a picture sits beside its words, not above them */
+#grid.low .card{flex-direction:row;gap:.4rem}
+.card .pic{font-size:var(--pic,2rem);line-height:1}
+.card .big{font-size:var(--big,clamp(2.2rem,5vw,3.2rem));line-height:1}
+.card .txt{overflow-wrap:anywhere}
+.shake{animation:shake .35s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
+#status{min-height:1.6em;margin:.9rem 0 0;font-weight:700;color:var(--accent)}
+.info{margin:.6rem 0 0;color:var(--soft);font-size:.9rem}
+.info b{color:var(--ink)}
+.ctrl{display:flex;justify-content:center;align-items:center;gap:.6rem;margin-top:.5rem;color:var(--soft)}
+.tb{background:none;border:0;padding:.35rem .2rem;font-weight:700;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:4px;min-height:40px}
+footer{text-align:center;font-size:.8rem;color:var(--soft);padding:.8rem 1rem 1rem}
+footer a{color:inherit}
+/* how-to-play plaque */
+.plaque-wrap{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(15,23,42,.55)}
+.plaque{width:100%;max-width:460px;max-height:92vh;overflow:auto;text-align:center;background:#fffdf5;border:3px solid var(--accent);outline:2px solid var(--tag);outline-offset:-9px;border-radius:18px;padding:1.6rem 1.4rem 1.2rem;box-shadow:0 18px 40px rgba(0,0,0,.3)}
+.plaque h2{margin:0 0 .6rem;font-family:"Source Serif 4",Georgia,serif;color:var(--accent);font-size:1.4rem}
+.plaque p{margin:0 0 .9rem;white-space:pre-line}
+.go{border:0;background:var(--accent);color:#fff;font-weight:800;font-size:1.05rem;border-radius:10px;padding:.7rem 1.6rem;cursor:pointer;box-shadow:0 8px 18px -8px rgba(15,23,42,.6)}
+/* celebration */
+.party{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:40}
+.bit{position:absolute;top:-40px;line-height:1;animation:fall linear forwards}
+@keyframes fall{0%{transform:translate(0,0) rotate(0);opacity:0}10%{opacity:1}100%{transform:translate(var(--d),110vh) rotate(var(--s));opacity:0}}
+.wd{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);padding:.8rem 1.6rem;border-radius:999px;background:#fffdf5;border:3px solid var(--accent);color:var(--accent);font-weight:800;font-size:1.4rem;white-space:nowrap;box-shadow:0 12px 30px rgba(0,0,0,.25);animation:wd 3s ease forwards}
+@keyframes wd{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}15%{transform:translate(-50%,-50%) scale(1.08);opacity:1}25%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0}}
+@media (max-width:820px){#grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){#grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}main{padding:.8rem .7rem 1rem}.top{padding:.5rem 1rem .55rem}h1{font-size:1.25rem}.howto{margin-bottom:.5rem}#status{margin-top:.6rem}}
+@media (min-width:1500px) and (min-height:900px){main{max-width:1400px}}
+/* short screens (phones on their side): smaller header so the tiles get the room */
+@media (max-height:560px){.top{padding:.25rem 1rem}.top .eyebrow{font-size:.6rem}main{padding:.5rem .8rem .8rem}.badge{margin:0 0 .15rem}h1{font-size:1.15rem}.howto{margin-bottom:.35rem;padding:0 .3rem}#status{margin-top:.4rem}.info{margin-top:.25rem}.ctrl{margin-top:.15rem}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><p class="eyebrow">Modern English Australia</p></header>
+<main>
+  <div class="badge" id="badge" hidden></div>
+  <h1 id="title"></h1>
+  <button type="button" class="howto" id="howto">ⓘ How to play</button>
+  <div id="grid"></div>
+  <p id="status" aria-live="polite"></p>
+  <p class="info" id="info"></p>
+  <div class="ctrl">
+    <button type="button" class="tb" id="again">New Round ↻</button><span aria-hidden="true">·</span>
+    <button type="button" class="tb" id="snd" aria-pressed="true">🔊 Sound on</button>
+  </div>
+</main>
+<footer>Made with the <a href="https://modernenglish.au/teachertools/bespoke-matching-game-maker.html" target="_blank" rel="noopener">Bespoke Matching Game Maker</a> · Modern English Australia · © Koala Spies Sydney</footer>
+<div class="plaque-wrap" id="plaque" role="dialog" aria-modal="true" aria-labelledby="pt">
+  <div class="plaque"><h2 id="pt">How to play</h2><p id="instr"></p><button type="button" class="go" id="go">Let’s play!</button></div>
+</div>
+<script>
+var G = __GAME_DATA__;
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var root = document.documentElement.style;
+  root.setProperty("--accent", G.colour);
+  root.setProperty("--back", shade(G.colour, .45));
+  function shade(hex, t){ var n = parseInt(hex.slice(1), 16), r = n >> 16 & 255, g = n >> 8 & 255, b = n & 255;
+    return "rgb(" + Math.round(r * (1 - t)) + "," + Math.round(g * (1 - t)) + "," + Math.round(b * (1 - t)) + ")"; }
+  $("title").textContent = G.title; document.title = G.title;
+  if(G.sub){ $("badge").textContent = G.sub; $("badge").hidden = false; }
+  $("instr").textContent = G.instr;
+  var COLS = ["#0e7c66","#c47f1e","#7a9e2a","#1f7a8c","#b0512b","#a8457a","#b88a12","#2f8f9d","#8a5a2b","#6a5acd"];
+  var EMOJI_ONLY = /^(?:\p{Extended_Pictographic}|\p{Emoji_Modifier}|‍|️|\s)+$/u;
+  var per = Math.min(G.perRound, G.pairs.length), first = null, second = null, lock = false, matched = 0, rounds = 0, used = [];
+
+  /* ---- sounds, made in the browser ---- */
+  var soundOn = G.sound !== false, AC = null;
+  function ac(){ if(!soundOn) return null; try{ try{ if(navigator.audioSession) navigator.audioSession.type = "playback"; }catch(e){}
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if(AC.state === "suspended") AC.resume(); return AC; }catch(e){ return null; } }
+  function note(a, o){ var t = a.currentTime + (o.at || 0), x = a.createOscillator(), g = a.createGain(), d = o.dur || .3;
+    x.type = o.type || "sine"; x.frequency.setValueAtTime(o.f, t); if(o.to) x.frequency.exponentialRampToValueAtTime(o.to, t + d);
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(o.vol || .2, t + (o.attack || .01)); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+    x.connect(g); g.connect(a.destination); x.start(t); x.stop(t + d + .05); }
+  var buf = null;
+  function noise(a, at, dur, vol, f){ if(!buf){ buf = a.createBuffer(1, a.sampleRate, a.sampleRate); var d = buf.getChannelData(0); for(var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; }
+    var t = a.currentTime + at, s = a.createBufferSource(), fl = a.createBiquadFilter(), g = a.createGain();
+    s.buffer = buf; fl.type = "bandpass"; fl.frequency.value = f; g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    s.connect(fl); fl.connect(g); g.connect(a.destination); s.start(t); s.stop(t + dur + .05); }
+  var SCALE = [523.25, 587.33, 659.25, 783.99, 880];
+  function sFlip(){ var a = ac(); if(!a) return; note(a, { type:"triangle", f:SCALE[Math.floor(Math.random() * SCALE.length)], dur:.25, vol:.12 }); }
+  function sMatch(){ var a = ac(); if(!a) return; note(a, { f:1318.5, dur:.35, vol:.16 }); note(a, { f:1760, at:.08, dur:.45, vol:.16 }); note(a, { f:2637, at:.16, dur:.6, vol:.08 }); }
+  function sMiss(){ var a = ac(); if(!a) return; note(a, { type:"square", f:260, to:110, dur:.3, vol:.07 }); }
+  function sWin(){ var a = ac(); if(!a) return;
+    [523.25, 659.25, 783.99, 1046.5].forEach(function(f, i){ note(a, { type:"triangle", f:f, at:i * .11, dur:.28, vol:.16 }); });
+    [523.25, 659.25, 783.99, 1046.5, 1318.5].forEach(function(f){ note(a, { type:"triangle", f:f, at:.5, dur:1.4, vol:.08, attack:.03 }); });
+    for(var i = 0; i < 60; i++) noise(a, .5 + Math.random() * 1.5 * Math.sqrt(Math.random()), .035, .1 + Math.random() * .1, 900 + Math.random() * 1600); }
+
+  function shuffle(a){ a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(){ var free = []; for(var i = 0; i < G.pairs.length; i++) if(used.indexOf(i) < 0) free.push(i);
+    if(free.length < per){ used = []; free = G.pairs.map(function(_, i){ return i; }); }
+    var c = shuffle(free).slice(0, per); used = used.concat(c); return c; }
+
+  function round(){
+    var grid = $("grid"); grid.innerHTML = ""; $("status").textContent = "";
+    first = second = null; lock = false; matched = 0; rounds++;
+    var cards = []; pick().forEach(function(i){ var p = G.pairs[i]; cards.push({ t:p[0], k:i }); cards.push({ t:p[1], k:i, pic:p[2] || "" }); });
+    shuffle(cards).forEach(function(c, n){
+      var d = document.createElement("div"); d.className = "card"; d.tabIndex = 0; d.setAttribute("role", "button");
+      d.setAttribute("aria-label", "Card " + (n + 1) + ", face down"); d._c = c; d._n = n + 1; back(d);
+      d.addEventListener("click", function(){ tap(d); });
+      d.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " "){ e.preventDefault(); tap(d); } });
+      grid.appendChild(d);
+    });
+    $("grid").style.maxWidth = per <= 4 ? "760px" : "";
+    info(); fit();
+  }
+  /* make the cards tall enough to read, but short enough that the whole round and the
+     New Round link fit on the screen (phones, tablets, laptops and big boards) */
+  /* 12, 16 or 24 tiles: try each tidy layout (2 to 8 columns) and keep the one that
+     gives the biggest cards on this screen, so a phone, a laptop and a wide board
+     each get their own arrangement. The text grows and shrinks with the cards. */
+  function fit(){
+    var grid = $("grid"), n = grid.children.length; if(!n) return;
+    var gap = parseFloat(getComputedStyle(grid).rowGap) || 10;
+    var big = window.innerWidth >= 1500 && window.innerHeight >= 900;
+    var gb = grid.getBoundingClientRect(), W = gb.width;
+    /* room left for the status line, score and New Round, measured from the page */
+    var after = $("again").getBoundingClientRect().bottom - gb.bottom + 10;
+    var top = gb.top + window.scrollY;
+    var H = Math.max(110, window.innerHeight - top - after);
+    var best = null;
+    for(var c = 2; c <= 8; c++){
+      if(n % c) continue;                                        /* full rows only */
+      var r = n / c, cw = (W - gap * (c - 1)) / c, ch = (H - gap * (r - 1)) / r;
+      if(cw < 70) continue;                                      /* too narrow to read */
+      var score = Math.min(cw, ch * 1.6);                         /* cards about 1.6 times wider than tall read best */
+      if(!best || score > best.score) best = { c:c, r:r, cw:cw, ch:ch, score:score };
+    }
+    if(!best) best = { c:2, r:Math.ceil(n / 2), cw:(W - gap) / 2, ch:58 };
+    grid.style.gridTemplateColumns = "repeat(" + best.c + ",minmax(0,1fr))";
+    var h = Math.max(44, Math.min(big ? 210 : 150, Math.floor(best.ch)));
+    var fs = Math.max(11, Math.min(big ? 28 : 20, best.cw / 8.5, h / 3.1));
+    /* before play, try every card's face in a hidden copy: shrink the text a little
+       at a time until the longest card fits, so no card grows when it is turned over */
+    var probe = document.createElement("div");
+    probe.className = "card flipped"; probe.setAttribute("aria-hidden", "true");
+    probe.style.cssText = "position:absolute;left:-9999px;top:0;visibility:hidden;min-height:0;width:" + best.cw + "px";
+    grid.appendChild(probe);
+    function tallest(){
+      grid.style.setProperty("--fs", fs.toFixed(1) + "px");
+      grid.style.setProperty("--big", Math.max(18, Math.min(52, h - 30, best.cw * .4)).toFixed(0) + "px");
+      grid.style.setProperty("--pic", Math.max(12, Math.min(34, h * .3, fs * 1.5)).toFixed(0) + "px");
+      var most = 0;
+      for(var i = 0; i < n; i++){ faceHTML(probe, grid.children[i]._c, 0); most = Math.max(most, probe.offsetHeight); }
+      return most;
+    }
+    grid.classList.toggle("low", h < 95);
+    var need = tallest();
+    for(var k = 0; k < 24 && need > h && fs > 10.5; k++){ fs -= .5; need = tallest(); }
+    probe.remove();
+    if(need > h) h = need;                         /* still too long: let the cards grow (the page scrolls a little) */
+    for(var j = 0; j < n; j++) grid.children[j].style.minHeight = h + "px";
+  }
+  var fitT; window.addEventListener("resize", function(){ clearTimeout(fitT); fitT = setTimeout(fit, 120); });
+  function info(){ $("info").innerHTML = "Matches: <b>" + matched + "</b> / " + per + " &nbsp;·&nbsp; Round <b>" + rounds + "</b>"; }
+  function back(d){ d.innerHTML = G.nums ? '<span class="num">' + d._n + "</span>" : ""; d.classList.remove("flipped"); d.style.background = ""; }
+  function faceHTML(d, c, num){
+    var h = G.nums ? '<span class="num">' + (num || 0) + "</span>" : "";
+    if(c.pic) h += '<span class="pic"></span>';
+    h += '<span class="txt"></span>';
+    d.innerHTML = h;
+    if(c.pic) d.querySelector(".pic").textContent = c.pic;
+    var tx = d.querySelector(".txt"); tx.textContent = c.t;
+    if(EMOJI_ONLY.test(c.t)) tx.className = "big";
+  }
+  function face(d){
+    var c = d._c; faceHTML(d, c, d._n);
+    d.classList.add("flipped"); d.setAttribute("aria-label", c.t || "picture");
+  }
+  function tap(d){
+    if(lock || d.classList.contains("flipped") || d.classList.contains("matched")) return;
+    face(d); sFlip();
+    if(!first){ first = d; return; }
+    second = d; lock = true;
+    var a = first, b = second, r = rounds;
+    if(a._c.k === b._c.k){
+      setTimeout(function(){ if(r !== rounds) return;
+        var col = COLS[matched % COLS.length];
+        [a, b].forEach(function(x){ x.classList.add("matched"); x.style.background = col; });
+        matched++; info(); sMatch();
+        if(matched === per){ $("status").textContent = "🎉 All matched! Press New Round to play again."; setTimeout(sWin, 300); party(); }
+        first = second = null; lock = false; }, 450);
+    } else {
+      setTimeout(function(){ if(r !== rounds) return; sMiss();
+        [a, b].forEach(function(x){ x.classList.add("shake"); setTimeout(function(){ x.classList.remove("shake"); }, 360); back(x); x.setAttribute("aria-label", "Card " + x._n + ", face down"); });
+        first = second = null; lock = false; }, 1100);
+    }
+  }
+  function party(){
+    var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches, l = document.createElement("div"), B = ["🎉","✨","⭐","🎊","🌟"];
+    l.className = "party"; l.setAttribute("aria-hidden", "true");
+    for(var i = 0; !calm && i < 36; i++){ var s = document.createElement("span"); s.className = "bit"; s.textContent = B[i % B.length];
+      s.style.left = Math.random() * 100 + "vw"; s.style.fontSize = 16 + Math.random() * 20 + "px"; s.style.animationDuration = 3 + Math.random() * 2.5 + "s";
+      s.style.animationDelay = Math.random() * 1.2 + "s"; s.style.setProperty("--d", Math.random() * 160 - 80 + "px"); s.style.setProperty("--s", Math.random() * 720 - 360 + "deg"); l.appendChild(s); }
+    var w = document.createElement("div"); w.className = "wd"; w.textContent = "🎉 Well done! 🎉"; l.appendChild(w);
+    document.body.appendChild(l); setTimeout(function(){ l.remove(); }, 6000);
+  }
+  $("again").onclick = round;
+  $("snd").textContent = soundOn ? "🔊 Sound on" : "🔇 Sound off"; $("snd").setAttribute("aria-pressed", String(soundOn));
+  $("snd").onclick = function(){ soundOn = !soundOn; this.textContent = soundOn ? "🔊 Sound on" : "🔇 Sound off"; this.setAttribute("aria-pressed", String(soundOn)); if(soundOn) sMatch(); };
+  $("howto").onclick = function(){ $("plaque").hidden = false; $("go").focus(); };
+  $("go").onclick = function(){ $("plaque").hidden = true; ac(); };
+  $("plaque").addEventListener("click", function(e){ if(e.target === this) this.hidden = true; });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") $("plaque").hidden = true; });
+  if(G.noPlaque) $("plaque").hidden = true;
+  round();
+})();
+<\/script>
+</body>
+</html>
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT
+// =====================================================================
+
+// The example game shown the first time (and after "Start again").
+const EXAMPLE = { title: "Opposites", sub: "A1–A2", pairs: "hot = cold\nbig = small\nhappy = sad\nfast = slow\nold = new\nopen = closed\nfull = empty\nearly = late\ncheap = expensive\nclean = dirty\nheavy = light\nnoisy = quiet\nstrong = weak\neasy = difficult\nwet = dry\ntall = short" };
+
+// Colour choices (the round buttons). The first is the default.
+const COLOURS = [
+  { name: "Modern English navy", c: "#0e2861" },
+  { name: "Modern English teal", c: "#0e7c66" },
+  { name: "Forest green", c: "#1f5130" },
+  { name: "Burgundy",   c: "#6b1e2e" },
+  { name: "Ocean",      c: "#0e5c7a" },
+  { name: "Violet",     c: "#4b2e83" },
+  { name: "Purple",     c: "#3b1f5c" },
+  { name: "Coral",      c: "#c2410c" },
+  { name: "Sky",        c: "#2563eb" },
+  { name: "Slate",      c: "#334155" }
+];
+
+const DEFAULT_INSTR = "Flip two cards to find a matching pair. When the two cards match, they stay open. Each round picks new pairs – play again and again!";
+const DEFAULTS = {
+  pairs: EXAMPLE.pairs, title: EXAMPLE.title, sub: EXAMPLE.sub,
+  perRound: 6, instr: DEFAULT_INSTR, nums: true, sound: true, colour: COLOURS[0].c
+};
+const STORE = "matching-game-maker.v1";
+const MAX_PAIRS = 120;
+// The address students' links point to when this page is opened from a file.
+const SITE_URL = "https://modernenglish.au/teachertools/bespoke-matching-game-maker.html";
+
+// =====================================================================
+// STATE (saved in this browser only)
+// =====================================================================
+const $ = id => document.getElementById(id);
+let st = Object.assign({}, DEFAULTS);
+try { Object.assign(st, JSON.parse(localStorage.getItem(STORE) || "{}")); } catch (e) {}
+function tidy() {
+  // 6, 8 or 12 pairs = 12, 16 or 24 tiles (older saved choices of 4 or 10 move to the nearest)
+  const pr = +st.perRound;
+  st.perRound = pr >= 10 ? 12 : pr === 8 ? 8 : 6;
+  if (!/^#[0-9a-f]{6}$/i.test(st.colour)) st.colour = DEFAULTS.colour;
+  ["pairs", "title", "sub", "instr"].forEach(k => { if (typeof st[k] !== "string") st[k] = DEFAULTS[k]; });
+}
+tidy();
+let saveTimer = 0;
+function save() { clearTimeout(saveTimer); saveTimer = setTimeout(() => { try { localStorage.setItem(STORE, JSON.stringify(st)); } catch (e) {} }, 300); }
+
+// Reads the pairs: one per line, split at a tab, " = ", "=", " | " or a spaced dash.
+// A third part is a picture shown on the second card.
+function parsePairs(text) {
+  const out = [];
+  text.split(/\r?\n/).forEach(line => {
+    line = line.trim(); if (!line) return;
+    let parts;
+    if (line.indexOf("\t") > -1) parts = line.split("\t");
+    else if (line.indexOf("=") > -1) parts = line.split("=");
+    else if (line.indexOf("|") > -1) parts = line.split("|");
+    else if (/\s[–—-]\s/.test(line)) parts = line.split(/\s[–—-]\s/);
+    else parts = [line];
+    parts = parts.map(s => s.trim());
+    if (parts.length >= 2 && parts[0] && parts[1]) out.push([parts[0].slice(0, 120), parts[1].slice(0, 160), (parts[2] || "").slice(0, 12)]);
+    else out.push(null);                                   // a line we couldn't split
+  });
+  return out;
+}
+function model() {
+  const all = parsePairs(st.pairs), bad = all.filter(p => !p).length, pairs = all.filter(Boolean).slice(0, MAX_PAIRS);
+  const seen = new Map(), dup = new Set();
+  pairs.forEach(p => [p[0], p[1]].forEach(t => { const k = t.toLowerCase(); if (seen.has(k)) dup.add(t); seen.set(k, 1); }));
+  return { pairs, bad, dup: [...dup], total: all.filter(Boolean).length };
+}
+function gameData(extra) {
+  const m = model();
+  return Object.assign({ v: 1, title: st.title.trim() || "Matching Game", sub: st.sub.trim(), instr: st.instr.trim() || DEFAULT_INSTR,
+    perRound: st.perRound, nums: !!st.nums, sound: !!st.sound, colour: st.colour, pairs: m.pairs }, extra || {});
+}
+
+// =====================================================================
+// MAKING THE GAME PAGE
+// =====================================================================
+const TEMPLATE = $("gameTemplate").textContent.replace(/<\\\/script>/g, "</" + "script>");
+const escHTML = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function gamePage(data) {
+  const json = JSON.stringify(data).replace(/</g, "\\u003c").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
+  return TEMPLATE.replace("__TITLE__", () => escHTML(data.title)).replace("__GAME_DATA__", () => json);
+}
+
+// ---- a shared link opens straight into the game ----
+const b64url = bytes => { let s = ""; bytes.forEach(b => { s += String.fromCharCode(b); }); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); };
+const unb64url = str => { const s = atob(str.replace(/-/g, "+").replace(/_/g, "/")); return Uint8Array.from(s, c => c.charCodeAt(0)); };
+async function pipe(bytes, stream) { return new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer()); }
+async function encodeGame(obj) {
+  const bytes = new TextEncoder().encode(JSON.stringify(obj));
+  if (window.CompressionStream) { try { return "z" + b64url(await pipe(bytes, new CompressionStream("deflate-raw"))); } catch (e) {} }
+  return "j" + b64url(bytes);
+}
+async function decodeGame(str) {
+  const bytes = unb64url(str.slice(1));
+  return JSON.parse(new TextDecoder().decode(str[0] === "z" ? await pipe(bytes, new DecompressionStream("deflate-raw")) : bytes));
+}
+(async function openSharedGame() {
+  const m = location.hash.match(/^#g=([zj][A-Za-z0-9_-]+)$/);
+  if (!m) return;
+  try {
+    const d = await decodeGame(m[1]);
+    if (!d || !Array.isArray(d.pairs) || d.pairs.length < 2) throw new Error("empty");
+    const clean = { v: 1, title: String(d.title || "Matching Game").slice(0, 80), sub: String(d.sub || "").slice(0, 80), instr: String(d.instr || DEFAULT_INSTR).slice(0, 600),
+      perRound: [4, 6, 8, 10, 12].indexOf(+d.perRound) > -1 ? +d.perRound : 6,   /* 4 and 10 keep older links working */ nums: !!d.nums, sound: d.sound !== false,
+      colour: /^#[0-9a-f]{6}$/i.test(d.colour) ? d.colour : "#0e2861",
+      pairs: d.pairs.slice(0, MAX_PAIRS).filter(p => Array.isArray(p) && p[0] && p[1]).map(p => [String(p[0]).slice(0, 120), String(p[1]).slice(0, 160), String(p[2] || "").slice(0, 12)]) };
+    document.open(); document.write(gamePage(clean)); document.close();
+    try { if (typeof gtag === "function") gtag("event", "matching_game_opened"); } catch (e) {}
+  } catch (e) {
+    alert("This game link could not be opened. Ask your teacher for a new link.");
+  }
+})();
+window.addEventListener("hashchange", () => { if (/^#g=/.test(location.hash)) location.reload(); });
+
+// =====================================================================
+// SCREEN
+// =====================================================================
+const frame = $("game");
+let drawTimer = 0;
+function say(msg) { $("status").textContent = msg; }
+function redraw(now) {
+  clearTimeout(drawTimer);
+  drawTimer = setTimeout(() => {
+    const m = model(), need = st.perRound;
+    // the line under the pairs box
+    const h = $("pairHint"); let warn = false, msg;
+    if (m.pairs.length < 2) { msg = "Type at least 2 pairs, one per line, with = in the middle."; warn = true; }
+    else {
+      msg = m.pairs.length + (m.pairs.length === 1 ? " pair." : " pairs.");
+      if (m.pairs.length < need) { msg += " Each round will use all of them (fewer than " + need + ")."; }
+      else if (m.pairs.length === need) msg += " Every round uses the same pairs; add more so each round is different.";
+      else msg += " Each round picks " + need + " of them.";
+      if (m.total > MAX_PAIRS) msg += " Only the first " + MAX_PAIRS + " are used.";
+    }
+    if (m.bad) { msg += " " + m.bad + (m.bad === 1 ? " line has" : " lines have") + " no = sign, so " + (m.bad === 1 ? "it was" : "they were") + " left out."; warn = true; }
+    if (m.dup.length) { msg += " Careful: “" + m.dup.slice(0, 3).join("”, “") + "” appears more than once, so two cards could match it."; warn = true; }
+    h.textContent = msg; h.classList.toggle("warn", warn);
+    $("roundHint").textContent = st.perRound * 2 + " tiles = " + st.perRound + " pairs in each round.";
+    ["fullBtn", "shareBtn", "downloadBtn"].forEach(id => { $(id).disabled = m.pairs.length < 2; });
+    if (m.pairs.length >= 2) frame.srcdoc = gamePage(gameData({ noPlaque: true }));
+    else frame.srcdoc = '<p style="font:16px sans-serif;color:#475569;text-align:center;margin-top:3rem">Type at least 2 pairs to see your game.</p>';
+  }, now ? 0 : 500);
+}
+
+function syncForm() {
+  document.querySelectorAll("[data-k]").forEach(el => {
+    if (el.type === "checkbox") el.checked = !!st[el.dataset.k];
+    else if (el !== document.activeElement) el.value = st[el.dataset.k];
+  });
+  document.querySelectorAll('input[name="perRound"]').forEach(r => { r.checked = r.value === String(st.perRound); });
+  document.querySelectorAll(".sw").forEach(b => b.setAttribute("aria-pressed", COLOURS[b.dataset.i].c.toLowerCase() === st.colour.toLowerCase()));
+}
+function changed(now) { syncForm(); save(); redraw(now); }
+
+COLOURS.forEach((p, i) => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.dataset.i = i;
+  b.title = p.name; b.setAttribute("aria-label", p.name); b.style.background = p.c;
+  b.onclick = () => { st.colour = p.c; changed(true); };
+  $("swatches").insertBefore(b, $("swatches").lastElementChild);
+});
+$("controls").addEventListener("input", e => {
+  const el = e.target, k = el.dataset.k;
+  if (k) st[k] = el.type === "checkbox" ? el.checked : el.value;
+  else if (el.type === "radio" && el.name === "perRound") st.perRound = +el.value;
+  else return;
+  changed(el.type === "radio" || el.type === "checkbox" || k === "colour");
+});
+$("resetBtn").onclick = () => { if (!confirm("Start again with the example game? Your pairs will be replaced.")) return; st = Object.assign({}, DEFAULTS); changed(true); say("Back to the example game."); };
+
+// ---- full screen ----
+$("fullBtn").onclick = () => {
+  frame.srcdoc = gamePage(gameData());                    // with the How-to-play plaque
+  const go = frame.requestFullscreen || frame.webkitRequestFullscreen;
+  if (go) { try { const p = go.call(frame); if (p && p.catch) p.catch(openTab); } catch (e) { openTab(); } }
+  else openTab();
+};
+function openTab() {
+  const w = window.open("", "_blank");
+  if (w) { w.document.open(); w.document.write(gamePage(gameData())); w.document.close(); }
+  else say("Your browser blocked the new window. Use Download game instead.");
+}
+document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement) redraw(true); });
+
+// ---- download ----
+function fileName(ext) {
+  const base = (st.title.trim() || "matching game").replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "_").slice(0, 50) || "matching_game";
+  return base + ext;
+}
+function download(blob, name) {
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 800);
+}
+$("downloadBtn").onclick = () => {
+  download(new Blob([gamePage(gameData())], { type: "text/html" }), fileName(".html"));
+  say("Downloaded. Open the file in any browser, or put it on your class website.");
+  try { if (typeof gtag === "function") gtag("event", "matching_game_download"); } catch (e) {}
+};
+
+// ---- share: link and QR code ----
+let shareURL = "", shareQR = null;
+const baseURL = () => /^https?:$/.test(location.protocol) ? location.href.split("#")[0] : SITE_URL;
+function qrSvg(text, margin) {
+  if (typeof qrcode === "undefined") return null;
+  try { const q = qrcode(0, "L"); q.addData(text); q.make(); return { svg: q.createSvgTag({ cellSize: 4, margin: margin || 0, scalable: true }), size: q.getModuleCount() }; }
+  catch (e) { return null; }
+}
+$("shareBtn").onclick = async () => {
+  shareURL = baseURL() + "#g=" + await encodeGame(gameData());
+  shareQR = shareURL.length <= 2900 ? qrSvg(shareURL) : null;
+  $("shLink").value = shareURL;
+  const note = $("shNote"); note.hidden = true;
+  if (!shareQR) { note.hidden = false; note.textContent = typeof qrcode === "undefined" ? "The QR code could not be made (check your internet connection). You can still copy the link." : "This game is too long for a QR code. Copy the link and send it instead, or use fewer pairs."; }
+  else if (shareQR.size > 100) { note.hidden = false; note.textContent = "The game is long, so the code is quite detailed. Show it large on the board so phones can scan it."; }
+  $("qrBox").hidden = !shareQR; $("qrSmall").innerHTML = shareQR ? shareQR.svg : "";
+  $("shFull").disabled = $("shDownload").disabled = !shareQR;
+  $("shareWrap").hidden = false; $("shCopy").focus();
+  try { if (typeof gtag === "function") gtag("event", "matching_game_share"); } catch (e) {}
+};
+$("shClose").onclick = () => { $("shareWrap").hidden = true; };
+$("shareWrap").addEventListener("mousedown", e => { if (e.target === $("shareWrap")) $("shareWrap").hidden = true; });
+$("shCopy").onclick = () => {
+  const done = () => say("Link copied. Paste it into an email or your class page.");
+  if (navigator.clipboard) navigator.clipboard.writeText(shareURL).then(done, () => { $("shLink").select(); document.execCommand("copy"); done(); });
+  else { $("shLink").select(); document.execCommand("copy"); done(); }
+};
+$("shDownload").onclick = () => { const q = qrSvg(shareURL, 4); if (q) download(new Blob([q.svg], { type: "image/svg+xml" }), fileName(" QR code.svg")); };
+$("shFull").onclick = () => {
+  if (!shareQR) return;
+  $("shareWrap").hidden = true; $("qrBig").innerHTML = shareQR.svg;
+  $("qrCaption").textContent = "Scan to play: " + (st.title.trim() || "Matching Game");
+  $("qrFull").hidden = false;
+  try { const p = $("qrFull").requestFullscreen && $("qrFull").requestFullscreen(); if (p && p.catch) p.catch(() => {}); } catch (e) {}
+};
+function closeQR() { $("qrFull").hidden = true; if (document.fullscreenElement === $("qrFull")) { try { document.exitFullscreen(); } catch (e) {} } }
+$("qrClose").onclick = closeQR;
+document.addEventListener("keydown", e => { if (e.key !== "Escape") return; if (!$("qrFull").hidden) closeQR(); else if (!$("shareWrap").hidden) $("shareWrap").hidden = true; });
+
+// =====================================================================
+// START
+// =====================================================================
+if (!/^#g=/.test(location.hash)) { syncForm(); redraw(true); }
+</script>
+
+<!-- me-site-footer: shared site links -->
+<style>footer.me-site-footer{display:block!important;text-align:center!important;max-width:none!important;background:none;box-sizing:border-box;width:100%;flex:0 0 auto;clear:both;position:relative;z-index:1;margin:0;padding:18px 16px 22px;text-align:center;font:14px/1.6 system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:inherit;border-top:1px solid rgba(127,127,127,.28)}footer.me-site-footer nav{margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px}.me-site-footer a{color:inherit;text-decoration:underline;text-underline-offset:3px}.me-site-footer a:hover{opacity:.75}footer.me-site-footer p{margin:6px auto 0!important;text-align:center!important;max-width:none!important;padding:0;font-size:12.5px;opacity:.75}@media print{.me-site-footer{display:none}}</style>
+<footer class="me-site-footer" style="padding-bottom:91px;color:#1d2433;border-top-color:rgba(0,0,0,.14)">
+  <nav aria-label="Site links">
+    <a href="../index.html">Home</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy.html">Privacy</a>
+  </nav>
+  <p>&#169; Modern English Australia &#183; Koala Spies Sydney</p>
+</footer>
+</body>
+</html>
