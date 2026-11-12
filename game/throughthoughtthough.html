@@ -886,6 +886,111 @@ var FilmSFX = (function(){
 })();
 </script>
 
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   ▶▶▶  MUSIC — thbg.mp3, in the same folder as this page
+   Loud while the How to Play card is open, soft during the game,
+   louder for a few seconds when a round is won. Browsers only allow
+   music after the first tap or key, so it starts then.
+   ══════════════════════════════════════════════════════════════════════ */
+var MUSIC_FILE  = "thbg.mp3";
+var MUSIC_LOUD  = 0.7;    // ← How to Play card open
+var MUSIC_SOFT  = 0.18;   // ← while playing
+var MUSIC_WIN   = 0.9;    // ← after a win
+var MUSIC_WIN_SECONDS = 8;
+
+var FilmMusic = (function(){
+  var el = null, ctx = null, gain = null, on = true, mode = "card", level = 0, fade = null, winTimer = null, broken = false;
+  try{ if(localStorage.getItem("thoughMusic") === "off") on = false; }catch(e){}
+  var useGraph = /^https?:$/.test(location.protocol);   // iPhones ignore volume unless it goes through Web Audio
+
+  function make(){
+    if(el) return el;
+    el = new Audio(MUSIC_FILE);
+    el.loop = true; el.preload = "auto";
+    el.addEventListener("error", function(){ broken = true; paint(); console.warn('Music: "' + MUSIC_FILE + '" would not play – is it in the same folder as this page?'); });
+    if(useGraph){
+      try{
+        var AC = window.AudioContext || window.webkitAudioContext;
+        ctx = new AC();
+        var src = ctx.createMediaElementSource(el);
+        gain = ctx.createGain(); gain.gain.value = 0;
+        src.connect(gain); gain.connect(ctx.destination);
+      }catch(e){ ctx = null; gain = null; }
+    }
+    return el;
+  }
+  function setVol(v){ level = Math.max(0, Math.min(1, v)); if(gain) gain.gain.value = level; else if(el){ try{ el.volume = level; }catch(e){} } }
+  function wanted(){ return !on ? 0 : mode === "card" ? MUSIC_LOUD : mode === "win" ? MUSIC_WIN : MUSIC_SOFT; }
+  function fadeTo(goal, secs){
+    clearInterval(fade);
+    var from = level, steps = Math.max(1, Math.round(secs * 25)), i = 0;
+    fade = setInterval(function(){
+      i++; setVol(from + (goal - from) * (i / steps));
+      if(i >= steps){ clearInterval(fade); if(!on && el) el.pause(); }
+    }, 40);
+  }
+  function playing(){ return !!el && !el.paused && (!ctx || ctx.state === "running"); }
+  function start(){
+    if(!on || broken) return;
+    make();
+    if(ctx && ctx.state === "suspended" && ctx.resume) ctx.resume();
+    if(el.paused){
+      setVol(0);
+      var p = el.play();
+      if(p && p.then) p.then(function(){ fadeTo(wanted(), 1); paint(); }, function(){ paint(); });
+      else fadeTo(wanted(), 1);
+    } else fadeTo(wanted(), .6);
+  }
+  function setMode(m){ clearTimeout(winTimer); mode = m; if(el && !el.paused) fadeTo(wanted(), m === "win" ? .5 : 1.2); }
+  function win(){
+    setMode("win");
+    winTimer = setTimeout(function(){
+      var card = document.getElementById("helpOverlay");
+      setMode(card && card.classList.contains("open") ? "card" : "game");
+    }, MUSIC_WIN_SECONDS * 1000);
+  }
+  function paint(){
+    document.querySelectorAll("[data-music-btn]").forEach(function(b){
+      b.textContent = broken ? "🎵 Music unavailable" : (on ? "🎵 Music on" : "🎵 Music off");
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+  function toggle(){
+    on = !on;
+    try{ localStorage.setItem("thoughMusic", on ? "on" : "off"); }catch(e){}
+    if(on) start(); else if(el && !el.paused) fadeTo(0, .5);
+    paint();
+  }
+  /* the first tap or key anywhere starts the song (the music button handles its own tap) */
+  ["pointerup", "touchend", "click", "keydown"].forEach(function(ev){
+    document.addEventListener(ev, function(e){
+      if(e.target && e.target.closest && e.target.closest("[data-music-btn]")) return;
+      if(on && !broken && !playing()) start();
+    }, true);
+  });
+  document.addEventListener("DOMContentLoaded", function(){
+    document.querySelectorAll("[data-music-btn]").forEach(function(b){
+      b.addEventListener("click", function(){ if(on && !playing()) start(); else toggle(); paint(); });
+    });
+    paint();
+    /* follow the How to Play card: loud while it is open, soft when it closes */
+    var card = document.getElementById("helpOverlay");
+    if(card && window.MutationObserver){
+      new MutationObserver(function(){
+        if(mode === "win") return;
+        setMode(card.classList.contains("open") ? "card" : "game");
+      }).observe(card, { attributes:true, attributeFilter:["class"] });
+    }
+  });
+  /* some browsers allow music straight away for sites you visit often */
+  if(on){ try{ make(); var p = el.play(); if(p && p.then) p.then(function(){ if(!ctx || ctx.state === "running") fadeTo(wanted(), 1); paint(); }, function(){}); }catch(e){} }
+
+  return { start:start, setMode:setMode, win:win, toggle:toggle, isOn:function(){ return on; }, level:function(){ return level; } };
+})();
+</script>
+
 <script>
 /* ══════════════════════════════════════════════════════════════════════
    ▶▶▶  BACKGROUND FILM + SOUND — THE SETTINGS ARE RIGHT HERE  ◀◀◀
@@ -932,8 +1037,7 @@ const Film = (function(){
   function start(){
     if (!v) return Promise.resolve(false);
     clearTimeout(cutoff); clearInterval(fade);
-    v.muted = false;
-    v.volume = SOUND_VOLUME;
+    v.muted = true;               // the film is silent: the music (thbg.mp3) is the soundtrack now
     const p = v.play();
     const attempt = (p && p.then) ? p : Promise.resolve();
     return attempt.then(function(){
@@ -1082,6 +1186,7 @@ if (document.readyState === 'loading'){
     </section>
 
     <div class="controls">
+      <button type="button" class="btn-sound" id="musicBtn" data-music-btn aria-pressed="true">🎵 Music on</button>
       <button type="button" class="btn-sound" id="soundBtn" aria-pressed="true" aria-label="Sound effects on">🔊 Sound on</button>
     </div>
 
@@ -1221,9 +1326,10 @@ if (document.readyState === 'loading'){
          the <span class="swatch grey"></span><strong>grey</strong> tiles are the gap-fill sentences.</p>
       <p>When the four pairs are done, the odd tile turns over on its own: that one is for you and your
          partner to answer out loud.</p>
-      <p>New sentences every time you reset.</p>
+      <p>New sentences every time you reset. The music plays loud here and softly during the game – use the <strong>Music</strong> button to turn it on or off.</p>
 
       <div class="row">
+        <button type="button" class="ghost" id="cardMusicBtn" data-music-btn aria-pressed="true">🎵 Music on</button>
         <button type="button" id="helpClose">Start the game →</button>
       </div>
     </div>
@@ -1374,6 +1480,7 @@ if (document.readyState === 'loading'){
 
   /* the win: every tile shakes and glows while the audience claps */
   function celebrate(){
+    if (window.FilmMusic) FilmMusic.win();
     FilmSFX.match();
     setTimeout(FilmSFX.applause, 350);
     game.querySelectorAll(".card").forEach(function(card, i){
