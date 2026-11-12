@@ -14,7 +14,7 @@
 <meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
 
 <title>Casual vs Academic Language – Matching Game + Gap-Fill (C2) | Modern English Australia</title>
-<meta name="description" content="Free C2 matching game: pair casual English with its formal academic equivalent, then practise in an academic gap-fill on ancient ceramics. Great for IELTS Writing and university English. Modern English Australia · Koala Spies Sydney." />
+<meta name="description" content="Free C1–C2 lesson: pre-teach 37 academic words, match casual English with its academic equivalent, then practise with a gap-fill, a mini lesson on academic style and rewrite exercises. Great for IELTS Writing, PTE and university English." />
 <link rel="canonical" href="https://modernenglish.au/game/Casualvsacademic.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Modern English Australia" />
@@ -53,6 +53,7 @@
 
   --radius:16px;
   --shadow:0 10px 24px rgba(0,0,0,.10);
+  --tile-shadow:0 2px 4px rgba(0,0,0,.18), 0 8px 16px rgba(0,0,0,.20), 0 18px 36px rgba(0,0,0,.16);
   --max:1100px;
 }
 
@@ -123,7 +124,7 @@ header span{
   background:transparent;
   color:#fff;
   padding:.45rem .75rem;
-  border-radius:999px;
+  border-radius:4px;
   font:800 .8rem/1 inherit;
   font-family:inherit;
   letter-spacing:1px;
@@ -268,7 +269,7 @@ h2{font-size:1.15rem;font-size:clamp(1.05rem, 1.6vw, 1.25rem);margin:1.1rem 0 .6
   text-align:center;
   padding:.8rem;
   border:2px solid transparent;
-  box-shadow:var(--shadow);
+  box-shadow:var(--tile-shadow);
   font-size:.95rem;
   font-weight:600;
   line-height:1.3;
@@ -307,11 +308,11 @@ h2{font-size:1.15rem;font-size:clamp(1.05rem, 1.6vw, 1.25rem);margin:1.1rem 0 .6
 .card.matched{cursor:default}
 .card.matched .back{
   border-color:var(--pair, #2f7d4b);
-  box-shadow:0 0 0 3px var(--pair, #2f7d4b), var(--shadow);
+  box-shadow:0 0 0 3px var(--pair, #2f7d4b), var(--tile-shadow);
 }
 
 /* Keyboard */
-.card:focus-visible .front,.card:focus-visible .back{box-shadow:0 0 0 3px var(--brand), var(--shadow)}
+.card:focus-visible .front,.card:focus-visible .back{box-shadow:0 0 0 3px var(--brand), var(--tile-shadow)}
 
 #status{
   text-align:center;
@@ -453,7 +454,7 @@ footer{
   letter-spacing:2px;
   text-transform:uppercase;
   color:#444;
-  margin:-.4rem 0 1rem;
+  margin:1rem 0 0;
 }
 .pair-count b{font-size:1.1rem;color:#1e1e1e;letter-spacing:1px}
 
@@ -523,6 +524,9 @@ body.rules-open{overflow:hidden}
 .rules-tips{margin:0 0 1rem;padding-left:1.2rem;font-size:.88rem;line-height:1.5;color:#333}
 .rules-tips li{margin-bottom:.2rem}
 .rules-go{display:block;margin:0 auto}
+.rules-intro{text-align:center}
+.rules-tile .pill-row{margin:.2rem 0 .6rem}
+.rules-tile .pill{font-size:.7rem;padding:.45rem .8rem}
 @media (max-width:600px){
   .rules-tile{padding:1.1rem .95rem 1rem}
   .rules-tile h2{font-size:1.15rem;margin-bottom:.6rem}
@@ -564,6 +568,124 @@ body.rules-open{overflow:hidden}
   display:none;
 }
 
+/* ===== Intro text ===== */
+.intro{
+  max-width:760px;
+  margin:.4rem auto .2rem;
+  text-align:center;
+  color:#333;
+  font-size:.98rem;
+}
+
+/* ===== Pills (pre-teach + lesson links) ===== */
+.pill-row{
+  display:-webkit-box;display:-webkit-flex;display:flex;
+  -webkit-justify-content:center;justify-content:center;
+  -webkit-flex-wrap:wrap;flex-wrap:wrap;
+  margin:.8rem 0 .4rem;
+}
+.pill{
+  -webkit-appearance:none;appearance:none;
+  display:-webkit-inline-box;display:-webkit-inline-flex;display:inline-flex;
+  -webkit-align-items:center;align-items:center;
+  -webkit-justify-content:center;justify-content:center;
+  margin:4px;
+  background:rgba(255,255,255,.85);
+  color:#2a2a2a;
+  border:1.5px solid #2a2a2a;
+  border-radius:4px;
+  padding:.5rem 1rem;
+  min-height:40px;
+  font-family:inherit;
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  line-height:1.2;
+  text-decoration:none;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:background .2s ease, color .2s ease;
+}
+.pill.pill-main{background:var(--brand);border-color:var(--brand);color:#1e1e1e}
+.pill[aria-expanded="true"]{background:#2a2a2a;border-color:#2a2a2a;color:var(--brand)}
+@media (hover:hover){ .pill:hover{background:#2a2a2a;border-color:#2a2a2a;color:var(--brand)} }
+.pill:focus-visible{outline:3px solid #2a2a2a;outline-offset:2px}
+
+/* ===== Content cards (pre-teach panel and lesson sections) ===== */
+.panel-card{
+  width:100%;
+  max-width:920px;
+  margin:2rem auto 0;
+  padding:0 .2rem;
+}
+.panel-card[hidden]{display:none}
+.panel-card h2{margin-top:0}
+.panel-card h3{
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#b8470b;
+  margin:1.2rem 0 .5rem;
+}
+.panel-card p{margin:.6rem 0}
+.panel-card ul,.panel-card ol{margin:.5rem 0 .5rem 1.3rem}
+.panel-card li{margin-bottom:.3rem}
+.panel-card .note{font-size:.9rem;color:var(--muted)}
+
+/* Word cards */
+.word-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap:10px;gap:10px;
+}
+.word{
+  background:#fafafa;
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:.55rem .75rem;
+  font-size:.92rem;
+  line-height:1.45;
+}
+.word b{font-size:1rem}
+.word .pos{color:#b8470b;font-size:.75rem;font-weight:700;margin-left:.3rem}
+.word .ex{display:block;color:var(--muted);font-style:italic;font-size:.86rem;margin-top:.2rem}
+.panel-close{display:block;margin:1.1rem auto 0}
+
+/* Casual → academic swap tables */
+.swap{
+  width:100%;
+  border-collapse:collapse;
+  margin:.6rem 0 .4rem;
+  font-size:.92rem;
+}
+.swap th{
+  text-align:left;
+  font-size:.7rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:.45rem .6rem;
+}
+.swap th:first-child{background:var(--casual-up);color:#1e1e1e}
+.swap th:last-child{background:var(--formal-up);color:#fff}
+.swap td{padding:.45rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
+.swap td:first-child{width:45%}
+
+/* Rewrite practice */
+.rewrite{margin:.4rem 0 0;padding:0;list-style:none}
+.rewrite li{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:.6rem .75rem;
+  margin-bottom:.55rem;
+  background:#fafafa;
+}
+.rewrite details{margin-top:.3rem}
+.rewrite summary{cursor:pointer;font-size:.82rem;font-weight:700;color:#b8470b}
+.rewrite .model{margin:.3rem 0 0;color:#1e1e1e}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion:reduce){
   .inner,.btn{-webkit-transition:none;transition:none}
@@ -588,6 +710,14 @@ body.rules-open{overflow:hidden}
     <div class="rules-tile">
       <p class="rules-kicker">How to play</p>
       <h2 id="rulesTitle">Casual vs Academic Language</h2>
+      <p class="rules-why rules-intro">The same idea can sound chatty or scholarly. In this game you match everyday English with the formal, academic way of saying it – the language you need for IELTS and PTE writing, university assignments and professional reports. Pre-teach the key words first, play the game, try the gap-fill, then finish with the mini lesson and rewrite practice below.</p>
+
+      <nav class="pill-row" aria-label="Lesson sections">
+        <button type="button" class="pill pill-main" id="preteachPill" aria-expanded="false" aria-controls="preteach">Pre-teach: key words</button>
+        <a class="pill" href="#lesson">Mini lesson</a>
+        <a class="pill" href="#rewrite">Rewrite practice</a>
+        <a class="pill" href="#teacher">Teacher notes</a>
+      </nav>
       <ol class="rules-steps">
         <li>Flip <b>two tiles</b>: a light <span class="sw light"></span> <b>casual</b> tile and a dark <span class="sw dark"></span> <b>academic</b> tile.</li>
         <li>If they say the same thing, it's a <b>pair</b> – they stay face up. If not, they turn back over.</li>
@@ -627,23 +757,76 @@ body.rules-open{overflow:hidden}
   <main class="page">
     <span class="level">Matching Game · C2</span>
     <h1>Casual vs Academic Language</h1>
-    <h2>Part 1 – Match casual English with its academic equivalent</h2>
 
-    <div class="tile-key" aria-hidden="true">
-      <span class="k-formal"><i></i>Dark tiles = academic</span>
-      <span class="k-casual"><i></i>Light tiles = casual</span>
-    </div>
+    <!-- ===== Pre-teaching word list (opens from the pill) ===== -->
+    <section class="panel-card" id="preteach" aria-labelledby="preteachTitle" hidden>
+      <h2 id="preteachTitle">Pre-teach: key academic words</h2>
+      <p>These are the academic words and phrases on the dark tiles and in the gap-fill. Read them before you play and notice which ones are new to you. Each word has a short meaning and an example from the game.</p>
+
+      <h3>Size and importance (adjectives)</h3>
+      <div class="word-grid">
+        <div class="word"><b>significant</b><span class="pos">adj</span><br>important, or large enough to notice<span class="ex">There had been significant developments.</span></div>
+        <div class="word"><b>considerable</b><span class="pos">adj</span><br>large in size or amount<span class="ex">Considerable debate continues.</span></div>
+        <div class="word"><b>substantial</b><span class="pos">adj</span><br>large and important<span class="ex">They wielded substantial influence.</span></div>
+        <div class="word"><b>extensive</b><span class="pos">adj</span><br>covering a large area or amount; thorough<span class="ex">She undertook extensive research.</span></div>
+        <div class="word"><b>enormous</b><span class="pos">adj</span><br>extremely large<span class="ex">There was an enormous variation.</span></div>
+        <div class="word"><b>widespread</b><span class="pos">adj</span><br>found in many places or among many people<span class="ex">There is widespread support.</span></div>
+        <div class="word"><b>minor</b><span class="pos">adj</span><br>small and not very important<span class="ex">It contains minor errors.</span></div>
+        <div class="word"><b>crucial</b><span class="pos">adj</span><br>extremely important; other things depend on it<span class="ex">Timing is crucial.</span></div>
+        <div class="word"><b>pivotal</b><span class="pos">adj</span><br>central; it causes other things to happen<span class="ex">They played a pivotal role.</span></div>
+        <div class="word"><b>preliminary</b><span class="pos">adj</span><br>early; coming before the main part<span class="ex">Preliminary findings seem encouraging.</span></div>
+        <div class="word"><b>influential</b><span class="pos">adj</span><br>having a strong effect on people or ideas<span class="ex">Their work was highly influential.</span></div>
+        <div class="word"><b>commonplace</b><span class="pos">adj</span><br>ordinary; happening often<span class="ex">In ancient times, it was commonplace.</span></div>
+        <div class="word"><b>ineffective</b><span class="pos">adj</span><br>not producing the result you want<span class="ex">It is widely regarded as ineffective.</span></div>
+        <div class="word"><b>challenging</b><span class="pos">adj</span><br>difficult in a way that tests your ability<span class="ex">It was challenging to maintain engagement.</span></div>
+      </div>
+
+      <h3>Verbs</h3>
+      <div class="word-grid">
+        <div class="word"><b>undertake</b><span class="pos">v</span><br>to start and do a task (formal for <i>do</i>)<span class="ex">She undertook extensive research.</span></div>
+        <div class="word"><b>wield</b><span class="pos">v</span><br>to have and use power or influence<span class="ex">Artisans wielded substantial influence.</span></div>
+        <div class="word"><b>maintain</b><span class="pos">v</span><br>to keep something going at the same level<span class="ex">He was able to maintain the program.</span></div>
+        <div class="word"><b>conflict</b><span class="pos">v</span><br>to disagree; not match. Stress: con<u>FLICT</u> (verb), <u>CON</u>flict (noun)<span class="ex">The findings conflicted.</span></div>
+        <div class="word"><b>display</b><span class="pos">v</span><br>to show something so people can see it<span class="ex">It displays specific iconography.</span></div>
+        <div class="word"><b>contain</b><span class="pos">v</span><br>to have something inside<span class="ex">It contains minor errors.</span></div>
+        <div class="word"><b>survey</b><span class="pos">v</span><br>to ask a group of people the same questions<span class="ex">They surveyed a random sample.</span></div>
+        <div class="word"><b>prove</b> + adjective<span class="pos">v</span><br>to turn out to be, after time or testing<span class="ex">The strategy proved unsuccessful.</span></div>
+        <div class="word"><b>be regarded as</b><span class="pos">phrase</span><br>to be thought of as<span class="ex">It is widely regarded as ineffective.</span></div>
+      </div>
+
+      <h3>Nouns and fixed phrases</h3>
+      <div class="word-grid">
+        <div class="word"><b>aspect</b><span class="pos">n</span><br>one part or feature of something<span class="ex">That is a significant aspect.</span></div>
+        <div class="word"><b>diversity</b><span class="pos">n</span><br>a range of many different types<span class="ex">There was considerable diversity.</span></div>
+        <div class="word"><b>variation</b><span class="pos">n</span><br>a difference between things<span class="ex">There was an enormous variation.</span></div>
+        <div class="word"><b>iconography</b><span class="pos">n</span><br>the images and symbols used in art<span class="ex">It displays specific iconography.</span></div>
+        <div class="word"><b>engagement</b><span class="pos">n</span><br>people's attention and involvement<span class="ex">It was challenging to maintain engagement.</span></div>
+        <div class="word"><b>findings</b><span class="pos">n, usually plural</span><br>the results of research<span class="ex">The findings conflicted.</span></div>
+        <div class="word"><b>debate</b><span class="pos">n</span><br>a discussion where people disagree<span class="ex">Considerable debate continues.</span></div>
+        <div class="word"><b>a random sample</b><span class="pos">n</span><br>people chosen by chance to take part in a study<span class="ex">They surveyed a random sample.</span></div>
+        <div class="word"><b>artefact</b><span class="pos">n</span><br>an object made by people, especially long ago (US spelling: <i>artifact</i>)<span class="ex">These artefacts display specific iconography.</span></div>
+        <div class="word"><b>common ground</b><span class="pos">n</span><br>ideas or opinions that both sides share<span class="ex">There is common ground.</span></div>
+        <div class="word"><b>common knowledge</b><span class="pos">n</span><br>something almost everyone knows<span class="ex">It is common knowledge that…</span></div>
+        <div class="word"><b>common practice</b><span class="pos">n</span><br>the usual way of doing something<span class="ex">It was common practice to do this.</span></div>
+        <div class="word"><b>an extended period</b><span class="pos">n</span><br>a long time (formal for <i>ages</i>)<span class="ex">For an extended period of time.</span></div>
+        <div class="word"><b>better off</b><span class="pos">adj phrase</span><br>in a better situation, often with more money<span class="ex">People are better off in economic terms.</span></div>
+      </div>
+
+      <button type="button" class="btn panel-close" id="preteachClose">Got it – close the list</button>
+    </section>
+
+    <h2>Part 1 – Match casual English with its academic equivalent</h2>
 
     <div class="controls">
       <button class="btn" type="button" id="playAgain">Play again</button>
-      <button class="btn btn-sound" type="button" id="rulesBtn">📜 Instructions</button>
+      <button class="btn btn-sound" type="button" id="rulesBtn">Instructions</button>
       <button class="btn btn-sound" type="button" id="soundBtn" aria-pressed="true" aria-label="Sound on">🔊 Sound on</button>
     </div>
 
-    <p class="pair-count" aria-live="polite">Pairs found: <b id="pairCount">0</b> / 8</p>
 
     <div class="game-wrap">
       <div id="game" aria-label="Matching game board"></div>
+      <p class="pair-count" aria-live="polite">Pairs found: <b id="pairCount">0</b> / 8</p>
       <div id="status" role="status" aria-live="polite"></div>
     </div>
 
@@ -664,6 +847,112 @@ body.rules-open{overflow:hidden}
 
       <button class="btn" id="checkBtn" type="button">Check answers</button>
       <div id="feedback" role="status" aria-live="polite"></div>
+    </section>
+
+    <!-- ===== Mini lesson ===== -->
+    <section class="panel-card" id="lesson" aria-labelledby="lessonTitle">
+      <h2 id="lessonTitle">Mini lesson: five ways to make your English sound academic</h2>
+      <p>Academic English is not about using the longest words you know. It is about being <b>precise</b>, <b>objective</b> and <b>careful</b> with your claims. Every pair in the game uses one or more of these five techniques.</p>
+
+      <h3>1 · Choose precise words over vague ones</h3>
+      <p>Casual English uses general words like <i>a lot</i>, <i>big</i>, <i>good</i> and <i>things</i>. Academic writing chooses a word that says exactly how much, how important or what kind.</p>
+      <table class="swap">
+        <tr><th>Casual</th><th>Academic</th></tr>
+        <tr><td>a lot / very big</td><td>considerable, substantial, enormous, significant(ly)</td></tr>
+        <tr><td>things, parts</td><td>factors, aspects, elements</td></tr>
+        <tr><td>good</td><td>beneficial, effective, encouraging</td></tr>
+        <tr><td>bad</td><td>ineffective, harmful, detrimental</td></tr>
+        <tr><td>tiny mistakes</td><td>minor errors</td></tr>
+      </table>
+
+      <h3>2 · Use one formal verb instead of a phrasal verb</h3>
+      <p>Phrasal verbs are normal in speech, but academic writing often prefers a single verb that comes from Latin. <i>The prices went up</i> becomes <i>The costs increased</i>.</p>
+      <table class="swap">
+        <tr><th>Casual</th><th>Academic</th></tr>
+        <tr><td>go up / go down</td><td>increase, rise / decrease, decline</td></tr>
+        <tr><td>find out</td><td>discover, establish</td></tr>
+        <tr><td>look into</td><td>investigate, examine</td></tr>
+        <tr><td>keep going, carry on</td><td>continue, maintain</td></tr>
+        <tr><td>come up with</td><td>devise, propose</td></tr>
+        <tr><td>get better</td><td>improve</td></tr>
+      </table>
+      <p class="note">Not every phrasal verb is too casual. <i>Carry out</i>, <i>consist of</i>, <i>account for</i> and <i>result in</i> are common in academic writing.</p>
+
+      <h3>3 · Make the idea the subject, not the people</h3>
+      <p>Casual English puts people first: <i>everyone</i>, <i>they</i>, <i>people</i>. Academic English often puts the idea first with <i>It is…</i>, <i>There is…</i> or the passive. This sounds more objective.</p>
+      <ul>
+        <li><i>Everyone knows that…</i> → <b>It is common knowledge that…</b></li>
+        <li><i>People think it's a bad idea.</i> → <b>It is widely regarded as ineffective.</b></li>
+        <li><i>They agree.</i> → <b>There is common ground.</b></li>
+        <li><i>There is still a big argument about that.</i> → <b>Considerable debate continues.</b></li>
+      </ul>
+
+      <h3>4 · Be careful with your claims (hedging)</h3>
+      <p>Academic writers rarely say something is 100% certain. They use <b>hedging</b> language to show how strong the evidence is. Compare <i>The first results look good</i> with <b>Preliminary findings seem encouraging</b>: the academic version tells the reader the results are early and the conclusion is not final.</p>
+      <ul>
+        <li>Verbs: <i>seem, appear, suggest, indicate, tend to</i></li>
+        <li>Modals: <i>may, might, could</i></li>
+        <li>Adverbs and adjectives: <i>likely, possibly, arguably, largely</i></li>
+      </ul>
+      <p>Avoid <i>This proves that…</i> unless it really does. <b>This suggests that…</b> is usually safer.</p>
+
+      <h3>5 · Drop the chat</h3>
+      <p>Some features belong to conversation, not to essays and reports:</p>
+      <ul>
+        <li><b>Contractions:</b> write <i>it is</i>, <i>do not</i>, <i>cannot</i> – not <i>it's</i>, <i>don't</i>, <i>can't</i>.</li>
+        <li><b>Slang and informal words:</b> <i>for ages, loads of, stuff, kids, uni</i> → <i>for an extended period, a large number of, material, children, university</i>.</li>
+        <li><b>Intensifiers:</b> <i>really, so, pretty, super</i> – choose a stronger word instead (<i>really important</i> → <i>crucial</i>).</li>
+        <li><b>Questions to the reader and exclamation marks.</b></li>
+      </ul>
+
+      <h3>Useful academic collocations from the game</h3>
+      <p>Learn these as chunks – the words naturally go together:</p>
+      <ul>
+        <li><b>wield</b> influence / power / authority</li>
+        <li><b>undertake</b> research / a study / a project</li>
+        <li><b>attract</b> support / criticism / attention</li>
+        <li><b>play a</b> pivotal / crucial / key <b>role</b> in</li>
+        <li><b>maintain</b> engagement / standards / a program</li>
+        <li><b>preliminary</b> findings / results; <b>conflicting</b> evidence / findings</li>
+      </ul>
+      <p class="note">Don't overdo it. <i>Utilise</i> is not better than <i>use</i>, and a sentence full of rare words is hard to read. In IELTS Writing, the Lexical Resource score rewards vocabulary that is precise and used with awareness of style and collocation – not just long words.</p>
+    </section>
+
+    <!-- ===== Rewrite practice ===== -->
+    <section class="panel-card" id="rewrite" aria-labelledby="rewriteTitle">
+      <h2 id="rewriteTitle">Rewrite practice: casual to academic</h2>
+      <p>Rewrite each casual sentence in academic English. Use the five techniques from the mini lesson, then open the model answer to compare. There is more than one correct answer.</p>
+      <ol class="rewrite">
+        <li>Loads of people use their phones on the train.
+          <details><summary>Model answer</summary><p class="model">A substantial number of commuters use mobile phones while travelling.</p></details></li>
+        <li>The government is looking into the problem.
+          <details><summary>Model answer</summary><p class="model">The government is investigating the issue.</p></details></li>
+        <li>Prices went down a bit last year.
+          <details><summary>Model answer</summary><p class="model">Prices decreased slightly in the previous year.</p></details></li>
+        <li>Scientists found out that the drug doesn't really work.
+          <details><summary>Model answer</summary><p class="model">Researchers discovered that the drug is largely ineffective.</p></details></li>
+        <li>Everybody thinks uni is really important these days.
+          <details><summary>Model answer</summary><p class="model">University education is widely regarded as essential today.</p></details></li>
+        <li>Kids who read a lot do better at school.
+          <details><summary>Model answer</summary><p class="model">Children who read extensively tend to achieve higher academic results.</p></details></li>
+      </ol>
+    </section>
+
+    <!-- ===== Teacher notes ===== -->
+    <section class="panel-card" id="teacher" aria-labelledby="teacherTitle">
+      <h2 id="teacherTitle">Teacher notes: a 45-minute lesson</h2>
+      <p><b>Level:</b> C1–C2 (strong B2 students can do the pre-teaching and game). <b>Useful for:</b> IELTS Writing Task 2, PTE Academic, university preparation and business report writing.</p>
+      <ol>
+        <li><b>Warm-up (5 min).</b> Write <i>The prices went up a lot</i> and <i>The costs increased significantly</i> on the board. Ask: where would you hear or read each one? What exactly is different?</li>
+        <li><b>Pre-teach (10 min).</b> Open <i>Pre-teach: key words</i>. Students mark the words they already know, then teach each other the rest. Drill the stress change in con<u>FLICT</u> / <u>CON</u>flict.</li>
+        <li><b>Play (10–15 min).</b> Students play solo on their phones (use the QR button) or in teams on the board. Every time a team finds a pair, they read both sentences aloud and say which technique it uses.</li>
+        <li><b>Gap-fill (10 min).</b> Individually, then compare answers in pairs before checking.</li>
+        <li><b>Rewrite (10 min).</b> Students rewrite the six sentences, then compare with the model answers. For homework, they take a paragraph from their own writing and make it more academic.</li>
+      </ol>
+
+      <h3>Common questions</h3>
+      <p><b>Is academic English the same as formal English?</b> Academic English is a type of formal English with extra features: cautious claims, references to evidence and an impersonal style. A formal business email can still say <i>we</i> and <i>please</i>; an academic essay usually focuses on ideas and evidence.</p>
+      <p><b>Can students use "I" in academic writing?</b> It depends on the task. IELTS Writing Task 2 often asks for your opinion, so <i>I believe</i> is fine in moderation. Many university subjects, especially in the sciences, prefer an impersonal style.</p>
     </section>
 
     <div class="nav-buttons">
@@ -696,7 +985,7 @@ body.rules-open{overflow:hidden}
 /* ==== PART 1: MATCHING GAME (8 pairs = 16 cards) ==== */
 var pairs = [
   ["Before that, there were important changes.","There had been significant developments."],
-  ["That’s an important part.","That’s a significant aspect."],
+  ["That’s an important part.","That is a significant aspect."],
   ["The prices went up a lot.","The costs increased significantly."],
   ["There was a very big difference.","There was an enormous variation."],
   ["There were a lot of different types.","There was considerable diversity."],
@@ -1118,12 +1407,41 @@ initGame();
     if(lastFocus && lastFocus.focus) lastFocus.focus();
   }
   go.addEventListener("click", hide);
+  /* Pills on the opening tile: close the tile, then go to that section */
+  var pills = box.querySelectorAll(".pill");
+  for(var i = 0; i < pills.length; i++){
+    pills[i].addEventListener("click", function(e){
+      var isPreteach = this.id === "preteachPill";
+      hide();
+      if(isPreteach){ e.preventDefault(); if(window.openPreteach) window.openPreteach(); }
+    });
+  }
   box.addEventListener("click", function(e){ if(e.target === box) hide(); });
   document.addEventListener("keydown", function(e){
     if((e.key === "Escape" || e.keyCode === 27) && !box.hidden) hide();
   });
   open.addEventListener("click", show);
   show();
+})();
+
+/* ===== Pre-teach pill: opens and closes the word list ===== */
+(function(){
+  var pill = document.getElementById("preteachPill");
+  var panel = document.getElementById("preteach");
+  var close = document.getElementById("preteachClose");
+  function set(open){
+    panel.hidden = !open;
+    pill.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
+  close.addEventListener("click", function(){
+    set(false);
+    document.getElementById("game").scrollIntoView({ behavior:"smooth", block:"start" });
+  });
+  window.openPreteach = function(){
+    set(true);
+    setTimeout(function(){ panel.scrollIntoView({ behavior:"smooth", block:"start" }); }, 60);
+  };
 })();
 
 /* ==== PART 2: GAP FILL ==== */
