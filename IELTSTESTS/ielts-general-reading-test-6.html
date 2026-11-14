@@ -404,6 +404,19 @@
     .q-row input[type=text]{width:100%; max-width:220px;}
   }
 </style>
+<style>
+  /* Statement + drop-down questions: number | statement | answer, stacked on phones */
+  .q-row.q-stmt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;align-items:start;margin:12px 0;padding:0;text-indent:0}
+  .q-row.q-stmt .qnum{min-width:0;margin:0;padding-top:7px}
+  .q-row.q-stmt .qtext{line-height:1.65;padding-top:5px}
+  .q-row.q-stmt .qctrl{display:flex;align-items:center}
+  .q-row.q-stmt > span[id^="mark"]{grid-column:2 / -1}
+  .q-row.q-stmt > span[id^="mark"]:empty{display:none}
+  @media (max-width:560px){
+    .q-row.q-stmt{grid-template-columns:30px minmax(0,1fr)}
+    .q-row.q-stmt .qctrl{grid-column:2 / -1}
+  }
+</style>
 </head>
 <body>
 
@@ -474,20 +487,13 @@
     <div class="qgroup">
       <h4>Questions 1–7</h4>
       <p class="sub">Do the following statements agree with the information given in the text? Choose <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
-      <div class="q-row"><span class="qnum">1.</span> The new cycle path begins in the centre of the city.
-        <select id="q1" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark1"></span></div>
-      <div class="q-row"><span class="qnum">2.</span> The new sections of the path are separated from traffic in the same way as the older Frome Street bikeway.
-        <select id="q2" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark2"></span></div>
-      <div class="q-row"><span class="qnum">3.</span> Bicycles can be hired from the golf course clubhouse.
-        <select id="q3" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark3"></span></div>
-      <div class="q-row"><span class="qnum">4.</span> Each bike repair station includes a pump.
-        <select id="q4" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark4"></span></div>
-      <div class="q-row"><span class="qnum">5.</span> Cyclists may use the marked crossing points to ride across the golf course.
-        <select id="q5" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark5"></span></div>
-      <div class="q-row"><span class="qnum">6.</span> Part of the path beside the golf course may sometimes be unavailable.
-        <select id="q6" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark6"></span></div>
-      <div class="q-row"><span class="qnum">7.</span> The council expects the new path to be used mainly by people travelling to work.
-        <select id="q7" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark7"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">1.</span><span class="qtext">The new cycle path begins in the centre of the city.</span><span class="qctrl"><select id="q1" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark1"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">2.</span><span class="qtext">The new sections of the path are separated from traffic in the same way as the older Frome Street bikeway.</span><span class="qctrl"><select id="q2" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark2"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">3.</span><span class="qtext">Bicycles can be hired from the golf course clubhouse.</span><span class="qctrl"><select id="q3" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark3"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">4.</span><span class="qtext">Each bike repair station includes a pump.</span><span class="qctrl"><select id="q4" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark4"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">5.</span><span class="qtext">Cyclists may use the marked crossing points to ride across the golf course.</span><span class="qctrl"><select id="q5" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark5"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">6.</span><span class="qtext">Part of the path beside the golf course may sometimes be unavailable.</span><span class="qctrl"><select id="q6" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark6"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">7.</span><span class="qtext">The council expects the new path to be used mainly by people travelling to work.</span><span class="qctrl"><select id="q7" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark7"></span></div>
     </div>
     </div>
     </div>
@@ -520,20 +526,13 @@
         <label>D. UX and Web Design</label>
         <label>E. Diploma of Design</label>
       </div>
-      <div class="q-row"><span class="qnum">8.</span> This course can be studied without attending a campus.
-        <select id="q8" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark8"></span></div>
-      <div class="q-row"><span class="qnum">9.</span> This course requires students to supply their own equipment.
-        <select id="q9" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark9"></span></div>
-      <div class="q-row"><span class="qnum">10.</span> This course includes a period of working for a company.
-        <select id="q10" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark10"></span></div>
-      <div class="q-row"><span class="qnum">11.</span> This course allows students to continue on to a more advanced course.
-        <select id="q11" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark11"></span></div>
-      <div class="q-row"><span class="qnum">12.</span> This course is taught in only one city.
-        <select id="q12" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark12"></span></div>
-      <div class="q-row"><span class="qnum">13.</span> This course does not expect students to have any previous experience of the subject.
-        <select id="q13" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark13"></span></div>
-      <div class="q-row"><span class="qnum">14.</span> This course involves making something at its actual size.
-        <select id="q14" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark14"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">8.</span><span class="qtext">This course can be studied without attending a campus.</span><span class="qctrl"><select id="q8" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark8"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">9.</span><span class="qtext">This course requires students to supply their own equipment.</span><span class="qctrl"><select id="q9" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark9"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">10.</span><span class="qtext">This course includes a period of working for a company.</span><span class="qctrl"><select id="q10" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark10"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">11.</span><span class="qtext">This course allows students to continue on to a more advanced course.</span><span class="qctrl"><select id="q11" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark11"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">12.</span><span class="qtext">This course is taught in only one city.</span><span class="qctrl"><select id="q12" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark12"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">13.</span><span class="qtext">This course does not expect students to have any previous experience of the subject.</span><span class="qctrl"><select id="q13" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark13"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">14.</span><span class="qtext">This course involves making something at its actual size.</span><span class="qctrl"><select id="q14" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark14"></span></div>
     </div>
     </div>
     </div>
@@ -661,13 +660,13 @@
         <div><strong>xi</strong>&nbsp; A common belief among pet owners</div>
       </div>
       <p class="sub"><em>Example:</em> Paragraph A — <strong>xi</strong></p>
-      <div class="q-row"><span class="qnum">28.</span> Paragraph B <select id="q28" data-correct="iii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select> <span id="mark28"></span></div>
-      <div class="q-row"><span class="qnum">29.</span> Paragraph C <select id="q29" data-correct="ii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select> <span id="mark29"></span></div>
-      <div class="q-row"><span class="qnum">30.</span> Paragraph D <select id="q30" data-correct="vii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select> <span id="mark30"></span></div>
-      <div class="q-row"><span class="qnum">31.</span> Paragraph E <select id="q31" data-correct="v"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select> <span id="mark31"></span></div>
-      <div class="q-row"><span class="qnum">32.</span> Paragraph F <select id="q32" data-correct="i"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select> <span id="mark32"></span></div>
-      <div class="q-row"><span class="qnum">33.</span> Paragraph G <select id="q33" data-correct="vi"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select> <span id="mark33"></span></div>
-      <div class="q-row"><span class="qnum">34.</span> Paragraph H <select id="q34" data-correct="iv"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select> <span id="mark34"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">28.</span><span class="qtext">Paragraph B</span><span class="qctrl"><select id="q28" data-correct="iii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select></span><span id="mark28"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">29.</span><span class="qtext">Paragraph C</span><span class="qctrl"><select id="q29" data-correct="ii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select></span><span id="mark29"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">30.</span><span class="qtext">Paragraph D</span><span class="qctrl"><select id="q30" data-correct="vii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select></span><span id="mark30"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">31.</span><span class="qtext">Paragraph E</span><span class="qctrl"><select id="q31" data-correct="v"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select></span><span id="mark31"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">32.</span><span class="qtext">Paragraph F</span><span class="qctrl"><select id="q32" data-correct="i"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select></span><span id="mark32"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">33.</span><span class="qtext">Paragraph G</span><span class="qctrl"><select id="q33" data-correct="vi"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select></span><span id="mark33"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">34.</span><span class="qtext">Paragraph H</span><span class="qctrl"><select id="q34" data-correct="iv"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option><option>xi</option></select></span><span id="mark34"></span></div>
     </div>
     <div class="qgroup">
       <h4>Questions 35–37</h4>

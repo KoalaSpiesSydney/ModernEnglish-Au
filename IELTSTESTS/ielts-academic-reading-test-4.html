@@ -430,6 +430,19 @@ font-size:14.5px;
   gtag('js', new Date());
   gtag('config', 'G-HCH5CJD2ZS');
 </script>
+<style>
+  /* Statement + drop-down questions: number | statement | answer, stacked on phones */
+  .q-row.q-stmt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;align-items:start;margin:12px 0;padding:0;text-indent:0}
+  .q-row.q-stmt .qnum{min-width:0;margin:0;padding-top:7px}
+  .q-row.q-stmt .qtext{line-height:1.65;padding-top:5px}
+  .q-row.q-stmt .qctrl{display:flex;align-items:center}
+  .q-row.q-stmt > span[id^="mark"]{grid-column:2 / -1}
+  .q-row.q-stmt > span[id^="mark"]:empty{display:none}
+  @media (max-width:560px){
+    .q-row.q-stmt{grid-template-columns:30px minmax(0,1fr)}
+    .q-row.q-stmt .qctrl{grid-column:2 / -1}
+  }
+</style>
 </head>
 <body>
 
@@ -546,22 +559,14 @@ font-size:14.5px;
 <div class="qgroup">
 <h4>Questions 6–13</h4>
 <p class="sub">Do the following statements agree with the information given in Reading Passage 1? Choose <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if it contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
-<div class="q-row flow"><span class="qnum">6.</span> Moa numbers had begun to fall before people reached New Zealand.
-<select id="q6" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark6"></span></div>
-<div class="q-row flow"><span class="qnum">7.</span> Hunters took moa eggs and chicks as well as fully grown birds.
-<select id="q7" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark7"></span></div>
-<div class="q-row flow"><span class="qnum">8.</span> The burning of vegetation was intended to make moa easier to catch.
-<select id="q8" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark8"></span></div>
-<div class="q-row flow"><span class="qnum">9.</span> New Zealand's Polynesian population was densely settled in comparison with other hunting and gathering societies.
-<select id="q9" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark9"></span></div>
-<div class="q-row flow"><span class="qnum">10.</span> The moa's breeding habits gave it some protection against the level of hunting it faced.
-<select id="q10" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark10"></span></div>
-<div class="q-row flow"><span class="qnum">11.</span> Owen was asked by the New Zealand authorities to examine the bone.
-<select id="q11" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark11"></span></div>
-<div class="q-row flow"><span class="qnum">12.</span> Owen went on to hold an important position at a London museum.
-<select id="q12" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark12"></span></div>
-<div class="q-row flow"><span class="qnum">13.</span> Experts decided that the creature in the 1993 photograph belonged to a different species.
-<select id="q13" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark13"></span></div>
+<div class="q-row q-stmt"><span class="qnum">6.</span><span class="qtext">Moa numbers had begun to fall before people reached New Zealand.</span><span class="qctrl"><select id="q6" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark6"></span></div>
+<div class="q-row q-stmt"><span class="qnum">7.</span><span class="qtext">Hunters took moa eggs and chicks as well as fully grown birds.</span><span class="qctrl"><select id="q7" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark7"></span></div>
+<div class="q-row q-stmt"><span class="qnum">8.</span><span class="qtext">The burning of vegetation was intended to make moa easier to catch.</span><span class="qctrl"><select id="q8" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark8"></span></div>
+<div class="q-row q-stmt"><span class="qnum">9.</span><span class="qtext">New Zealand's Polynesian population was densely settled in comparison with other hunting and gathering societies.</span><span class="qctrl"><select id="q9" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark9"></span></div>
+<div class="q-row q-stmt"><span class="qnum">10.</span><span class="qtext">The moa's breeding habits gave it some protection against the level of hunting it faced.</span><span class="qctrl"><select id="q10" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark10"></span></div>
+<div class="q-row q-stmt"><span class="qnum">11.</span><span class="qtext">Owen was asked by the New Zealand authorities to examine the bone.</span><span class="qctrl"><select id="q11" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark11"></span></div>
+<div class="q-row q-stmt"><span class="qnum">12.</span><span class="qtext">Owen went on to hold an important position at a London museum.</span><span class="qctrl"><select id="q12" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark12"></span></div>
+<div class="q-row q-stmt"><span class="qnum">13.</span><span class="qtext">Experts decided that the creature in the 1993 photograph belonged to a different species.</span><span class="qctrl"><select id="q13" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark13"></span></div>
 </div>
 
 </div>
@@ -613,20 +618,13 @@ font-size:14.5px;
 <div class="qgroup">
 <h4>Questions 14–20</h4>
 <p class="sub">Reading Passage 2 has eight sections, <strong>A–H</strong>. Which section contains the following information?</p>
-<div class="q-row flow"><span class="qnum">14.</span> reference to the way in which shea growing differs from other kinds of commercial agriculture
-<select id="q14" data-correct="F"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select> <span id="mark14"></span></div>
-<div class="q-row flow"><span class="qnum">15.</span> a description of an organisation that sets standards for the shea industry
-<select id="q15" data-correct="G"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select> <span id="mark15"></span></div>
-<div class="q-row flow"><span class="qnum">16.</span> examples of the everyday products in which shea butter is used
-<select id="q16" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select> <span id="mark16"></span></div>
-<div class="q-row flow"><span class="qnum">17.</span> reference to a group of creatures whose activity improves the shea harvest
-<select id="q17" data-correct="H"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select> <span id="mark17"></span></div>
-<div class="q-row flow"><span class="qnum">18.</span> figures illustrating the rapid growth of the shea trade
-<select id="q18" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select> <span id="mark18"></span></div>
-<div class="q-row flow"><span class="qnum">19.</span> an economic argument for continuing to buy shea
-<select id="q19" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select> <span id="mark19"></span></div>
-<div class="q-row flow"><span class="qnum">20.</span> examples of the various causes of the loss of shea trees
-<select id="q20" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select> <span id="mark20"></span></div>
+<div class="q-row q-stmt"><span class="qnum">14.</span><span class="qtext">reference to the way in which shea growing differs from other kinds of commercial agriculture</span><span class="qctrl"><select id="q14" data-correct="F"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></span><span id="mark14"></span></div>
+<div class="q-row q-stmt"><span class="qnum">15.</span><span class="qtext">a description of an organisation that sets standards for the shea industry</span><span class="qctrl"><select id="q15" data-correct="G"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></span><span id="mark15"></span></div>
+<div class="q-row q-stmt"><span class="qnum">16.</span><span class="qtext">examples of the everyday products in which shea butter is used</span><span class="qctrl"><select id="q16" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></span><span id="mark16"></span></div>
+<div class="q-row q-stmt"><span class="qnum">17.</span><span class="qtext">reference to a group of creatures whose activity improves the shea harvest</span><span class="qctrl"><select id="q17" data-correct="H"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></span><span id="mark17"></span></div>
+<div class="q-row q-stmt"><span class="qnum">18.</span><span class="qtext">figures illustrating the rapid growth of the shea trade</span><span class="qctrl"><select id="q18" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></span><span id="mark18"></span></div>
+<div class="q-row q-stmt"><span class="qnum">19.</span><span class="qtext">an economic argument for continuing to buy shea</span><span class="qctrl"><select id="q19" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></span><span id="mark19"></span></div>
+<div class="q-row q-stmt"><span class="qnum">20.</span><span class="qtext">examples of the various causes of the loss of shea trees</span><span class="qctrl"><select id="q20" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></span><span id="mark20"></span></div>
 </div>
 
 <div class="qgroup">
@@ -639,10 +637,8 @@ font-size:14.5px;
 <div><strong>D</strong> &nbsp;It has estimated the quantity of carbon that its planting target would capture.</div>
 <div><strong>E</strong> &nbsp;It is currently planting shea trees faster than they are being lost.</div>
 </div>
-<div class="q-row flow"><span class="qnum">21.</span> First answer
-<select id="q21"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark21"></span></div>
-<div class="q-row flow"><span class="qnum">22.</span> Second answer
-<select id="q22"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark22"></span></div>
+<div class="q-row q-stmt"><span class="qnum">21.</span><span class="qtext">First answer</span><span class="qctrl"><select id="q21"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark21"></span></div>
+<div class="q-row q-stmt"><span class="qnum">22.</span><span class="qtext">Second answer</span><span class="qctrl"><select id="q22"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark22"></span></div>
 </div>
 
 <div class="qgroup">
@@ -756,14 +752,10 @@ font-size:14.5px;
 <div class="qgroup">
 <h4>Questions 32–35</h4>
 <p class="sub">Do the following statements agree with the claims of the writer in Reading Passage 3? Choose <strong>YES</strong> if the statement agrees with the claims of the writer, <strong>NO</strong> if it contradicts them, or <strong>NOT GIVEN</strong> if it is impossible to say what the writer thinks about this.</p>
-<div class="q-row flow"><span class="qnum">32.</span> The opening chapters make the origins of the lane seem dull.
-<select id="q32" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark32"></span></div>
-<div class="q-row flow"><span class="qnum">33.</span> The chapter on the post office is the finest piece of writing in the book.
-<select id="q33" data-correct="YES"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark33"></span></div>
-<div class="q-row flow"><span class="qnum">34.</span> The book has been received more warmly in Australia than in other countries.
-<select id="q34" data-correct="NOT GIVEN"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark34"></span></div>
-<div class="q-row flow"><span class="qnum">35.</span> The chapters on the financial buildings are likely to appeal to the general reader.
-<select id="q35" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark35"></span></div>
+<div class="q-row q-stmt"><span class="qnum">32.</span><span class="qtext">The opening chapters make the origins of the lane seem dull.</span><span class="qctrl"><select id="q32" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark32"></span></div>
+<div class="q-row q-stmt"><span class="qnum">33.</span><span class="qtext">The chapter on the post office is the finest piece of writing in the book.</span><span class="qctrl"><select id="q33" data-correct="YES"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark33"></span></div>
+<div class="q-row q-stmt"><span class="qnum">34.</span><span class="qtext">The book has been received more warmly in Australia than in other countries.</span><span class="qctrl"><select id="q34" data-correct="NOT GIVEN"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark34"></span></div>
+<div class="q-row q-stmt"><span class="qnum">35.</span><span class="qtext">The chapters on the financial buildings are likely to appeal to the general reader.</span><span class="qctrl"><select id="q35" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark35"></span></div>
 </div>
 
 <div class="qgroup">

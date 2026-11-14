@@ -401,6 +401,19 @@
     .q-row input[type=text]{width:100%; max-width:220px;}
   }
 </style>
+<style>
+  /* Statement + drop-down questions: number | statement | answer, stacked on phones */
+  .q-row.q-stmt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;align-items:start;margin:12px 0;padding:0;text-indent:0}
+  .q-row.q-stmt .qnum{min-width:0;margin:0;padding-top:7px}
+  .q-row.q-stmt .qtext{line-height:1.65;padding-top:5px}
+  .q-row.q-stmt .qctrl{display:flex;align-items:center}
+  .q-row.q-stmt > span[id^="mark"]{grid-column:2 / -1}
+  .q-row.q-stmt > span[id^="mark"]:empty{display:none}
+  @media (max-width:560px){
+    .q-row.q-stmt{grid-template-columns:30px minmax(0,1fr)}
+    .q-row.q-stmt .qctrl{grid-column:2 / -1}
+  }
+</style>
 </head>
 <body>
 
@@ -473,20 +486,13 @@
     <div class="qgroup">
       <h4>Questions 1–7</h4>
       <p class="sub">Do the following statements agree with the information given in the text? Choose <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
-      <div class="q-row"><span class="qnum">1.</span> Lloyd&#x27;s Lock-up is a relatively new business.
-        <select id="q1" data-correct="FALSE" data-explain="&#x27;Lloyd&#x27;s Lock-up is a well-established … company&#x27; — so it is not new."><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark1"></span></div>
-      <div class="q-row"><span class="qnum">2.</span> You can&#x27;t rent a unit for just a few days.
-        <select id="q2" data-correct="FALSE" data-explain="&#x27;We offer safe and secure units, whether your needs are for long- or short-term storage … for the period of time that the storage is required.&#x27;"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark2"></span></div>
-      <div class="q-row"><span class="qnum">3.</span> You can drive your vehicle right up to your storage unit.
-        <select id="q3" data-correct="TRUE" data-explain="&#x27;Tarmac roadways allow customers to park cars and lorries immediately outside their units.&#x27;"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark3"></span></div>
-      <div class="q-row"><span class="qnum">4.</span> The majority of their clients are individuals storing furniture while they travel overseas.
-        <select id="q4" data-correct="NOT GIVEN" data-explain="The text says &#x27;some of our clients&#x27; are going abroad, but nothing about the majority, or about furniture."><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark4"></span></div>
-      <div class="q-row"><span class="qnum">5.</span> You should expect additional fees on top of the quoted price.
-        <select id="q5" data-correct="FALSE" data-explain="&#x27;We offer no-nonsense competitive pricing … with no hidden extras.&#x27;"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark5"></span></div>
-      <div class="q-row"><span class="qnum">6.</span> Lloyd&#x27;s offers discounts with certain truck hire services.
-        <select id="q6" data-correct="NOT GIVEN" data-explain="They &#x27;recommend local van and driver hire companies&#x27;, but discounts are never mentioned."><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark6"></span></div>
-      <div class="q-row"><span class="qnum">7.</span> Lloyd&#x27;s offers free storage to some businesses.
-        <select id="q7" data-correct="FALSE" data-explain="&#x27;Free up&#x27; is a distractor: it means make space available. The text says &#x27;more affordable&#x27; storage, not free."><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark7"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">1.</span><span class="qtext">Lloyd&#x27;s Lock-up is a relatively new business.</span><span class="qctrl"><select id="q1" data-correct="FALSE" data-explain="&#x27;Lloyd&#x27;s Lock-up is a well-established … company&#x27; — so it is not new."><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark1"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">2.</span><span class="qtext">You can&#x27;t rent a unit for just a few days.</span><span class="qctrl"><select id="q2" data-correct="FALSE" data-explain="&#x27;We offer safe and secure units, whether your needs are for long- or short-term storage … for the period of time that the storage is required.&#x27;"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark2"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">3.</span><span class="qtext">You can drive your vehicle right up to your storage unit.</span><span class="qctrl"><select id="q3" data-correct="TRUE" data-explain="&#x27;Tarmac roadways allow customers to park cars and lorries immediately outside their units.&#x27;"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark3"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">4.</span><span class="qtext">The majority of their clients are individuals storing furniture while they travel overseas.</span><span class="qctrl"><select id="q4" data-correct="NOT GIVEN" data-explain="The text says &#x27;some of our clients&#x27; are going abroad, but nothing about the majority, or about furniture."><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark4"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">5.</span><span class="qtext">You should expect additional fees on top of the quoted price.</span><span class="qctrl"><select id="q5" data-correct="FALSE" data-explain="&#x27;We offer no-nonsense competitive pricing … with no hidden extras.&#x27;"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark5"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">6.</span><span class="qtext">Lloyd&#x27;s offers discounts with certain truck hire services.</span><span class="qctrl"><select id="q6" data-correct="NOT GIVEN" data-explain="They &#x27;recommend local van and driver hire companies&#x27;, but discounts are never mentioned."><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark6"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">7.</span><span class="qtext">Lloyd&#x27;s offers free storage to some businesses.</span><span class="qctrl"><select id="q7" data-correct="FALSE" data-explain="&#x27;Free up&#x27; is a distractor: it means make space available. The text says &#x27;more affordable&#x27; storage, not free."><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark7"></span></div>
     </div>
     </div>
     </div>

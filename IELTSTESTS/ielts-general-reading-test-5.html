@@ -422,6 +422,19 @@
   }
   @media (max-width:500px){ .notes-table td.act{width:26%;} .notes-table th,.notes-table td{padding:7px 8px;} .gap input[type=text]{width:120px;} }
 </style>
+<style>
+  /* Statement + drop-down questions: number | statement | answer, stacked on phones */
+  .q-row.q-stmt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;align-items:start;margin:12px 0;padding:0;text-indent:0}
+  .q-row.q-stmt .qnum{min-width:0;margin:0;padding-top:7px}
+  .q-row.q-stmt .qtext{line-height:1.65;padding-top:5px}
+  .q-row.q-stmt .qctrl{display:flex;align-items:center}
+  .q-row.q-stmt > span[id^="mark"]{grid-column:2 / -1}
+  .q-row.q-stmt > span[id^="mark"]:empty{display:none}
+  @media (max-width:560px){
+    .q-row.q-stmt{grid-template-columns:30px minmax(0,1fr)}
+    .q-row.q-stmt .qctrl{grid-column:2 / -1}
+  }
+</style>
 </head>
 <body>
 
@@ -541,13 +554,13 @@
         <div><strong>ix</strong>&nbsp; Making Iced Coffee</div>
         <div><strong>x</strong>&nbsp; Removing Limescale</div>
       </div>
-      <div class="q-row"><span class="qnum">8.</span> Section A <select id="q8" data-correct="iii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark8"></span></div>
-      <div class="q-row"><span class="qnum">9.</span> Section B <select id="q9" data-correct="vii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark9"></span></div>
-      <div class="q-row"><span class="qnum">10.</span> Section C <select id="q10" data-correct="v"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark10"></span></div>
-      <div class="q-row"><span class="qnum">11.</span> Section D <select id="q11" data-correct="viii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark11"></span></div>
-      <div class="q-row"><span class="qnum">12.</span> Section E <select id="q12" data-correct="i"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark12"></span></div>
-      <div class="q-row"><span class="qnum">13.</span> Section F <select id="q13" data-correct="x"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark13"></span></div>
-      <div class="q-row"><span class="qnum">14.</span> Section G <select id="q14" data-correct="iv"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark14"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">8.</span><span class="qtext">Section A</span><span class="qctrl"><select id="q8" data-correct="iii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark8"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">9.</span><span class="qtext">Section B</span><span class="qctrl"><select id="q9" data-correct="vii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark9"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">10.</span><span class="qtext">Section C</span><span class="qctrl"><select id="q10" data-correct="v"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark10"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">11.</span><span class="qtext">Section D</span><span class="qctrl"><select id="q11" data-correct="viii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark11"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">12.</span><span class="qtext">Section E</span><span class="qctrl"><select id="q12" data-correct="i"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark12"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">13.</span><span class="qtext">Section F</span><span class="qctrl"><select id="q13" data-correct="x"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark13"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">14.</span><span class="qtext">Section G</span><span class="qctrl"><select id="q14" data-correct="iv"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark14"></span></div>
     </div>
     </div>
     </div>
@@ -673,34 +686,22 @@
         <div><strong>PN</strong>&nbsp; Dr Priya Nair</div>
         <div><strong>TB</strong>&nbsp; Tom Becker</div>
       </div>
-      <div class="q-row"><span class="qnum">28.</span> Earlier electric cars were held back mainly by the battery technology of the time.
-        <select id="q28" data-correct="SO"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select> <span id="mark28"></span></div>
-      <div class="q-row"><span class="qnum">29.</span> Interest in electric vehicles has tended to rise and fall with public concern about fuel and pollution.
-        <select id="q29" data-correct="HM"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select> <span id="mark29"></span></div>
-      <div class="q-row"><span class="qnum">30.</span> Many people do not realise how long ago electric cars were being developed.
-        <select id="q30" data-correct="RD"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select> <span id="mark30"></span></div>
-      <div class="q-row"><span class="qnum">31.</span> One of the vehicles produced no harmful exhaust.
-        <select id="q31" data-correct="PN"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select> <span id="mark31"></span></div>
-      <div class="q-row"><span class="qnum">32.</span> The lack of places to recharge or refuel continues to discourage drivers.
-        <select id="q32" data-correct="TB"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select> <span id="mark32"></span></div>
-      <div class="q-row"><span class="qnum">33.</span> Government action on air quality encouraged car makers to experiment.
-        <select id="q33" data-correct="HM"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select> <span id="mark33"></span></div>
-      <div class="q-row"><span class="qnum">34.</span> An improved form of an early technology is now used in large vehicles.
-        <select id="q34" data-correct="PN"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select> <span id="mark34"></span></div>
-      <div class="q-row"><span class="qnum">35.</span> The batteries for one vehicle cost as much as buying several standard cars.
-        <select id="q35" data-correct="SO"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select> <span id="mark35"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">28.</span><span class="qtext">Earlier electric cars were held back mainly by the battery technology of the time.</span><span class="qctrl"><select id="q28" data-correct="SO"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select></span><span id="mark28"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">29.</span><span class="qtext">Interest in electric vehicles has tended to rise and fall with public concern about fuel and pollution.</span><span class="qctrl"><select id="q29" data-correct="HM"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select></span><span id="mark29"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">30.</span><span class="qtext">Many people do not realise how long ago electric cars were being developed.</span><span class="qctrl"><select id="q30" data-correct="RD"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select></span><span id="mark30"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">31.</span><span class="qtext">One of the vehicles produced no harmful exhaust.</span><span class="qctrl"><select id="q31" data-correct="PN"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select></span><span id="mark31"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">32.</span><span class="qtext">The lack of places to recharge or refuel continues to discourage drivers.</span><span class="qctrl"><select id="q32" data-correct="TB"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select></span><span id="mark32"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">33.</span><span class="qtext">Government action on air quality encouraged car makers to experiment.</span><span class="qctrl"><select id="q33" data-correct="HM"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select></span><span id="mark33"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">34.</span><span class="qtext">An improved form of an early technology is now used in large vehicles.</span><span class="qctrl"><select id="q34" data-correct="PN"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select></span><span id="mark34"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">35.</span><span class="qtext">The batteries for one vehicle cost as much as buying several standard cars.</span><span class="qctrl"><select id="q35" data-correct="SO"><option value="">—</option><option>HM</option><option>RD</option><option>SO</option><option>PN</option><option>TB</option></select></span><span id="mark35"></span></div>
     </div>
     <div class="qgroup">
       <h4>Questions 36–39</h4>
       <p class="sub">Do the following statements agree with the information given in the text? Choose <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if the statement contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
-      <div class="q-row"><span class="qnum">36.</span> Electric cars were already in use in American cities around 1900.
-        <select id="q36" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark36"></span></div>
-      <div class="q-row"><span class="qnum">37.</span> The Electrovan was tested on public roads in Michigan.
-        <select id="q37" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark37"></span></div>
-      <div class="q-row"><span class="qnum">38.</span> The Electrovair II could be fully recharged in less than four hours.
-        <select id="q38" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark38"></span></div>
-      <div class="q-row"><span class="qnum">39.</span> The Electrovair II will be the main attraction in the museum&#x27;s new exhibition.
-        <select id="q39" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark39"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">36.</span><span class="qtext">Electric cars were already in use in American cities around 1900.</span><span class="qctrl"><select id="q36" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark36"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">37.</span><span class="qtext">The Electrovan was tested on public roads in Michigan.</span><span class="qctrl"><select id="q37" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark37"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">38.</span><span class="qtext">The Electrovair II could be fully recharged in less than four hours.</span><span class="qctrl"><select id="q38" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark38"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">39.</span><span class="qtext">The Electrovair II will be the main attraction in the museum&#x27;s new exhibition.</span><span class="qctrl"><select id="q39" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark39"></span></div>
     </div>
     <div class="qgroup">
       <h4>Question 40</h4>

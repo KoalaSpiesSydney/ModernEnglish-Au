@@ -437,6 +437,20 @@
   .passage{padding-left:12px; padding-right:12px;}
 }
 </style>
+<style>
+  /* Statement + drop-down questions: number | statement | answer, stacked on phones */
+  .q-row.q-stmt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;align-items:start;margin:12px 0;padding:0;text-indent:0}
+  .q-row.q-stmt .qnum{min-width:0;margin:0;padding-top:7px}
+  .q-row.q-stmt .qtext{line-height:1.65;padding-top:5px}
+  .q-row.q-stmt .qctrl{display:flex;align-items:center}
+  .q-row.q-stmt > span[id^="mark"]{grid-column:2 / -1}
+  .q-row.q-stmt > span[id^="mark"]:empty{display:none}
+  @media (max-width:560px){
+    .q-row.q-stmt{grid-template-columns:30px minmax(0,1fr)}
+    .q-row.q-stmt .qctrl{grid-column:2 / -1}
+  }
+</style>
+<style>.gap-pair{white-space:nowrap}</style>
 </head>
 <body>
 
@@ -524,20 +538,13 @@
     <div class="qgroup">
       <h4>Questions 7–13</h4>
       <p class="sub">Do the following statements agree with the information given in Reading Passage 1? Choose TRUE, FALSE or NOT GIVEN for each.</p>
-      <div class="q-row"><span class="qnum">7.</span> Some other Australian cities had built automated metro railways before Sydney's opened.
-        <select id="q7" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark7"></span></div>
-      <div class="q-row"><span class="qnum">8.</span> More passengers travelled on the new line in its first year than the operators had expected.
-        <select id="q8" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark8"></span></div>
-      <div class="q-row"><span class="qnum">9.</span> Building the tunnels deep underground meant that buildings on the surface did not need to be demolished.
-        <select id="q9" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark9"></span></div>
-      <div class="q-row"><span class="qnum">10.</span> The lines under construction to the west and to Sydney's airport will use a different power supply from the original metro line.
-        <select id="q10" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark10"></span></div>
-      <div class="q-row"><span class="qnum">11.</span> Trains will be able to travel between the new airport line and the original Sydney Metro line.
-        <select id="q11" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark11"></span></div>
-      <div class="q-row"><span class="qnum">12.</span> The section of track between Sydenham and Bankstown is a completely new railway line.
-        <select id="q12" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark12"></span></div>
-      <div class="q-row"><span class="qnum">13.</span> The City & Southwest extension cost more than had originally been budgeted.
-        <select id="q13" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark13"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">7.</span><span class="qtext">Some other Australian cities had built automated metro railways before Sydney's opened.</span><span class="qctrl"><select id="q7" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark7"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">8.</span><span class="qtext">More passengers travelled on the new line in its first year than the operators had expected.</span><span class="qctrl"><select id="q8" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark8"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">9.</span><span class="qtext">Building the tunnels deep underground meant that buildings on the surface did not need to be demolished.</span><span class="qctrl"><select id="q9" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark9"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">10.</span><span class="qtext">The lines under construction to the west and to Sydney's airport will use a different power supply from the original metro line.</span><span class="qctrl"><select id="q10" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark10"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">11.</span><span class="qtext">Trains will be able to travel between the new airport line and the original Sydney Metro line.</span><span class="qctrl"><select id="q11" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark11"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">12.</span><span class="qtext">The section of track between Sydenham and Bankstown is a completely new railway line.</span><span class="qctrl"><select id="q12" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark12"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">13.</span><span class="qtext">The City & Southwest extension cost more than had originally been budgeted.</span><span class="qctrl"><select id="q13" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark13"></span></div>
     </div>
     </div>
     </div>
@@ -573,14 +580,10 @@
     <div class="qgroup">
       <h4>Questions 14–17</h4>
       <p class="sub">Reading Passage 2 has seven sections, A–G. Which section contains the following information? Write the correct letter, A–G. <em>You may use any letter more than once.</em></p>
-      <div class="q-row"><span class="qnum">14.</span> a mention of negative attitudes towards golf courses' use of natural resources
-        <select id="q14" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark14"></span></div>
-      <div class="q-row"><span class="qnum">15.</span> figures demonstrating the cooling effect of a certain type of green space
-        <select id="q15" data-correct="F"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark15"></span></div>
-      <div class="q-row"><span class="qnum">16.</span> examples of golf clubs that profited by selling their land for redevelopment
-        <select id="q16" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark16"></span></div>
-      <div class="q-row"><span class="qnum">17.</span> reference to obstacles that can prevent former golf courses from being redeveloped
-        <select id="q17" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark17"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">14.</span><span class="qtext">a mention of negative attitudes towards golf courses' use of natural resources</span><span class="qctrl"><select id="q14" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span><span id="mark14"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">15.</span><span class="qtext">figures demonstrating the cooling effect of a certain type of green space</span><span class="qctrl"><select id="q15" data-correct="F"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span><span id="mark15"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">16.</span><span class="qtext">examples of golf clubs that profited by selling their land for redevelopment</span><span class="qctrl"><select id="q16" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span><span id="mark16"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">17.</span><span class="qtext">reference to obstacles that can prevent former golf courses from being redeveloped</span><span class="qctrl"><select id="q17" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span><span id="mark17"></span></div>
     </div>
 
     <div class="qgroup">
@@ -604,8 +607,8 @@
         <label>D. They are usually located too far from cities.</label>
         <label>E. They increase the risk of drought in nearby farmland.</label>
       </div>
-      <div class="q-row"><span class="qnum">23.</span> <select id="q23"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
-        <span class="qnum">24.</span> <select id="q24"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark2324"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">23.</span><span class="qtext"></span><span class="qctrl"><select id="q23"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
+        <span class="gap-pair"><span class="qnum">24.</span> <select id="q24"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span></span><span id="mark2324"></span></div>
     </div>
 
     <div class="qgroup">
@@ -618,8 +621,8 @@
         <label>D. They lower the cost of water for local residents.</label>
         <label>E. They increase the number of people playing golf.</label>
       </div>
-      <div class="q-row"><span class="qnum">25.</span> <select id="q25"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
-        <span class="qnum">26.</span> <select id="q26"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark2526"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">25.</span><span class="qtext"></span><span class="qctrl"><select id="q25"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
+        <span class="gap-pair"><span class="qnum">26.</span> <select id="q26"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span></span><span id="mark2526"></span></div>
     </div>
     </div>
     </div>
@@ -660,29 +663,25 @@
         <div>G. official policy</div><div>H. forced removal</div><div>I. shared culture</div>
         <div>J. scholarly debate</div>
       </div>
-      <div class="q-row">At least fifteen convicts of African descent arrived in Australia with the First Fleet in 1788, and by 1840 almost five hundred had been transported. Chingaipe traces individuals such as David Stuurman, who led an <span class="qnum">27.</span>
-        <select id="q27" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select> against colonial rule at the Cape of Good Hope, <span id="mark27"></span></div>
-      <div class="q-row">and John Caesar, who achieved a kind of <span class="qnum">28.</span>
-        <select id="q28" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select> as Australia's first bushranger. <span id="mark28"></span></div>
-      <div class="q-row">Central to the book is the argument that the convict system was closely connected to an earlier <span class="qnum">29.</span>
-        <select id="q29" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select> built on slave labour, <span id="mark29"></span></div>
-      <div class="q-row">and that ideas developed under this system were carried, largely without question, into the <span class="qnum">30.</span>
-        <select id="q30" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select> of the convict colonies. <span id="mark30"></span></div>
-      <div class="q-row">Chingaipe avoids simple narratives, showing that some Black convicts formed close ties with Aboriginal Australians, while others took part in the <span class="qnum">31.</span>
-        <select id="q31" data-correct="H"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select> of Aboriginal people from their land. <span id="mark31"></span></div>
+      <div class="q-row">At least fifteen convicts of African descent arrived in Australia with the First Fleet in 1788, and by 1840 almost five hundred had been transported. Chingaipe traces individuals such as David Stuurman, who led an <span class="gap-pair"><span class="qnum">27.</span>
+        <select id="q27" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select></span> against colonial rule at the Cape of Good Hope, <span id="mark27"></span></div>
+      <div class="q-row">and John Caesar, who achieved a kind of <span class="gap-pair"><span class="qnum">28.</span>
+        <select id="q28" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select></span> as Australia's first bushranger. <span id="mark28"></span></div>
+      <div class="q-row">Central to the book is the argument that the convict system was closely connected to an earlier <span class="gap-pair"><span class="qnum">29.</span>
+        <select id="q29" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select></span> built on slave labour, <span id="mark29"></span></div>
+      <div class="q-row">and that ideas developed under this system were carried, largely without question, into the <span class="gap-pair"><span class="qnum">30.</span>
+        <select id="q30" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select></span> of the convict colonies. <span id="mark30"></span></div>
+      <div class="q-row">Chingaipe avoids simple narratives, showing that some Black convicts formed close ties with Aboriginal Australians, while others took part in the <span class="gap-pair"><span class="qnum">31.</span>
+        <select id="q31" data-correct="H"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option></select></span> of Aboriginal people from their land. <span id="mark31"></span></div>
     </div>
 
     <div class="qgroup">
       <h4>Questions 32–35</h4>
       <p class="sub">Do the following statements agree with the claims of the writer in Reading Passage 3? Choose YES, NO or NOT GIVEN.</p>
-      <div class="q-row"><span class="qnum">32.</span> Chingaipe carried out extensive research for the book.
-        <select id="q32" data-correct="YES"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark32"></span></div>
-      <div class="q-row"><span class="qnum">33.</span> The individual stories in the book are told in a dry, academic style.
-        <select id="q33" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark33"></span></div>
-      <div class="q-row"><span class="qnum">34.</span> Chingaipe presents Black convicts uniformly as victims of the colonial system.
-        <select id="q34" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark34"></span></div>
-      <div class="q-row"><span class="qnum">35.</span> Chingaipe played a bigger role in the book's promotional documentary than in writing the book itself.
-        <select id="q35" data-correct="NOT GIVEN"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark35"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">32.</span><span class="qtext">Chingaipe carried out extensive research for the book.</span><span class="qctrl"><select id="q32" data-correct="YES"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark32"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">33.</span><span class="qtext">The individual stories in the book are told in a dry, academic style.</span><span class="qctrl"><select id="q33" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark33"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">34.</span><span class="qtext">Chingaipe presents Black convicts uniformly as victims of the colonial system.</span><span class="qctrl"><select id="q34" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark34"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">35.</span><span class="qtext">Chingaipe played a bigger role in the book's promotional documentary than in writing the book itself.</span><span class="qctrl"><select id="q35" data-correct="NOT GIVEN"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark35"></span></div>
     </div>
 
     <div class="qgroup">

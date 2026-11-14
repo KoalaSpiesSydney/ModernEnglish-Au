@@ -403,6 +403,20 @@
   .passage{padding-left:12px; padding-right:12px;}
 }
 </style>
+<style>
+  /* Statement + drop-down questions: number | statement | answer, stacked on phones */
+  .q-row.q-stmt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;align-items:start;margin:12px 0;padding:0;text-indent:0}
+  .q-row.q-stmt .qnum{min-width:0;margin:0;padding-top:7px}
+  .q-row.q-stmt .qtext{line-height:1.65;padding-top:5px}
+  .q-row.q-stmt .qctrl{display:flex;align-items:center}
+  .q-row.q-stmt > span[id^="mark"]{grid-column:2 / -1}
+  .q-row.q-stmt > span[id^="mark"]:empty{display:none}
+  @media (max-width:560px){
+    .q-row.q-stmt{grid-template-columns:30px minmax(0,1fr)}
+    .q-row.q-stmt .qctrl{grid-column:2 / -1}
+  }
+</style>
+<style>.gap-pair{white-space:nowrap}</style>
 </head>
 <body>
 
@@ -487,22 +501,14 @@
     <div class="qgroup">
       <h4>Questions 6–13</h4>
       <p class="sub">Do the following statements agree with the information given in Reading Passage 1? Choose TRUE, FALSE or NOT GIVEN for each.</p>
-      <div class="q-row"><span class="qnum">6.</span> Grenfell and Hunt were disappointed with the number of literary papyri they discovered at Oxyrhynchus.
-        <select id="q6" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark6"></span></div>
-      <div class="q-row"><span class="qnum">7.</span> There is agreement among scholars about who composed the Iliad and the Odyssey.
-        <select id="q7" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark7"></span></div>
-      <div class="q-row"><span class="qnum">8.</span> Most of the poems that formed the Epic Cycle have survived only in fragments or summaries.
-        <select id="q8" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark8"></span></div>
-      <div class="q-row"><span class="qnum">9.</span> The Tabulae Iliacae presented the story of the Iliad in an unconventional format.
-        <select id="q9" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark9"></span></div>
-      <div class="q-row"><span class="qnum">10.</span> The Venetus A manuscript was a gift from the Byzantine emperor to the city of Venice.
-        <select id="q10" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark10"></span></div>
-      <div class="q-row"><span class="qnum">11.</span> Napoleon's forces paid the city of Venice for the Venetus A manuscript.
-        <select id="q11" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark11"></span></div>
-      <div class="q-row"><span class="qnum">12.</span> The papyrus fragment now on display in New York contains lines that differ from the standard modern text of the Odyssey.
-        <select id="q12" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark12"></span></div>
-      <div class="q-row"><span class="qnum">13.</span> Museum curators are actively searching for further undiscovered fragments of the Odyssey.
-        <select id="q13" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark13"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">6.</span><span class="qtext">Grenfell and Hunt were disappointed with the number of literary papyri they discovered at Oxyrhynchus.</span><span class="qctrl"><select id="q6" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark6"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">7.</span><span class="qtext">There is agreement among scholars about who composed the Iliad and the Odyssey.</span><span class="qctrl"><select id="q7" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark7"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">8.</span><span class="qtext">Most of the poems that formed the Epic Cycle have survived only in fragments or summaries.</span><span class="qctrl"><select id="q8" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark8"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">9.</span><span class="qtext">The Tabulae Iliacae presented the story of the Iliad in an unconventional format.</span><span class="qctrl"><select id="q9" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark9"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">10.</span><span class="qtext">The Venetus A manuscript was a gift from the Byzantine emperor to the city of Venice.</span><span class="qctrl"><select id="q10" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark10"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">11.</span><span class="qtext">Napoleon's forces paid the city of Venice for the Venetus A manuscript.</span><span class="qctrl"><select id="q11" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark11"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">12.</span><span class="qtext">The papyrus fragment now on display in New York contains lines that differ from the standard modern text of the Odyssey.</span><span class="qctrl"><select id="q12" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark12"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">13.</span><span class="qtext">Museum curators are actively searching for further undiscovered fragments of the Odyssey.</span><span class="qctrl"><select id="q13" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark13"></span></div>
     </div>
     </div>
     </div>
@@ -537,16 +543,11 @@
     <div class="qgroup">
       <h4>Questions 14–18</h4>
       <p class="sub">Reading Passage 2 has five sections, A–E. Which section contains the following information? <em>You may use any letter more than once.</em></p>
-      <div class="q-row"><span class="qnum">14.</span> a reference to a naturally occurring gene that could help protect macadamia trees against disease
-        <select id="q14" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark14"></span></div>
-      <div class="q-row"><span class="qnum">15.</span> an explanation of how problems can arise from relying on a narrow genetic base
-        <select id="q15" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark15"></span></div>
-      <div class="q-row"><span class="qnum">16.</span> a number of examples of wild macadamia populations that have not been used in commercial breeding
-        <select id="q16" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark16"></span></div>
-      <div class="q-row"><span class="qnum">17.</span> a comparison between the early domestication of the macadamia and more recent research
-        <select id="q17" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark17"></span></div>
-      <div class="q-row"><span class="qnum">18.</span> a personal reaction to the early results of a breeding trial
-        <select id="q18" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark18"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">14.</span><span class="qtext">a reference to a naturally occurring gene that could help protect macadamia trees against disease</span><span class="qctrl"><select id="q14" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark14"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">15.</span><span class="qtext">an explanation of how problems can arise from relying on a narrow genetic base</span><span class="qctrl"><select id="q15" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark15"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">16.</span><span class="qtext">a number of examples of wild macadamia populations that have not been used in commercial breeding</span><span class="qctrl"><select id="q16" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark16"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">17.</span><span class="qtext">a comparison between the early domestication of the macadamia and more recent research</span><span class="qctrl"><select id="q17" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark17"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">18.</span><span class="qtext">a personal reaction to the early results of a breeding trial</span><span class="qctrl"><select id="q18" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark18"></span></div>
     </div>
 
     <div class="qgroup">
@@ -558,16 +559,11 @@
         <label>C. Bruce Topp</label>
         <label>D. Dr Elena Marsh</label>
       </div>
-      <div class="q-row"><span class="qnum">19.</span> Breeding certain trees for particular traits could help them cope with future environmental conditions.
-        <select id="q19" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select> <span id="mark19"></span></div>
-      <div class="q-row"><span class="qnum">20.</span> Growers may be slow to adopt new varieties even if they perform well.
-        <select id="q20" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select> <span id="mark20"></span></div>
-      <div class="q-row"><span class="qnum">21.</span> It is not advisable to reveal exactly where the most promising research results have come from.
-        <select id="q21" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select> <span id="mark21"></span></div>
-      <div class="q-row"><span class="qnum">22.</span> A breeding programme represents a very large financial commitment for the industry.
-        <select id="q22" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select> <span id="mark22"></span></div>
-      <div class="q-row"><span class="qnum">23.</span> Only a small proportion of a species' genetic diversity has been used so far.
-        <select id="q23" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select> <span id="mark23"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">19.</span><span class="qtext">Breeding certain trees for particular traits could help them cope with future environmental conditions.</span><span class="qctrl"><select id="q19" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select></span><span id="mark19"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">20.</span><span class="qtext">Growers may be slow to adopt new varieties even if they perform well.</span><span class="qctrl"><select id="q20" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select></span><span id="mark20"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">21.</span><span class="qtext">It is not advisable to reveal exactly where the most promising research results have come from.</span><span class="qctrl"><select id="q21" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select></span><span id="mark21"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">22.</span><span class="qtext">A breeding programme represents a very large financial commitment for the industry.</span><span class="qctrl"><select id="q22" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select></span><span id="mark22"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">23.</span><span class="qtext">Only a small proportion of a species' genetic diversity has been used so far.</span><span class="qctrl"><select id="q23" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option></select></span><span id="mark23"></span></div>
     </div>
 
     <div class="qgroup">
@@ -665,16 +661,11 @@
     <div class="qgroup">
       <h4>Questions 32–36</h4>
       <p class="sub">Do the following statements agree with the claims of the writers in Reading Passage 3? Choose YES, NO or NOT GIVEN.</p>
-      <div class="q-row"><span class="qnum">32.</span> Continuing to describe exceptionally skilled autistic individuals simply as "geniuses" will help scientists explain how such skills develop.
-        <select id="q32" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark32"></span></div>
-      <div class="q-row"><span class="qnum">33.</span> The hyper-systemizing theory was proposed as a way of explaining rare talent without relying on the idea of genius.
-        <select id="q33" data-correct="YES"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark33"></span></div>
-      <div class="q-row"><span class="qnum">34.</span> The weak central coherence theory suggests that autistic people intentionally choose to focus on small details rather than the bigger picture.
-        <select id="q34" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark34"></span></div>
-      <div class="q-row"><span class="qnum">35.</span> Current theories provide a complete explanation of why only some autistic people develop savant abilities.
-        <select id="q35" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark35"></span></div>
-      <div class="q-row"><span class="qnum">36.</span> Many researchers are now moving away from simple stereotypes of autism as either pure genius or pure deficit.
-        <select id="q36" data-correct="YES"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select> <span id="mark36"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">32.</span><span class="qtext">Continuing to describe exceptionally skilled autistic individuals simply as "geniuses" will help scientists explain how such skills develop.</span><span class="qctrl"><select id="q32" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark32"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">33.</span><span class="qtext">The hyper-systemizing theory was proposed as a way of explaining rare talent without relying on the idea of genius.</span><span class="qctrl"><select id="q33" data-correct="YES"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark33"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">34.</span><span class="qtext">The weak central coherence theory suggests that autistic people intentionally choose to focus on small details rather than the bigger picture.</span><span class="qctrl"><select id="q34" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark34"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">35.</span><span class="qtext">Current theories provide a complete explanation of why only some autistic people develop savant abilities.</span><span class="qctrl"><select id="q35" data-correct="NO"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark35"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">36.</span><span class="qtext">Many researchers are now moving away from simple stereotypes of autism as either pure genius or pure deficit.</span><span class="qctrl"><select id="q36" data-correct="YES"><option value="">— choose —</option><option>YES</option><option>NO</option><option>NOT GIVEN</option></select></span><span id="mark36"></span></div>
     </div>
 
     <div class="qgroup">
@@ -685,14 +676,14 @@
         <div>D. evidence</div><div>E. luck</div><div>F. diagnosis</div>
         <div>G. inspiration</div>
       </div>
-      <div class="q-row">The popular assumption is that autism is closely linked to hidden <span class="qnum">37.</span>
-        <select id="q37" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select>, as though every autistic person secretly possesses some remarkable gift. <span id="mark37"></span></div>
-      <div class="q-row">Although this can be true in rare cases, most autistic people do not have any unusual <span class="qnum">38.</span>
-        <select id="q38" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select>. <span id="mark38"></span></div>
-      <div class="q-row">In some cases, apparently extraordinary skill turns out to be the product of years of repeated <span class="qnum">39.</span>
-        <select id="q39" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> rather than an automatic feature of autism itself. <span id="mark39"></span></div>
-      <div class="q-row">Elsewhere, popular belief has simply been mistaken, as illustrated by the case of Kim Peek, whose abilities were long attributed to autism without clear <span class="qnum">40.</span>
-        <select id="q40" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select>. <span id="mark40"></span></div>
+      <div class="q-row">The popular assumption is that autism is closely linked to hidden <span class="gap-pair"><span class="qnum">37.</span>
+        <select id="q37" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span>, as though every autistic person secretly possesses some remarkable gift. <span id="mark37"></span></div>
+      <div class="q-row">Although this can be true in rare cases, most autistic people do not have any unusual <span class="gap-pair"><span class="qnum">38.</span>
+        <select id="q38" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span>. <span id="mark38"></span></div>
+      <div class="q-row">In some cases, apparently extraordinary skill turns out to be the product of years of repeated <span class="gap-pair"><span class="qnum">39.</span>
+        <select id="q39" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span> rather than an automatic feature of autism itself. <span id="mark39"></span></div>
+      <div class="q-row">Elsewhere, popular belief has simply been mistaken, as illustrated by the case of Kim Peek, whose abilities were long attributed to autism without clear <span class="gap-pair"><span class="qnum">40.</span>
+        <select id="q40" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span>. <span id="mark40"></span></div>
     </div>
     </div>
     </div>

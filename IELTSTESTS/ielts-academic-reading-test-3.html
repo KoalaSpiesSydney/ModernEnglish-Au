@@ -408,6 +408,20 @@ padding:26px 10px 40px;
   gtag('js', new Date());
   gtag('config', 'G-HCH5CJD2ZS');
 </script>
+<style>
+  /* Statement + drop-down questions: number | statement | answer, stacked on phones */
+  .q-row.q-stmt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;align-items:start;margin:12px 0;padding:0;text-indent:0}
+  .q-row.q-stmt .qnum{min-width:0;margin:0;padding-top:7px}
+  .q-row.q-stmt .qtext{line-height:1.65;padding-top:5px}
+  .q-row.q-stmt .qctrl{display:flex;align-items:center}
+  .q-row.q-stmt > span[id^="mark"]{grid-column:2 / -1}
+  .q-row.q-stmt > span[id^="mark"]:empty{display:none}
+  @media (max-width:560px){
+    .q-row.q-stmt{grid-template-columns:30px minmax(0,1fr)}
+    .q-row.q-stmt .qctrl{grid-column:2 / -1}
+  }
+</style>
+<style>.gap-pair{white-space:nowrap}</style>
 </head>
 <body>
 
@@ -482,20 +496,13 @@ padding:26px 10px 40px;
 <div class="qgroup">
 <h4>Questions 1–7</h4>
 <p class="sub">Do the following statements agree with the information given in Reading Passage 1? Choose <strong>TRUE</strong> if the statement agrees with the information, <strong>FALSE</strong> if it contradicts the information, or <strong>NOT GIVEN</strong> if there is no information on this.</p>
-<div class="q-row"><span class="qnum">1.</span> Whiteley’s interest in art was encouraged by his teachers at school.
-<select id="q1" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark1"></span></div>
-<div class="q-row"><span class="qnum">2.</span> Whiteley studied drawing in the evenings while he was still a teenager.
-<select id="q2" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark2"></span></div>
-<div class="q-row"><span class="qnum">3.</span> The scholarship that took Whiteley to Europe was awarded by an Australian organisation.
-<select id="q3" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark3"></span></div>
-<div class="q-row"><span class="qnum">4.</span> At the time of the purchase, Whiteley was the youngest living artist whose work the Tate Gallery owned.
-<select id="q4" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark4"></span></div>
-<div class="q-row"><span class="qnum">5.</span> Whiteley’s move away from abstract painting is associated with a picture connected to his honeymoon.
-<select id="q5" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark5"></span></div>
-<div class="q-row"><span class="qnum">6.</span> The series about the London murderer was admired by critics.
-<select id="q6" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark6"></span></div>
-<div class="q-row"><span class="qnum">7.</span> The large work Whiteley made in New York took him more than a year to finish.
-<select id="q7" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark7"></span></div>
+<div class="q-row q-stmt"><span class="qnum">1.</span><span class="qtext">Whiteley’s interest in art was encouraged by his teachers at school.</span><span class="qctrl"><select id="q1" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark1"></span></div>
+<div class="q-row q-stmt"><span class="qnum">2.</span><span class="qtext">Whiteley studied drawing in the evenings while he was still a teenager.</span><span class="qctrl"><select id="q2" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark2"></span></div>
+<div class="q-row q-stmt"><span class="qnum">3.</span><span class="qtext">The scholarship that took Whiteley to Europe was awarded by an Australian organisation.</span><span class="qctrl"><select id="q3" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark3"></span></div>
+<div class="q-row q-stmt"><span class="qnum">4.</span><span class="qtext">At the time of the purchase, Whiteley was the youngest living artist whose work the Tate Gallery owned.</span><span class="qctrl"><select id="q4" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark4"></span></div>
+<div class="q-row q-stmt"><span class="qnum">5.</span><span class="qtext">Whiteley’s move away from abstract painting is associated with a picture connected to his honeymoon.</span><span class="qctrl"><select id="q5" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark5"></span></div>
+<div class="q-row q-stmt"><span class="qnum">6.</span><span class="qtext">The series about the London murderer was admired by critics.</span><span class="qctrl"><select id="q6" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark6"></span></div>
+<div class="q-row q-stmt"><span class="qnum">7.</span><span class="qtext">The large work Whiteley made in New York took him more than a year to finish.</span><span class="qctrl"><select id="q7" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark7"></span></div>
 </div>
 
 <div class="qgroup">
@@ -546,20 +553,13 @@ padding:26px 10px 40px;
 <h4>Questions 14–20</h4>
 <p class="sub">Reading Passage 2 has seven sections, <strong>A–G</strong>. Choose the correct heading for each section from the list below.</p>
 <div class="phrase-bank" style="grid-template-columns:1fr;"><div><strong>i</strong> &nbsp;A term that means different things to different people</div><div><strong>ii</strong> &nbsp;The scale of what has already been lost</div><div><strong>iii</strong> &nbsp;Government funding for new farming methods</div><div><strong>iv</strong> &nbsp;Claims that go well beyond the evidence</div><div><strong>v</strong> &nbsp;What the research actually supports</div><div><strong>vi</strong> &nbsp;A set of techniques rather than a single method</div><div><strong>vii</strong> &nbsp;Why many farmers remain unconvinced</div><div><strong>viii</strong> &nbsp;The cost of buying farm machinery</div><div><strong>ix</strong> &nbsp;Testing the claims against measurements</div><div><strong>x</strong> &nbsp;Choosing crops for a changing climate</div></div>
-<div class="q-row"><span class="qnum">14.</span> Section A
-<select id="q14" data-correct="ii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark14"></span></div>
-<div class="q-row"><span class="qnum">15.</span> Section B
-<select id="q15" data-correct="vi"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark15"></span></div>
-<div class="q-row"><span class="qnum">16.</span> Section C
-<select id="q16" data-correct="i"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark16"></span></div>
-<div class="q-row"><span class="qnum">17.</span> Section D
-<select id="q17" data-correct="iv"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark17"></span></div>
-<div class="q-row"><span class="qnum">18.</span> Section E
-<select id="q18" data-correct="ix"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark18"></span></div>
-<div class="q-row"><span class="qnum">19.</span> Section F
-<select id="q19" data-correct="v"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark19"></span></div>
-<div class="q-row"><span class="qnum">20.</span> Section G
-<select id="q20" data-correct="vii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select> <span id="mark20"></span></div>
+<div class="q-row q-stmt"><span class="qnum">14.</span><span class="qtext">Section A</span><span class="qctrl"><select id="q14" data-correct="ii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark14"></span></div>
+<div class="q-row q-stmt"><span class="qnum">15.</span><span class="qtext">Section B</span><span class="qctrl"><select id="q15" data-correct="vi"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark15"></span></div>
+<div class="q-row q-stmt"><span class="qnum">16.</span><span class="qtext">Section C</span><span class="qctrl"><select id="q16" data-correct="i"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark16"></span></div>
+<div class="q-row q-stmt"><span class="qnum">17.</span><span class="qtext">Section D</span><span class="qctrl"><select id="q17" data-correct="iv"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark17"></span></div>
+<div class="q-row q-stmt"><span class="qnum">18.</span><span class="qtext">Section E</span><span class="qctrl"><select id="q18" data-correct="ix"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark18"></span></div>
+<div class="q-row q-stmt"><span class="qnum">19.</span><span class="qtext">Section F</span><span class="qctrl"><select id="q19" data-correct="v"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark19"></span></div>
+<div class="q-row q-stmt"><span class="qnum">20.</span><span class="qtext">Section G</span><span class="qctrl"><select id="q20" data-correct="vii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option><option>x</option></select></span><span id="mark20"></span></div>
 </div>
 
 <div class="qgroup">
@@ -610,16 +610,11 @@ padding:26px 10px 40px;
 <div class="qgroup">
 <h4>Questions 27–31</h4>
 <p class="sub">Complete each sentence with the correct ending, <strong>A–F</strong>, below.</p>
-<div class="q-row"><span class="qnum">27.</span> The gatherings held at Congo Square
-<select id="q27" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select> <span id="mark27"></span></div>
-<div class="q-row"><span class="qnum">28.</span> The segregation laws of the 1890s
-<select id="q28" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select> <span id="mark28"></span></div>
-<div class="q-row"><span class="qnum">29.</span> Buddy Bolden’s cornet playing
-<select id="q29" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select> <span id="mark29"></span></div>
-<div class="q-row"><span class="qnum">30.</span> The 1917 recording by the Original Dixieland Jazz Band
-<select id="q30" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select> <span id="mark30"></span></div>
-<div class="q-row"><span class="qnum">31.</span> The memoirs that researchers rely on
-<select id="q31" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select> <span id="mark31"></span></div>
+<div class="q-row q-stmt"><span class="qnum">27.</span><span class="qtext">The gatherings held at Congo Square</span><span class="qctrl"><select id="q27" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></span><span id="mark27"></span></div>
+<div class="q-row q-stmt"><span class="qnum">28.</span><span class="qtext">The segregation laws of the 1890s</span><span class="qctrl"><select id="q28" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></span><span id="mark28"></span></div>
+<div class="q-row q-stmt"><span class="qnum">29.</span><span class="qtext">Buddy Bolden’s cornet playing</span><span class="qctrl"><select id="q29" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></span><span id="mark29"></span></div>
+<div class="q-row q-stmt"><span class="qnum">30.</span><span class="qtext">The 1917 recording by the Original Dixieland Jazz Band</span><span class="qctrl"><select id="q30" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></span><span id="mark30"></span></div>
+<div class="q-row q-stmt"><span class="qnum">31.</span><span class="qtext">The memoirs that researchers rely on</span><span class="qctrl"><select id="q31" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></span><span id="mark31"></span></div>
 <div class="phrase-bank" style="grid-template-columns:1fr;"><div><strong>A</strong> &nbsp;brought two separate musical traditions into contact.</div><div><strong>B</strong> &nbsp;were produced a long time after the events they describe.</div><div><strong>C</strong> &nbsp;kept African musical practices alive in the city.</div><div><strong>D</strong> &nbsp;drew national attention to a music few outsiders knew.</div><div><strong>E</strong> &nbsp;struck listeners as something they had not heard before.</div><div><strong>F</strong> &nbsp;were paid for by the city authorities.</div></div>
 </div>
 
@@ -628,11 +623,11 @@ padding:26px 10px 40px;
 <p class="sub">Complete the summary using the list of words, <strong>A–I</strong>, below.</p>
 <p class="sub"><strong>The problem of evidence</strong></p>
 <div class="phrase-bank"><div>A. recorded</div><div>B. cities</div><div>C. conditions</div><div>D. memoirs</div><div>E. white</div><div>F. sold</div><div>G. audiences</div><div>H. drummers</div><div>I. letters</div></div>
-<div class="q-row">Because no jazz was <span class="qnum">32.</span><select id="q32" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select> <span id="mark32"></span></div>
-<div class="q-row">before 1917, researchers studying the earliest years of the music have almost no direct material to examine. They depend instead on <span class="qnum">33.</span><select id="q33" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select> <span id="mark33"></span></div>
-<div class="q-row">produced many years later, together with newspaper advertisements and official documents. Marchetti argues that this gap has distorted the account that came down to us, because the recording that began the craze was made by a <span class="qnum">34.</span><select id="q34" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select> <span id="mark34"></span></div>
-<div class="q-row">band. Brannigan accepts the shortage of evidence but maintains that the combination of <span class="qnum">35.</span><select id="q35" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select> <span id="mark35"></span></div>
-<div class="q-row">present in New Orleans existed nowhere else. Most researchers now agree that the music which spread across the country was shaped by a number of <span class="qnum">36.</span><select id="q36" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select> <span id="mark36"></span></div>
+<div class="q-row">Because no jazz was <span class="gap-pair"><span class="qnum">32.</span><select id="q32" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select></span> <span id="mark32"></span></div>
+<div class="q-row">before 1917, researchers studying the earliest years of the music have almost no direct material to examine. They depend instead on <span class="gap-pair"><span class="qnum">33.</span><select id="q33" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select></span> <span id="mark33"></span></div>
+<div class="q-row">produced many years later, together with newspaper advertisements and official documents. Marchetti argues that this gap has distorted the account that came down to us, because the recording that began the craze was made by a <span class="gap-pair"><span class="qnum">34.</span><select id="q34" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select></span> <span id="mark34"></span></div>
+<div class="q-row">band. Brannigan accepts the shortage of evidence but maintains that the combination of <span class="gap-pair"><span class="qnum">35.</span><select id="q35" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select></span> <span id="mark35"></span></div>
+<div class="q-row">present in New Orleans existed nowhere else. Most researchers now agree that the music which spread across the country was shaped by a number of <span class="gap-pair"><span class="qnum">36.</span><select id="q36" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select></span> <span id="mark36"></span></div>
 <div class="q-row">, even if its elements first came together in a single place.</div>
 </div>
 

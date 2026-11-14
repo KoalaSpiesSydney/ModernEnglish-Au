@@ -401,6 +401,19 @@
     .q-row input[type=text]{width:100%; max-width:220px;}
   }
 </style>
+<style>
+  /* Statement + drop-down questions: number | statement | answer, stacked on phones */
+  .q-row.q-stmt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;align-items:start;margin:12px 0;padding:0;text-indent:0}
+  .q-row.q-stmt .qnum{min-width:0;margin:0;padding-top:7px}
+  .q-row.q-stmt .qtext{line-height:1.65;padding-top:5px}
+  .q-row.q-stmt .qctrl{display:flex;align-items:center}
+  .q-row.q-stmt > span[id^="mark"]{grid-column:2 / -1}
+  .q-row.q-stmt > span[id^="mark"]:empty{display:none}
+  @media (max-width:560px){
+    .q-row.q-stmt{grid-template-columns:30px minmax(0,1fr)}
+    .q-row.q-stmt .qctrl{grid-column:2 / -1}
+  }
+</style>
 </head>
 <body>
 
@@ -470,20 +483,13 @@
     <div class="qgroup">
       <h4>Questions 8–14</h4>
       <p class="sub">The text has five paragraphs, <strong>A–E</strong>. Which paragraph contains the following information? <em>You may use any letter more than once.</em></p>
-      <div class="q-row"><span class="qnum">8.</span> An event that younger people are not allowed to enter
-        <select id="q8" data-correct="B" data-explain="&#x27;Amateurs are welcome to participate as long as they are over 16&#x27; — the iron man competition."><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark8"></span></div>
-      <div class="q-row"><span class="qnum">9.</span> Sessions that teach visitors how to behave responsibly on the beach
-        <select id="q9" data-correct="C" data-explain="&#x27;Various workshops and talks are organized to educate visitors on sustainable practices on the beach.&#x27;"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark9"></span></div>
-      <div class="q-row"><span class="qnum">10.</span> A reminder about protecting your skin
-        <select id="q10" data-correct="E" data-explain="&#x27;Don&#x27;t forget your sunscreen, a hat …&#x27;"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark10"></span></div>
-      <div class="q-row"><span class="qnum">11.</span> A description of the different acts and activities on offer
-        <select id="q11" data-correct="B" data-explain="&#x27;… a diverse lineup of performances … a variety of activities, including a surf carnival, indigenous art exhibitions, and food stalls.&#x27;"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark11"></span></div>
-      <div class="q-row"><span class="qnum">12.</span> This happens every year
-        <select id="q12" data-correct="A" data-explain="&#x27;… gearing up for its annual Summer Waves Festival.&#x27; Annual means every year."><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark12"></span></div>
-      <div class="q-row"><span class="qnum">13.</span> A focus on looking after the local environment
-        <select id="q13" data-correct="C" data-explain="&#x27;… the importance of preserving the natural beauty of Little Byron Beach.&#x27;"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark13"></span></div>
-      <div class="q-row"><span class="qnum">14.</span> Where the musicians who will perform come from
-        <select id="q14" data-correct="B" data-explain="&#x27;… from local bands to internationally acclaimed artists.&#x27;"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark14"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">8.</span><span class="qtext">An event that younger people are not allowed to enter</span><span class="qctrl"><select id="q8" data-correct="B" data-explain="&#x27;Amateurs are welcome to participate as long as they are over 16&#x27; — the iron man competition."><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark8"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">9.</span><span class="qtext">Sessions that teach visitors how to behave responsibly on the beach</span><span class="qctrl"><select id="q9" data-correct="C" data-explain="&#x27;Various workshops and talks are organized to educate visitors on sustainable practices on the beach.&#x27;"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark9"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">10.</span><span class="qtext">A reminder about protecting your skin</span><span class="qctrl"><select id="q10" data-correct="E" data-explain="&#x27;Don&#x27;t forget your sunscreen, a hat …&#x27;"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark10"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">11.</span><span class="qtext">A description of the different acts and activities on offer</span><span class="qctrl"><select id="q11" data-correct="B" data-explain="&#x27;… a diverse lineup of performances … a variety of activities, including a surf carnival, indigenous art exhibitions, and food stalls.&#x27;"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark11"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">12.</span><span class="qtext">This happens every year</span><span class="qctrl"><select id="q12" data-correct="A" data-explain="&#x27;… gearing up for its annual Summer Waves Festival.&#x27; Annual means every year."><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark12"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">13.</span><span class="qtext">A focus on looking after the local environment</span><span class="qctrl"><select id="q13" data-correct="C" data-explain="&#x27;… the importance of preserving the natural beauty of Little Byron Beach.&#x27;"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark13"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">14.</span><span class="qtext">Where the musicians who will perform come from</span><span class="qctrl"><select id="q14" data-correct="B" data-explain="&#x27;… from local bands to internationally acclaimed artists.&#x27;"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark14"></span></div>
     </div>
     </div>
     </div>

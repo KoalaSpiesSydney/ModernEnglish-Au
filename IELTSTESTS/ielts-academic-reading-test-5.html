@@ -437,6 +437,20 @@
   .passage{padding-left:12px; padding-right:12px;}
 }
 </style>
+<style>
+  /* Statement + drop-down questions: number | statement | answer, stacked on phones */
+  .q-row.q-stmt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;align-items:start;margin:12px 0;padding:0;text-indent:0}
+  .q-row.q-stmt .qnum{min-width:0;margin:0;padding-top:7px}
+  .q-row.q-stmt .qtext{line-height:1.65;padding-top:5px}
+  .q-row.q-stmt .qctrl{display:flex;align-items:center}
+  .q-row.q-stmt > span[id^="mark"]{grid-column:2 / -1}
+  .q-row.q-stmt > span[id^="mark"]:empty{display:none}
+  @media (max-width:560px){
+    .q-row.q-stmt{grid-template-columns:30px minmax(0,1fr)}
+    .q-row.q-stmt .qctrl{grid-column:2 / -1}
+  }
+</style>
+<style>.gap-pair{white-space:nowrap}</style>
 </head>
 <body>
 
@@ -512,20 +526,13 @@
     <div class="qgroup">
       <h4>Questions 1–7</h4>
       <p class="sub">Do the following statements agree with the information given in Reading Passage 1? Choose TRUE, FALSE or NOT GIVEN for each.</p>
-      <div class="q-row"><span class="qnum">1.</span> H5N1 was introduced to Antarctica from South America by birds.
-        <select id="q1" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark1"></span></div>
-      <div class="q-row"><span class="qnum">2.</span> Dr Dewar was working alone when she first identified the virus in Antarctica.
-        <select id="q2" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark2"></span></div>
-      <div class="q-row"><span class="qnum">3.</span> Skuas were the first species in Antarctica in which the virus was found.
-        <select id="q3" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark3"></span></div>
-      <div class="q-row"><span class="qnum">4.</span> Leopard seals have been more seriously affected by the virus than any other seal species.
-        <select id="q4" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark4"></span></div>
-      <div class="q-row"><span class="qnum">5.</span> Scientists think that seals may be infecting other seals with the virus.
-        <select id="q5" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark5"></span></div>
-      <div class="q-row"><span class="qnum">6.</span> On her return to Antarctica, Dewar discovered very large numbers of dead penguins.
-        <select id="q6" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark6"></span></div>
-      <div class="q-row"><span class="qnum">7.</span> The techniques being used in the Melbourne laboratory were previously applied to another disease.
-        <select id="q7" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark7"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">1.</span><span class="qtext">H5N1 was introduced to Antarctica from South America by birds.</span><span class="qctrl"><select id="q1" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark1"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">2.</span><span class="qtext">Dr Dewar was working alone when she first identified the virus in Antarctica.</span><span class="qctrl"><select id="q2" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark2"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">3.</span><span class="qtext">Skuas were the first species in Antarctica in which the virus was found.</span><span class="qctrl"><select id="q3" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark3"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">4.</span><span class="qtext">Leopard seals have been more seriously affected by the virus than any other seal species.</span><span class="qctrl"><select id="q4" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark4"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">5.</span><span class="qtext">Scientists think that seals may be infecting other seals with the virus.</span><span class="qctrl"><select id="q5" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark5"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">6.</span><span class="qtext">On her return to Antarctica, Dewar discovered very large numbers of dead penguins.</span><span class="qctrl"><select id="q6" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark6"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">7.</span><span class="qtext">The techniques being used in the Melbourne laboratory were previously applied to another disease.</span><span class="qctrl"><select id="q7" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark7"></span></div>
     </div>
 
     <div class="qgroup">
@@ -588,20 +595,13 @@
         <div>viii. How the site was first uncovered by archaeologists</div>
         <div>ix. An empire that both dominated and borrowed</div>
       </div>
-      <div class="q-row"><span class="qnum">14.</span> Paragraph A
-        <select id="q14" data-correct="ii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select> <span id="mark14"></span></div>
-      <div class="q-row"><span class="qnum">15.</span> Paragraph B
-        <select id="q15" data-correct="vi"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select> <span id="mark15"></span></div>
-      <div class="q-row"><span class="qnum">16.</span> Paragraph C
-        <select id="q16" data-correct="v"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select> <span id="mark16"></span></div>
-      <div class="q-row"><span class="qnum">17.</span> Paragraph D
-        <select id="q17" data-correct="vii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select> <span id="mark17"></span></div>
-      <div class="q-row"><span class="qnum">18.</span> Paragraph E
-        <select id="q18" data-correct="i"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select> <span id="mark18"></span></div>
-      <div class="q-row"><span class="qnum">19.</span> Paragraph F
-        <select id="q19" data-correct="ix"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select> <span id="mark19"></span></div>
-      <div class="q-row"><span class="qnum">20.</span> Paragraph G
-        <select id="q20" data-correct="iv"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select> <span id="mark20"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">14.</span><span class="qtext">Paragraph A</span><span class="qctrl"><select id="q14" data-correct="ii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select></span><span id="mark14"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">15.</span><span class="qtext">Paragraph B</span><span class="qctrl"><select id="q15" data-correct="vi"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select></span><span id="mark15"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">16.</span><span class="qtext">Paragraph C</span><span class="qctrl"><select id="q16" data-correct="v"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select></span><span id="mark16"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">17.</span><span class="qtext">Paragraph D</span><span class="qctrl"><select id="q17" data-correct="vii"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select></span><span id="mark17"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">18.</span><span class="qtext">Paragraph E</span><span class="qctrl"><select id="q18" data-correct="i"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select></span><span id="mark18"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">19.</span><span class="qtext">Paragraph F</span><span class="qctrl"><select id="q19" data-correct="ix"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select></span><span id="mark19"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">20.</span><span class="qtext">Paragraph G</span><span class="qctrl"><select id="q20" data-correct="iv"><option value="">—</option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option><option>ix</option></select></span><span id="mark20"></span></div>
     </div>
 
     <div class="qgroup">
@@ -624,8 +624,8 @@
         <label>D. A limited proportion of it has been rebuilt.</label>
         <label>E. It is in better condition than other Inca sites in Peru.</label>
       </div>
-      <div class="q-row"><span class="qnum">25.</span> <select id="q25"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
-        <span class="qnum">26.</span> <select id="q26"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark2526"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">25.</span><span class="qtext"></span><span class="qctrl"><select id="q25"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select>
+        <span class="gap-pair"><span class="qnum">26.</span> <select id="q26"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span></span><span id="mark2526"></span></div>
     </div>
 
     </div>
@@ -708,14 +708,14 @@
         <div>D. source</div><div>E. surplus</div><div>F. salary</div>
         <div>G. competition</div>
       </div>
-      <div class="q-row">According to Mark Marone, AI is increasingly able to complete entire processes by itself, acting as an agent and not just an assistant. This has consequences for the people who run organisations. They are now expected to deal with <span class="qnum">31.</span>
-        <select id="q31" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> and not simply to provide expert knowledge, <span id="mark31"></span></div>
-      <div class="q-row">and to take responsibility for their teams’ AI <span class="qnum">32.</span>
-        <select id="q32" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select>. <span id="mark32"></span></div>
-      <div class="q-row">Marone is also worried about the disappearance of junior positions, since these have traditionally served as a <span class="qnum">33.</span>
-        <select id="q33" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> of future leaders. <span id="mark33"></span></div>
-      <div class="q-row">Without them, organisations could face a <span class="qnum">34.</span>
-        <select id="q34" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> of capable people in years to come. <span id="mark34"></span></div>
+      <div class="q-row">According to Mark Marone, AI is increasingly able to complete entire processes by itself, acting as an agent and not just an assistant. This has consequences for the people who run organisations. They are now expected to deal with <span class="gap-pair"><span class="qnum">31.</span>
+        <select id="q31" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span> and not simply to provide expert knowledge, <span id="mark31"></span></div>
+      <div class="q-row">and to take responsibility for their teams’ AI <span class="gap-pair"><span class="qnum">32.</span>
+        <select id="q32" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span>. <span id="mark32"></span></div>
+      <div class="q-row">Marone is also worried about the disappearance of junior positions, since these have traditionally served as a <span class="gap-pair"><span class="qnum">33.</span>
+        <select id="q33" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span> of future leaders. <span id="mark33"></span></div>
+      <div class="q-row">Without them, organisations could face a <span class="gap-pair"><span class="qnum">34.</span>
+        <select id="q34" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span> of capable people in years to come. <span id="mark34"></span></div>
     </div>
 
     <div class="qgroup">
@@ -725,18 +725,12 @@
       <div class="phrase-bank">
         <div>A. Mark Marone</div><div>B. Erik Brynjolfsson</div><div>C. David Autor</div>
       </div>
-      <div class="q-row"><span class="qnum">35.</span> AI is better at reproducing what is learned through study than what is learned through practice.
-        <select id="q35" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option></select> <span id="mark35"></span></div>
-      <div class="q-row"><span class="qnum">36.</span> AI could allow people with fewer qualifications to do work that is currently done by professionals.
-        <select id="q36" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option></select> <span id="mark36"></span></div>
-      <div class="q-row"><span class="qnum">37.</span> People in senior positions may be given duties that are entirely new.
-        <select id="q37" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option></select> <span id="mark37"></span></div>
-      <div class="q-row"><span class="qnum">38.</span> It is human beings who will decide what the technology is used for.
-        <select id="q38" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option></select> <span id="mark38"></span></div>
-      <div class="q-row"><span class="qnum">39.</span> Organisations should prepare for more than one possible outcome.
-        <select id="q39" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option></select> <span id="mark39"></span></div>
-      <div class="q-row"><span class="qnum">40.</span> The impact of AI on employment can be seen in job numbers more clearly than in wages.
-        <select id="q40" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option></select> <span id="mark40"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">35.</span><span class="qtext">AI is better at reproducing what is learned through study than what is learned through practice.</span><span class="qctrl"><select id="q35" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option></select></span><span id="mark35"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">36.</span><span class="qtext">AI could allow people with fewer qualifications to do work that is currently done by professionals.</span><span class="qctrl"><select id="q36" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option></select></span><span id="mark36"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">37.</span><span class="qtext">People in senior positions may be given duties that are entirely new.</span><span class="qctrl"><select id="q37" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option></select></span><span id="mark37"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">38.</span><span class="qtext">It is human beings who will decide what the technology is used for.</span><span class="qctrl"><select id="q38" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option></select></span><span id="mark38"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">39.</span><span class="qtext">Organisations should prepare for more than one possible outcome.</span><span class="qctrl"><select id="q39" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option></select></span><span id="mark39"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">40.</span><span class="qtext">The impact of AI on employment can be seen in job numbers more clearly than in wages.</span><span class="qctrl"><select id="q40" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option></select></span><span id="mark40"></span></div>
     </div>
 
     </div>

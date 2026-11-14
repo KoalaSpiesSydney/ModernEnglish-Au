@@ -401,6 +401,19 @@
   .passage{padding-left:12px; padding-right:12px;}
 }
 </style>
+<style>
+  /* Statement + drop-down questions: number | statement | answer, stacked on phones */
+  .q-row.q-stmt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;align-items:start;margin:12px 0;padding:0;text-indent:0}
+  .q-row.q-stmt .qnum{min-width:0;margin:0;padding-top:7px}
+  .q-row.q-stmt .qtext{line-height:1.65;padding-top:5px}
+  .q-row.q-stmt .qctrl{display:flex;align-items:center}
+  .q-row.q-stmt > span[id^="mark"]{grid-column:2 / -1}
+  .q-row.q-stmt > span[id^="mark"]:empty{display:none}
+  @media (max-width:560px){
+    .q-row.q-stmt{grid-template-columns:30px minmax(0,1fr)}
+    .q-row.q-stmt .qctrl{grid-column:2 / -1}
+  }
+</style>
 </head>
 <body>
 
@@ -478,18 +491,12 @@
     <div class="qgroup">
       <h4>Questions 1–6</h4>
       <p class="sub">Do the following statements agree with the information given in the text? Choose TRUE, FALSE or NOT GIVEN for each.</p>
-      <div class="q-row"><span class="qnum">1.</span> Most domestic parcels that are running late still arrive within five business days of the expected delivery date.
-        <select id="q1" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark1"></span></div>
-      <div class="q-row"><span class="qnum">2.</span> You should contact Australia Post before checking whether a neighbour or colleague has accepted the item for you.
-        <select id="q2" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark2"></span></div>
-      <div class="q-row"><span class="qnum">3.</span> A domestic item can only be queried once it is more than 30 days overdue.
-        <select id="q3" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark3"></span></div>
-      <div class="q-row"><span class="qnum">4.</span> International Courier and Express items can be queried sooner than international Standard items.
-        <select id="q4" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark4"></span></div>
-      <div class="q-row"><span class="qnum">5.</span> You need to create a MyPost account before you can submit an enquiry about a missing personal item.
-        <select id="q5" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark5"></span></div>
-      <div class="q-row"><span class="qnum">6.</span> Australia Post guarantees that lost items will be replaced free of charge within seven days.
-        <select id="q6" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select> <span id="mark6"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">1.</span><span class="qtext">Most domestic parcels that are running late still arrive within five business days of the expected delivery date.</span><span class="qctrl"><select id="q1" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark1"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">2.</span><span class="qtext">You should contact Australia Post before checking whether a neighbour or colleague has accepted the item for you.</span><span class="qctrl"><select id="q2" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark2"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">3.</span><span class="qtext">A domestic item can only be queried once it is more than 30 days overdue.</span><span class="qctrl"><select id="q3" data-correct="FALSE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark3"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">4.</span><span class="qtext">International Courier and Express items can be queried sooner than international Standard items.</span><span class="qctrl"><select id="q4" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark4"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">5.</span><span class="qtext">You need to create a MyPost account before you can submit an enquiry about a missing personal item.</span><span class="qctrl"><select id="q5" data-correct="TRUE"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark5"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">6.</span><span class="qtext">Australia Post guarantees that lost items will be replaced free of charge within seven days.</span><span class="qctrl"><select id="q6" data-correct="NOT GIVEN"><option value="">— choose —</option><option>TRUE</option><option>FALSE</option><option>NOT GIVEN</option></select></span><span id="mark6"></span></div>
     </div>
     </div>
     </div>
@@ -518,22 +525,14 @@
     <div class="qgroup">
       <h4>Questions 7–14</h4>
       <p class="sub">Look at the five options for collecting a parcel, A–E. For which option are the following statements true? <em>You may use any letter more than once.</em></p>
-      <div class="q-row"><span class="qnum">7.</span> This service must be set up before some other Australia Post services can be used.
-        <select id="q7" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark7"></span></div>
-      <div class="q-row"><span class="qnum">8.</span> This option cannot be used for heavier parcels.
-        <select id="q8" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark8"></span></div>
-      <div class="q-row"><span class="qnum">9.</span> This service helps you recognise genuine communications from Australia Post.
-        <select id="q9" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark9"></span></div>
-      <div class="q-row"><span class="qnum">10.</span> You are not able to select where your parcel will be sent under this option.
-        <select id="q10" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark10"></span></div>
-      <div class="q-row"><span class="qnum">11.</span> Photo identification is required to collect your parcel under this option.
-        <select id="q11" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark11"></span></div>
-      <div class="q-row"><span class="qnum">12.</span> There is a time limit of two business days to pick up your item.
-        <select id="q12" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark12"></span></div>
-      <div class="q-row"><span class="qnum">13.</span> This option does not involve any extra cost to the customer.
-        <select id="q13" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark13"></span></div>
-      <div class="q-row"><span class="qnum">14.</span> Verifying your identity may take some time when you first register.
-        <select id="q14" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select> <span id="mark14"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">7.</span><span class="qtext">This service must be set up before some other Australia Post services can be used.</span><span class="qctrl"><select id="q7" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark7"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">8.</span><span class="qtext">This option cannot be used for heavier parcels.</span><span class="qctrl"><select id="q8" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark8"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">9.</span><span class="qtext">This service helps you recognise genuine communications from Australia Post.</span><span class="qctrl"><select id="q9" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark9"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">10.</span><span class="qtext">You are not able to select where your parcel will be sent under this option.</span><span class="qctrl"><select id="q10" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark10"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">11.</span><span class="qtext">Photo identification is required to collect your parcel under this option.</span><span class="qctrl"><select id="q11" data-correct="D"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark11"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">12.</span><span class="qtext">There is a time limit of two business days to pick up your item.</span><span class="qctrl"><select id="q12" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark12"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">13.</span><span class="qtext">This option does not involve any extra cost to the customer.</span><span class="qctrl"><select id="q13" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark13"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">14.</span><span class="qtext">Verifying your identity may take some time when you first register.</span><span class="qctrl"><select id="q14" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></span><span id="mark14"></span></div>
     </div>
     </div>
     </div>
@@ -684,16 +683,11 @@
     <div class="qgroup">
       <h4>Questions 32–36</h4>
       <p class="sub">The text has seven sections, A–G. Which section contains the following information? <em>You may use any letter more than once.</em></p>
-      <div class="q-row"><span class="qnum">32.</span> a reference to the origins of the political beliefs held by some miners
-        <select id="q32" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark32"></span></div>
-      <div class="q-row"><span class="qnum">33.</span> a mention of specific figures showing declining gold yields
-        <select id="q33" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark33"></span></div>
-      <div class="q-row"><span class="qnum">34.</span> a description of an object that became a lasting national symbol
-        <select id="q34" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark34"></span></div>
-      <div class="q-row"><span class="qnum">35.</span> details of population growth during the gold rush period
-        <select id="q35" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark35"></span></div>
-      <div class="q-row"><span class="qnum">36.</span> a reference to changes made to address miners' complaints
-        <select id="q36" data-correct="G"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select> <span id="mark36"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">32.</span><span class="qtext">a reference to the origins of the political beliefs held by some miners</span><span class="qctrl"><select id="q32" data-correct="C"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span><span id="mark32"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">33.</span><span class="qtext">a mention of specific figures showing declining gold yields</span><span class="qctrl"><select id="q33" data-correct="B"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span><span id="mark33"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">34.</span><span class="qtext">a description of an object that became a lasting national symbol</span><span class="qctrl"><select id="q34" data-correct="E"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span><span id="mark34"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">35.</span><span class="qtext">details of population growth during the gold rush period</span><span class="qctrl"><select id="q35" data-correct="A"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span><span id="mark35"></span></div>
+      <div class="q-row q-stmt"><span class="qnum">36.</span><span class="qtext">a reference to changes made to address miners' complaints</span><span class="qctrl"><select id="q36" data-correct="G"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select></span><span id="mark36"></span></div>
     </div>
 
     <div class="qgroup">
