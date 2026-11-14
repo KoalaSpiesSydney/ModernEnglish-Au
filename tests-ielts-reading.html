@@ -23,7 +23,8 @@ crossorigin="anonymous"></script>
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/lfp3llb.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -192,28 +193,23 @@ crossorigin="anonymous"></script>
     .game-card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 4px;
+      border-radius: 12px;
       padding: 24px 26px;
       text-decoration: none;
       color: var(--ink);
       display: flex;
       flex-direction: column;
       gap: 8px;
+      box-shadow: 0 1px 2px rgba(15,23,42,.05), 0 6px 18px rgba(15,23,42,.08);
       transition: box-shadow .2s, transform .2s, border-color .2s;
       position: relative;
       overflow: hidden;
     }
-    .game-card::before {
-      content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-      background: linear-gradient(180deg, var(--accent), #60a5fa);
-      opacity: 0; transition: opacity .2s;
-    }
-    .game-card:hover {
-      box-shadow: 0 8px 28px rgba(15,23,42,.12);
+    .game-card:hover, .game-card:focus-visible {
+      box-shadow: 0 2px 4px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.14);
       transform: translateY(-2px);
       border-color: rgba(57,104,234,.25);
     }
-    .game-card:hover::before { opacity: 1; }
     .game-card-label {
       font-family: var(--sans); font-size: 0.78rem; font-weight: 700;
       letter-spacing: 2px; text-transform: uppercase; color: var(--link);
@@ -226,36 +222,33 @@ crossorigin="anonymous"></script>
     .game-card-desc {
       font-size: 0.92rem; color: var(--muted); line-height: 1.6; margin: 0;
     }
+    .game-card-topics { font-size: 0.9rem; color: var(--ink); line-height: 1.55; margin: 0; }
+    /* GUIDE + BAND TABLE */
+    .guide h2 { margin-bottom: 14px; }
+    .guide .guide-sub { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--ink); letter-spacing: 0; text-transform: none; margin: 26px 0 8px; }
+    .guide p { font-size: 1rem; line-height: 1.75; }
+    .band-table-wrap { overflow-x: auto; margin: 6px 0 10px; }
+    .band-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: 0.98rem; }
+    .band-table caption { caption-side: top; text-align: left; font-size: 0.85rem; font-weight: 700; color: var(--muted); padding: 0 0 8px; }
+    .band-table th, .band-table td { padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--line); }
+    .band-table thead th { background: var(--accent); color: #fff; font-weight: 700; font-size: 0.9rem; }
+    .band-table tbody th { font-family: var(--serif); font-weight: 700; color: var(--accent); }
+    .band-table tbody tr:last-child th, .band-table tbody tr:last-child td { border-bottom: 0; }
+    .band-note { font-size: 0.82rem !important; color: var(--muted); }
     .game-card-arrow {
       margin-top: 6px; font-size: 0.88rem; font-weight: 700;
       color: var(--link); transition: gap .15s;
       display: inline-flex; align-items: center; gap: 4px;
     }
     .game-card:hover .game-card-arrow { gap: 8px; }
-    /* COMING SOON CARDS */
-    .game-card.is-coming-soon {
-      cursor: default;
-      opacity: .62;
-      border-style: dashed;
-    }
-    .game-card.is-coming-soon:hover {
-      box-shadow: none;
-      transform: none;
-      border-color: var(--line);
-    }
-    .game-card.is-coming-soon:hover::before { opacity: 0; }
-    .game-card.is-coming-soon .card-top-row {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 8px 10px; margin-bottom: 2px;
-    }
-    .game-card.is-coming-soon .game-card-label { padding-right: 0; }
-    .coming-soon-badge {
-      flex: 0 0 auto;
-      font-family: var(--sans); font-size: 0.66rem; font-weight: 700;
-      letter-spacing: 1.6px; text-transform: uppercase;
-      color: #fff; background: var(--muted);
-      padding: 4px 10px; border-radius: 4px;
-    }
+    /* TEACHER TOOL PROMO (sits in the test grid) */
+    .game-card.tool-promo { background: #f7f5f1; border: 1px solid #ddd7cb; border-radius: 4px; gap: 10px; }
+    .game-card.tool-promo:hover { border-color: #14314f; }
+    .tool-promo-kicker { font-family: var(--sans); font-size: 0.74rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #9c7d3f; }
+    .tool-promo-title { font-family: "tt-modernoir", var(--sans); font-weight: 700; font-size: clamp(1.15rem, 0.95rem + 0.6vw, 1.4rem); letter-spacing: 1px; line-height: 1.2; color: #14314f; }
+    .tool-promo-text { font-size: 0.94rem; line-height: 1.6; color: #5c5a56; margin: 0; flex: 1; }
+    .tool-promo-btn { align-self: flex-start; margin-top: 4px; font-family: var(--sans); font-weight: 700; font-size: 0.94rem; color: #fff; background: #14314f; border-radius: 4px; padding: 8px 18px; transition: background .15s; }
+    .game-card.tool-promo:hover .tool-promo-btn { background: #0c2138; }
     /* TIPS / HACKS PILLS */
     .hacks-section { max-width: 900px; margin: 0 auto; text-align: center; }
     .tips-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin: 18px 0 0; }
@@ -263,7 +256,7 @@ crossorigin="anonymous"></script>
       cursor: pointer; font-family: var(--sans); font-size: 0.86rem; font-weight: 700;
       display: inline-flex; align-items: center; gap: 8px;
       color: var(--accent); background: var(--surface);
-      border: 1px solid var(--line); border-radius: 4px;
+      border: 1px solid var(--line); border-radius: 999px;
       padding: 9px 18px;
       transition: border-color .15s, box-shadow .15s, color .15s, background .15s;
     }
@@ -273,7 +266,7 @@ crossorigin="anonymous"></script>
     .tips-pill.is-active .chev { transform: rotate(180deg); }
     .tips-panel {
       margin: 20px auto 0; background: var(--surface); border: 1px solid var(--line);
-      border-radius: 4px; padding: 22px clamp(20px, 3vw, 28px);
+      border-radius: 12px; padding: 22px clamp(20px, 3vw, 28px);
       width: min(600px, 90vw); text-align: left;
     }
     .tips-panel[hidden] { display: none; }
@@ -284,62 +277,77 @@ crossorigin="anonymous"></script>
     .tips-panel h4:first-child { margin-top: 0; }
     .tips-panel p { font-size: 0.96rem; color: var(--muted); margin-bottom: 0; }
     /* OTHER TEST PAGES */
-    .page-nav { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 8px; }
+    .page-nav { display: flex; gap: 10px 28px; flex-wrap: wrap; margin: 0 0 8px; }
     .page-nav a {
-      font-family: var(--sans); font-size: 0.86rem; font-weight: 700;
-      text-decoration: none; color: var(--accent);
-      background: var(--surface); border: 1px solid var(--line);
-      border-radius: 4px; padding: 7px 16px;
-      transition: border-color .15s, box-shadow .15s, color .15s;
+      font-family: var(--sans); font-size: 1rem; font-weight: 700;
+      color: var(--link); text-decoration: underline; text-underline-offset: 3px;
+      transition: color .15s;
     }
-    .page-nav a:hover { border-color: rgba(57,104,234,.35); box-shadow: 0 4px 14px rgba(15,23,42,.08); color: var(--link); }
-    /* AD SLOT (placeholder — swap in a real sponsor's copy and link) */
-    .ad-slot { margin: 8px 0 0; }
-    .ad-label {
-      display: block; font-family: var(--sans); font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
-      margin-bottom: 8px;
+    .page-nav a:hover { color: var(--accent-2); }
+    .text-row { gap: 10px 28px; }
+    /* ============ JUSTINE LEIGH KELLY: LEARNING DESIGN (house promo, styled to match justineleighkelly.com.au) ============ */
+    .jlk {
+      --jlk-bg: #f7f5f1; --jlk-ink: #1c1c1c; --jlk-muted: #5c5a56; --jlk-line: #ddd7cb;
+      --jlk-accent: #14314f; --jlk-accent-hover: #0c2138; --jlk-brass: #9c7d3f;
+      background: var(--jlk-bg); color: var(--jlk-ink);
+      border: 1px solid var(--jlk-line); border-radius: 4px;
+      display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: clamp(20px, 3.5vw, 40px); align-items: start;
+      padding: clamp(24px, 4vw, 40px) clamp(20px, 4vw, 44px);
+      font-family: "Source Sans 3", "Source Sans Pro", "Segoe UI", Arial, sans-serif;
     }
-    .ad-card {
-      display: flex; align-items: center; gap: clamp(16px, 3vw, 32px);
-      background: linear-gradient(120deg, #ffffff 0%, #f6f8fd 100%);
-      border: 1px solid var(--line); border-radius: 4px;
-      padding: clamp(20px, 3vw, 30px) clamp(20px, 3.4vw, 34px);
-      position: relative; overflow: hidden;
+    .jlk-media { display: block; }
+    .jlk-media img { width: 100%; height: auto; border-radius: 4px; display: block; }
+    .jlk-body { min-width: 0; }
+    @media (max-width: 760px) {
+      .jlk { grid-template-columns: 1fr; }
+      .jlk-media { max-width: 320px; }
     }
-    .ad-card::before {
-      content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-      background: linear-gradient(180deg, var(--accent), #60a5fa);
+    .jlk-kicker { font-size: 0.74rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--jlk-brass); margin: 0 0 10px; }
+    .jlk-title {
+      font-family: "tt-modernoir", "Source Sans 3", "Segoe UI", sans-serif; font-weight: 700;
+      font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem); letter-spacing: 1.5px; line-height: 1.15;
+      color: var(--jlk-accent); max-width: 720px; margin: 0 0 8px;
     }
-    .ad-mark {
-      flex: 0 0 auto; width: 76px; height: 76px; border-radius: 10%;
-      display: grid; place-items: center; order: -1;
-      background: var(--accent); color: #fff;
-      font-family: var(--serif); font-weight: 800; font-size: 1.5rem; letter-spacing: 1px;
+    .jlk-tagline { font-family: "Libre Baskerville", Georgia, "Times New Roman", serif; font-style: italic; font-size: 1.05rem; color: var(--jlk-muted); margin: 0 0 16px; }
+    .jlk-text { font-size: 1.02rem; line-height: 1.7; max-width: 720px; margin: 0 0 14px; }
+    .jlk-list {
+      list-style: none; margin: 0 0 24px; padding: 14px 0 0; border-top: 1px solid var(--jlk-line);
+      columns: 2 280px; column-gap: 32px;
     }
-    .ad-body { min-width: 0; }
-    .ad-kicker { font-family: var(--sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--link); margin: 0 0 4px; }
-    .ad-title { font-family: var(--serif); font-weight: 700; font-size: clamp(1.15rem, 0.95rem + 0.7vw, 1.5rem); line-height: 1.25; margin: 0 0 6px; }
-    .ad-text { font-size: 0.95rem; color: var(--muted); line-height: 1.6; margin: 0 0 12px; }
-    .ad-cta {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: var(--sans); font-weight: 700; font-size: 0.92rem;
-      text-decoration: none; color: #fff; background: var(--accent);
-      border-radius: 4px; padding: 9px 20px;
-      transition: background .15s, gap .15s;
+    .jlk-list li { break-inside: avoid; font-size: 0.97rem; line-height: 1.5; padding: 5px 0 5px 18px; position: relative; }
+    .jlk-list li::before { content: ""; position: absolute; left: 0; top: 0.95em; width: 8px; height: 2px; background: var(--jlk-brass); }
+    .jlk-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .jlk-btn {
+      display: inline-block; font-weight: 700; font-size: 0.97rem; letter-spacing: 0.3px; text-decoration: none;
+      color: var(--jlk-accent); background: transparent; border: 1px solid var(--jlk-accent); border-radius: 4px;
+      padding: 9px 20px; transition: background .15s, color .15s;
     }
-    .ad-cta::after { content: "→"; }
-    .ad-cta:hover { background: var(--link); color: #fff; gap: 10px; }
-    .ad-note { font-family: var(--sans); font-size: 0.74rem; color: var(--muted); margin: 8px 0 0; }
-    /* ============ BLOG PILL ============ */
-    .pill-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 28px 0 0; }
+    .jlk-btn:hover { background: var(--jlk-accent); color: #fff; }
+    .jlk-btn--solid { background: var(--jlk-accent); color: #fff; }
+    .jlk-btn--solid:hover { background: var(--jlk-accent-hover); color: #fff; }
+    .jlk-btn:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+    /* ============ TEXT-LINK TOGGLES (Tips / Read the Blog) ============ */
+    .text-toggle {
+      appearance: none; -webkit-appearance: none; background: none; border: 0; padding: 0;
+      display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+      font-family: var(--sans); font-weight: 700; font-size: 1rem; line-height: 1.4;
+      color: var(--link); text-decoration: underline; text-underline-offset: 3px;
+      transition: color .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .text-toggle:hover { color: var(--accent-2); }
+    .text-toggle:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
+    .text-toggle .chev { display: inline-block; font-size: 0.75em; text-decoration: none; transition: transform .18s ease; }
+    .text-toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    /* ============ BLOG TOGGLE ROW ============ */
+    .pill-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 18px 0 0; }
     .pill {
       display: inline-flex; align-items: center; gap: 10px;
       font-family: var(--sans); font-size: 0.92rem; font-weight: 700;
       letter-spacing: 1.6px; text-transform: uppercase;
       color: var(--header-ink); background: var(--header);
       border: 1px solid rgba(15,23,42,.18);
-      border-radius: 4px; padding: 11px 22px;
+      border-radius: 999px; padding: 11px 22px;
       cursor: pointer; text-decoration: none;
       transition: transform .18s, box-shadow .18s, background .18s;
       -webkit-tap-highlight-color: transparent;
@@ -390,7 +398,7 @@ crossorigin="anonymous"></script>
     .blog-roll-tag {
       font-family: var(--sans); font-size: 0.68rem; font-weight: 700;
       letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted);
-      border: 1px solid var(--line); border-radius: 4px; padding: 2px 9px;
+      border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px;
       margin-left: auto;
     }
     .follow-note { font-size: 0.82rem; color: var(--muted); margin: 14px 0 0; }
@@ -403,8 +411,6 @@ crossorigin="anonymous"></script>
     .footer-links a:hover { color: #fff; }
     /* RESPONSIVE */
     @media (max-width: 640px) {
-      .ad-card { flex-direction: column; align-items: flex-start; text-align: left; }
-      .ad-mark { width: 62px; height: 62px; font-size: 1.25rem; }
     }
     @media (max-width: 540px) {
       .header-inner { padding-block: 20px 24px; }
@@ -430,7 +436,7 @@ crossorigin="anonymous"></script>
     @media (pointer: coarse) {
       .kss-label, .breadcrumb a { padding-block: 10px; margin-block: -10px; }
       .footer-links a { display: inline-block; padding: 10px 4px; margin: -10px -4px; }
-      .tips-pill, .pill { min-height: 44px; }
+      .tips-pill, .pill, .text-toggle { min-height: 44px; }
     }
   </style>
 </head>
@@ -465,7 +471,7 @@ crossorigin="anonymous"></script>
           Full-length IELTS Academic and General Training Reading tests, plus mini drills built around one task type so students can practise the skill that is costing them marks. Every test is auto-scored and mobile-friendly &mdash; use a mini test at the end of a lesson, or set a full test as a timed diagnostic.
         </p>
         <div class="tips-row" id="topTipsRow" style="justify-content:flex-start;">
-          <button type="button" class="tips-pill" data-panel="panel-tips" aria-expanded="false">Tips <span class="chev">&#9662;</span></button>
+          <button type="button" class="text-toggle" data-panel="panel-tips" aria-expanded="false" aria-controls="panel-tips">Tips <span class="chev" aria-hidden="true">&#9662;</span></button>
         </div>
         <div class="tips-panel" id="panel-tips" hidden style="margin:20px 0 0;">
           <h4>What's the difference between Academic and General Training Reading?</h4>
@@ -478,10 +484,9 @@ crossorigin="anonymous"></script>
           <p>Practise under real timed conditions, then review every wrong answer by finding the exact sentence in the passage that supports the correct one. Tracking which question types — matching headings, TFNG, summary completion — cost you the most marks lets you target your revision instead of just repeating full tests.</p>
         </div>
         <div class="pill-row">
-          <button class="pill" id="blogToggle" type="button" aria-expanded="false" aria-controls="blogPanel">
-            <span class="pill-dot" aria-hidden="true"></span>
+          <button class="text-toggle" id="blogToggle" type="button" aria-expanded="false" aria-controls="blogPanel">
             <span class="pill-text">Read the Blog</span>
-            <span class="pill-chev" aria-hidden="true">&#9662;</span>
+            <span class="chev" aria-hidden="true">&#9662;</span>
           </button>
         </div>
       </div>
@@ -518,41 +523,44 @@ crossorigin="anonymous"></script>
         <a class="game-card" href="IELTSTESTS/ielts-academic-reading-test-1.html">
           <span class="game-card-label">IELTS Academic &middot; Full Test 1</span>
           <span class="game-card-title">Sydney Metro &middot; Golf Courses &middot; Black Convicts</span>
+          <p class="game-card-topics">Topics: city transport, sport and land use, and colonial Australian history.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; note completion, TFNG, matching, multiple choice.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/ielts-academic-reading-test-2.html">
           <span class="game-card-label">IELTS Academic &middot; Full Test 2</span>
           <span class="game-card-title">Homer's Odyssey &middot; The Macadamia &middot; Genius &amp; Autism</span>
+          <p class="game-card-topics">Topics: classical literature, an Australian native crop, and psychology.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; note completion, TFNG, matching, multiple choice.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/ielts-academic-reading-test-3.html">
           <span class="game-card-label">IELTS Academic &middot; Full Test 3</span>
           <span class="game-card-title">Brett Whiteley &middot; Regenerative Farming &middot; Jazz</span>
+          <p class="game-card-topics">Topics: Australian art, sustainable agriculture, and music history.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; TFNG, note completion, matching headings, summary, multiple choice.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/ielts-academic-reading-test-4.html">
           <span class="game-card-label">IELTS Academic &middot; Full Test 4</span>
           <span class="game-card-title">The Moa &middot; Shea Butter &middot; Martin Place</span>
+          <p class="game-card-topics">Topics: an extinct New Zealand bird, a West African trade product, and Sydney&rsquo;s urban history.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; note completion, TFNG, matching sections, summary, multiple choice.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/ielts-academic-reading-test-5.html">
           <span class="game-card-label">IELTS Academic &middot; Full Test 5</span>
           <span class="game-card-title">Bird Flu in Antarctica &middot; The Inca at Nazca &middot; The Fluid Future of Work</span>
+          <p class="game-card-topics">Topics: wildlife disease, South American archaeology, and the changing workplace.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; TFNG, table and note completion, matching headings, multiple choice, summary, matching people.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
-        <div class="game-card is-coming-soon" aria-disabled="true">
-          <div class="card-top-row">
-            <span class="game-card-label">IELTS Academic</span>
-            <span class="coming-soon-badge">Coming soon</span>
-          </div>
-          <span class="game-card-title">Test 6</span>
-          <p class="game-card-desc">60 minutes &middot; 40 questions. In production.</p>
-        </div>
+        <a class="game-card tool-promo" href="ielts-test-maker.html">
+          <span class="tool-promo-kicker">Teacher tool</span>
+          <span class="tool-promo-title">Make your own IELTS Reading test in minutes</span>
+          <p class="tool-promo-text">Choose an up-to-date topic and generate a test in IELTS style, with IELTS question types already built in. Check it, edit it, then print it or project it for your class.</p>
+          <span class="tool-promo-btn">Build a test</span>
+        </a>
       </div>
       <hr class="divider">
       <h2 style="margin-bottom: 6px;">Full IELTS General Reading Tests</h2>
@@ -561,55 +569,45 @@ crossorigin="anonymous"></script>
         <a class="game-card" href="IELTSTESTS/ielts-general-reading-test-1.html">
           <span class="game-card-label">IELTS General &middot; Full Test 1</span>
           <span class="game-card-title">Consumer Advice &middot; Construction Safety &middot; Eureka Stockade</span>
+          <p class="game-card-topics">Texts: consumer rights information, a workplace safety document, and an Australian history passage.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; TFNG, matching, note completion, multiple choice.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/ielts-general-reading-test-2.html">
           <span class="game-card-label">IELTS General &middot; Full Test 2</span>
           <span class="game-card-title">Fashion Design Competition &middot; Getting an ABN &amp; a Telehealth Meeting &middot; Migratory Birds</span>
+          <p class="game-card-topics">Texts: a competition notice, small-business and telehealth guides, and a nature passage.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; TFNG, matching, note completion, multiple choice.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/ielts-general-reading-test-3.html">
           <span class="game-card-label">IELTS General &middot; Full Test 3</span>
           <span class="game-card-title">Walk the Yorke &middot; Job Scams &middot; Renting e-bikes &amp; First Nation Fashion</span>
+          <p class="game-card-topics">Texts: a walking-trail guide, a job-scam warning, e-bike rental terms, and a passage on First Nations fashion.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; note completion, TFNG, matching, multiple choice.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/ielts-general-reading-test-4.html">
           <span class="game-card-label">IELTS General &middot; Full Test 4</span>
           <span class="game-card-title">Starting School in NSW &middot; Holiday Stays &amp; Part-time Work &middot; Starting a Business in Australia</span>
+          <p class="game-card-topics">Texts: school enrolment information, holiday stay and part-time work notices, and a passage on starting a business.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; TFNG, note completion, matching headings, summary, multiple choice.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/ielts-general-reading-test-5.html">
           <span class="game-card-label">IELTS General &middot; Full Test 5</span>
           <span class="game-card-title">Fiji Family Resort &middot; Home Coffee Machine &middot; Staff Feedback &amp; Claude at Work &middot; Early Electric Cars</span>
+          <p class="game-card-topics">Texts: a resort brochure, appliance instructions, workplace documents on feedback and AI tools, and a history of early electric cars.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; table completion, matching headings, flow chart, matching people, TFNG, multiple choice.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/ielts-general-reading-test-6.html">
           <span class="game-card-label">IELTS General &middot; Full Test 6</span>
           <span class="game-card-title">Adelaide Cycle Path &middot; Design School &middot; A Healthier Workplace &amp; AI Interviews &middot; Do Pets Feel Guilty?</span>
+          <p class="game-card-topics">Texts: a cycle path notice, a course guide, workplace wellbeing and AI interview material, and a passage on animal behaviour.</p>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; TFNG, matching, sentence and note completion, matching headings, multiple choice, summary.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
-        <div class="game-card is-coming-soon" aria-disabled="true">
-          <div class="card-top-row">
-            <span class="game-card-label">IELTS Reading</span>
-            <span class="coming-soon-badge">Coming soon</span>
-          </div>
-          <span class="game-card-title">Test 7</span>
-          <p class="game-card-desc">60 minutes &middot; 40 questions. In production.</p>
-        </div>
-        <div class="game-card is-coming-soon" aria-disabled="true">
-          <div class="card-top-row">
-            <span class="game-card-label">IELTS Reading</span>
-            <span class="coming-soon-badge">Coming soon</span>
-          </div>
-          <span class="game-card-title">Test 8</span>
-          <p class="game-card-desc">60 minutes &middot; 40 questions. In production.</p>
-        </div>
       </div>
       <hr class="divider">
       <h2 style="margin-bottom: 6px;">Mini IELTS General Reading Tests</h2>
@@ -618,30 +616,62 @@ crossorigin="anonymous"></script>
         <a class="game-card" href="IELTSTESTS/mini-byron-beach-festival.html">
           <span class="game-card-label">IELTS General &middot; Section 1</span>
           <span class="game-card-title">The Little Byron Beach Festival</span>
+          <p class="game-card-topics">Practises scanning short paragraphs to find which one holds each detail.</p>
           <p class="game-card-desc">7 questions &middot; matching information to paragraphs.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/mini-lloyds-lock-up.html">
           <span class="game-card-label">IELTS General &middot; Section 1</span>
           <span class="game-card-title">Lloyd&rsquo;s Lock-up</span>
+          <p class="game-card-topics">Practises telling FALSE apart from NOT GIVEN in a short everyday text.</p>
           <p class="game-card-desc">7 questions &middot; True / False / Not Given.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
         <a class="game-card" href="IELTSTESTS/mini-tenants-rights.html">
           <span class="game-card-label">IELTS General &middot; Section 2</span>
           <span class="game-card-title">Tenants&rsquo; Rights When a Landlord Sells</span>
+          <p class="game-card-topics">Practises copying exact words from the passage within a strict word limit.</p>
           <p class="game-card-desc">7 questions &middot; note completion (no more than three words and/or a number).</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
       </div>
       <hr class="divider">
+      <section class="guide one-col" aria-labelledby="guide-heading">
+        <h2 id="guide-heading">How the IELTS Reading test works</h2>
+        <p>The IELTS Reading test lasts 60 minutes and has 40 questions spread across three sections. Each correct answer earns one mark, and there is no penalty for a wrong answer, so never leave a gap. On the paper-based test there is no extra time to transfer answers to the answer sheet &mdash; that has to happen inside the 60 minutes. On the computer-delivered test you type your answers straight into the screen.</p>
+        <h3 class="guide-sub">Academic or General Training?</h3>
+        <p>Check which one your university, employer or visa requires before you start practising. <strong>Academic Reading</strong> uses three long passages taken from books, journals, magazines and newspapers, written for a general reader rather than a specialist. <strong>General Training Reading</strong> begins with short, practical texts &mdash; notices, advertisements, timetables, workplace policies and job information &mdash; and builds up to one longer passage in Section 3. The general texts are easier to read, so you need more correct answers to reach the same band.</p>
+        <h3 class="guide-sub">The question types you will meet</h3>
+        <p>Both versions draw on the same set of tasks: multiple choice; True / False / Not Given and Yes / No / Not Given; matching headings, information, features and sentence endings; sentence, summary, note, table and flow-chart completion; labelling a diagram; and short-answer questions. Completion tasks set a word limit, and answers must be spelt correctly to earn the mark. The practice tests on this page mix these types the way the real test does, while the mini drills isolate one type at a time.</p>
+        <h3 class="guide-sub">From raw score to band score</h3>
+        <p>Your number of correct answers (your raw score) is converted to a band from 1 to 9. The table shows roughly how many correct answers are needed for each whole band. The exact cut-off moves by a mark or so from one test version to the next.</p>
+        <div class="band-table-wrap">
+          <table class="band-table">
+            <caption>Approximate correct answers out of 40 needed for each band</caption>
+            <thead>
+              <tr><th scope="col">Band</th><th scope="col">Academic Reading</th><th scope="col">General Training Reading</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">8</th><td>35</td><td>38</td></tr>
+              <tr><th scope="row">7</th><td>30</td><td>34</td></tr>
+              <tr><th scope="row">6</th><td>23</td><td>30</td></tr>
+              <tr><th scope="row">5</th><td>15</td><td>23</td></tr>
+              <tr><th scope="row">4</th><td>&mdash;</td><td>15</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="band-note">Source: average conversion figures published by IELTS (British Council and IDP). Treat your practice score as a guide, not a guarantee.</p>
+        <h3 class="guide-sub">How to get the most from these tests</h3>
+        <p>Start with one full test under strict 60-minute timing to find your baseline. Mark it, then go back through every wrong answer and find the exact sentence in the passage that proves the right one. Note which question types cost you the most marks and use the mini drills to work on those. After a week or two of targeted practice, sit a new full test and compare your scores.</p>
+      </section>
+      <hr class="divider">
       <div class="hacks-section">
       <h2 style="margin-bottom: 6px;">Reading Strategy Hacks</h2>
       <p class="intro-text" style="margin-top:0;">Quick, focused strategies for the question types that trip students up most.</p>
-      <div class="tips-row" id="hacksPillRow">
-        <button type="button" class="tips-pill" data-panel="panel-tfng" aria-expanded="false">TFNG hack <span class="chev">&#9662;</span></button>
-        <button type="button" class="tips-pill" data-panel="panel-mc" aria-expanded="false">Multiple choice hack <span class="chev">&#9662;</span></button>
-        <button type="button" class="tips-pill" data-panel="panel-summary" aria-expanded="false">Summary &amp; gap-fill hack <span class="chev">&#9662;</span></button>
+      <div class="tips-row text-row" id="hacksPillRow">
+        <button type="button" class="text-toggle" data-panel="panel-tfng" aria-expanded="false" aria-controls="panel-tfng">TFNG hack <span class="chev" aria-hidden="true">&#9662;</span></button>
+        <button type="button" class="text-toggle" data-panel="panel-mc" aria-expanded="false" aria-controls="panel-mc">Multiple choice hack <span class="chev" aria-hidden="true">&#9662;</span></button>
+        <button type="button" class="text-toggle" data-panel="panel-summary" aria-expanded="false" aria-controls="panel-summary">Summary &amp; gap-fill hack <span class="chev" aria-hidden="true">&#9662;</span></button>
       </div>
 
       <div class="tips-panel" id="panel-tfng" hidden>
@@ -689,21 +719,27 @@ crossorigin="anonymous"></script>
         <a class="cta-link" href="contact.html">Get in touch about custom tests</a>
       </p>
       <hr class="divider">
-      <!-- ═══ PLACEHOLDER ADVERTISEMENT ═══
-           Fictional sponsor, used to show how a paid slot sits on the page.
-           Replace the kicker, title, text, initials and href with the real sponsor's details. -->
-      <aside class="ad-slot" aria-label="Advertisement">
-        <span class="ad-label">Advertisement</span>
-        <div class="ad-card">
-          <div class="ad-mark" aria-hidden="true">FE</div>
-          <div class="ad-body">
-            <p class="ad-kicker">Sponsored &middot; ELICOS</p>
-            <h2 class="ad-title">Fernbrook English College, Sydney</h2>
-            <p class="ad-text">General English, EAP and 10-week IELTS preparation classes in the CBD. Morning and evening timetables, small classes, and a free placement test before you enrol.</p>
-            <a class="ad-cta" href="#" onclick="return false">See course dates</a>
-          </div>
+      <aside class="jlk" aria-labelledby="jlk-heading">
+        <a class="jlk-media" href="https://justineleighkelly.com.au/instructionaldesign.html" tabindex="-1" aria-hidden="true">
+          <img src="instructionaldesignthumbnail.webp" alt="" width="841" height="720" loading="lazy" decoding="async">
+        </a>
+        <div class="jlk-body">
+        <p class="jlk-kicker">Learning design &middot; Justine Leigh Kelly</p>
+        <h2 id="jlk-heading" class="jlk-title">Custom e-learning for schools, colleges and workplaces</h2>
+        <p class="jlk-tagline">Show, don&rsquo;t just tell.</p>
+        <p class="jlk-text">I&rsquo;m the learning designer behind Modern English Australia. I build interactive lessons, courses and onboarding programs that are easy to use and run in any LMS.</p>
+        <ul class="jlk-list">
+          <li>Articulate 360 courses and presentations</li>
+          <li>Branching scenarios for compliance and onboarding</li>
+          <li>Moodle onboarding with H5P content and certificates</li>
+          <li>SCORM packages that run without extra subscriptions</li>
+          <li>Custom-coded language games and lessons</li>
+        </ul>
+        <div class="jlk-actions">
+          <a class="jlk-btn jlk-btn--solid" href="https://justineleighkelly.com.au/contact.html">Contact me for a quote</a>
+          <a class="jlk-btn" href="https://justineleighkelly.com.au/instructionaldesign.html">See my samples</a>
         </div>
-        <p class="ad-note">Sample advertisement — fictional sponsor, shown as a placeholder for a paid slot.</p>
+        </div>
       </aside>
     </div>
   </section>
@@ -725,7 +761,7 @@ crossorigin="anonymous"></script>
     function wireGroup(containerSelector) {
       var container = document.querySelector(containerSelector);
       if (!container) return;
-      var pills = container.querySelectorAll('.tips-pill');
+      var pills = container.querySelectorAll('.tips-pill, .text-toggle');
       pills.forEach(function (btn) {
         btn.addEventListener('click', function () {
           var wasOpen = btn.getAttribute('aria-expanded') === 'true';
