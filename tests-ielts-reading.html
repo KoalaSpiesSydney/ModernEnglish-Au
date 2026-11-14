@@ -308,6 +308,23 @@ crossorigin="anonymous"></script>
     .jlk-btn--solid { background: var(--jlk-accent); color: #fff; }
     .jlk-btn--solid:hover { background: var(--jlk-accent-hover); color: #fff; }
     .jlk-btn:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+    /* ============ AUTHOR NOTE (sticky note beside the intro) ============ */
+    .intro-layout { display: grid; grid-template-columns: minmax(0, 760px) minmax(240px, 300px); gap: 24px clamp(32px, 5vw, 72px); align-items: start; }
+    .author-note {
+      margin: 64px 0 0; padding: 22px 24px 20px;
+      background: #fff6b8; color: #2b2a24;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(15,23,42,.08), 0 10px 24px rgba(15,23,42,.12);
+      transform: rotate(1.5deg);
+    }
+    .author-note-label { font-family: var(--sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #8a6d12; margin: 0 0 10px; }
+    .author-note-text p { font-family: "Libre Baskerville", Georgia, serif; font-style: italic; font-size: 0.98rem; line-height: 1.65; margin: 0; }
+    .author-note-sign { font-family: var(--sans); font-weight: 700; font-size: 0.92rem; margin: 12px 0 0; text-align: right; }
+    @media (max-width: 900px) {
+      .intro-layout { grid-template-columns: minmax(0, 1fr); }
+      .author-note { margin: 8px 0 0; max-width: 520px; transform: rotate(-0.8deg); }
+    }
+    @media (prefers-reduced-motion: reduce) { .author-note { transform: none; } }
     /* ============ TEXT-LINK TOGGLES (Tips / Read the Blog) ============ */
     .text-toggle {
       appearance: none; -webkit-appearance: none; background: none; border: 0; padding: 0;
@@ -416,6 +433,7 @@ crossorigin="anonymous"></script>
         <span aria-hidden="true">›</span>
         <span aria-current="page">IELTS Reading</span>
       </nav>
+      <div class="intro-layout">
       <div class="one-col">
         <h3>Assessment</h3>
         <h1 class="hero-headline" aria-label="ielts reading">
@@ -444,6 +462,14 @@ crossorigin="anonymous"></script>
             <span class="chev" aria-hidden="true">&#9662;</span>
           </button>
         </div>
+      </div>
+      <figure class="author-note" aria-label="A note from the author">
+        <p class="author-note-label">A note from the author</p>
+        <blockquote class="author-note-text">
+          <p>These tests were designed with people migrating to Australia, and life in Australia, in mind. Although there are international topics, many of the topics help students familiarise themselves with Australian places, cultures and processes.</p>
+        </blockquote>
+        <figcaption class="author-note-sign">&mdash; Justine Leigh Kelly</figcaption>
+      </figure>
       </div>
       <div class="blog-panel" id="blogPanel" role="region" aria-labelledby="blogToggle">
         <div class="blog-panel-inner">
@@ -510,7 +536,7 @@ crossorigin="anonymous"></script>
           <p class="game-card-desc">60 minutes &middot; 40 questions &middot; TFNG, table and note completion, matching headings, multiple choice, summary, matching people.</p>
           <span class="game-card-arrow">Start <span>&rarr;</span></span>
         </a>
-        <a class="game-card tool-promo" href="ielts-test-maker.html">
+        <a class="game-card tool-promo" href="teachertools/bespoke-ielts-reading-test-maker.html">
           <span class="tool-promo-kicker">Teacher tool</span>
           <span class="tool-promo-title">Make your own IELTS Reading test in minutes</span>
           <p class="tool-promo-text">Choose an up-to-date topic and generate a test in IELTS style, with IELTS question types already built in. Check it, edit it, then print it or project it for your class.</p>
