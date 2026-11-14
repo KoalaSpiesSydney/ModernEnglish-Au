@@ -193,7 +193,7 @@ crossorigin="anonymous"></script>
     .game-card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 4px;
       padding: 24px 26px;
       text-decoration: none;
       color: var(--ink);
@@ -201,14 +201,11 @@ crossorigin="anonymous"></script>
       flex-direction: column;
       gap: 8px;
       box-shadow: 0 1px 2px rgba(15,23,42,.05), 0 6px 18px rgba(15,23,42,.08);
-      transition: box-shadow .2s, transform .2s, border-color .2s;
-      position: relative;
-      overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
     }
     .game-card:hover, .game-card:focus-visible {
       box-shadow: 0 2px 4px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.14);
       transform: translateY(-2px);
-      border-color: rgba(57,104,234,.25);
     }
     .game-card-label {
       font-family: var(--sans); font-size: 0.78rem; font-weight: 700;
@@ -228,7 +225,7 @@ crossorigin="anonymous"></script>
     .guide .guide-sub { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--ink); letter-spacing: 0; text-transform: none; margin: 26px 0 8px; }
     .guide p { font-size: 1rem; line-height: 1.75; }
     .band-table-wrap { overflow-x: auto; margin: 6px 0 10px; }
-    .band-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: 0.98rem; }
+    .band-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; font-size: 0.98rem; }
     .band-table caption { caption-side: top; text-align: left; font-size: 0.85rem; font-weight: 700; color: var(--muted); padding: 0 0 8px; }
     .band-table th, .band-table td { padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--line); }
     .band-table thead th { background: var(--accent); color: #fff; font-weight: 700; font-size: 0.9rem; }
@@ -243,7 +240,6 @@ crossorigin="anonymous"></script>
     .game-card:hover .game-card-arrow { gap: 8px; }
     /* TEACHER TOOL PROMO (sits in the test grid) */
     .game-card.tool-promo { background: #f7f5f1; border: 1px solid #ddd7cb; border-radius: 4px; gap: 10px; }
-    .game-card.tool-promo:hover { border-color: #14314f; }
     .tool-promo-kicker { font-family: var(--sans); font-size: 0.74rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #9c7d3f; }
     .tool-promo-title { font-family: "tt-modernoir", var(--sans); font-weight: 700; font-size: clamp(1.15rem, 0.95rem + 0.6vw, 1.4rem); letter-spacing: 1px; line-height: 1.2; color: #14314f; }
     .tool-promo-text { font-size: 0.94rem; line-height: 1.6; color: #5c5a56; margin: 0; flex: 1; }
@@ -251,22 +247,9 @@ crossorigin="anonymous"></script>
     .game-card.tool-promo:hover .tool-promo-btn { background: #0c2138; }
     /* TIPS / HACKS PILLS */
     .hacks-section { max-width: 900px; margin: 0 auto; text-align: center; }
-    .tips-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin: 18px 0 0; }
-    .tips-pill {
-      cursor: pointer; font-family: var(--sans); font-size: 0.86rem; font-weight: 700;
-      display: inline-flex; align-items: center; gap: 8px;
-      color: var(--accent); background: var(--surface);
-      border: 1px solid var(--line); border-radius: 999px;
-      padding: 9px 18px;
-      transition: border-color .15s, box-shadow .15s, color .15s, background .15s;
-    }
-    .tips-pill:hover { border-color: rgba(57,104,234,.35); box-shadow: 0 4px 14px rgba(15,23,42,.08); color: var(--link); }
-    .tips-pill.is-active { color: #fff; background: var(--accent); border-color: var(--accent); }
-    .tips-pill .chev { transition: transform .18s ease; font-size: 0.75em; }
-    .tips-pill.is-active .chev { transform: rotate(180deg); }
     .tips-panel {
       margin: 20px auto 0; background: var(--surface); border: 1px solid var(--line);
-      border-radius: 12px; padding: 22px clamp(20px, 3vw, 28px);
+      border-radius: 4px; padding: 22px clamp(20px, 3vw, 28px);
       width: min(600px, 90vw); text-align: left;
     }
     .tips-panel[hidden] { display: none; }
@@ -284,7 +267,6 @@ crossorigin="anonymous"></script>
       transition: color .15s;
     }
     .page-nav a:hover { color: var(--accent-2); }
-    .text-row { gap: 10px 28px; }
     /* ============ JUSTINE LEIGH KELLY: LEARNING DESIGN (house promo, styled to match justineleighkelly.com.au) ============ */
     .jlk {
       --jlk-bg: #f7f5f1; --jlk-ink: #1c1c1c; --jlk-muted: #5c5a56; --jlk-line: #ddd7cb;
@@ -340,32 +322,8 @@ crossorigin="anonymous"></script>
     .text-toggle .chev { display: inline-block; font-size: 0.75em; text-decoration: none; transition: transform .18s ease; }
     .text-toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
     /* ============ BLOG TOGGLE ROW ============ */
-    .pill-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 18px 0 0; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--sans); font-size: 0.92rem; font-weight: 700;
-      letter-spacing: 1.6px; text-transform: uppercase;
-      color: var(--header-ink); background: var(--header);
-      border: 1px solid rgba(15,23,42,.18);
-      border-radius: 999px; padding: 11px 22px;
-      cursor: pointer; text-decoration: none;
-      transition: transform .18s, box-shadow .18s, background .18s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .pill:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(15,23,42,.18); background: var(--accent); color: var(--header-ink); }
-    .pill:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
-    .pill .pill-dot {
-      width: 9px; height: 9px; border-radius: 50%;
-      background: #fde047; box-shadow: 0 0 0 0 rgba(253,224,71,.55);
-      animation: dot-ping 2.2s ease-out infinite;
-    }
-    @keyframes dot-ping {
-      0%   { box-shadow: 0 0 0 0 rgba(253,224,71,.55); }
-      70%  { box-shadow: 0 0 0 8px rgba(253,224,71,0); }
-      100% { box-shadow: 0 0 0 0 rgba(253,224,71,0); }
-    }
-    .pill .pill-chev { font-size: 0.8rem; transition: transform .25s ease; }
-    .pill[aria-expanded="true"] .pill-chev { transform: rotate(180deg); }
+    .toggle-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 28px; margin: 18px 0 0; }
+    .toggle-row--center { justify-content: center; }
     /* ============ BLOG PANEL (reveal) ============ */
     .blog-panel {
       display: grid; grid-template-rows: 0fr;
@@ -398,7 +356,7 @@ crossorigin="anonymous"></script>
     .blog-roll-tag {
       font-family: var(--sans); font-size: 0.68rem; font-weight: 700;
       letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted);
-      border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px;
+      border: 1px solid var(--line); border-radius: 4px; padding: 2px 9px;
       margin-left: auto;
     }
     .follow-note { font-size: 0.82rem; color: var(--muted); margin: 14px 0 0; }
@@ -418,7 +376,6 @@ crossorigin="anonymous"></script>
       .game-card { padding: 18px 20px; }
       .blog-roll-date { min-width: 100%; }
       .blog-roll-tag { margin-left: 0; }
-      .pill { padding: 10px 18px; font-size: 0.86rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-word { animation: none; opacity: 1; transform: none; }
@@ -428,15 +385,13 @@ crossorigin="anonymous"></script>
       body { animation: none; }
       .game-card { transition: none; }
       .blog-panel { transition: none; }
-      .pill { transition: none; }
-      .pill .pill-dot { animation: none; }
     }
     /* TOUCH SCREENS: bigger tap areas for fingers. The extra padding is
        cancelled by a negative margin, so nothing moves on the page. */
     @media (pointer: coarse) {
       .kss-label, .breadcrumb a { padding-block: 10px; margin-block: -10px; }
       .footer-links a { display: inline-block; padding: 10px 4px; margin: -10px -4px; }
-      .tips-pill, .pill, .text-toggle { min-height: 44px; }
+      .text-toggle { min-height: 44px; }
     }
   </style>
 </head>
@@ -470,7 +425,7 @@ crossorigin="anonymous"></script>
         <p class="intro-text">
           Full-length IELTS Academic and General Training Reading tests, plus mini drills built around one task type so students can practise the skill that is costing them marks. Every test is auto-scored and mobile-friendly &mdash; use a mini test at the end of a lesson, or set a full test as a timed diagnostic.
         </p>
-        <div class="tips-row" id="topTipsRow" style="justify-content:flex-start;">
+        <div class="toggle-row" id="tipsToggles">
           <button type="button" class="text-toggle" data-panel="panel-tips" aria-expanded="false" aria-controls="panel-tips">Tips <span class="chev" aria-hidden="true">&#9662;</span></button>
         </div>
         <div class="tips-panel" id="panel-tips" hidden style="margin:20px 0 0;">
@@ -483,9 +438,9 @@ crossorigin="anonymous"></script>
           <h4>How do I actually improve my score with practice tests?</h4>
           <p>Practise under real timed conditions, then review every wrong answer by finding the exact sentence in the passage that supports the correct one. Tracking which question types — matching headings, TFNG, summary completion — cost you the most marks lets you target your revision instead of just repeating full tests.</p>
         </div>
-        <div class="pill-row">
+        <div class="toggle-row">
           <button class="text-toggle" id="blogToggle" type="button" aria-expanded="false" aria-controls="blogPanel">
-            <span class="pill-text">Read the Blog</span>
+            <span class="toggle-label">Read the Blog</span>
             <span class="chev" aria-hidden="true">&#9662;</span>
           </button>
         </div>
@@ -668,7 +623,7 @@ crossorigin="anonymous"></script>
       <div class="hacks-section">
       <h2 style="margin-bottom: 6px;">Reading Strategy Hacks</h2>
       <p class="intro-text" style="margin-top:0;">Quick, focused strategies for the question types that trip students up most.</p>
-      <div class="tips-row text-row" id="hacksPillRow">
+      <div class="toggle-row toggle-row--center" id="hackToggles">
         <button type="button" class="text-toggle" data-panel="panel-tfng" aria-expanded="false" aria-controls="panel-tfng">TFNG hack <span class="chev" aria-hidden="true">&#9662;</span></button>
         <button type="button" class="text-toggle" data-panel="panel-mc" aria-expanded="false" aria-controls="panel-mc">Multiple choice hack <span class="chev" aria-hidden="true">&#9662;</span></button>
         <button type="button" class="text-toggle" data-panel="panel-summary" aria-expanded="false" aria-controls="panel-summary">Summary &amp; gap-fill hack <span class="chev" aria-hidden="true">&#9662;</span></button>
@@ -761,27 +716,25 @@ crossorigin="anonymous"></script>
     function wireGroup(containerSelector) {
       var container = document.querySelector(containerSelector);
       if (!container) return;
-      var pills = container.querySelectorAll('.tips-pill, .text-toggle');
-      pills.forEach(function (btn) {
+      var toggles = container.querySelectorAll('.text-toggle');
+      toggles.forEach(function (btn) {
         btn.addEventListener('click', function () {
           var wasOpen = btn.getAttribute('aria-expanded') === 'true';
-          pills.forEach(function (b) {
+          toggles.forEach(function (b) {
             b.setAttribute('aria-expanded', 'false');
-            b.classList.remove('is-active');
-            var p = document.getElementById(b.getAttribute('data-panel'));
+                        var p = document.getElementById(b.getAttribute('data-panel'));
             if (p) p.hidden = true;
           });
           if (!wasOpen) {
             btn.setAttribute('aria-expanded', 'true');
-            btn.classList.add('is-active');
-            var target = document.getElementById(btn.getAttribute('data-panel'));
+                        var target = document.getElementById(btn.getAttribute('data-panel'));
             if (target) target.hidden = false;
           }
         });
       });
     }
-    wireGroup('#topTipsRow');
-    wireGroup('#hacksPillRow');
+    wireGroup('#tipsToggles');
+    wireGroup('#hackToggles');
   })();
 </script>
 <script>
@@ -789,13 +742,11 @@ crossorigin="anonymous"></script>
     var toggle = document.getElementById('blogToggle');
     var panel  = document.getElementById('blogPanel');
     if (!toggle || !panel) return;
-    var label = toggle.querySelector('.pill-text');
-    var dot   = toggle.querySelector('.pill-dot');
+    var label = toggle.querySelector('.toggle-label');
     function openPanel(scroll) {
       panel.classList.add('is-open');
       toggle.setAttribute('aria-expanded', 'true');
       if (label) label.textContent = 'Hide the Blog';
-      if (dot) dot.style.display = 'none';
       if (scroll) {
         window.setTimeout(function () {
           panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -806,7 +757,6 @@ crossorigin="anonymous"></script>
       panel.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
       if (label) label.textContent = 'Read the Blog';
-      if (dot) dot.style.display = '';
     }
     toggle.addEventListener('click', function () {
       if (panel.classList.contains('is-open')) { closePanel(); }
