@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Follow the Blog by RSS · Modern English Australia</title>
+  <meta name="description" content="Follow the Modern English Australia blog in a feed reader such as Feedly or Inoreader. No email address needed." />
+  <link rel="canonical" href="https://modernenglish.au/rss.html" />
+  <!-- A helper page: keep it out of search results so it doesn't count as a thin page -->
+  <meta name="robots" content="noindex, follow" />
+  <meta name="theme-color" content="#1c1c1c" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Modern English Australia — Blog" href="https://modernenglish.au/feed.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&display=swap" rel="stylesheet">
+
+  <!-- Consent Mode v2 (same as the rest of the site) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+      region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+      wait_for_update: 500
+    });
+    gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-HCH5CJD2ZS');
+  </script>
+
+  <style>
+    :root {
+      --ink: #0f172a; --muted: #475569; --line: rgba(15,23,42,.10);
+      --accent: #0e2861; --link: #3968ea; --header: #1c1c1c; --header-ink: #f8fafc;
+      --rss: #e8740c;
+      --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --serif: "Source Serif 4", Georgia, serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--sans); font-size: 18px; line-height: 1.7; color: var(--ink);
+      background: radial-gradient(circle at top, #fffce6 0%, #f7f5ea 40%, #f0f4fa 100%) no-repeat;
+      background-color: #f0f4fa;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    a { color: var(--link); text-underline-offset: 3px; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); width: 100%; }
+
+    header { background: var(--header); color: var(--header-ink); padding-top: env(safe-area-inset-top, 0px); }
+    .header-inner { display: flex; flex-direction: column; gap: 5px; padding: 24px 0 28px; }
+    .brand-top { font-family: var(--serif); font-weight: 800; font-size: clamp(1.8rem, 1.1rem + 3vw, 3rem); letter-spacing: 3px; text-transform: uppercase; line-height: 1; color: #f8fafc; text-decoration: none; }
+    .kss-label { font-weight: 700; font-size: .78rem; letter-spacing: 5px; text-transform: uppercase; color: #fde047; text-decoration: none; }
+
+    main { flex: 1; padding: 22px 0 64px; }
+    .breadcrumb { font-size: .84rem; color: var(--muted); margin-bottom: 26px; }
+    .breadcrumb a { font-weight: 600; text-decoration: none; }
+    h1 { font-family: var(--serif); font-weight: 800; font-size: clamp(2rem, 1.3rem + 3vw, 3rem); line-height: 1.1; margin-bottom: 14px; }
+    h1 .rss-dot { display: inline-block; width: .5em; height: .5em; border-radius: 4px; background: var(--rss); margin-left: 10px; vertical-align: .1em; }
+    h2 { font-family: var(--serif); font-size: clamp(1.3rem, 1.05rem + 1vw, 1.7rem); line-height: 1.2; margin: 40px 0 12px; }
+    .lead { font-size: 1.08rem; color: var(--muted); margin-bottom: 26px; }
+    .lead b { color: var(--ink); }
+
+    /* Subscribe panel */
+    .panel { background: #fffef7; border-radius: 4px; padding: 22px 22px 20px; box-shadow: inset 0 0 7px rgba(120,100,60,.12), 0 3px 6px -1px rgba(0,0,0,.10), 0 12px 20px -6px rgba(0,0,0,.14); }
+    .panel-label { font-size: .78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .feed-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: stretch; }
+    .feed-url { flex: 1 1 260px; min-width: 0; font: 600 1rem/1.4 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: var(--ink); background: #fff; border: 1px solid #c9cfdb; border-radius: 4px; padding: 10px 12px; overflow-wrap: anywhere; user-select: all; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 4px; border: 0; font: 700 .95rem/1.2 var(--sans); text-decoration: none; cursor: pointer; }
+    .btn-copy { background: var(--header); color: #fff; }
+    .btn-copy:hover { background: var(--accent); }
+    .copied { font-size: .9rem; font-weight: 700; color: #1e7a46; min-height: 1.4em; margin-top: 6px; }
+    .readers { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .btn-reader { background: #fff; color: var(--ink); border: 1.5px solid var(--ink); }
+    .btn-reader:hover { background: var(--ink); color: #fff; }
+
+    /* How it works */
+    .steps { list-style: none; counter-reset: s; display: grid; gap: 12px; }
+    .steps li { counter-increment: s; position: relative; padding-left: 44px; }
+    .steps li::before { content: counter(s); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 4px; background: var(--rss); color: #fff; font-weight: 800; display: grid; place-items: center; font-size: .95rem; }
+    .note { margin-top: 16px; font-size: .95rem; color: var(--muted); }
+
+    /* Latest posts (read from feed.xml) */
+    .posts { list-style: none; border-top: 1px solid var(--line); }
+    .posts li { border-bottom: 1px solid var(--line); padding: 14px 2px; }
+    .post-meta { display: block; font-size: .74rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+    .posts a { font-family: "Bricolage Grotesque", var(--sans); font-weight: 700; font-size: 1.12rem; color: var(--ink); text-decoration: none; line-height: 1.3; }
+    .posts a:hover { color: var(--link); text-decoration: underline; }
+    .posts p { font-size: .95rem; color: var(--muted); margin-top: 3px; }
+    .all-posts { display: inline-block; margin-top: 16px; font-weight: 700; }
+
+    footer { background: var(--header); color: rgba(248,250,252,.6); padding: 20px 0 calc(20px + env(safe-area-inset-bottom, 0px)); font-size: .87rem; text-align: center; }
+    .footer-links { display: flex; gap: 6px 16px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
+    .footer-links a { color: rgba(248,250,252,.75); padding: 6px 2px; }
+    .footer-links a:hover { color: #fff; }
+    @media (max-width: 480px) { .btn, .btn-reader { flex: 1 1 100%; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="/" class="brand-top">Modern English Au</a>
+    <a href="https://koalaspiessydney.github.io/KoalaSpiesSyd/" class="kss-label">Koala Spies Sydney</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> › <a href="/blog.html">Blog</a> › <span aria-current="page">Follow by RSS</span>
+    </nav>
+
+    <h1>Follow the blog by RSS<span class="rss-dot" aria-hidden="true"></span></h1>
+    <p class="lead">Get every new post from the Modern English Australia blog in a <b>feed reader</b>, an app that collects updates from all the sites you follow in one place. <b>Free, and no email address needed.</b></p>
+
+    <section class="panel" aria-labelledby="sub-h">
+      <p class="panel-label" id="sub-h">The blog's feed address</p>
+      <div class="feed-row">
+        <code class="feed-url" id="feedUrl">https://modernenglish.au/feed.xml</code>
+        <button type="button" class="btn btn-copy" id="copyBtn">Copy address</button>
+      </div>
+      <p class="copied" id="copied" role="status" aria-live="polite"></p>
+
+      <p class="panel-label" style="margin-top:14px">Or follow in one click</p>
+      <div class="readers">
+        <a class="btn btn-reader" href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fmodernenglish.au%2Ffeed.xml" target="_blank" rel="noopener">Follow on Feedly</a>
+        <a class="btn btn-reader" href="https://www.inoreader.com/?add_feed=https%3A%2F%2Fmodernenglish.au%2Ffeed.xml" target="_blank" rel="noopener">Follow on Inoreader</a>
+      </div>
+    </section>
+
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><b>Get a feed reader.</b> Feedly and Inoreader are free on the web and on phones. NetNewsWire is free on Mac and iPhone.</li>
+      <li><b>Add the address.</b> Paste <code>https://modernenglish.au/feed.xml</code> into the reader's “Add” or “Follow” box, or use a one-click button above.</li>
+      <li><b>Read new posts there.</b> Each new post appears in your reader automatically. To stop, just remove the feed. There's nothing to unsubscribe from.</li>
+    </ol>
+    <p class="note">Prefer video? There are how-to videos for the games on <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> and <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a>.</p>
+
+    <h2>Latest posts</h2>
+    <ul class="posts" id="posts" aria-live="polite">
+      <li><span class="post-meta">Loading the latest posts…</span></li>
+    </ul>
+    <a class="all-posts" href="/blog.html">Read all posts on the blog →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/blog.html">Blog</a>
+      <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a>
+      <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy &amp; Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Copy the feed address */
+  (function () {
+    var btn = document.getElementById('copyBtn');
+    var out = document.getElementById('copied');
+    var url = document.getElementById('feedUrl').textContent.trim();
+    btn.addEventListener('click', function () {
+      function done(ok) { out.textContent = ok ? '✔ Copied. Now paste it into your feed reader.' : 'Select the address above and copy it.'; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () { done(true); }, function () { done(false); });
+      } else {
+        var r = document.createRange(); r.selectNodeContents(document.getElementById('feedUrl'));
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        try { done(document.execCommand('copy')); } catch (e) { done(false); }
+      }
+    });
+  })();
+
+  /* List the latest posts straight from feed.xml, so this page never needs updating */
+  (function () {
+    var list = document.getElementById('posts');
+    function show(msg) { list.innerHTML = ''; var li = document.createElement('li'); var s = document.createElement('span'); s.className = 'post-meta'; s.textContent = msg; li.appendChild(s); list.appendChild(li); }
+    fetch('/feed.xml', { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function (txt) {
+        var xml = new DOMParser().parseFromString(txt, 'application/xml');
+        if (xml.querySelector('parsererror')) throw new Error('bad feed');
+        var items = Array.prototype.slice.call(xml.querySelectorAll('item'));
+        if (!items.length) { show('No posts yet.'); return; }
+        function text(el, tag) { var n = el.getElementsByTagName(tag)[0]; return n ? n.textContent.trim() : ''; }
+        items = items.map(function (it) {
+          return { title: text(it, 'title'), link: text(it, 'link'), desc: text(it, 'description'), cat: text(it, 'category'), date: new Date(text(it, 'pubDate')) };
+        }).sort(function (a, b) { return b.date - a.date; }).slice(0, 8);
+        list.innerHTML = '';
+        items.forEach(function (p) {
+          var li = document.createElement('li');
+          var meta = document.createElement('span'); meta.className = 'post-meta';
+          var d = isNaN(p.date) ? '' : p.date.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+          meta.textContent = d + (p.cat ? ' · ' + p.cat : '');
+          var a = document.createElement('a'); a.href = p.link; a.textContent = p.title;
+          var para = document.createElement('p'); para.textContent = p.desc;
+          li.append(meta, a, para); list.appendChild(li);
+        });
+      })
+      .catch(function () { show('The post list couldn’t load. See all posts on the blog.'); });
+  })();
+</script>
+</body>
+</html>

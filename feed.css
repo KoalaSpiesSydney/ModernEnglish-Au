@@ -1,0 +1,61 @@
+/* feed.css: makes feed.xml readable when someone opens it in a browser.
+   Feed readers ignore this file. It uses plain CSS (no XSLT), which browsers are keeping. */
+@namespace atom url("http://www.w3.org/2005/Atom");
+@namespace dc url("http://purl.org/dc/elements/1.1/");
+@namespace content url("http://purl.org/rss/1.0/modules/content/");
+
+rss {
+  display: block;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 18px 48px;
+  font-family: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #0f172a;
+}
+:root { background: #f7f5ea; }
+
+channel { display: block; }
+
+/* Message at the top for people who clicked the feed link */
+channel::before {
+  content: "This is an RSS feed: the address you paste into a feed reader such as Feedly or Inoreader to follow the blog. For a friendlier page with one-click follow buttons, go to modernenglish.au/rss.html";
+  display: block;
+  background: #1c1c1c;
+  color: #f8fafc;
+  border-left: 6px solid #e8740c;
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin-bottom: 26px;
+  font-weight: 600;
+}
+
+channel > title {
+  display: block;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+channel > description { display: block; color: #475569; margin-bottom: 22px; }
+
+/* Hide the technical channel fields */
+channel > link, channel > language, channel > copyright, channel > lastBuildDate,
+channel > pubDate, channel > generator, channel > ttl, channel > image, atom|link { display: none; }
+
+item {
+  display: block;
+  background: #fffef7;
+  border-radius: 4px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 3px 6px -1px rgba(0,0,0,.10), 0 10px 18px -8px rgba(0,0,0,.14);
+}
+item > pubDate { display: block; font-size: .78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #475569; }
+item > title { display: block; font-size: 1.2rem; font-weight: 800; line-height: 1.3; margin: 2px 0 4px; }
+item > description { display: block; color: #475569; }
+item > link { display: block; margin-top: 6px; font-size: .85rem; color: #3968ea; overflow-wrap: anywhere; }
+item > category { display: inline-block; margin-top: 8px; font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #475569; border: 1px solid rgba(15,23,42,.15); border-radius: 4px; padding: 1px 8px; }
+item > guid, dc|creator, content|encoded, item > enclosure { display: none; }
