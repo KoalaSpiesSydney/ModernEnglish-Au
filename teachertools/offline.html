@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>You're offline · Teacher Tools</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#1c1c1c" />
+  <link rel="manifest" href="/teachertools/manifest.webmanifest">
+  <link rel="icon" href="/teachertools/icons/icon-192.png" />
+  <style>
+    :root { --ink: #0f172a; --muted: #475569; --line: rgba(15,23,42,.10); --link: #3968ea; --header: #1c1c1c; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 18px; line-height: 1.65; color: var(--ink);
+      background: radial-gradient(circle at top, #fffce6 0%, #f7f5ea 40%, #f0f4fa 100%) no-repeat; background-color: #f0f4fa; min-height: 100vh; }
+    header { background: var(--header); padding: 22px 0 24px; padding-top: calc(22px + env(safe-area-inset-top, 0px)); }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 32px); }
+    .brand { font-family: "Source Serif 4", Georgia, serif; font-weight: 800; font-size: clamp(1.6rem, 1rem + 2.4vw, 2.4rem); letter-spacing: 3px; text-transform: uppercase; color: #f8fafc; text-decoration: none; line-height: 1; }
+    main { padding: 34px 0 60px; }
+    h1 { font-family: "Source Serif 4", Georgia, serif; font-size: clamp(1.8rem, 1.2rem + 2.4vw, 2.6rem); line-height: 1.15; margin-bottom: 10px; }
+    p { color: var(--muted); margin-bottom: 18px; }
+    ul { list-style: none; border-top: 1px solid var(--line); }
+    li { border-bottom: 1px solid var(--line); padding: 12px 2px; }
+    a { color: var(--link); font-weight: 700; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { margin-top: 22px; min-height: 44px; padding: 10px 20px; border: 0; border-radius: 4px; background: var(--header); color: #fff; font-family: inherit; font-size: 1rem; font-weight: 700; line-height: 1.2; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><a class="brand" href="/teachertools/TeacherToolDirectory.html">Teacher Tools</a></div></header>
+  <main>
+    <div class="wrap">
+      <h1>You're offline</h1>
+      <p>This page hasn't been saved on this device yet. Tools you've opened before still work without internet:</p>
+      <ul id="saved"><li>Looking for saved tools…</li></ul>
+      <button type="button" onclick="location.reload()">Try again</button>
+    </div>
+  </main>
+  <script>
+    (async function () {
+      var list = document.getElementById('saved');
+      try {
+        var names = await caches.keys();
+        var rows = [];
+        for (var n of names.filter(function (k) { return k.indexOf('tt-pages-') === 0; })) {
+          var cache = await caches.open(n);
+          for (var req of await cache.keys()) {
+            var path = new URL(req.url).pathname;
+            if (!/\.html$/.test(path) || /offline\.html$/.test(path)) continue;
+            var res = await cache.match(req);
+            var m = (await res.text()).match(/<title>([^<]*)<\/title>/i);
+            var title = m ? m[1].split(/ [·|:–-] /)[0].replace(/&amp;/g, '&') : path.split('/').pop();
+            rows.push({ path: path, title: title });
+          }
+        }
+        list.innerHTML = '';
+        if (!rows.length) { list.innerHTML = '<li>No tools saved yet. Open a tool while you\'re online and it will work offline next time.</li>'; return; }
+        rows.sort(function (a, b) { return a.title.localeCompare(b.title); }).forEach(function (r) {
+          var li = document.createElement('li'); var a = document.createElement('a');
+          a.href = r.path; a.textContent = r.title; li.appendChild(a); list.appendChild(li);
+        });
+      } catch (e) { list.innerHTML = '<li>Open a tool while you\'re online and it will work offline next time.</li>'; }
+    })();
+  </script>
+</body>
+</html>
