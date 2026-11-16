@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Bespoke Micro Drama Lesson Maker © Koala Spies Sydney. All rights reserved. -->
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="Koala Spies Sydney">
@@ -10,6 +10,15 @@
 <title>Bespoke Micro Drama Lesson Maker: Free Interactive TikTok Drama Lesson Creator | Modern English Australia</title>
 <meta name="description" content="Turn a micro drama on TikTok into an interactive English lesson. Add the episodes, put questions that pause the video, end each episode with a cliffhanger prediction, then share a link or QR code with your class, or print a worksheet. Free, no sign-up.">
 <link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-micro-drama-lesson-maker.html">
+<meta name="google-adsense-account" content="ca-pub-7047447363586796">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Teacher Tools app: install it, and use it offline -->
+<link rel="manifest" href="/teachertools/manifest.webmanifest">
+<meta name="theme-color" content="#1c1c1c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Teacher Tools">
+<script src="/teachertools/pwa.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Serif+4:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,700&family=Fredoka:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,700&family=Montserrat:ital,wght@0,500;0,700;1,700&family=Nunito:ital,wght@0,500;0,800;1,800&display=swap">
@@ -331,6 +340,11 @@ details.group>summary{padding-left:0;padding-right:0}
 .share-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem}
 .share-note{margin:0;font-size:.85rem;font-weight:700;color:var(--foil)}
 .qrthumb canvas,.qrthumb img{width:112px!important;height:112px!important;image-rendering:pixelated}
+.toolsback{display:block;width:max-content;margin:.35rem 0 0;color:#f8fafc;text-decoration:none;letter-spacing:.12em;font-weight:700}
+.toolsback:hover{color:var(--tag);text-decoration:underline}
+.subblock{display:grid;gap:.5rem;justify-items:start;max-width:46ch}
+.appinstall{border:0;border-radius:4px;background:#ff7a1a;color:#1c1c1c;font-weight:800;font-size:.88rem;padding:.45rem .9rem;min-height:38px;cursor:pointer}
+.appinstall:hover{background:#ff9b3d}
 .qrph{display:grid;place-items:center;width:100%;height:100%;border:2px dashed #c3c8d2;border-radius:4px;color:var(--soft);font-weight:700;letter-spacing:.1em;line-height:1;font-size:.9rem}
 #qrOut{display:none}   /* the header QR code is the one students scan; this copy is kept for "Download QR code" */
 @media (max-width:520px){.qrthumb,.qrthumb canvas,.qrthumb img{width:92px!important;height:92px!important}}
@@ -395,12 +409,31 @@ p.gapline input.wrong{border-bottom-color:var(--warn);background:#fbecea}
 body.playing .school-cta,body.play .school-cta{display:none!important}
 @media print{.school-cta{display:none!important}}
 </style>
-<!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID. -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
+     until they accept in Google's consent message (AdSense > Privacy & messaging). -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+    wait_for_update: 500
+  });
+  gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+</script>
+<!-- Google AdSense. Ads show to teachers using the maker, but never to students:
+     the student player (a link ending in #play=…) doesn't load the ad script at all. -->
+<script>
+  if (!/^#play=/.test(location.hash)) {
+    var ads = document.createElement('script');
+    ads.async = true; ads.crossOrigin = 'anonymous';
+    ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796';
+    document.head.appendChild(ads);
+  }
+</script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
   gtag('js', new Date());
   gtag('config', 'G-HCH5CJD2ZS');
 </script>
@@ -415,8 +448,11 @@ body.playing .school-cta,body.play .school-cta{display:none!important}
       <span class="qrthumb off" id="qrThumb"><span class="qrph">QR</span></span>
       <span class="qrcap"><span id="qrCapText">Share options</span><span class="arr" aria-hidden="true">▾</span></span>
     </button>
-    <div class="titleblock"><p class="eyebrow">Modern English Australia</p><h1 id="pageTitle">Bespoke Micro Drama Lesson Maker<span class="beta maker">Testing</span></h1></div>
-    <p id="pageSub">Free for teachers. Add the episodes of a short drama series on TikTok, put questions that pause the video and end each episode on a cliffhanger. Share a link or QR code, or print a worksheet. No sign-up.</p>
+    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback maker" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1 id="pageTitle">Bespoke Micro Drama Lesson Maker<span class="beta maker">Testing</span></h1></div>
+    <div class="subblock">
+      <p id="pageSub">Free for teachers. Add the episodes of a short drama series on TikTok, put questions that pause the video and end each episode on a cliffhanger. Share a link or QR code, or print a worksheet. No sign-up.</p>
+      <button type="button" class="appinstall maker" id="appInstall" hidden>Install Teacher Tools as an app</button>
+    </div>
   </div>
 </header>
 
@@ -651,7 +687,7 @@ body.playing .school-cta,body.play .school-cta{display:none!important}
 </section>
 
 <footer>
-  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="../index.html">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-video-lesson-maker.html">Video lesson maker</a> · <a href="bespoke-song-lesson-maker.html">Song lesson maker</a> · <a href="https://modernenglish.au/teachertools/bespoke-micro-drama-lesson-maker.html#terms">Terms of use</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-video-lesson-maker.html">Video lesson maker</a> · <a href="bespoke-song-lesson-maker.html">Song lesson maker</a> · <a href="https://modernenglish.au/teachertools/bespoke-micro-drama-lesson-maker.html#terms">Terms of use</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
 </footer>
 
 <div class="lib" id="lib" hidden role="dialog" aria-modal="true" aria-labelledby="libH">
@@ -1814,6 +1850,24 @@ function results() {
   };
   panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
+
+// ---------- install as an app (Chrome and Edge offer this; the button stays hidden elsewhere) ----------
+(function () {
+  let deferred = null;
+  const btn = $("appInstall");
+  const standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    if (standalone || /^#play=/.test(location.hash)) return;   // never offer it to students
+    deferred = e; btn.hidden = false;
+  });
+  btn.onclick = () => {
+    if (!deferred) return;
+    try { if (typeof gtag === "function") gtag("event", "app_install_click", { from: "micro_drama_lesson_maker" }); } catch (err) {}
+    deferred.prompt(); deferred.userChoice.finally(() => { deferred = null; btn.hidden = true; });
+  };
+  window.addEventListener("appinstalled", () => { btn.hidden = true; say("Installed. Find Teacher Tools with your other apps."); });
+})();
 
 // =====================================================================
 // START: a #play= link opens the player; anything else opens the maker
