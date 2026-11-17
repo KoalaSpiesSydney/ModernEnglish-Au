@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Bespoke Grammar Test Maker © Koala Spies Sydney. All rights reserved. -->
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="Koala Spies Sydney">
@@ -9,6 +9,15 @@
 <title>Bespoke Grammar Test Maker: Free ESL Grammar Quiz and Test Generator | Modern English Australia</title>
 <meta name="description" content="Write your own grammar test: multiple choice, gap fill, correct or incorrect, word order and sentence rewriting. Print it with a QR code and answer key, or share it as an online test that marks itself. Free for teachers, nothing uploaded.">
 <link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-grammar-test-maker.html">
+<meta name="google-adsense-account" content="ca-pub-7047447363586796">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Teacher Tools app: install it, and use it offline -->
+<link rel="manifest" href="/teachertools/manifest.webmanifest">
+<meta name="theme-color" content="#1c1c1c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Teacher Tools">
+<script src="/teachertools/pwa.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Serif+4:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Fredoka:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,500;0,700;1,500;1,700&family=Nunito:ital,wght@0,500;0,800;1,500;1,800&family=Playfair+Display:wght@700&display=swap">
@@ -61,6 +70,13 @@ button,input,select,textarea{font:inherit;color:inherit}
 @media (max-width:520px){.qrthumb,.qrthumb canvas{width:92px;height:92px}}
 .top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
 .top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:46ch}
+.toolsback{display:block;width:max-content;margin:.35rem 0 0;color:#f8fafc;text-decoration:none;letter-spacing:.12em;font-weight:700}
+.toolsback:hover{color:var(--tag);text-decoration:underline}
+.subblock{display:grid;gap:.5rem;justify-items:start;max-width:50ch}
+.appinstall{border:0;border-radius:4px;background:#ff7a1a;color:#1c1c1c;font-weight:800;font-size:.88rem;padding:.45rem .9rem;min-height:38px;cursor:pointer}
+.appinstall:hover{background:#ff9b3d}
+/* teachers only: hidden in the online test that students open */
+body.playing .maker-only{display:none!important}
 
 /* ---------- the bench: controls + preview ---------- */
 .bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(320px,470px) minmax(0,1fr);gap:1.5rem;align-items:start}
@@ -310,13 +326,31 @@ details.group{margin-bottom:.35rem}
 body.playing .school-cta,body.play .school-cta{display:none!important}
 @media print{.school-cta{display:none!important}}
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796"
-     crossorigin="anonymous"></script>
-<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
+     until they accept in Google's consent message (AdSense > Privacy & messaging). -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+    wait_for_update: 500
+  });
+  gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+</script>
+<!-- Google AdSense. Ads show to teachers using the maker, but never to students:
+     the online test (a link ending in #t=…) doesn't load the ad script at all. -->
+<script>
+  if (location.hash.indexOf('#t=') !== 0) {
+    var ads = document.createElement('script');
+    ads.async = true; ads.crossOrigin = 'anonymous';
+    ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796';
+    document.head.appendChild(ads);
+  }
+</script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
   gtag('js', new Date());
   gtag('config', 'G-HCH5CJD2ZS');
 </script>
@@ -330,8 +364,11 @@ body.playing .school-cta,body.play .school-cta{display:none!important}
       <span class="qrthumb off" id="hdrQrBox"><span class="qrph">QR</span></span>
       <span class="qrcap" id="hdrQrCap">Share with students</span>
     </button>
-    <div class="titleblock"><p class="eyebrow">Modern English Australia</p><h1 id="pageH1">Bespoke Grammar Test Maker</h1></div>
-    <p id="pageLead">Free for teachers. Write your own grammar questions, then print the test with an answer key or share it as an online test that marks itself. Nothing is uploaded.</p>
+    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback maker-only" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1 id="pageH1">Bespoke Grammar Test Maker</h1></div>
+    <div class="subblock">
+      <p id="pageLead">Free for teachers. Write your own grammar questions, then print the test with an answer key or share it as an online test that marks itself. Nothing is uploaded.</p>
+      <button type="button" class="appinstall maker-only" id="appInstall" hidden>Install Teacher Tools as an app</button>
+    </div>
   </div>
 </header>
 
@@ -592,7 +629,7 @@ body.playing .school-cta,body.play .school-cta{display:none!important}
 <!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
 
 <footer>
-  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-report-maker.html">Report maker</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-sentence-scramble-maker.html">Sentence scramble maker</a> · <a href="grammar-level-test.html">Grammar level test</a> · <a href="#terms">Terms of use</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-report-maker.html">Report maker</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-sentence-scramble-maker.html">Sentence scramble maker</a> · <a href="grammar-level-test.html">Grammar level test</a> · <a href="#terms">Terms of use</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
 </footer>
 
 <div id="printArea" aria-hidden="true"></div>
@@ -1470,6 +1507,24 @@ document.addEventListener("keydown", e => {
   const k = { a: 0, b: 1, c: 2, d: 3 }[e.key.toLowerCase()]; if (k == null) return;
   const b = document.querySelectorAll("#pBody .opt")[k]; if (b) { e.preventDefault(); b.click(); }
 });
+
+// ---------- install as an app (Chrome and Edge offer this; the button stays hidden elsewhere) ----------
+(function () {
+  let deferred = null;
+  const btn = $("appInstall");
+  const standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    if (standalone || location.hash.indexOf("#t=") === 0) return;   // never offer it to students
+    deferred = e; btn.hidden = false;
+  });
+  btn.onclick = () => {
+    if (!deferred) return;
+    try { if (typeof gtag === "function") gtag("event", "app_install_click", { from: "grammar_test_maker" }); } catch (err) {}
+    deferred.prompt(); deferred.userChoice.finally(() => { deferred = null; btn.hidden = true; });
+  };
+  window.addEventListener("appinstalled", () => { btn.hidden = true; say("Installed. Find Teacher Tools with your other apps."); });
+})();
 
 // =====================================================================
 // START: a link with #t= opens the online test, otherwise the maker
