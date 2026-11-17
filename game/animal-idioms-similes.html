@@ -158,7 +158,7 @@ header span{ display:block; color:var(--leaf); font-weight:400; font-size:.68rem
 /* ===== QR (top left) and back to the games (top right) ===== */
 .qr-toggle, .home-btn{
   position:fixed; top:8px; top:max(8px, env(safe-area-inset-top)); z-index:9999;
-  height:42px; border-radius:12px; border:1px solid rgba(31,81,48,.25);
+  height:42px; border-radius:4px; border:1px solid rgba(31,81,48,.25);
   background:rgba(255,255,255,.92); color:var(--accent);
   font-family:inherit; font-size:.85rem; font-weight:700; cursor:pointer;
   -webkit-tap-highlight-color:transparent; touch-action:manipulation;
@@ -168,12 +168,12 @@ header span{ display:block; color:var(--leaf); font-weight:400; font-size:.68rem
 @media (hover:hover){ .qr-toggle:hover, .home-btn:hover{ background:#fff; } }
 .qr-panel{
   position:fixed; left:10px; left:max(10px, env(safe-area-inset-left)); top:60px; z-index:9999;
-  width:240px; background:rgba(255,255,255,.97); border:1px solid rgba(0,0,0,.12); border-radius:16px;
+  width:240px; background:rgba(255,255,255,.97); border:1px solid rgba(0,0,0,.12); border-radius:4px;
   padding:12px; box-shadow:0 12px 28px rgba(0,0,0,.18); display:none;
 }
 .qr-panel .qr-title{ font-weight:800; color:#111; margin:0 0 8px; font-size:.95rem; }
 .qr-panel .qr-url{ font-size:.72rem; color:rgba(0,0,0,.65); word-break:break-all; margin:8px 0 0; line-height:1.35; }
-.qr-code{ width:200px; height:200px; margin:0 auto; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:12px; border:1px solid rgba(0,0,0,.10); }
+.qr-code{ width:200px; height:200px; margin:0 auto; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:4px; border:1px solid rgba(0,0,0,.10); }
 
 /* ===== THE GAME (hero) ===== */
 main{ flex:1; width:100%; padding:0 0 calc(3rem + env(safe-area-inset-bottom)); }
@@ -189,7 +189,7 @@ main{ flex:1; width:100%; padding:0 0 calc(3rem + env(safe-area-inset-bottom)); 
 .levels{ display:flex; gap:6px; flex-wrap:wrap; }
 .level-btn{
   appearance:none; font-family:inherit; cursor:pointer;
-  background:#fff; color:var(--accent); border:2px solid rgba(31,81,48,.3); border-radius:999px;
+  background:#fff; color:var(--accent); border:2px solid rgba(31,81,48,.3); border-radius:4px;
   padding:.35rem .85rem; min-height:40px; font-weight:800; font-size:.86rem; line-height:1.1;
 }
 .level-btn small{ font-weight:700; font-size:.68rem; letter-spacing:1px; opacity:.75; margin-left:.25rem; }
@@ -198,13 +198,13 @@ main{ flex:1; width:100%; padding:0 0 calc(3rem + env(safe-area-inset-bottom)); 
 @media (hover:hover){ .level-btn:not([aria-pressed="true"]):hover{ border-color:var(--accent); } }
 
 .hud{ display:flex; align-items:center; justify-content:center; gap:.5rem 1rem; flex-wrap:wrap; margin:0 auto .7rem; }
-.hud .pill{ background:var(--glass); border:1px solid rgba(31,81,48,.14); border-radius:999px; padding:.35rem .9rem; font-weight:800; font-size:.88rem; color:var(--muted); }
+.hud .pill{ background:var(--glass); border:1px solid rgba(31,81,48,.14); border-radius:4px; padding:.35rem .9rem; font-weight:800; font-size:.88rem; color:var(--muted); }
 .hud .pill span{ color:var(--ink); }
 
 .board-wrap{ position:relative; max-width:960px; margin:0 auto; }
 #game{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; }
 .card{
-  position:relative; min-height:112px; padding:12px 10px; border-radius:16px;
+  position:relative; min-height:112px; padding:12px 10px; border-radius:4px;
   display:flex; flex-direction:column; gap:6px; align-items:center; justify-content:center; text-align:center;
   font-size:1rem; font-weight:700; line-height:1.3; color:#fff; cursor:pointer; user-select:none; word-break:break-word;
   background:var(--back);
@@ -226,7 +226,7 @@ main{ flex:1; width:100%; padding:0 0 calc(3rem + env(safe-area-inset-bottom)); 
 
 .controls{ display:flex; justify-content:center; gap:.6rem; flex-wrap:wrap; margin-top:1rem; }
 #status:empty{ display:none; }
-#status{ display:inline-block; margin-top:1rem; padding:.45rem 1.1rem; border-radius:999px; background:var(--glass); font-size:1.05rem; font-weight:800; color:var(--accent); }
+#status{ display:inline-block; margin-top:1rem; padding:.45rem 1.1rem; border-radius:4px; background:var(--glass); font-size:1.05rem; font-weight:800; color:var(--accent); }
 .after-round{ margin-top:.8rem; display:none; gap:.6rem; justify-content:center; flex-wrap:wrap; }
 .after-round.show{ display:flex; }
 
@@ -234,7 +234,7 @@ main{ flex:1; width:100%; padding:0 0 calc(3rem + env(safe-area-inset-bottom)); 
 .intro{
   position:absolute; top:0; right:0; bottom:0; left:0; z-index:5;
   display:flex; align-items:flex-start; justify-content:center; padding:18px 10px;
-  background:rgba(22,48,29,.18); border-radius:18px;
+  background:rgba(22,48,29,.18); border-radius:4px;
   -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
 }
 .intro[hidden]{ display:none; }
@@ -242,10 +242,10 @@ main{ flex:1; width:100%; padding:0 0 calc(3rem + env(safe-area-inset-bottom)); 
 .board-wrap.intro-open #game{ display:none; }
 .board-wrap.intro-open .intro{ position:static; background:none; -webkit-backdrop-filter:none; backdrop-filter:none; padding:0 0 .4rem; }
 .intro-tile{
-  width:100%; max-width:560px; background:#fff; border-radius:20px; padding:1.4rem 1.4rem 1.2rem;
+  width:100%; max-width:560px; background:#fff; border-radius:4px; padding:1.4rem 1.4rem 1.2rem;
   box-shadow:0 18px 40px rgba(0,0,0,.28); text-align:center;
 }
-.intro-badge{ display:inline-block; background:var(--sun); color:#3b2a00; font-size:.72rem; font-weight:900; letter-spacing:1.6px; text-transform:uppercase; border-radius:999px; padding:.25rem .8rem; }
+.intro-badge{ display:inline-block; background:var(--sun); color:#3b2a00; font-size:.72rem; font-weight:900; letter-spacing:1.6px; text-transform:uppercase; border-radius:4px; padding:.25rem .8rem; }
 .intro-tile h2{ color:var(--accent); font-size:1.5rem; font-size:clamp(1.25rem,2.4vw,1.75rem); font-weight:900; margin:.5rem 0 .2rem; line-height:1.2; }
 .intro-tile .eg{ color:var(--muted); font-style:italic; margin-bottom:.8rem; }
 .intro-tile ol{ text-align:left; margin:0 auto 1.1rem; padding-left:1.4rem; max-width:440px; line-height:1.5; }
@@ -254,7 +254,7 @@ main{ flex:1; width:100%; padding:0 0 calc(3rem + env(safe-area-inset-bottom)); 
 .play-now{
   appearance:none; font-family:inherit; cursor:pointer; border:0;
   background:var(--accent); color:#fff; font-size:1.35rem; font-weight:900; letter-spacing:.5px;
-  border-radius:999px; padding:.85rem 2.6rem; min-height:60px; box-shadow:0 6px 0 #102c19, 0 10px 20px rgba(0,0,0,.2);
+  border-radius:4px; padding:.85rem 2.6rem; min-height:60px; box-shadow:0 6px 0 #102c19, 0 10px 20px rgba(0,0,0,.2);
   transition:transform .12s, box-shadow .12s;
 }
 @media (hover:hover){ .play-now:hover{ background:#246039; } }
@@ -267,7 +267,7 @@ main{ flex:1; width:100%; padding:0 0 calc(3rem + env(safe-area-inset-bottom)); 
 /* ===== Buttons (thin outline, fill on hover) ===== */
 .btn{
   appearance:none; font-family:inherit; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; justify-content:center;
-  background:rgba(255,255,255,.92); color:var(--accent); border:1.5px solid var(--accent); border-radius:999px;
+  background:rgba(255,255,255,.92); color:var(--accent); border:1.5px solid var(--accent); border-radius:4px;
   font-weight:800; font-size:.92rem; padding:.5rem 1.15rem; min-height:42px; transition:background .2s, color .2s;
 }
 .btn.main{ background:var(--accent); color:#fff; }
@@ -276,7 +276,7 @@ main{ flex:1; width:100%; padding:0 0 calc(3rem + env(safe-area-inset-bottom)); 
 
 /* ===== Below the game: learn the words, then the gap-fill ===== */
 .sheet{
-  max-width:1000px; margin:1.4rem auto 0; background:rgba(255,255,255,.94); border-radius:20px;
+  max-width:1000px; margin:1.4rem auto 0; background:rgba(255,255,255,.94); border-radius:4px;
   padding:1.5rem 1.2rem 1.7rem; box-shadow:0 10px 30px rgba(0,0,0,.12); text-align:center; scroll-margin-top:12px;
 }
 .sheet + .sheet{ margin-top:1.2rem; }
