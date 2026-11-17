@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Bespoke Bingo Card Maker © Koala Spies Sydney. All rights reserved. -->
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
 <meta name="author" content="Koala Spies Sydney">
@@ -10,6 +10,15 @@
 
 <meta name="description" content="Make printable bingo cards in a minute. Type or paste your own words, choose 3x3, 4x4 or 5x5, and download a PDF with a different card for every student plus a caller's list. Free, no sign-up.">
 <link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-bingo-card-maker.html">
+<meta name="google-adsense-account" content="ca-pub-7047447363586796">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Teacher Tools app: install it, and use it offline -->
+<link rel="manifest" href="/teachertools/manifest.webmanifest">
+<meta name="theme-color" content="#1c1c1c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Teacher Tools">
+<script src="/teachertools/pwa.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700;800&family=Source+Serif+4:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@500;600&family=Montserrat:wght@600;800&family=Nunito:wght@700;800&display=swap">
@@ -52,6 +61,12 @@ button,input,select,textarea{font:inherit;color:inherit}
 .top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
 .top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15;letter-spacing:.005em}
 .top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:46ch}
+.titleblock{flex:1 1 16rem;min-width:0}
+.toolsback{display:block;width:max-content;margin:.35rem 0 0;color:#f8fafc;text-decoration:none;letter-spacing:.12em;font-weight:700}
+.toolsback:hover{color:var(--tag);text-decoration:underline}
+.subblock{display:grid;gap:.5rem;justify-items:start;max-width:50ch}
+.appinstall{border:0;border-radius:4px;background:#ff7a1a;color:#1c1c1c;font-weight:800;font-size:.88rem;padding:.45rem .9rem;min-height:38px;cursor:pointer}
+.appinstall:hover{background:#ff9b3d}
 
 /* ---------- the bench: controls + preview ---------- */
 .bench{max-width:1320px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(300px,400px) minmax(0,1fr);gap:1.5rem;align-items:start}
@@ -174,14 +189,24 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
   #printArea img:last-child{page-break-after:auto;break-after:auto}
 }
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796"
-     crossorigin="anonymous"></script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
+     until they accept in Google's consent message (AdSense > Privacy & messaging). -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+    wait_for_update: 500
+  });
+  gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+</script>
+<!-- Google AdSense. This tool is for teachers' preparation only, so the ad script always loads. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
   gtag('js', new Date());
   gtag('config', 'G-HCH5CJD2ZS');
 </script>
@@ -190,8 +215,11 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
 
 <header class="top">
   <div class="top-in">
-    <div><p class="eyebrow">Modern English Australia</p><h1>Bespoke Bingo Card Maker</h1></div>
-    <p>Free for teachers. Type your words and print a different card for every student. Nothing leaves this device.</p>
+    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1>Bespoke Bingo Card Maker</h1></div>
+    <div class="subblock">
+      <p>Free for teachers. Type your words and print a different card for every student. Nothing leaves this device.</p>
+      <button type="button" class="appinstall" id="appInstall" hidden>Install Teacher Tools as an app</button>
+    </div>
   </div>
 </header>
 
@@ -359,7 +387,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
 <!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
 
 <footer>
-  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-report-maker.html">Report maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-sentence-scramble-maker.html">Sentence scramble maker</a> · <a href="bespoke-video-lesson-maker.html">Video lesson maker</a> · <a href="bespoke-grammar-test-maker.html">Grammar test maker</a> · <a href="grammar-level-test.html">Grammar level test</a> · <a href="#terms">Terms of use</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-report-maker.html">Report maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-sentence-scramble-maker.html">Sentence scramble maker</a> · <a href="bespoke-video-lesson-maker.html">Video lesson maker</a> · <a href="bespoke-grammar-test-maker.html">Grammar test maker</a> · <a href="grammar-level-test.html">Grammar level test</a> · <a href="#terms">Terms of use</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
 </footer>
 
 <div id="printArea" aria-hidden="true"></div>
@@ -779,6 +807,24 @@ $("printBtn").onclick = () => busy(async m => {
   say("");
   window.print();
 });
+
+// ---------- install as an app (Chrome and Edge offer this; the button stays hidden elsewhere) ----------
+(function () {
+  let deferred = null;
+  const btn = $("appInstall");
+  const standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    if (standalone) return;
+    deferred = e; btn.hidden = false;
+  });
+  btn.onclick = () => {
+    if (!deferred) return;
+    try { if (typeof gtag === "function") gtag("event", "app_install_click", { from: "bingo_card_maker" }); } catch (err) {}
+    deferred.prompt(); deferred.userChoice.finally(() => { deferred = null; btn.hidden = true; });
+  };
+  window.addEventListener("appinstalled", () => { btn.hidden = true; say("Installed. Find Teacher Tools with your other apps."); });
+})();
 
 // =====================================================================
 // START
