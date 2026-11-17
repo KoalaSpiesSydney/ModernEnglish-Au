@@ -9,6 +9,15 @@
 <title>Bespoke Picture Bingo &amp; Flashcards for Kids: Free Printable ESL Bingo, Memory and Snap Cards | Modern English Australia</title>
 <meta name="description" content="Free picture bingo boards, flashcards and memory cards for young learners. Choose a theme like animals, food or weather, pick your words, and download a PDF or PNG, or call bingo on screen. No sign-up.">
 <link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-picture-bingo-kids.html">
+<meta name="google-adsense-account" content="ca-pub-7047447363586796">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Teacher Tools app: install it, and use it offline -->
+<link rel="manifest" href="/teachertools/manifest.webmanifest">
+<meta name="theme-color" content="#1c1c1c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Teacher Tools">
+<script src="/teachertools/pwa.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Serif+4:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,700&family=Fredoka:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,700&family=Montserrat:ital,wght@0,500;0,700;1,700&family=Nunito:ital,wght@0,500;0,800;1,800&display=swap">
@@ -35,7 +44,6 @@
   --focus:#3968ea;
   --warn:#b3261e;
   --good:#1f7a4d;
-  --good:#1f7a4d;
   --amber:#b45309; --amberbg:#fff7ed; --amberline:#f3d3a8;
   --radius:10px;
 }
@@ -52,6 +60,11 @@ button,input,select,textarea{font:inherit;color:inherit}
 .top-in{max-width:1400px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
 .top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15}
 .top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:54ch}
+.toolsback{display:block;width:max-content;margin:.35rem 0 0;color:#f8fafc;text-decoration:none;letter-spacing:.12em;font-weight:700}
+.toolsback:hover{color:var(--tag);text-decoration:underline}
+.subblock{display:grid;gap:.5rem;justify-items:start;max-width:54ch}
+.appinstall{border:0;border-radius:4px;background:#ff7a1a;color:#1c1c1c;font-weight:800;font-size:.88rem;padding:.45rem .9rem;min-height:38px;cursor:pointer}
+.appinstall:hover{background:#ff9b3d}
 .top .beta{display:inline-block;vertical-align:middle;margin-left:.6rem;padding:.1rem .6rem;border-radius:999px;background:var(--amber);color:#fff;font-family:"Source Sans 3",system-ui,Arial,sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .testing-note{max-width:1400px;margin:1rem auto 0;padding:0 1.25rem}
 .testing-note p{margin:0;font-size:.9rem;background:var(--amberbg);border:1px solid var(--amberline);border-left:4px solid var(--amber);border-radius:6px;padding:.55rem .8rem}
@@ -206,14 +219,25 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
 .school-cta a{color:var(--deep);font-weight:700}
 @media print{.school-cta{display:none!important}}
 </style>
-<!-- Google AdSense: replace ca-pub-XXXXXXXXXXXXXXXX with your own publisher ID (AdSense > Account > Account information).
-     With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
+     until they accept in Google's consent message (AdSense > Privacy & messaging). -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+    wait_for_update: 500
+  });
+  gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+</script>
+<!-- Google AdSense. Teachers use this page to make cards; the on-screen caller covers the whole page while the class watches.
+     With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
   gtag('js', new Date());
   gtag('config', 'G-HCH5CJD2ZS');
 </script>
@@ -222,8 +246,11 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
 
 <header class="top">
   <div class="top-in">
-    <div class="titleblock"><p class="eyebrow">Modern English Australia</p><h1>Picture Bingo &amp; Flashcards for Kids<span class="beta">Testing</span></h1></div>
-    <p>Free for teachers. Choose a theme, pick your words and print picture bingo boards, flashcards and memory cards. Or call bingo on the board. No sign-up.</p>
+    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1>Picture Bingo &amp; Flashcards for Kids<span class="beta">Testing</span></h1></div>
+    <div class="subblock">
+      <p>Free for teachers. Choose a theme, pick your words and print picture bingo boards, flashcards and memory cards. Or call bingo on the board. No sign-up.</p>
+      <button type="button" class="appinstall" id="appInstall" hidden>Install Teacher Tools as an app</button>
+    </div>
   </div>
 </header>
 
@@ -479,7 +506,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:point
 <!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
 
 <footer>
-  <p style="margin:0">A free tool from <a href="https://modernenglish.au/index.html">Modern English Australia</a>. © Koala Spies Sydney. <a href="../index.html">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-song-lesson-maker.html">Song lesson maker</a> · <a href="bespoke-video-lesson-maker.html">Video lesson maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="#terms">Terms of use</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-song-lesson-maker.html">Song lesson maker</a> · <a href="bespoke-video-lesson-maker.html">Video lesson maker</a> · <a href="bespoke-gap-fill-maker.html">Gap-fill maker</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="#terms">Terms of use</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
   <p style="margin:.4rem 0 0;font-size:.8rem">Pictures: Noto Emoji by Google, Apache License 2.0.</p>
 </footer>
 
@@ -1198,6 +1225,24 @@ document.addEventListener("keydown", e => {
   else if (e.key === " " || e.key === "ArrowRight") { e.preventDefault(); $("cNext").click(); }
   else if (e.key === "ArrowLeft") $("cBack").click();
 });
+
+// ---------- install as an app (Chrome and Edge offer this; the button stays hidden elsewhere) ----------
+(function () {
+  let deferred = null;
+  const btn = $("appInstall");
+  const standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    if (standalone) return;
+    deferred = e; btn.hidden = false;
+  });
+  btn.onclick = () => {
+    if (!deferred) return;
+    try { if (typeof gtag === "function") gtag("event", "app_install_click", { from: "picture_bingo_kids" }); } catch (err) {}
+    deferred.prompt(); deferred.userChoice.finally(() => { deferred = null; btn.hidden = true; });
+  };
+  window.addEventListener("appinstalled", () => { btn.hidden = true; say("Installed. Find Teacher Tools with your other apps."); });
+})();
 
 // =====================================================================
 // START
