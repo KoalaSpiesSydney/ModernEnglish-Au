@@ -419,6 +419,31 @@ footer{ background:var(--card); color:#b9c9b0; text-align:center; border-top:3px
 @media (max-width:600px){ .lesson{ border-radius:4px; margin-left:.5rem; margin-right:.5rem; padding:1.2rem .8rem 1.4rem; } }
 button, input{ letter-spacing:inherit; word-spacing:inherit; }
 .music-credit{ display:block; margin-top:.35rem; font-size:.78rem; opacity:.8; }
+
+/* ===== All the words (every level) and teacher notes ===== */
+.aw-level{ max-width:820px; margin:0 auto .6rem; text-align:left; border-bottom:1px solid rgba(0,0,0,.1); }
+.aw-level > summary{ cursor:pointer; list-style:none; padding:.75rem .2rem; font-weight:900; color:var(--accent); font-size:1.02rem; }
+.aw-level > summary::-webkit-details-marker{ display:none; }
+.aw-level > summary::before{ content:"+"; display:inline-block; width:1.2em; color:var(--leaf); }
+.aw-level[open] > summary::before{ content:"–"; }
+.aw-level > summary span{ font-weight:600; color:var(--muted); font-size:.88rem; }
+.aw-intro, .aw-usage{ line-height:1.6; margin:.2rem 0 .9rem; font-size:.95rem; }
+.aw-group{ font-size:.78rem; letter-spacing:1.6px; text-transform:uppercase; color:var(--muted); font-weight:900; margin:1rem 0 .4rem; }
+.aw-list{ display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:2px 22px; margin:0 0 .8rem; }
+.aw-list div{ padding:.45rem .1rem; border-bottom:1px solid rgba(0,0,0,.06); }
+.aw-list dt{ font-weight:900; color:var(--accent); line-height:1.3; }
+.aw-list dd{ margin:2px 0 0; font-size:.92rem; line-height:1.35; }
+.teacher-notes{ text-align:left; }
+.teacher-notes > summary{ display:block; width:max-content; max-width:100%; margin:0 auto; cursor:pointer; list-style:none; }
+.teacher-notes > summary{ border:1.5px solid var(--accent); color:var(--accent); background:#fff; border-radius:4px; padding:.65rem 1.2rem; font-weight:800; font-size:.8rem; letter-spacing:1.5px; text-transform:uppercase; }
+.teacher-notes > summary::-webkit-details-marker{ display:none; }
+.teacher-notes[open] > summary{ background:var(--accent); color:#fff; }
+.teacher-body{ max-width:820px; margin:1.2rem auto 0; line-height:1.6; }
+.teacher-body h2{ text-align:center; }
+.teacher-body h3{ font-size:.8rem; letter-spacing:1.6px; text-transform:uppercase; color:var(--leaf); margin:1.2rem 0 .4rem; }
+.teacher-body ol, .teacher-body ul{ margin:.5rem 0 .5rem 1.3rem; }
+.teacher-body li{ margin-bottom:.35rem; }
+@media print{ .aw-level{ break-inside:avoid; } .aw-level > summary::before{ content:""; } }
 </style>
 </head>
 <body data-level="1">
@@ -527,6 +552,127 @@ button, input{ letter-spacing:inherit; word-spacing:inherit; }
     <div class="gap-score" id="gapScore" aria-live="polite"></div>
     <div class="sheet-actions" id="nextLevelRow"></div>
   </section>
+
+  <!-- ═════ ALL THE WORDS: every level written into the page, so search engines and
+       teachers can read the whole list. A small script at the bottom of the page
+       rebuilds it from DATA, so it always matches the game. ═════ -->
+  <hr class="lesson-rule">
+  <section class="sheet" id="all-words" aria-labelledby="allWordsTitle">
+    <span class="kicker">Revise or print</span>
+    <h2 id="allWordsTitle">All the similes and idioms</h2>
+    <p class="sheet-intro">Here are all 61 phrases from the game, level by level, with what they mean. Open a level to revise it, or print the list for class.</p>
+    <div id="allWords">
+    <details class="aw-level">
+      <summary>Level 1 · Animal Similes: as … as <span>(A1–A2 · 20 phrases)</span></summary>
+      <p class="aw-intro">A <strong>simile</strong> compares two things using <strong>as … as</strong>: <em>He is as brave as a lion</em> means he is very brave. Look at each picture and read the meaning. Remember <strong>an</strong> before a vowel sound: <em>an ox, an owl</em>.</p>
+      <dl class="aw-list">
+        <div><dt>as brave as a lion</dt><dd>not afraid of danger</dd></div>
+        <div><dt>as quiet as a mouse</dt><dd>making almost no noise</dd></div>
+        <div><dt>as sly as a fox</dt><dd>clever at tricking people</dd></div>
+        <div><dt>as busy as a bee</dt><dd>doing lots of things</dd></div>
+        <div><dt>as stubborn as a mule</dt><dd>not willing to change your mind</dd></div>
+        <div><dt>as blind as a bat</dt><dd>not able to see well</dd></div>
+        <div><dt>as gentle as a lamb</dt><dd>kind and soft</dd></div>
+        <div><dt>as proud as a peacock</dt><dd>very pleased with yourself</dd></div>
+        <div><dt>as hungry as a wolf</dt><dd>wanting a lot of food</dd></div>
+        <div><dt>as slow as a snail</dt><dd>moving very slowly</dd></div>
+        <div><dt>as playful as a kitten</dt><dd>liking to play and have fun</dd></div>
+        <div><dt>as strong as an ox</dt><dd>having great strength</dd></div>
+        <div><dt>as graceful as a deer</dt><dd>moving in a beautiful way</dd></div>
+        <div><dt>as fierce as a tiger</dt><dd>angry and frightening</dd></div>
+        <div><dt>as curious as a cat</dt><dd>wanting to know everything</dd></div>
+        <div><dt>as clumsy as a bear</dt><dd>often dropping or bumping into things</dd></div>
+        <div><dt>as cute as a bunny</dt><dd>small and sweet</dd></div>
+        <div><dt>as free as a bird</dt><dd>able to do what you want</dd></div>
+        <div><dt>as wise as an owl</dt><dd>knowing a lot; clever</dd></div>
+        <div><dt>as fat as a pig</dt><dd>very fat (rude about people!)</dd></div>
+      </dl>
+      <p class="aw-usage"><strong>Note:</strong> <em>as fat as a pig</em> is a real simile, but it is rude to say about a person. Use it for animals, or for a joke about yourself: <em>After Christmas lunch I feel as fat as a pig!</em></p>
+    </details>
+    <details class="aw-level">
+      <summary>Level 2 · Animal Similes with like <span>(A2–B1 · 21 phrases)</span></summary>
+      <p class="aw-intro">These similes use <strong>verb + like + a/an + animal</strong>: <em>She runs like a leopard</em> means she runs very fast. The verb changes (<em>runs, ran, is running</em>) but the <em>like</em> part stays the same. Compare Level 1, which uses <strong>as … as</strong>: <em>as brave as a lion</em>.</p>
+      <dl class="aw-list">
+        <div><dt>run like a leopard</dt><dd>run very fast</dd></div>
+        <div><dt>swim like a fish</dt><dd>swim very well</dd></div>
+        <div><dt>fly like an eagle</dt><dd>fly high and strongly</dd></div>
+        <div><dt>sing like a bird</dt><dd>sing beautifully</dd></div>
+        <div><dt>glide like a swan</dt><dd>move smoothly and elegantly</dd></div>
+        <div><dt>eat like a horse</dt><dd>eat a lot</dd></div>
+        <div><dt>leap like a frog</dt><dd>jump suddenly forward</dd></div>
+        <div><dt>jump like a kangaroo</dt><dd>jump high, again and again</dd></div>
+        <div><dt>pounce like a tiger</dt><dd>jump suddenly to catch something</dd></div>
+        <div><dt>remember like an elephant</dt><dd>never forget anything</dd></div>
+        <div><dt>climb like a monkey</dt><dd>climb quickly and easily</dd></div>
+        <div><dt>work like a dog</dt><dd>work very hard</dd></div>
+        <div><dt>sting like a bee</dt><dd>hurt quickly and sharply, e.g. with words</dd></div>
+        <div><dt>float like a butterfly</dt><dd>move very lightly</dd></div>
+        <div><dt>waddle like a duck</dt><dd>walk with short steps, moving from side to side</dd></div>
+        <div><dt>slither like a snake</dt><dd>move smoothly along the ground, twisting</dd></div>
+        <div><dt>roar like a lion</dt><dd>shout very loudly</dd></div>
+        <div><dt>squeal like a pig</dt><dd>make a long, high, excited noise</dd></div>
+        <div><dt>crawl like a snail</dt><dd>move extremely slowly</dd></div>
+        <div><dt>howl like a wolf</dt><dd>cry out long and loud</dd></div>
+        <div><dt>charge like a bull</dt><dd>rush forward with great force</dd></div>
+      </dl>
+      <p class="aw-usage"><strong>Notes:</strong> <em>eat like a horse</em> means eat a lot and is not rude. People also say <em>eat like a pig</em> (eat noisily and messily), but that is impolite about another person, though fine about yourself: <em>I ate like a pig at the party!</em> People often say <em>have a memory like an elephant</em> as well as <em>remember like an elephant</em>.</p>
+    </details>
+    <details class="aw-level">
+      <summary>Level 3 · Animal Idioms <span>(B2–C1 · 20 phrases)</span></summary>
+      <p class="aw-intro">An <strong>idiom</strong> is a fixed phrase whose meaning is different from the meaning of its words: nobody really puts a cat in a bag! Unlike the similes in Levels 1 and 2, idioms don't use <em>like</em> or <em>as … as</em>, so you have to learn them as whole chunks.</p>
+      <h3 class="aw-group">B2</h3>
+      <dl class="aw-list">
+        <div><dt>let the cat out of the bag</dt><dd>reveal a secret</dd></div>
+        <div><dt>the lion's share</dt><dd>the biggest part</dd></div>
+        <div><dt>a wolf in sheep's clothing</dt><dd>someone who seems kind but is dangerous</dd></div>
+        <div><dt>hold your horses</dt><dd>wait; don't rush</dd></div>
+        <div><dt>smell a rat</dt><dd>suspect something is wrong</dd></div>
+        <div><dt>get your ducks in a row</dt><dd>get organised</dd></div>
+        <div><dt>kill two birds with one stone</dt><dd>achieve two things with one action</dd></div>
+        <div><dt>monkey business</dt><dd>silly or dishonest behaviour</dd></div>
+        <div><dt>a dark horse</dt><dd>someone who surprises everyone by succeeding</dd></div>
+        <div><dt>eagle-eyed</dt><dd>very good at noticing details</dd></div>
+      </dl>
+      <h3 class="aw-group">C1</h3>
+      <dl class="aw-list">
+        <div><dt>a sacred cow</dt><dd>something people refuse to criticise</dd></div>
+        <div><dt>the elephant in the room</dt><dd>an obvious problem nobody wants to discuss</dd></div>
+        <div><dt>a paper tiger</dt><dd>something that seems powerful but is weak</dd></div>
+        <div><dt>let sleeping dogs lie</dt><dd>don't bring up old problems again</dd></div>
+        <div><dt>put the cat among the pigeons</dt><dd>cause trouble or controversy</dd></div>
+        <div><dt>a wild goose chase</dt><dd>a pointless search for something</dd></div>
+        <div><dt>ride the tiger</dt><dd>be stuck in a risky situation you can't easily leave</dd></div>
+        <div><dt>birds of a feather flock together</dt><dd>similar people like to be together</dd></div>
+        <div><dt>a fly in the ointment</dt><dd>a small problem that spoils something good</dd></div>
+        <div><dt>stir up a hornet's nest</dt><dd>cause a lot of anger and trouble</dd></div>
+      </dl>
+      <p class="aw-usage"><strong>Usage notes:</strong> the verbs inside idioms change form (<em>she let the cat out of the bag; I smelt/smelled a rat</em>) and possessives change (<em>get <u>our</u> ducks in a row</em>). <em>Birds of a feather flock together</em> is often shortened to <em>birds of a feather</em>. <em>Put the cat among the pigeons</em> is mainly British and Australian English.</p>
+    </details>
+    </div>
+  </section>
+
+  <!-- ═════ TEACHER NOTES: closed until a teacher opens them ═════ -->
+  <hr class="lesson-rule">
+  <details class="sheet teacher-notes" id="teacher">
+    <summary>For teachers: lesson notes</summary>
+    <div class="teacher-body">
+      <h2>A 45-minute lesson</h2>
+      <p><b>Levels:</b> Level 1 suits A1–A2 classes, Level 2 suits A2–B1, and Level 3 suits B2–C1. With a mixed class, start everyone on Level 1, then let stronger students move on. <b>Useful for:</b> describing people, storytelling, and IELTS Speaking Part 2.</p>
+      <ol>
+        <li><b>Warm-up (5 min).</b> Show a picture of a lion, a mouse and a bee. Ask: <i>What is a lion like?</i> Elicit <i>brave</i>, then teach the pattern <i>as brave as a lion</i>.</li>
+        <li><b>Learn the words (10 min).</b> Open <i>Learn the words</i> for your level. Students read the list, then press <i>Hide the meanings</i> and test a partner.</li>
+        <li><b>Play (10–15 min).</b> Project the game and split the class into two teams. Before a team keeps a match, a player must say the whole phrase aloud. With phones, share the QR code and play in pairs.</li>
+        <li><b>Gap-fill (10 min).</b> Students complete the sentences alone, then check with a partner before pressing Check.</li>
+        <li><b>Speaking (10 min).</b> Levels 1 and 2: describe a friend or family member with two similes, for example <i>My brother eats like a horse</i>. Level 3: tell a partner about a time someone <i>let the cat out of the bag</i>, or a topic that was <i>the elephant in the room</i>.</li>
+      </ol>
+      <h3>Extension ideas</h3>
+      <ul>
+        <li><b>Compare languages:</b> ask students for animal similes in their first language. Is it the same animal as in English? Often it isn’t, and the differences make a good discussion.</li>
+        <li><b>Be careful with rude similes:</b> read the usage notes together. <i>As fat as a pig</i> and <i>eat like a pig</i> are real, but impolite about a person.</li>
+        <li><b>Draw it:</b> students draw the literal meaning of an idiom (a real cat in a bag) and the class guesses the idiom.</li>
+      </ul>
+    </div>
+  </details>
   </div>
 </main>
 
@@ -1688,5 +1834,35 @@ window.scrollTo(0, 0);
 })();
 </script>
 
+
+<script>
+/* ===== All the words: rebuild the list from DATA, so it always matches the game ===== */
+(function(){
+  var box = document.getElementById("allWords");
+  if(!box || typeof LEVELS === "undefined") return;
+  function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  var total = 0, html = "";
+  LEVELS.forEach(function(L){
+    var items = L.items || [], groups = [];
+    total += items.length;
+    items.forEach(function(it){
+      var g = it.cefr || "", x = null;
+      for(var i = 0; i < groups.length; i++) if(groups[i].n === g) x = groups[i];
+      if(!x){ x = { n:g, items:[] }; groups.push(x); }
+      x.items.push(it);
+    });
+    html += '<details class="aw-level"><summary>' + esc(L.name) + ' · ' + esc(L.title) + ' <span>(' + esc(L.cefr) + ' · ' + items.length + ' phrases)</span></summary>' +
+            '<p class="aw-intro">' + L.intro + '</p>';
+    groups.forEach(function(g){
+      if(g.n) html += '<h3 class="aw-group">' + esc(g.n) + '</h3>';
+      html += '<dl class="aw-list">' + g.items.map(function(it){ return '<div><dt>' + esc(it.phrase) + '</dt><dd>' + esc(it.meaning) + '</dd></div>'; }).join("") + '</dl>';
+    });
+    html += '<p class="aw-usage">' + L.usage + '</p></details>';
+  });
+  box.innerHTML = html;
+  var intro = document.querySelector("#all-words .sheet-intro");
+  if(intro) intro.textContent = "Here are all " + total + " phrases from the game, level by level, with what they mean. Open a level to revise it, or print the list for class.";
+})();
+</script>
 </body>
 </html>
