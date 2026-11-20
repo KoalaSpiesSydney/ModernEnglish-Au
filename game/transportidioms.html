@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="theme-color" content="#1d3a6b" />
 <title>Transport Idioms – Matching Game (Elementary to Advanced) – Modern English Australia</title>
-<meta name="description" content="Free English matching game at four levels: everyday transport phrases like fasten your seatbelt for elementary, then transport idioms like in the same boat and hit the road from intermediate to advanced. Match the cards, then complete the sentences.">
+<meta name="description" content="Free transport idioms game for English learners: match phrases like fasten your seatbelt and miss the boat, then complete the sentences. A2 to C2.">
 
 <link rel="canonical" href="https://modernenglish.au/game/transportidioms.html" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -955,6 +955,38 @@ header .neon-brand{ display:inline-block; font-weight:900; }
 @media(max-width:600px){
   #game::before{ left:-10px; right:-10px; top:-16px; bottom:-16px; border-radius:32px; }
 }
+
+/* ===== All the words (every level) and teacher notes ===== */
+.aw-section{ text-align:center; }
+.aw-section .aw-kicker{ display:block; font-size:.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--leaf, var(--accent)); font-weight:900; margin-bottom:.2rem; }
+.aw-section .aw-lead{ max-width:720px; margin:0 auto 1rem; line-height:1.55; }
+.aw-level{ max-width:820px; margin:0 auto .6rem; text-align:left; border-bottom:1px solid rgba(0,0,0,.1); }
+.aw-level > summary{ cursor:pointer; list-style:none; padding:.75rem .2rem; font-weight:900; color:var(--accent); font-size:1.02rem; }
+.aw-level > summary::-webkit-details-marker{ display:none; }
+.aw-level > summary::before{ content:"+"; display:inline-block; width:1.2em; color:var(--leaf, var(--accent)); }
+.aw-level[open] > summary::before{ content:"\2013"; }
+.aw-level > summary span{ font-weight:600; color:var(--muted); font-size:.88rem; }
+.aw-intro, .aw-usage{ line-height:1.6; margin:.2rem 0 .9rem; font-size:.95rem; }
+.aw-group{ font-size:.78rem; letter-spacing:1.6px; text-transform:uppercase; color:var(--muted); font-weight:900; margin:1rem 0 .4rem; }
+.aw-list{ display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:2px 22px; margin:0 0 .8rem; }
+.aw-list div{ padding:.45rem .1rem; border-bottom:1px solid rgba(0,0,0,.06); }
+.aw-list dt{ font-weight:900; color:var(--accent); line-height:1.3; }
+.aw-list dd{ margin:2px 0 0; font-size:.92rem; line-height:1.35; }
+.teacher-notes{ text-align:left; }
+.teacher-notes > summary{ display:block; width:max-content; max-width:100%; margin:0 auto; cursor:pointer; list-style:none; border:1.5px solid var(--accent); color:var(--accent); background:#fff; border-radius:4px; padding:.65rem 1.2rem; font-weight:800; font-size:.8rem; letter-spacing:1.5px; text-transform:uppercase; }
+.teacher-notes > summary::-webkit-details-marker{ display:none; }
+.teacher-notes[open] > summary{ background:var(--accent); color:#fff; }
+.teacher-body{ max-width:820px; margin:1.2rem auto 0; line-height:1.6; }
+.teacher-body h2{ text-align:center; }
+.teacher-body h3{ font-size:.8rem; letter-spacing:1.6px; text-transform:uppercase; color:var(--leaf, var(--accent)); margin:1.2rem 0 .4rem; }
+.teacher-body ol, .teacher-body ul{ margin:.5rem 0 .5rem 1.3rem; padding:0; }
+.teacher-body li{ margin-bottom:.35rem; }
+@media print{ .aw-level{ break-inside:avoid; } }
+
+/* footer links (About, Contact, Privacy) */
+footer .foot-links{ display:block; margin-top:.35rem; font-size:.85rem; }
+footer .foot-links a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+@media (hover:hover){ footer .foot-links a:hover{ color:#fff; } }
 </style>
 </head>
 
@@ -1030,6 +1062,40 @@ header .neon-brand{ display:inline-block; font-weight:900; }
     <div class="gapfill-list" id="gapfillList"></div>
   </section>
 
+
+  <!-- ═════ ALL THE WORDS: every level written into the page, so search engines and
+       teachers can read the whole list. A small script at the bottom of the page
+       rebuilds it from LEVELS, so it always matches the game. ═════ -->
+  
+  <section class="gapfill-wrap aw-section" id="all-words" aria-labelledby="allWordsTitle">
+    <span class="aw-kicker">Revise or print</span>
+    <h2 id="allWordsTitle">All the transport phrases and idioms</h2>
+    <p class="aw-lead" id="allWordsLead">Here are all 95 transport phrases and idioms from the game, level by level, with what they mean. Open a level to revise it, or print the list for class.</p>
+    <div id="allWords"><details class="aw-level"><summary>Elementary <span>(A2 · 35 phrases)</span></summary><dl class="aw-list"><div><dt>fasten your seatbelt</dt><dd>close your seatbelt so it holds you safely</dd></div><div><dt>hail a taxi</dt><dd>wave your hand to stop a taxi</dd></div><div><dt>pump up the tyres</dt><dd>fill the tyres with air</dd></div><div><dt>ring the bell</dt><dd>make the bell on your bike (or the bus) ring</dd></div><div><dt>honk the horn</dt><dd>make the car horn sound: beep beep!</dd></div><div><dt>wait at the bus stop</dt><dd>stand at the place where the bus stops</dd></div><div><dt>cross the road</dt><dd>walk from one side of the road to the other</dd></div><div><dt>row a boat</dt><dd>move a small boat with oars</dd></div><div><dt>ride a bike</dt><dd>sit on a bike and make it go</dd></div><div><dt>fly a plane</dt><dd>be the pilot of a plane</dd></div><div><dt>buy a ticket</dt><dd>pay for the right to travel</dd></div><div><dt>go through airport security</dt><dd>be checked before you get on a plane</dd></div><div><dt>fill up with petrol</dt><dd>put petrol in the car until it is full</dd></div><div><dt>read the map</dt><dd>look at a map to find the way</dd></div><div><dt>get stuck in traffic</dt><dd>can’t move because there are too many cars</dd></div><div><dt>drive on the left</dt><dd>drive on the left side of the road, as in Australia and the UK</dd></div><div><dt>pack your suitcase</dt><dd>put your clothes and things in your suitcase</dd></div><div><dt>obey the speed limit</dt><dd>don’t drive faster than the sign says</dd></div><div><dt>turn on the headlights</dt><dd>switch on the lights at the front of the car</dd></div><div><dt>pay the toll</dt><dd>pay money to use a road, bridge or tunnel</dd></div><div><dt>go by bus</dt><dd>travel somewhere using the bus</dd></div><div><dt>go on foot</dt><dd>walk to your destination</dd></div><div><dt>drive a car</dt><dd>control a car and make it move</dd></div><div><dt>ride a motorbike</dt><dd>sit on a motorbike and drive it</dd></div><div><dt>get on the train</dt><dd>board or step onto a train</dd></div><div><dt>get off the bus</dt><dd>exit or leave a bus</dd></div><div><dt>get in the taxi</dt><dd>step inside a car or taxi</dd></div><div><dt>get out of the car</dt><dd>exit or step outside a car</dd></div><div><dt>take a taxi</dt><dd>pay for a taxi ride to travel somewhere</dd></div><div><dt>catch the train</dt><dd>arrive in time to get on the train</dd></div><div><dt>miss the bus</dt><dd>arrive too late to catch the bus</dd></div><div><dt>wait for the bus</dt><dd>stay in a place until the bus comes</dd></div><div><dt>change trains</dt><dd>get off one train and get on another</dd></div><div><dt>look at the timetable</dt><dd>check the times for buses or trains</dd></div><div><dt>arrive at the airport</dt><dd>reach the airport at the end of a journey</dd></div></dl><p class="aw-usage"><strong>Tip:</strong> these are <strong>collocations</strong> – words that English speakers always use together. We <em>ride</em> a bike but <em>drive</em> a car, <em>row</em> a small boat and <em>fly</em> a plane. Australians say <em>petrol</em> and <em>tyres</em>; Americans say <em>gas</em> and <em>tires</em>.</p></details><details class="aw-level"><summary>Intermediate <span>(B1 · 20 phrases)</span></summary><dl class="aw-list"><div><dt>in the same boat</dt><dd>in the same difficult situation as others</dd></div><div><dt>miss the boat</dt><dd>be too late to get a chance</dd></div><div><dt>in the driver’s seat</dt><dd>in control</dd></div><div><dt>a backseat driver</dt><dd>a passenger who tells the driver what to do</dd></div><div><dt>hit the road</dt><dd>leave; start a journey</dd></div><div><dt>on the right track</dt><dd>doing something the right way</dd></div><div><dt>full steam ahead</dt><dd>moving forward with all your energy</dd></div><div><dt>get the green light</dt><dd>get permission to start</dd></div><div><dt>take a back seat</dt><dd>choose a less important role</dd></div><div><dt>go the extra mile</dt><dd>do more than people expect</dd></div><div><dt>along for the ride</dt><dd>joining in, but not really involved</dd></div><div><dt>run out of steam</dt><dd>lose energy and stop</dd></div><div><dt>put the brakes on</dt><dd>slow down or stop something</dd></div><div><dt>life in the fast lane</dt><dd>an exciting, busy, sometimes dangerous life</dd></div><div><dt>at a crossroads</dt><dd>at a time when you must make an important decision</dd></div><div><dt>a bumpy ride</dt><dd>a difficult time</dd></div><div><dt>the end of the road</dt><dd>the point where something finishes</dd></div><div><dt>drive someone up the wall</dt><dd>make someone very annoyed</dd></div><div><dt>get on board</dt><dd>agree to support a plan</dd></div><div><dt>learn the ropes</dt><dd>learn how to do a new job</dd></div></dl><p class="aw-usage"><strong>Tip:</strong> lots of these idioms are about control and direction: <em>in the driver’s seat</em> (in control), <em>take a back seat</em> (let others lead), <em>on the right track</em> (going the right way). People in Australia and the UK often say <em>drive someone round the bend</em> too.</p></details><details class="aw-level"><summary>Upper-intermediate <span>(B2 · 20 phrases)</span></summary><dl class="aw-list"><div><dt>go off the rails</dt><dd>start behaving in a wrong or crazy way</dd></div><div><dt>jump on the bandwagon</dt><dd>join something because it is popular</dd></div><div><dt>the wheels came off</dt><dd>everything started to go wrong</dd></div><div><dt>fly by the seat of your pants</dt><dd>do something without a plan</dd></div><div><dt>rock the boat</dt><dd>cause trouble by trying to change things</dd></div><div><dt>burn your bridges</dt><dd>destroy a relationship you might need later</dd></div><div><dt>cross that bridge when you come to it</dt><dd>deal with a problem only when it happens</dd></div><div><dt>a train of thought</dt><dd>a series of connected ideas</dd></div><div><dt>put the cart before the horse</dt><dd>do things in the wrong order</dd></div><div><dt>the driving force</dt><dd>the main person or thing that makes something happen</dd></div><div><dt>running on empty</dt><dd>continuing with no energy left</dd></div><div><dt>back-pedal</dt><dd>change what you said or promised before</dd></div><div><dt>steer clear of</dt><dd>avoid someone or something</dd></div><div><dt>change gear</dt><dd>change the way you are doing something</dd></div><div><dt>hit a roadblock</dt><dd>meet a problem that stops progress</dd></div><div><dt>hit a speed bump</dt><dd>meet a small problem that slows you down</dd></div><div><dt>be on autopilot</dt><dd>do things without thinking about them</dd></div><div><dt>throw someone under the bus</dt><dd>blame someone else to protect yourself</dd></div><div><dt>a well-oiled machine</dt><dd>a group that works together smoothly</dd></div><div><dt>take the wheel</dt><dd>take control</dd></div></dl><p class="aw-usage"><strong>Tip:</strong> <em>burn your bridges</em> is usually used in the negative as advice: <em>Don’t burn your bridges when you leave a job.</em> <em>Throw someone under the bus</em> is informal and very common at work.</p></details><details class="aw-level"><summary>Advanced <span>(C1–C2 · 20 phrases)</span></summary><dl class="aw-list"><div><dt>a juggernaut</dt><dd>a huge, powerful force that is hard to stop</dd></div><div><dt>fall off the back of a lorry</dt><dd>be stolen (humorous)</dd></div><div><dt>that ship has sailed</dt><dd>it is too late; the chance has gone</dd></div><div><dt>when my ship comes in</dt><dd>when I become rich</dd></div><div><dt>batten down the hatches</dt><dd>prepare for a difficult time</dd></div><div><dt>give someone a wide berth</dt><dd>keep well away from someone</dd></div><div><dt>take the wind out of someone’s sails</dt><dd>make someone suddenly less confident</dd></div><div><dt>plain sailing</dt><dd>easy, with no problems</dd></div><div><dt>the light at the end of the tunnel</dt><dd>a sign that a difficult time is ending</dd></div><div><dt>asleep at the wheel</dt><dd>not paying attention to your responsibilities</dd></div><div><dt>the gravy train</dt><dd>an easy way to make a lot of money</dd></div><div><dt>a white-knuckle ride</dt><dd>a frightening or exciting experience</dd></div><div><dt>go full throttle</dt><dd>do something with maximum speed and effort</dd></div><div><dt>derail</dt><dd>stop a plan or process from succeeding</dd></div><div><dt>in the doldrums</dt><dd>inactive, slow or in low spirits</dd></div><div><dt>run a tight ship</dt><dd>manage something strictly and efficiently</dd></div><div><dt>jump ship</dt><dd>suddenly leave an organisation</dd></div><div><dt>reinvent the wheel</dt><dd>waste time making something that already exists</dd></div><div><dt>steer a middle course</dt><dd>choose a moderate path between two extremes</dd></div><div><dt>be taken for a ride</dt><dd>be cheated or tricked</dd></div></dl><p class="aw-usage"><strong>Sailing idioms:</strong> many advanced idioms come from life at sea: <em>batten down the hatches</em> (close the openings before a storm), <em>a wide berth</em> (plenty of space around a ship), <em>the doldrums</em> (an area of the ocean with no wind). <em>Fall off the back of a lorry</em> is used in Australia and the UK, often as a joke.</p></details></div>
+  </section>
+
+  <!-- ═════ TEACHER NOTES: closed until a teacher opens them ═════ -->
+  
+  <details class="gapfill-wrap teacher-notes" id="teacher">
+    <summary>For teachers: lesson plan</summary>
+    <div class="teacher-body">
+      <h2>A 45-minute lesson</h2>
+      <p><b>Levels:</b> Elementary (A2) teaches everyday transport collocations like <i>fasten your seatbelt</i> and <i>hail a taxi</i>. Intermediate (B1), Upper-intermediate (B2) and Advanced (C1–C2) teach idioms like <i>miss the boat</i> and <i>go off the rails</i>. <b>Useful for:</b> talking about travel and daily routines, work and decisions, and IELTS Speaking.</p>
+      <ol>
+        <li><b>Warm-up (5 min).</b> Ask: <i>How did you get here today?</i> Write students' answers on the board and correct the verbs: <i>ride</i> a bike, <i>drive</i> a car, <i>catch</i> the bus.</li>
+        <li><b>Learn the words (10 min).</b> Open the list for your level above. Students cover the meanings and test a partner.</li>
+        <li><b>Play (10–15 min).</b> Project the game and split the class into two teams. Before a team keeps a pair, a player must say the whole phrase aloud. With phones, share the QR code and play in pairs.</li>
+        <li><b>Gap-fill (10 min).</b> Students complete the sentences alone, then check with a partner before pressing Submit.</li>
+        <li><b>Speaking (10 min).</b> Elementary: describe your trip to school or work, step by step. Higher levels: tell a partner about a time you <i>missed the boat</i>, felt <i>in the same boat</i> as others, or decided to <i>burn your bridges</i>.</li>
+      </ol>
+      <h3>Extension ideas</h3>
+      <ul>
+        <li><b>Directions role-play:</b> pairs give directions across town using the elementary collocations (<i>get off at the second stop, wait at the bus stop</i>).</li>
+        <li><b>Workplace idioms:</b> many of these idioms describe work and leadership (<i>in the driver's seat, take a back seat, rock the boat</i>). Students use three to describe a team they have worked in.</li>
+        <li><b>Draw it:</b> students draw the literal meaning of an idiom (a real train going off the rails) and the class guesses it.</li>
+      </ul>
+    </div>
+  </details>
   <div class="links">
     <a href="../vocabularygames.html" class="btn">More vocab games</a>
     <a href="../index.html" class="btn">Home</a>
@@ -1075,6 +1141,7 @@ header .neon-brand{ display:inline-block; font-weight:900; }
 
 <footer>
   © Koala Spies Sydney · Modern English Australia · All Rights Reserved
+  <span class="foot-links"><a href="/vocabularygames.html">Vocabulary games</a> · <a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy.html">Privacy policy</a></span>
 </footer>
 
 <!-- Background video: start it, retry on the first tap (iPhones in Low Power
@@ -2159,5 +2226,37 @@ setLevel(startLevel, false);
 openPlaque();
 </script>
 
+
+<script>
+/* ===== All the words: rebuild the list from LEVELS, so it always matches the game ===== */
+(function(){
+  var box = document.getElementById("allWords");
+  if(!box || typeof LEVELS === "undefined") return;
+  try{
+    var r = (function(levels, noun){
+  function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  var total = 0, h = "";
+  levels.forEach(function(L){
+    var n = 0; L.groups.forEach(function(g){ n += g.items.length; }); total += n;
+    h += '<details class="aw-level"><summary>' + esc(L.title) + ' <span>(' + esc(L.sub) + ' · ' + n + ' ' + noun + ')</span></summary>';
+    if(L.intro) h += '<p class="aw-intro">' + L.intro + '</p>';
+    L.groups.forEach(function(g){
+      if(g.n) h += '<h3 class="aw-group">' + esc(g.n) + '</h3>';
+      h += '<dl class="aw-list">' + g.items.map(function(it){ return '<div><dt>' + esc(it[0]) + '</dt><dd>' + esc(it[1]) + '</dd></div>'; }).join("") + '</dl>';
+    });
+    if(L.usage) h += '<p class="aw-usage">' + L.usage + '</p>';
+    h += '</details>';
+  });
+  return { html: h, total: total };
+})((function(){ return Object.keys(LEVELS).map(function(k){ var L = LEVELS[k];
+  var lv = (L.badge || '').split(' ')[0];
+  return { title: L.label, sub: lv, intro: '', usage: L.extra || '',
+           groups: [{ n: '', items: L.idioms.map(function(x){ return L.simile ? [x[0].replace('…', x[1]), x[3]] : [x[0], x[1]]; }) }] }; }); })(), 'phrases');
+    box.innerHTML = r.html;
+    var lead = document.getElementById("allWordsLead");
+    if(lead) lead.textContent = 'Here are all ' + r.total + ' transport phrases and idioms from the game, level by level, with what they mean. Open a level to revise it, or print the list for class.';
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
