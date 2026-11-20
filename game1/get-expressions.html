@@ -2649,7 +2649,7 @@ function onCardClick(div, data){
       scoreMatchedEl.textContent = matched;
       if(matched === PAIRS_PER_ROUND){ CandySFX.click(); } else { CandySFX.sweet(streak); }
       if(matched === PAIRS_PER_ROUND){
-        statusEl.textContent = "Delicious! All matched – press New Round for new cards.";
+        statusEl.textContent = "Get out of here! All matched – press New Round for new cards.";
         statusEl.classList.add("win");
         celebrateWin();
       }else{
@@ -2702,7 +2702,7 @@ function flip(div, text){
 }
 
 function celebrateWin(){
-  const words = ["Delicious!", "Divine!", "Sweet!", "Tasty!"];
+  const words = ["Get out of here!", "Get down and boogie!", "Get up and celebrate!", "Got it!"];
   const word = streak >= PAIRS_PER_ROUND ? "Divine!" : words[Math.floor(Math.random() * words.length)];
   CandySFX.win();
   setTimeout(() => CandySFX.cheer(word), 1700);   // after the sugar rush and fanfare
