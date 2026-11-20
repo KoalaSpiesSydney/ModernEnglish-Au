@@ -94,7 +94,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="preload" href="people.mp4" as="video">
-<link rel="preload" href="ISM.mp3" as="audio">
+<link rel="preload" href="ISM.mp3?v=2" as="audio">
 
 <!-- Google tag (gtag.js) – same Analytics property as your other games -->
 <!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
@@ -1115,8 +1115,9 @@
     <source src="people.mp4" type="video/mp4">
     <source src="people.mp4" type="video/mp4">
   </video>
-  <!-- Game music: ISM.mp3 in the same folder – soft while playing, louder after a win -->
-  <audio id="bgMusic" src="ISM.mp3" loop preload="auto"></audio>
+  <!-- Game music: ISM.mp3 in the same folder – soft while playing, louder after a win.
+       "?v=2" makes browsers fetch the new file instead of an old saved copy. If you replace ISM.mp3 again, change it to ?v=3. -->
+  <audio id="bgMusic" src="ISM.mp3?v=2" loop preload="auto"></audio>
 
   <div class="gold-flash" id="goldFlash" aria-hidden="true"></div>
 
