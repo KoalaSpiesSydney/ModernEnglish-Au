@@ -786,6 +786,33 @@ button.btn.level-tab[aria-pressed="true"]{ background:var(--accent); color:#fff;
 .card.matched{ border-color:rgba(0,0,0,.15); }
 .card.matched::after{ background:rgba(0,0,0,.25); }
 @media(max-width:600px){ .card{ border-radius:5px 36px 5px 36px; padding:8px 12px; } }
+
+/* ===== All the words (every level) and teacher notes ===== */
+.aw-section{ text-align:center; }
+.aw-section .aw-kicker{ display:block; font-size:.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--leaf, var(--accent)); font-weight:900; margin-bottom:.2rem; }
+.aw-section .aw-lead{ max-width:720px; margin:0 auto 1rem; line-height:1.55; }
+.aw-level{ max-width:820px; margin:0 auto .6rem; text-align:left; border-bottom:1px solid rgba(0,0,0,.1); }
+.aw-level > summary{ cursor:pointer; list-style:none; padding:.75rem .2rem; font-weight:900; color:var(--accent); font-size:1.02rem; }
+.aw-level > summary::-webkit-details-marker{ display:none; }
+.aw-level > summary::before{ content:"+"; display:inline-block; width:1.2em; color:var(--leaf, var(--accent)); }
+.aw-level[open] > summary::before{ content:"\2013"; }
+.aw-level > summary span{ font-weight:600; color:var(--muted); font-size:.88rem; }
+.aw-intro, .aw-usage{ line-height:1.6; margin:.2rem 0 .9rem; font-size:.95rem; }
+.aw-group{ font-size:.78rem; letter-spacing:1.6px; text-transform:uppercase; color:var(--muted); font-weight:900; margin:1rem 0 .4rem; }
+.aw-list{ display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:2px 22px; margin:0 0 .8rem; }
+.aw-list div{ padding:.45rem .1rem; border-bottom:1px solid rgba(0,0,0,.06); }
+.aw-list dt{ font-weight:900; color:var(--accent); line-height:1.3; }
+.aw-list dd{ margin:2px 0 0; font-size:.92rem; line-height:1.35; }
+.teacher-notes{ text-align:left; }
+.teacher-notes > summary{ display:block; width:max-content; max-width:100%; margin:0 auto; cursor:pointer; list-style:none; border:1.5px solid var(--accent); color:var(--accent); background:#fff; border-radius:4px; padding:.65rem 1.2rem; font-weight:800; font-size:.8rem; letter-spacing:1.5px; text-transform:uppercase; }
+.teacher-notes > summary::-webkit-details-marker{ display:none; }
+.teacher-notes[open] > summary{ background:var(--accent); color:#fff; }
+.teacher-body{ max-width:820px; margin:1.2rem auto 0; line-height:1.6; }
+.teacher-body h2{ text-align:center; }
+.teacher-body h3{ font-size:.8rem; letter-spacing:1.6px; text-transform:uppercase; color:var(--leaf, var(--accent)); margin:1.2rem 0 .4rem; }
+.teacher-body ol, .teacher-body ul{ margin:.5rem 0 .5rem 1.3rem; padding:0; }
+.teacher-body li{ margin-bottom:.35rem; }
+@media print{ .aw-level{ break-inside:avoid; } }
 </style>
 </head>
 
@@ -861,6 +888,40 @@ button.btn.level-tab[aria-pressed="true"]{ background:var(--accent); color:#fff;
     <div class="gapfill-list" id="gapfillList"></div>
   </section>
 
+
+  <!-- ═════ ALL THE WORDS: every level written into the page, so search engines and
+       teachers can read the whole list. A small script at the bottom of the page
+       rebuilds it from LEVELS, so it always matches the game. ═════ -->
+  
+  <section class="gapfill-wrap aw-section" id="all-words" aria-labelledby="allWordsTitle">
+    <span class="aw-kicker">Revise or print</span>
+    <h2 id="allWordsTitle">All the plant similes and idioms</h2>
+    <p class="aw-lead" id="allWordsLead">Here are all 80 plant similes and idioms from the game, level by level, with what they mean. Open a level to revise it, or print the list for class.</p>
+    <div id="allWords"><details class="aw-level"><summary>Elementary <span>(A2 · 20 phrases)</span></summary><dl class="aw-list"><div><dt>as red as a beetroot</dt><dd>very red, often from embarrassment</dd></div><div><dt>as orange as a carrot</dt><dd>bright orange</dd></div><div><dt>as green as grass</dt><dd>very green</dd></div><div><dt>as yellow as a banana</dt><dd>bright yellow</dd></div><div><dt>as purple as a plum</dt><dd>dark purple</dd></div><div><dt>as brown as a nut</dt><dd>very brown, e.g. skin after lots of sun</dd></div><div><dt>as white as a lily</dt><dd>pure white</dd></div><div><dt>as fresh as a daisy</dt><dd>not tired at all</dd></div><div><dt>as cool as a cucumber</dt><dd>very calm, not worried</dd></div><div><dt>as sour as a lemon</dt><dd>very sour; also a grumpy person</dd></div><div><dt>as sweet as a peach</dt><dd>very sweet or very kind</dd></div><div><dt>as tall as a tree</dt><dd>very tall</dd></div><div><dt>as small as a pea</dt><dd>very small</dd></div><div><dt>as round as an orange</dt><dd>perfectly round</dd></div><div><dt>as thin as a twig</dt><dd>very thin</dd></div><div><dt>as hot as a chilli</dt><dd>very spicy or very hot</dd></div><div><dt>as prickly as a cactus</dt><dd>sharp to touch; also easily annoyed</dd></div><div><dt>as soft as a petal</dt><dd>very soft and gentle</dd></div><div><dt>as light as a leaf</dt><dd>not heavy at all</dd></div><div><dt>as strong as an oak</dt><dd>very strong</dd></div></dl><p class="aw-usage"><strong>Tip:</strong> a simile compares two things with <strong>as … as</strong>: <em>as green as grass</em> = very green. Remember <strong>an</strong> before a vowel sound: <em>an orange, an oak</em>. <em>As red as a beetroot</em>, <em>as cool as a cucumber</em> and <em>as fresh as a daisy</em> are fixed expressions that English speakers use all the time.</p></details><details class="aw-level"><summary>Intermediate <span>(B1 · 20 phrases)</span></summary><dl class="aw-list"><div><dt>go bananas</dt><dd>become very excited or very angry</dd></div><div><dt>a couch potato</dt><dd>a lazy person who watches a lot of TV</dd></div><div><dt>full of beans</dt><dd>full of energy</dd></div><div><dt>spill the beans</dt><dd>tell a secret</dd></div><div><dt>hit the hay</dt><dd>go to bed</dd></div><div><dt>like two peas in a pod</dt><dd>very much the same</dd></div><div><dt>in a nutshell</dt><dd>in a few words</dd></div><div><dt>the apple of my eye</dt><dd>the person I love most</dd></div><div><dt>the cherry on top</dt><dd>a small extra thing that makes something even better</dd></div><div><dt>turn over a new leaf</dt><dd>start to behave better</dd></div><div><dt>grow like weeds</dt><dd>grow very fast</dd></div><div><dt>money doesn’t grow on trees</dt><dd>money is not easy to get, so don’t waste it</dd></div><div><dt>shake like a leaf</dt><dd>shake because you are scared or nervous</dd></div><div><dt>stop and smell the roses</dt><dd>relax and enjoy life</dd></div><div><dt>life is not a bed of roses</dt><dd>life is not always easy</dd></div><div><dt>a bad apple</dt><dd>one bad person who makes the others bad too</dd></div><div><dt>branch out</dt><dd>start doing something new</dd></div><div><dt>the last straw</dt><dd>the last problem that makes you lose patience</dd></div><div><dt>beat around the bush</dt><dd>not say something directly</dd></div><div><dt>plant the seed</dt><dd>give someone a new idea that will grow</dd></div></dl><p class="aw-usage"><strong>Tip:</strong> <em>full of beans</em> means full of energy, but <em>spill the beans</em> means tell a secret – same vegetable, different idea! People in Australia and the UK also say <em>beat about the bush</em>.</p></details><details class="aw-level"><summary>Upper-intermediate <span>(B2 · 20 phrases)</span></summary><dl class="aw-list"><div><dt>bark up the wrong tree</dt><dd>blame the wrong person or look in the wrong place</dd></div><div><dt>nip something in the bud</dt><dd>stop a problem before it grows</dd></div><div><dt>take root</dt><dd>become fixed or established</dd></div><div><dt>a late bloomer</dt><dd>someone who becomes successful later than others</dd></div><div><dt>go out on a limb</dt><dd>say or do something risky that others don’t support</dd></div><div><dt>can’t see the wood for the trees</dt><dd>focus on details and miss the big picture</dd></div><div><dt>the grass is always greener on the other side</dt><dd>other people’s lives always seem better than yours</dd></div><div><dt>a hot potato</dt><dd>a difficult topic that people argue about</dd></div><div><dt>reap what you sow</dt><dd>get the results your actions deserve</dd></div><div><dt>the root of the problem</dt><dd>the real cause of a problem</dd></div><div><dt>bear fruit</dt><dd>finally produce good results</dd></div><div><dt>not out of the woods yet</dt><dd>still in difficulty or danger</dd></div><div><dt>a thorn in your side</dt><dd>someone or something that annoys you again and again</dd></div><div><dt>sour grapes</dt><dd>pretending you didn’t want something you couldn’t get</dd></div><div><dt>offer an olive branch</dt><dd>do something to show you want peace</dd></div><div><dt>small potatoes</dt><dd>something unimportant</dd></div><div><dt>go against the grain</dt><dd>do something different from what is normal or expected</dd></div><div><dt>put down roots</dt><dd>settle permanently in a place</dd></div><div><dt>take a leaf out of someone’s book</dt><dd>copy someone’s good example</dd></div><div><dt>hear it on the grapevine</dt><dd>hear news unofficially, as gossip</dd></div></dl><p class="aw-usage"><strong>Tip:</strong> British and Australian speakers say <em>can’t see the wood for the trees</em>; Americans say <em>can’t see the forest for the trees</em>. <em>Take root</em> (an idea or habit becomes established) and <em>put down roots</em> (a person settles in a place) are easy to mix up.</p></details><details class="aw-level"><summary>Advanced <span>(C1–C2 · 20 phrases)</span></summary><dl class="aw-list"><div><dt>gild the lily</dt><dd>spoil something by adding to what is already perfect</dd></div><div><dt>a shrinking violet</dt><dd>a very shy person</dd></div><div><dt>rest on your laurels</dt><dd>stop trying because of past success</dd></div><div><dt>the low-hanging fruit</dt><dd>the easiest tasks or gains to achieve first</dd></div><div><dt>wither on the vine</dt><dd>fail slowly through lack of support or attention</dd></div><div><dt>come up smelling of roses</dt><dd>come out of a difficult situation looking good</dd></div><div><dt>separate the wheat from the chaff</dt><dd>separate what is valuable from what is worthless</dd></div><div><dt>sow your wild oats</dt><dd>have a wild, carefree time while you are young</dd></div><div><dt>be pushing up daisies</dt><dd>be dead and buried (humorous)</dd></div><div><dt>the bloom is off the rose</dt><dd>something is no longer new or exciting</dd></div><div><dt>tall poppy syndrome</dt><dd>the habit of criticising very successful people</dd></div><div><dt>a hard nut to crack</dt><dd>a person or problem that is very hard to deal with</dd></div><div><dt>up a gum tree</dt><dd>in a very difficult situation</dd></div><div><dt>forbidden fruit</dt><dd>something you want more because it isn’t allowed</dd></div><div><dt>lead someone up the garden path</dt><dd>deceive or mislead someone</dd></div><div><dt>great oaks from little acorns grow</dt><dd>big things often start from small beginnings</dd></div><div><dt>the pick of the bunch</dt><dd>the best one of a group</dd></div><div><dt>at grassroots level</dt><dd>among ordinary people, not leaders</dd></div><div><dt>go to seed</dt><dd>lose condition or quality through neglect</dd></div><div><dt>the fruits of your labour</dt><dd>the rewards of your hard work</dd></div></dl><p class="aw-usage"><strong>Aussie idioms:</strong> <em>tall poppy syndrome</em> is very common in Australia and New Zealand, and <em>up a gum tree</em> (a gum tree is a eucalyptus) is heard in Australia and the UK. <em>Be pushing up daisies</em> is a joke way to talk about death, so use it carefully.</p></details></div>
+  </section>
+
+  <!-- ═════ TEACHER NOTES: closed until a teacher opens them ═════ -->
+  
+  <details class="gapfill-wrap teacher-notes" id="teacher">
+    <summary>For teachers: lesson plan</summary>
+    <div class="teacher-body">
+      <h2>A 45-minute lesson</h2>
+      <p><b>Levels:</b> Elementary (A2) uses similes like <i>as red as a beetroot</i>. Intermediate (B1), Upper-intermediate (B2) and Advanced (C1–C2) use idioms like <i>spill the beans</i> and <i>bark up the wrong tree</i>. <b>Useful for:</b> describing people and feelings, storytelling, and IELTS Speaking.</p>
+      <ol>
+        <li><b>Warm-up (5 min).</b> Show a lemon, a cucumber or a picture of a beetroot. Ask: <i>What colour is it? How does it taste?</i> Then teach the pattern <i>as sour as a lemon</i>.</li>
+        <li><b>Learn the words (10 min).</b> Open the list for your level above. Students cover the meanings and test a partner.</li>
+        <li><b>Play (10–15 min).</b> Project the game and split the class into two teams. Before a team keeps a pair, a player must say the whole phrase aloud. With phones, share the QR code and play in pairs.</li>
+        <li><b>Gap-fill (10 min).</b> Students complete the sentences alone, then check with a partner before pressing Submit.</li>
+        <li><b>Speaking (10 min).</b> Elementary: describe your favourite food or a friend with two similes. Higher levels: tell a partner about a time you or someone you know <i>went bananas</i>, <i>spilled the beans</i> or was <i>a late bloomer</i>.</li>
+      </ol>
+      <h3>Extension ideas</h3>
+      <ul>
+        <li><b>Compare languages:</b> ask students for food and plant idioms in their first language. Is it the same fruit or vegetable as in English?</li>
+        <li><b>Literal or idiom?</b> Read sentences aloud, such as <i>He's full of beans</i>. Students say whether it's about real beans or about energy.</li>
+        <li><b>Draw it:</b> students draw the literal meaning of an idiom (a dog barking up a real tree) and the class guesses it.</li>
+      </ul>
+    </div>
+  </details>
   <div class="links">
     <a href="../vocabularygames.html" class="btn">More vocab games</a>
     <a href="../index.html" class="btn">Home</a>
@@ -1022,13 +1083,13 @@ function playBlurp(){ const a = ac(); if(!a) return;
   note(a,{type:"square",f:260,to:90,dur:.32,vol:.16,lp:900}); }
 
 /* ══════════════════════════════════════════════════════════════
-   MUSIC — flora.mp3 in the same folder as this page.
+   MUSIC — flora.mp3 in the main folder of the site (one level up from this page).
    It plays at a normal volume while the "How to play" plaque is open,
    softly in the background during the game, and swells up when a
    round is won (staying up until the next round starts). Browsers only allow music after the first tap or key,
    so it starts then. If flora.mp3 is missing, the game just carries on.
    ══════════════════════════════════════════════════════════════ */
-const MUSIC_FILE   = "flora.mp3";
+const MUSIC_FILE   = "../flora.mp3";
 const VOL_INTRO    = .55;     /* plaque open */
 const VOL_GAME     = .14;     /* while playing */
 const VOL_WIN      = .6;      /* round won */
@@ -1645,5 +1706,37 @@ setLevel(startLevel, false);
 openPlaque();
 </script>
 
+
+<script>
+/* ===== All the words: rebuild the list from LEVELS, so it always matches the game ===== */
+(function(){
+  var box = document.getElementById("allWords");
+  if(!box || typeof LEVELS === "undefined") return;
+  try{
+    var r = (function(levels, noun){
+  function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  var total = 0, h = "";
+  levels.forEach(function(L){
+    var n = 0; L.groups.forEach(function(g){ n += g.items.length; }); total += n;
+    h += '<details class="aw-level"><summary>' + esc(L.title) + ' <span>(' + esc(L.sub) + ' · ' + n + ' ' + noun + ')</span></summary>';
+    if(L.intro) h += '<p class="aw-intro">' + L.intro + '</p>';
+    L.groups.forEach(function(g){
+      if(g.n) h += '<h3 class="aw-group">' + esc(g.n) + '</h3>';
+      h += '<dl class="aw-list">' + g.items.map(function(it){ return '<div><dt>' + esc(it[0]) + '</dt><dd>' + esc(it[1]) + '</dd></div>'; }).join("") + '</dl>';
+    });
+    if(L.usage) h += '<p class="aw-usage">' + L.usage + '</p>';
+    h += '</details>';
+  });
+  return { html: h, total: total };
+})((function(){ return Object.keys(LEVELS).map(function(k){ var L = LEVELS[k];
+  var lv = (L.badge || '').split(' ')[0];
+  return { title: L.label, sub: lv, intro: '', usage: L.extra || '',
+           groups: [{ n: '', items: L.idioms.map(function(x){ return L.simile ? [x[0].replace('…', x[1]), x[3]] : [x[0], x[1]]; }) }] }; }); })(), 'phrases');
+    box.innerHTML = r.html;
+    var lead = document.getElementById("allWordsLead");
+    if(lead) lead.textContent = 'Here are all ' + r.total + ' plant similes and idioms from the game, level by level, with what they mean. Open a level to revise it, or print the list for class.';
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
