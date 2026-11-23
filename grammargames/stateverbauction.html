@@ -8,8 +8,26 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="theme-color" content="#111111" />
 
+<!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
+     until they accept in Google's consent message (AdSense › Privacy & messaging). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+    wait_for_update: 500
+  });
+  gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796"
      crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+
 <meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
 
 <title>State Verbs Grammar Auction Game (A1–A2) – To Be and Not to Being | Modern English Australia</title>
@@ -19,12 +37,13 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Modern English Australia" />
 <meta property="og:locale" content="en_AU" />
-<!-- ▶ Make a 1200×630 screenshot of the game, name it stateverbauction-share.jpg and upload it next to this page -->
-<meta property="og:image" content="https://modernenglish.au/grammargames/stateverbauction-share.jpg" />
+<!-- ▶ To use a screenshot of this game instead, upload a 1200×630 image and change this address -->
+<meta property="og:image" content="https://modernenglish.au/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="The state verbs grammar auction game on a classroom screen" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://modernenglish.au/og-image.jpg" />
 <!-- ▶ Change these two lines if you upload the page somewhere else -->
 <meta property="og:url" content="https://modernenglish.au/grammargames/stateverbauction.html" />
 <link rel="canonical" href="https://modernenglish.au/grammargames/stateverbauction.html" />
@@ -455,16 +474,11 @@ header .sub{ color:#a9a7a0; }
   .faq summary{ cursor:pointer; font-weight:700; padding:.55rem 0; list-style-position:inside; }
   .faq details[open] summary{ border-bottom:1px solid var(--edge); margin-bottom:.6rem; }
   .faq details p{ margin:0 0 .7rem; }
+  .foot-links{ display:block; margin-top:.35rem; font-size:.85rem; }
+  .foot-links a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
 </style>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-HCH5CJD2ZS');
-</script>
 </head>
 <body>
 <!-- ══════════════════════════════════════════════════════════════════════
@@ -539,7 +553,7 @@ header .sub{ color:#a9a7a0; }
   </section>
 
   <div class="links">
-    <a href="https://modernenglish.au/grammargames.html" class="linkbtn" target="_blank" rel="noopener">More Grammar Games<span class="arrow" aria-hidden="true">→</span></a>
+    <a href="https://modernenglish.au/grammargames.html" class="linkbtn">More Grammar Games<span class="arrow" aria-hidden="true">→</span></a>
     <a href="https://modernenglish.au/vocabularygames.html" class="linkbtn" target="_blank" rel="noopener">Vocabulary Games<span class="arrow" aria-hidden="true">→</span></a>
     <a href="https://modernenglish.au/" class="linkbtn" target="_blank" rel="noopener">Home<span class="arrow" aria-hidden="true">→</span></a>
   </div>
@@ -568,7 +582,8 @@ header .sub{ color:#a9a7a0; }
 </div>
 
 <!-- ===== Footer ===== -->
-<footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved</footer>
+<footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved
+  <span class="foot-links"><a href="https://modernenglish.au/grammargames.html">Grammar games</a> · <a href="https://modernenglish.au/about.html">About</a> · <a href="https://modernenglish.au/contact.html">Contact</a> · <a href="https://modernenglish.au/privacy.html">Privacy policy</a></span></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -8,8 +8,26 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="theme-color" content="#1c1c1c" />
 
+<!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
+     until they accept in Google's consent message (AdSense › Privacy & messaging). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+    wait_for_update: 500
+  });
+  gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796"
      crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+
 <meta name="google-site-verification" content="yiFsKK4r7ZLeRZV6S8tbLCaE0a-AOniFhLknWu3308w" />
 
 <title>Homophone Grammar Auction (A1–C1) | Modern English Australia</title>
@@ -18,9 +36,77 @@
 <meta property="og:description" content="Every sentence is for sale. Some are forgeries. A team auction game on there, their, they're and more." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Modern English Australia" />
+<meta property="og:locale" content="en_AU" />
+<meta property="og:image" content="https://modernenglish.au/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://modernenglish.au/og-image.jpg" />
 <!-- ▶ Change these two lines if you upload the page somewhere else -->
 <meta property="og:url" content="https://modernenglish.au/grammargames/homophone-grammar-auction.html" />
 <link rel="canonical" href="https://modernenglish.au/grammargames/homophone-grammar-auction.html" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "LearningResource",
+   "name": "Homophone Grammar Auction",
+   "url": "https://modernenglish.au/grammargames/homophone-grammar-auction.html",
+   "description": "Free classroom grammar auction on homophones for ESL, K–12 and academic English: teams bid on sentences they think are correct, then the reveal shows which are forgeries. Beginner, intermediate and advanced (PTE and IELTS-style) levels. Modern English Australia · Koala Spies Sydney.",
+   "inLanguage": "en-AU",
+   "learningResourceType": [
+    "Game",
+    "Exercise"
+   ],
+   "educationalLevel": [
+    "A1",
+    "A2",
+    "B1",
+    "B2",
+    "C1"
+   ],
+   "teaches": "English homophones such as there, their and they're; its and it's; your and you're; to, too and two",
+   "isAccessibleForFree": true,
+   "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": [
+     "student",
+     "teacher"
+    ]
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Modern English Australia",
+    "url": "https://modernenglish.au/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://modernenglish.au/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Grammar games",
+     "item": "https://modernenglish.au/grammargames.html"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Homophone Grammar Auction"
+    }
+   ]
+  }
+ ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -326,16 +412,23 @@
   .makeown{ margin:1.6rem auto 0; max-width:640px; font-family:var(--body-font); font-size:1rem; color:var(--headline); text-shadow:0 1px 1px rgba(255,255,255,.6); }
   .makeown strong{ display:block; font-family:var(--display-font); font-weight:400; font-size:1.2rem; letter-spacing:1px; margin-bottom:.2rem; }
   .makeown a{ color:var(--h2); font-weight:700; text-underline-offset:4px; }
+  .foot-links{ display:block; margin-top:.35rem; font-size:.85rem; }
+  .foot-links a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+  .about{ max-width:760px; margin:3rem auto 0; text-align:left; }
+  .about h2{ margin-bottom:.8rem; }
+  .about h3{ font-family:var(--accent-font); color:var(--h2); font-size:.8rem; letter-spacing:3px; text-transform:uppercase; font-weight:400; margin:1.6rem 0 .6rem; }
+  .about p{ margin:0 0 .8rem; }
+  .about strong{ font-weight:700; }
+  .pills{ list-style:none; margin:.4rem 0 0; padding:0; display:flex; flex-wrap:wrap; gap:.45rem; }
+  .pill{ font-family:var(--accent-font); font-size:.85rem; color:var(--ink); background:var(--paper); border:1px solid var(--edge); border-radius:999px; padding:.3rem .85rem; line-height:1.3; }
+  .faq{ display:flex; flex-direction:column; gap:.5rem; }
+  .faq details{ background:var(--paper); border:1px solid var(--edge); border-radius:18px; padding:.15rem 1rem; }
+  .faq summary{ cursor:pointer; font-weight:700; padding:.55rem 0; list-style-position:inside; }
+  .faq details[open] summary{ border-bottom:1px solid var(--edge); margin-bottom:.6rem; }
+  .faq details p{ margin:0 0 .7rem; }
 </style>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-HCH5CJD2ZS');
-</script>
 </head>
 <body>
 <!-- ══════════════════════════════════════════════════════════════════════
@@ -354,17 +447,17 @@
      (and queen-of-sheba.ogg as a spare) in the same folder as this page.
      Medium on the setup screen, soft during the game, full volume for the Rich List celebration.
      Volumes are in MUSIC SETTINGS in the script below. -->
-<audio id="gameMusic" loop preload="auto">
+<audio id="gameMusic" loop preload="none">
   <source src="queen-of-sheba.mp3" type="audio/mpeg">
   <source src="queen-of-sheba.ogg" type="audio/ogg">
 </audio>
-<video class="bg-video" id="filmSetup" muted loop playsinline webkit-playsinline preload="auto" aria-hidden="true" tabindex="-1" hidden>
+<video class="bg-video" id="filmSetup" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true" tabindex="-1" hidden>
   <source src="hammer.mp4" type="video/mp4">
 </video>
-<video class="bg-video" id="filmAuction" muted loop playsinline webkit-playsinline preload="auto" aria-hidden="true" tabindex="-1" hidden>
+<video class="bg-video" id="filmAuction" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true" tabindex="-1" hidden>
   <source src="auctionbg.mp4" type="video/mp4">
 </video>
-<video class="bg-video" id="filmWinner" muted loop playsinline webkit-playsinline preload="auto" aria-hidden="true" tabindex="-1" hidden>
+<video class="bg-video" id="filmWinner" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true" tabindex="-1" hidden>
   <source src="auctionceleb.mp4" type="video/mp4">
 </video>
 
@@ -397,7 +490,43 @@
 
   <div id="app"></div>
 
+  <!-- ===== About this game: teacher notes, also read by search engines ===== -->
+  <section class="about" aria-labelledby="aboutTitle">
+    <h2 id="aboutTitle">About this game</h2>
+    <p>The <strong>Homophone Grammar Auction</strong> is a free classroom game on <strong>homophones</strong>: words that sound the same but are spelt differently and mean different things, like <em>there</em>, <em>their</em> and <em>they’re</em>. Teams become wealthy families and bid on sentences they think are correct. Some sentences are forgeries, with a typical homophone mistake such as <em>it’s</em> for <em>its</em> or <em>your</em> for <em>you’re</em>.</p>
+    <p>Nobody finds out what they bought until the last lot is sold. At the reveal, the class votes on each sentence, and a family that bought a forgery wins double points if it can correct the mistake in the redemption round.</p>
+    <ul class="pills" aria-label="Topics">
+      <li class="pill">Homophones</li><li class="pill">There, their, they&#x27;re</li><li class="pill">Its or it&#x27;s</li><li class="pill">Grammar auction</li><li class="pill">ESL game</li><li class="pill">Academic English</li><li class="pill">A1–C1</li>
+    </ul>
+
+    <h3>Three levels</h3>
+    <ul>
+      <li><strong>Beginner (A1–A2):</strong> short everyday sentences with the big four and everyday pairs. Students choose the correct word from two options, and a word bank stays on screen.</li>
+      <li><strong>Intermediate (B1–B2):</strong> everyday contexts and the pairs that need more thought. Students fix the sentence and give a simple reason, e.g. <em>it’s = it is</em>.</li>
+      <li><strong>Advanced (B2+, native speakers and academic English):</strong> PTE and IELTS-style academic sentences. Students fix the sentence and name the rule using grammatical terms.</li>
+    </ul>
+
+    <h3>Homophones in this game</h3>
+    <ul class="pills">
+      <li class="pill">there / their / they&#x27;re</li><li class="pill">to / too / two</li><li class="pill">your / you&#x27;re</li><li class="pill">its / it&#x27;s</li><li class="pill">here / hear</li><li class="pill">see / sea</li><li class="pill">know / no</li><li class="pill">eight / ate</li><li class="pill">who&#x27;s / whose</li><li class="pill">weather / whether</li><li class="pill">passed / past</li><li class="pill">aloud / allowed</li><li class="pill">brake / break</li><li class="pill">threw / through</li><li class="pill">fare / fair</li><li class="pill">patients / patience</li><li class="pill">principal / principle</li><li class="pill">cite / site</li><li class="pill">discrete / discreet</li><li class="pill">presence / presents</li><li class="pill">led / lead</li><li class="pill">role / roll</li><li class="pill">council / counsel</li>
+    </ul>
+
+    <h3>In the classroom</h3>
+    <ul class="pills">
+      <li class="pill">About 30–40 minutes</li><li class="pill">10–12 sentences per level</li><li class="pill">4–6 teams of 3–4</li><li class="pill">One auctioneer: teacher or student</li><li class="pill">Projector or interactive whiteboard</li><li class="pill">Works on phones and tablets</li>
+    </ul>
+
+    <h3>Questions teachers ask</h3>
+    <div class="faq">
+      <details><summary>What are homophones?</summary><p>Homophones are words that sound the same but have different spellings and meanings, such as <em>there</em>, <em>their</em> and <em>they’re</em>, or <em>see</em> and <em>sea</em>. They cause spelling mistakes even for native speakers.</p></details>
+      <details><summary>What’s the easiest way to teach its and it’s?</summary><p>Try saying <em>it is</em> or <em>it has</em> in the sentence. If it works, write <em>it’s</em>. If it doesn’t, write <em>its</em>, with no apostrophe, like <em>his</em> and <em>hers</em>.</p></details>
+      <details><summary>Which level should I choose?</summary><p>Beginner suits A1–A2 classes and younger learners. Intermediate suits most adult B1–B2 classes. Advanced is for B2+ students preparing for IELTS, PTE or university, and it works well with native speakers too.</p></details>
+      <details><summary>Is there a lesson to go with it?</summary><p>Yes. Teach or review the pairs first with the free <a href="https://modernenglish.au/minilessons/homophones-lesson.html">homophones lesson</a>, then play the auction to practise them.</p></details>
+    </div>
+  </section>
+
   <div class="links">
+    <a href="https://modernenglish.au/grammargames.html" class="linkbtn">More Grammar Games<span class="arrow" aria-hidden="true">→</span></a>
     <a href="https://modernenglish.au/minilessons/homophones-lesson.html" class="linkbtn" target="_blank" rel="noopener">Lesson<span class="arrow" aria-hidden="true">→</span></a>
     <a href="https://modernenglish.au/vocabularygames.html" class="linkbtn" target="_blank" rel="noopener">More Vocabulary Games<span class="arrow" aria-hidden="true">→</span></a>
     <a href="https://modernenglish.au/" class="linkbtn" target="_blank" rel="noopener">Home<span class="arrow" aria-hidden="true">→</span></a>
@@ -430,7 +559,8 @@
 
 <!-- ===== Footer ===== -->
 <footer>© Koala Spies Sydney · Modern English Australia · All Rights Reserved
-  <span class="music-credit">Music: G. F. Handel, <em>Arrival of the Queen of Sheba</em> (public domain)</span></footer>
+  <span class="music-credit">Music: G. F. Handel, <em>Arrival of the Queen of Sheba</em> (public domain)</span>
+  <span class="foot-links"><a href="https://modernenglish.au/grammargames.html">Grammar games</a> · <a href="https://modernenglish.au/about.html">About</a> · <a href="https://modernenglish.au/contact.html">Contact</a> · <a href="https://modernenglish.au/privacy.html">Privacy policy</a></span></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 
