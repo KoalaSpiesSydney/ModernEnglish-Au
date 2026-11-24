@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,650;8..60,700;8..60,800&display=swap" rel="stylesheet">
   <!-- Fonts used only by the themed game cards -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Limelight&family=Newsreader:ital,opsz,wght@0,6..72,600;1,6..72,600&family=Pirata+One&family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,500&family=Fredoka:wght@500;600&family=Limelight&family=Newsreader:ital,opsz,wght@0,6..72,600;1,6..72,600&family=Pirata+One&family=Special+Elite&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #fffce6;
@@ -399,8 +399,12 @@
       --t-accent: #2f6b2a; --t-ink: #1f3a1d; --t-muted: #4a5a46; --t-font: "Newsreader", var(--serif); }
     .theme-flora .game-card-title { font-style: italic; }
 
-    .theme-citycountry { --t-bg: linear-gradient(135deg, #e4e8f0 0 50%, #eaf4dd 50% 100%); --t-border: #c3ccd8;
-      --t-accent: #3d5a26; --t-ink: #1f2933; --t-muted: #4a5360; }
+    /* Turn: a 90s Vogue page, like the game itself: white, black Bodoni, one Vogue red */
+    .theme-turn { --t-bg: #ffffff; --t-border: #111111; --t-accent: #c8102e; --t-link: #111111; --t-ink: #111111; --t-muted: #4a4a4a;
+      --t-font: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif; --t-motif: "turn"; }
+    .theme-turn .game-card-title { font-weight: 500; letter-spacing: -.01em; }
+    .theme-turn::after { font-family: "Bodoni Moda", "Didot", Georgia, serif; font-style: italic; font-weight: 500;
+      font-size: 2rem !important; bottom: 12px !important; color: rgba(200,16,46,.38); }
     
     .game-card.is-soon {
       background: rgba(255,255,255,.6);
@@ -1018,12 +1022,15 @@ crossorigin="anonymous"></script>
           </div>
         </article>
         
-        <article class="game-card theme-citycountry is-soon">
-          <span class="soon-badge">Coming soon</span>
-          <span class="game-card-label">Matching Game · City &amp; Country</span>
-          <h3 class="game-card-title">City &amp; Country Idioms</h3>
-          <p class="game-card-desc">Paint the town red, the concrete jungle, the back of beyond, out in the sticks. Bright lights, big city, and life beyond the black stump.</p>
-          <div class="game-card-links"><span class="game-card-arrow">In the works</span></div>
+        <article class="game-card theme-turn">
+          <span class="game-card-label">Matching Game · 3 levels · A2–C1</span>
+          <h3 class="game-card-title"><a href="game/turn-phrasal-verbs-idioms.html">Turn: Phrasal Verbs and Idioms</a></h3>
+          <p class="game-card-desc">Turn it up, turn it down, turn in, turn up, it turned out. Tap a word tile, then turn over a card to build the phrasal verb: literal uses, then new meanings, then idioms like <em>turn a blind eye</em> and <em>turn the tables</em>. With a guess-the-meaning quiz, a gap-fill, word order and a story to rewrite.</p>
+          <div class="game-card-links">
+            <a href="game/turn-phrasal-verbs-idioms.html#level-1">Play <span aria-hidden="true">→</span></a>
+            <a href="game/turn-phrasal-verbs-idioms.html#level-2">Level 2 <span aria-hidden="true">→</span></a>
+            <a href="game/turn-phrasal-verbs-idioms.html#level-3">Level 3 <span aria-hidden="true">→</span></a>
+          </div>
         </article>
 
       </div>
@@ -1153,7 +1160,8 @@ crossorigin="anonymous"></script>
         { "@type": "ListItem", "position": 13, "name": "The ISM Game: -isms, Phobias & Manias (B2–C2)", "url": "https://modernenglish.au/game/loversandhaters.html" },
         { "@type": "ListItem", "position": 14, "name": "Transport Collocations, Idioms & Phrases (all levels)", "url": "https://modernenglish.au/game/transportidioms.html" },
         { "@type": "ListItem", "position": 15, "name": "Flora & Plant Collocations, Idioms & Phrases (all levels)", "url": "https://modernenglish.au/game/floraidioms.html" },
-        { "@type": "ListItem", "position": 16, "name": "Make Your Own Matching Game (teacher tool)", "url": "https://modernenglish.au/teachertools/bespoke-matching-game-maker.html" }
+        { "@type": "ListItem", "position": 16, "name": "Turn: Phrasal Verbs and Idioms, 3 levels (A2–C1)", "url": "https://modernenglish.au/game/turn-phrasal-verbs-idioms.html" },
+        { "@type": "ListItem", "position": 17, "name": "Make Your Own Matching Game (teacher tool)", "url": "https://modernenglish.au/teachertools/bespoke-matching-game-maker.html" }
       ]
     }
   ]
