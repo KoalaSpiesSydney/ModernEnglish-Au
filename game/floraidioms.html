@@ -817,6 +817,77 @@ button.btn.level-tab[aria-pressed="true"]{ background:var(--accent); color:#fff;
 /* footer links (About, Contact, Privacy) */
 .mea-foot-links{ display:block; margin-top:.35rem; font-size:.85rem; }
 .mea-foot-links a{ color:inherit; text-decoration:underline; text-underline-offset:2px; }
+
+/* ══════════ LEAVES WITH HEIGHT AND DEPTH ══════════
+   Light falls from the top left: a bright edge there, a shaded edge on the
+   lower right, a soft sheen across the leaf, a thin darker rim underneath
+   (the leaf's thickness) and a layered shadow on the page, so each leaf
+   seems to float. Leaves lift a little on hover and when turned over, and
+   settle back down once matched. */
+.card{
+  --lift-shadow:
+    inset 2px 3px 0 rgba(255,255,255,.30),
+    inset -3px -4px 0 rgba(0,0,0,.16),
+    0 2px 0 rgba(10,60,30,.55),
+    0 6px 10px -2px rgba(22,48,29,.28),
+    0 16px 24px -10px rgba(22,48,29,.38);
+  box-shadow:var(--lift-shadow);
+  /* the centre vein, pressed into the leaf: a dark line with a light line beside it */
+  background-image:linear-gradient(to top right, transparent calc(50% - 2.5px), rgba(0,0,0,.20) calc(50% - 1px), rgba(255,255,255,.55) 50%, transparent calc(50% + 1.5px));
+  transition:transform .22s ease, box-shadow .22s ease, background-color .3s, color .3s;
+}
+/* sheen: light on the top-left of the leaf, shade on the bottom-right */
+.card::before{
+  content:""; position:absolute; top:0; right:0; bottom:0; left:0; border-radius:inherit; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(120% 90% at 22% 12%, rgba(255,255,255,.34), rgba(255,255,255,0) 48%),
+    radial-gradient(120% 100% at 88% 96%, rgba(0,0,0,.20), rgba(0,0,0,0) 52%);
+}
+.card .card-icon, .card .card-label{ position:relative; z-index:1; }
+.card .card-num{ z-index:1; }
+.card::after{ box-shadow:0 2px 3px rgba(0,0,0,.25); }        /* the stalk casts a little shadow too */
+.card .card-icon{ box-shadow:0 2px 4px rgba(0,0,0,.28), inset 0 -2px 0 rgba(0,0,0,.08); }
+/* hover: the leaf lifts and tilts a little; its shadow grows and softens */
+@media (hover:hover){
+  .card:not(.flipped):not(.matched):hover{
+    transform:translateY(-5px) rotate(-1.2deg);
+    box-shadow:
+      inset 2px 3px 0 rgba(255,255,255,.34),
+      inset -3px -4px 0 rgba(0,0,0,.16),
+      0 2px 0 rgba(10,60,30,.55),
+      0 12px 16px -4px rgba(22,48,29,.26),
+      0 26px 32px -12px rgba(22,48,29,.40);
+  }
+}
+/* turned over: held up off the page */
+.card.flipped{
+  transform:translateY(-4px) scale(1.04);
+  background-image:linear-gradient(to top right, transparent calc(50% - 2.5px), rgba(120,90,10,.28) calc(50% - 1px), rgba(255,255,255,.6) 50%, transparent calc(50% + 1.5px));
+  box-shadow:
+    inset 2px 3px 0 rgba(255,255,255,.55),
+    inset -3px -4px 0 rgba(150,110,10,.22),
+    0 2px 0 #c99a14,
+    0 12px 16px -4px rgba(22,48,29,.26),
+    0 24px 30px -12px rgba(22,48,29,.40);
+}
+/* matched: the leaf settles back down, lower and calmer */
+.card.matched{
+  transform:none;
+  box-shadow:
+    inset 2px 3px 0 rgba(255,255,255,.26),
+    inset -3px -4px 0 rgba(0,0,0,.18),
+    0 1px 0 rgba(0,0,0,.25),
+    0 4px 8px -2px rgba(22,48,29,.24);
+}
+.card:active:not(.matched){ transform:translateY(-1px) scale(.99); }
+@media (max-width:600px){
+  .card{ --lift-shadow:
+    inset 2px 2px 0 rgba(255,255,255,.30), inset -2px -3px 0 rgba(0,0,0,.16),
+    0 2px 0 rgba(10,60,30,.55), 0 5px 8px -2px rgba(22,48,29,.28), 0 12px 18px -8px rgba(22,48,29,.34); }
+}
+@media (prefers-reduced-motion: reduce){
+  .card, .card:hover, .card.flipped{ transition:none; transform:none !important; }
+}
 </style>
 </head>
 
@@ -1127,13 +1198,13 @@ function playBlurp(){ const a = ac(); if(!a) return;
   note(a,{type:"square",f:260,to:90,dur:.32,vol:.16,lp:900}); }
 
 /* ══════════════════════════════════════════════════════════════
-   MUSIC — flora.mp3 in the main folder of the site (one level up from this page).
+   MUSIC — flora.mp3 in the same folder as this page (game/).
    It plays at a normal volume while the "How to play" plaque is open,
    softly in the background during the game, and swells up when a
    round is won (staying up until the next round starts). Browsers only allow music after the first tap or key,
    so it starts then. If flora.mp3 is missing, the game just carries on.
    ══════════════════════════════════════════════════════════════ */
-const MUSIC_FILE   = "game/flora.mp3";
+const MUSIC_FILE   = "flora.mp3";
 const VOL_INTRO    = .55;     /* plaque open */
 const VOL_GAME     = .14;     /* while playing */
 const VOL_WIN      = .6;      /* round won */
