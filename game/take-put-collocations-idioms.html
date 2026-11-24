@@ -806,18 +806,18 @@ header, .stage, .slide, .tile, .face, .link, .filter-btn, .made-chip, .level-bad
 .stage-top .stage-intro{ color:#17171c; text-shadow:none; }
 
 /* ══════════ PINK OPENING TILE (and winner screen) ══════════
-   Hot pink with black: the dark colours swapped round. Glossy, with the
-   same fine grain as the cards. */
+   A soft, dusty pink with black: the dark colours swapped round. Glossy,
+   with the same fine grain as the cards. (It was hot pink #ff5fae.) */
 .slide{ background:rgba(6,6,8,.6); }
 .slide-inner{
   --ink:#0d0d0f; --muted:#3a0d24; --accent:#0d0d0f;
-  background-color:#ff5fae;
-  background-image:linear-gradient(180deg, rgba(255,255,255,.35) 0%, rgba(255,255,255,.08) 38%, rgba(255,255,255,0) 40%, rgba(0,0,0,.10) 100%), var(--grain);
+  background-color:#eaa6c4;
+  background-image:linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,.08) 38%, rgba(255,255,255,0) 40%, rgba(0,0,0,.10) 100%), var(--grain);
   background-size:auto, 140px 140px;
   color:#0d0d0f; border:2px solid #0d0d0f;
-  box-shadow:0 8px 0 #0d0d0f, 0 24px 60px rgba(0,0,0,.55), 0 0 40px rgba(255,79,163,.45);
+  box-shadow:0 8px 0 #0d0d0f, 0 24px 60px rgba(0,0,0,.55), 0 0 30px rgba(234,166,196,.25);
 }
-.slide .level-badge{ background:#0d0d0f; color:#ff7cc0; box-shadow:none; }
+.slide .level-badge{ background:#0d0d0f; color:#f0bcd3; box-shadow:none; }
 .slide h2{ background:none; -webkit-background-clip:border-box; background-clip:border-box; color:#0d0d0f; -webkit-text-fill-color:#0d0d0f; }
 .slide .slide-sub{ color:#3a0d24; }
 .slide ol{ color:#0d0d0f; }
@@ -830,11 +830,11 @@ header, .stage, .slide, .tile, .face, .link, .filter-btn, .made-chip, .level-bad
 .slide .slide-eg strong{ color:#fff; }
 .slide .slide-eg .t-take, .slide .slide-eg .t-put{ padding:0; }
 /* Start playing: black and glossy, with pink letters */
-.slide-start{ background:linear-gradient(180deg, #3a3a40 0%, #141416 50%, #050506 100%); color:#ff7cc0; text-shadow:none;
-  box-shadow:inset 0 2px 0 rgba(255,255,255,.25), 0 6px 0 #5c0b3c, 0 12px 24px rgba(0,0,0,.45); }
-.slide-start:active{ box-shadow:inset 0 2px 0 rgba(255,255,255,.25), 0 2px 0 #5c0b3c; }
+.slide-start{ background:linear-gradient(180deg, #3a3a40 0%, #141416 50%, #050506 100%); color:#f0bcd3; text-shadow:none;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.25), 0 6px 0 #4a1d33, 0 12px 24px rgba(0,0,0,.45); }
+.slide-start:active{ box-shadow:inset 0 2px 0 rgba(255,255,255,.25), 0 2px 0 #4a1d33; }
 .slide-start:focus-visible{ outline:3px solid #0d0d0f; outline-offset:3px; }
-@media (hover:hover){ .slide-start:hover{ background:linear-gradient(180deg, #4a4a52 0%, #1e1e22 50%, #0a0a0c 100%); color:#ffb0da; } }
+@media (hover:hover){ .slide-start:hover{ background:linear-gradient(180deg, #4a4a52 0%, #1e1e22 50%, #0a0a0c 100%); color:#f7d3e3; } }
 .slide .link{ color:#0d0d0f; text-shadow:none; }
 @media (hover:hover){ .slide .link:hover{ color:#3a0d24; } }
 .slide .slide-links .link + .link{ border-left-color:rgba(0,0,0,.3); }
@@ -2279,18 +2279,25 @@ function paintGapScore(){
 
 /* ══════════ BACKGROUND VIDEO ══════════
    takeputbg.mp4, in the same folder as this page: one video for all three
-   levels. Skipped when the visitor has asked for less motion or to save data. */
+   levels. Skipped when the visitor has asked for less motion or to save data.
+   After VIDEO_FREEZE_AT seconds it stops and stays on that frame, like a
+   still photo, and nothing starts it again. */
+const VIDEO_FREEZE_AT = 10;
+let videoFrozen = false;
 const bgVideo = $("bgVideo");
 const calm = (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) ||
              (navigator.connection && navigator.connection.saveData);
 function startVideo(){
-  if(!bgVideo || calm || bgVideo.classList.contains("off")) return;
+  if(!bgVideo || calm || videoFrozen || bgVideo.classList.contains("off")) return;
   if(!bgVideo.getAttribute("src")) bgVideo.src = bgVideo.dataset.src;
   bgVideo.muted = true; bgVideo.defaultMuted = true;      /* phones only autoplay a muted video */
   const p = bgVideo.play(); if(p && p.catch) p.catch(() => {});
 }
 if(bgVideo){
   bgVideo.addEventListener("error", () => bgVideo.classList.add("off"));
+  bgVideo.addEventListener("timeupdate", () => {
+    if(!videoFrozen && bgVideo.currentTime >= VIDEO_FREEZE_AT){ videoFrozen = true; bgVideo.loop = false; bgVideo.pause(); }
+  });
   if(calm) bgVideo.classList.add("off"); else startVideo();
 }
 
