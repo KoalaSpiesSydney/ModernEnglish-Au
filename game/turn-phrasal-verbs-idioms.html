@@ -1122,9 +1122,9 @@ footer{ background:var(--ink90); color:#fff; border-top:0; box-shadow:none; font
 </head>
 <body data-level="1">
 
-<!-- Background picture: turn.png, and song: turn.mp3, both in the same folder as this page.
+<!-- Background picture: turn.png, and song: "Love Is Not A Straight Line - usesuno.com.mp3", both in the same folder as this page.
      (The video below is switched off in the Vogue style; the picture is set in the CSS.) -->
-<video class="bg-video" id="bgVideo" muted loop playsinline webkit-playsinline
+<video class="bg-video off" id="bgVideo" muted loop playsinline webkit-playsinline
        x5-playsinline x5-video-player-type="h5-page" disablepictureinpicture
        preload="none" aria-hidden="true" tabindex="-1" data-src="bg.mp4"></video>
 <div class="bg-overlay" aria-hidden="true"></div>
@@ -2147,7 +2147,8 @@ if(bgVideo){
    Browsers only allow music after a tap, so it starts with Start playing.
    The Sound link turns the music on and off too. It pauses when the tab
    is hidden. */
-const MUSIC_FILE = "turn.mp3";
+/* the song file's exact name, in the same folder as this page (spaces are fine: encodeURI handles them) */
+const MUSIC_FILE = encodeURI("Love Is Not A Straight Line - usesuno.com.mp3");
 const MUSIC_GAME = 0.15, MUSIC_WIN = 0.9, MUSIC_WIN_SECONDS = 120;
 let music = null, musicGain = null, musicBroken = false, musicStarted = false, swellTimer = null, mctx = null;
 /* iPhones and iPads ignore an audio player's own volume, so only there the
