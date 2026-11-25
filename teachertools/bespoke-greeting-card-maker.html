@@ -7,7 +7,7 @@
 <meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free Printable Christmas &amp; Greeting Card Maker | Fold from One Sheet</title>
-<meta name="description" content="Make Christmas, birthday, Eid, Diwali, Lunar New Year, thank-you and other greeting cards that fold from one sheet of A4, A3 or Letter paper. Leave the front blank to draw on, or add an emoji or your own picture. Choose a frame and a message, and print. Free for teachers and students. No sign-up.">
+<meta name="description" content="Make Christmas, birthday, Eid, Diwali, Lunar New Year, thank-you and other greeting cards that fold from one sheet of A4, A3 or Letter paper. Choose a vintage picture or a drawing to colour in, leave the front blank to draw on, or add your own picture. Choose a frame and a message, and print. Free for teachers and students. No sign-up.">
 <link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-greeting-card-maker.html">
 <meta property="og:title" content="Free Christmas &amp; Greeting Card Maker">
 <meta property="og:description" content="Printable cards that fold from one sheet of paper. Frames, messages and sentence starters for English learners.">
@@ -31,9 +31,8 @@
 <style>
 /* =====================================================================
    CHRISTMAS & GREETING CARD MAKER
-   One file, no server. Frames are drawn in code; emoji pictures are
-   Noto Emoji (Google, Apache 2.0) from the official set on GitHub, with
-   any copies in this folder as a backup. Every card and page is
+   One file, no server. Frames are drawn in code; the pictures are
+   public-domain and free-to-use images in the card-pictures folder. Every card and page is
    drawn on a <canvas>, so the preview, the PDF, the PNGs and the
    print-out are always identical. Nothing the teacher types leaves
    the browser.
@@ -115,7 +114,6 @@ input[type=text],input[type=number],input[type=search],select{width:100%;padding
 /* themes and words */
 .themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.6rem,1fr));gap:.4rem}
 .theme{display:flex;align-items:center;gap:.45rem;border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:.3rem .5rem;cursor:pointer;text-align:left;font-size:.88rem;line-height:1.2;min-height:44px}
-.theme img{width:26px;height:26px;flex:none}
 .theme[aria-pressed=true]{border-color:var(--deep);background:#eef2fb;font-weight:700;box-shadow:inset 0 0 0 1px var(--deep)}
 .words{display:grid;grid-template-columns:repeat(auto-fill,minmax(6.4rem,1fr));gap:.4rem;max-height:24rem;overflow:auto;padding:.1rem}
 .word{position:relative;border:1.5px solid var(--line);border-radius:8px;background:#fff;display:grid;justify-items:center;gap:.1rem;padding:.4rem .3rem .35rem;min-width:0}
@@ -130,10 +128,6 @@ input[type=text],input[type=number],input[type=search],select{width:100%;padding
 .word .x{position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:.7rem;padding:0;color:var(--soft)}
 .empty{margin:0;padding:.8rem;border:1.5px dashed var(--line);border-radius:8px;color:var(--soft);text-align:center}
 .search{display:grid;gap:.5rem}
-.results{display:grid;grid-template-columns:repeat(auto-fill,minmax(3.4rem,1fr));gap:.3rem}
-.results button{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:.25rem;cursor:pointer;display:grid;justify-items:center;font-size:.65rem;line-height:1.1;color:var(--soft);min-height:60px}
-.results button:hover{border-color:var(--deep)}
-.results img{width:36px;height:36px}
 .picking{border:1.5px solid var(--deep);border-radius:8px;padding:.6rem;background:#eef2fb}
 
 /* preview */
@@ -246,7 +240,6 @@ label.f small{font-weight:400;color:var(--soft)}
 .smallnote{font-size:.68rem;color:var(--amber);font-weight:700}
 #libWarn{color:var(--amber)}
 .libcredits a{color:var(--deep);font-weight:700}
-#emojis{grid-template-columns:repeat(auto-fill,minmax(4rem,1fr))}
 .frames{grid-template-columns:repeat(auto-fill,minmax(5rem,1fr))}
 .frames .pick canvas{width:50px;height:70px}
 .seg.wrap4{grid-auto-flow:row;grid-template-columns:1fr 1fr}
@@ -378,7 +371,6 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
           </div>
           <p class="lab" style="margin:.6rem 0 .3rem;font-weight:400;color:var(--soft)">Or use</p>
           <div class="seg" role="radiogroup" aria-label="More picture choices">
-            <label><input type="radio" name="src" value="emoji">An emoji picture</label>
             <label><input type="radio" name="src" value="own">Your own picture</label>
           </div></div>
         <div class="optbox" id="optLib" hidden>
@@ -386,14 +378,6 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
           <p class="hint warn" id="libWarn" hidden>This picture is best for small cards: A4 or Letter folded in quarters. On a bigger card it may print a little soft.</p>
           <p class="hint" id="libHint"></p>
           <details class="sub"><summary>Picture credits and links</summary><ul class="hint libcredits" id="libCredits"></ul></details>
-        </div>
-        <div class="optbox" id="optEmoji" hidden>
-          <div class="pics" id="emojis"></div>
-          <div class="search">
-            <label class="f"><span>Find another picture</span><input type="search" id="q" placeholder="e.g. reindeer, cake, sun" maxlength="40"></label>
-            <div class="results" id="results"></div>
-            <p class="hint" id="qHint">Pictures come from Noto Emoji by Google, free to use. Search only shows pictures that are suitable for children.</p>
-          </div>
         </div>
         <div class="optbox" id="optOwn" hidden>
           <div class="actions"><label class="btn" for="file">Choose a picture…</label><input type="file" id="file" accept="image/*" hidden><span class="hint" id="fileName"></span></div>
@@ -444,7 +428,7 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
             <label><input type="radio" name="style" value="colour">Full colour</label>
             <label><input type="radio" name="style" value="line">Colour in (black outlines)</label>
           </div>
-          <p class="hint" id="lineNote" hidden>The frame and the letters print as black outlines for students to colour. Saves ink, too. Emoji and your own pictures print in pale grey.</p></div>
+          <p class="hint" id="lineNote" hidden>The frame and the letters print as black outlines for students to colour. Saves ink, too. Your own pictures print in pale grey.</p></div>
         <label class="f"><span>Greeting font</span><select id="gfont"></select></label>
         <div id="tcolRow"><p class="lab">Greeting colour</p><div class="swatches" id="tcolSw"></div></div>
         <label class="f"><span>Message font</span><select id="mfont"></select></label>
@@ -568,7 +552,7 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
       </div>
     </div>
     <p id="status" role="status" aria-live="polite"></p>
-    <p class="fineprint">© Koala Spies Sydney. Emoji pictures: <a href="https://github.com/googlefonts/noto-emoji" target="_blank" rel="noopener">Noto Emoji</a> by Google, Apache License 2.0. <a href="#terms">Terms of use</a></p>
+    <p class="fineprint">© Koala Spies Sydney. <a href="#terms">Terms of use</a></p>
   </section>
 </main>
 
@@ -577,7 +561,7 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
     <h2>How it works</h2>
     <ol>
       <li>Choose an occasion. The greeting and message are filled in for you.</li>
-      <li>Leave the front blank for students to draw on, or add an emoji or your own picture. Choose your frame, fonts and colours.</li>
+      <li>Choose a vintage picture or a drawing to colour in, leave the front blank for students to draw on, or add your own picture. Choose your frame, fonts and colours.</li>
       <li>Choose how to fold it, and your paper. Print, fold, and give it to someone.</li>
     </ol>
   </div>
@@ -618,7 +602,6 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
     <ul>
       <li>The frames and card designs are © Koala Spies Sydney. You may use them freely on the cards you make here.</li>
       <li>The old pictures (engravings) are in the public domain. Each one is credited on the back of the card and in step 2.</li>
-      <li>The emoji pictures are <a href="https://github.com/googlefonts/noto-emoji" target="_blank" rel="noopener">Noto Emoji</a> by Google, used under the Apache License, Version 2.0. A copy of the licence is kept with the pictures on this site. Google does not endorse this tool. When you use one, the card's back says where it came from.</li>
       <li>The search keywords come from the Unicode Common Locale Data Repository (CLDR), used under the Unicode License.</li>
       <li>If you add your own picture, you are responsible for having the right to use it. Public-domain and CC0 pictures are free to use. The links on this page go to other websites, which have their own terms.</li>
     </ul>
@@ -641,7 +624,6 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
 
 <footer>
   <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-picture-bingo-kids.html">Picture bingo for kids</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="#terms">Terms of use</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
-  <p style="margin:.4rem 0 0;font-size:.8rem">Emoji pictures: Noto Emoji by Google, Apache License 2.0.</p>
 </footer>
 
 <div id="printArea" aria-hidden="true"></div>
@@ -653,12 +635,7 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
 // =====================================================================
 // SETTINGS YOU CAN EDIT
 // =====================================================================
-// the Noto Emoji pictures, from Google's official copy, pinned to one version so a Noto update cannot break the page
-const IMG_BASE = "https://raw.githubusercontent.com/googlefonts/noto-emoji/v2026-09-24-unicode18_0/2D/svg/";
-const IMG_BACKUP = "";                     // if that fails, look for the picture in this folder
-const INDEX_URL = "noto-index.json";        // the picture search list, next to this page
 const COPYRIGHT = "© Koala Spies Sydney · modernenglish.au";
-const EMOJI_CREDIT = "Picture: Noto Emoji (Google, Apache 2.0)";
 const STORE = "greeting-card-maker.draft.v1", PICSTORE = "greeting-card-maker.picture.v1";
 const PAPERS = { a4: [210, 297], a3: [297, 420], letter: [215.9, 279.4] };
 const PAPER_NAME = { a4: "A4", a3: "A3", letter: "Letter" };
@@ -686,71 +663,50 @@ const GFONTS = {
   poster:   { label: "Poster (Abril Fatface)", f: "Abril Fatface", b: 400, r: 400 }
 };
 const MFONTS = ["andika", "script", "caveat", "rounded", "friendly", "clear", "elegant", "oldbook"];
-// The occasions. draw = the suggested drawing, emoji = Noto pictures to offer first,
+// The occasions. draw = the suggested drawing,
 // starters = sentence starters for students to finish inside the card.
 const OCCASIONS = [
-  { id: "christmas", name: "Christmas", icon: "1f384", greeting: "Merry Christmas", colour: "#b3261e", frame: "lights", draw: "tree", gfont: "festive",
-    emoji: ["1f384", "1f385", "2603", "1f381", "2b50", "1f514", "1f98c", "1f36a", "2744", "1f56f", "1f9e6", "1f3c2"], message: "Wishing you a merry Christmas and a happy new year!", end: "Love from",
+  { id: "christmas", name: "Christmas", greeting: "Merry Christmas", colour: "#b3261e", frame: "lights", draw: "tree", gfont: "festive", message: "Wishing you a merry Christmas and a happy new year!", end: "Love from",
     starters: ["I hope you have…", "This Christmas I want to…", "Thank you for…"] },
-  { id: "holidays", name: "Happy holidays", icon: "2744", greeting: "Happy Holidays", line2: "and best wishes for the new year", colour: "#0e5c7a", frame: "snow", draw: "snowflake", gfont: "elegant",
-    emoji: ["2744", "26c4", "1f381", "2b50", "1f56f", "1f9e3", "1f31f", "1f3d6"], message: "Have a wonderful holiday. See you next year!", end: "From",
+  { id: "holidays", name: "Happy holidays", greeting: "Happy Holidays", line2: "and best wishes for the new year", colour: "#0e5c7a", frame: "snow", draw: "snowflake", gfont: "elegant", message: "Have a wonderful holiday. See you next year!", end: "From",
     starters: ["In the holidays I will…", "I hope you have…", "My favourite thing this year was…"] },
-  { id: "newyear", name: "New Year", icon: "1f386", greeting: "Happy New Year", colour: "#0e2861", frame: "confetti", draw: "star", gfont: "elegant",
-    emoji: ["1f386", "1f387", "1f389", "1f38a", "2b50", "1f31f", "1f973"], message: "Happy New Year! I hope it's a great one.", end: "From",
+  { id: "newyear", name: "New Year", greeting: "Happy New Year", colour: "#0e2861", frame: "confetti", draw: "star", gfont: "elegant", message: "Happy New Year! I hope it's a great one.", end: "From",
     starters: ["This year I want to…", "I hope you…", "Last year my favourite day was…"] },
-  { id: "birthday", name: "Birthday", icon: "1f382", greeting: "Happy Birthday!", colour: "#c2185b", frame: "bunting", draw: "cake", gfont: "fun",
-    emoji: ["1f382", "1f388", "1f389", "1f381", "1f973", "1f9c1", "1f38a", "1f36d"], message: "Have a wonderful birthday!", end: "From",
+  { id: "birthday", name: "Birthday", greeting: "Happy Birthday!", colour: "#c2185b", frame: "bunting", draw: "cake", gfont: "fun", message: "Have a wonderful birthday!", end: "From",
     starters: ["I hope you have…", "You are…", "I like you because…"] },
-  { id: "thanks", name: "Thank you", icon: "1f490", greeting: "Thank You", colour: "#0e7c66", frame: "flowers", draw: "flower", gfont: "script",
-    emoji: ["1f490", "1f33b", "1f496", "1f64f", "1f337", "1f31f", "1f381"], message: "Thank you so much. You are wonderful!", end: "From",
+  { id: "thanks", name: "Thank you", greeting: "Thank You", colour: "#0e7c66", frame: "flowers", draw: "flower", gfont: "script", message: "Thank you so much. You are wonderful!", end: "From",
     starters: ["Thank you for…", "You helped me to…", "I really liked…"] },
-  { id: "teacher", name: "Thank you, teacher", icon: "1f34e", greeting: "Thank You, Teacher!", colour: "#0e2861", frame: "stars", draw: "apple", gfont: "friendly",
-    emoji: ["1f34e", "1f4da", "270f", "1f31f", "1f3eb", "1f9d1_200d_1f3eb", "1f3c5"], message: "Thank you for helping me learn this year.", end: "From",
+  { id: "teacher", name: "Thank you, teacher", greeting: "Thank You, Teacher!", colour: "#0e2861", frame: "stars", draw: "apple", gfont: "friendly", message: "Thank you for helping me learn this year.", end: "From",
     starters: ["Thank you for…", "This year I learned…", "My favourite lesson was…"] },
-  { id: "mother", name: "Mother's Day", icon: "1f490", greeting: "Happy Mother's Day", colour: "#c2185b", frame: "hearts", draw: "flower", gfont: "script",
-    emoji: ["1f490", "1f339", "1f337", "1f496", "1f98b", "1f338", "2615"], message: "Thank you for everything you do. I love you!", end: "Love from",
+  { id: "mother", name: "Mother's Day", greeting: "Happy Mother's Day", colour: "#c2185b", frame: "hearts", draw: "flower", gfont: "script", message: "Thank you for everything you do. I love you!", end: "Love from",
     starters: ["Thank you for…", "I love it when we…", "You are the best because…"] },
-  { id: "father", name: "Father's Day", icon: "1f454", greeting: "Happy Father's Day", colour: "#1565c0", frame: "double", draw: "tie", gfont: "friendly",
-    emoji: ["1f454", "1f3c6", "2615", "1f527", "26bd", "1f496", "1f3a3"], message: "Thank you for everything you do. You're the best!", end: "Love from",
+  { id: "father", name: "Father's Day", greeting: "Happy Father's Day", colour: "#1565c0", frame: "double", draw: "tie", gfont: "friendly", message: "Thank you for everything you do. You're the best!", end: "Love from",
     starters: ["Thank you for…", "I love it when we…", "You are the best because…"] },
-  { id: "getwell", name: "Get well soon", icon: "1f308", greeting: "Get Well Soon", colour: "#0e7c66", frame: "flowers", draw: "rainbow", gfont: "rounded",
-    emoji: ["1f308", "1f33b", "1f490", "2600", "1fa79", "1f917", "1f375"], message: "I hope you feel better very soon.", end: "From",
+  { id: "getwell", name: "Get well soon", greeting: "Get Well Soon", colour: "#0e7c66", frame: "flowers", draw: "rainbow", gfont: "rounded", message: "I hope you feel better very soon.", end: "From",
     starters: ["I hope you…", "We miss you because…", "When you come back, we can…"] },
-  { id: "congrats", name: "Well done", icon: "1f389", greeting: "Congratulations!", colour: "#5b2a86", frame: "confetti", draw: "cap", gfont: "friendly",
-    emoji: ["1f389", "1f393", "1f3c6", "1f3c5", "1f31f", "1f38a", "1f44f"], message: "Well done! You worked so hard.", end: "From",
+  { id: "congrats", name: "Well done", greeting: "Congratulations!", colour: "#5b2a86", frame: "confetti", draw: "cap", gfont: "friendly", message: "Well done! You worked so hard.", end: "From",
     starters: ["Well done on…", "You worked hard to…", "I'm proud of you because…"] },
-  { id: "goodluck", name: "Good luck", icon: "1f340", greeting: "Good Luck!", colour: "#1b5e20", frame: "stars", draw: "rainbow", gfont: "rounded",
-    emoji: ["1f340", "1f31f", "1f308", "1f44d", "1f3c6", "1f4aa"], message: "Good luck! I know you can do it.", end: "From",
+  { id: "goodluck", name: "Good luck", greeting: "Good Luck!", colour: "#1b5e20", frame: "stars", draw: "rainbow", gfont: "rounded", message: "Good luck! I know you can do it.", end: "From",
     starters: ["Good luck with…", "I know you can…", "Don't forget to…"] },
-  { id: "friend", name: "Friendship", icon: "1f91d", greeting: "You're a Great Friend", colour: "#d9481f", frame: "hearts", draw: "koala", gfont: "friendly",
-    emoji: ["1f91d", "1f496", "1f60a", "1f308", "1f44b", "1f33b"], message: "Thank you for being my friend.", end: "From",
+  { id: "friend", name: "Friendship", greeting: "You're a Great Friend", colour: "#d9481f", frame: "hearts", draw: "koala", gfont: "friendly", message: "Thank you for being my friend.", end: "From",
     starters: ["You are a good friend because…", "I like it when we…", "Let's…"] },
-  { id: "welcome", name: "Welcome", icon: "1f44b", greeting: "Welcome!", colour: "#0e7c66", frame: "bunting", draw: "balloons", gfont: "friendly",
-    emoji: ["1f44b", "1f388", "1f31f", "1f3eb", "1f60a", "1f3e0"], message: "Welcome to our class! We're happy you're here.", end: "From",
+  { id: "welcome", name: "Welcome", greeting: "Welcome!", colour: "#0e7c66", frame: "bunting", draw: "balloons", gfont: "friendly", message: "Welcome to our class! We're happy you're here.", end: "From",
     starters: ["Welcome to…", "My name is…", "I hope you like…"] },
-  { id: "lunar", name: "Lunar New Year", icon: "1f3ee", greeting: "Happy Lunar New Year", colour: "#b3261e", frame: "corners", draw: "lantern", gfont: "elegant",
-    emoji: ["1f3ee", "1f9e7", "1f409", "1f9e8", "1f34a", "1f386"], message: "Wishing you health and happiness in the new year.", end: "From",
+  { id: "lunar", name: "Lunar New Year", greeting: "Happy Lunar New Year", colour: "#b3261e", frame: "corners", draw: "lantern", gfont: "elegant", message: "Wishing you health and happiness in the new year.", end: "From",
     starters: ["I hope the new year brings you…", "This year I want to…", "At Lunar New Year we…"] },
-  { id: "eid", name: "Eid", icon: "1f319", greeting: "Eid Mubarak", colour: "#0e2861", frame: "corners", draw: "moon", gfont: "elegant",
-    emoji: ["1f319", "2b50", "1f54c", "1f3ee", "1f31f", "1f381"], message: "Wishing you and your family a happy Eid.", end: "From",
+  { id: "eid", name: "Eid", greeting: "Eid Mubarak", colour: "#0e2861", frame: "corners", draw: "moon", gfont: "elegant", message: "Wishing you and your family a happy Eid.", end: "From",
     starters: ["I hope you…", "On Eid we…", "I am thankful for…"] },
-  { id: "diwali", name: "Diwali", icon: "1fa94", greeting: "Happy Diwali", colour: "#d9481f", frame: "lights", draw: "diya", gfont: "elegant",
-    emoji: ["1fa94", "1f386", "1f387", "1f31f", "1f338", "1f36c"], message: "Wishing you a bright and happy Diwali.", end: "From",
+  { id: "diwali", name: "Diwali", greeting: "Happy Diwali", colour: "#d9481f", frame: "lights", draw: "diya", gfont: "elegant", message: "Wishing you a bright and happy Diwali.", end: "From",
     starters: ["I hope your Diwali is…", "At Diwali we…", "I am thankful for…"] },
-  { id: "hanukkah", name: "Hanukkah", icon: "1f54e", greeting: "Happy Hanukkah", colour: "#1565c0", frame: "dots", draw: "menorah", gfont: "elegant",
-    emoji: ["1f54e", "1f56f", "2721", "1f369", "1f381"], message: "Wishing you a happy Hanukkah.", end: "From",
+  { id: "hanukkah", name: "Hanukkah", greeting: "Happy Hanukkah", colour: "#1565c0", frame: "dots", draw: "menorah", gfont: "elegant", message: "Wishing you a happy Hanukkah.", end: "From",
     starters: ["I hope your Hanukkah is…", "At Hanukkah we…", "I am thankful for…"] },
-  { id: "easter", name: "Easter", icon: "1f423", greeting: "Happy Easter", colour: "#5b2a86", frame: "flowers", draw: "egg", gfont: "rounded",
-    emoji: ["1f95a", "1f423", "1f430", "1f337", "1f33c", "1f98b", "1f36b"], message: "Have a happy Easter!", end: "From",
+  { id: "easter", name: "Easter", greeting: "Happy Easter", colour: "#5b2a86", frame: "flowers", draw: "egg", gfont: "rounded", message: "Have a happy Easter!", end: "From",
     starters: ["I hope you have…", "At Easter I like to…", "Thank you for…"] },
-  { id: "valentine", name: "Valentine's Day", icon: "1f496", greeting: "Happy Valentine's Day", colour: "#c2185b", frame: "hearts", draw: "heart", gfont: "script",
-    emoji: ["2764", "1f495", "1f339", "1f48c", "1f496", "1f9f8"], message: "You're a wonderful friend!", end: "From",
+  { id: "valentine", name: "Valentine's Day", greeting: "Happy Valentine's Day", colour: "#c2185b", frame: "hearts", draw: "heart", gfont: "script", message: "You're a wonderful friend!", end: "From",
     starters: ["You are special because…", "I like it when we…", "Thank you for…"] },
-  { id: "halloween", name: "Halloween", icon: "1f383", greeting: "Happy Halloween", colour: "#d9481f", frame: "confetti", draw: "pumpkin", gfont: "festive",
-    emoji: ["1f383", "1f47b", "1f987", "1f36c", "1f577", "1f9d9"], message: "Have a fun and spooky Halloween!", end: "From",
+  { id: "halloween", name: "Halloween", greeting: "Happy Halloween", colour: "#d9481f", frame: "confetti", draw: "pumpkin", gfont: "festive", message: "Have a fun and spooky Halloween!", end: "From",
     starters: ["This Halloween I will be…", "My favourite treat is…", "Something scary is…"] },
-  { id: "any", name: "Any occasion", icon: "1f48c", greeting: "Hello!", colour: "#0e2861", frame: "line", draw: "koala", gfont: "friendly",
-    emoji: ["1f48c", "1f31f", "1f60a", "1f308", "1f33b", "1f428"], message: "", end: "From",
+  { id: "any", name: "Any occasion", greeting: "Hello!", colour: "#0e2861", frame: "line", draw: "koala", gfont: "friendly", message: "", end: "From",
     starters: ["I hope you…", "Thank you for…", "I like…"] }
 ];
 const OCC_BY = {}; OCCASIONS.forEach(o => OCC_BY[o.id] = o);
@@ -786,7 +742,7 @@ const LIBRARY = [
   { group: "Colouring pictures", id: "nicu-sea-world", title: "Sea world", credit: "Openclipart (public domain)", info: "Clipart from Openclipart, shared as public domain. Artist to be added.", link: "", line: true },
   { group: "Colouring pictures", id: "deer-colouring", title: "Reindeer", credit: "line drawing, free to use", info: "Source and licence to be added.", link: "", line: true },
   { group: "Colouring pictures", id: "peacock-woodcut", title: "Peacock", credit: "old Italian woodcut (public domain)", info: "A very old woodcut of a peacock, from an Italian natural history book. Lots of fine detail, so it suits older children. Book and artist to be added.", link: "", line: true },
-  { group: "Colouring pictures", id: "tux", title: "Tux the penguin", credit: "Tux by Larry Ewing (lewing@isc.tamu.edu), made with The GIMP", info: "The Linux penguin. Not public domain, but free to use and change if you credit Larry Ewing and The GIMP, so the credit prints on the back of the card.", link: "", line: true }
+  { group: "Colouring pictures", id: "tux", title: "Tux the penguin", credit: "Tux by Larry Ewing (lewing@isc.tamu.edu), made with The GIMP", licence: "Free to use with this credit", info: "The Linux penguin. Not public domain, but free to use and change if you credit Larry Ewing and The GIMP, so the credit prints on the back of the card.", link: "", line: true }
 ];
 // where to find public-domain pictures (download, then use "Your picture")
 const PD_LINKS = [
@@ -1012,7 +968,7 @@ function fresh() {
   return {
     occ: o.id, greeting: o.greeting, line2: "", gpos: "top", gfont: o.gfont, mfont: "andika",
     style: "colour", tcol: "#b3261e", mcol: "#1f2937", fcol: "#b3261e", bgcol: "#b3261e", bg: "white", fsize: "m", fAll: false,
-    src: "space", lib: LIBRARY[0].id, emoji: o.emoji[0], picSize: "l", fit: "contain", credit: "", spaceLabel: false,
+    src: "space", lib: LIBRARY[0].id, picSize: "l", fit: "contain", credit: "", spaceLabel: false,
     frame: o.frame,
     in1: "blank", in2: "message", toWord: "Dear", toName: "", message: o.message, end: o.end, fromName: "", starters: o.starters.join("\n"), names: "", spacing: "big",
     back: "made", madeBy: "",
@@ -1022,7 +978,7 @@ function fresh() {
 }
 let S = fresh(), page = 0, pages = [], OWN = null;
 const ONE_OF = {
-  gpos: ["top", "bottom"], style: ["colour", "line"], bg: ["white", "soft", "strong"], fsize: ["s", "m", "l"], src: ["space", "vintage", "colourin", "emoji", "own"], picSize: ["s", "m", "l"],
+  gpos: ["top", "bottom"], style: ["colour", "line"], bg: ["white", "soft", "strong"], fsize: ["s", "m", "l"], src: ["space", "vintage", "colourin", "own"], picSize: ["s", "m", "l"],
   fit: ["contain", "cover"], in1: ["blank", "picture", "lines", "draw"], in2: ["message", "lines", "starters", "blank"], toWord: ["Dear", "To", "Hi", "Hello", ""],
   spacing: ["big", "normal"], back: ["made", "blank"], fold: ["quarter", "half"], shape: ["tall", "wide"], fmt: ["half", "wide", "quarter", "quarterw"], paper: ["a4", "a3", "letter"], inside: ["both", "outside"], out: ["sheets", "card", "fold"]
 };
@@ -1030,6 +986,7 @@ function tidy(o) {
   const d = fresh(); o = o && typeof o === "object" ? o : {};
   if (o.colour && !o.tcol) { o.tcol = o.fcol = o.bgcol = o.colour; }
   if (o.bg === "deep") o.bg = "strong";
+  if (o.src === "emoji") o.src = "space";
   if (o.src === "lib") { const p = LIBRARY.find(x => x.id === o.lib); o.src = p && p.line ? "colourin" : "vintage"; }
   const T = Object.assign(d, o);
   Object.keys(ONE_OF).forEach(k => { if (ONE_OF[k].indexOf(T[k]) < 0) T[k] = d[k] !== undefined ? fresh()[k] : ONE_OF[k][0]; });
@@ -1037,7 +994,6 @@ function tidy(o) {
   if (!GFONTS[T.gfont]) T.gfont = "festive";
   if (MFONTS.indexOf(T.mfont) < 0) T.mfont = "andika";
   if (!FRAME_BY[T.frame]) T.frame = "line";
-  if (!/^[0-9a-f_]{4,60}$/.test(T.emoji || "")) T.emoji = "1f384";
   if (!LIBRARY.some(p => p.id === T.lib)) T.lib = LIBRARY[0].id;
   ["tcol", "mcol", "fcol", "bgcol"].forEach(k => { if (!/^#[0-9a-f]{6}$/i.test(T[k])) T[k] = d[k]; });
   delete T.colour;
@@ -1055,25 +1011,13 @@ function namesList() { return S.names.split(/\n|,/).map(x => x.trim()).filter(Bo
 function cards() { const n = namesList(); return n.length ? n.map(to => ({ to })) : [{ to: S.toName.trim() }]; }
 
 // =====================================================================
-// NOTO EMOJI PICTURES: loaded once, as same-site images, so the canvas can export them
+// PICTURES
 // =====================================================================
-const picCache = {}, loaded = {}, greyCache = {};
-const imgUrl = code => IMG_BASE + "emoji_u" + code + ".svg";
-function loadPic(code) {
-  if (!code) return Promise.resolve(null);
-  if (picCache[code]) return picCache[code];
-  const get = url => fetch(url).then(r => { if (!r.ok) throw 0; return r.text(); });
-  picCache[code] = get(imgUrl(code)).catch(() => get(IMG_BACKUP + "emoji_u" + code + ".svg")).then(txt => {
-    if (!/<svg[^>]*\swidth=/.test(txt)) txt = txt.replace(/<svg/, '<svg width="512" height="512"');
-    return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = URL.createObjectURL(new Blob([txt], { type: "image/svg+xml" })); });
-  }).catch(() => null);
-  return picCache[code];
-}
+const greyCache = {};
 // the public-domain pictures on this site
 const libCache = {}, libLoaded = {};
 const isLib = () => S.src === "vintage" || S.src === "colourin";
 function loadLib(id) { if (!libCache[id]) libCache[id] = new Promise(res => { const im = new Image(); im.onload = () => { im.id = "lib" + id; libLoaded[id] = im; res(im); }; im.onerror = () => res(null); im.src = LIB_BASE + id + ".jpg"; }); return libCache[id]; }
-async function preload(list) { await Promise.all(list.map(code => loadPic(code).then(im => { loaded[code] = im; }))); }
 // a pale grey copy of a picture, to colour over
 function greyOf(key, im, w, h) {
   if (greyCache[key]) return greyCache[key];
@@ -1124,10 +1068,6 @@ const SIZES = { s: .62, m: .8, l: 1 };
 // the picture, inside a box
 function drawPicture(ctx, b, s, opts) {
   const line = S.style === "line", scale = opts && opts.scale || SIZES[S.picSize], cx = b.x + b.w / 2, cy = b.y + b.h / 2;
-  if (S.src === "emoji") {
-    const im = loaded[S.emoji], side = Math.min(b.w, b.h) * scale * .92; if (!im) return;
-    ctx.drawImage(line ? greyOf("e" + S.emoji, im, 512, 512) : im, cx - side / 2, cy - side / 2, side, side); return;
-  }
   if (S.src === "own" || isLib()) {
     const IMG = S.src === "own" ? OWN : libLoaded[S.lib];
     const LP = isLib() ? LIBRARY.find(p => p.id === S.lib) : null, isLine = !!(LP && LP.line);
@@ -1237,14 +1177,13 @@ function drawBackPanel(ctx, w, h) {
   const s = Math.min(w, h) / 105, cx = w / 2, r = S.fAll ? framed(ctx, w, h) : null, foot = r ? r.y + r.h - 1 * s : h - 8.5 * s;
   if (S.back === "made") {
     const side = Math.min(w, h) * .2, line = S.style === "line";
-    if (S.src === "emoji" && loaded[S.emoji]) ctx.drawImage(line ? greyOf("e" + S.emoji, loaded[S.emoji], 512, 512) : loaded[S.emoji], cx - side / 2, h * .32 - side / 2, side, side);
     const z = Math.min(4.6 * s, 6.5); ctx.font = mFont(z); ctx.fillStyle = MC(); ctx.textBaseline = "alphabetic";
     const lead = "Made by" + (S.madeBy ? " " + S.madeBy : "");
     if (S.madeBy) { ctx.textAlign = "center"; ctx.fillText(lead, cx, h * .55); }
     else { const tw = ctx.measureText(lead).width, lw = Math.min(w * .42, 40 * s), x0 = cx - (tw + lw + 2) / 2; ctx.textAlign = "left"; ctx.fillText(lead, x0, h * .55); ctx.strokeStyle = RULE; ctx.lineWidth = .25; ctx.beginPath(); ctx.moveTo(x0 + tw + 2, h * .55 + .6); ctx.lineTo(x0 + tw + 2 + lw, h * .55 + .6); ctx.stroke(); }
   }
   const lp = LIBRARY.find(p => p.id === S.lib);
-  const credit = S.src === "emoji" ? EMOJI_CREDIT : isLib() && lp ? "Picture: " + lp.title + ", " + lp.credit + " (public domain)" : (S.src === "own" && S.credit.trim()) ? "Picture: " + S.credit.trim() : "";
+  const credit = isLib() && lp ? "Picture: " + lp.title + ", " + lp.credit + (lp.licence ? "" : " (public domain)") : (S.src === "own" && S.credit.trim()) ? "Picture: " + S.credit.trim() : "";
   if (credit) { ctx.font = uiFont(2 * s); const cl = wrapLines(ctx, credit, w - 16 * s).slice(0, 3); cl.forEach((l, i) => smallPrint(ctx, l, cx, foot - 3.5 * s - (cl.length - 1 - i) * 2.6 * s, 2 * s)); }
   smallPrint(ctx, COPYRIGHT, cx, foot, 2.2 * s);
 }
@@ -1437,14 +1376,13 @@ function renderPage(canvas, pg, pxPerMm) {
 // =====================================================================
 let drawQueued = false, turned = false, zoom = 1;
 const ZOOMS = [1, 1.5, 2, 3];
-function neededPics() { const c = new Set(); if (S.src === "emoji") c.add(S.emoji); return Array.from(c); }
 function fontsReady() {
   if (!(document.fonts && document.fonts.load)) return Promise.resolve();
   return Promise.all([gFont(20), gFont(20, 400), mFont(20), mFont(20, true), uiFont(20), uiFont(20, true), '700 20px "Source Serif 4"'].map(f => document.fonts.load(f).catch(() => {})));
 }
 async function redraw() {
   if (drawQueued) return; drawQueued = true;
-  await preload(neededPics()); if (isLib()) await loadLib(S.lib); await fontsReady();
+  if (isLib()) await loadLib(S.lib); await fontsReady();
   requestAnimationFrame(() => {
     drawQueued = false;
     pages = buildPages(); page = clamp(page, 0, Math.max(0, pages.length - 1));
@@ -1498,14 +1436,14 @@ $("preview").addEventListener("click", e => {
 function pick(cls, label, pressed, data) { const b = el("button", "pick" + (cls ? " " + cls : "")); b.type = "button"; b.setAttribute("aria-pressed", pressed); b.title = label; Object.assign(b.dataset, data); return b; }
 function buildOccs() {
   const box = $("occs"); box.textContent = "";
-  OCCASIONS.forEach(o => { const b = el("button", "theme"); b.type = "button"; b.dataset.id = o.id; const im = el("img"); im.src = imgUrl(o.icon); im.alt = ""; im.loading = "lazy"; b.append(im, document.createTextNode(o.name)); box.appendChild(b); });
+  OCCASIONS.forEach(o => { const b = el("button", "theme"); b.type = "button"; b.dataset.id = o.id; b.textContent = o.name; box.appendChild(b); });
 }
 function syncOccs() { document.querySelectorAll("#occs .theme").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === S.occ)); }
 function applyOccasion(id) {
   const o = OCC_BY[id]; if (!o) return;
-  Object.assign(S, { occ: id, greeting: o.greeting, line2: o.line2 || "", emoji: o.emoji[0], message: o.message, end: o.end, starters: o.starters.join("\n") });
+  Object.assign(S, { occ: id, greeting: o.greeting, line2: o.line2 || "", message: o.message, end: o.end, starters: o.starters.join("\n") });
 }
-$("occs").addEventListener("click", e => { const b = e.target.closest(".theme"); if (!b) return; applyOccasion(b.dataset.id); syncOccs(); buildEmojis(); syncForm(); changed(); say(OCC_BY[S.occ].name + ": the greeting and message have changed. Your fonts, colours and frame stay as you chose them."); });
+$("occs").addEventListener("click", e => { const b = e.target.closest(".theme"); if (!b) return; applyOccasion(b.dataset.id); syncOccs(); syncForm(); changed(); say(OCC_BY[S.occ].name + ": the greeting and message have changed. Your fonts, colours and frame stay as you chose them."); });
 function buildLib() {
   const box = $("libs"), list = $("libCredits"); box.textContent = ""; list.textContent = "";
   let group = "";
@@ -1515,7 +1453,7 @@ function buildLib() {
     if (p.group !== group) { group = p.group; box.appendChild(el("p", "libgroup", group)); }
     const b = pick("", p.title, p.id === S.lib, { id: p.id }), im = el("img"); im.src = LIB_BASE + "thumb-" + p.id + ".jpg"; im.alt = ""; im.loading = "lazy"; b.append(im, el("span", "", p.title)); if (p.small) b.appendChild(el("small", "smallnote", "Best for small cards")); box.appendChild(b);
     const li = el("li"); if (p.link) { const a = el("a", "", p.title); a.href = p.link; a.target = "_blank"; a.rel = "noopener"; li.appendChild(a); } else li.appendChild(el("b", "", p.title));
-    li.appendChild(document.createTextNode(": " + p.credit + ". Public domain." + (p.info ? " " + p.info : ""))); list.appendChild(li);
+    li.appendChild(document.createTextNode(": " + p.credit + ". " + (p.licence || "Public domain") + "." + (p.info ? " " + p.info : ""))); list.appendChild(li);
   });
 }
 $("libs").addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return; S.lib = b.dataset.id; document.querySelectorAll("#libs .pick").forEach(x => x.setAttribute("aria-pressed", x === b)); changed(true); });
@@ -1524,12 +1462,6 @@ function libWarn() {
   const p = LIBRARY.find(x => x.id === S.lib), big = S.paper === "a3" || S.fold !== "quarter";
   $("libWarn").hidden = !(isLib() && p && p.small && big);
 }
-function buildEmojis() {
-  const box = $("emojis"); box.textContent = "";
-  const list = OCC_BY[S.occ].emoji.slice(); if (list.indexOf(S.emoji) < 0) list.unshift(S.emoji);
-  list.forEach(c => { const b = pick("", "", c === S.emoji, { c }), im = el("img"); im.src = imgUrl(c); im.alt = ""; im.loading = "lazy"; b.appendChild(im); b.setAttribute("aria-label", "Picture " + c); box.appendChild(b); });
-}
-$("emojis").addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return; S.emoji = b.dataset.c; document.querySelectorAll("#emojis .pick").forEach(x => x.setAttribute("aria-pressed", x === b)); changed(true); });
 function buildFrames() {
   const box = $("frames"), cc = cardColours(), line = cc.line, bg = cc.bg; box.textContent = "";
   FRAMES.forEach(f => {
@@ -1541,35 +1473,6 @@ function buildFrames() {
 }
 $("frames").addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return; S.frame = b.dataset.id; document.querySelectorAll("#frames .pick").forEach(x => x.setAttribute("aria-pressed", x === b)); changed(true); });
 
-// ---------- search: all child-safe Noto pictures ----------
-let INDEX = null;
-async function index() {
-  if (INDEX) return INDEX;
-  try { INDEX = await (await fetch(INDEX_URL)).json(); } catch (e) { INDEX = []; $("qHint").textContent = "The picture search didn't load. You can still choose one of the pictures above."; }
-  return INDEX;
-}
-function searchPics(q) {
-  q = q.toLowerCase().trim(); if (!q || !INDEX) return [];
-  const words = q.split(/\s+/), scored = [];
-  INDEX.forEach(([c, n, k]) => {
-    const name = n.toLowerCase(), kw = k.toLowerCase().split("|"); let s = 0;
-    if (name === q) s = 100; else if (name.split(/\s+/).indexOf(q) > -1) s = 80; else if (name.startsWith(q)) s = 70;
-    else if (kw.indexOf(q) > -1) s = 60; else if (words.every(w => name.indexOf(w) > -1 || kw.some(x => x.startsWith(w)))) s = 40;
-    if (s) scored.push([s - name.length / 100, c, n]);
-  });
-  return scored.sort((a, b) => b[0] - a[0]).slice(0, 30);
-}
-let qTimer = 0;
-$("q").addEventListener("focus", index);
-$("q").addEventListener("input", () => { clearTimeout(qTimer); qTimer = setTimeout(showResults, 150); });
-async function showResults() {
-  await index();
-  const q = $("q").value.trim(), box = $("results"); box.textContent = ""; if (!q) return;
-  const res = searchPics(q);
-  res.forEach(([, c, n]) => { const b = el("button"); b.type = "button"; b.dataset.c = c; b.title = n; const im = el("img"); im.src = imgUrl(c); im.alt = n; im.loading = "lazy"; b.append(im, document.createTextNode(n.length > 14 ? n.slice(0, 13) + "…" : n)); box.appendChild(b); });
-  if (!res.length) box.appendChild(el("p", "hint", "No picture for “" + q + "”. Try another word."));
-}
-$("results").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; S.emoji = b.dataset.c; $("q").value = ""; $("results").textContent = ""; buildEmojis(); changed(true); say("Picture chosen: " + b.title + "."); });
 
 // ---------- your own picture ----------
 function useOwn(im, keep) {
@@ -1604,7 +1507,7 @@ function syncForm() {
   RADIOS.forEach(n => document.querySelectorAll('input[name="' + n + '"]').forEach(r => { r.checked = String(S[n]) === r.value; }));
   TEXTS.forEach(id => { if ($(id) !== document.activeElement) $(id).value = S[id]; });
   $("gfont").value = S.gfont; $("mfont").value = S.mfont; $("toWord").value = S.toWord; $("spaceLabel").checked = S.spaceLabel; $("fAll").checked = S.fAll; $("marks").checked = S.marks;
-  show("optEmoji", S.src === "emoji"); show("optLib", isLib()); show("fitRow", S.src === "own" || isLib()); show("optOwn", S.src === "own"); show("optSpace", S.src === "space");
+  show("optLib", isLib()); show("fitRow", S.src === "own" || isLib()); show("optOwn", S.src === "own"); show("optSpace", S.src === "space");
   const line = S.style === "line"; ["tcolRow", "mcolRow", "fcolRow", "bgRow"].forEach(id => show(id, !line)); show("bgcolRow", !line && S.bg !== "white"); show("lineNote", line);
   const wide = S.shape === "wide"; $("gposA").textContent = wide ? "On the right" : "At the top"; $("gposB").textContent = wide ? "On the left" : "At the bottom"; $("in1Lab").textContent = wide ? "Inside top" : "Inside left"; $("in2Lab").textContent = wide ? "Inside bottom (the message)" : "Inside right (the message)";
   const letter = ["message", "lines", "starters"].indexOf(S.in2) > -1;
@@ -1646,7 +1549,7 @@ function swatchRow(key) {
 ["tcol", "mcol", "fcol", "bgcol"].forEach(swatchRow);
 $("prevBtn").onclick = () => { page = Math.max(0, page - 1); redraw(); };
 $("nextBtn").onclick = () => { page = Math.min(pages.length - 1, page + 1); redraw(); };
-$("resetBtn").onclick = () => { try { localStorage.removeItem(STORE); localStorage.removeItem(PICSTORE); } catch (e) {} S = fresh(); OWN = null; $("fileName").textContent = ""; syncOccs(); buildEmojis(); buildFrames(); syncForm(); changed(); say("Started again."); };
+$("resetBtn").onclick = () => { try { localStorage.removeItem(STORE); localStorage.removeItem(PICSTORE); } catch (e) {} S = fresh(); OWN = null; $("fileName").textContent = ""; syncOccs(); buildFrames(); syncForm(); changed(); say("Started again."); };
 
 // ---------- a link to this card ----------
 const b64u = bytes => { let s = ""; for (let i = 0; i < bytes.length; i += 8192) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192)); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); };
@@ -1669,7 +1572,7 @@ function slug(t) { return String(t).replace(/[^\w\- ]+/g, "").trim().replace(/\s
 function fileBase() { return (slug(S.greeting) || "greeting") + (S.out === "fold" ? "-how-to-fold" : "-card"); }
 async function busy(job) {
   const all = [$("pdfBtn"), $("pngBtn"), $("printBtn")]; all.forEach(b => b.disabled = true);
-  try { await preload(neededPics()); if (isLib()) await loadLib(S.lib); await fontsReady(); await job(); } catch (e) { console.error(e); say("Something went wrong making the file. Try again, or use Print."); }
+  try { if (isLib()) await loadLib(S.lib); await fontsReady(); await job(); } catch (e) { console.error(e); say("Something went wrong making the file. Try again, or use Print."); }
   all.forEach(b => b.disabled = false);
 }
 const dpiFor = () => (S.paper === "a3" ? 200 : 250) / 25.4;
@@ -1749,7 +1652,7 @@ $("printBtn").onclick = () => busy(async () => {
   if (!set) { try { const s = localStorage.getItem(STORE); if (s) set = tidy(JSON.parse(s)); } catch (e) {} }
   S = set || fresh();
   try { const p = localStorage.getItem(PICSTORE); if (p) { useOwn(await imageFrom(p), false); $("fileName").textContent = "Your picture from last time"; } } catch (e) {}
-  buildOccs(); syncOccs(); buildLib(); buildEmojis(); buildFrames(); buildLinks(); syncForm(); redraw();
+  buildOccs(); syncOccs(); buildLib(); buildFrames(); buildLinks(); syncForm(); redraw();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => redraw());
 })();
 </script>
