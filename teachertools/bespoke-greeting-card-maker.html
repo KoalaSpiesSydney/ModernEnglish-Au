@@ -71,10 +71,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .subblock{display:grid;gap:.5rem;justify-items:start;max-width:54ch}
 .appinstall{border:0;border-radius:4px;background:#ff7a1a;color:#1c1c1c;font-weight:800;font-size:.88rem;padding:.45rem .9rem;min-height:38px;cursor:pointer}
 .appinstall:hover{background:#ff9b3d}
-.top .beta{display:inline-block;vertical-align:middle;margin-left:.6rem;padding:.1rem .6rem;border-radius:999px;background:var(--amber);color:#fff;font-family:"Source Sans 3",system-ui,Arial,sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.testing-note{max-width:1400px;margin:1rem auto 0;padding:0 1.25rem}
-.testing-note p{margin:0;font-size:.9rem;background:var(--amberbg);border:1px solid var(--amberline);border-left:4px solid var(--amber);border-radius:6px;padding:.55rem .8rem}
-.testing-note a{color:var(--deep);font-weight:700}
 
 .bench{max-width:1400px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(320px,500px) minmax(0,1fr);gap:1.5rem;align-items:start}
 .controls{display:grid;gap:.75rem;min-width:0}
@@ -131,7 +127,7 @@ input[type=text],input[type=number],input[type=search],select{width:100%;padding
 .picking{border:1.5px solid var(--deep);border-radius:8px;padding:.6rem;background:#eef2fb}
 
 /* preview */
-.stage{position:sticky;top:1rem;display:grid;gap:.7rem;min-width:0}
+.stage{position:sticky;top:1rem;display:grid;gap:.7rem;min-width:0;max-height:calc(100vh - 2rem);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .outs{display:flex;gap:.35rem;flex-wrap:wrap}
 .outs button{border:1.5px solid var(--line);background:#fff;border-radius:6px;padding:.35rem .9rem;font-weight:700;cursor:pointer;min-height:40px}
 .outs button[aria-pressed=true]{background:var(--deep);border-color:var(--deep);color:#fff}
@@ -178,7 +174,7 @@ footer a{color:#fff}
 #printArea{display:none}
 @media (max-width:980px){
   .bench{grid-template-columns:minmax(0,1fr);padding:1rem}
-  .stage{position:static;order:-1}
+  .stage{position:static;order:-1;max-height:none;overflow:visible}
   #preview{max-height:62vh}
 }
 /* ---------- open layout: no card backings, no horizontal lines, raised buttons ---------- */
@@ -187,8 +183,6 @@ details.group{margin-bottom:.35rem}
 details.group>summary{padding-left:0;padding-right:0}
 .group-body,.terms-in{padding-left:0;padding-right:0}
 .notes h2{border-bottom:0;padding-bottom:0}
-.testing-note p{background:none;border:0;border-radius:0;padding:0;color:#92400e}
-.top .beta{border-radius:4px}
 .btn{box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
 .btn:not([disabled]):hover{box-shadow:0 2px 4px rgba(15,23,42,.22),0 12px 24px -8px rgba(15,23,42,.48);transform:translateY(-1px)}
 .btn:not([disabled]):active{box-shadow:0 1px 2px rgba(15,23,42,.28);transform:translateY(0)}
@@ -266,6 +260,7 @@ details.group.flash>summary{animation:flash 1.6s ease}
 #outsHint:empty{display:none}
 .supportbox{display:flex;align-items:center;justify-content:space-between;gap:.6rem 1rem;flex-wrap:wrap;padding:.7rem .9rem;border-radius:8px;background:#fff6e5}
 .supportbox p{margin:0;font-size:.92rem;color:var(--soft);flex:1 1 16rem}
+.supportbox .thanks{display:block;margin-top:.25rem;font-style:italic;color:var(--ink)}
 .btn.support{display:inline-flex;align-items:center;gap:.4rem;border-color:#ff7a1a;background:#ff7a1a;color:#1c1c1c;text-decoration:none;font-weight:800}
 .btn.support:hover{background:#ff9b3d}
 .btn.support span{color:#b3261e;font-size:1.1em;line-height:1}
@@ -310,7 +305,7 @@ details.group.flash>summary{animation:flash 1.6s ease}
 
 <header class="top">
   <div class="top-in">
-    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1>Christmas &amp; Greeting Card Maker<span class="beta">Testing</span></h1></div>
+    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1>Christmas &amp; Greeting Card Maker</h1></div>
     <div class="subblock">
       <p>Free for teachers and students. Choose an occasion, a picture and a frame, then print a card that folds from one sheet of paper. No sign-up.</p>
       <button type="button" class="appinstall" id="appInstall" hidden>Install Teacher Tools as an app</button>
@@ -355,9 +350,6 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
 </details>
 </nav>
 <script>try{if(window.matchMedia("(max-width:640px)").matches)document.getElementById("meMenu").open=false}catch(e){}</script>
-
-<!-- TESTING: remove this block and the "Testing" badge in the header when the tool leaves testing. -->
-<div class="testing-note"><p><b>This tool is new and in testing.</b> Please print and fold one card before you print a class set. Found a problem or have an idea? <a href="https://modernenglish.au/contact.html">Tell us</a>.</p></div>
 
 <!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
 
@@ -577,7 +569,7 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
     <!-- SUPPORT: the PayPal fundraiser for the Christmas campaign. When it ends, change the link in 3 places:
          here, in the footer, and SITE_SUPPORT in the script. -->
     <div class="supportbox">
-      <p>This tool is free, with no sign-up. Help us bring real art by real artists to Christmas cards.</p>
+      <p>This tool is free, with no sign-up. Help us bring real art by real artists to Christmas cards. <span class="thanks">Thank you to the people who find and curate the pictures, and to the artists who create them.</span></p>
       <a class="btn support" href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener"><span aria-hidden="true">♥</span> Support real art on Christmas cards</a>
     </div>
     <p class="fineprint">© Koala Spies Sydney. <a href="#terms">Terms of use</a></p>
@@ -748,6 +740,7 @@ const LIB_BASE = "card-pictures/";
 // small: true = a smaller file, best for small cards
 // SUPPORT THE ARTIST (optional): add these two to a picture by a living artist who has agreed to it.
 //   artist:  "Jane Smith"                          the name shown with the link
+//   byline:  "Hand-drawn in Sydney by Jane Smith"  printed on the back of the card (optional)
 //   support: "https://www.paypal.me/janesmith"     the artist's OWN link (PayPal.Me, Ko-fi, their shop…), from them directly
 // Example: { group: "Colouring pictures", id: "jane-wombat", title: "Wombat", credit: "Jane Smith", artist: "Jane Smith", support: "https://www.paypal.me/janesmith", link: "", line: true },
 // The link shows on the website only (step 2), never on the printed card. Money goes straight to the artist.
@@ -775,11 +768,10 @@ const LIBRARY = [
   { group: "Other animals", id: "nps-ekgmowechashala", title: "Ekgmowechashala, an ancient primate", credit: "US National Park Service (NPS Paleontology)", info: "Drawing of Ekgmowechashala zancanellai, an adapid primate that lived in North America about 30 million years ago. Works of the US government are public domain.", link: "" },
   // line: true = a drawing to colour in. It prints in black lines, and its white paper takes the card's background colour.
   // modern: true = the Contemporary art gallery. These are NOT public domain: use them only with the artist's permission.
-  // MOCK-UP: replace the three JKL pictures below with the real titles and file names when the art arrives,
-  // and change JKLNAME to JKL's own PayPal.Me name.
-  { group: "JKL", id: "jkl-artwork-1", title: "Artwork 1 (title to come)", credit: "JKL", licence: "Used with the artist's permission", artist: "JKL", support: "https://www.paypal.me/JKLNAME", info: "Contemporary art by JKL, used on these cards with the artist's permission.", link: "", modern: true },
-  { group: "JKL", id: "jkl-artwork-2", title: "Artwork 2 (title to come)", credit: "JKL", licence: "Used with the artist's permission", artist: "JKL", support: "https://www.paypal.me/JKLNAME", info: "Contemporary art by JKL, used on these cards with the artist's permission.", link: "", modern: true },
-  { group: "JKL", id: "jkl-artwork-3", title: "Artwork 3 (title to come)", credit: "JKL", licence: "Used with the artist's permission", artist: "JKL", support: "https://www.paypal.me/JKLNAME", info: "Contemporary art by JKL, used on these cards with the artist's permission.", link: "", modern: true },
+  // To add JLK's PayPal or shop link, add  support: "https://…"  to her line (her own link, from her).
+  { group: "JLK (Justine Kelly)", id: "jlk-koala-tiger-onesie", title: "Koala in a Tiger Onesy", credit: "© Justine Kelly (JLK), 2018", licence: "Used with the artist's permission", artist: "Justine Kelly", byline: "Hand-drawn in Sydney by Justine Kelly", info: "Hand-drawn in Sydney by Justine Kelly (JLK), 2018. Used on these cards with the artist's permission.", link: "", modern: true },
+  { group: "JLK (Justine Kelly)", id: "jlk-panda-dressed-as-koala", title: "Panda dressed up as Koala", credit: "© Justine Kelly (JLK)", licence: "Used with the artist's permission", artist: "Justine Kelly", byline: "Hand-drawn in Sydney by Justine Kelly", info: "Hand-drawn in Sydney by Justine Kelly (JLK). Used on these cards with the artist's permission.", link: "", modern: true },
+  { group: "JLK (Justine Kelly)", id: "jlk-koala-dressed-as-panda", title: "Koala dressed up as Panda", credit: "© Justine Kelly (JLK)", licence: "Used with the artist's permission", artist: "Justine Kelly", byline: "Hand-drawn in Sydney by Justine Kelly", info: "Hand-drawn in Sydney by Justine Kelly (JLK). Used on these cards with the artist's permission.", link: "", modern: true },
   { group: "Colouring pictures", id: "poinsettia-line-art", title: "Poinsettia and berries", credit: "line drawing, free to use", info: "Source and licence to be added.", link: "", line: true },
   { group: "Colouring pictures", id: "nicu-christmas-tree", title: "Christmas tree", credit: "Nicu Buculei, Openclipart (public domain)", info: "Clipart drawing by Nicu Buculei, shared on Openclipart as public domain.", link: "", line: true },
   { group: "Colouring pictures", id: "nicu-birthday-cake", title: "Birthday cake", credit: "Nicu Buculei, Openclipart (public domain)", info: "Clipart drawing by Nicu Buculei, shared on Openclipart as public domain.", link: "", line: true },
@@ -1231,7 +1223,10 @@ function drawBackPanel(ctx, w, h) {
   }
   const lp = LIBRARY.find(p => p.id === S.lib);
   const credit = isLib() && lp ? "Picture: " + lp.title + ", " + lp.credit + (lp.licence ? "" : " (public domain)") : (S.src === "own" && S.credit.trim()) ? "Picture: " + S.credit.trim() : "";
-  if (credit) { ctx.font = uiFont(2 * s); const cl = wrapLines(ctx, credit, w - 16 * s).slice(0, 3); cl.forEach((l, i) => smallPrint(ctx, l, cx, foot - 3.5 * s - (cl.length - 1 - i) * 2.6 * s, 2 * s)); }
+  let creditTop = foot;
+  if (credit) { ctx.font = uiFont(2 * s); const cl = wrapLines(ctx, credit, w - 16 * s).slice(0, 3); cl.forEach((l, i) => smallPrint(ctx, l, cx, foot - 3.5 * s - (cl.length - 1 - i) * 2.6 * s, 2 * s)); creditTop = foot - 3.5 * s - (cl.length - 1) * 2.6 * s; }
+  // contemporary art: "Hand-drawn in Sydney by …", a little bigger, above the credit
+  if (isLib() && lp && lp.byline) { ctx.font = "italic 700 " + (3.2 * s) + 'px "Source Serif 4", Georgia, serif'; ctx.fillStyle = S.style === "line" ? "#111111" : INK; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic"; wrapLines(ctx, lp.byline, w - 16 * s).slice(0, 2).reverse().forEach((l, i) => ctx.fillText(l, cx, creditTop - 5.5 * s - i * 4 * s)); }
   smallPrint(ctx, COPYRIGHT, cx, foot, 2.2 * s);
 }
 function drawPanel(ctx, role, w, h, card) {
@@ -1445,9 +1440,20 @@ async function redraw() {
     if (pg.to) bits.push(pg.to); if (pg.side === "outside") bits.push("outside"); if (pg.side === "inside") bits.push("inside (print on the back)");
     $("pagerText").textContent = S.out === "card" ? "Card " + (page + 1) + " of " + pages.length + (pg.to ? " · " + pg.to : "") : bits.join(" · ");
     const n = printPages().length; $("pdfBtn").textContent = "Download PDF (" + n + (n === 1 ? " page)" : " pages)");
-    hints();
+    hints(); fitStage();
   });
 }
+// On a wide screen the preview panel stays in view as you scroll. Shrink the preview so the whole
+// panel (buttons and support box included) fits in the window, instead of hiding below it.
+function fitStage() {
+  const cv = $("preview"), st = document.querySelector(".stage");
+  if (window.innerWidth <= 980 || zoom > 1) { cv.style.maxHeight = ""; return; }
+  cv.style.maxHeight = "";
+  const other = st.scrollHeight - cv.offsetHeight, room = window.innerHeight - 40 - other;
+  cv.style.maxHeight = Math.max(280, Math.min(room, window.innerHeight * .74)) + "px";
+}
+let fitTimer = 0;
+window.addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitStage, 120); });
 function hints() {
   const g = geom(), two = S.fold !== "quarter" && S.inside === "both", n = namesList().length;
   $("foldHint").textContent = cardSizeText() + ". " + (S.fold === "quarter" ? "Prints on one side of the paper: fold it in half, then in half again. Part of the page prints upside down so it's the right way up when you fold it."
