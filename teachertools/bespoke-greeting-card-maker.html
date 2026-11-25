@@ -264,6 +264,25 @@ details.group.flash>summary{animation:flash 1.6s ease}
 .sw[data-c="#ffffff"],.sw[data-c="#f6e7c1"]{box-shadow:0 0 0 1.5px #94a3b8,0 6px 14px -4px rgba(15,23,42,.42)}
 #outsHint{margin:0;font-size:.9rem;color:var(--soft)}
 #outsHint:empty{display:none}
+.supportbox{display:flex;align-items:center;justify-content:space-between;gap:.6rem 1rem;flex-wrap:wrap;padding:.7rem .9rem;border-radius:8px;background:#fff6e5}
+.supportbox p{margin:0;font-size:.92rem;color:var(--soft);flex:1 1 16rem}
+.btn.support{display:inline-flex;align-items:center;gap:.4rem;border-color:#ff7a1a;background:#ff7a1a;color:#1c1c1c;text-decoration:none;font-weight:800}
+.btn.support:hover{background:#ff9b3d}
+.btn.support span{color:#b3261e;font-size:1.1em;line-height:1}
+@media print{.supportbox{display:none!important}}
+.artad{display:grid;justify-items:center;align-content:center;gap:.15rem;min-height:9.2rem;padding:.4rem .3rem;border:1.5px dashed var(--foil);border-radius:8px;background:#eef7f4;color:var(--ink);text-align:center;text-decoration:none;font-size:.74rem;line-height:1.15}
+.artad:hover{background:#dff0ea;border-style:solid}
+.artad .adtag{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--foil);border-radius:3px;padding:.05rem .35rem}
+.artad .adplus{font-size:1.6rem;font-weight:700;line-height:1;color:var(--foil)}
+.artad .admail{font-weight:700;color:var(--foil);font-size:.66rem;word-break:break-all}
+.campaign a{color:#b3261e;font-weight:800}
+.bynote{font-size:.7rem;color:var(--foil);font-weight:700}
+.artistnote{display:flex;align-items:center;justify-content:space-between;gap:.5rem .8rem;flex-wrap:wrap;background:#eef7f4;border-left:4px solid var(--foil);border-radius:4px;padding:.55rem .7rem;color:var(--ink)}
+.artistnote span{flex:1 1 14rem}
+.artistnote[hidden]{display:none!important}
+.btn.artistbtn{display:inline-flex;align-items:center;gap:.35rem;background:var(--foil);border-color:var(--foil);color:#fff;text-decoration:none}
+.btn.artistbtn:hover{background:#0b6655}
+.libcredits a.support{color:var(--foil);font-weight:700}
 </style>
 <!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
      until they accept in Google's consent message (AdSense > Privacy & messaging). -->
@@ -371,12 +390,15 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
           </div>
           <p class="lab" style="margin:.6rem 0 .3rem;font-weight:400;color:var(--soft)">Or use</p>
           <div class="seg" role="radiogroup" aria-label="More picture choices">
+            <label><input type="radio" name="src" value="modern">Contemporary art</label>
             <label><input type="radio" name="src" value="own">Your own picture</label>
           </div></div>
         <div class="optbox" id="optLib" hidden>
           <div class="pics" id="libs"></div>
           <p class="hint warn" id="libWarn" hidden>This picture is best for small cards: A4 or Letter folded in quarters. On a bigger card it may print a little soft.</p>
           <p class="hint" id="libHint"></p>
+          <p class="hint artistnote" id="artistNote" hidden></p>
+          <p class="hint campaign" id="campaignNote" hidden></p>
           <details class="sub"><summary>Picture credits and links</summary><ul class="hint libcredits" id="libCredits"></ul></details>
         </div>
         <div class="optbox" id="optOwn" hidden>
@@ -552,6 +574,12 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
       </div>
     </div>
     <p id="status" role="status" aria-live="polite"></p>
+    <!-- SUPPORT: the PayPal fundraiser for the Christmas campaign. When it ends, change the link in 3 places:
+         here, in the footer, and SITE_SUPPORT in the script. -->
+    <div class="supportbox">
+      <p>This tool is free, with no sign-up. Help us bring real art by real artists to Christmas cards.</p>
+      <a class="btn support" href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener"><span aria-hidden="true">♥</span> Support real art on Christmas cards</a>
+    </div>
     <p class="fineprint">© Koala Spies Sydney. <a href="#terms">Terms of use</a></p>
   </section>
 </main>
@@ -602,6 +630,7 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
     <ul>
       <li>The frames and card designs are © Koala Spies Sydney. You may use them freely on the cards you make here.</li>
       <li>The old pictures (engravings) are in the public domain. Each one is credited on the back of the card and in step 2.</li>
+      <li>The contemporary art belongs to the artists, who let us use it on these cards. You may print and share cards with it, but not copy the pictures for anything else. A “Support the artist” link pays the artist directly, not us.</li>
       <li>The search keywords come from the Unicode Common Locale Data Repository (CLDR), used under the Unicode License.</li>
       <li>If you add your own picture, you are responsible for having the right to use it. Public-domain and CC0 pictures are free to use. The links on this page go to other websites, which have their own terms.</li>
     </ul>
@@ -623,7 +652,7 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
 <!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
 
 <footer>
-  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-picture-bingo-kids.html">Picture bingo for kids</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="#terms">Terms of use</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-picture-bingo-kids.html">Picture bingo for kids</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="#terms">Terms of use</a> · <a href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener">♥ Support real art on Christmas cards</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
 </footer>
 
 <div id="printArea" aria-hidden="true"></div>
@@ -717,6 +746,15 @@ const OCC_BY = {}; OCCASIONS.forEach(o => OCC_BY[o.id] = o);
 const LIB_BASE = "card-pictures/";
 // group = the heading in the gallery. credit = printed small on the back of the card. info = more detail, shown in step 2.
 // small: true = a smaller file, best for small cards
+// SUPPORT THE ARTIST (optional): add these two to a picture by a living artist who has agreed to it.
+//   artist:  "Jane Smith"                          the name shown with the link
+//   support: "https://www.paypal.me/janesmith"     the artist's OWN link (PayPal.Me, Ko-fi, their shop…), from them directly
+// Example: { group: "Colouring pictures", id: "jane-wombat", title: "Wombat", credit: "Jane Smith", artist: "Jane Smith", support: "https://www.paypal.me/janesmith", link: "", line: true },
+// The link shows on the website only (step 2), never on the printed card. Money goes straight to the artist.
+// the email shown on the "Want to offer your art here?" tile in the Contemporary art gallery
+const ARTIST_CONTACT = "KoalaSpiesSydney@outlook.com";
+// the PayPal fundraiser for real art on Christmas cards (also in the page's support box and footer)
+const SITE_SUPPORT = "https://www.paypal.com/pools/c/9uHzWMu2N1";
 const LIBRARY = [
   { group: "Old pictures", id: "lady-bountiful", title: "Lady Bountiful", credit: "State Library Victoria", link: "" },
   { group: "Old pictures", id: "on-the-heathcote", title: "On the Heathcote, near Christchurch, N.Z.", credit: "State Library Victoria", link: "" },
@@ -736,6 +774,12 @@ const LIBRARY = [
   { group: "Australian animals", id: "dot-cockatoo-magpie", title: "Cockatoo and magpie", credit: "Frank P. Mahony, in Dot and the Kangaroo by Ethel C. Pedley (1899)", info: "Black and white, so it's good for colouring in.", link: "https://www.gutenberg.org/ebooks/18891", small: true },
   { group: "Other animals", id: "nps-ekgmowechashala", title: "Ekgmowechashala, an ancient primate", credit: "US National Park Service (NPS Paleontology)", info: "Drawing of Ekgmowechashala zancanellai, an adapid primate that lived in North America about 30 million years ago. Works of the US government are public domain.", link: "" },
   // line: true = a drawing to colour in. It prints in black lines, and its white paper takes the card's background colour.
+  // modern: true = the Contemporary art gallery. These are NOT public domain: use them only with the artist's permission.
+  // MOCK-UP: replace the three JKL pictures below with the real titles and file names when the art arrives,
+  // and change JKLNAME to JKL's own PayPal.Me name.
+  { group: "JKL", id: "jkl-artwork-1", title: "Artwork 1 (title to come)", credit: "JKL", licence: "Used with the artist's permission", artist: "JKL", support: "https://www.paypal.me/JKLNAME", info: "Contemporary art by JKL, used on these cards with the artist's permission.", link: "", modern: true },
+  { group: "JKL", id: "jkl-artwork-2", title: "Artwork 2 (title to come)", credit: "JKL", licence: "Used with the artist's permission", artist: "JKL", support: "https://www.paypal.me/JKLNAME", info: "Contemporary art by JKL, used on these cards with the artist's permission.", link: "", modern: true },
+  { group: "JKL", id: "jkl-artwork-3", title: "Artwork 3 (title to come)", credit: "JKL", licence: "Used with the artist's permission", artist: "JKL", support: "https://www.paypal.me/JKLNAME", info: "Contemporary art by JKL, used on these cards with the artist's permission.", link: "", modern: true },
   { group: "Colouring pictures", id: "poinsettia-line-art", title: "Poinsettia and berries", credit: "line drawing, free to use", info: "Source and licence to be added.", link: "", line: true },
   { group: "Colouring pictures", id: "nicu-christmas-tree", title: "Christmas tree", credit: "Nicu Buculei, Openclipart (public domain)", info: "Clipart drawing by Nicu Buculei, shared on Openclipart as public domain.", link: "", line: true },
   { group: "Colouring pictures", id: "nicu-birthday-cake", title: "Birthday cake", credit: "Nicu Buculei, Openclipart (public domain)", info: "Clipart drawing by Nicu Buculei, shared on Openclipart as public domain.", link: "", line: true },
@@ -978,7 +1022,7 @@ function fresh() {
 }
 let S = fresh(), page = 0, pages = [], OWN = null;
 const ONE_OF = {
-  gpos: ["top", "bottom"], style: ["colour", "line"], bg: ["white", "soft", "strong"], fsize: ["s", "m", "l"], src: ["space", "vintage", "colourin", "own"], picSize: ["s", "m", "l"],
+  gpos: ["top", "bottom"], style: ["colour", "line"], bg: ["white", "soft", "strong"], fsize: ["s", "m", "l"], src: ["space", "vintage", "colourin", "modern", "own"], picSize: ["s", "m", "l"],
   fit: ["contain", "cover"], in1: ["blank", "picture", "lines", "draw"], in2: ["message", "lines", "starters", "blank"], toWord: ["Dear", "To", "Hi", "Hello", ""],
   spacing: ["big", "normal"], back: ["made", "blank"], fold: ["quarter", "half"], shape: ["tall", "wide"], fmt: ["half", "wide", "quarter", "quarterw"], paper: ["a4", "a3", "letter"], inside: ["both", "outside"], out: ["sheets", "card", "fold"]
 };
@@ -1016,7 +1060,9 @@ function cards() { const n = namesList(); return n.length ? n.map(to => ({ to })
 const greyCache = {};
 // the public-domain pictures on this site
 const libCache = {}, libLoaded = {};
-const isLib = () => S.src === "vintage" || S.src === "colourin";
+const isLib = () => S.src === "vintage" || S.src === "colourin" || S.src === "modern";
+// which gallery a picture belongs to: contemporary art, colouring pictures, or old pictures
+const kindOf = p => p.modern ? "modern" : p.line ? "colourin" : "vintage";
 function loadLib(id) { if (!libCache[id]) libCache[id] = new Promise(res => { const im = new Image(); im.onload = () => { im.id = "lib" + id; libLoaded[id] = im; res(im); }; im.onerror = () => res(null); im.src = LIB_BASE + id + ".jpg"; }); return libCache[id]; }
 // a pale grey copy of a picture, to colour over
 function greyOf(key, im, w, h) {
@@ -1146,7 +1192,8 @@ function drawLinesBox(ctx, x, y, w, h, s, card, kind) {
 }
 function drawMessage(ctx, x, y, w, h, s, card) {
   const big = Math.min(6.2 * s, 8), small = Math.min(4.8 * s, 6.5);
-  let top = y, bottom = y + h;
+  // the sign-off ("Love from") sits a little up from the bottom edge, not right on it
+  let top = y, bottom = y + h - h * .08;
   if (card.to) { ctx.font = mFont(small); ctx.fillStyle = MC(); ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText((S.toWord ? S.toWord + " " : "") + card.to + ",", x, y); top += small * 2; }
   const endTxt = S.end.trim();
   if (endTxt || S.fromName) {
@@ -1447,16 +1494,38 @@ $("occs").addEventListener("click", e => { const b = e.target.closest(".theme");
 function buildLib() {
   const box = $("libs"), list = $("libCredits"); box.textContent = ""; list.textContent = "";
   let group = "";
-  const want = S.src === "colourin";
-  $("libHint").textContent = want ? "Line drawings to colour in. They print in crisp black lines. The card is set to “Colour in”, so the frame and letters are outlines too: you can change that in step 4." : "Old engravings, paintings, postcards and natural history plates, now in the public domain. The animals work for any time of year. The card's back says where the picture came from.";
-  LIBRARY.filter(p => !!p.line === want).forEach(p => {
+  const want = S.src;
+  $("libHint").textContent = want === "modern" ? "Pictures by living artists, used with their permission. If you like one, you can support the artist: the link goes straight to them." : want === "colourin" ? "Line drawings to colour in. They print in crisp black lines. The card is set to “Colour in”, so the frame and letters are outlines too: you can change that in step 4." : "Old engravings, paintings, postcards and natural history plates, now in the public domain. The animals work for any time of year. The card's back says where the picture came from.";
+  LIBRARY.filter(p => kindOf(p) === want).forEach(p => {
     if (p.group !== group) { group = p.group; box.appendChild(el("p", "libgroup", group)); }
-    const b = pick("", p.title, p.id === S.lib, { id: p.id }), im = el("img"); im.src = LIB_BASE + "thumb-" + p.id + ".jpg"; im.alt = ""; im.loading = "lazy"; b.append(im, el("span", "", p.title)); if (p.small) b.appendChild(el("small", "smallnote", "Best for small cards")); box.appendChild(b);
+    const b = pick("", p.title, p.id === S.lib, { id: p.id }), im = el("img"); im.src = LIB_BASE + "thumb-" + p.id + ".jpg"; im.alt = ""; im.loading = "lazy"; b.append(im, el("span", "", p.title)); if (p.small) b.appendChild(el("small", "smallnote", "Best for small cards")); if (p.artist) b.appendChild(el("small", "bynote", "♥ by " + p.artist)); box.appendChild(b);
     const li = el("li"); if (p.link) { const a = el("a", "", p.title); a.href = p.link; a.target = "_blank"; a.rel = "noopener"; li.appendChild(a); } else li.appendChild(el("b", "", p.title));
-    li.appendChild(document.createTextNode(": " + p.credit + ". " + (p.licence || "Public domain") + "." + (p.info ? " " + p.info : ""))); list.appendChild(li);
+    li.appendChild(document.createTextNode(": " + p.credit + ". " + (p.licence || "Public domain") + "." + (p.info ? " " + p.info : "")));
+    if (supportUrl(p)) { li.appendChild(document.createTextNode(" ")); li.appendChild(supportLink(p, "support")); }
+    list.appendChild(li);
   });
+  // the "your art here" tile at the end of the Contemporary art gallery
+  if (want === "modern") {
+    const ad = el("a", "artad"); ad.href = "mailto:" + ARTIST_CONTACT + "?subject=" + encodeURIComponent("My art on the greeting card maker");
+    ad.title = "Email us about offering your art";
+    ad.append(el("small", "adtag", "For artists"), el("span", "adplus", "+"), el("b", "", "Want to offer your art here?"), el("span", "", "Contact"), el("span", "admail", ARTIST_CONTACT));
+    box.appendChild(ad);
+  }
+  artistNote();
+  const cn = $("campaignNote"); cn.textContent = ""; cn.hidden = want !== "modern" || !SITE_SUPPORT;
+  if (!cn.hidden) { const a = el("a", "", "♥ Support real art on Christmas cards"); a.href = SITE_SUPPORT; a.target = "_blank"; a.rel = "noopener"; cn.append(document.createTextNode("Want more art like this? "), a, document.createTextNode(" (our PayPal fundraiser).")); }
 }
-$("libs").addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return; S.lib = b.dataset.id; document.querySelectorAll("#libs .pick").forEach(x => x.setAttribute("aria-pressed", x === b)); changed(true); });
+// "Support the artist": only a real https link the artist gave you
+function supportUrl(p) { return p && typeof p.support === "string" && /^https:\/\/[^\s"'<>]+$/i.test(p.support.trim()) ? p.support.trim() : ""; }
+function supportLink(p, cls) { const a = el("a", cls || "", "Support " + (p.artist || "the artist")); a.href = supportUrl(p); a.target = "_blank"; a.rel = "noopener"; a.title = "This goes straight to the artist, not to us"; return a; }
+function artistNote() {
+  const box = $("artistNote"), p = LIBRARY.find(x => x.id === S.lib), url = isLib() && supportUrl(p);
+  box.textContent = ""; box.hidden = !url; if (!url) return;
+  const btn = supportLink(p, "btn small artistbtn"); btn.textContent = "♥ Support " + (p.artist || "the artist");
+  const txt = el("span", "", "This picture is by " + (p.artist || "the artist") + ". Like it? Your support goes straight to the artist, not to us.");
+  box.append(txt, btn);
+}
+$("libs").addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return; S.lib = b.dataset.id; document.querySelectorAll("#libs .pick").forEach(x => x.setAttribute("aria-pressed", x === b)); artistNote(); changed(true); });
 // a warning when a smaller picture is used on a big card
 function libWarn() {
   const p = LIBRARY.find(x => x.id === S.lib), big = S.paper === "a3" || S.fold !== "quarter";
@@ -1523,9 +1592,9 @@ $("controls").addEventListener("change", e => {
     S[t.name] = t.value;
     if (t.name === "fold" || t.name === "shape") S.fmt = fmtOf(S);
     if (t.name === "src" && isLib()) {
-      const want = S.src === "colourin", cur = LIBRARY.find(p => p.id === S.lib);
-      if (!cur || !!cur.line !== want) S.lib = (LIBRARY.find(p => !!p.line === want) || LIBRARY[0]).id;
-      if (want) S.style = "line";
+      const want = S.src, cur = LIBRARY.find(p => p.id === S.lib);
+      if (!cur || kindOf(cur) !== want) S.lib = (LIBRARY.find(p => kindOf(p) === want) || LIBRARY[0]).id;
+      if (want === "colourin") S.style = "line";
       buildLib(); buildFrames();
     }
     if (t.name === "style" || t.name === "bg" || t.name === "fsize") buildFrames();
