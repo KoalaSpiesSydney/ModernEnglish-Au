@@ -530,6 +530,7 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
           </div></div>
         <label class="check"><input type="checkbox" id="marks">Fold marks at the edges of the paper</label>
         <p class="hint" id="foldHint"></p>
+        <p class="hint" id="envHint"><b>Need an envelope?</b> <a id="envLink" href="bespoke-envelope-maker.html" style="color:var(--deep);font-weight:700">Make one that fits this card →</a></p>
         <p class="hint"><b>When you print, choose “Actual size” or 100%</b>, not “Fit to page”, so the folds land in the right place.</p>
       </div>
     </details>
@@ -592,6 +593,7 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
       <li><strong>Draw your own:</strong> the front is blank for students' own pictures.</li>
       <li><strong>Writing practice:</strong> choose “Sentence starters” inside. Students finish each sentence, then read their card to a partner.</li>
       <li><strong>A card for everyone:</strong> paste your class list into “Make one card for each name”.</li>
+      <li><strong>Envelopes:</strong> make a matching envelope with the <a href="bespoke-envelope-maker.html">Envelope maker</a>, with an art stamp by Justine Kelly.</li>
       <li><strong>Follow instructions:</strong> print “How to fold” and let students fold their own cards. Fold, turn over, press…</li>
     </ul>
   </div>
@@ -644,7 +646,7 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
 <!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
 
 <footer>
-  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-picture-bingo-kids.html">Picture bingo for kids</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="#terms">Terms of use</a> · <a href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener">♥ Support real art on Christmas cards</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-envelope-maker.html">Envelope maker</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-picture-bingo-kids.html">Picture bingo for kids</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="#terms">Terms of use</a> · <a href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener">♥ Support real art on Christmas cards</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
 </footer>
 
 <div id="printArea" aria-hidden="true"></div>
@@ -1460,6 +1462,9 @@ function hints() {
     : two ? "Print the two pages on both sides of one sheet: choose double-sided and flip on the " + ("short") + " edge. Then fold it in half."
     : "Prints on one side. Fold it in half and write inside by hand.");
   libWarn();
+  // the envelope maker has envelopes for these cards
+  const envCard = { a4: { quarter: "a6", half: "a5" }, a3: { quarter: "a5" }, letter: { quarter: "lq", half: "lh" } }[S.paper][S.fold];
+  $("envHint").hidden = !envCard; if (envCard) $("envLink").href = "bespoke-envelope-maker.html#card=" + envCard;
   $("namesHint").textContent = n ? n + (n === 1 ? " card" : " cards") + ", one for each name. Each name goes after “" + (S.toWord || "To") + "”." : "Each card gets its own name after “Dear”. Up to 60 names.";
   $("outsHint").textContent = S.out === "card" ? "This is how the card looks after folding. Download PDF and Print give you the page to print; Download PNG gives you pictures of the card to send by email or message." :
     S.out === "fold" ? "A page of folding instructions to print and give to your class." : "";
