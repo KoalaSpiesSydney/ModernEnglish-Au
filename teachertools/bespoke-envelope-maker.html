@@ -54,6 +54,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .toolsback:hover{color:var(--tag);text-decoration:underline}
 .top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15}
 .top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:54ch}
+.top .beta{display:inline-block;vertical-align:middle;margin-left:.6rem;padding:.1rem .6rem;border-radius:4px;background:#b45309;color:#fff;font-family:"Source Sans 3",system-ui,Arial,sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.testing-note{max-width:1400px;margin:1rem auto 0;padding:0 1.25rem}
+.testing-note p{margin:0;font-size:.9rem;color:#92400e}
+.testing-note a{color:var(--deep);font-weight:700}
 .subblock{display:grid;gap:.5rem;justify-items:start;max-width:54ch}
 .appinstall{border:0;border-radius:4px;background:#ff7a1a;color:#1c1c1c;font-weight:800;font-size:.88rem;padding:.45rem .9rem;min-height:38px;cursor:pointer}
 .appinstall:hover{background:#ff9b3d}
@@ -182,7 +186,7 @@ footer a{color:#fff}
 
 <header class="top">
   <div class="top-in">
-    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1>Envelope Maker</h1></div>
+    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1>Envelope Maker<span class="beta">Testing</span></h1></div>
     <div class="subblock">
       <p>Free for teachers and students. Print an envelope that folds from one sheet of paper, sized for the cards from our <a href="bespoke-greeting-card-maker.html" style="color:#fde047">greeting card maker</a>. No sign-up.</p>
       <button type="button" class="appinstall" id="appInstall" hidden>Install Teacher Tools as an app</button>
@@ -227,6 +231,9 @@ nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
 </details>
 </nav>
 <script>try{if(window.matchMedia("(max-width:640px)").matches)document.getElementById("meMenu").open=false}catch(e){}</script>
+
+<!-- TESTING: remove this block and the "Testing" badge in the header when the tool leaves testing. -->
+<div class="testing-note"><p><b>This tool is new and in testing.</b> Please print, cut and fold one envelope, and check your card fits, before you print a class set. Found a problem or have an idea? <a href="https://modernenglish.au/contact.html">Tell us</a>.</p></div>
 
 <!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
 

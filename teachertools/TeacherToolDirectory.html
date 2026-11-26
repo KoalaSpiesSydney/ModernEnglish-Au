@@ -61,7 +61,8 @@
           { "@type": "ListItem", "position": 18, "name": "Bespoke IELTS Reading Test Maker", "url": "https://modernenglish.au/teachertools/bespoke-ielts-reading-test-maker.html" },
           { "@type": "ListItem", "position": 19, "name": "Grammar Level Test", "url": "https://modernenglish.au/teachertools/grammar-level-test.html" },
           { "@type": "ListItem", "position": 20, "name": "Bespoke Grammar Test Maker", "url": "https://modernenglish.au/teachertools/bespoke-grammar-test-maker.html" },
-          { "@type": "ListItem", "position": 21, "name": "Christmas & Greeting Card Maker", "url": "https://modernenglish.au/teachertools/bespoke-greeting-card-maker.html" }
+          { "@type": "ListItem", "position": 21, "name": "Christmas & Greeting Card Maker", "url": "https://modernenglish.au/teachertools/bespoke-greeting-card-maker.html" },
+          { "@type": "ListItem", "position": 22, "name": "Envelope Maker", "url": "https://modernenglish.au/teachertools/bespoke-envelope-maker.html" }
         ] }
     ]
   }
@@ -124,6 +125,24 @@
     .dir .more { font-size: .95rem; color: var(--muted); margin-top: 10px; }
     .note { font-size: .95rem; color: var(--muted); margin-top: 16px; }
     .back { display: inline-block; margin-top: 26px; font-weight: 700; }
+
+    /* SEASONAL GREETINGS: real art, near the top of the directory */
+    .season { margin: 34px 0 6px; padding: clamp(18px, 3vw, 28px) clamp(18px, 3.2vw, 32px) 14px; background: rgba(255,255,255,.88); border: 1px solid var(--line); border-top: 4px solid #b3261e; border-radius: 3px; }
+    .season-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px 34px; align-items: center; }
+    .season-kicker { font-size: .74rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: #b3261e; margin: 0; }
+    .dir .season h2 { font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem); font-weight: 800; margin: 2px 0 10px; padding: 0; border: 0; line-height: 1.15; }
+    .season-text p { font-size: 1.02rem; line-height: 1.7; margin: 0 0 10px; max-width: 64ch; }
+    .season-text .why { color: var(--muted); font-size: .97rem; }
+    .season-art { display: flex; gap: 14px; align-items: center; }
+    /* the pictures as stamps: a white perforated edge (round bites at the border), a coloured frame */
+    .stamp { display: block; width: 88px; padding: 7px; background: radial-gradient(circle, transparent 3px, #fff 3.6px) -4px -4px / 8px 8px; filter: drop-shadow(0 3px 5px rgba(15,23,42,.25)); }
+    .stamp img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border: 4px solid var(--c); background: #fff; }
+    .stamp:nth-child(1) { transform: rotate(-4deg); } .stamp:nth-child(2) { transform: rotate(2deg) translateY(-6px); } .stamp:nth-child(3) { transform: rotate(-1deg); }
+    .dir .season ul { margin-top: 14px; border-top: 1px solid var(--line); }
+    .dir .season li:last-child { border-bottom: 0; }
+    .season-credit { font-size: .88rem; color: var(--muted); margin: 8px 0 0; padding-top: 10px; border-top: 1px solid var(--line); }
+    .season-credit a.give { color: #b3261e; font-weight: 700; }
+    @media (max-width: 760px) { .season-head { grid-template-columns: 1fr; } .season-art { justify-content: center; } }
 
     /* FOR SCHOOLS: a quiet strip above the tools, same plain look as the note to teachers */
     .schools { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); gap: 6px 28px; align-items: baseline;
@@ -277,6 +296,28 @@
         <li><div class="t"><a href="bespoke-micro-drama-lesson-maker.html">Bespoke Micro Drama Lesson Maker</a></div><span>Turn a short drama series on TikTok into a lesson: questions that pause each episode, a cliffhanger prediction at the end, and a link or QR code to share. Prints a worksheet too.<a class="example" href="neighbours-trouble-at-the-door.html">See an example lesson: Neighbours: Trouble at the Door →</a></span></li>
       </ul>
 
+      <!-- SEASONAL GREETINGS: move or remove this section after the holidays -->
+      <section class="season" aria-labelledby="seasonH">
+        <div class="season-head">
+          <div class="season-text">
+            <p class="season-kicker">This holiday season</p>
+            <h2 id="seasonH">Give real art</h2>
+            <p>Choose a beautiful vintage picture, curated and credited, or art by a real contemporary artist. Or draw your own. Make your cards and envelopes at home, and print them on any ordinary printer.</p>
+            <p class="why">These charming designs are made to feel homemade and personal. They're better for the environment (print them on recycled paper), and better for the economy: real artists instead of AI copies, made locally, and they cost almost nothing.</p>
+          </div>
+          <div class="season-art" aria-hidden="true">
+            <span class="stamp" style="--c:#0e5c7a"><img src="card-pictures/thumb-jlk-koala-tiger-onesie.jpg" alt="" loading="lazy"></span>
+            <span class="stamp" style="--c:#b3261e"><img src="card-pictures/thumb-jlk-panda-dressed-as-koala.jpg" alt="" loading="lazy"></span>
+            <span class="stamp" style="--c:#1b5e20"><img src="card-pictures/thumb-jlk-koala-dressed-as-panda.jpg" alt="" loading="lazy"></span>
+          </div>
+        </div>
+        <ul>
+          <li><div class="t"><a href="bespoke-greeting-card-maker.html">Christmas &amp; Greeting Card Maker</a></div><span>Christmas, birthday and other greeting cards that fold from one sheet of A4, A3 or Letter paper. Choose a vintage picture, art by a contemporary artist, a drawing to colour in, or a blank space to draw on, then pick the frame, fonts and colours.</span></li>
+          <li><div class="t"><a href="bespoke-envelope-maker.html">Envelope Maker</a> <b class="tag testing">Testing</b></div><span>An envelope that folds from one sheet of paper, sized to fit your card, with an art stamp by Justine Kelly. Pocket or diamond fold, with step-by-step folding instructions to print.</span></li>
+        </ul>
+        <p class="season-credit">Stamps and contemporary art by Justine Kelly, hand-drawn in Sydney. Vintage pictures from State Library Victoria, John Gould's natural history plates and other public-domain collections. <a class="give" href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener">♥ Support real art on Christmas cards</a></p>
+      </section>
+
       <h2>Worksheets</h2>
       <ul>
         <li><div class="t"><a href="bespoke-gap-fill-maker.html">Bespoke Gap-Fill Maker</a></div><span>Gap-fill worksheets from any text, with a word box and answer key.</span></li>
@@ -333,11 +374,6 @@
       <ul>
         <li><div class="t"><a href="grammar-level-test.html">Grammar Level Test</a></div><span>A ready-to-go placement test: 48 multiple-choice questions that get harder as you go, stopping after three wrong answers in a row, with a level from A1 to C2. Send students the QR code or print the paper version.</span></li>
         <li><div class="t"><a href="bespoke-grammar-test-maker.html">Bespoke Grammar Test Maker</a></div><span>Write your own grammar test: multiple choice, gap fill, correct or incorrect, word order and sentence rewriting. Print it with a QR code and answer key, or share it online.</span></li>
-      </ul>
-
-      <h2>Cards</h2>
-      <ul>
-        <li><div class="t"><a href="bespoke-greeting-card-maker.html">Christmas &amp; Greeting Card Maker</a> <b class="tag testing">Testing</b></div><span>Christmas, birthday and other greeting cards that fold from one sheet of A4, A3 or Letter paper. Choose a vintage picture, a drawing to colour in, or a blank space to draw on, then pick the frame, fonts and colours.</span></li>
       </ul>
 
       <h2>Coming soon</h2>
@@ -447,7 +483,7 @@
 
   // every live tool row in the directory, by file name
   var rows = {};
-  document.querySelectorAll('.dir > ul > li:not(.soon)').forEach(function (li) {
+  document.querySelectorAll('.dir > ul > li:not(.soon), .dir > .season > ul > li').forEach(function (li) {
     var a = li.querySelector('a[href]'); if (!a) return;
     var file = a.getAttribute('href').split('/').pop();
     rows[file] = li;
