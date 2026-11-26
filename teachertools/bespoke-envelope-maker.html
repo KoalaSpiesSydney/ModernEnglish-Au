@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<!-- Envelope Maker © Koala Spies Sydney. All rights reserved. -->
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Printable Envelope Maker for Greeting Cards | Fold from One Sheet</title>
+<meta name="description" content="Print an envelope that folds from one sheet of A3, A4, Letter or Tabloid paper, sized for the cards from our greeting card maker. Pocket or diamond fold, with a decorative art stamp by Sydney artist Justine Kelly. Free for teachers and students. No sign-up.">
+<link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-envelope-maker.html">
+<meta property="og:title" content="Free Envelope Maker for Greeting Cards">
+<meta property="og:description" content="Printable envelopes that fold from one sheet of paper, sized for our greeting cards, with art stamps by Justine Kelly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://modernenglish.au/teachertools/bespoke-envelope-maker.html">
+<meta name="google-adsense-account" content="ca-pub-7047447363586796">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Teacher Tools app: install it, and use it offline -->
+<link rel="manifest" href="/teachertools/manifest.webmanifest">
+<meta name="theme-color" content="#1c1c1c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Teacher Tools">
+<script src="/teachertools/pwa.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Serif+4:ital,wght@0,700;0,800;1,700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Envelope Maker","url":"https://modernenglish.au/teachertools/bespoke-envelope-maker.html","applicationCategory":"EducationalApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},"description":"Printable envelopes that fold from one sheet of paper, sized for greeting cards, with art stamps by Justine Kelly.","publisher":{"@type":"Organization","name":"Modern English Australia","url":"https://modernenglish.au/"}}
+</script>
+<style>
+/* =====================================================================
+   ENVELOPE MAKER
+   One file, no server. Every envelope and page is drawn on a <canvas>,
+   so the preview, the PDF, the PNG and the print-out are identical.
+   Nothing the teacher types leaves the browser.
+   ===================================================================== */
+:root{
+  --bench:#fffce6; --panel:#ffffff; --ink:#0f172a; --soft:#475569; --line:#dcd9c6;
+  --header:#1c1c1c; --tag:#fde047; --deep:#0e2861; --foil:#0e7c66; --focus:#3968ea; --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%230f172a%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.top{background:var(--header);color:#f8fafc}
+.top-in{max-width:1400px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.titleblock{flex:1 1 16rem;min-width:0}
+.top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
+.toolsback{display:block;width:max-content;margin:.35rem 0 0;color:#f8fafc;text-decoration:none;letter-spacing:.12em;font-weight:700}
+.toolsback:hover{color:var(--tag);text-decoration:underline}
+.top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15}
+.top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:54ch}
+.subblock{display:grid;gap:.5rem;justify-items:start;max-width:54ch}
+.appinstall{border:0;border-radius:4px;background:#ff7a1a;color:#1c1c1c;font-weight:800;font-size:.88rem;padding:.45rem .9rem;min-height:38px;cursor:pointer}
+.appinstall:hover{background:#ff9b3d}
+.bench{max-width:1400px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(320px,500px) minmax(0,1fr);gap:1.5rem;align-items:start}
+.controls{display:grid;gap:.75rem;min-width:0}
+details.group{margin-bottom:.35rem}
+details.group>summary{cursor:pointer;list-style:none;padding:.8rem 0;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.group>summary::-webkit-details-marker{display:none}
+details.group>summary::after{content:"";width:.55rem;height:.55rem;border-right:2px solid var(--soft);border-bottom:2px solid var(--soft);transform:rotate(45deg);transition:transform .15s ease;flex:none;margin-right:.2rem}
+details.group[open]>summary::after{transform:rotate(-135deg)}
+.group-body{padding:0 0 1rem;display:grid;grid-template-columns:minmax(0,1fr);gap:.8rem}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft)}
+label.f>span{font-weight:700;color:var(--ink)}
+label.f small{font-weight:400;color:var(--soft)}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+.lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg label{position:relative;text-align:center;padding:.45rem .3rem;cursor:pointer;font-size:.92rem;min-height:44px;display:flex;align-items:center;justify-content:center;line-height:1.2}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--deep);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:-3px}
+.seg.wrap2{grid-auto-flow:row;grid-template-columns:1fr 1fr}
+.seg.wrap2 label{border-bottom:1px solid var(--line)}
+.seg.big label{min-height:64px}
+.seg.big span{display:grid;gap:.1rem}
+.seg.big small{font-size:.74rem;opacity:.85;font-weight:400}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep);flex:none}
+.swatches{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.sw{width:40px;height:40px;border-radius:50%;border:2px solid #fff;cursor:pointer;padding:0;box-shadow:0 0 0 1.5px var(--line),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+input[type=text],select,textarea{width:100%;padding:.55rem .65rem;font-size:1rem;min-height:44px;background:#fff;border:1px solid #d5d3c2;border-bottom:2px solid #94a3b8;border-radius:6px 6px 3px 3px;box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 1px 2px rgba(15,23,42,.1),0 5px 14px -5px rgba(15,23,42,.28)}
+input[type=text]:focus,select:focus,textarea:focus{outline:none;border-color:var(--deep);box-shadow:0 0 0 3px rgba(57,104,234,.22)}
+textarea{line-height:1.4;resize:vertical;min-height:4.6rem}
+select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23475569' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right .8rem center}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px;box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
+.btn:not([disabled]):hover{background:#eef2fb;transform:translateY(-1px)}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:not([disabled]):hover{background:#0a1d47}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn.small{min-height:36px;padding:.25rem .65rem;font-size:.9rem}
+.btn[disabled]{opacity:.55;cursor:progress;box-shadow:none;transform:none}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+/* stamp picker */
+.stamps{display:grid;grid-template-columns:repeat(auto-fill,minmax(6.5rem,1fr));gap:.4rem}
+.pick{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:.35rem .2rem .3rem;cursor:pointer;display:grid;justify-items:center;align-content:start;gap:.2rem;font-size:.76rem;line-height:1.15;color:var(--soft);min-height:44px;box-shadow:0 1px 2px rgba(15,23,42,.15),0 4px 10px -4px rgba(15,23,42,.3)}
+.pick canvas{width:64px;height:80px;display:block}
+.pick:hover{border-color:var(--deep)}
+.pick[aria-pressed=true]{border-color:var(--deep);background:#eef2fb;color:var(--ink);font-weight:700;box-shadow:inset 0 0 0 1px var(--deep)}
+.pick .none{width:64px;height:80px;display:grid;place-items:center;border:1.5px dashed var(--line);border-radius:4px;font-size:.72rem}
+/* preview */
+.stage{position:sticky;top:1rem;display:grid;gap:.7rem;min-width:0;max-height:calc(100vh - 2rem);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.outs{display:flex;gap:.35rem;flex-wrap:wrap}
+.outs button{border:1.5px solid var(--line);background:#fff;border-radius:6px;padding:.35rem .9rem;font-weight:700;cursor:pointer;min-height:40px;box-shadow:0 1px 2px rgba(15,23,42,.15),0 4px 10px -4px rgba(15,23,42,.3)}
+.outs button[aria-pressed=true]{background:var(--deep);border-color:var(--deep);color:#fff}
+.paper{background:#ebe7cf;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.2rem);display:flex;justify-content:center}
+#preview{display:block;max-width:100%;max-height:74vh;width:auto;height:auto;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.25),0 14px 34px -10px rgba(15,23,42,.45)}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.pager{display:flex;align-items:center;gap:.5rem;font-size:.95rem}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+#sizeNote{margin:0;font-size:.9rem;color:var(--soft)}
+.fineprint{margin:0;font-size:.9rem;color:var(--soft)}
+.fineprint a,.terms a,.notes a{color:var(--deep);font-weight:700}
+.supportbox{display:flex;align-items:center;justify-content:space-between;gap:.6rem 1rem;flex-wrap:wrap;padding:.7rem .9rem;border-radius:8px;background:#fff6e5}
+.supportbox p{margin:0;font-size:.92rem;color:var(--soft);flex:1 1 16rem}
+.supportbox .thanks{display:block;margin-top:.25rem;font-style:italic;color:var(--ink)}
+.btn.support{display:inline-flex;align-items:center;gap:.4rem;border-color:#ff7a1a;background:#ff7a1a;color:#1c1c1c;text-decoration:none;font-weight:800}
+.btn.support:not([disabled]):hover{background:#ff9b3d}
+.btn.support span{color:#b3261e;font-size:1.1em;line-height:1}
+@media (max-width:980px){
+  .bench{grid-template-columns:minmax(0,1fr);padding:1rem}
+  .stage{position:static;order:-1;max-height:none;overflow:visible}
+  #preview{max-height:62vh}
+}
+/* reading matter */
+.notes{max-width:1400px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2,.terms h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+.terms{max-width:1400px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+footer{background:var(--header);color:#cbd5e1;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer a{color:#fff}
+#printArea{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  body>*:not(#printArea){display:none!important}
+  body{background:#fff none;padding:0}
+  #printArea{display:block}
+  #printArea img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
+  #printArea img:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+<!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
+     until they accept in Google's consent message (AdSense > Privacy & messaging). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+    wait_for_update: 500
+  });
+  gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+</script>
+<!-- Google AdSense. With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1>Envelope Maker</h1></div>
+    <div class="subblock">
+      <p>Free for teachers and students. Print an envelope that folds from one sheet of paper, sized for the cards from our <a href="bespoke-greeting-card-maker.html" style="color:#fde047">greeting card maker</a>. No sign-up.</p>
+      <button type="button" class="appinstall" id="appInstall" hidden>Install Teacher Tools as an app</button>
+    </div>
+  </div>
+</header>
+<style>
+nav.me-menu{position:relative;z-index:20;background:#0f172a;font:600 15px/1.2 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-align:center;letter-spacing:normal;text-transform:none;white-space:normal;margin:0;padding:0}
+nav.me-menu details,nav.me-menu summary{margin:0;padding:0;border:0;background:none}
+nav.me-menu summary{display:none}
+nav.me-menu ul{list-style:none;margin:0 auto;padding:6px 8px;display:flex;flex-wrap:wrap;justify-content:center;gap:2px 4px;max-width:1100px}
+nav.me-menu li{margin:0;padding:0;border:0;display:block;line-height:1.2;font-size:inherit}
+nav.me-menu li::before{content:none}
+nav.me-menu a{display:inline-block;padding:7px 11px;color:#f8fafc;text-decoration:none;border-radius:6px;font-weight:600;opacity:1;white-space:nowrap}
+nav.me-menu a:hover{background:rgba(255,255,255,.14)}
+nav.me-menu a:focus-visible{outline:2px solid #fde047;outline-offset:1px}
+nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
+@media (max-width:640px){
+ nav.me-menu summary{display:block;cursor:pointer;list-style:none;padding:11px 16px;color:#f8fafc;font-weight:700}
+ nav.me-menu summary::-webkit-details-marker{display:none}
+ nav.me-menu summary::before{content:"\2630\00a0\00a0"}
+ nav.me-menu ul{flex-direction:column;align-items:stretch;padding:0 8px 8px}
+ nav.me-menu a{display:block;padding:11px 12px}
+}
+@media print{nav.me-menu{display:none!important}}
+</style>
+<nav class="me-menu" aria-label="Site menu">
+<details id="meMenu" open>
+<summary>Menu</summary>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/vocabularygames.html">Vocab games</a></li>
+<li><a href="/grammargames.html">Grammar games</a></li>
+<li><a href="/minilessons.html">Mini lessons</a></li>
+<li><a href="/learnEnglishwithMusic.html">Songs</a></li>
+<li><a href="/tests-ielts-reading.html">IELTS</a></li>
+<li><a href="/tests-cambridge.html">Cambridge</a></li>
+<li><a href="/teachertools/TeacherToolDirectory.html" aria-current="true">Teacher tools</a></li>
+<li><a href="/blog.html">Blog</a></li>
+<li><a href="/about.html">About</a></li>
+</ul>
+</details>
+</nav>
+<script>try{if(window.matchMedia("(max-width:640px)").matches)document.getElementById("meMenu").open=false}catch(e){}</script>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<main class="bench">
+  <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
+
+    <details class="group" open>
+      <summary>1. Your card</summary>
+      <div class="group-body">
+        <div class="seg wrap2" role="radiogroup" aria-label="Your card">
+          <label><input type="radio" name="card" value="a6">A4 folded in quarters</label>
+          <label><input type="radio" name="card" value="a5">A4 folded in half</label>
+          <label><input type="radio" name="card" value="lq">Letter folded in quarters</label>
+          <label><input type="radio" name="card" value="lh">Letter folded in half</label>
+        </div>
+        <p class="hint" id="cardHint"></p>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>2. Envelope style</summary>
+      <div class="group-body">
+        <div class="seg big" role="radiogroup" aria-label="Envelope style">
+          <label><input type="radio" name="style" value="pocket"><span><b>Pocket</b><small>like a shop envelope: a little glue</small></span></label>
+          <label><input type="radio" name="style" value="diamond"><span><b>Diamond fold</b><small>folds from a square: one sticker</small></span></label>
+        </div>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>3. Stamp</summary>
+      <div class="group-body">
+        <div class="stamps" id="stamps"></div>
+        <p class="hint">Art stamps by Justine Kelly, hand-drawn in Sydney. They are decorative: to post the envelope, add a real stamp.</p>
+        <label class="check"><input type="checkbox" id="postmark">Add a postmark</label>
+        <label class="f" id="pmRow"><span>Postmark words <small>(the bottom line)</small></span><input type="text" id="pmText" maxlength="14" placeholder="e.g. XMAS 2026"></label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>4. Address and colours</summary>
+      <div class="group-body">
+        <div class="two">
+          <label class="f"><span>Start with</span><select id="toWord"><option value="To">To</option><option value="For">For</option><option value="">(nothing)</option></select></label>
+          <label class="f"><span>Name</span><input type="text" id="toName" maxlength="40" placeholder="Empty: write by hand"></label>
+        </div>
+        <div><p class="lab">Address lines</p>
+          <div class="seg" role="radiogroup" aria-label="Address lines">
+            <label><input type="radio" name="lines" value="0">None</label>
+            <label><input type="radio" name="lines" value="2">2</label>
+            <label><input type="radio" name="lines" value="3">3</label>
+          </div></div>
+        <label class="check"><input type="checkbox" id="fromOn">“From” on the back flap</label>
+        <label class="f" id="fromRow"><span>From</span><input type="text" id="fromName" maxlength="40" placeholder="Empty: write by hand"></label>
+        <label class="check"><input type="checkbox" id="frameOn">A frame around the front</label>
+        <div id="colRow"><p class="lab">Frame colour</p><div class="swatches" id="colSw"></div></div>
+        <div><p class="lab">Paper</p>
+          <div class="seg" role="radiogroup" aria-label="Envelope colour">
+            <label><input type="radio" name="tint" value="white">White (saves ink)</label>
+            <label><input type="radio" name="tint" value="cream">Cream</label>
+          </div>
+          <p class="hint">Coloured paper looks lovely too: choose White and print on it.</p></div>
+        <details class="sub">
+          <summary style="cursor:pointer;font-weight:700;color:var(--deep)">Make one envelope for each name</summary>
+          <label class="f" style="margin-top:.5rem"><span>Names <small>(one on each line)</small></span><textarea id="names" rows="4" maxlength="2400" placeholder="Mia&#10;Leo&#10;Aisha"></textarea></label>
+          <p class="hint" id="namesHint"></p>
+        </details>
+      </div>
+    </details>
+
+    <div class="actions">
+      <button type="button" class="btn quiet" id="resetBtn">Start again</button>
+    </div>
+  </form>
+
+  <section class="stage" aria-label="Preview">
+    <div class="outs" role="group" aria-label="What to see" id="outs">
+      <button type="button" data-out="sheets" aria-pressed="true">What you print</button>
+      <button type="button" data-out="env" aria-pressed="false">The finished envelope</button>
+      <button type="button" data-out="fold" aria-pressed="false">How to fold</button>
+    </div>
+    <p id="sizeNote"></p>
+    <div class="paper" id="paper"><canvas id="preview" role="img" aria-label="Preview of the page"></canvas></div>
+    <div class="stage-bar">
+      <div class="pager" id="pager" hidden>
+        <button type="button" class="btn small" id="prevBtn" aria-label="Previous page">‹</button>
+        <span id="pagerText"></span>
+        <button type="button" class="btn small" id="nextBtn" aria-label="Next page">›</button>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn main" id="pdfBtn">Download PDF</button>
+        <button type="button" class="btn" id="pngBtn">Download PNG</button>
+        <button type="button" class="btn" id="printBtn">Print</button>
+      </div>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <!-- SUPPORT: the PayPal fundraiser (the same link as in the card maker). -->
+    <div class="supportbox">
+      <p>This tool is free, with no sign-up. Help us bring real art by real artists to Christmas cards. <span class="thanks">Thank you to the people who find and curate the pictures, and to the artists who create them.</span></p>
+      <a class="btn support" href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener"><span aria-hidden="true">♥</span> Support real art on Christmas cards</a>
+    </div>
+    <p class="fineprint">© Koala Spies Sydney. <a href="#terms">Terms of use</a></p>
+  </section>
+</main>
+
+<section class="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>Choose the card you made: which paper, and folded in half or in quarters. The envelope is sized to fit it.</li>
+      <li>Choose a pocket or diamond envelope, a stamp, and the words on the front.</li>
+      <li>Print at “Actual size”, cut along the solid line, and fold along the dashed lines.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Which paper?</h2>
+    <dl>
+      <dt>A card from A4 folded in quarters (A6)</dt><dd>The envelope prints on A4.</dd>
+      <dt>A card from A4 folded in half (A5)</dt><dd>The envelope prints on A3.</dd>
+      <dt>Letter cards</dt><dd>Quarter-fold cards print on Letter; half-fold cards print on Tabloid (11 × 17 in).</dd>
+      <dt>Which paper weight?</dt><dd>Ordinary 80–120 gsm paper folds best. Thick card is hard to fold neatly.</dd>
+    </dl>
+  </div>
+  <div>
+    <h2>Ideas for class</h2>
+    <ul>
+      <li><strong>Following instructions:</strong> print “How to fold” and let students fold their own envelope, step by step.</li>
+      <li><strong>Addresses:</strong> practise writing a name and address on the lines, then “post” the cards to classmates.</li>
+      <li><strong>A class set:</strong> paste your class list into “Make one envelope for each name”.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="terms" id="terms" tabindex="-1">
+  <h2>Terms of use</h2>
+  <p class="updated">Last updated 26 November 2026</p>
+  <p>The Envelope Maker is a free tool for teachers, students and families. By making, downloading or printing envelopes you agree to these terms.</p>
+  <h3>Pictures</h3>
+  <ul>
+    <li>The envelope designs are © Koala Spies Sydney. You may use them freely on the envelopes you make here.</li>
+    <li>The stamp pictures are © Justine Kelly (JLK), hand-drawn in Sydney, and used with her permission. You may print and share envelopes with them, but not copy the pictures for anything else.</li>
+    <li>The stamps are decorative and are not postage. To post an envelope, add a real stamp.</li>
+  </ul>
+  <h3>Your information</h3>
+  <p>Nothing you type is sent to us. Your choices are kept in your own browser so they are there next time, and “Start again” removes them. This site uses cookies for visitor statistics and to show ads, and providers such as Google may set them. See our <a href="https://modernenglish.au/privacy.html">privacy policy</a>.</p>
+  <h3>What you must not do</h3>
+  <ul><li>Copy, resell or republish this tool or its code, or sell the envelopes as your own product.</li></ul>
+  <h3>No guarantees</h3>
+  <p>The tool is provided free and as it is. Print one envelope before you print a class set. To the extent the law allows, we are not liable for loss or damage arising from its use. Nothing in these terms limits any rights you have under the Australian Consumer Law. These terms are governed by the laws of New South Wales, Australia.</p>
+</section>
+
+<!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<footer>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-greeting-card-maker.html">Greeting card maker</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="#terms">Terms of use</a> · <a href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener">♥ Support real art on Christmas cards</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+</footer>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT
+// =====================================================================
+const COPYRIGHT = "© Koala Spies Sydney · modernenglish.au";
+const STORE = "envelope-maker.draft.v1";
+const PIC_BASE = "card-pictures/";   // the same folder as the card maker's pictures
+// paper sizes in millimetres
+const PAPERS = { a4: [210, 297], a3: [297, 420], letter: [215.9, 279.4], tabloid: [279.4, 431.8] };
+const PAPER_NAME = { a4: "A4", a3: "A3", letter: "Letter", tabloid: "Tabloid (11 × 17 in)" };
+// the cards from the greeting card maker, and the paper each envelope prints on
+const CARDS = {
+  a6: { name: "an A6 card (A4 folded in quarters)", w: 105, h: 148, paper: "a4" },
+  a5: { name: "an A5 card (A4 folded in half)", w: 148, h: 210, paper: "a3" },
+  lq: { name: "a card from Letter paper folded in quarters", w: 107.95, h: 139.7, paper: "letter" },
+  lh: { name: "a card from Letter paper folded in half", w: 139.7, h: 215.9, paper: "tabloid" }
+};
+const ROOM = 3; // mm of space around the card inside the envelope, on each side
+// Justine Kelly's art stamps. file = the picture in card-pictures (without .jpg), col = the stamp's border colour,
+// top = where to crop the picture (0 = keep the top, 0.5 = the middle)
+const STAMPS = [
+  { id: "tiger", file: "jlk-koala-tiger-onesie", name: "Koala in a Tiger Onesy", col: "#0e5c7a", top: 0 },
+  { id: "panda", file: "jlk-panda-dressed-as-koala", name: "Panda dressed up as Koala", col: "#b3261e", top: .42 },
+  { id: "koalapanda", file: "jlk-koala-dressed-as-panda", name: "Koala dressed up as Panda", col: "#1b5e20", top: .42 }
+];
+const STAMP_LINE1 = "KOALA SPIES SYDNEY", STAMP_LINE2 = "art by J. Kelly";
+const COLOURS = [
+  { name: "Christmas red", c: "#b3261e" }, { name: "Holly green", c: "#1b5e20" }, { name: "Gold", c: "#a87410" },
+  { name: "Modern English navy", c: "#0e2861" }, { name: "Modern English teal", c: "#0e7c66" }, { name: "Ocean", c: "#0e5c7a" },
+  { name: "Purple", c: "#5b2a86" }, { name: "Pink", c: "#c2185b" }, { name: "Black", c: "#222222" }
+];
+const TINTS = { white: "#ffffff", cream: "#fbf6e9" };
+const INK = "#1f2937", GREY = "#64748b", RULE = "#9aa7b4", CUT = "#475569";
+
+// =====================================================================
+// STATE
+// =====================================================================
+const $ = id => document.getElementById(id);
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; };
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+function fresh() {
+  return { card: "a6", style: "pocket", stamp: "tiger", postmark: true, pmText: "XMAS 2026", toWord: "To", toName: "", lines: "3",
+    fromOn: true, fromName: "", frameOn: true, col: "#b3261e", tint: "white", names: "", out: "sheets" };
+}
+const ONE_OF = { card: Object.keys(CARDS), style: ["pocket", "diamond"], stamp: ["none"].concat(STAMPS.map(s => s.id)), toWord: ["To", "For", ""], lines: ["0", "2", "3"], tint: ["white", "cream"], out: ["sheets", "env", "fold"] };
+function tidy(o) {
+  const d = fresh(), T = Object.assign(d, o && typeof o === "object" ? o : {});
+  Object.keys(ONE_OF).forEach(k => { if (ONE_OF[k].indexOf(T[k]) < 0) T[k] = fresh()[k]; });
+  if (!/^#[0-9a-f]{6}$/i.test(T.col)) T.col = fresh().col;
+  ["postmark", "fromOn", "frameOn"].forEach(k => T[k] = T[k] !== false);
+  const txt = (k, n) => { T[k] = String(T[k] == null ? "" : T[k]).slice(0, n); };
+  txt("pmText", 14); txt("toName", 40); txt("fromName", 40); txt("names", 2400);
+  return T;
+}
+let S = fresh(), page = 0, pages = [];
+let saveTimer = 0;
+function save() { clearTimeout(saveTimer); saveTimer = setTimeout(() => { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} }, 300); }
+function say(m) { $("status").textContent = m; }
+function namesList() { return S.names.split(/\n|,/).map(x => x.trim()).filter(Boolean).slice(0, 60); }
+function envs() { const n = namesList(); return n.length ? n.map(to => ({ to })) : [{ to: S.toName.trim() }]; }
+
+// =====================================================================
+// PICTURES
+// =====================================================================
+const pics = {}, picWait = {};
+function loadPic(file) {
+  if (!picWait[file]) picWait[file] = new Promise(res => { const im = new Image(); im.onload = () => { pics[file] = im; res(im); }; im.onerror = () => res(null); im.src = PIC_BASE + file + ".jpg"; });
+  return picWait[file];
+}
+const stampOf = id => STAMPS.find(s => s.id === id);
+
+// =====================================================================
+// DRAWING (all sizes in millimetres)
+// =====================================================================
+function rrPath(c, x, y, w, h, r) { r = Math.max(0, Math.min(r, w / 2, h / 2)); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function poly(c, pts) { pts.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); }
+const hand = (z, bold) => (bold ? 700 : 400) + " " + z + 'px "Andika", "Atkinson Hyperlegible", Verdana, sans-serif';
+const serif = (z, it) => (it ? "italic " : "") + "700 " + z + 'px "Source Serif 4", Georgia, serif';
+const ui = (z, bold) => (bold ? 700 : 400) + " " + z + 'px "Atkinson Hyperlegible", Verdana, sans-serif';
+function mix(hex, a) { const n = parseInt(hex.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255, m = v => Math.round(255 - (255 - v) * a).toString(16).padStart(2, "0"); return "#" + m(r) + m(g) + m(b); }
+const tint = () => TINTS[S.tint];
+
+// an art stamp: white perforated edge, a coloured border, the picture and two lines of words
+function drawStamp(ctx, x, y, w, h, st, under) {
+  const im = pics[st.file], m = w * .075, b = m + w * .028, cap = h * .13, r = w * .03, step = w * .085;
+  ctx.save();
+  ctx.shadowColor = "rgba(15,23,42,.28)"; ctx.shadowBlur = w * .05 * ctx.getTransform().a; ctx.shadowOffsetY = w * .012 * ctx.getTransform().a;
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(x, y, w, h); ctx.restore();
+  // the perforations: bites out of the edge, in the envelope's colour
+  ctx.save(); ctx.fillStyle = under;
+  const bites = (len, put) => { const n = Math.max(3, Math.round(len / step)), sp = len / n; for (let i = 0; i <= n; i++) put(i * sp); };
+  ctx.beginPath();
+  bites(w, t => { ctx.moveTo(x + t + r, y); ctx.arc(x + t, y, r, 0, Math.PI * 2); ctx.moveTo(x + t + r, y + h); ctx.arc(x + t, y + h, r, 0, Math.PI * 2); });
+  bites(h, t => { ctx.moveTo(x + r, y + t); ctx.arc(x, y + t, r, 0, Math.PI * 2); ctx.moveTo(x + w + r, y + t); ctx.arc(x + w, y + t, r, 0, Math.PI * 2); });
+  ctx.fill(); ctx.restore();
+  ctx.fillStyle = st.col; ctx.fillRect(x + m, y + m, w - 2 * m, h - 2 * m);
+  const bx = x + b, by = y + b, bw = w - 2 * b, bh = h - 2 * b - cap;
+  if (im) {
+    const iw = im.naturalWidth, ih = im.naturalHeight, k = Math.max(bw / iw, bh / ih), sw = bw / k, sh = bh / k;
+    ctx.drawImage(im, (iw - sw) / 2, (ih - sh) * st.top, sw, sh, bx, by, bw, bh);
+  } else { ctx.fillStyle = "#e2e8f0"; ctx.fillRect(bx, by, bw, bh); }
+  ctx.fillStyle = "#ffffff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  let z = cap * .34; ctx.font = serif(z); const tw = ctx.measureText(STAMP_LINE1).width; if (tw > bw) { z *= bw / tw; ctx.font = serif(z); }
+  ctx.fillText(STAMP_LINE1, x + w / 2, y + h - b - cap * .64);
+  ctx.fillStyle = "#fff1cc"; ctx.font = serif(cap * .25, true); ctx.fillText(STAMP_LINE2, x + w / 2, y + h - b - cap * .25);
+}
+// a postmark: a double ring with words, and wavy lines. The ring sits over the stamp's left edge.
+function drawPostmark(ctx, cx, cy, R, toward) {
+  const ink = "rgba(40,50,70,.6)";
+  ctx.save(); ctx.strokeStyle = ink; ctx.fillStyle = ink; ctx.lineWidth = R * .045;
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.stroke();
+  ctx.lineWidth = R * .03; ctx.beginPath(); ctx.arc(cx, cy, R * .84, 0, Math.PI * 2); ctx.stroke();
+  const words = ["KOALA SPIES", "SYDNEY", (S.pmText || "").toUpperCase()].filter(Boolean);
+  ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  words.forEach((t, i) => { let z = R * .24; ctx.font = serif(z); const tw = ctx.measureText(t).width; if (tw > R * 1.45) { z *= R * 1.45 / tw; ctx.font = serif(z); } ctx.fillText(t, cx, cy + (i - (words.length - 1) / 2) * R * .32); });
+  ctx.lineWidth = R * .05; ctx.lineCap = "round";
+  for (let j = 0; j < 4; j++) {
+    const yb = cy - R * .55 + j * R * .37; ctx.beginPath();
+    for (let s = 0; s <= 60; s++) { const d = R * 1.1 + s / 60 * R * 2.2, px = cx + toward * d, py = yb + Math.sin(d / R * 4.2) * R * .09; s ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+// the front of the envelope, W × H, origin at its top-left corner
+function drawFront(ctx, W, H, env) {
+  const k = H / 111;
+  ctx.fillStyle = tint(); ctx.fillRect(0, 0, W, H);
+  if (S.frameOn) { ctx.strokeStyle = S.col; ctx.lineWidth = .55 * k; ctx.beginPath(); rrPath(ctx, 4 * k, 4 * k, W - 8 * k, H - 8 * k, 1.5 * k); ctx.stroke(); }
+  const st = stampOf(S.stamp);
+  if (st) {
+    const sw = 26 * k, sh = 33 * k, sx = W - 9 * k - sw, sy = 8 * k;
+    drawStamp(ctx, sx, sy, sw, sh, st, tint());
+    if (S.postmark) drawPostmark(ctx, sx - 5 * k, sy + sh * .42, 11 * k, -1);
+  }
+  // the address
+  const x0 = W * .36, y1 = H * .53, gap = 10.5 * k, right = W - 10 * k, n = +S.lines;
+  ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.fillStyle = INK; ctx.strokeStyle = RULE; ctx.lineWidth = .3 * k;
+  let lx = x0;
+  if (S.toWord || env.to) {
+    ctx.font = hand(6.2 * k, true); const lead = (S.toWord ? S.toWord + " " : "") + (env.to || "");
+    ctx.fillText(lead.trim(), x0, y1); lx = x0 + ctx.measureText(lead).width + 2 * k;
+  }
+  if (!env.to) { ctx.beginPath(); ctx.moveTo(lx, y1 + 1.2 * k); ctx.lineTo(right, y1 + 1.2 * k); ctx.stroke(); }
+  for (let i = 1; i <= n; i++) { ctx.beginPath(); ctx.moveTo(x0, y1 + 1.2 * k + i * gap); ctx.lineTo(right, y1 + 1.2 * k + i * gap); ctx.stroke(); }
+  ctx.font = ui(1.9 * k); ctx.fillStyle = GREY; ctx.textAlign = "left";
+  ctx.fillText(COPYRIGHT + (st ? " · stamp: Justine Kelly, hand-drawn in Sydney" : ""), 8 * k, H - 6.5 * k);
+}
+// "From …" for the back flap, centred on 0,0
+function drawFrom(ctx, maxW, k) {
+  ctx.textBaseline = "alphabetic"; ctx.fillStyle = INK; ctx.font = hand(4.4 * k, true);
+  const name = S.fromName.trim(), lead = "From" + (name ? " " + name : "");
+  const tw = ctx.measureText(lead).width, lw = name ? 0 : Math.min(maxW * .55, 42 * k), x = -(tw + (lw ? lw + 2 * k : 0)) / 2;
+  ctx.textAlign = "left"; ctx.fillText(lead, x, 0);
+  if (lw) { ctx.strokeStyle = RULE; ctx.lineWidth = .3 * k; ctx.beginPath(); ctx.moveTo(x + tw + 2 * k, .8 * k); ctx.lineTo(x + tw + 2 * k + lw, .8 * k); ctx.stroke(); }
+}
+// a dotted circle that says where the sticker goes, centred on 0,0
+function drawSticker(ctx, k) {
+  ctx.save(); ctx.setLineDash([1 * k, 1 * k]); ctx.strokeStyle = "#b6bfc9"; ctx.lineWidth = .3 * k;
+  ctx.beginPath(); ctx.arc(0, 0, 6 * k, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+  ctx.fillStyle = "#aab4bf"; ctx.font = ui(1.9 * k); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("sticker", 0, 0);
+}
+
+// =====================================================================
+// THE SHAPES: where everything goes on the paper
+// The printed side is the outside of the envelope. You lay it printed side down,
+// put the card in the middle and fold the flaps over it. So anything on a flap is
+// printed upside down, and is the right way up once the flap is folded.
+// =====================================================================
+function geom() {
+  const c = CARDS[S.card], [PW, PH] = PAPERS[c.paper], L = Math.max(c.w, c.h) + 2 * ROOM, H = Math.min(c.w, c.h) + 2 * ROOM, k = H / 111;
+  const g = { PW, PH, L, H, k, paper: c.paper, card: c };
+  if (S.style === "pocket") {
+    g.sf = 18 * k; g.tf = H * .45; g.bf = H * .62;
+    g.px = (PW - L) / 2; g.py = (PH - (g.tf + H + g.bf)) / 2 + g.tf;
+  } else {
+    g.Q = (L + H) / Math.SQRT2; g.cx = PW / 2; g.cy = PH / 2;
+  }
+  return g;
+}
+// the outline of the pocket envelope, as one shape
+// the sizes, in whole millimetres, for the notes and instructions
+function sizes(g) {
+  const mm = v => Math.round(v);
+  return g.Q ? { cut: mm(g.Q) + " × " + mm(g.Q) + " mm square", env: mm(g.L) + " × " + mm(g.H) + " mm", side: mm(g.H / 2), end: mm(g.L / 2) }
+    : { cut: mm(g.L + 2 * g.sf) + " × " + mm(g.tf * .92 + g.H + g.bf) + " mm", env: mm(g.L) + " × " + mm(g.H) + " mm", side: mm(g.sf), top: mm(g.tf * .92), bottom: mm(g.bf) };
+}
+function pocketOutline(ctx, g) {
+  const { px, py, L, H, sf, tf, bf } = g;
+  ctx.moveTo(px, py);
+  ctx.lineTo(px + L * .09, py - tf * .62); ctx.quadraticCurveTo(px + L / 2, py - tf * 1.22, px + L * .91, py - tf * .62); ctx.lineTo(px + L, py);
+  ctx.lineTo(px + L + sf * .35, py + H * .06); ctx.lineTo(px + L + sf, py + H * .2); ctx.lineTo(px + L + sf, py + H * .84); ctx.lineTo(px + L, py + H);
+  ctx.lineTo(px + L - L * .05, py + H + bf); ctx.lineTo(px + L * .05, py + H + bf); ctx.lineTo(px, py + H);
+  ctx.lineTo(px - sf, py + H * .84); ctx.lineTo(px - sf, py + H * .2); ctx.lineTo(px - sf * .35, py + H * .06); ctx.closePath();
+}
+function diamondOutline(ctx, g) { ctx.rect(g.cx - g.Q / 2, g.cy - g.Q / 2, g.Q, g.Q); }
+function cutAndFold(ctx, g, outline, foldRect) {
+  // fold lines: dashed
+  ctx.save(); foldRect(); ctx.setLineDash([2.2 * g.k, 1.6 * g.k]); ctx.strokeStyle = "#8d99a6"; ctx.lineWidth = .3; ctx.stroke(); ctx.restore();
+  // the cutting line: solid
+  ctx.save(); ctx.beginPath(); outline(); ctx.strokeStyle = CUT; ctx.lineWidth = .35; ctx.stroke(); ctx.restore();
+}
+function sheetNotes(ctx, g) {
+  ctx.fillStyle = GREY; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic"; ctx.font = ui(3.3, true);
+  ctx.fillText("✂  Cut along the solid line.   Fold along the dashed lines.", g.PW / 2, 11);
+  const z = sizes(g);
+  ctx.font = ui(2.8); ctx.fillText("Print at “Actual size” or 100%. For " + g.card.name + ". Envelope " + z.env + ". Cut-out " + z.cut + ".", g.PW / 2, 16);
+  // a 50 mm line to check the printer didn't shrink the page
+  const y = g.PH - 15, x0 = g.PW / 2 - 25;
+  ctx.strokeStyle = INK; ctx.lineWidth = .35; ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x0 + 50, y); ctx.moveTo(x0, y - 2); ctx.lineTo(x0, y + 2); ctx.moveTo(x0 + 50, y - 2); ctx.lineTo(x0 + 50, y + 2); ctx.stroke();
+  ctx.fillStyle = INK; ctx.font = ui(2.5, true); ctx.fillText("Check with a ruler: this line is 50 mm (5 cm). If not, print again at “Actual size”.", g.PW / 2, y - 3);
+  ctx.fillStyle = GREY; ctx.font = ui(2.4); ctx.fillText(COPYRIGHT, g.PW / 2, g.PH - 6);
+}
+function drawPocketSheet(ctx, g, env) {
+  const { px, py, L, H, sf, tf, bf, k } = g;
+  ctx.save(); ctx.beginPath(); pocketOutline(ctx, g); ctx.fillStyle = tint(); ctx.fill(); ctx.restore();
+  ctx.save(); ctx.translate(px, py); drawFront(ctx, L, H, env); ctx.restore();
+  // the top flap closes the envelope: "From" and the sticker go on it, upside down
+  ctx.save(); ctx.translate(px + L / 2, py - tf * .4); ctx.rotate(Math.PI); if (S.fromOn) drawFrom(ctx, L * .7, k); ctx.restore();
+  ctx.save(); ctx.translate(px + L / 2, py - tf * .72); ctx.rotate(Math.PI); drawSticker(ctx, k); ctx.restore();
+  // glue goes on the side flaps, where the bottom flap covers them
+  [[px - sf / 2, -Math.PI / 2], [px + L + sf / 2, Math.PI / 2]].forEach(([x, a]) => { ctx.save(); ctx.translate(x, py + H * .66); ctx.rotate(a); ctx.fillStyle = "#aab4bf"; ctx.font = ui(2.4 * k, true); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("glue here", 0, 0); ctx.restore(); });
+  cutAndFold(ctx, g, () => pocketOutline(ctx, g), () => { ctx.beginPath(); ctx.rect(px, py, L, H); });
+}
+function drawDiamondSheet(ctx, g, env) {
+  const { cx, cy, L, H, Q, k } = g;
+  ctx.save(); ctx.beginPath(); diamondOutline(ctx, g); ctx.fillStyle = tint(); ctx.fill(); ctx.restore();
+  const local = draw => { ctx.save(); ctx.translate(cx, cy); ctx.rotate(-Math.PI / 4); draw(); ctx.restore(); };
+  local(() => { ctx.translate(-L / 2, -H / 2); drawFront(ctx, L, H, env); });
+  // the top flap closes the envelope: "From" and the sticker go on it, upside down
+  local(() => { ctx.translate(0, -H / 2 - L / 2 * .3); ctx.rotate(Math.PI); if (S.fromOn) drawFrom(ctx, L * .55, k); });
+  local(() => { ctx.translate(0, -H / 2 - L / 2 + 10 * k); ctx.rotate(Math.PI); drawSticker(ctx, k); });
+  cutAndFold(ctx, g, () => diamondOutline(ctx, g), () => local(() => { ctx.beginPath(); ctx.rect(-L / 2, -H / 2, L, H); }));
+}
+function drawSheet(ctx, env) {
+  const g = geom(); sheetNotes(ctx, g);
+  S.style === "pocket" ? drawPocketSheet(ctx, g, env) : drawDiamondSheet(ctx, g, env);
+}
+// the back of the finished envelope, upright
+function drawBack(ctx, W, H, env, stage) {
+  stage = stage || 3; const k = H / 111, g = geom();
+  ctx.fillStyle = tint(); ctx.fillRect(0, 0, W, H);
+  if (stage < 3) { // the card, lying on the back of the front panel
+    const c = g.card, cw = Math.max(c.w, c.h), ch = Math.min(c.w, c.h);
+    ctx.save(); ctx.fillStyle = "#fff7e0"; ctx.fillRect((W - cw) / 2, (H - ch) / 2, cw, ch); ctx.setLineDash([1.5 * k, 1.2 * k]); ctx.strokeStyle = "#c9a54a"; ctx.lineWidth = .35 * k; ctx.strokeRect((W - cw) / 2, (H - ch) / 2, cw, ch); ctx.restore();
+    ctx.fillStyle = "#a07c22"; ctx.font = ui(5 * k, true); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("card", W / 2, H / 2);
+  }
+  const flap = pts => { ctx.save(); ctx.shadowColor = "rgba(15,23,42,.22)"; ctx.shadowBlur = 1.4 * k * ctx.getTransform().a; ctx.beginPath(); poly(ctx, pts); ctx.fillStyle = tint(); ctx.fill(); ctx.restore(); ctx.beginPath(); poly(ctx, pts); ctx.strokeStyle = "rgba(15,23,42,.25)"; ctx.lineWidth = .3 * k; ctx.stroke(); };
+  let fromY, stickY;
+  if (S.style === "pocket") {
+    const sf = g.sf, tf = g.tf, bf = g.bf;
+    flap([[0, 0], [sf * .35, H * .06], [sf, H * .2], [sf, H * .84], [0, H]]);
+    flap([[W, 0], [W - sf * .35, H * .06], [W - sf, H * .2], [W - sf, H * .84], [W, H]]);
+    if (stage >= 2) flap([[0, H], [W, H], [W - W * .05, H - bf], [W * .05, H - bf]]);
+    const top = []; top.push([0, 0], [W * .09, tf * .62]); for (let i = 1; i < 20; i++) { const t = i / 20, u = 1 - t; top.push([u * u * W * .09 + 2 * u * t * W / 2 + t * t * W * .91, u * u * tf * .62 + 2 * u * t * tf * 1.22 + t * t * tf * .62]); } top.push([W * .91, tf * .62], [W, 0]);
+    if (stage >= 3) flap(top); fromY = tf * .4; stickY = tf * .72;
+  } else {
+    flap([[0, 0], [H / 2, H / 2], [0, H]]); flap([[W, 0], [W - H / 2, H / 2], [W, H]]);
+    if (stage >= 2) flap([[0, H], [W, H], [W / 2, H - W / 2]]); if (stage >= 3) flap([[0, 0], [W, 0], [W / 2, W / 2]]);
+    fromY = W / 2 * .3; stickY = W / 2 - 10 * k;
+  }
+  if (stage < 3) return;
+  if (S.fromOn) { ctx.save(); ctx.translate(W / 2, fromY + 1.5 * k); drawFrom(ctx, W * .55, k); ctx.restore(); }
+  ctx.save(); ctx.translate(W / 2, stickY); drawSticker(ctx, k); ctx.restore();
+}
+function arrow(ctx, x0, y0, x1, y1, w) {
+  const a = Math.atan2(y1 - y0, x1 - x0), h = w * 3.2;
+  ctx.save(); ctx.strokeStyle = ctx.fillStyle = "#d9481f"; ctx.lineWidth = w; ctx.lineCap = "round";
+  ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1 - Math.cos(a) * h * .6, y1 - Math.sin(a) * h * .6); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x1 - Math.cos(a - .5) * h, y1 - Math.sin(a - .5) * h); ctx.lineTo(x1 - Math.cos(a + .5) * h, y1 - Math.sin(a + .5) * h); ctx.closePath(); ctx.fill(); ctx.restore();
+}
+// a numbered circle, for the fold order
+function badge(ctx, x, y, n, z) {
+  ctx.fillStyle = "#d9481f"; ctx.beginPath(); ctx.arc(x, y, z, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = "#fff"; ctx.font = ui(z * 1.25, true); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(n), x, y + z * .08);
+}
+// the cut-out shape with its parts named, numbered and measured: for the instructions page
+function drawLabelled(ctx, g) {
+  const z = sizes(g), k = g.k, lab = (t, x, y, zz, col) => { ctx.fillStyle = col || INK; ctx.font = ui(zz, true); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(t, x, y); };
+  ctx.save(); ctx.beginPath(); S.style === "pocket" ? pocketOutline(ctx, g) : diamondOutline(ctx, g); ctx.fillStyle = "#fff"; ctx.fill(); ctx.restore();
+  if (S.style === "pocket") {
+    const { px, py, L, H, sf, tf, bf } = g;
+    ctx.fillStyle = mix(S.col, .1); ctx.fillRect(px, py, L, H);
+    cutAndFold(ctx, g, () => pocketOutline(ctx, g), () => { ctx.beginPath(); ctx.rect(px, py, L, H); });
+    lab("FRONT", px + L / 2, py + H * .38, 11 * k, S.col); lab("printed side", px + L / 2, py + H * .55, 6.5 * k); lab(z.env, px + L / 2, py + H * .67, 6.5 * k);
+    badge(ctx, px - sf / 2, py + H * .38, 1, 6 * k); badge(ctx, px + L + sf / 2, py + H * .38, 1, 6 * k);
+    lab(z.side + " mm", px - sf / 2, py + H * .58, 5 * k); lab(z.side + " mm", px + L + sf / 2, py + H * .58, 5 * k);
+    badge(ctx, px + L / 2 - 36 * k, py + H + bf * .45, 2, 6 * k); lab("bottom flap " + z.bottom + " mm", px + L / 2 + 4 * k, py + H + bf * .45, 6.5 * k);
+    badge(ctx, px + L / 2 - 33 * k, py - tf * .42, 3, 6 * k); lab("top flap " + z.top + " mm", px + L / 2 + 4 * k, py - tf * .42, 6.5 * k);
+  } else {
+    const { cx, cy, L, H } = g;
+    const local = draw => { ctx.save(); ctx.translate(cx, cy); ctx.rotate(-Math.PI / 4); draw(); ctx.restore(); };
+    local(() => { ctx.fillStyle = mix(S.col, .1); ctx.fillRect(-L / 2, -H / 2, L, H); });
+    cutAndFold(ctx, g, () => diamondOutline(ctx, g), () => local(() => { ctx.beginPath(); ctx.rect(-L / 2, -H / 2, L, H); }));
+    lab("FRONT", cx, cy - 8 * k, 11 * k, S.col); lab("printed side", cx, cy + 4 * k, 6.5 * k); lab(z.env, cx, cy + 12 * k, 6.5 * k);
+    // the middle of each corner flap, turned with the shape
+    const at = (u, v) => { const c = Math.cos(-Math.PI / 4), s = Math.sin(-Math.PI / 4); return [cx + u * c - v * s, cy + u * s + v * c]; };
+    const sideD = H / 2 / 2.6, endD = L / 2 / 2.4;
+    // each corner flap: its number, and its size beside it (towards the middle of the sheet)
+    const corner = (n, mmTxt, u, v) => { const [x, y] = at(u, v), dir = x < cx ? 1 : -1; badge(ctx, x, y, n, 6 * k); ctx.fillStyle = INK; ctx.font = ui(5.5 * k, true); ctx.textAlign = dir > 0 ? "left" : "right"; ctx.textBaseline = "middle"; ctx.fillText(mmTxt, x + dir * 8 * k, y); };
+    corner(1, z.side + " mm", -L / 2 - sideD, 0); corner(1, z.side + " mm", L / 2 + sideD, 0);
+    corner(2, z.end + " mm", 0, H / 2 + endD); corner(3, z.end + " mm", 0, -H / 2 - endD);
+  }
+}
+// the back as you fold it, step by step, with an arrow for the flap that moves
+function drawStep(ctx, W, H, env, stage) {
+  const k = H / 111, pocket = S.style === "pocket", w = 1.6 * k;
+  drawBack(ctx, W, H, env, stage);
+  if (stage === 1) { arrow(ctx, -2 * k, H / 2, (pocket ? 18 : H / 3) * k / k, H / 2, w); arrow(ctx, W + 2 * k, H / 2, W - (pocket ? 18 : H / 3) * k / k, H / 2, w); }
+  if (stage === 2) arrow(ctx, W / 2, H + 2 * k, W / 2, H - H * .45, w);
+  if (stage === 3) arrow(ctx, W * .78, -2 * k, W * .78, H * .3, w);
+}
+
+// =====================================================================
+// PAGES
+// =====================================================================
+function sheetPages() { const g = geom(); return envs().map(env => ({ W: g.PW, H: g.PH, orient: "portrait", paper: g.paper, to: env.to, draw: ctx => drawSheet(ctx, env) })); }
+function shadowBox(ctx, x, y, w, h, fn) {
+  ctx.save(); ctx.shadowColor = "rgba(15,23,42,.3)"; ctx.shadowBlur = 3 * ctx.getTransform().a; ctx.shadowOffsetY = ctx.getTransform().a; ctx.fillStyle = "#fff"; ctx.fillRect(x, y, w, h); ctx.restore();
+  ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip(); ctx.translate(x, y); fn(ctx); ctx.restore();
+}
+function label(ctx, t, x, y, z) { ctx.font = ui(z, true); ctx.fillStyle = GREY; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.fillText(t, x, y); }
+function envPage(env) {
+  const g = geom(), k = g.k, m = 10 * k, gap = 12 * k, lab = 7 * k, W = 2 * g.L + gap + 2 * m, H = g.H + 2 * lab + 2 * m + 6 * k;
+  return { W, H, view: true, to: env.to, draw: ctx => {
+    ctx.fillStyle = "#f3f1e6"; ctx.fillRect(0, 0, W, H);
+    label(ctx, "Front", m, m + lab * .7, 4.2 * k); shadowBox(ctx, m, m + lab, g.L, g.H, c => drawFront(c, g.L, g.H, env));
+    label(ctx, "Back", m + g.L + gap, m + lab * .7, 4.2 * k); shadowBox(ctx, m + g.L + gap, m + lab, g.L, g.H, c => drawBack(c, g.L, g.H, env));
+    ctx.font = ui(3.4 * k); ctx.fillStyle = GREY; ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Envelope: " + Math.round(g.L) + " × " + Math.round(g.H) + " mm, for " + g.card.name + ". Printed on " + PAPER_NAME[g.paper] + ".", m, m + lab + g.H + 4 * k);
+  } };
+}
+function thumb(ctx, x, y, w, h, drawFn, W, H) {
+  const f = Math.min(w / W, h / H), dw = W * f, dh = H * f, ox = x + (w - dw) / 2, oy = y + (h - dh) / 2;
+  ctx.save(); ctx.shadowColor = "rgba(15,23,42,.25)"; ctx.shadowBlur = 2 * ctx.getTransform().a; ctx.fillStyle = "#fff"; ctx.fillRect(ox, oy, dw, dh); ctx.restore();
+  ctx.save(); ctx.beginPath(); ctx.rect(ox, oy, dw, dh); ctx.clip(); ctx.translate(ox, oy); ctx.scale(f, f); drawFn(ctx); ctx.restore();
+  ctx.save(); ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = .3; ctx.strokeRect(ox, oy, dw, dh); ctx.restore();
+  return { x: ox, y: oy, w: dw, h: dh };
+}
+function wrapLines(ctx, text, maxW) { const out = []; let line = ""; String(text).split(/\s+/).filter(Boolean).forEach(w => { const t = line ? line + " " + w : w; if (line && ctx.measureText(t).width > maxW) { out.push(line); line = w; } else line = t; }); out.push(line); return out; }
+function foldPage() {
+  const g = geom(), paper = g.paper === "letter" || g.paper === "tabloid" ? "letter" : "a4", [W, H] = PAPERS[paper], k = Math.min(W / 210, H / 297), env = envs()[0], A = S.col, pocket = S.style === "pocket", z = sizes(g);
+  const c = g.card, cardTxt = Math.round(Math.max(c.w, c.h) * 10) / 10 + " × " + Math.round(Math.min(c.w, c.h) * 10) / 10 + " mm";
+  const top = [
+    "Print the sheet on " + PAPER_NAME[g.paper] + " paper, on one side. In the print window choose “Actual size” or 100%, not “Fit to page”. Measure the line at the bottom of the sheet: it must be 50 mm. If it isn't, the envelope will be too small for the card.",
+    pocket ? "Cut along the solid line, all the way round. The cut-out is " + z.cut + ". Keep the flaps on: cut only on the solid line." : "Cut out the square along the solid line. It is " + z.cut + ". The white parts of the sheet outside it are not needed.",
+    "Fold along each dashed line, printed side out: fold the flap back, press the fold flat with a ruler, then open it again. Do all four dashed lines."
+  ];
+  const low = pocket ? [
+    "Turn the sheet over, printed side down. Put the card in the middle. Fold side flaps ① (" + z.side + " mm) in over the card.",
+    "Put a little glue on the side flaps, below the card's middle. Fold bottom flap ② (" + z.bottom + " mm) up over them and press for 10 seconds.",
+    "Fold top flap ③ (" + z.top + " mm) down over the bottom flap. Put a sticker on the dotted circle, half on each flap."
+  ] : [
+    "Turn the square over, printed side down. Put the card in the middle, straight along the dashed lines. Fold the two side corners ① in.",
+    "Fold the bottom corner ② up over them. A dab of glue under its two edges makes it stronger.",
+    "Fold the top corner ③ down over the bottom corner. Put a sticker on the dotted circle, half on each corner."
+  ];
+  return { W, H, orient: "portrait", paper, draw: ctx => {
+    const M = 14 * k, R = W - 14 * k;
+    ctx.fillStyle = A; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.font = serif(8.5 * k); ctx.fillText("How to fold your envelope", M, 22 * k);
+    ctx.font = ui(3.8 * k); ctx.fillStyle = GREY; ctx.fillText((pocket ? "Pocket envelope" : "Diamond-fold envelope") + " for " + c.name, M, 28.5 * k);
+    ctx.strokeStyle = A; ctx.lineWidth = .8 * k; ctx.beginPath(); ctx.moveTo(M, 31.5 * k); ctx.lineTo(R, 31.5 * k); ctx.stroke();
+    // the sizes
+    const facts = [["Your card", cardTxt], ["Finished envelope", z.env], ["Print on", PAPER_NAME[g.paper]], [pocket ? "Cut-out size" : "Cut-out square", z.cut.replace(" square", "")]];
+    const bw = (R - M) / 4; ctx.fillStyle = mix(A, .07); ctx.beginPath(); rrPath(ctx, M, 35 * k, R - M, 15 * k, 2.5 * k); ctx.fill();
+    facts.forEach(([a, b], i) => { const x = M + i * bw + 4 * k; ctx.fillStyle = GREY; ctx.font = ui(3 * k); ctx.textBaseline = "alphabetic"; ctx.textAlign = "left"; ctx.fillText(a, x, 41 * k); ctx.fillStyle = INK; ctx.font = ui(3.9 * k, true); ctx.fillText(b, x, 46.8 * k); });
+    // the labelled cut-out, on the left
+    const dx = M, dy = 55 * k, dw = (R - M) * .5, dh = 124 * k;
+    label(ctx, "The cut-out, printed side up", dx, dy, 3.2 * k);
+    const bb = pocket ? { x: g.px - g.sf, y: g.py - g.tf * .92, w: g.L + 2 * g.sf, h: g.tf * .92 + g.H + g.bf } : { x: g.cx - g.Q / 2, y: g.cy - g.Q / 2, w: g.Q, h: g.Q };
+    const f = Math.min(dw / bb.w, (dh - 6 * k) / bb.h);
+    ctx.save(); ctx.translate(dx + (dw - bb.w * f) / 2, dy + 4 * k); ctx.scale(f, f); ctx.translate(-bb.x, -bb.y); drawLabelled(ctx, g); ctx.restore();
+    // steps 1 to 3, on the right
+    const step = (n, t, x, y, w, zz) => { badge(ctx, x + 4 * k, y + 4 * k, n, 4 * k); ctx.font = ui(zz); ctx.fillStyle = INK; ctx.textAlign = "left"; ctx.textBaseline = "top"; const ls = wrapLines(ctx, t, w - 11 * k); ls.forEach((l, j) => ctx.fillText(l, x + 11 * k, y + 1.2 * k + j * zz * 1.32)); return ls.length * zz * 1.32; };
+    let y = dy - 1 * k; const sx = M + dw + 6 * k, sw = R - sx;
+    top.forEach((t, i) => { y += step(i + 1, t, sx, y, sw, 3.5 * k) + 5 * k; });
+    // steps 4 to 6, with pictures of the back as you fold
+    const py = dy + dh + 6 * k, pw = (R - M - 8 * k) / 3, ph = pw * g.H / g.L;
+    low.forEach((t, i) => {
+      const x = M + i * (pw + 4 * k);
+      thumb(ctx, x + 3 * k, py, pw - 6 * k, ph - 4 * k, cc => drawStep(cc, g.L, g.H, env, i + 1), g.L, g.H);
+      step(i + 4, t, x, py + ph, pw, 3.2 * k);
+    });
+    // tips
+    const ty = H - 34 * k; ctx.fillStyle = mix(A, .07); ctx.beginPath(); rrPath(ctx, M, ty, R - M, 22 * k, 2.5 * k); ctx.fill();
+    ctx.fillStyle = A; ctx.font = ui(3.8 * k, true); ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText("Tips", M + 4 * k, ty + 3 * k);
+    ctx.font = ui(3.1 * k); ctx.fillStyle = INK; let yy = ty + 8.5 * k;
+    ["Ordinary 80–120 gsm paper folds best: thick card cracks. Print one envelope and check it fits the card before you print a class set.", "The art stamp is decorative. To post the envelope, add a real stamp at the top right, over the art stamp or beside it."]
+      .forEach(t => wrapLines(ctx, "•  " + t, R - M - 8 * k).forEach(l => { ctx.fillText(l, M + 4 * k, yy); yy += 4.3 * k; }));
+    ctx.font = ui(2.5 * k); ctx.fillStyle = GREY; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic"; ctx.fillText(COPYRIGHT, W / 2, H - 6 * k);
+  } };
+}
+function printPages() { return S.out === "fold" ? [foldPage()] : sheetPages(); }
+function buildPages() { return S.out === "fold" ? [foldPage()] : S.out === "env" ? envs().map(envPage) : sheetPages(); }
+function renderPage(canvas, pg, pxPerMm) {
+  canvas.width = Math.round(pg.W * pxPerMm); canvas.height = Math.round(pg.H * pxPerMm);
+  const ctx = canvas.getContext("2d"); ctx.setTransform(pxPerMm, 0, 0, pxPerMm, 0, 0);
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, pg.W, pg.H); ctx.lineJoin = "round"; pg.draw(ctx); return canvas;
+}
+
+// =====================================================================
+// SCREEN
+// =====================================================================
+let drawQueued = false;
+function fontsReady() {
+  if (!(document.fonts && document.fonts.load)) return Promise.resolve();
+  return Promise.all([hand(20, true), ui(20), ui(20, true), serif(20), serif(20, true)].map(f => document.fonts.load(f).catch(() => {})));
+}
+async function redraw() {
+  if (drawQueued) return; drawQueued = true;
+  const st = stampOf(S.stamp); if (st) await loadPic(st.file); await fontsReady();
+  requestAnimationFrame(() => {
+    drawQueued = false;
+    pages = buildPages(); page = clamp(page, 0, pages.length - 1);
+    const pg = pages[page], cv = $("preview"), dpr = Math.min(2, window.devicePixelRatio || 1);
+    renderPage(cv, pg, Math.min(3.2 * dpr, 2800 / Math.max(pg.W, pg.H)));
+    cv.setAttribute("aria-label", S.out === "fold" ? "How to fold the envelope" : S.out === "env" ? "The finished envelope: front and back" : "The page to print");
+    $("pager").hidden = pages.length < 2;
+    $("pagerText").textContent = "Page " + (page + 1) + " of " + pages.length + (pg.to ? " · " + pg.to : "");
+    const n = printPages().length; $("pdfBtn").textContent = "Download PDF (" + n + (n === 1 ? " page)" : " pages)");
+    hints(); fitStage();
+  });
+}
+function hints() {
+  const g = geom(), n = namesList().length;
+  $("cardHint").textContent = "For " + g.card.name + ". The envelope is " + Math.round(g.L) + " × " + Math.round(g.H) + " mm and prints on " + PAPER_NAME[g.paper] + " paper.";
+  $("sizeNote").textContent = S.out === "env" ? "This is how the envelope looks after folding." : S.out === "fold" ? "A page of folding instructions to print and give to your class." : "Prints on " + PAPER_NAME[g.paper] + ". Choose “Actual size” or 100% when you print.";
+  $("namesHint").textContent = n ? n + (n === 1 ? " envelope" : " envelopes") + ", one for each name." : "Each envelope gets its own name on the front. Up to 60 names.";
+}
+// the preview panel stays in view as you scroll: shrink the preview so the whole panel fits the window
+function fitStage() {
+  const cv = $("preview"), st = document.querySelector(".stage");
+  if (window.innerWidth <= 980) { cv.style.maxHeight = ""; return; }
+  cv.style.maxHeight = "";
+  const other = st.scrollHeight - cv.offsetHeight, room = window.innerHeight - 40 - other;
+  cv.style.maxHeight = Math.max(280, Math.min(room, window.innerHeight * .74)) + "px";
+}
+let fitTimer = 0;
+window.addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitStage, 120); });
+
+// ---------- the form ----------
+const RADIOS = ["card", "style", "lines", "tint"], TEXTS = ["pmText", "toName", "fromName", "names"], CHECKS = ["postmark", "fromOn", "frameOn"];
+const show = (id, on) => { $(id).hidden = !on; };
+function syncForm() {
+  RADIOS.forEach(n => document.querySelectorAll('input[name="' + n + '"]').forEach(r => { r.checked = String(S[n]) === r.value; }));
+  TEXTS.forEach(id => { if ($(id) !== document.activeElement) $(id).value = S[id]; });
+  CHECKS.forEach(id => { $(id).checked = S[id]; });
+  $("toWord").value = S.toWord;
+  show("pmRow", S.postmark && S.stamp !== "none"); $("postmark").closest(".check").hidden = S.stamp === "none";
+  show("fromRow", S.fromOn); show("colRow", S.frameOn);
+  document.querySelectorAll("#colSw .sw").forEach(b => b.setAttribute("aria-pressed", b.dataset.c === S.col));
+  document.querySelectorAll("#stamps .pick").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === S.stamp));
+  document.querySelectorAll("#outs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.out === S.out));
+}
+function changed(keepPage) { if (!keepPage) page = 0; save(); redraw(); }
+$("controls").addEventListener("change", e => {
+  const t = e.target;
+  if (t.type === "radio" && RADIOS.indexOf(t.name) > -1) S[t.name] = t.value;
+  else if (CHECKS.indexOf(t.id) > -1) S[t.id] = t.checked;
+  else if (t.id === "toWord") S.toWord = t.value;
+  else return;
+  syncForm(); changed(true);
+});
+TEXTS.forEach(id => $(id).addEventListener("input", e => { S[id] = e.target.value; changed(id !== "names"); }));
+$("outs").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; S.out = b.dataset.out; syncForm(); changed(); });
+COLOURS.forEach(p => { const b = el("button", "sw"); b.type = "button"; b.dataset.c = p.c; b.title = p.name; b.setAttribute("aria-label", p.name); b.style.background = p.c; b.onclick = () => { S.col = p.c; syncForm(); changed(true); }; $("colSw").appendChild(b); });
+async function buildStamps() {
+  const box = $("stamps"); box.textContent = "";
+  const none = el("button", "pick"); none.type = "button"; none.dataset.id = "none"; none.append(el("span", "none", "No stamp"), el("span", "", "No stamp")); box.appendChild(none);
+  for (const st of STAMPS) {
+    const b = el("button", "pick"); b.type = "button"; b.dataset.id = st.id; b.title = st.name;
+    const c = el("canvas"); c.width = 128; c.height = 160; c.setAttribute("aria-hidden", "true");
+    b.append(c, el("span", "", st.name)); box.appendChild(b);
+    await loadPic(st.file); const x = c.getContext("2d"); x.scale(4, 4); drawStamp(x, 3, 3, 26, 33, st, "#ffffff");
+  }
+  syncForm();
+}
+$("stamps").addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return; S.stamp = b.dataset.id; syncForm(); changed(true); });
+$("prevBtn").onclick = () => { page = Math.max(0, page - 1); redraw(); };
+$("nextBtn").onclick = () => { page = Math.min(pages.length - 1, page + 1); redraw(); };
+$("resetBtn").onclick = () => { try { localStorage.removeItem(STORE); } catch (e) {} S = fresh(); syncForm(); changed(); say("Started again."); };
+
+// =====================================================================
+// DOWNLOAD AND PRINT
+// =====================================================================
+const pause = () => new Promise(r => setTimeout(r, 0));
+function fileBase() { return S.out === "fold" ? "envelope-how-to-fold" : "envelope-" + (S.style === "pocket" ? "pocket" : "diamond"); }
+async function busy(job) {
+  const all = [$("pdfBtn"), $("pngBtn"), $("printBtn")]; all.forEach(b => b.disabled = true);
+  try { const st = stampOf(S.stamp); if (st) await loadPic(st.file); await fontsReady(); await job(); } catch (e) { console.error(e); say("Something went wrong making the file. Try again, or use Print."); }
+  all.forEach(b => b.disabled = false);
+}
+const dpi = () => (geom().paper === "a3" || geom().paper === "tabloid" ? 200 : 250) / 25.4;
+$("pdfBtn").onclick = () => busy(async () => {
+  if (!window.jspdf) { say("The PDF tool didn't load (check your connection). Use Print and choose Save as PDF."); return; }
+  const ps = printPages(), fmt = ps[0].paper, pdf = new window.jspdf.jsPDF({ orientation: "portrait", unit: "mm", format: fmt }), cv = document.createElement("canvas");
+  for (let i = 0; i < ps.length; i++) {
+    say("Making page " + (i + 1) + " of " + ps.length + "…"); await pause();
+    renderPage(cv, ps[i], S.out === "fold" ? 250 / 25.4 : dpi()); if (i) pdf.addPage(fmt, "portrait");
+    pdf.addImage(cv.toDataURL("image/jpeg", .92), "JPEG", 0, 0, ps[i].W, ps[i].H, undefined, "FAST");
+  }
+  pdf.save(fileBase() + ".pdf"); say("Downloaded. When you print, choose “Actual size” or 100%.");
+});
+function downloadBlob(b, name) { const a = el("a"); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+$("pngBtn").onclick = () => busy(async () => {
+  const pg = pages[page], cv = document.createElement("canvas");
+  renderPage(cv, pg, (pg.view ? 300 : 200) / 25.4);
+  downloadBlob(await new Promise(r => cv.toBlob(r, "image/png")), fileBase() + (pages.length > 1 ? "-" + (page + 1) : "") + ".png");
+  say("Downloaded this page as a picture.");
+});
+$("printBtn").onclick = () => busy(async () => {
+  const ps = printPages(), area = $("printArea"), cv = document.createElement("canvas"); area.textContent = "";
+  let pr = $("pageRule"); if (!pr) { pr = el("style"); pr.id = "pageRule"; document.head.appendChild(pr); }
+  pr.textContent = "@page{size:" + { a4: "A4", a3: "A3", letter: "letter", tabloid: "11in 17in" }[ps[0].paper] + " portrait;margin:0}";
+  const waits = [];
+  for (let i = 0; i < ps.length; i++) { say("Getting ready to print…"); await pause(); renderPage(cv, ps[i], 150 / 25.4); const im = new Image(); waits.push(new Promise(r => { im.onload = im.onerror = r; })); im.src = cv.toDataURL("image/jpeg", .92); area.appendChild(im); }
+  await Promise.all(waits);
+  say("Choose “Actual size” or 100% in the print window, and " + PAPER_NAME[ps[0].paper] + " paper.");
+  window.print();
+  setTimeout(() => { area.textContent = ""; }, 1000);
+});
+
+// ---------- install as an app (Chrome and Edge offer this; the button stays hidden elsewhere) ----------
+(function () {
+  let deferred = null;
+  const btn = $("appInstall");
+  const standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); if (standalone) return; deferred = e; btn.hidden = false; });
+  btn.onclick = () => { if (!deferred) return; deferred.prompt(); deferred.userChoice.finally(() => { deferred = null; btn.hidden = true; }); };
+  window.addEventListener("appinstalled", () => { btn.hidden = true; say("Installed. Find Teacher Tools with your other apps."); });
+})();
+
+// =====================================================================
+// START
+// =====================================================================
+(function start() {
+  try { const s = localStorage.getItem(STORE); if (s) S = tidy(JSON.parse(s)); } catch (e) {}
+  // a link from the card maker can say which card: bespoke-envelope-maker.html#card=a5
+  const m = /#card=(a4q|a6|a5|lq|lh)/.exec(location.hash); if (m && CARDS[m[1]]) S.card = m[1];
+  syncForm(); buildStamps(); redraw();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => redraw());
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<!-- Christmas & Greeting Card Maker © Koala Spies Sydney. All rights reserved. -->
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Printable Christmas &amp; Greeting Card Maker | Fold from One Sheet</title>
+<meta name="description" content="Make Christmas, birthday, Eid, Diwali, Lunar New Year, thank-you and other greeting cards that fold from one sheet of A4, A3 or Letter paper. Choose a vintage picture or a drawing to colour in, leave the front blank to draw on, or add your own picture. Choose a frame and a message, and print. Free for teachers and students. No sign-up.">
+<link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-greeting-card-maker.html">
+<meta property="og:title" content="Free Christmas &amp; Greeting Card Maker">
+<meta property="og:description" content="Printable cards that fold from one sheet of paper. Frames, messages and sentence starters for English learners.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://modernenglish.au/teachertools/bespoke-greeting-card-maker.html">
+<meta name="google-adsense-account" content="ca-pub-7047447363586796">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Teacher Tools app: install it, and use it offline -->
+<link rel="manifest" href="/teachertools/manifest.webmanifest">
+<meta name="theme-color" content="#1c1c1c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Teacher Tools">
+<script src="/teachertools/pwa.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Serif+4:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,700&family=Fredoka:wght@400;600&family=Nunito:wght@500;800&family=Mountains+of+Christmas:wght@400;700&family=Dancing+Script:wght@500;700&family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IM+Fell+English&family=Cinzel:wght@400;700&family=Great+Vibes&family=Lobster&family=Caveat:wght@500;700&family=Amatic+SC:wght@400;700&family=Abril+Fatface&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Christmas & Greeting Card Maker","url":"https://modernenglish.au/teachertools/bespoke-greeting-card-maker.html","applicationCategory":"EducationalApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},"description":"Printable greeting cards that fold from one sheet of A4, A3 or Letter paper, with frames, messages and sentence starters for English learners.","publisher":{"@type":"Organization","name":"Modern English Australia","url":"https://modernenglish.au/"}}
+</script>
+<style>
+/* =====================================================================
+   CHRISTMAS & GREETING CARD MAKER
+   One file, no server. Frames are drawn in code; the pictures are
+   public-domain and free-to-use images in the card-pictures folder. Every card and page is
+   drawn on a <canvas>, so the preview, the PDF, the PNGs and the
+   print-out are always identical. Nothing the teacher types leaves
+   the browser.
+   ===================================================================== */
+:root{
+  --bench:#fffce6;      /* the site's cream page colour */
+  --panel:#ffffff;
+  --ink:#0f172a;
+  --soft:#475569;
+  --line:#dcd9c6;
+  --header:#1c1c1c;     /* header and footer, as on modernenglish.au */
+  --tag:#fde047;        /* the yellow of the site's tagline, on dark only */
+  --deep:#0e2861;       /* Modern English navy: primary buttons, headings */
+  --foil:#0e7c66;       /* Modern English teal, used sparingly */
+  --focus:#3968ea;
+  --warn:#b3261e;
+  --good:#1f7a4d;
+  --amber:#b45309; --amberbg:#fff7ed; --amberline:#f3d3a8;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%230f172a%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.top{background:var(--header);color:#f8fafc}
+.top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
+.titleblock{flex:1 1 16rem;min-width:0}
+.top-in{max-width:1400px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15}
+.top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:54ch}
+.toolsback{display:block;width:max-content;margin:.35rem 0 0;color:#f8fafc;text-decoration:none;letter-spacing:.12em;font-weight:700}
+.toolsback:hover{color:var(--tag);text-decoration:underline}
+.subblock{display:grid;gap:.5rem;justify-items:start;max-width:54ch}
+.appinstall{border:0;border-radius:4px;background:#ff7a1a;color:#1c1c1c;font-weight:800;font-size:.88rem;padding:.45rem .9rem;min-height:38px;cursor:pointer}
+.appinstall:hover{background:#ff9b3d}
+
+.bench{max-width:1400px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(320px,500px) minmax(0,1fr);gap:1.5rem;align-items:start}
+.controls{display:grid;gap:.75rem;min-width:0}
+details.group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+details.group>summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.group>summary::-webkit-details-marker{display:none}
+details.group>summary::after{content:"";width:.55rem;height:.55rem;border-right:2px solid var(--soft);border-bottom:2px solid var(--soft);transform:rotate(45deg);transition:transform .15s ease;flex:none;margin-right:.2rem}
+details.group[open]>summary::after{transform:rotate(-135deg)}
+.group-body{padding:0 1rem 1rem;display:grid;grid-template-columns:minmax(0,1fr);gap:.8rem}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft)}
+label.f>span{font-weight:700;color:var(--ink)}
+input[type=text],input[type=number],input[type=search],select{width:100%;padding:.55rem .65rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:1rem;min-height:44px}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+.hint.warn{color:var(--warn);font-weight:700}
+.lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg label{position:relative;text-align:center;padding:.45rem .3rem;cursor:pointer;font-size:.92rem;min-height:44px;display:flex;align-items:center;justify-content:center;line-height:1.2}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--deep);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:-3px}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep);flex:none}
+.swatches{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.sw{width:40px;height:40px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep)}
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
+.btn:hover{background:#eef2fb}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:hover{background:#0a1d47}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn.small{min-height:36px;padding:.25rem .65rem;font-size:.9rem}
+.btn[disabled]{opacity:.55;cursor:progress}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+
+/* themes and words */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.6rem,1fr));gap:.4rem}
+.theme{display:flex;align-items:center;gap:.45rem;border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:.3rem .5rem;cursor:pointer;text-align:left;font-size:.88rem;line-height:1.2;min-height:44px}
+.theme[aria-pressed=true]{border-color:var(--deep);background:#eef2fb;font-weight:700;box-shadow:inset 0 0 0 1px var(--deep)}
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(6.4rem,1fr));gap:.4rem;max-height:24rem;overflow:auto;padding:.1rem}
+.word{position:relative;border:1.5px solid var(--line);border-radius:8px;background:#fff;display:grid;justify-items:center;gap:.1rem;padding:.4rem .3rem .35rem;min-width:0}
+.word.off{opacity:.38;background:#eef2fb}
+.word .pic{width:48px;height:48px;border:0;background:none;padding:0;cursor:pointer;border-radius:6px}
+.word .pic img{width:48px;height:48px;display:block}
+.word .nopic{width:48px;height:48px;display:grid;place-items:center;border:1.5px dashed var(--line);border-radius:6px;font-size:.7rem;color:var(--soft);line-height:1.1;text-align:center}
+.word input{width:100%;min-height:30px;padding:.1rem .25rem;border:1px solid transparent;border-radius:5px;text-align:center;font-size:.88rem;background:transparent}
+.word input:hover,.word input:focus{border-color:var(--line);background:#fff}
+.word .tog{position:absolute;top:2px;right:2px;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-size:.75rem;line-height:1;padding:0}
+.word:not(.off) .tog{background:var(--deep);border-color:var(--deep);color:#fff}
+.word .x{position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:.7rem;padding:0;color:var(--soft)}
+.empty{margin:0;padding:.8rem;border:1.5px dashed var(--line);border-radius:8px;color:var(--soft);text-align:center}
+.search{display:grid;gap:.5rem}
+.picking{border:1.5px solid var(--deep);border-radius:8px;padding:.6rem;background:#eef2fb}
+
+/* preview */
+.stage{position:sticky;top:1rem;display:grid;gap:.7rem;min-width:0;max-height:calc(100vh - 2rem);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.outs{display:flex;gap:.35rem;flex-wrap:wrap}
+.outs button{border:1.5px solid var(--line);background:#fff;border-radius:6px;padding:.35rem .9rem;font-weight:700;cursor:pointer;min-height:40px}
+.outs button[aria-pressed=true]{background:var(--deep);border-color:var(--deep);color:#fff}
+.paper{background:#ebe7cf;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.2rem);display:flex;justify-content:center}
+#preview{display:block;max-width:100%;max-height:74vh;width:auto;height:auto;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.25),0 14px 34px -10px rgba(15,23,42,.45)}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.pager{display:flex;align-items:center;gap:.5rem;font-size:.95rem}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+.fineprint{margin:0;font-size:.9rem;color:var(--soft)}
+.fineprint a,.terms a,.notes a{color:var(--deep);font-weight:700}
+.optbox{display:grid;gap:.7rem}
+
+/* on-screen caller */
+.caller{position:fixed;inset:0;z-index:60;background:#fffdf7;display:grid;grid-template-rows:auto 1fr auto;padding:1rem 1.25rem;gap:.6rem}
+.caller-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.caller-top h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:clamp(1.3rem,3vw,2rem)}
+.caller-main{display:grid;place-items:center;align-content:center;gap:1rem;text-align:center;min-height:0}
+.caller-main img{width:min(52vh,70vw);height:min(52vh,70vw);object-fit:contain}
+.caller-main .cw{font-family:var(--cfont,"Andika"),sans-serif;font-size:clamp(2.4rem,8vw,6rem);font-weight:700;line-height:1.1}
+.caller-main .cn{font-size:1.1rem;color:var(--soft)}
+.caller-bot{display:grid;gap:.6rem}
+.called{display:flex;gap:.3rem;flex-wrap:wrap;justify-content:center;max-height:5.2rem;overflow:auto}
+.called img{width:40px;height:40px;opacity:.85}
+.called span{font-size:.9rem;border:1px solid var(--line);border-radius:999px;padding:0 .5rem}
+.caller .btn{font-size:1.05rem}
+
+/* reading matter */
+.notes{max-width:1400px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+.terms{max-width:1400px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
+.terms h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+footer{background:var(--header);color:#cbd5e1;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer a{color:#fff}
+#printArea{display:none}
+@media (max-width:980px){
+  .bench{grid-template-columns:minmax(0,1fr);padding:1rem}
+  .stage{position:static;order:-1;max-height:none;overflow:visible}
+  #preview{max-height:62vh}
+}
+/* ---------- open layout: no card backings, no horizontal lines, raised buttons ---------- */
+details.group,.terms-in{background:none;border:0!important;border-radius:0;box-shadow:none}
+details.group{margin-bottom:.35rem}
+details.group>summary{padding-left:0;padding-right:0}
+.group-body,.terms-in{padding-left:0;padding-right:0}
+.notes h2{border-bottom:0;padding-bottom:0}
+.btn{box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
+.btn:not([disabled]):hover{box-shadow:0 2px 4px rgba(15,23,42,.22),0 12px 24px -8px rgba(15,23,42,.48);transform:translateY(-1px)}
+.btn:not([disabled]):active{box-shadow:0 1px 2px rgba(15,23,42,.28);transform:translateY(0)}
+.btn[disabled]{box-shadow:none;transform:none}
+.sw{box-shadow:0 0 0 1.5px var(--line),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+
+/* ---------- typing fields: white, with a firm bottom edge that says "write here" ---------- */
+input[type=text],input[type=number],input[type=url],input[type=search],textarea,select{background:#fff;border:1px solid #d5d3c2;border-bottom:2px solid #94a3b8;border-radius:6px 6px 3px 3px;box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 1px 2px rgba(15,23,42,.1),0 5px 14px -5px rgba(15,23,42,.28);transition:border-color .15s ease,box-shadow .15s ease}
+input[type=text]:hover,input[type=number]:hover,input[type=url]:hover,input[type=search]:hover,textarea:hover,select:hover{border-bottom-color:var(--deep)}
+input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,input[type=search]:focus,textarea:focus,select:focus{outline:none;border-color:var(--deep);box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 5px 14px -5px rgba(15,23,42,.28),0 0 0 3px rgba(57,104,234,.22)}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
+select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23475569' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right .8rem center}
+/* the word tiles keep their see-through name boxes */
+.word input{background:transparent;border:1px solid transparent;border-radius:5px;box-shadow:none}
+.word input:hover,.word input:focus{border-color:var(--line);background:#fff;box-shadow:none}
+.theme,.outs button{box-shadow:0 1px 2px rgba(15,23,42,.15),0 4px 10px -4px rgba(15,23,42,.3)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  body>*:not(#printArea){display:none!important}
+  body{background:#fff none;padding:0}
+  #printArea{display:block}
+  #printArea img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
+  #printArea img:last-child{page-break-after:auto;break-after:auto}
+}
+/* For schools: one quiet line at the end of the notes. Never shown in print. */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+@media print{.school-cta{display:none!important}}
+/* ---------- card maker extras ---------- */
+textarea{width:100%;padding:.55rem .65rem;font-size:1rem;line-height:1.4;resize:vertical;min-height:4.6rem}
+label.f small{font-weight:400;color:var(--soft)}
+.pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(5.4rem,1fr));gap:.4rem;max-height:21rem;overflow:auto;padding:.15rem}
+.pick{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:.35rem .2rem .3rem;cursor:pointer;display:grid;justify-items:center;align-content:start;gap:.2rem;font-size:.76rem;line-height:1.15;color:var(--soft);min-height:44px;box-shadow:0 1px 2px rgba(15,23,42,.15),0 4px 10px -4px rgba(15,23,42,.3)}
+.pick canvas,.pick img{width:56px;height:56px;display:block}
+.pick:hover{border-color:var(--deep)}
+.pick[aria-pressed=true]{border-color:var(--deep);background:#eef2fb;color:var(--ink);font-weight:700;box-shadow:inset 0 0 0 1px var(--deep)}
+#libs .pick img{width:auto;height:84px;max-width:100%}
+#libs{grid-template-columns:repeat(auto-fill,minmax(6.5rem,1fr))}
+.libcredits{margin:0;padding-left:1.1rem}
+.libcredits li{margin-bottom:.3rem}
+.pics{grid-auto-rows:max-content}
+#libs{max-height:30rem}
+.seg.big3 label{min-height:64px}
+.seg.big3 span{display:grid;gap:.1rem}
+.seg.big3 small{font-size:.74rem;opacity:.85;font-weight:400}
+.libgroup{grid-column:1/-1;margin:.4rem 0 0;font-weight:700;color:var(--ink);font-size:.9rem}
+.smallnote{font-size:.68rem;color:var(--amber);font-weight:700}
+#libWarn{color:var(--amber)}
+.libcredits a{color:var(--deep);font-weight:700}
+.frames{grid-template-columns:repeat(auto-fill,minmax(5rem,1fr))}
+.frames .pick canvas{width:50px;height:70px}
+.seg.wrap4{grid-auto-flow:row;grid-template-columns:1fr 1fr}
+.seg.wrap4 label{border-bottom:1px solid var(--line)}
+.pdlinks ul{margin:.2rem 0 .4rem;padding-left:1.1rem;font-size:.9rem;color:var(--soft)}
+.pdlinks li{margin-bottom:.25rem}
+.pdlinks a{color:var(--deep);font-weight:700}
+details.sub>summary{cursor:pointer;font-weight:700;color:var(--deep);padding:.2rem 0}
+details.sub[open]>summary{margin-bottom:.5rem}
+label.btn{display:inline-flex;align-items:center}
+.viewtools{display:flex;align-items:center;gap:.5rem .8rem;flex-wrap:wrap}
+.zoombox{display:inline-flex;align-items:center;gap:.35rem}
+#zoomText{min-width:3.2em;text-align:center;font-size:.9rem;font-weight:700}
+#turnBtn[aria-pressed=true]{background:var(--deep);color:#fff}
+.paper.zoomed{display:block;overflow:auto;max-height:78vh}
+.paper.zoomed #preview{max-width:none;max-height:none;height:auto}
+details.group.flash>summary{animation:flash 1.6s ease}
+@keyframes flash{0%,40%{background:#fde047}100%{background:transparent}}
+.swpick{position:relative;overflow:hidden;display:inline-block;background:conic-gradient(#e53935,#fdd835,#43a047,#1e88e5,#8e24aa,#e53935)}
+.swpick input{position:absolute;inset:-6px;width:calc(100% + 12px);height:calc(100% + 12px);opacity:0;cursor:pointer;border:0;padding:0}
+.swpick[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[data-c="#ffffff"],.sw[data-c="#f6e7c1"]{box-shadow:0 0 0 1.5px #94a3b8,0 6px 14px -4px rgba(15,23,42,.42)}
+#outsHint{margin:0;font-size:.9rem;color:var(--soft)}
+#outsHint:empty{display:none}
+.supportbox{display:flex;align-items:center;justify-content:space-between;gap:.6rem 1rem;flex-wrap:wrap;padding:.7rem .9rem;border-radius:8px;background:#fff6e5}
+.supportbox p{margin:0;font-size:.92rem;color:var(--soft);flex:1 1 16rem}
+.supportbox .thanks{display:block;margin-top:.25rem;font-style:italic;color:var(--ink)}
+.btn.support{display:inline-flex;align-items:center;gap:.4rem;border-color:#ff7a1a;background:#ff7a1a;color:#1c1c1c;text-decoration:none;font-weight:800}
+.btn.support:hover{background:#ff9b3d}
+.btn.support span{color:#b3261e;font-size:1.1em;line-height:1}
+@media print{.supportbox{display:none!important}}
+.artad{display:grid;justify-items:center;align-content:center;gap:.15rem;min-height:9.2rem;padding:.4rem .3rem;border:1.5px dashed var(--foil);border-radius:8px;background:#eef7f4;color:var(--ink);text-align:center;text-decoration:none;font-size:.74rem;line-height:1.15}
+.artad:hover{background:#dff0ea;border-style:solid}
+.artad .adtag{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--foil);border-radius:3px;padding:.05rem .35rem}
+.artad .adplus{font-size:1.6rem;font-weight:700;line-height:1;color:var(--foil)}
+.artad .admail{font-weight:700;color:var(--foil);font-size:.66rem;word-break:break-all}
+.campaign a{color:#b3261e;font-weight:800}
+.bynote{font-size:.7rem;color:var(--foil);font-weight:700}
+.artistnote{display:flex;align-items:center;justify-content:space-between;gap:.5rem .8rem;flex-wrap:wrap;background:#eef7f4;border-left:4px solid var(--foil);border-radius:4px;padding:.55rem .7rem;color:var(--ink)}
+.artistnote span{flex:1 1 14rem}
+.artistnote[hidden]{display:none!important}
+.btn.artistbtn{display:inline-flex;align-items:center;gap:.35rem;background:var(--foil);border-color:var(--foil);color:#fff;text-decoration:none}
+.btn.artistbtn:hover{background:#0b6655}
+.libcredits a.support{color:var(--foil);font-weight:700}
+</style>
+<!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
+     until they accept in Google's consent message (AdSense > Privacy & messaging). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+    wait_for_update: 500
+  });
+  gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+</script>
+<!-- Google AdSense. With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1>Christmas &amp; Greeting Card Maker</h1></div>
+    <div class="subblock">
+      <p>Free for teachers and students. Choose an occasion, a picture and a frame, then print a card that folds from one sheet of paper. No sign-up.</p>
+      <button type="button" class="appinstall" id="appInstall" hidden>Install Teacher Tools as an app</button>
+    </div>
+  </div>
+</header>
+<style>
+nav.me-menu{position:relative;z-index:20;background:#0f172a;font:600 15px/1.2 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-align:center;letter-spacing:normal;text-transform:none;white-space:normal;margin:0;padding:0}
+nav.me-menu details,nav.me-menu summary{margin:0;padding:0;border:0;background:none}
+nav.me-menu summary{display:none}
+nav.me-menu ul{list-style:none;margin:0 auto;padding:6px 8px;display:flex;flex-wrap:wrap;justify-content:center;gap:2px 4px;max-width:1100px}
+nav.me-menu li{margin:0;padding:0;border:0;display:block;line-height:1.2;font-size:inherit}
+nav.me-menu li::before{content:none}
+nav.me-menu a{display:inline-block;padding:7px 11px;color:#f8fafc;text-decoration:none;border-radius:6px;font-weight:600;opacity:1;white-space:nowrap}
+nav.me-menu a:hover{background:rgba(255,255,255,.14)}
+nav.me-menu a:focus-visible{outline:2px solid #fde047;outline-offset:1px}
+nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
+@media (max-width:640px){
+ nav.me-menu summary{display:block;cursor:pointer;list-style:none;padding:11px 16px;color:#f8fafc;font-weight:700}
+ nav.me-menu summary::-webkit-details-marker{display:none}
+ nav.me-menu summary::before{content:"\2630\00a0\00a0"}
+ nav.me-menu ul{flex-direction:column;align-items:stretch;padding:0 8px 8px}
+ nav.me-menu a{display:block;padding:11px 12px}
+}
+@media print{nav.me-menu{display:none!important}}
+</style>
+<nav class="me-menu" aria-label="Site menu">
+<details id="meMenu" open>
+<summary>Menu</summary>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/vocabularygames.html">Vocab games</a></li>
+<li><a href="/grammargames.html">Grammar games</a></li>
+<li><a href="/minilessons.html">Mini lessons</a></li>
+<li><a href="/learnEnglishwithMusic.html">Songs</a></li>
+<li><a href="/tests-ielts-reading.html">IELTS</a></li>
+<li><a href="/tests-cambridge.html">Cambridge</a></li>
+<li><a href="/teachertools/TeacherToolDirectory.html" aria-current="true">Teacher tools</a></li>
+<li><a href="/blog.html">Blog</a></li>
+<li><a href="/about.html">About</a></li>
+</ul>
+</details>
+</nav>
+<script>try{if(window.matchMedia("(max-width:640px)").matches)document.getElementById("meMenu").open=false}catch(e){}</script>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<main class="bench">
+  <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
+
+    <details class="group" open>
+      <summary>1. Choose an occasion</summary>
+      <div class="group-body">
+        <div class="themes" id="occs"></div>
+        <p class="hint">Choosing an occasion fills in the greeting and the message. You choose the fonts, colours and frame in steps 3 and 4.</p>
+      </div>
+    </details>
+
+    <details class="group" open id="grpFront">
+      <summary>2. The front</summary>
+      <div class="group-body">
+        <label class="f"><span>Greeting</span><input type="text" id="greeting" maxlength="60" placeholder="e.g. Merry Christmas"></label>
+        <label class="f"><span>Second line <small>(optional)</small></span><input type="text" id="line2" maxlength="70" placeholder="e.g. and a Happy New Year"></label>
+        <div><p class="lab">Greeting goes</p>
+          <div class="seg" role="radiogroup" aria-label="Where the greeting goes">
+            <label><input type="radio" name="gpos" value="top"><span id="gposA">At the top</span></label>
+            <label><input type="radio" name="gpos" value="bottom"><span id="gposB">At the bottom</span></label>
+          </div></div>
+        <div><p class="lab">Picture</p>
+          <div class="seg big3" role="radiogroup" aria-label="Picture">
+            <label><input type="radio" name="src" value="vintage"><span><b>Vintage card</b><small>old pictures and Australian animals</small></span></label>
+            <label><input type="radio" name="src" value="colourin"><span><b>Colour in</b><small>line drawings to colour</small></span></label>
+            <label><input type="radio" name="src" value="space"><span><b>Draw your own</b><small>a blank space to draw in</small></span></label>
+          </div>
+          <p class="lab" style="margin:.6rem 0 .3rem;font-weight:400;color:var(--soft)">Or use</p>
+          <div class="seg" role="radiogroup" aria-label="More picture choices">
+            <label><input type="radio" name="src" value="modern">Contemporary art</label>
+            <label><input type="radio" name="src" value="own">Your own picture</label>
+          </div></div>
+        <div class="optbox" id="optLib" hidden>
+          <div class="pics" id="libs"></div>
+          <p class="hint warn" id="libWarn" hidden>This picture is best for small cards: A4 or Letter folded in quarters. On a bigger card it may print a little soft.</p>
+          <p class="hint" id="libHint"></p>
+          <p class="hint artistnote" id="artistNote" hidden></p>
+          <p class="hint campaign" id="campaignNote" hidden></p>
+          <details class="sub"><summary>Picture credits and links</summary><ul class="hint libcredits" id="libCredits"></ul></details>
+        </div>
+        <div class="optbox" id="optOwn" hidden>
+          <div class="actions"><label class="btn" for="file">Choose a picture…</label><input type="file" id="file" accept="image/*" hidden><span class="hint" id="fileName"></span></div>
+          <label class="f"><span>Or paste a link to a picture</span>
+            <span class="actions" style="flex-wrap:nowrap"><input type="url" id="url" placeholder="https://…" style="flex:1;min-width:0"><button type="button" class="btn" id="urlBtn">Use it</button></span></label>
+          <label class="f"><span>Picture credit <small>(printed small on the back)</small></span><input type="text" id="credit" maxlength="90" placeholder="e.g. Wikimedia Commons, public domain"></label>
+          <div class="pdlinks"><p class="lab">Where to find free public-domain pictures</p><ul id="pdLinks"></ul>
+            <p class="hint">Download a picture you like, then choose it above. Check that it says “public domain” or “CC0”. Use photos of people only with their permission. Your picture stays on your computer: it isn't uploaded.</p></div>
+        </div>
+        <div id="fitRow" hidden><p class="lab">Fit</p>
+          <div class="seg" role="radiogroup" aria-label="Fit">
+            <label><input type="radio" name="fit" value="contain">Show all of it</label>
+            <label><input type="radio" name="fit" value="cover">Fill the space</label>
+          </div></div>
+        <div class="optbox" id="optSpace" hidden>
+          <p class="hint">The space inside the frame is left blank for students to draw or stick their own picture.</p>
+          <label class="check"><input type="checkbox" id="spaceLabel">Show a dashed box and “Draw your picture here”</label>
+        </div>
+        <div><p class="lab">Picture size</p>
+          <div class="seg" role="radiogroup" aria-label="Picture size">
+            <label><input type="radio" name="picSize" value="s">Small</label>
+            <label><input type="radio" name="picSize" value="m">Medium</label>
+            <label><input type="radio" name="picSize" value="l">Large</label>
+          </div></div>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>3. Frame</summary>
+      <div class="group-body">
+        <div class="pics frames" id="frames"></div>
+        <div id="fcolRow"><p class="lab">Frame colour</p><div class="swatches" id="fcolSw"></div></div>
+        <div><p class="lab">Frame size</p>
+          <div class="seg" role="radiogroup" aria-label="Frame size">
+            <label><input type="radio" name="fsize" value="s">Thin</label>
+            <label><input type="radio" name="fsize" value="m">Medium</label>
+            <label><input type="radio" name="fsize" value="l">Thick</label>
+          </div></div>
+        <label class="check"><input type="checkbox" id="fAll">Put the frame inside the card and on the back too</label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>4. Fonts and colours</summary>
+      <div class="group-body">
+        <div><p class="lab">Style</p>
+          <div class="seg" role="radiogroup" aria-label="Style">
+            <label><input type="radio" name="style" value="colour">Full colour</label>
+            <label><input type="radio" name="style" value="line">Colour in (black outlines)</label>
+          </div>
+          <p class="hint" id="lineNote" hidden>The frame and the letters print as black outlines for students to colour. Saves ink, too. Your own pictures print in pale grey.</p></div>
+        <label class="f"><span>Greeting font</span><select id="gfont"></select></label>
+        <div id="tcolRow"><p class="lab">Greeting colour</p><div class="swatches" id="tcolSw"></div></div>
+        <label class="f"><span>Message font</span><select id="mfont"></select></label>
+        <div id="mcolRow"><p class="lab">Message colour</p><div class="swatches" id="mcolSw"></div></div>
+        <div id="bgRow"><p class="lab">Background</p>
+          <div class="seg" role="radiogroup" aria-label="Background">
+            <label><input type="radio" name="bg" value="white">White</label>
+            <label><input type="radio" name="bg" value="soft">Soft colour</label>
+            <label><input type="radio" name="bg" value="strong">Strong colour</label>
+          </div></div>
+        <div id="bgcolRow"><p class="lab">Background colour</p><div class="swatches" id="bgcolSw"></div>
+          <p class="hint">With a strong background, choose a light greeting colour, such as white or cream.</p></div>
+      </div>
+    </details>
+
+    <details class="group" id="grpInside">
+      <summary>5. Inside and back</summary>
+      <div class="group-body">
+        <div><p class="lab" id="in1Lab">Inside left</p>
+          <div class="seg wrap4" role="radiogroup" aria-label="Inside left">
+            <label><input type="radio" name="in1" value="blank">Blank</label>
+            <label><input type="radio" name="in1" value="picture">Small picture</label>
+            <label><input type="radio" name="in1" value="lines">Writing lines</label>
+            <label><input type="radio" name="in1" value="draw">Box to draw in</label>
+          </div></div>
+        <div><p class="lab" id="in2Lab">Inside right (the message)</p>
+          <div class="seg wrap4" role="radiogroup" aria-label="Inside right">
+            <label><input type="radio" name="in2" value="message">Typed message</label>
+            <label><input type="radio" name="in2" value="lines">Lines to write on</label>
+            <label><input type="radio" name="in2" value="starters">Sentence starters</label>
+            <label><input type="radio" name="in2" value="blank">Blank</label>
+          </div></div>
+        <div class="two" id="toRow">
+          <label class="f"><span>Start with</span><select id="toWord"><option value="Dear">Dear</option><option value="To">To</option><option value="Hi">Hi</option><option value="Hello">Hello</option><option value="">(nothing)</option></select></label>
+          <label class="f"><span>Name</span><input type="text" id="toName" maxlength="40" placeholder="e.g. Grandma"></label>
+        </div>
+        <label class="f" id="msgRow"><span>Message</span><textarea id="message" maxlength="400" rows="3"></textarea></label>
+        <label class="f" id="startRow"><span>Sentence starters <small>(one on each line)</small></span><textarea id="starters" maxlength="300" rows="3"></textarea></label>
+        <div class="two" id="endRow">
+          <label class="f"><span>End with</span><input type="text" id="end" maxlength="30" placeholder="e.g. Love from"></label>
+          <label class="f"><span>From</span><input type="text" id="fromName" maxlength="40" placeholder="Empty: sign by hand"></label>
+        </div>
+        <div id="spacingRow"><p class="lab">Writing lines</p>
+          <div class="seg" role="radiogroup" aria-label="Writing lines">
+            <label><input type="radio" name="spacing" value="big">Big (young learners)</label>
+            <label><input type="radio" name="spacing" value="normal">Normal</label>
+          </div></div>
+        <details class="sub">
+          <summary>Make one card for each name</summary>
+          <label class="f"><span>Names <small>(one on each line)</small></span><textarea id="names" rows="4" maxlength="2400" placeholder="Mia&#10;Leo&#10;Aisha"></textarea></label>
+          <p class="hint" id="namesHint"></p>
+        </details>
+        <div><p class="lab">Back of the card</p>
+          <div class="seg" role="radiogroup" aria-label="Back of the card">
+            <label><input type="radio" name="back" value="made">“Made by” line</label>
+            <label><input type="radio" name="back" value="blank">Blank</label>
+          </div></div>
+        <label class="f" id="madeRow"><span>Made by</span><input type="text" id="madeBy" maxlength="40" placeholder="Empty: write it by hand"></label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>6. Paper and folding</summary>
+      <div class="group-body">
+        <div><p class="lab">Card shape</p>
+          <div class="seg" role="radiogroup" aria-label="Card shape">
+            <label><input type="radio" name="shape" value="tall">Tall (portrait)</label>
+            <label><input type="radio" name="shape" value="wide">Wide (landscape)</label>
+          </div></div>
+        <div><p class="lab">How to fold it</p>
+          <div class="seg" role="radiogroup" aria-label="How to fold it">
+            <label><input type="radio" name="fold" value="quarter">In quarters (prints on one side)</label>
+            <label><input type="radio" name="fold" value="half">In half (bigger card)</label>
+          </div></div>
+        <div><p class="lab">Paper</p>
+          <div class="seg" role="radiogroup" aria-label="Paper size">
+            <label><input type="radio" name="paper" value="a4">A4</label>
+            <label><input type="radio" name="paper" value="a3">A3 (bigger)</label>
+            <label><input type="radio" name="paper" value="letter">Letter</label>
+          </div></div>
+        <div id="insideRow"><p class="lab">Inside the card</p>
+          <div class="seg" role="radiogroup" aria-label="Inside the card">
+            <label><input type="radio" name="inside" value="both">Print it (double-sided)</label>
+            <label><input type="radio" name="inside" value="outside">Leave it blank</label>
+          </div></div>
+        <label class="check"><input type="checkbox" id="marks">Fold marks at the edges of the paper</label>
+        <p class="hint" id="foldHint"></p>
+        <p class="hint" id="envHint"><b>Need an envelope?</b> <a id="envLink" href="bespoke-envelope-maker.html" style="color:var(--deep);font-weight:700">Make one that fits this card →</a></p>
+        <p class="hint"><b>When you print, choose “Actual size” or 100%</b>, not “Fit to page”, so the folds land in the right place.</p>
+      </div>
+    </details>
+
+    <div class="actions">
+      <button type="button" class="btn quiet" id="linkBtn">Copy a link to this card</button>
+      <button type="button" class="btn quiet" id="resetBtn">Start again</button>
+    </div>
+  </form>
+
+  <section class="stage" aria-label="Preview">
+    <div class="outs" role="group" aria-label="What to see" id="outs">
+      <button type="button" data-out="sheets" aria-pressed="true">What you print</button>
+      <button type="button" data-out="card" aria-pressed="false">The finished card</button>
+      <button type="button" data-out="fold" aria-pressed="false">How to fold</button>
+    </div>
+    <p id="outsHint"></p>
+    <div class="viewtools">
+      <button type="button" class="btn small" id="turnBtn" aria-pressed="false">↻ Turn the view</button>
+      <span class="zoombox"><button type="button" class="btn small" id="zoomOut" aria-label="Zoom out">−</button><span id="zoomText">100%</span><button type="button" class="btn small" id="zoomIn" aria-label="Zoom in">+</button><button type="button" class="btn small quiet" id="zoomFit">Fit</button></span>
+      <span class="hint">Click a part of the card to change it.</span>
+    </div>
+    <div class="paper" id="paper"><canvas id="preview" role="img" aria-label="Preview of the page"></canvas></div>
+    <div class="stage-bar">
+      <div class="pager" id="pager" hidden>
+        <button type="button" class="btn small" id="prevBtn" aria-label="Previous page">‹</button>
+        <span id="pagerText"></span>
+        <button type="button" class="btn small" id="nextBtn" aria-label="Next page">›</button>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn main" id="pdfBtn">Download PDF</button>
+        <button type="button" class="btn" id="pngBtn">Download PNG</button>
+        <button type="button" class="btn" id="printBtn">Print</button>
+      </div>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <!-- SUPPORT: the PayPal fundraiser for the Christmas campaign. When it ends, change the link in 3 places:
+         here, in the footer, and SITE_SUPPORT in the script. -->
+    <div class="supportbox">
+      <p>This tool is free, with no sign-up. Help us bring real art by real artists to Christmas cards. <span class="thanks">Thank you to the people who find and curate the pictures, and to the artists who create them.</span></p>
+      <a class="btn support" href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener"><span aria-hidden="true">♥</span> Support real art on Christmas cards</a>
+    </div>
+    <p class="fineprint">© Koala Spies Sydney. <a href="#terms">Terms of use</a></p>
+  </section>
+</main>
+
+<section class="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>Choose an occasion. The greeting and message are filled in for you.</li>
+      <li>Choose a vintage picture or a drawing to colour in, leave the front blank for students to draw on, or add your own picture. Choose your frame, fonts and colours.</li>
+      <li>Choose how to fold it, and your paper. Print, fold, and give it to someone.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Ideas for class</h2>
+    <ul>
+      <li><strong>Colour in:</strong> choose “Colour in” and print a class set. Students colour the frame and the letters.</li>
+      <li><strong>Draw your own:</strong> the front is blank for students' own pictures.</li>
+      <li><strong>Writing practice:</strong> choose “Sentence starters” inside. Students finish each sentence, then read their card to a partner.</li>
+      <li><strong>A card for everyone:</strong> paste your class list into “Make one card for each name”.</li>
+      <li><strong>Envelopes:</strong> make a matching envelope with the <a href="bespoke-envelope-maker.html">Envelope maker</a>, with an art stamp by Justine Kelly.</li>
+      <li><strong>Follow instructions:</strong> print “How to fold” and let students fold their own cards. Fold, turn over, press…</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Questions</h2>
+    <dl>
+      <dt>Which fold should I choose?</dt>
+      <dd>“In quarters” prints on one side, so any printer can do it. “In half” makes a bigger card but needs double-sided printing (or you can leave the inside blank and write by hand).</dd>
+      <dt>Why is half the page upside down?</dt>
+      <dd>On a card folded in quarters, the top half is printed upside down so it's the right way up when you fold it.</dd>
+      <dt>The inside is upside down, or on the wrong side.</dt>
+      <dd>Try the other flip setting (long edge or short edge) in your printer's double-sided options. Print one card first to check.</dd>
+      <dt>Can I send a card by email?</dt>
+      <dd>Yes. Open “The finished card” and choose Download PNG for pictures of the front, inside and back.</dd>
+    </dl>
+  </div>
+  <p class="school-cta">For schools and colleges: want cards and certificates with your school's logo, colours and events? <a href="custom-tools.html">Custom tools for your school →</a></p>
+</section>
+
+<!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
+     the site goes public, and change the date when you edit it. -->
+<section class="terms" id="terms" tabindex="-1">
+  <div class="terms-in">
+    <h2>Terms of use</h2>
+    <p class="updated">Last updated 25 November 2026</p>
+    <p>The Christmas &amp; Greeting Card Maker is a free tool for teachers, students and families. By making, downloading or printing cards you agree to these terms.</p>
+    <h3>Pictures and credits</h3>
+    <ul>
+      <li>The frames and card designs are © Koala Spies Sydney. You may use them freely on the cards you make here.</li>
+      <li>The old pictures (engravings) are in the public domain. Each one is credited on the back of the card and in step 2.</li>
+      <li>The contemporary art belongs to the artists, who let us use it on these cards. You may print and share cards with it, but not copy the pictures for anything else. A “Support the artist” link pays the artist directly, not us.</li>
+      <li>The search keywords come from the Unicode Common Locale Data Repository (CLDR), used under the Unicode License.</li>
+      <li>If you add your own picture, you are responsible for having the right to use it. Public-domain and CC0 pictures are free to use. The links on this page go to other websites, which have their own terms.</li>
+    </ul>
+    <h3>Using what you make</h3>
+    <ul>
+      <li>Print and share the cards with your classes, students, friends and family, on paper or on screen.</li>
+      <li>Keep the © Koala Spies Sydney · modernenglish.au line on the back of the card. Do not sell the cards or republish them as your own product.</li>
+      <li>You are responsible for the words you add and for checking that the cards suit your students.</li>
+    </ul>
+    <h3>Your information</h3>
+    <p>Nothing you choose, type or add is sent to us. Your card, and a copy of your own picture, are kept in your own browser so they are there next time, and “Start again” removes them. A link you copy contains your card's words (but not your own picture), so anyone with the link can open it. This site uses cookies for visitor statistics and to show ads, and providers such as Google may set them. See our <a href="https://modernenglish.au/privacy.html">privacy policy</a>.</p>
+    <h3>What you must not do</h3>
+    <ul><li>Copy, resell or republish this tool or its code.</li></ul>
+    <h3>No guarantees</h3>
+    <p>The tool is provided free and as it is. Print one card before you print a class set. These terms are general information and not legal advice. To the extent the law allows, we are not liable for loss or damage arising from its use. Nothing in these terms limits any rights you have under the Australian Consumer Law. These terms are governed by the laws of New South Wales, Australia.</p>
+  </div>
+</section>
+
+<!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<footer>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-envelope-maker.html">Envelope maker</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-picture-bingo-kids.html">Picture bingo for kids</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="#terms">Terms of use</a> · <a href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener">♥ Support real art on Christmas cards</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+</footer>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT
+// =====================================================================
+const COPYRIGHT = "© Koala Spies Sydney · modernenglish.au";
+const STORE = "greeting-card-maker.draft.v1", PICSTORE = "greeting-card-maker.picture.v1";
+const PAPERS = { a4: [210, 297], a3: [297, 420], letter: [215.9, 279.4] };
+const PAPER_NAME = { a4: "A4", a3: "A3", letter: "Letter" };
+const COLOURS = [
+  { name: "Christmas red", c: "#b3261e" }, { name: "Holly green", c: "#1b5e20" }, { name: "Gold", c: "#a87410" },
+  { name: "Modern English navy", c: "#0e2861" }, { name: "Modern English teal", c: "#0e7c66" }, { name: "Ocean", c: "#0e5c7a" },
+  { name: "Purple", c: "#5b2a86" }, { name: "Pink", c: "#c2185b" }, { name: "Sky", c: "#1565c0" }, { name: "Orange", c: "#d9481f" }, { name: "Black", c: "#222222" }, { name: "White", c: "#ffffff" }, { name: "Cream", c: "#f6e7c1" }
+];
+// b = the weight used for headings, r = the weight for ordinary writing
+const GFONTS = {
+  festive:  { label: "Festive (Mountains of Christmas)", f: "Mountains of Christmas", b: 700, r: 400 },
+  script:   { label: "Handwriting (Dancing Script)", f: "Dancing Script", b: 700, r: 500 },
+  fun:      { label: "Fun (Pacifico)", f: "Pacifico", b: 400, r: 400 },
+  elegant:  { label: "Elegant (Playfair Display)", f: "Playfair Display", b: 700, r: 400, i: 1 },
+  friendly: { label: "Friendly (Fredoka)", f: "Fredoka", b: 600, r: 400 },
+  rounded:  { label: "Rounded (Nunito)", f: "Nunito", b: 800, r: 500 },
+  andika:   { label: "School letters (Andika)", f: "Andika", b: 700, r: 400 },
+  clear:    { label: "Easy to read (Atkinson)", f: "Atkinson Hyperlegible", b: 700, r: 400 },
+  oldbook:  { label: "Old book (IM Fell English)", f: "IM Fell English", b: 400, r: 400 },
+  classic:  { label: "Classic capitals (Cinzel)", f: "Cinzel", b: 700, r: 400 },
+  vibes:    { label: "Fancy script (Great Vibes)", f: "Great Vibes", b: 400, r: 400 },
+  retro:    { label: "Retro (Lobster)", f: "Lobster", b: 400, r: 400 },
+  caveat:   { label: "Handwritten (Caveat)", f: "Caveat", b: 700, r: 500 },
+  amatic:   { label: "Hand-drawn capitals (Amatic SC)", f: "Amatic SC", b: 700, r: 400 },
+  poster:   { label: "Poster (Abril Fatface)", f: "Abril Fatface", b: 400, r: 400 }
+};
+const MFONTS = ["andika", "script", "caveat", "rounded", "friendly", "clear", "elegant", "oldbook"];
+// The occasions. draw = the suggested drawing,
+// starters = sentence starters for students to finish inside the card.
+const OCCASIONS = [
+  { id: "christmas", name: "Christmas", greeting: "Merry Christmas", colour: "#b3261e", frame: "lights", draw: "tree", gfont: "festive", message: "Wishing you a merry Christmas and a happy new year!", end: "Love from",
+    starters: ["I hope you have…", "This Christmas I want to…", "Thank you for…"] },
+  { id: "holidays", name: "Happy holidays", greeting: "Happy Holidays", line2: "and best wishes for the new year", colour: "#0e5c7a", frame: "snow", draw: "snowflake", gfont: "elegant", message: "Have a wonderful holiday. See you next year!", end: "From",
+    starters: ["In the holidays I will…", "I hope you have…", "My favourite thing this year was…"] },
+  { id: "newyear", name: "New Year", greeting: "Happy New Year", colour: "#0e2861", frame: "confetti", draw: "star", gfont: "elegant", message: "Happy New Year! I hope it's a great one.", end: "From",
+    starters: ["This year I want to…", "I hope you…", "Last year my favourite day was…"] },
+  { id: "birthday", name: "Birthday", greeting: "Happy Birthday!", colour: "#c2185b", frame: "bunting", draw: "cake", gfont: "fun", message: "Have a wonderful birthday!", end: "From",
+    starters: ["I hope you have…", "You are…", "I like you because…"] },
+  { id: "thanks", name: "Thank you", greeting: "Thank You", colour: "#0e7c66", frame: "flowers", draw: "flower", gfont: "script", message: "Thank you so much. You are wonderful!", end: "From",
+    starters: ["Thank you for…", "You helped me to…", "I really liked…"] },
+  { id: "teacher", name: "Thank you, teacher", greeting: "Thank You, Teacher!", colour: "#0e2861", frame: "stars", draw: "apple", gfont: "friendly", message: "Thank you for helping me learn this year.", end: "From",
+    starters: ["Thank you for…", "This year I learned…", "My favourite lesson was…"] },
+  { id: "mother", name: "Mother's Day", greeting: "Happy Mother's Day", colour: "#c2185b", frame: "hearts", draw: "flower", gfont: "script", message: "Thank you for everything you do. I love you!", end: "Love from",
+    starters: ["Thank you for…", "I love it when we…", "You are the best because…"] },
+  { id: "father", name: "Father's Day", greeting: "Happy Father's Day", colour: "#1565c0", frame: "double", draw: "tie", gfont: "friendly", message: "Thank you for everything you do. You're the best!", end: "Love from",
+    starters: ["Thank you for…", "I love it when we…", "You are the best because…"] },
+  { id: "getwell", name: "Get well soon", greeting: "Get Well Soon", colour: "#0e7c66", frame: "flowers", draw: "rainbow", gfont: "rounded", message: "I hope you feel better very soon.", end: "From",
+    starters: ["I hope you…", "We miss you because…", "When you come back, we can…"] },
+  { id: "congrats", name: "Well done", greeting: "Congratulations!", colour: "#5b2a86", frame: "confetti", draw: "cap", gfont: "friendly", message: "Well done! You worked so hard.", end: "From",
+    starters: ["Well done on…", "You worked hard to…", "I'm proud of you because…"] },
+  { id: "goodluck", name: "Good luck", greeting: "Good Luck!", colour: "#1b5e20", frame: "stars", draw: "rainbow", gfont: "rounded", message: "Good luck! I know you can do it.", end: "From",
+    starters: ["Good luck with…", "I know you can…", "Don't forget to…"] },
+  { id: "friend", name: "Friendship", greeting: "You're a Great Friend", colour: "#d9481f", frame: "hearts", draw: "koala", gfont: "friendly", message: "Thank you for being my friend.", end: "From",
+    starters: ["You are a good friend because…", "I like it when we…", "Let's…"] },
+  { id: "welcome", name: "Welcome", greeting: "Welcome!", colour: "#0e7c66", frame: "bunting", draw: "balloons", gfont: "friendly", message: "Welcome to our class! We're happy you're here.", end: "From",
+    starters: ["Welcome to…", "My name is…", "I hope you like…"] },
+  { id: "lunar", name: "Lunar New Year", greeting: "Happy Lunar New Year", colour: "#b3261e", frame: "corners", draw: "lantern", gfont: "elegant", message: "Wishing you health and happiness in the new year.", end: "From",
+    starters: ["I hope the new year brings you…", "This year I want to…", "At Lunar New Year we…"] },
+  { id: "eid", name: "Eid", greeting: "Eid Mubarak", colour: "#0e2861", frame: "corners", draw: "moon", gfont: "elegant", message: "Wishing you and your family a happy Eid.", end: "From",
+    starters: ["I hope you…", "On Eid we…", "I am thankful for…"] },
+  { id: "diwali", name: "Diwali", greeting: "Happy Diwali", colour: "#d9481f", frame: "lights", draw: "diya", gfont: "elegant", message: "Wishing you a bright and happy Diwali.", end: "From",
+    starters: ["I hope your Diwali is…", "At Diwali we…", "I am thankful for…"] },
+  { id: "hanukkah", name: "Hanukkah", greeting: "Happy Hanukkah", colour: "#1565c0", frame: "dots", draw: "menorah", gfont: "elegant", message: "Wishing you a happy Hanukkah.", end: "From",
+    starters: ["I hope your Hanukkah is…", "At Hanukkah we…", "I am thankful for…"] },
+  { id: "easter", name: "Easter", greeting: "Happy Easter", colour: "#5b2a86", frame: "flowers", draw: "egg", gfont: "rounded", message: "Have a happy Easter!", end: "From",
+    starters: ["I hope you have…", "At Easter I like to…", "Thank you for…"] },
+  { id: "valentine", name: "Valentine's Day", greeting: "Happy Valentine's Day", colour: "#c2185b", frame: "hearts", draw: "heart", gfont: "script", message: "You're a wonderful friend!", end: "From",
+    starters: ["You are special because…", "I like it when we…", "Thank you for…"] },
+  { id: "halloween", name: "Halloween", greeting: "Happy Halloween", colour: "#d9481f", frame: "confetti", draw: "pumpkin", gfont: "festive", message: "Have a fun and spooky Halloween!", end: "From",
+    starters: ["This Halloween I will be…", "My favourite treat is…", "Something scary is…"] },
+  { id: "any", name: "Any occasion", greeting: "Hello!", colour: "#0e2861", frame: "line", draw: "koala", gfont: "friendly", message: "", end: "From",
+    starters: ["I hope you…", "Thank you for…", "I like…"] }
+];
+const OCC_BY = {}; OCCASIONS.forEach(o => OCC_BY[o.id] = o);
+// Public-domain pictures kept on this site, in the card-pictures folder next to this page.
+// id = the file name (without .jpg); thumb-<id>.jpg is the small version. link = the page to cite.
+// Add only pictures made by people (not AI pictures in an old style) that are public domain:
+// made before about 1930, made by the US government (e.g. National Park Service), or given to the public domain by the artist.
+const LIB_BASE = "card-pictures/";
+// group = the heading in the gallery. credit = printed small on the back of the card. info = more detail, shown in step 2.
+// small: true = a smaller file, best for small cards
+// SUPPORT THE ARTIST (optional): add these two to a picture by a living artist who has agreed to it.
+//   artist:  "Jane Smith"                          the name shown with the link
+//   byline:  "Hand-drawn in Sydney by Jane Smith"  printed on the back of the card (optional)
+//   support: "https://www.paypal.me/janesmith"     the artist's OWN link (PayPal.Me, Ko-fi, their shop…), from them directly
+// Example: { group: "Colouring pictures", id: "jane-wombat", title: "Wombat", credit: "Jane Smith", artist: "Jane Smith", support: "https://www.paypal.me/janesmith", link: "", line: true },
+// The link shows on the website only (step 2), never on the printed card. Money goes straight to the artist.
+// the email shown on the "Want to offer your art here?" tile in the Contemporary art gallery
+const ARTIST_CONTACT = "KoalaSpiesSydney@outlook.com";
+// the PayPal fundraiser for real art on Christmas cards (also in the page's support box and footer)
+const SITE_SUPPORT = "https://www.paypal.com/pools/c/9uHzWMu2N1";
+const LIBRARY = [
+  { group: "Old pictures", id: "lady-bountiful", title: "Lady Bountiful", credit: "State Library Victoria", link: "" },
+  { group: "Old pictures", id: "on-the-heathcote", title: "On the Heathcote, near Christchurch, N.Z.", credit: "State Library Victoria", link: "" },
+  { group: "Old pictures", id: "diamond-lake-otago", title: "Diamond Lake, Otago, N.Z.", credit: "State Library Victoria", link: "" },
+  { group: "Old pictures", id: "dogs-christmas-tree", title: "Dogs round the Christmas tree", credit: "old painting", link: "", small: true },
+  { group: "Old pictures", id: "puppy-holly", title: "Puppy with holly", credit: "old Christmas postcard", link: "", small: true },
+  { group: "Old pictures", id: "nativity-postcard", title: "Mary, Joseph and the baby Jesus", credit: "old Christmas postcard", link: "", small: true },
+  { group: "Old pictures", id: "christmas-tree-sheet-music", title: "Christmas tree on old sheet music", credit: "collage of old Christmas pictures", link: "", small: true },
+  { group: "Australian animals", id: "hartig-koalas", title: "Koala and baby", credit: "Karl Ludwig Hartig, in Brehms Tierleben (1911)", info: "Painting by Karl Ludwig Hartig (1879–1947), printed in the 4th edition of Brehms Tierleben (Brehm's Animal Life), Leipzig, 1911. Scan from the Internet Archive Book Images, on Wikimedia Commons.", link: "https://commons.wikimedia.org/wiki/File:Brehms_Tierleben._Allgemeine_kunde_des_Tierreichs_(1911)_(20387695886).jpg" },
+  { group: "Australian animals", id: "gould-sulphur-crested-cockatoo", title: "Sulphur-crested cockatoo", credit: "John Gould, The Birds of Australia (1840–48)", info: "Plate by John Gould and H.C. Richter (Cacatua galerita). Enhanced copy by rawpixel, on Wikimedia Commons.", link: "https://commons.wikimedia.org/wiki/File:Bird_illustration_by_Elizabeth_Gould_for_Birds_of_Australia,_digitally_enhanced_from_rawpixel%27s_own_facsimile_book342.jpg" },
+  { group: "Australian animals", id: "gould-red-tailed-black-cockatoo", title: "Red-tailed black cockatoo", credit: "John Gould, The Birds of Australia (1840–48)", info: "Plate by John Gould and H.C. Richter (Calyptorhynchus banksii). Enhanced copy by rawpixel, on Wikimedia Commons.", link: "https://commons.wikimedia.org/wiki/File:Bird_illustration_by_Elizabeth_Gould_for_Birds_of_Australia,_digitally_enhanced_from_rawpixel%27s_own_facsimile_book348.jpg" },
+  { group: "Australian animals", id: "gould-galah", title: "Galah", credit: "John Gould, The Birds of Australia (1840–48)", info: "Plate by John Gould and H.C. Richter (Cacatua eos, now Eolophus roseicapilla). Enhanced copy by rawpixel, on Wikimedia Commons.", link: "https://commons.wikimedia.org/wiki/File:Bird_illustration_by_Elizabeth_Gould_for_Birds_of_Australia,_digitally_enhanced_from_rawpixel%27s_own_facsimile_book345.jpg" },
+  { group: "Australian animals", id: "gould-straw-necked-ibis", title: "Straw-necked ibis", credit: "John Gould, The Birds of Australia (1840–48)", info: "Plate by John Gould and H.C. Richter (Geronticus spinicollis). Enhanced copy by rawpixel, on Wikimedia Commons.", link: "https://commons.wikimedia.org/wiki/File:Bird_illustration_by_Elizabeth_Gould_for_Birds_of_Australia,_digitally_enhanced_from_rawpixel%27s_own_facsimile_book478.jpg" },
+  { group: "Australian animals", id: "gould-rock-wallaby", title: "Little rock-wallaby (nabarlek)", credit: "John Gould, The Mammals of Australia (1845–63)", info: "Plate 48, volume 2 (Petrogale concinna). Lithograph by H.C. Richter.", link: "https://commons.wikimedia.org/wiki/File:Petrogale_cocinna_Gould_Mamm_Aust_vol_2_plate_48.jpg" },
+  { group: "Australian animals", id: "gould-brush-tailed-bettong", title: "Brush-tailed bettong (woylie)", credit: "John Gould, The Mammals of Australia (1845–63)", info: "Plate 61, volume 2 (Bettongia penicillata). Lithograph by H.C. Richter.", link: "https://commons.wikimedia.org/wiki/File:Bettongia_penicillata_Gould_Mamm_Aust_vol_2_plate_61.jpg" },
+  { group: "Australian animals", id: "dot-and-the-kangaroo", title: "Dot and the Kangaroo", credit: "Frank P. Mahony, in Dot and the Kangaroo by Ethel C. Pedley (1899)", info: "The book's frontispiece: Dot, the kangaroo and the platypus.", link: "https://www.gutenberg.org/ebooks/18891", small: true },
+  { group: "Australian animals", id: "dot-cockatoo-magpie", title: "Cockatoo and magpie", credit: "Frank P. Mahony, in Dot and the Kangaroo by Ethel C. Pedley (1899)", info: "Black and white, so it's good for colouring in.", link: "https://www.gutenberg.org/ebooks/18891", small: true },
+  { group: "Other animals", id: "nps-ekgmowechashala", title: "Ekgmowechashala, an ancient primate", credit: "US National Park Service (NPS Paleontology)", info: "Drawing of Ekgmowechashala zancanellai, an adapid primate that lived in North America about 30 million years ago. Works of the US government are public domain.", link: "" },
+  // line: true = a drawing to colour in. It prints in black lines, and its white paper takes the card's background colour.
+  // modern: true = the Contemporary art gallery. These are NOT public domain: use them only with the artist's permission.
+  // To add JLK's PayPal or shop link, add  support: "https://…"  to her line (her own link, from her).
+  { group: "JLK (Justine Kelly)", id: "jlk-koala-tiger-onesie", title: "Koala in a Tiger Onesy", credit: "© Justine Kelly (JLK), 2018", licence: "Used with the artist's permission", artist: "Justine Kelly", byline: "Hand-drawn in Sydney by Justine Kelly", info: "Hand-drawn in Sydney by Justine Kelly (JLK), 2018. Used on these cards with the artist's permission.", link: "", modern: true },
+  { group: "JLK (Justine Kelly)", id: "jlk-panda-dressed-as-koala", title: "Panda dressed up as Koala", credit: "© Justine Kelly (JLK)", licence: "Used with the artist's permission", artist: "Justine Kelly", byline: "Hand-drawn in Sydney by Justine Kelly", info: "Hand-drawn in Sydney by Justine Kelly (JLK). Used on these cards with the artist's permission.", link: "", modern: true },
+  { group: "JLK (Justine Kelly)", id: "jlk-koala-dressed-as-panda", title: "Koala dressed up as Panda", credit: "© Justine Kelly (JLK)", licence: "Used with the artist's permission", artist: "Justine Kelly", byline: "Hand-drawn in Sydney by Justine Kelly", info: "Hand-drawn in Sydney by Justine Kelly (JLK). Used on these cards with the artist's permission.", link: "", modern: true },
+  { group: "Colouring pictures", id: "poinsettia-line-art", title: "Poinsettia and berries", credit: "line drawing, free to use", info: "Source and licence to be added.", link: "", line: true },
+  { group: "Colouring pictures", id: "nicu-christmas-tree", title: "Christmas tree", credit: "Nicu Buculei, Openclipart (public domain)", info: "Clipart drawing by Nicu Buculei, shared on Openclipart as public domain.", link: "", line: true },
+  { group: "Colouring pictures", id: "nicu-birthday-cake", title: "Birthday cake", credit: "Nicu Buculei, Openclipart (public domain)", info: "Clipart drawing by Nicu Buculei, shared on Openclipart as public domain.", link: "", line: true },
+  { group: "Colouring pictures", id: "nicu-sea-world", title: "Sea world", credit: "Openclipart (public domain)", info: "Clipart from Openclipart, shared as public domain. Artist to be added.", link: "", line: true },
+  { group: "Colouring pictures", id: "deer-colouring", title: "Reindeer", credit: "line drawing, free to use", info: "Source and licence to be added.", link: "", line: true },
+  { group: "Colouring pictures", id: "peacock-woodcut", title: "Peacock", credit: "old Italian woodcut (public domain)", info: "A very old woodcut of a peacock, from an Italian natural history book. Lots of fine detail, so it suits older children. Book and artist to be added.", link: "", line: true },
+  { group: "Colouring pictures", id: "tux", title: "Tux the penguin", credit: "Tux by Larry Ewing (lewing@isc.tamu.edu), made with The GIMP", licence: "Free to use with this credit", info: "The Linux penguin. Not public domain, but free to use and change if you credit Larry Ewing and The GIMP, so the credit prints on the back of the card.", link: "", line: true }
+];
+// where to find public-domain pictures (download, then use "Your picture")
+const PD_LINKS = [
+  { name: "Openverse", url: "https://openverse.org/", note: "search millions of free pictures; choose “Use commercially” and “Public domain” in the filters" },
+  { name: "Wikimedia Commons", url: "https://commons.wikimedia.org/", note: "look for “public domain” or “CC0” on the picture's page" },
+  { name: "Smithsonian Open Access", url: "https://www.si.edu/openaccess", note: "free museum pictures (CC0)" },
+  { name: "The Met: open access", url: "https://www.metmuseum.org/art/collection/search?showOnly=openAccess", note: "public-domain art" },
+  { name: "Wikimedia Commons: John Gould's Birds of Australia", url: "https://commons.wikimedia.org/wiki/Category:The_Birds_of_Australia_(John_Gould)", note: "hundreds of Australian bird plates" },
+  { name: "Biodiversity Heritage Library: The Mammals of Australia", url: "https://www.biodiversitylibrary.org/bibliography/112962", note: "John Gould's Australian animals" },
+  { name: "The Public Domain Review", url: "https://publicdomainreview.org/collections/", note: "old illustrations and prints" }
+];
+// =====================================================================
+// THE DRAWING KIT (used by the frames)
+// In "colour" mode shapes are filled, with a dark outline. In "line" mode
+// they are white with a black outline, so students can colour them in.
+// =====================================================================
+function rrPath(c, x, y, w, h, r) { r = Math.max(0, Math.min(r, w / 2, h / 2)); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function polyPath(c, pts) { pts.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); }
+function polyline(c, pts) { pts.forEach((p, i) => i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); }
+function starPath(c, x, y, R, r, n, rot) { rot = rot === undefined ? -Math.PI / 2 : rot; for (let i = 0; i < n * 2; i++) { const a = rot + i * Math.PI / n, d = i % 2 ? r : R, px = x + Math.cos(a) * d, py = y + Math.sin(a) * d; i ? c.lineTo(px, py) : c.moveTo(px, py); } c.closePath(); }
+function heartPath(c, x, y, s) { const P = (u, v) => [x + u * s, y + v * s]; c.moveTo(...P(0, .42)); c.bezierCurveTo(...P(-.3, .22), ...P(-.52, .04), ...P(-.48, -.18)); c.bezierCurveTo(...P(-.44, -.42), ...P(-.1, -.48), ...P(0, -.24)); c.bezierCurveTo(...P(.1, -.48), ...P(.44, -.42), ...P(.48, -.18)); c.bezierCurveTo(...P(.52, .04), ...P(.3, .22), ...P(0, .42)); c.closePath(); }
+function flamePath(c, x, by, h, w) { c.moveTo(x, by - h); c.bezierCurveTo(x + w * 1.15, by - h * .45, x + w, by, x, by); c.bezierCurveTo(x - w, by, x - w * 1.15, by - h * .45, x, by - h); c.closePath(); }
+function rot(x, y, ang) { const c = Math.cos(ang), s = Math.sin(ang); return (u, v) => [x + u * c - v * s, y + u * s + v * c]; }
+function leafPath(c, x, y, len, wid, ang) { const T = rot(x, y, ang), L = len / 2; c.moveTo(...T(-L, 0)); c.quadraticCurveTo(...T(0, -wid), ...T(L, 0)); c.quadraticCurveTo(...T(0, wid), ...T(-L, 0)); c.closePath(); }
+function hollyPath(c, x, y, len, wid, ang) {
+  const T = rot(x, y, ang), L = len / 2, W = wid / 2, top = [[-L, 0], [-L / 2, -W * .85], [0, -W], [L / 2, -W * .85], [L, 0]];
+  c.moveTo(...T(-L, 0));
+  for (let i = 1; i < top.length; i++) { const a = top[i - 1], b = top[i]; c.quadraticCurveTo(...T((a[0] + b[0]) / 2, (a[1] + b[1]) / 2 * .3), ...T(b[0], b[1])); }
+  for (let i = top.length - 2; i >= 0; i--) { const a = top[i + 1], b = top[i]; c.quadraticCurveTo(...T((a[0] + b[0]) / 2, -(a[1] + b[1]) / 2 * .3), ...T(b[0], -b[1])); }
+  c.closePath();
+}
+function bar(c, x0, y0, ang, len, w) { const T = rot(x0, y0, ang); polyPath(c, [T(0, -w / 2), T(len, -w / 2), T(len, w / 2), T(0, w / 2)]); }
+function icingPath(c, x, y, w, n, drop) {
+  c.moveTo(x, y); c.lineTo(x + w, y); c.lineTo(x + w, y + drop * .6);
+  const step = w / n; for (let i = 0; i < n; i++) { const x1 = x + w - i * step; c.quadraticCurveTo(x1 - step / 2, y + drop * 1.7, x1 - step, y + drop * .6); }
+  c.closePath();
+}
+// points along a path made of straight lines and curves, so stripes can follow it
+function trackOf(pts) {
+  const d = [0]; for (let i = 1; i < pts.length; i++) d.push(d[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const total = d[d.length - 1];
+  const at = s => { s = Math.max(0, Math.min(total, s)); let i = 1; while (i < d.length - 1 && d[i] < s) i++; const t = (s - d[i - 1]) / ((d[i] - d[i - 1]) || 1), a = pts[i - 1], b = pts[i], dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1; return { x: a[0] + dx * t, y: a[1] + dy * t, nx: -dy / l, ny: dx / l }; };
+  return { total, at };
+}
+function bez(p0, p1, p2, p3, n) { const out = []; for (let i = 0; i <= n; i++) { const t = i / n, u = 1 - t; out.push([u * u * u * p0[0] + 3 * u * u * t * p1[0] + 3 * u * t * t * p2[0] + t * t * t * p3[0], u * u * u * p0[1] + 3 * u * u * t * p1[1] + 3 * u * t * t * p2[1] + t * t * t * p3[1]]); } return out; }
+
+function kit(ctx, mode, lw) {
+  const line = mode === "line", OUT = line ? "#111111" : "#2b2622", LW = lw || (line ? 3.6 : 3);
+  ctx.lineJoin = "round"; ctx.lineCap = "round";
+  const skip = o => line && o && o.colourOnly;
+  const fillCol = (f, o) => (line && !(o && o.keep)) ? "#ffffff" : f;
+  function finish(fill, o, p) {
+    o = o || {};
+    if (fill) { ctx.fillStyle = fillCol(fill, o); p ? ctx.fill(p, o.rule || "nonzero") : ctx.fill(o.rule || "nonzero"); }
+    if (!o.noStroke) { ctx.strokeStyle = (o.stroke && !line) ? o.stroke : OUT; ctx.lineWidth = o.lw || LW; p ? ctx.stroke(p) : ctx.stroke(); }
+  }
+  const K = {
+    line, OUT, LW, ctx,
+    shape(build, fill, o) { if (skip(o)) return; ctx.beginPath(); build(); finish(fill, o); },
+    path(d, fill, o) { if (skip(o)) return; finish(fill, o, typeof d === "string" ? new Path2D(d) : d); },
+    circle(x, y, r, fill, o) { K.shape(() => ctx.arc(x, y, r, 0, Math.PI * 2), fill, o); },
+    ellipse(x, y, rx, ry, a, fill, o) { K.shape(() => ctx.ellipse(x, y, rx, ry, a || 0, 0, Math.PI * 2), fill, o); },
+    rect(x, y, w, h, fill, o) { K.shape(() => ctx.rect(x, y, w, h), fill, o); },
+    rr(x, y, w, h, r, fill, o) { K.shape(() => rrPath(ctx, x, y, w, h, r), fill, o); },
+    poly(pts, fill, o) { K.shape(() => polyPath(ctx, pts), fill, o); },
+    star(x, y, R, r, fill, o, n, a) { K.shape(() => starPath(ctx, x, y, R, r, n || 5, a), fill, o); },
+    sparkle(x, y, R, fill, o) { K.shape(() => starPath(ctx, x, y, R, R * .3, 4, -Math.PI / 2), fill, o); },
+    heart(x, y, s, fill, o) { K.shape(() => heartPath(ctx, x, y, s), fill, o); },
+    flame(x, by, h, w, fill, o) { K.shape(() => flamePath(ctx, x, by, h, w), fill, o); },
+    leaf(x, y, len, wid, a, fill, o) { K.shape(() => leafPath(ctx, x, y, len, wid, a), fill, o); },
+    holly(x, y, len, wid, a, fill, o) { K.shape(() => hollyPath(ctx, x, y, len, wid, a), fill, o); },
+    lines(pts, colour, w, o) { if (skip(o)) return; ctx.beginPath(); polyline(ctx, pts); ctx.strokeStyle = line ? OUT : colour; ctx.lineWidth = w || LW; ctx.stroke(); },
+    curve(build, colour, w, o) { if (skip(o)) return; ctx.beginPath(); build(); ctx.strokeStyle = line ? OUT : colour; ctx.lineWidth = w || LW; ctx.stroke(); },
+    clip(build, draw) { ctx.save(); ctx.beginPath(); build(); ctx.clip(); draw(); ctx.restore(); },
+    // several shapes drawn as one: one outline round the lot, then one fill
+    merged(builders, fill, o) { if (skip(o)) return; ctx.strokeStyle = OUT; ctx.lineWidth = (o && o.lw || LW) * 2; builders.forEach(b => { ctx.beginPath(); b(); ctx.stroke(); }); ctx.fillStyle = fillCol(fill, o); builders.forEach(b => { ctx.beginPath(); b(); ctx.fill(); }); },
+    // a thick line with an outline (canes, candle-holder arms)
+    tube(build, w, fill, o) { if (skip(o)) return; ctx.beginPath(); build(); ctx.strokeStyle = OUT; ctx.lineWidth = w + LW * 2; ctx.stroke(); ctx.strokeStyle = fillCol(fill, o); ctx.lineWidth = w; ctx.stroke(); },
+    shine(x, y, rx, ry, a) { K.ellipse(x, y, rx, ry, a || 0, "rgba(255,255,255,.55)", { colourOnly: 1, noStroke: 1 }); }
+  };
+  return K;
+}
+const SHINE = { colourOnly: 1, noStroke: 1 };
+const KEEP = { keep: 1 };
+
+// =====================================================================
+// FRAMES (drawn straight onto the card, in millimetres)
+// ins: how far the picture and words stay in from the frame, in millimetres on a small card
+// =====================================================================
+const FRAMES = [
+  { id: "none", name: "No frame", ins: 1 }, { id: "line", name: "Simple line", ins: 3.5 }, { id: "double", name: "Double line", ins: 5 },
+  { id: "dots", name: "Dots", ins: 6 }, { id: "scallop", name: "Scallops", ins: 5 }, { id: "stars", name: "Stars", ins: 8 },
+  { id: "hearts", name: "Hearts", ins: 8 }, { id: "snow", name: "Snowflakes", ins: 8.5 }, { id: "holly", name: "Holly corners", ins: 9 },
+  { id: "lights", name: "Fairy lights", ins: 12.5 }, { id: "candy", name: "Candy stripes", ins: 7 }, { id: "bunting", name: "Bunting", ins: 4, top: 15 },
+  { id: "confetti", name: "Confetti", ins: 11 }, { id: "flowers", name: "Flower corners", ins: 9 }, { id: "corners", name: "Gold corners", ins: 8 }
+];
+const FRAME_BY = {}; FRAMES.forEach(f => FRAME_BY[f.id] = f);
+const BRIGHT = ["#e53935", "#fdd835", "#43a047", "#1e88e5", "#f06292", "#fb8c00", "#8e24aa"];
+function around(x, y, w, h, sp) {
+  const pts = [];
+  [[x, y, x + w, y], [x + w, y, x + w, y + h], [x + w, y + h, x, y + h], [x, y + h, x, y]].forEach(([ax, ay, bx, by], e) => {
+    const n = Math.max(1, Math.round(Math.hypot(bx - ax, by - ay) / sp));
+    for (let i = 0; i < n; i++) pts.push([ax + (bx - ax) * i / n, ay + (by - ay) * i / n, e, i]);
+  });
+  return pts;
+}
+function seeded(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+// o: { s: size factor, col: accent colour, line: colour-in, deep: deep background, bg: inside colour }
+function drawFrame(ctx, id, x, y, w, h, o) {
+  const s = o.s, line = o.line, ink = line ? "#111111" : o.deep ? "#ffffff" : o.col, K = kit(ctx, line ? "line" : "colour", (line ? .3 : .26) * s);
+  const soft = line ? "#ffffff" : o.deep ? "#ffffff" : o.col;
+  ctx.save();
+  const strokeRR = (ix, lw, r) => { ctx.beginPath(); rrPath(ctx, x + ix, y + ix, w - 2 * ix, h - 2 * ix, r === undefined ? 3 * s : r); ctx.strokeStyle = ink; ctx.lineWidth = lw; ctx.stroke(); };
+  const corners = draw => [[x, y, 0], [x + w, y, Math.PI / 2], [x + w, y + h, Math.PI], [x, y + h, Math.PI * 1.5]].forEach(([cx, cy, a], i) => draw(rot(cx, cy, a), a, i));
+  switch (id) {
+    case "line": strokeRR(0, .8 * s); break;
+    case "double": strokeRR(0, 1.1 * s); strokeRR(2 * s, .35 * s, 1.5 * s); break;
+    case "dots": around(x + 2.2 * s, y + 2.2 * s, w - 4.4 * s, h - 4.4 * s, 4.3 * s).forEach(p => K.circle(p[0], p[1], .95 * s, soft, line ? {} : { noStroke: 1 })); break;
+    case "scallop": {
+      const r = 2.1 * s, bs = around(x, y, w, h, 3.4 * s).map(p => () => ctx.arc(p[0], p[1], r, 0, Math.PI * 2));
+      K.merged(bs, line ? "#ffffff" : o.deep ? "#ffffff" : o.col + "55");
+      ctx.beginPath(); ctx.rect(x, y, w, h); ctx.fillStyle = o.bg; ctx.fill(); ctx.strokeStyle = line ? "#111" : o.deep ? "#ffffff" : o.col; ctx.lineWidth = .35 * s; ctx.stroke();
+      break;
+    }
+    case "stars": around(x + 3 * s, y + 3 * s, w - 6 * s, h - 6 * s, 8.5 * s).forEach((p, i) => K.star(p[0], p[1], 2.9 * s, 1.2 * s, i % 2 ? (o.deep ? "#ffffff" : o.col) : "#fbc02d", {}, 5, -Math.PI / 2 + (i % 3 - 1) * .25)); break;
+    case "hearts": around(x + 3 * s, y + 3 * s, w - 6 * s, h - 6 * s, 8 * s).forEach((p, i) => K.heart(p[0], p[1], 5 * s, i % 2 ? "#f48fb1" : (o.deep ? "#ffffff" : o.col))); break;
+    case "snow": {
+      const c = line ? "#111" : o.deep ? "#ffffff" : "#4f9fd6";
+      ctx.strokeStyle = c; ctx.lineWidth = .4 * s; ctx.lineCap = "round";
+      around(x + 3.2 * s, y + 3.2 * s, w - 6.4 * s, h - 6.4 * s, 9.5 * s).forEach((p, i) => {
+        const R = (i % 2 ? 2.2 : 2.8) * s; ctx.beginPath();
+        for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3, T = rot(p[0], p[1], a); ctx.moveTo(p[0], p[1]); ctx.lineTo(...T(R, 0)); ctx.moveTo(...T(R * .55, 0)); ctx.lineTo(...T(R * .85, -R * .25)); ctx.moveTo(...T(R * .55, 0)); ctx.lineTo(...T(R * .85, R * .25)); }
+        ctx.stroke();
+      });
+      break;
+    }
+    case "holly":
+      strokeRR(0, .5 * s); strokeRR(1.6 * s, .25 * s, 1.5 * s);
+      corners((T, a) => {
+        const d = 1.25 * s;
+        K.holly(...T(9 * d, 2.6 * d), 11 * d, 5 * d, a + .12, "#2e7d32"); K.holly(...T(2.6 * d, 9 * d), 11 * d, 5 * d, a + Math.PI / 2 - .12, "#388e3c");
+        [[3, 3], [5.6, 2.6], [2.6, 5.6]].forEach(q => K.circle(...T(q[0] * d, q[1] * d), 1.55 * d, "#d32f2f"));
+      });
+      break;
+    case "lights": {
+      const ix = 2.4 * s, X = x + ix, Y = y + ix, Wd = w - 2 * ix, Ht = h - 2 * ix, sag = 3.6 * s, wire = line ? "#111" : o.deep ? "#ffffff" : "#3d3d3d";
+      let n = 0;
+      [[X, Y, X + Wd, Y, 0, 1], [X + Wd, Y, X + Wd, Y + Ht, -1, 0], [X + Wd, Y + Ht, X, Y + Ht, 0, -1], [X, Y + Ht, X, Y, 1, 0]].forEach(([ax, ay, bx, by, nx, ny]) => {
+        const len = Math.hypot(bx - ax, by - ay), k = Math.max(1, Math.round(len / (13 * s)));
+        for (let i = 0; i < k; i++) {
+          const p0 = [ax + (bx - ax) * i / k, ay + (by - ay) * i / k], p1 = [ax + (bx - ax) * (i + 1) / k, ay + (by - ay) * (i + 1) / k], m = [(p0[0] + p1[0]) / 2 + nx * sag, (p0[1] + p1[1]) / 2 + ny * sag];
+          ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.quadraticCurveTo(m[0], m[1], p1[0], p1[1]); ctx.strokeStyle = wire; ctx.lineWidth = .35 * s; ctx.stroke();
+          const bx0 = (p0[0] + p1[0]) / 2 + nx * sag / 2, by0 = (p0[1] + p1[1]) / 2 + ny * sag / 2, a = Math.atan2(ny, nx);
+          const T = rot(bx0, by0, a);
+          K.rr(...T(0, -.9 * s), 1.4 * s, 1.8 * s, .3 * s, "#9e9e9e");
+          ctx.save(); ctx.translate(...T(3.2 * s, 0)); ctx.rotate(a); K.ellipse(0, 0, 2.4 * s, 1.55 * s, 0, BRIGHT[n++ % 5]); ctx.restore();
+        }
+      });
+      break;
+    }
+    case "candy": {
+      const b = 4 * s;
+      ctx.save(); ctx.beginPath(); rrPath(ctx, x, y, w, h, 3 * s); rrPath(ctx, x + b, y + b, w - 2 * b, h - 2 * b, 1.5 * s); ctx.clip("evenodd");
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(x, y, w, h);
+      for (let t = -h; t < w + h; t += 4.4 * s) K.poly([[x + t, y - 2], [x + t + 2.2 * s, y - 2], [x + t + 2.2 * s - h - 4, y + h + 2], [x + t - h - 4, y + h + 2]], o.col, line ? {} : { noStroke: 1 });
+      ctx.restore();
+      ctx.beginPath(); rrPath(ctx, x, y, w, h, 3 * s); rrPath(ctx, x + b, y + b, w - 2 * b, h - 2 * b, 1.5 * s); ctx.strokeStyle = line ? "#111" : o.deep ? "#ffffff" : o.col; ctx.lineWidth = .35 * s; ctx.stroke();
+      break;
+    }
+    case "bunting": {
+      strokeRR(0, .5 * s);
+      const sx = x + 2 * s, ex = x + w - 2 * s, sy = y + 2.5 * s, segs = 2, segW = (ex - sx) / segs, sag = 3.2 * s, fw = 5.6 * s, fh = 7.5 * s;
+      const pt = t => { const g = Math.min(segs - 1, Math.floor(t * segs)), u = t * segs - g, px = sx + segW * (g + u); return [px, sy + 4 * sag * u * (1 - u)]; };
+      ctx.beginPath(); for (let i = 0; i <= 60; i++) { const p = pt(i / 60); i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); } ctx.strokeStyle = line ? "#111" : o.deep ? "#ffffff" : "#555"; ctx.lineWidth = .35 * s; ctx.stroke();
+      const nf = Math.max(3, Math.floor((ex - sx) / (fw * 1.25)));
+      for (let i = 0; i < nf; i++) { const t0 = (i + .1) / nf, t1 = (i + .1) / nf + fw / (ex - sx), a = pt(t0), b2 = pt(Math.min(1, t1)), mx = (a[0] + b2[0]) / 2, my = (a[1] + b2[1]) / 2; K.poly([a, b2, [mx, my + fh]], BRIGHT[i % BRIGHT.length]); }
+      break;
+    }
+    case "confetti": {
+      const r = seeded(7), band = 9 * s, per = 2 * (w + h), n = Math.round(per / (2.4 * s));
+      for (let i = 0; i < n; i++) {
+        let d = r() * per, depth = 1.5 * s + r() * (band - 1.5 * s), px, py;
+        if (d < w) { px = x + d; py = y + depth; } else if ((d -= w) < h) { px = x + w - depth; py = y + d; } else if ((d -= h) < w) { px = x + w - d; py = y + h - depth; } else { d -= w; px = x + depth; py = y + h - d; }
+        const c = BRIGHT[i % BRIGHT.length], kind = i % 3, a = r() * Math.PI;
+        if (kind === 0) K.circle(px, py, .85 * s, c, line ? {} : { noStroke: 1 });
+        else if (kind === 1) { ctx.save(); ctx.translate(px, py); ctx.rotate(a); K.rect(-.6 * s, -1.3 * s, 1.2 * s, 2.6 * s, c, line ? {} : { noStroke: 1 }); ctx.restore(); }
+        else K.star(px, py, 1.4 * s, .6 * s, c, line ? {} : { noStroke: 1 }, 5, a);
+      }
+      break;
+    }
+    case "flowers":
+      strokeRR(0, .45 * s);
+      corners((T, a, i) => {
+        const d = 1.2 * s, c0 = T(5.2 * d, 5.2 * d);
+        K.leaf(...T(11.5 * d, 3 * d), 6 * d, 3.6 * d, a + .2, "#66bb6a"); K.leaf(...T(3 * d, 11.5 * d), 6 * d, 3.6 * d, a + Math.PI / 2 - .2, "#66bb6a");
+        for (let k = 0; k < 5; k++) { const b = k * Math.PI * 2 / 5 + i; K.circle(c0[0] + Math.cos(b) * 2.4 * d, c0[1] + Math.sin(b) * 2.4 * d, 1.9 * d, i % 2 ? "#f48fb1" : (o.deep ? "#ffffff" : o.col)); }
+        K.circle(c0[0], c0[1], 1.4 * d, "#ffca28");
+      });
+      break;
+    case "corners": {
+      const g = line ? "#111" : o.deep ? "#f5d27a" : "#b8860b";
+      ctx.strokeStyle = g; ctx.lineWidth = .3 * s; ctx.beginPath(); rrPath(ctx, x + 3.4 * s, y + 3.4 * s, w - 6.8 * s, h - 6.8 * s, 0); ctx.stroke();
+      corners(T => {
+        ctx.beginPath(); ctx.moveTo(...T(1.2 * s, 14 * s)); ctx.lineTo(...T(1.2 * s, 1.2 * s)); ctx.lineTo(...T(14 * s, 1.2 * s)); ctx.lineWidth = .9 * s; ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(...T(5.6 * s, 9 * s)); ctx.lineTo(...T(5.6 * s, 5.6 * s)); ctx.lineTo(...T(9 * s, 5.6 * s)); ctx.lineWidth = .35 * s; ctx.stroke();
+        ctx.beginPath(); ctx.arc(...T(14 * s, 3 * s), 1.8 * s, 0, Math.PI * 2); ctx.moveTo(...T(4.8 * s, 14 * s)); ctx.arc(...T(3 * s, 14 * s), 1.8 * s, 0, Math.PI * 2); ctx.lineWidth = .3 * s; ctx.stroke();
+        ctx.beginPath(); polyPath(ctx, [T(3.4 * s, 1.9 * s), T(4.9 * s, 3.4 * s), T(3.4 * s, 4.9 * s), T(1.9 * s, 3.4 * s)]); ctx.fillStyle = line ? "#ffffff" : g; ctx.fill(); ctx.stroke();
+      });
+      break;
+    }
+  }
+  ctx.restore();
+}
+
+// =====================================================================
+// STATE
+// =====================================================================
+const $ = id => document.getElementById(id);
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; };
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+function fresh() {
+  const o = OCC_BY.christmas;
+  return {
+    occ: o.id, greeting: o.greeting, line2: "", gpos: "top", gfont: o.gfont, mfont: "andika",
+    style: "colour", tcol: "#b3261e", mcol: "#1f2937", fcol: "#b3261e", bgcol: "#b3261e", bg: "white", fsize: "m", fAll: false,
+    src: "space", lib: LIBRARY[0].id, picSize: "l", fit: "contain", credit: "", spaceLabel: false,
+    frame: o.frame,
+    in1: "blank", in2: "message", toWord: "Dear", toName: "", message: o.message, end: o.end, fromName: "", starters: o.starters.join("\n"), names: "", spacing: "big",
+    back: "made", madeBy: "",
+    fold: "quarter", shape: "tall", fmt: "quarter", paper: "a4", inside: "both", marks: true,
+    out: "sheets"
+  };
+}
+let S = fresh(), page = 0, pages = [], OWN = null;
+const ONE_OF = {
+  gpos: ["top", "bottom"], style: ["colour", "line"], bg: ["white", "soft", "strong"], fsize: ["s", "m", "l"], src: ["space", "vintage", "colourin", "modern", "own"], picSize: ["s", "m", "l"],
+  fit: ["contain", "cover"], in1: ["blank", "picture", "lines", "draw"], in2: ["message", "lines", "starters", "blank"], toWord: ["Dear", "To", "Hi", "Hello", ""],
+  spacing: ["big", "normal"], back: ["made", "blank"], fold: ["quarter", "half"], shape: ["tall", "wide"], fmt: ["half", "wide", "quarter", "quarterw"], paper: ["a4", "a3", "letter"], inside: ["both", "outside"], out: ["sheets", "card", "fold"]
+};
+function tidy(o) {
+  const d = fresh(); o = o && typeof o === "object" ? o : {};
+  if (o.colour && !o.tcol) { o.tcol = o.fcol = o.bgcol = o.colour; }
+  if (o.bg === "deep") o.bg = "strong";
+  if (o.src === "emoji") o.src = "space";
+  if (o.src === "lib") { const p = LIBRARY.find(x => x.id === o.lib); o.src = p && p.line ? "colourin" : "vintage"; }
+  const T = Object.assign(d, o);
+  Object.keys(ONE_OF).forEach(k => { if (ONE_OF[k].indexOf(T[k]) < 0) T[k] = d[k] !== undefined ? fresh()[k] : ONE_OF[k][0]; });
+  if (!OCC_BY[T.occ]) T.occ = "christmas";
+  if (!GFONTS[T.gfont]) T.gfont = "festive";
+  if (MFONTS.indexOf(T.mfont) < 0) T.mfont = "andika";
+  if (!FRAME_BY[T.frame]) T.frame = "line";
+  if (!LIBRARY.some(p => p.id === T.lib)) T.lib = LIBRARY[0].id;
+  ["tcol", "mcol", "fcol", "bgcol"].forEach(k => { if (!/^#[0-9a-f]{6}$/i.test(T[k])) T[k] = d[k]; });
+  delete T.colour;
+  const txt = (k, n) => { T[k] = String(T[k] == null ? "" : T[k]).slice(0, n); };
+  txt("greeting", 60); txt("line2", 70); txt("credit", 90); txt("toName", 40); txt("message", 400); txt("end", 30); txt("fromName", 40); txt("starters", 300); txt("names", 2400); txt("madeBy", 40);
+  if (!o.fold && o.fmt) { T.fold = o.fmt === "half" || o.fmt === "wide" ? "half" : "quarter"; T.shape = o.fmt === "wide" || o.fmt === "quarterw" ? "wide" : "tall"; }
+  T.fmt = fmtOf(T);
+  T.spaceLabel = T.spaceLabel === true; T.marks = T.marks !== false; T.fAll = T.fAll === true;
+  return T;
+}
+let saveTimer = 0;
+function save() { clearTimeout(saveTimer); saveTimer = setTimeout(() => { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} }, 300); }
+function say(m) { $("status").textContent = m; }
+function namesList() { return S.names.split(/\n|,/).map(x => x.trim()).filter(Boolean).slice(0, 60); }
+function cards() { const n = namesList(); return n.length ? n.map(to => ({ to })) : [{ to: S.toName.trim() }]; }
+
+// =====================================================================
+// PICTURES
+// =====================================================================
+const greyCache = {};
+// the public-domain pictures on this site
+const libCache = {}, libLoaded = {};
+const isLib = () => S.src === "vintage" || S.src === "colourin" || S.src === "modern";
+// which gallery a picture belongs to: contemporary art, colouring pictures, or old pictures
+const kindOf = p => p.modern ? "modern" : p.line ? "colourin" : "vintage";
+function loadLib(id) { if (!libCache[id]) libCache[id] = new Promise(res => { const im = new Image(); im.onload = () => { im.id = "lib" + id; libLoaded[id] = im; res(im); }; im.onerror = () => res(null); im.src = LIB_BASE + id + ".jpg"; }); return libCache[id]; }
+// a pale grey copy of a picture, to colour over
+function greyOf(key, im, w, h) {
+  if (greyCache[key]) return greyCache[key];
+  const c = document.createElement("canvas"); c.width = w; c.height = h;
+  const x = c.getContext("2d"); x.drawImage(im, 0, 0, w, h);
+  try {
+    const d = x.getImageData(0, 0, w, h), p = d.data;
+    for (let i = 0; i < p.length; i += 4) { const g = p[i] * .3 + p[i + 1] * .59 + p[i + 2] * .11, v = Math.min(255, 255 - (255 - g) * .5); p[i] = p[i + 1] = p[i + 2] = v; }
+    x.putImageData(d, 0, 0);
+  } catch (e) {}
+  return (greyCache[key] = c);
+}
+
+// =====================================================================
+// DRAWING THE CARD (all sizes in millimetres)
+// =====================================================================
+const INK = "#1f2937", GREY = "#64748b", RULE = "#9aa7b4";
+function gFont(size, weight) { const f = GFONTS[S.gfont]; return (f.i ? "italic " : "") + (weight || f.b) + " " + size + 'px "' + f.f + '", Georgia, serif'; }
+function mFont(size, bold) { const f = GFONTS[S.mfont]; return (bold ? f.b : f.r) + " " + size + 'px "' + f.f + '", "Atkinson Hyperlegible", Verdana, sans-serif'; }
+function uiFont(size, bold) { return (bold ? 700 : 400) + " " + size + 'px "Atkinson Hyperlegible", Verdana, sans-serif'; }
+function mix(hex, a) { const n = parseInt(hex.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255, m = v => Math.round(255 - (255 - v) * a).toString(16).padStart(2, "0"); return "#" + m(r) + m(g) + m(b); }
+function wrapLines(ctx, text, maxW) {
+  const out = [];
+  String(text).split("\n").forEach(par => { let line = ""; par.split(/\s+/).filter(Boolean).forEach(w => { const t = line ? line + " " + w : w; if (line && ctx.measureText(t).width > maxW) { out.push(line); line = w; } else line = t; }); out.push(line); });
+  return out;
+}
+// the biggest size that fits a greeting in the box: one line, or two balanced lines
+function fitHeading(ctx, text, maxW, maxH, font) {
+  ctx.font = font(100); const w1 = ctx.measureText(text).width || 1;
+  const one = { lines: [text], size: Math.min(maxH / 1.15, 100 * maxW / w1) };
+  const words = text.split(/\s+/); if (words.length < 2) return one;
+  let best = null;
+  for (let i = 1; i < words.length; i++) { const a = words.slice(0, i).join(" "), b = words.slice(i).join(" "), w = Math.max(ctx.measureText(a).width, ctx.measureText(b).width); if (!best || w < best.w) best = { w, lines: [a, b] }; }
+  const two = { lines: best.lines, size: Math.min(maxH / 2.25, 100 * maxW / best.w) };
+  return two.size > one.size * 1.12 ? two : one;
+}
+function paintLines(ctx, lines, size, font, cx, cy, colour, outline, align) {
+  ctx.font = font; ctx.textAlign = align || "center"; ctx.textBaseline = "middle"; ctx.lineJoin = "round";
+  const lh = size * 1.12, top = cy - lh * (lines.length - 1) / 2;
+  lines.forEach((l, i) => {
+    const y = top + i * lh;
+    if (outline) { ctx.fillStyle = "#ffffff"; ctx.fillText(l, cx, y); ctx.lineWidth = Math.max(.22, size * .045); ctx.strokeStyle = "#111111"; ctx.strokeText(l, cx, y); }
+    else { ctx.fillStyle = colour; ctx.fillText(l, cx, y); }
+  });
+}
+function smallPrint(ctx, text, cx, y, size, colour) { ctx.font = uiFont(size); ctx.fillStyle = colour || GREY; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic"; ctx.fillText(text, cx, y); }
+const SIZES = { s: .62, m: .8, l: 1 };
+// the picture, inside a box
+function drawPicture(ctx, b, s, opts) {
+  const line = S.style === "line", scale = opts && opts.scale || SIZES[S.picSize], cx = b.x + b.w / 2, cy = b.y + b.h / 2;
+  if (S.src === "own" || isLib()) {
+    const IMG = S.src === "own" ? OWN : libLoaded[S.lib];
+    const LP = isLib() ? LIBRARY.find(p => p.id === S.lib) : null, isLine = !!(LP && LP.line);
+    if (!IMG) { if (isLib()) return; if (!(opts && opts.quiet)) { ctx.fillStyle = GREY; ctx.font = uiFont(3.4 * s); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("Choose your picture in step 2", cx, cy); } return; }
+    const iw = IMG.naturalWidth || IMG.width, ih = IMG.naturalHeight || IMG.height, bw = b.w * scale, bh = b.h * scale, src = line && !isLine ? greyOf("pic" + IMG.id, IMG, iw, ih) : IMG;
+    if (S.fit === "cover" && !(opts && opts.small)) {
+      const k = Math.max(bw / iw, bh / ih), dw = iw * k, dh = ih * k;
+      ctx.save(); ctx.beginPath(); rrPath(ctx, cx - bw / 2, cy - bh / 2, bw, bh, 2.5 * s); ctx.clip(); { if (isLine) ctx.globalCompositeOperation = "multiply"; ctx.drawImage(src, cx - dw / 2, cy - dh / 2, dw, dh); ctx.globalCompositeOperation = "source-over"; }; ctx.restore();
+    } else { const k = Math.min(bw / iw, bh / ih), dw = iw * k, dh = ih * k; { if (isLine) ctx.globalCompositeOperation = "multiply"; ctx.drawImage(src, cx - dw / 2, cy - dh / 2, dw, dh); ctx.globalCompositeOperation = "source-over"; }; }
+    return;
+  }
+  if (S.src === "space" && !(opts && opts.small) && S.spaceLabel) {
+    const bw = b.w * scale, bh = b.h * scale;
+    ctx.save(); ctx.setLineDash([1.6 * s, 1.4 * s]); ctx.strokeStyle = "#b6bfc9"; ctx.lineWidth = .3 * s; ctx.beginPath(); rrPath(ctx, cx - bw / 2, cy - bh / 2, bw, bh, 2.5 * s); ctx.stroke(); ctx.restore();
+    { ctx.fillStyle = "#aab4bf"; ctx.font = uiFont(3 * s); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("Draw your picture here", cx, cy); }
+  }
+}
+const FS = { s: .75, m: 1, l: 1.3 };
+const MC = () => S.style === "line" ? "#111111" : S.mcol;
+function cardColours() { const line = S.style === "line"; return { line, text: line ? "#111111" : S.tcol, frame: S.fcol, bg: line ? "#ffffff" : S.bg === "strong" ? S.bgcol : S.bg === "soft" ? mix(S.bgcol, .14) : "#ffffff" }; }
+// the background and frame of one part of the card; returns the space left inside it
+function framed(ctx, w, h) {
+  const s = Math.min(w, h) / 105, m = 5.5 * s, c = cardColours(), fx = m, fy = m, fw = w - 2 * m, fh = h - 2 * m, fs = s * FS[S.fsize];
+  ctx.fillStyle = c.bg; ctx.beginPath(); rrPath(ctx, fx, fy, fw, fh, 3 * s); ctx.fill();
+  drawFrame(ctx, S.frame, fx, fy, fw, fh, { s: fs, col: c.frame, line: c.line, deep: false, bg: c.bg });
+  const fr = FRAME_BY[S.frame], ins = fr.ins * fs + 2.5 * s, top = (fr.top || fr.ins) * fs + 2.5 * s;
+  return { x: fx + ins, y: fy + top, w: fw - 2 * ins, h: fh - top - ins };
+}
+function drawFront(ctx, w, h) {
+  const s = Math.min(w, h) / 105, c = cardColours(), line = c.line, deep = false, col = c.text, r = framed(ctx, w, h);
+  const x0 = r.x, y0 = r.y, cw = r.w, ch = r.h, wide = w > h;
+  let pic = { x: x0, y: y0, w: cw, h: ch };
+  const g = S.greeting.trim(), g2 = S.line2.trim();
+  const IM = S.src === "own" ? OWN : isLib() ? libLoaded[S.lib] : null, landscapePic = IM && (IM.naturalWidth || IM.width) > (IM.naturalHeight || IM.height) * 1.15;
+  if ((g || g2) && wide && S.src !== "space" && !landscapePic) {
+    // a wide card: the picture on one side, the greeting on the other
+    const gw = cw * .56, gap = 3 * s, gx = S.gpos === "top" ? x0 + cw - gw : x0, colour = deep ? "#ffffff" : col;
+    const mainH = g2 ? ch * .5 : ch * .7, gy = y0 + (ch - mainH - (g2 ? ch * .22 : 0)) / 2;
+    if (g) { const fit = fitHeading(ctx, g, gw, mainH, z => gFont(z)); paintLines(ctx, fit.lines, fit.size, gFont(fit.size), gx + gw / 2, gy + mainH / 2, colour, line); }
+    if (g2) { const z = Math.min(ch * .09, 6.5 * s); ctx.font = mFont(z); const lines = wrapLines(ctx, g2, gw).slice(0, 3); paintLines(ctx, lines, z, mFont(z), gx + gw / 2, gy + mainH + ch * .11, line ? "#111" : col, false); }
+    drawPicture(ctx, { x: S.gpos === "top" ? x0 : x0 + gw + gap, y: y0, w: cw - gw - gap, h: ch }, s);
+    return;
+  }
+  if (g || g2) {
+    const gh = ch * (wide ? .3 : .25) * (g && g2 ? 1.3 : 1), gy = S.gpos === "top" ? y0 : y0 + ch - gh, gap = 2 * s;
+    const mainH = g2 ? (g ? gh * .7 : 0) : gh, subH = gh - mainH, colour = deep ? "#ffffff" : col;
+    if (g) { const fit = fitHeading(ctx, g, cw, mainH, z => gFont(z)); paintLines(ctx, fit.lines, fit.size, gFont(fit.size), x0 + cw / 2, gy + mainH / 2, colour, line); }
+    if (g2) { const z = Math.min(subH * .62, 6.5 * s); ctx.font = mFont(z, false); const lines = wrapLines(ctx, g2, cw), k = Math.min(1, cw / Math.max(...lines.map(l => ctx.measureText(l).width || 1))), z2 = z * (lines.length > 1 ? .8 : 1) * Math.min(1, k * 1.0); paintLines(ctx, lines.length > 2 ? [lines.join(" ")] : lines, z2, mFont(z2, false), x0 + cw / 2, gy + mainH + subH / 2, line ? "#111" : col, false); }
+    pic = S.gpos === "top" ? { x: x0, y: y0 + gh + gap, w: cw, h: ch - gh - gap } : { x: x0, y: y0, w: cw, h: ch - gh - gap };
+  }
+  drawPicture(ctx, pic, s);
+}
+// writing lines: plain, a letter ("Dear …", "From …"), or with sentence starters
+function drawLinesBox(ctx, x, y, w, h, s, card, kind) {
+  const sp = S.spacing === "big" ? 11 : 8.5, rows = Math.max(2, Math.floor(h / sp)), size = S.spacing === "big" ? 4.6 : 4;
+  const base = i => y + h - (rows - 1 - i) * sp - 1;
+  ctx.strokeStyle = RULE; ctx.lineWidth = .25; ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+  const rule = (i, from) => { ctx.beginPath(); ctx.moveTo(from, base(i)); ctx.lineTo(x + w, base(i)); ctx.stroke(); };
+  const write = (i, text, colour, bold) => { ctx.font = mFont(size, bold); ctx.fillStyle = colour; ctx.fillText(text, x, base(i) - 1.4); return x + ctx.measureText(text).width + 1.5; };
+  if (kind === "plain") { for (let i = 0; i < rows; i++) rule(i, x); return; }
+  let first = 0, last = rows;
+  if (S.toWord || card.to) {
+    const lead = (S.toWord ? S.toWord + " " : "") + (card.to ? card.to + "," : "");
+    ctx.font = mFont(size); ctx.fillStyle = MC(); ctx.fillText(lead, x, base(0) - 1.4);
+    if (!card.to) { const e = x + ctx.measureText(lead).width + 1.5, f = x + w * .62; ctx.beginPath(); ctx.moveTo(e, base(0)); ctx.lineTo(f, base(0)); ctx.stroke(); ctx.fillText(",", f + .6, base(0) - 1.4); }
+    first = 1;
+  }
+  const endText = (S.end ? S.end + " " : "") + (S.fromName || "");
+  if (endText.trim()) { last = rows - 1; ctx.font = mFont(size); const tx = x + w * .3; ctx.fillStyle = MC(); ctx.fillText(endText.trim(), tx, base(last) - 1.4); if (!S.fromName) { const e = tx + ctx.measureText(endText).width + 1; ctx.beginPath(); ctx.moveTo(e, base(last)); ctx.lineTo(x + w, base(last)); ctx.stroke(); } }
+  const starters = kind === "starters" ? S.starters.split("\n").map(t => t.trim()).filter(Boolean) : [];
+  const free = last - first, per = starters.length ? Math.max(1, Math.floor(free / starters.length)) : 1;
+  for (let i = first; i < last; i++) {
+    const k = i - first, st = starters.length && k % per === 0 ? starters[k / per] : null;
+    if (st) { ctx.font = mFont(size * .92); ctx.fillStyle = GREY; ctx.fillText(st, x, base(i) - 1.4); rule(i, x + ctx.measureText(st).width + 1.5); } else rule(i, x);
+  }
+}
+function drawMessage(ctx, x, y, w, h, s, card) {
+  const big = Math.min(6.2 * s, 8), small = Math.min(4.8 * s, 6.5);
+  // the sign-off ("Love from") sits a little up from the bottom edge, not right on it
+  let top = y, bottom = y + h - h * .08;
+  if (card.to) { ctx.font = mFont(small); ctx.fillStyle = MC(); ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText((S.toWord ? S.toWord + " " : "") + card.to + ",", x, y); top += small * 2; }
+  const endTxt = S.end.trim();
+  if (endTxt || S.fromName) {
+    ctx.font = mFont(small); ctx.fillStyle = MC(); ctx.textAlign = "right"; ctx.textBaseline = "alphabetic";
+    if (S.fromName) { ctx.fillText(S.fromName, x + w, bottom); if (endTxt) ctx.fillText(endTxt + ",", x + w, bottom - small * 1.45); bottom -= small * (endTxt ? 3.2 : 1.9); }
+    else { const lw = w * .42; ctx.fillText(endTxt + ",", x + w, bottom - small * 1.6); ctx.strokeStyle = RULE; ctx.lineWidth = .25; ctx.beginPath(); ctx.moveTo(x + w - lw, bottom); ctx.lineTo(x + w, bottom); ctx.stroke(); bottom -= small * 3.4; }
+  }
+  const msg = S.message.trim(); if (!msg) return;
+  let z = big, lines;
+  for (let i = 0; i < 40; i++) { ctx.font = mFont(z); lines = wrapLines(ctx, msg, w * .94); if (lines.length * z * 1.35 <= bottom - top && lines.every(l => ctx.measureText(l).width <= w)) break; z *= .94; }
+  ctx.fillStyle = MC(); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  const lh = z * 1.35, mid = (top + bottom) / 2, t0 = mid - lh * (lines.length - 1) / 2;
+  lines.forEach((l, i) => ctx.fillText(l, x + w / 2, t0 + i * lh));
+}
+function drawInside(ctx, role, w, h, card) {
+  const s = Math.min(w, h) / 105, r = S.fAll ? framed(ctx, w, h) : null, m = 8 * s, x = r ? r.x : m, y = r ? r.y : m, iw = r ? r.w : w - 2 * m, ih = r ? r.h : h - 2 * m, kind = role === "in2" ? S.in2 : S.in1;
+  if (kind === "blank") return;
+  if (kind === "picture") { drawPicture(ctx, { x, y: y + ih * .1, w: iw, h: ih * .8 }, s, { scale: .62, small: true, quiet: true }); return; }
+  if (kind === "draw") {
+    ctx.save(); ctx.setLineDash([1.6 * s, 1.4 * s]); ctx.strokeStyle = "#b6bfc9"; ctx.lineWidth = .3; ctx.beginPath(); rrPath(ctx, x, y, iw, ih, 3 * s); ctx.stroke(); ctx.restore();
+    ctx.fillStyle = "#aab4bf"; ctx.font = uiFont(3 * s); ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText("Draw a picture here", x + 3 * s, y + 3 * s); return;
+  }
+  if (kind === "lines") { drawLinesBox(ctx, x, y, iw, ih, s, card, role === "in2" ? "letter" : "plain"); return; }
+  if (kind === "starters") { drawLinesBox(ctx, x, y, iw, ih, s, card, "starters"); return; }
+  drawMessage(ctx, x, y, iw, ih, s, card);
+}
+function drawBackPanel(ctx, w, h) {
+  const s = Math.min(w, h) / 105, cx = w / 2, r = S.fAll ? framed(ctx, w, h) : null, foot = r ? r.y + r.h - 1 * s : h - 8.5 * s;
+  if (S.back === "made") {
+    const side = Math.min(w, h) * .2, line = S.style === "line";
+    const z = Math.min(4.6 * s, 6.5); ctx.font = mFont(z); ctx.fillStyle = MC(); ctx.textBaseline = "alphabetic";
+    const lead = "Made by" + (S.madeBy ? " " + S.madeBy : "");
+    if (S.madeBy) { ctx.textAlign = "center"; ctx.fillText(lead, cx, h * .55); }
+    else { const tw = ctx.measureText(lead).width, lw = Math.min(w * .42, 40 * s), x0 = cx - (tw + lw + 2) / 2; ctx.textAlign = "left"; ctx.fillText(lead, x0, h * .55); ctx.strokeStyle = RULE; ctx.lineWidth = .25; ctx.beginPath(); ctx.moveTo(x0 + tw + 2, h * .55 + .6); ctx.lineTo(x0 + tw + 2 + lw, h * .55 + .6); ctx.stroke(); }
+  }
+  const lp = LIBRARY.find(p => p.id === S.lib);
+  const credit = isLib() && lp ? "Picture: " + lp.title + ", " + lp.credit + (lp.licence ? "" : " (public domain)") : (S.src === "own" && S.credit.trim()) ? "Picture: " + S.credit.trim() : "";
+  let creditTop = foot;
+  if (credit) { ctx.font = uiFont(2 * s); const cl = wrapLines(ctx, credit, w - 16 * s).slice(0, 3); cl.forEach((l, i) => smallPrint(ctx, l, cx, foot - 3.5 * s - (cl.length - 1 - i) * 2.6 * s, 2 * s)); creditTop = foot - 3.5 * s - (cl.length - 1) * 2.6 * s; }
+  // contemporary art: "Hand-drawn in Sydney by …", a little bigger, above the credit
+  if (isLib() && lp && lp.byline) { ctx.font = "italic 700 " + (3.2 * s) + 'px "Source Serif 4", Georgia, serif'; ctx.fillStyle = S.style === "line" ? "#111111" : INK; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic"; wrapLines(ctx, lp.byline, w - 16 * s).slice(0, 2).reverse().forEach((l, i) => ctx.fillText(l, cx, creditTop - 5.5 * s - i * 4 * s)); }
+  smallPrint(ctx, COPYRIGHT, cx, foot, 2.2 * s);
+}
+function drawPanel(ctx, role, w, h, card) {
+  if (role === "none") return;
+  if (role === "front") drawFront(ctx, w, h);
+  else if (role === "back") drawBackPanel(ctx, w, h);
+  else drawInside(ctx, role, w, h, card);
+}
+
+// =====================================================================
+// FOLDING: where each part of the card goes on the paper
+// half    = landscape sheet, folded once: a tall card (A4 makes an A5 card)
+// wide    = portrait sheet, folded once top to bottom: a wide card
+// quarter = portrait sheet, folded twice: a small tall card, printed on one side only.
+//           The top half is printed upside down, so it is the right way up after folding.
+// =====================================================================
+// the four ways to fold: quarter (tall), quarterw (wide), half (tall), wide (half, wide)
+function fmtOf(T) { return T.fold === "quarter" ? (T.shape === "wide" ? "quarterw" : "quarter") : (T.shape === "wide" ? "wide" : "half"); }
+function geom(fmt, paper) {
+  fmt = fmt || S.fmt; const [pw, ph] = PAPERS[paper || S.paper];
+  if (fmt === "half") return { W: ph, H: pw, cw: ph / 2, ch: pw, orient: "landscape" };
+  if (fmt === "wide") return { W: pw, H: ph, cw: pw, ch: ph / 2, orient: "portrait" };
+  if (fmt === "quarterw") return { W: ph, H: pw, cw: ph / 2, ch: pw / 2, orient: "landscape" };
+  return { W: pw, H: ph, cw: pw / 2, ch: ph / 2, orient: "portrait" };
+}
+function sheetLayout(g) {
+  if (S.fmt === "half") return [
+    { side: "outside", panels: [{ role: "back", x: 0, y: 0 }, { role: "front", x: g.cw, y: 0 }] },
+    { side: "inside", panels: [{ role: "in1", x: 0, y: 0 }, { role: "in2", x: g.cw, y: 0 }] }];
+  if (S.fmt === "wide") return [
+    { side: "outside", panels: [{ role: "back", x: 0, y: 0, flip: 1 }, { role: "front", x: 0, y: g.ch }] },
+    { side: "inside", panels: [{ role: "in1", x: 0, y: 0 }, { role: "in2", x: 0, y: g.ch }] }];
+  // quarter, wide card: fold the right half back, then the top half down. The front prints upside down.
+  if (S.fmt === "quarterw") return [{ side: "one", panels: [{ role: "in1", x: 0, y: 0 }, { role: "in2", x: 0, y: g.ch }, { role: "front", x: g.cw, y: 0, flip: 1 }, { role: "back", x: g.cw, y: g.ch }] }];
+  // quarter, tall card: fold the top half back, then the left half over to the right. The top row prints upside down.
+  return [{ side: "one", panels: [{ role: "front", x: 0, y: 0, flip: 1 }, { role: "back", x: g.cw, y: 0, flip: 1 }, { role: "in1", x: 0, y: g.ch }, { role: "in2", x: g.cw, y: g.ch }] }];
+}
+function placePanel(ctx, p, g, card) {
+  ctx.save(); ctx.beginPath(); ctx.rect(p.x, p.y, g.cw, g.ch); ctx.clip();
+  if (p.flip) { ctx.translate(p.x + g.cw, p.y + g.ch); ctx.rotate(Math.PI); } else ctx.translate(p.x, p.y);
+  drawPanel(ctx, p.role, g.cw, g.ch, card); ctx.restore();
+}
+function foldMarks(ctx, g) {
+  if (!S.marks) return;
+  ctx.save(); ctx.strokeStyle = "#9aa5a0"; ctx.lineWidth = .25; ctx.setLineDash([1, 1]);
+  const v = x => { ctx.beginPath(); ctx.moveTo(x, 4); ctx.lineTo(x, 11); ctx.moveTo(x, g.H - 4); ctx.lineTo(x, g.H - 11); ctx.stroke(); };
+  const hz = y => { ctx.beginPath(); ctx.moveTo(4, y); ctx.lineTo(11, y); ctx.moveTo(g.W - 4, y); ctx.lineTo(g.W - 11, y); ctx.stroke(); };
+  if (S.fmt === "half") v(g.cw); else if (S.fmt === "wide") hz(g.ch); else { v(g.cw); hz(g.ch); }
+  ctx.restore();
+}
+function sheetPages(card) {
+  const g = geom(), sides = sheetLayout(g).filter(sd => !(sd.side === "inside" && S.inside === "outside"));
+  return sides.map(sd => ({ W: g.W, H: g.H, orient: g.orient, side: sd.side, to: card.to, hits: sd.panels.map(p => ({ role: p.role, x: p.x, y: p.y, w: g.cw, h: g.ch })), draw: ctx => { sd.panels.forEach(p => placePanel(ctx, p, g, card)); foldMarks(ctx, g); } }));
+}
+function printPages() { return S.out === "fold" ? [foldPage()] : [].concat(...cards().map(sheetPages)); }
+
+// ---------- the finished card, as it looks after folding ----------
+function shadowPanel(ctx, x, y, w, h, role, card) {
+  const k = ctx.getTransform().a;
+  ctx.save(); ctx.shadowColor = "rgba(15,23,42,.3)"; ctx.shadowBlur = 3 * k; ctx.shadowOffsetY = 1 * k; ctx.fillStyle = "#ffffff"; ctx.fillRect(x, y, w, h); ctx.restore();
+  ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip(); ctx.translate(x, y); drawPanel(ctx, role, w, h, card); ctx.restore();
+}
+function label(ctx, text, x, y, size) { ctx.font = uiFont(size, true); ctx.fillStyle = GREY; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.fillText(text, x, y); }
+function cardViewPage(card) {
+  const g = geom(), cw = g.cw, ch = g.ch, k = Math.min(cw, ch) / 105, m = 10 * k, gap = 14 * k, lab = 7 * k, wide = S.shape === "wide";
+  const W = wide ? 2 * cw + gap + 2 * m : 3 * cw + gap + 2 * m, H = 2 * ch + 2 * lab + gap + 2 * m;
+  const ix0 = m + cw + gap, by0 = m + lab + ch + gap;
+  const hits = [{ role: "front", x: m, y: m + lab, w: cw, h: ch }, { role: "back", x: m, y: by0 + lab, w: cw, h: ch },
+    { role: "in1", x: ix0, y: m + lab, w: cw, h: ch }, wide ? { role: "in2", x: ix0, y: m + lab + ch, w: cw, h: ch } : { role: "in2", x: ix0 + cw, y: m + lab, w: cw, h: ch }];
+  return { W, H, view: true, to: card.to, hits, draw: ctx => {
+    ctx.fillStyle = "#f3f1e6"; ctx.fillRect(0, 0, W, H);
+    const ls = 4.2 * k;
+    label(ctx, "Front", m, m + lab * .7, ls); shadowPanel(ctx, m, m + lab, cw, ch, "front", card);
+    const ix = m + cw + gap;
+    label(ctx, "Inside" + (S.inside === "outside" && S.fold !== "quarter" ? " (left blank to write by hand)" : ""), ix, m + lab * .7, ls);
+    const blankInside = S.inside === "outside" && S.fold !== "quarter", fake = blankInside ? "none" : null;
+    if (wide) { shadowPanel(ctx, ix, m + lab, cw, ch, fake ? "none" : "in1", card); shadowPanel(ctx, ix, m + lab + ch, cw, ch, fake ? "none" : "in2", card); }
+    else { shadowPanel(ctx, ix, m + lab, cw, ch, fake ? "none" : "in1", card); shadowPanel(ctx, ix + cw, m + lab, cw, ch, fake ? "none" : "in2", card); }
+    // the fold, in the middle of the open card
+    ctx.save(); const grad = wide ? ctx.createLinearGradient(0, m + lab + ch - 3 * k, 0, m + lab + ch + 3 * k) : ctx.createLinearGradient(ix + cw - 3 * k, 0, ix + cw + 3 * k, 0);
+    grad.addColorStop(0, "rgba(15,23,42,0)"); grad.addColorStop(.5, "rgba(15,23,42,.13)"); grad.addColorStop(1, "rgba(15,23,42,0)"); ctx.fillStyle = grad;
+    wide ? ctx.fillRect(ix, m + lab + ch - 3 * k, cw, 6 * k) : ctx.fillRect(ix + cw - 3 * k, m + lab, 6 * k, ch); ctx.restore();
+    const by = m + lab + ch + gap; label(ctx, "Back", m, by + lab * .7, ls); shadowPanel(ctx, m, by + lab, cw, ch, "back", card);
+    const tx = ix, ty = wide ? m + lab + 2 * ch + 5 * k : by + lab + 6 * k;
+    ctx.font = uiFont(3.6 * k); ctx.fillStyle = GREY; ctx.textAlign = "left"; ctx.textBaseline = "top";
+    [cardSizeText(), "Printed on " + PAPER_NAME[S.paper] + " paper, " + FOLD_NAME[S.fmt].toLowerCase() + ".", card.to ? "This card is for " + card.to + "." : ""].filter(Boolean).forEach((t, i) => ctx.fillText(t, tx, ty + i * 5.4 * k));
+  } };
+}
+const FOLD_NAME = { half: "Folded in half (tall card)", wide: "Folded in half (wide card)", quarter: "Folded in quarters (tall card)", quarterw: "Folded in quarters (wide card)" };
+function cardSizeText() {
+  const g = geom(), mm = v => Math.round(v);
+  const named = { a4: { half: "A5", wide: "A5", quarter: "A6", quarterw: "A6" }, a3: { half: "A4", wide: "A4", quarter: "A5", quarterw: "A5" }, letter: { half: "5½ × 8½ in", wide: "8½ × 5½ in", quarter: "4¼ × 5½ in", quarterw: "5½ × 4¼ in" } }[S.paper][S.fmt];
+  return "Card size: " + mm(g.cw) + " × " + mm(g.ch) + " mm (" + named + ")";
+}
+
+// ---------- how to fold: a printable page ----------
+function arrow(ctx, pts, k, colour, dashed) {
+  ctx.save(); ctx.strokeStyle = colour; ctx.fillStyle = colour; ctx.lineWidth = .7 * k; ctx.lineCap = "round"; if (dashed) ctx.setLineDash([1.6 * k, 1.4 * k]);
+  ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); ctx.bezierCurveTo(pts[1][0], pts[1][1], pts[2][0], pts[2][1], pts[3][0], pts[3][1]); ctx.stroke(); ctx.setLineDash([]);
+  const a = Math.atan2(pts[3][1] - pts[2][1], pts[3][0] - pts[2][0]), T = rot(pts[3][0], pts[3][1], a);
+  ctx.beginPath(); polyPath(ctx, [T(0, 0), T(-3 * k, -1.7 * k), T(-3 * k, 1.7 * k)]); ctx.fill(); ctx.restore();
+}
+// a small copy of a printed sheet, a part of the card, or a few parts side by side
+function thumb(ctx, x, y, w, h, drawFn, W, H, opts) {
+  const f = Math.min(w / W, h / H), dw = W * f, dh = H * f, ox = x + (w - dw) / 2, oy = y + (h - dh) / 2;
+  ctx.save(); ctx.shadowColor = "rgba(15,23,42,.25)"; ctx.shadowBlur = 2 * ctx.getTransform().a; ctx.fillStyle = "#fff"; ctx.fillRect(ox, oy, dw, dh); ctx.restore();
+  ctx.save(); ctx.beginPath(); ctx.rect(ox, oy, dw, dh); ctx.clip(); ctx.translate(ox, oy); ctx.scale(f, f); drawFn(ctx); ctx.restore();
+  ctx.save(); ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = .3; ctx.strokeRect(ox, oy, dw, dh); ctx.restore();
+  if (opts && opts.fold) { ctx.save(); ctx.strokeStyle = "#d9481f"; ctx.lineWidth = .45; ctx.setLineDash([1.4, 1.1]); ctx.beginPath(); opts.fold.forEach(([a, b, c, d]) => { ctx.moveTo(ox + a * dw, oy + b * dh); ctx.lineTo(ox + c * dw, oy + d * dh); }); ctx.stroke(); ctx.restore(); }
+  return { x: ox, y: oy, w: dw, h: dh };
+}
+function foldPage() {
+  const [W, H] = PAPERS[S.paper], k = Math.min(W / 210, H / 297), g = geom(), card = cards()[0], sheets = sheetPages(card), A = S.style === "line" ? "#222" : /^#f/i.test(S.tcol) ? "#0e2861" : S.tcol, ORANGE = "#d9481f";
+  return { W, H, orient: "portrait", draw: ctx => {
+    ctx.fillStyle = A; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.font = '700 ' + (9 * k) + 'px "Source Serif 4", Georgia, serif'; ctx.fillText("How to fold your card", 14 * k, 24 * k);
+    ctx.font = uiFont(3.9 * k); ctx.fillStyle = GREY; ctx.fillText(FOLD_NAME[S.fmt] + " · " + PAPER_NAME[S.paper] + " paper · " + cardSizeText().replace("Card size: ", "card size "), 14 * k, 31 * k);
+    ctx.strokeStyle = A; ctx.lineWidth = .9 * k; ctx.beginPath(); ctx.moveTo(14 * k, 34 * k); ctx.lineTo(W - 14 * k, 34 * k); ctx.stroke();
+    const twoSided = S.fold !== "quarter" && S.inside === "both", flip = "short";
+    const steps = [];
+    if (S.fmt === "quarterw") {
+      const col = c => { placePanel(c, { role: "in1", x: 0, y: 0 }, g, card); placePanel(c, { role: "in2", x: 0, y: g.ch }, g, card); };
+      steps.push({ t: "Print the page on one side of the paper. Choose “Actual size” or 100%. The top-right part prints upside down: that's right!", d: (x, y, w, h) => thumb(ctx, x, y, w, h, sheets[0].draw, g.W, g.H, { fold: [[0, .5, 1, .5], [.5, 0, .5, 1]] }) });
+      steps.push({ t: "Fold the right half back, behind the left half. Press the fold flat.", d: (x, y, w, h) => {
+        const r = thumb(ctx, x, y, w * .55, h, col, g.cw, g.H, { fold: [[0, .5, 1, .5]] });
+        ctx.save(); ctx.setLineDash([1.4 * k, 1.2 * k]); ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = .35; ctx.strokeRect(r.x + r.w, r.y, r.w * .6, r.h); ctx.restore();
+        arrow(ctx, [[r.x + r.w * 1.45, r.y + r.h * .15], [r.x + r.w * 1.45, r.y - r.h * .1], [r.x + r.w * .9, r.y - r.h * .1], [r.x + r.w * .8, r.y + r.h * .04]], k, ORANGE, true);
+      } });
+      steps.push({ t: "Fold the top half down over the bottom half. The picture is now on the front.", d: (x, y, w, h) => {
+        const r = thumb(ctx, x, y, w * .55, h, col, g.cw, g.H, { fold: [[0, .5, 1, .5]] });
+        arrow(ctx, [[r.x + r.w * .8, r.y + r.h * .15], [r.x + r.w * 1.3, r.y + r.h * .3], [r.x + r.w * 1.3, r.y + r.h * .7], [r.x + r.w * .8, r.y + r.h * .82]], k, ORANGE);
+      } });
+    } else if (S.fmt === "quarter") {
+      steps.push({ t: "Print the page on one side of the paper. Choose “Actual size” or 100%. The top half prints upside down: that\'s right!", d: (x, y, w, h) => thumb(ctx, x, y, w, h, sheets[0].draw, g.W, g.H, { fold: [[0, .5, 1, .5], [.5, 0, .5, 1]] }) });
+      steps.push({ t: "Fold the top half back, behind the bottom half. Press the fold flat.", d: (x, y, w, h) => {
+        const r = thumb(ctx, x, y + h * .3, w, h * .7, c => { placePanel(c, { role: "in1", x: 0, y: 0 }, g, card); placePanel(c, { role: "in2", x: g.cw, y: 0 }, g, card); }, g.W, g.ch, { fold: [[.5, 0, .5, 1]] });
+        ctx.save(); ctx.setLineDash([1.4 * k, 1.2 * k]); ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = .35; ctx.strokeRect(r.x, r.y - r.h * .45, r.w, r.h * .45); ctx.restore();
+        arrow(ctx, [[r.x + r.w * .82, r.y - r.h * .4], [r.x + r.w * 1.08, r.y - r.h * .4], [r.x + r.w * 1.08, r.y + r.h * .3], [r.x + r.w * .97, r.y + r.h * .45]], k, ORANGE, true);
+      } });
+      steps.push({ t: "Fold the left half over to the right. The picture is now on the front.", d: (x, y, w, h) => {
+        const r = thumb(ctx, x, y + h * .15, w, h * .75, c => { placePanel(c, { role: "in1", x: 0, y: 0 }, g, card); placePanel(c, { role: "in2", x: g.cw, y: 0 }, g, card); }, g.W, g.ch, { fold: [[.5, 0, .5, 1]] });
+        arrow(ctx, [[r.x + r.w * .15, r.y + r.h * .3], [r.x + r.w * .25, r.y - r.h * .25], [r.x + r.w * .7, r.y - r.h * .25], [r.x + r.w * .82, r.y + r.h * .2]], k, ORANGE);
+      } });
+    } else {
+      const outside = sheets[0], inside = sheets[1];
+      steps.push({ t: twoSided ? "Print the two pages on the two sides of one sheet. Choose double-sided, flip on the " + flip + " edge, and “Actual size” or 100%." : "Print the page on one side of the paper. Choose “Actual size” or 100%. You can write inside the card by hand.", d: (x, y, w, h) => {
+        if (inside) { thumb(ctx, x, y, w * .48, h, outside.draw, g.W, g.H, {}); thumb(ctx, x + w * .52, y, w * .48, h, inside.draw, g.W, g.H, {}); label(ctx, "page 1", x + 1, y + h + 3.6 * k, 3 * k); label(ctx, "page 2 (on the back)", x + w * .52 + 1, y + h + 3.6 * k, 3 * k); }
+        else thumb(ctx, x, y, w, h, outside.draw, g.W, g.H, {});
+      } });
+      steps.push({ t: S.fmt === "half" ? "Fold the sheet in half. The left half goes back, behind the picture." : "Fold the top half back, behind the bottom half. The picture is on the front.", d: (x, y, w, h) => {
+        const r = thumb(ctx, x, y, w, h, outside.draw, g.W, g.H, { fold: S.fmt === "half" ? [[.5, 0, .5, 1]] : [[0, .5, 1, .5]] });
+        if (S.fmt === "half") arrow(ctx, [[r.x + r.w * .12, r.y + r.h * .2], [r.x - r.w * .1, r.y - r.h * .12], [r.x + r.w * .45, r.y - r.h * .16], [r.x + r.w * .55, r.y + r.h * .05]], k, ORANGE, true);
+        else arrow(ctx, [[r.x + r.w * .85, r.y + r.h * .12], [r.x + r.w * 1.12, r.y], [r.x + r.w * 1.12, r.y + r.h * .55], [r.x + r.w * .98, r.y + r.h * .62]], k, ORANGE, true);
+      } });
+    }
+    steps.push({ t: "Your card is ready. Write inside it, and give it to someone special!", d: (x, y, w, h) => thumb(ctx, x, y, w, h, c => drawPanel(c, "front", g.cw, g.ch, card), g.cw, g.ch, {}) });
+    const cols = 2, top = 44 * k, cellW = (W - 28 * k - 10 * k) / cols, cellH = (H - top - 70 * k) / Math.ceil(steps.length / cols);
+    steps.forEach((st, i) => {
+      const x = 14 * k + (i % cols) * (cellW + 10 * k), y = top + Math.floor(i / cols) * cellH;
+      ctx.fillStyle = A; ctx.beginPath(); ctx.arc(x + 4.5 * k, y + 4.5 * k, 4.5 * k, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#fff"; ctx.font = uiFont(5 * k, true); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(i + 1), x + 4.5 * k, y + 4.8 * k);
+      ctx.font = uiFont(3.7 * k); ctx.fillStyle = INK; ctx.textAlign = "left"; ctx.textBaseline = "top";
+      const lines = wrapLines(ctx, st.t, cellW - 13 * k); lines.forEach((l, j) => ctx.fillText(l, x + 12 * k, y + 1.5 * k + j * 5 * k));
+      const dy = y + Math.max(12 * k, lines.length * 5 * k + 5 * k);
+      st.d(x + 6 * k, dy, cellW - 12 * k, cellH - (dy - y) - 10 * k);
+    });
+    // tips
+    const ty = H - 62 * k; ctx.fillStyle = S.style === "line" ? "#f1f1f1" : mix(A, .08); ctx.beginPath(); rrPath(ctx, 14 * k, ty, W - 28 * k, 48 * k, 3 * k); ctx.fill();
+    ctx.fillStyle = A; ctx.font = uiFont(4.4 * k, true); ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText("Tips", 19 * k, ty + 4 * k);
+    ctx.font = uiFont(3.4 * k); ctx.fillStyle = INK;
+    const tips = ["Thin card (160–200 gsm) makes a strong card. Ordinary paper works well for the quarter fold.", "For a sharp fold, press along the fold with a ruler or the back of a spoon.", "Print one card first to check it before you print a class set.",
+      S.fold === "quarter" ? "No double-sided printing is needed for this card." : "No double-sided printer? Print page 1, turn the sheet over, put it back in the tray and print page 2. Draw a pencil arrow on a sheet first to see which way your printer feeds paper."];
+    let yy = ty + 11 * k; tips.forEach(t => { wrapLines(ctx, "•  " + t, W - 40 * k).forEach(l => { ctx.fillText(l, 19 * k, yy); yy += 4.6 * k; }); yy += 1 * k; });
+    smallPrint(ctx, COPYRIGHT, W / 2, H - 7 * k, 2.6 * k);
+  } };
+}
+function buildPages() {
+  if (S.out === "fold") return [foldPage()];
+  if (S.out === "card") return cards().map(cardViewPage);
+  return printPages();
+}
+function renderPage(canvas, pg, pxPerMm) {
+  canvas.width = Math.round(pg.W * pxPerMm); canvas.height = Math.round(pg.H * pxPerMm);
+  const ctx = canvas.getContext("2d"); ctx.setTransform(pxPerMm, 0, 0, pxPerMm, 0, 0);
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, pg.W, pg.H); pg.draw(ctx); return canvas;
+}
+
+// =====================================================================
+// SCREEN
+// =====================================================================
+let drawQueued = false, turned = false, zoom = 1;
+const ZOOMS = [1, 1.5, 2, 3];
+function fontsReady() {
+  if (!(document.fonts && document.fonts.load)) return Promise.resolve();
+  return Promise.all([gFont(20), gFont(20, 400), mFont(20), mFont(20, true), uiFont(20), uiFont(20, true), '700 20px "Source Serif 4"'].map(f => document.fonts.load(f).catch(() => {})));
+}
+async function redraw() {
+  if (drawQueued) return; drawQueued = true;
+  if (isLib()) await loadLib(S.lib); await fontsReady();
+  requestAnimationFrame(() => {
+    drawQueued = false;
+    pages = buildPages(); page = clamp(page, 0, Math.max(0, pages.length - 1));
+    const pg = pages[page], cv = $("preview"), dpr = Math.min(2, window.devicePixelRatio || 1), turn = turned && S.out === "sheets";
+    const shown = turn ? Object.assign({}, pg, { draw: ctx => { ctx.translate(pg.W, pg.H); ctx.rotate(Math.PI); pg.draw(ctx); } }) : pg;
+    renderPage(cv, shown, Math.min(3.2 * dpr * zoom, 2800 * Math.min(zoom, 2) / Math.max(pg.W, pg.H)));
+    $("paper").classList.toggle("zoomed", zoom > 1); cv.style.width = zoom > 1 ? (zoom * 100) + "%" : "";
+    $("turnBtn").hidden = S.out !== "sheets"; $("turnBtn").setAttribute("aria-pressed", turn);
+    $("zoomText").textContent = Math.round(zoom * 100) + "%"; $("zoomOut").disabled = zoom <= 1; $("zoomIn").disabled = zoom >= ZOOMS[ZOOMS.length - 1];
+    cv.setAttribute("aria-label", S.out === "fold" ? "How to fold the card" : S.out === "card" ? "The finished card: front, inside and back" : "The page to print");
+    $("pager").hidden = pages.length < 2;
+    const bits = ["Page " + (page + 1) + " of " + pages.length];
+    if (pg.to) bits.push(pg.to); if (pg.side === "outside") bits.push("outside"); if (pg.side === "inside") bits.push("inside (print on the back)");
+    $("pagerText").textContent = S.out === "card" ? "Card " + (page + 1) + " of " + pages.length + (pg.to ? " · " + pg.to : "") : bits.join(" · ");
+    const n = printPages().length; $("pdfBtn").textContent = "Download PDF (" + n + (n === 1 ? " page)" : " pages)");
+    hints(); fitStage();
+  });
+}
+// On a wide screen the preview panel stays in view as you scroll. Shrink the preview so the whole
+// panel (buttons and support box included) fits in the window, instead of hiding below it.
+function fitStage() {
+  const cv = $("preview"), st = document.querySelector(".stage");
+  if (window.innerWidth <= 980 || zoom > 1) { cv.style.maxHeight = ""; return; }
+  cv.style.maxHeight = "";
+  const other = st.scrollHeight - cv.offsetHeight, room = window.innerHeight - 40 - other;
+  cv.style.maxHeight = Math.max(280, Math.min(room, window.innerHeight * .74)) + "px";
+}
+let fitTimer = 0;
+window.addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitStage, 120); });
+function hints() {
+  const g = geom(), two = S.fold !== "quarter" && S.inside === "both", n = namesList().length;
+  $("foldHint").textContent = cardSizeText() + ". " + (S.fold === "quarter" ? "Prints on one side of the paper: fold it in half, then in half again. Part of the page prints upside down so it's the right way up when you fold it."
+    : two ? "Print the two pages on both sides of one sheet: choose double-sided and flip on the " + ("short") + " edge. Then fold it in half."
+    : "Prints on one side. Fold it in half and write inside by hand.");
+  libWarn();
+  // the envelope maker has envelopes for these cards
+  const envCard = { a4: { quarter: "a6", half: "a5" }, a3: { quarter: "a5" }, letter: { quarter: "lq", half: "lh" } }[S.paper][S.fold];
+  $("envHint").hidden = !envCard; if (envCard) $("envLink").href = "bespoke-envelope-maker.html#card=" + envCard;
+  $("namesHint").textContent = n ? n + (n === 1 ? " card" : " cards") + ", one for each name. Each name goes after “" + (S.toWord || "To") + "”." : "Each card gets its own name after “Dear”. Up to 60 names.";
+  $("outsHint").textContent = S.out === "card" ? "This is how the card looks after folding. Download PDF and Print give you the page to print; Download PNG gives you pictures of the card to send by email or message." :
+    S.out === "fold" ? "A page of folding instructions to print and give to your class." : "";
+}
+
+// ---------- turn, zoom, and click a part of the card to change it ----------
+$("turnBtn").onclick = () => { turned = !turned; redraw(); say(turned ? "The view is turned round so you can read the cover. What you print doesn't change." : "The view shows the page as it prints."); };
+$("zoomIn").onclick = () => { zoom = ZOOMS[Math.min(ZOOMS.length - 1, ZOOMS.indexOf(zoom) + 1)]; redraw(); };
+$("zoomOut").onclick = () => { zoom = ZOOMS[Math.max(0, ZOOMS.indexOf(zoom) - 1)]; redraw(); };
+$("zoomFit").onclick = () => { zoom = 1; redraw(); };
+const STEP_FOR = { front: "grpFront", back: "grpInside", in1: "grpInside", in2: "grpInside" };
+function hitAt(e) {
+  const pg = pages[page], cv = $("preview"); if (!pg || !pg.hits) return null;
+  const r = cv.getBoundingClientRect(); let x = (e.clientX - r.left) / r.width * pg.W, y = (e.clientY - r.top) / r.height * pg.H;
+  if (turned && S.out === "sheets") { x = pg.W - x; y = pg.H - y; }
+  return pg.hits.find(h => x >= h.x && x <= h.x + h.w && y >= h.y && y <= h.y + h.h) || null;
+}
+$("preview").addEventListener("mousemove", e => { $("preview").style.cursor = hitAt(e) ? "pointer" : ""; });
+$("preview").addEventListener("click", e => {
+  const h = hitAt(e); if (!h) return;
+  const d = $(STEP_FOR[h.role]); d.open = true; d.scrollIntoView({ behavior: "smooth", block: "start" });
+  d.classList.remove("flash"); void d.offsetWidth; d.classList.add("flash");
+  say({ front: "The front of the card: change the greeting and picture here. The frame, fonts and colours are in steps 3 and 4.", back: "The back of the card: change it at the bottom of step 5.", in1: "Inside the card: change it in step 5.", in2: "The message inside: change it in step 5." }[h.role]);
+});
+
+// ---------- occasions, pictures and frames ----------
+function pick(cls, label, pressed, data) { const b = el("button", "pick" + (cls ? " " + cls : "")); b.type = "button"; b.setAttribute("aria-pressed", pressed); b.title = label; Object.assign(b.dataset, data); return b; }
+function buildOccs() {
+  const box = $("occs"); box.textContent = "";
+  OCCASIONS.forEach(o => { const b = el("button", "theme"); b.type = "button"; b.dataset.id = o.id; b.textContent = o.name; box.appendChild(b); });
+}
+function syncOccs() { document.querySelectorAll("#occs .theme").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === S.occ)); }
+function applyOccasion(id) {
+  const o = OCC_BY[id]; if (!o) return;
+  Object.assign(S, { occ: id, greeting: o.greeting, line2: o.line2 || "", message: o.message, end: o.end, starters: o.starters.join("\n") });
+}
+$("occs").addEventListener("click", e => { const b = e.target.closest(".theme"); if (!b) return; applyOccasion(b.dataset.id); syncOccs(); syncForm(); changed(); say(OCC_BY[S.occ].name + ": the greeting and message have changed. Your fonts, colours and frame stay as you chose them."); });
+function buildLib() {
+  const box = $("libs"), list = $("libCredits"); box.textContent = ""; list.textContent = "";
+  let group = "";
+  const want = S.src;
+  $("libHint").textContent = want === "modern" ? "Pictures by living artists, used with their permission. If you like one, you can support the artist: the link goes straight to them." : want === "colourin" ? "Line drawings to colour in. They print in crisp black lines. The card is set to “Colour in”, so the frame and letters are outlines too: you can change that in step 4." : "Old engravings, paintings, postcards and natural history plates, now in the public domain. The animals work for any time of year. The card's back says where the picture came from.";
+  LIBRARY.filter(p => kindOf(p) === want).forEach(p => {
+    if (p.group !== group) { group = p.group; box.appendChild(el("p", "libgroup", group)); }
+    const b = pick("", p.title, p.id === S.lib, { id: p.id }), im = el("img"); im.src = LIB_BASE + "thumb-" + p.id + ".jpg"; im.alt = ""; im.loading = "lazy"; b.append(im, el("span", "", p.title)); if (p.small) b.appendChild(el("small", "smallnote", "Best for small cards")); if (p.artist) b.appendChild(el("small", "bynote", "♥ by " + p.artist)); box.appendChild(b);
+    const li = el("li"); if (p.link) { const a = el("a", "", p.title); a.href = p.link; a.target = "_blank"; a.rel = "noopener"; li.appendChild(a); } else li.appendChild(el("b", "", p.title));
+    li.appendChild(document.createTextNode(": " + p.credit + ". " + (p.licence || "Public domain") + "." + (p.info ? " " + p.info : "")));
+    if (supportUrl(p)) { li.appendChild(document.createTextNode(" ")); li.appendChild(supportLink(p, "support")); }
+    list.appendChild(li);
+  });
+  // the "your art here" tile at the end of the Contemporary art gallery
+  if (want === "modern") {
+    const ad = el("a", "artad"); ad.href = "mailto:" + ARTIST_CONTACT + "?subject=" + encodeURIComponent("My art on the greeting card maker");
+    ad.title = "Email us about offering your art";
+    ad.append(el("small", "adtag", "For artists"), el("span", "adplus", "+"), el("b", "", "Want to offer your art here?"), el("span", "", "Contact"), el("span", "admail", ARTIST_CONTACT));
+    box.appendChild(ad);
+  }
+  artistNote();
+  const cn = $("campaignNote"); cn.textContent = ""; cn.hidden = want !== "modern" || !SITE_SUPPORT;
+  if (!cn.hidden) { const a = el("a", "", "♥ Support real art on Christmas cards"); a.href = SITE_SUPPORT; a.target = "_blank"; a.rel = "noopener"; cn.append(document.createTextNode("Want more art like this? "), a, document.createTextNode(" (our PayPal fundraiser).")); }
+}
+// "Support the artist": only a real https link the artist gave you
+function supportUrl(p) { return p && typeof p.support === "string" && /^https:\/\/[^\s"'<>]+$/i.test(p.support.trim()) ? p.support.trim() : ""; }
+function supportLink(p, cls) { const a = el("a", cls || "", "Support " + (p.artist || "the artist")); a.href = supportUrl(p); a.target = "_blank"; a.rel = "noopener"; a.title = "This goes straight to the artist, not to us"; return a; }
+function artistNote() {
+  const box = $("artistNote"), p = LIBRARY.find(x => x.id === S.lib), url = isLib() && supportUrl(p);
+  box.textContent = ""; box.hidden = !url; if (!url) return;
+  const btn = supportLink(p, "btn small artistbtn"); btn.textContent = "♥ Support " + (p.artist || "the artist");
+  const txt = el("span", "", "This picture is by " + (p.artist || "the artist") + ". Like it? Your support goes straight to the artist, not to us.");
+  box.append(txt, btn);
+}
+$("libs").addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return; S.lib = b.dataset.id; document.querySelectorAll("#libs .pick").forEach(x => x.setAttribute("aria-pressed", x === b)); artistNote(); changed(true); });
+// a warning when a smaller picture is used on a big card
+function libWarn() {
+  const p = LIBRARY.find(x => x.id === S.lib), big = S.paper === "a3" || S.fold !== "quarter";
+  $("libWarn").hidden = !(isLib() && p && p.small && big);
+}
+function buildFrames() {
+  const box = $("frames"), cc = cardColours(), line = cc.line, bg = cc.bg; box.textContent = "";
+  FRAMES.forEach(f => {
+    const b = pick("", f.name, f.id === S.frame, { id: f.id }), c = el("canvas"), W = 70, H = 98, k = 1.25; c.width = W * k; c.height = H * k;
+    const x = c.getContext("2d"); x.scale(k, k); x.fillStyle = "#fff"; x.fillRect(0, 0, W, H); x.fillStyle = bg; x.beginPath(); rrPath(x, 4, 4, W - 8, H - 8, 2.5); x.fill();
+    drawFrame(x, f.id, 4, 4, W - 8, H - 8, { s: .82 * FS[S.fsize], col: cc.frame, line, deep: false, bg }); c.setAttribute("aria-hidden", "true");
+    b.append(c, el("span", "", f.name)); box.appendChild(b);
+  });
+}
+$("frames").addEventListener("click", e => { const b = e.target.closest(".pick"); if (!b) return; S.frame = b.dataset.id; document.querySelectorAll("#frames .pick").forEach(x => x.setAttribute("aria-pressed", x === b)); changed(true); });
+
+
+// ---------- your own picture ----------
+function useOwn(im, keep) {
+  const max = 2000, k = Math.min(1, max / Math.max(im.naturalWidth || im.width, im.naturalHeight || im.height));
+  const c = document.createElement("canvas"); c.width = Math.max(1, Math.round((im.naturalWidth || im.width) * k)); c.height = Math.max(1, Math.round((im.naturalHeight || im.height) * k));
+  c.getContext("2d").drawImage(im, 0, 0, c.width, c.height); c.id = "o" + Date.now(); OWN = c;
+  if (keep) { try { const small = document.createElement("canvas"), f = Math.min(1, 1200 / Math.max(c.width, c.height)); small.width = c.width * f; small.height = c.height * f; small.getContext("2d").drawImage(c, 0, 0, small.width, small.height); localStorage.setItem(PICSTORE, small.toDataURL("image/jpeg", .88)); } catch (e) {} }
+}
+function imageFrom(src) { return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; }); }
+$("file").addEventListener("change", async e => {
+  const f = e.target.files && e.target.files[0]; if (!f) return;
+  try { const url = URL.createObjectURL(f); useOwn(await imageFrom(url), true); URL.revokeObjectURL(url); $("fileName").textContent = f.name; S.src = "own"; syncForm(); changed(true); say("Picture added. It stays on this computer: it is not uploaded anywhere."); }
+  catch (err) { say("That file isn't a picture this browser can open. Try a JPG or PNG."); }
+  e.target.value = "";
+});
+$("urlBtn").onclick = async () => {
+  const u = $("url").value.trim(); if (!/^https?:\/\//i.test(u)) { say("Paste a link that starts with https://"); return; }
+  say("Getting the picture…");
+  try {
+    const r = await fetch(u); if (!r.ok) throw 0; const b = await r.blob(); if (!/^image\//.test(b.type)) throw 0;
+    const url = URL.createObjectURL(b); useOwn(await imageFrom(url), true); URL.revokeObjectURL(url);
+    $("fileName").textContent = u.split("/").pop().slice(0, 40); S.src = "own"; syncForm(); changed(true); say("Picture added from the link.");
+  } catch (e) { say("That website doesn't let other pages use its pictures. Download the picture to your computer, then use “Choose a picture”."); }
+};
+function buildLinks() { const ul = $("pdLinks"); PD_LINKS.forEach(l => { const li = el("li"), a = el("a", "", l.name); a.href = l.url; a.target = "_blank"; a.rel = "noopener"; li.append(a, document.createTextNode(": " + l.note)); ul.appendChild(li); }); }
+
+// ---------- the form ----------
+const RADIOS = ["gpos", "src", "picSize", "fit", "style", "bg", "fsize", "in1", "in2", "spacing", "back", "fold", "shape", "paper", "inside"];
+const TEXTS = ["greeting", "line2", "credit", "toName", "message", "end", "fromName", "starters", "names", "madeBy"];
+const show = (id, on) => { $(id).hidden = !on; };
+function syncForm() {
+  RADIOS.forEach(n => document.querySelectorAll('input[name="' + n + '"]').forEach(r => { r.checked = String(S[n]) === r.value; }));
+  TEXTS.forEach(id => { if ($(id) !== document.activeElement) $(id).value = S[id]; });
+  $("gfont").value = S.gfont; $("mfont").value = S.mfont; $("toWord").value = S.toWord; $("spaceLabel").checked = S.spaceLabel; $("fAll").checked = S.fAll; $("marks").checked = S.marks;
+  show("optLib", isLib()); show("fitRow", S.src === "own" || isLib()); show("optOwn", S.src === "own"); show("optSpace", S.src === "space");
+  const line = S.style === "line"; ["tcolRow", "mcolRow", "fcolRow", "bgRow"].forEach(id => show(id, !line)); show("bgcolRow", !line && S.bg !== "white"); show("lineNote", line);
+  const wide = S.shape === "wide"; $("gposA").textContent = wide ? "On the right" : "At the top"; $("gposB").textContent = wide ? "On the left" : "At the bottom"; $("in1Lab").textContent = wide ? "Inside top" : "Inside left"; $("in2Lab").textContent = wide ? "Inside bottom (the message)" : "Inside right (the message)";
+  const letter = ["message", "lines", "starters"].indexOf(S.in2) > -1;
+  show("toRow", letter); show("endRow", letter); show("msgRow", S.in2 === "message"); show("startRow", S.in2 === "starters");
+  show("spacingRow", S.in1 === "lines" || S.in2 === "lines" || S.in2 === "starters"); show("madeRow", S.back === "made"); show("insideRow", S.fold !== "quarter");
+  ["tcol", "mcol", "fcol", "bgcol"].forEach(k => { document.querySelectorAll("#" + k + "Sw .sw").forEach(b => b.setAttribute("aria-pressed", b.dataset.c === S[k])); const p = $(k + "Pick"); p.value = S[k]; p.closest(".swpick").setAttribute("aria-pressed", !COLOURS.some(x => x.c === S[k])); });
+  document.querySelectorAll("#outs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.out === S.out));
+}
+function changed(keepPage) { if (!keepPage) page = 0; save(); redraw(); }
+$("controls").addEventListener("change", e => {
+  const t = e.target;
+  if (t.type === "radio" && RADIOS.indexOf(t.name) > -1) {
+    S[t.name] = t.value;
+    if (t.name === "fold" || t.name === "shape") S.fmt = fmtOf(S);
+    if (t.name === "src" && isLib()) {
+      const want = S.src, cur = LIBRARY.find(p => p.id === S.lib);
+      if (!cur || kindOf(cur) !== want) S.lib = (LIBRARY.find(p => kindOf(p) === want) || LIBRARY[0]).id;
+      if (want === "colourin") S.style = "line";
+      buildLib(); buildFrames();
+    }
+    if (t.name === "style" || t.name === "bg" || t.name === "fsize") buildFrames();
+    syncForm(); changed(); return;
+  }
+  if (t.id === "gfont" || t.id === "mfont" || t.id === "toWord") S[t.id] = t.value;
+  else if (t.id === "spaceLabel" || t.id === "marks" || t.id === "fAll") S[t.id] = t.checked;
+  else if (/Pick$/.test(t.id)) { S[t.id.replace("Pick", "")] = t.value; buildFrames(); }
+  else return;
+  syncForm(); changed(true);
+});
+TEXTS.forEach(id => $(id).addEventListener("input", e => { S[id] = e.target.value; changed(id !== "names"); if (id === "names") hints(); }));
+$("outs").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; S.out = b.dataset.out; syncForm(); changed(); });
+Object.keys(GFONTS).forEach(k => { const o = el("option", "", GFONTS[k].label); o.value = k; $("gfont").appendChild(o); });
+MFONTS.forEach(k => { const o = el("option", "", GFONTS[k].label); o.value = k; $("mfont").appendChild(o); });
+function swatchRow(key) {
+  const box = $(key + "Sw");
+  COLOURS.forEach(p => { const b = el("button", "sw"); b.type = "button"; b.dataset.c = p.c; b.title = p.name; b.setAttribute("aria-label", p.name); b.style.background = p.c; b.onclick = () => { S[key] = p.c; buildFrames(); syncForm(); changed(true); }; box.appendChild(b); });
+  const lab = el("label", "sw swpick"), inp = el("input"); inp.type = "color"; inp.id = key + "Pick"; inp.setAttribute("aria-label", "Choose any colour"); lab.title = "Choose any colour"; lab.append(inp); box.appendChild(lab);
+}
+["tcol", "mcol", "fcol", "bgcol"].forEach(swatchRow);
+$("prevBtn").onclick = () => { page = Math.max(0, page - 1); redraw(); };
+$("nextBtn").onclick = () => { page = Math.min(pages.length - 1, page + 1); redraw(); };
+$("resetBtn").onclick = () => { try { localStorage.removeItem(STORE); localStorage.removeItem(PICSTORE); } catch (e) {} S = fresh(); OWN = null; $("fileName").textContent = ""; syncOccs(); buildFrames(); syncForm(); changed(); say("Started again."); };
+
+// ---------- a link to this card ----------
+const b64u = bytes => { let s = ""; for (let i = 0; i < bytes.length; i += 8192) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192)); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); };
+const unb64u = s => { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; return Uint8Array.from(atob(s), c => c.charCodeAt(0)); };
+async function pipe(bytes, stream) { return new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer()); }
+async function pack(o) { const raw = new TextEncoder().encode(JSON.stringify(o)); if (window.CompressionStream) { try { return "z" + b64u(await pipe(raw, new CompressionStream("deflate-raw"))); } catch (e) {} } return "j" + b64u(raw); }
+async function unpack(s) { const bytes = unb64u(s.slice(1)); return JSON.parse(new TextDecoder().decode(s[0] === "z" ? await pipe(bytes, new DecompressionStream("deflate-raw")) : bytes)); }
+$("linkBtn").onclick = async () => {
+  const url = location.href.split("#")[0] + "#set=" + await pack(S);
+  const extra = S.src === "own" ? " Your own picture isn't in the link: whoever opens it chooses their own." : "";
+  try { await navigator.clipboard.writeText(url); say("Link copied. It opens this card, ready to print, on any computer." + extra); }
+  catch (e) { prompt("Copy this link:", url); }
+};
+
+// =====================================================================
+// DOWNLOAD AND PRINT
+// =====================================================================
+const pause = () => new Promise(r => setTimeout(r, 0));
+function slug(t) { return String(t).replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "-").toLowerCase().slice(0, 40); }
+function fileBase() { return (slug(S.greeting) || "greeting") + (S.out === "fold" ? "-how-to-fold" : "-card"); }
+async function busy(job) {
+  const all = [$("pdfBtn"), $("pngBtn"), $("printBtn")]; all.forEach(b => b.disabled = true);
+  try { if (isLib()) await loadLib(S.lib); await fontsReady(); await job(); } catch (e) { console.error(e); say("Something went wrong making the file. Try again, or use Print."); }
+  all.forEach(b => b.disabled = false);
+}
+const dpiFor = () => (S.paper === "a3" ? 200 : 250) / 25.4;
+const fmtName = () => S.paper === "letter" ? "letter" : S.paper;
+$("pdfBtn").onclick = () => busy(async () => {
+  if (!window.jspdf) { say("The PDF tool didn't load (check your connection). Use Print and choose Save as PDF."); return; }
+  const ps = printPages(), pdf = new window.jspdf.jsPDF({ orientation: ps[0].orient, unit: "mm", format: fmtName() }), cv = document.createElement("canvas");
+  for (let i = 0; i < ps.length; i++) {
+    say("Making page " + (i + 1) + " of " + ps.length + "…"); await pause();
+    renderPage(cv, ps[i], dpiFor()); if (i) pdf.addPage(fmtName(), ps[i].orient);
+    pdf.addImage(cv.toDataURL("image/jpeg", .92), "JPEG", 0, 0, ps[i].W, ps[i].H, undefined, "FAST");
+  }
+  pdf.save(fileBase() + ".pdf");
+  const two = S.out !== "fold" && S.fold !== "quarter" && S.inside === "both";
+  say("Downloaded. When you print, choose “Actual size” or 100%." + (two ? " Print double-sided, flipping on the " + ("short") + " edge." : ""));
+});
+function downloadBlob(b, name) { const a = el("a"); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+const toBlob = c => new Promise(r => c.toBlob(r, "image/png"));
+// pictures of the finished card, to send by email or message
+function cardPictures(card, prefix) {
+  const g = geom(), wide = S.shape === "wide", out = [
+    { name: prefix + "front", W: g.cw, H: g.ch, draw: c => drawPanel(c, "front", g.cw, g.ch, card) },
+    { name: prefix + "inside", W: wide ? g.cw : g.cw * 2, H: wide ? g.ch * 2 : g.ch, draw: c => { c.save(); drawPanel(c, "in1", g.cw, g.ch, card); c.restore(); c.save(); wide ? c.translate(0, g.ch) : c.translate(g.cw, 0); drawPanel(c, "in2", g.cw, g.ch, card); c.restore(); } },
+    { name: prefix + "back", W: g.cw, H: g.ch, draw: c => drawPanel(c, "back", g.cw, g.ch, card) }];
+  const v = cardViewPage(card); out.push({ name: prefix + "all", W: v.W, H: v.H, draw: v.draw });
+  return out;
+}
+$("pngBtn").onclick = () => busy(async () => {
+  let list;
+  if (S.out === "card") { const cs = cards(); list = [].concat(...cs.map(c => cardPictures(c, cs.length > 1 ? slug(c.to) + "-" : ""))); }
+  else list = printPages().map((p, i, a) => Object.assign({ name: a.length > 1 ? "page-" + String(i + 1).padStart(2, "0") + (p.side && p.side !== "one" ? "-" + p.side : "") : "" }, p));
+  const cv = document.createElement("canvas"), dpi = 300 / 25.4;
+  const render = it => renderPage(cv, it, it.view || it.W > 250 ? 160 / 25.4 : S.out === "card" ? dpi : dpiFor());
+  if (list.length === 1) { render(list[0]); downloadBlob(await toBlob(cv), fileBase() + ".png"); say("Downloaded."); return; }
+  if (!window.JSZip) { say("The ZIP tool didn't load (check your connection)."); return; }
+  const zip = new JSZip();
+  for (let i = 0; i < list.length; i++) { say("Making picture " + (i + 1) + " of " + list.length + "…"); await pause(); render(list[i]); zip.file(fileBase() + "-" + list[i].name + ".png", await toBlob(cv)); }
+  say("Packing the ZIP file…"); await pause();
+  downloadBlob(await zip.generateAsync({ type: "blob" }), fileBase() + "-png.zip");
+  say("Downloaded " + list.length + " pictures in one ZIP file." + (S.out === "card" ? " Send the front and inside pictures as an e-card." : ""));
+});
+$("printBtn").onclick = () => busy(async () => {
+  const ps = printPages(), area = $("printArea"), cv = document.createElement("canvas"); area.textContent = "";
+  let pr = $("pageRule"); if (!pr) { pr = el("style"); pr.id = "pageRule"; document.head.appendChild(pr); }
+  pr.textContent = "@page{size:" + (S.paper === "letter" ? "letter" : S.paper.toUpperCase()) + " " + ps[0].orient + ";margin:0}";
+  const waits = [];
+  for (let i = 0; i < ps.length; i++) { say("Getting ready to print…"); await pause(); renderPage(cv, ps[i], 150 / 25.4); const im = new Image(); waits.push(new Promise(r => { im.onload = im.onerror = r; })); im.src = cv.toDataURL("image/jpeg", .92); area.appendChild(im); }
+  await Promise.all(waits);
+  const two = S.out !== "fold" && S.fold !== "quarter" && S.inside === "both";
+  say("Choose “Actual size” or 100% in the print window." + (two ? " Choose double-sided, flip on the " + ("short") + " edge." : ""));
+  window.print();
+  setTimeout(() => { area.textContent = ""; }, 1000);
+});
+
+// ---------- install as an app (Chrome and Edge offer this; the button stays hidden elsewhere) ----------
+(function () {
+  let deferred = null;
+  const btn = $("appInstall");
+  const standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); if (standalone) return; deferred = e; btn.hidden = false; });
+  btn.onclick = () => {
+    if (!deferred) return;
+    try { if (typeof gtag === "function") gtag("event", "app_install_click", { from: "greeting_card_maker" }); } catch (err) {}
+    deferred.prompt(); deferred.userChoice.finally(() => { deferred = null; btn.hidden = true; });
+  };
+  window.addEventListener("appinstalled", () => { btn.hidden = true; say("Installed. Find Teacher Tools with your other apps."); });
+})();
+
+// =====================================================================
+// START
+// =====================================================================
+(async function start() {
+  const h = location.hash;
+  let set = null;
+  if (/^#set=/.test(h)) { try { set = tidy(await unpack(h.slice(5))); } catch (e) { say("That link is incomplete, so a new card is open instead."); } history.replaceState(null, "", location.href.split("#")[0]); }
+  else if (/^#occ=/.test(h)) { const id = decodeURIComponent(h.slice(5)); if (OCC_BY[id]) { set = fresh(); S = set; applyOccasion(id); } }
+  if (!set) { try { const s = localStorage.getItem(STORE); if (s) set = tidy(JSON.parse(s)); } catch (e) {} }
+  S = set || fresh();
+  try { const p = localStorage.getItem(PICSTORE); if (p) { useOwn(await imageFrom(p), false); $("fileName").textContent = "Your picture from last time"; } } catch (e) {}
+  buildOccs(); syncOccs(); buildLib(); buildFrames(); buildLinks(); syncForm(); redraw();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => redraw());
+})();
+</script>
+</body>
+</html>
