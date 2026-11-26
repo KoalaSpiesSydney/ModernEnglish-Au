@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<!-- Christmas Origami Paper Maker © Koala Spies Sydney. All rights reserved. -->
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Koala Spies Sydney">
+<meta name="copyright" content="© Koala Spies Sydney. All rights reserved.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Printable Christmas Origami Paper | Tree, Star, Santa and Bauble</title>
+<meta name="description" content="Print free Christmas origami paper in your choice of colours and patterns, and fold a Christmas tree, a 5-point star, Santa or a bauble from one square. No glue. Folding steps, tutorial links and folding words for English learners included. Free for teachers and students. No sign-up.">
+<link rel="canonical" href="https://modernenglish.au/teachertools/bespoke-origami-paper-maker.html">
+<meta property="og:title" content="Free Christmas Origami Paper Maker">
+<meta property="og:description" content="Printable origami squares in your colours and patterns, with folding steps and words for English learners: tree, star, Santa and bauble.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://modernenglish.au/teachertools/bespoke-origami-paper-maker.html">
+<meta name="google-adsense-account" content="ca-pub-7047447363586796">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Teacher Tools app: install it, and use it offline -->
+<link rel="manifest" href="/teachertools/manifest.webmanifest">
+<meta name="theme-color" content="#1c1c1c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Teacher Tools">
+<script src="/teachertools/pwa.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Serif+4:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,700&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Christmas Origami Paper Maker","url":"https://modernenglish.au/teachertools/bespoke-origami-paper-maker.html","applicationCategory":"EducationalApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},"description":"Printable Christmas origami paper in your choice of colours and patterns, with folding steps and words for English learners: Christmas tree, 5-point star, Santa and bauble.","publisher":{"@type":"Organization","name":"Modern English Australia","url":"https://modernenglish.au/"}}
+</script>
+<style>
+/* =====================================================================
+   CHRISTMAS ORIGAMI PAPER MAKER
+   One file, no server. Every page is drawn on a <canvas>, so the
+   preview, the PDF, the PNGs and the print-out are always identical.
+   Nothing the teacher types leaves the browser.
+   ===================================================================== */
+:root{
+  --bench:#fffce6;      /* the site's cream page colour */
+  --panel:#ffffff;
+  --ink:#0f172a;
+  --soft:#475569;
+  --line:#dcd9c6;
+  --header:#1c1c1c;     /* header and footer, as on modernenglish.au */
+  --tag:#fde047;        /* the yellow of the site's tagline, on dark only */
+  --deep:#0e2861;       /* Modern English navy: primary buttons, headings */
+  --foil:#0e7c66;       /* Modern English teal, used sparingly */
+  --focus:#3968ea;
+  --warn:#b3261e;
+  --good:#1f7a4d;
+  --amber:#b45309; --amberbg:#fff7ed; --amberline:#f3d3a8;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:106.25%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%22230%22%3E%3Ctext x=%22180%22 y=%22122%22 text-anchor=%22middle%22 transform=%22rotate(-24 180 115)%22 font-family=%22Georgia,'Times New Roman',serif%22 font-size=%2223%22 letter-spacing=%221%22 fill=%22%230f172a%22 fill-opacity=%22.075%22%3EKoala Spies Sydney%3C/text%3E%3C/svg%3E")}
+body{margin:0;background-color:var(--bench);color:var(--ink);font-family:"Source Sans 3",system-ui,"Segoe UI",Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.top{background:var(--header);color:#f8fafc}
+.top p.eyebrow{margin:0 0 .3rem;color:var(--tag);font-weight:700;font-size:.74rem;letter-spacing:.32em;text-transform:uppercase}
+.titleblock{flex:1 1 16rem;min-width:0}
+.top-in{max-width:1400px;margin:0 auto;padding:1.1rem 1.25rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
+.top h1{margin:0;font-family:"Source Serif 4",Georgia,serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.15}
+.top p{margin:0;color:#cbd5e1;font-size:.95rem;max-width:54ch}
+.toolsback{display:block;width:max-content;margin:.35rem 0 0;color:#f8fafc;text-decoration:none;letter-spacing:.12em;font-weight:700}
+.toolsback:hover{color:var(--tag);text-decoration:underline}
+.subblock{display:grid;gap:.5rem;justify-items:start;max-width:54ch}
+.appinstall{border:0;border-radius:4px;background:#ff7a1a;color:#1c1c1c;font-weight:800;font-size:.88rem;padding:.45rem .9rem;min-height:38px;cursor:pointer}
+.appinstall:hover{background:#ff9b3d}
+
+.bench{max-width:1400px;margin:0 auto;padding:1.25rem;display:grid;grid-template-columns:minmax(320px,500px) minmax(0,1fr);gap:1.5rem;align-items:start}
+.controls{display:grid;gap:.75rem;min-width:0}
+details.group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+details.group>summary{cursor:pointer;list-style:none;padding:.8rem 1rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.group>summary::-webkit-details-marker{display:none}
+details.group>summary::after{content:"";width:.55rem;height:.55rem;border-right:2px solid var(--soft);border-bottom:2px solid var(--soft);transform:rotate(45deg);transition:transform .15s ease;flex:none;margin-right:.2rem}
+details.group[open]>summary::after{transform:rotate(-135deg)}
+.group-body{padding:0 1rem 1rem;display:grid;grid-template-columns:minmax(0,1fr);gap:.8rem}
+label.f{display:grid;gap:.25rem;font-size:.9rem;color:var(--soft)}
+label.f>span{font-weight:700;color:var(--ink)}
+input[type=text],input[type=number],input[type=search],select{width:100%;padding:.55rem .65rem;border:1.5px solid var(--line);border-radius:8px;background:#fff;font-size:1rem;min-height:44px}
+.hint{margin:0;font-size:.85rem;color:var(--soft)}
+.hint.warn{color:var(--warn);font-weight:700}
+.lab{margin:0 0 .3rem;font-size:.9rem;font-weight:700;color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg label{position:relative;text-align:center;padding:.45rem .3rem;cursor:pointer;font-size:.92rem;min-height:44px;display:flex;align-items:center;justify-content:center;line-height:1.2}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--deep);color:#fff}
+.seg label:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:-3px}
+.check{display:flex;gap:.55rem;align-items:center;font-size:.95rem;min-height:38px}
+.check input{width:1.15rem;height:1.15rem;accent-color:var(--deep);flex:none}
+.swatches{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.sw{width:40px;height:40px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep)}
+.btn{border:1.5px solid var(--deep);background:#fff;color:var(--deep);border-radius:8px;padding:.55rem 1rem;font-weight:700;cursor:pointer;min-height:44px}
+.btn:hover{background:#eef2fb}
+.btn.main{background:var(--deep);color:#fff}
+.btn.main:hover{background:#0a1d47}
+.btn.quiet{border-color:var(--line);color:var(--soft);font-weight:400}
+.btn.small{min-height:36px;padding:.25rem .65rem;font-size:.9rem}
+.btn[disabled]{opacity:.55;cursor:progress}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+
+/* themes and words */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.6rem,1fr));gap:.4rem}
+.theme{display:flex;align-items:center;gap:.45rem;border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:.3rem .5rem;cursor:pointer;text-align:left;font-size:.88rem;line-height:1.2;min-height:44px}
+.theme[aria-pressed=true]{border-color:var(--deep);background:#eef2fb;font-weight:700;box-shadow:inset 0 0 0 1px var(--deep)}
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(6.4rem,1fr));gap:.4rem;max-height:24rem;overflow:auto;padding:.1rem}
+.word{position:relative;border:1.5px solid var(--line);border-radius:8px;background:#fff;display:grid;justify-items:center;gap:.1rem;padding:.4rem .3rem .35rem;min-width:0}
+.word.off{opacity:.38;background:#eef2fb}
+.word .pic{width:48px;height:48px;border:0;background:none;padding:0;cursor:pointer;border-radius:6px}
+.word .pic img{width:48px;height:48px;display:block}
+.word .nopic{width:48px;height:48px;display:grid;place-items:center;border:1.5px dashed var(--line);border-radius:6px;font-size:.7rem;color:var(--soft);line-height:1.1;text-align:center}
+.word input{width:100%;min-height:30px;padding:.1rem .25rem;border:1px solid transparent;border-radius:5px;text-align:center;font-size:.88rem;background:transparent}
+.word input:hover,.word input:focus{border-color:var(--line);background:#fff}
+.word .tog{position:absolute;top:2px;right:2px;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-size:.75rem;line-height:1;padding:0}
+.word:not(.off) .tog{background:var(--deep);border-color:var(--deep);color:#fff}
+.word .x{position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:.7rem;padding:0;color:var(--soft)}
+.empty{margin:0;padding:.8rem;border:1.5px dashed var(--line);border-radius:8px;color:var(--soft);text-align:center}
+.search{display:grid;gap:.5rem}
+.picking{border:1.5px solid var(--deep);border-radius:8px;padding:.6rem;background:#eef2fb}
+
+/* preview */
+.stage{position:sticky;top:1rem;display:grid;gap:.7rem;min-width:0;max-height:calc(100vh - 2rem);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.outs{display:flex;gap:.35rem;flex-wrap:wrap}
+.outs button{border:1.5px solid var(--line);background:#fff;border-radius:6px;padding:.35rem .9rem;font-weight:700;cursor:pointer;min-height:40px}
+.outs button[aria-pressed=true]{background:var(--deep);border-color:var(--deep);color:#fff}
+.paper{background:#ebe7cf;border-radius:var(--radius);padding:clamp(.6rem,2vw,1.2rem);display:flex;justify-content:center}
+#preview{display:block;max-width:100%;max-height:74vh;width:auto;height:auto;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.25),0 14px 34px -10px rgba(15,23,42,.45)}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.pager{display:flex;align-items:center;gap:.5rem;font-size:.95rem}
+#status{margin:0;font-size:.9rem;color:var(--soft);min-height:1.4em}
+.fineprint{margin:0;font-size:.9rem;color:var(--soft)}
+.fineprint a,.terms a,.notes a{color:var(--deep);font-weight:700}
+.optbox{display:grid;gap:.7rem}
+
+/* on-screen caller */
+.caller{position:fixed;inset:0;z-index:60;background:#fffdf7;display:grid;grid-template-rows:auto 1fr auto;padding:1rem 1.25rem;gap:.6rem}
+.caller-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.caller-top h2{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:clamp(1.3rem,3vw,2rem)}
+.caller-main{display:grid;place-items:center;align-content:center;gap:1rem;text-align:center;min-height:0}
+.caller-main img{width:min(52vh,70vw);height:min(52vh,70vw);object-fit:contain}
+.caller-main .cw{font-family:var(--cfont,"Andika"),sans-serif;font-size:clamp(2.4rem,8vw,6rem);font-weight:700;line-height:1.1}
+.caller-main .cn{font-size:1.1rem;color:var(--soft)}
+.caller-bot{display:grid;gap:.6rem}
+.called{display:flex;gap:.3rem;flex-wrap:wrap;justify-content:center;max-height:5.2rem;overflow:auto}
+.called img{width:40px;height:40px;opacity:.85}
+.called span{font-size:.9rem;border:1px solid var(--line);border-radius:999px;padding:0 .5rem}
+.caller .btn{font-size:1.05rem}
+
+/* reading matter */
+.notes{max-width:1400px;margin:1rem auto 0;padding:0 1.25rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem 2.5rem}
+.notes h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .5rem;border-bottom:2px solid var(--foil);padding-bottom:.3rem;display:inline-block}
+.notes p,.notes li{max-width:62ch}
+.notes ol,.notes ul{margin:0;padding-left:1.2rem}
+.notes li{margin-bottom:.35rem}
+.notes dt{font-weight:700;margin-top:.6rem}
+.notes dd{margin:0}
+.terms{max-width:1400px;margin:0 auto;padding:0 1.25rem 2rem}
+.terms-in{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem 1.4rem 1.4rem}
+.terms h2{font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;margin:0 0 .3rem}
+.terms h3{font-size:1rem;margin:1.1rem 0 .3rem}
+.terms p,.terms li{max-width:75ch;margin:0 0 .4rem}
+.terms ul{margin:0;padding-left:1.2rem}
+.terms .updated{color:var(--soft);font-size:.9rem}
+footer{background:var(--header);color:#cbd5e1;text-align:center;padding:1.3rem 1rem;font-size:.9rem}
+footer a{color:#fff}
+#printArea{display:none}
+@media (max-width:980px){
+  .bench{grid-template-columns:minmax(0,1fr);padding:1rem}
+  .stage{position:static;order:-1;max-height:none;overflow:visible}
+  #preview{max-height:62vh}
+}
+/* ---------- open layout: no card backings, no horizontal lines, raised buttons ---------- */
+details.group,.terms-in{background:none;border:0!important;border-radius:0;box-shadow:none}
+details.group{margin-bottom:.35rem}
+details.group>summary{padding-left:0;padding-right:0}
+.group-body,.terms-in{padding-left:0;padding-right:0}
+.notes h2{border-bottom:0;padding-bottom:0}
+.btn{box-shadow:0 1px 2px rgba(15,23,42,.2),0 6px 14px -4px rgba(15,23,42,.38);transition:box-shadow .15s ease,transform .15s ease,background-color .15s ease}
+.btn:not([disabled]):hover{box-shadow:0 2px 4px rgba(15,23,42,.22),0 12px 24px -8px rgba(15,23,42,.48);transform:translateY(-1px)}
+.btn:not([disabled]):active{box-shadow:0 1px 2px rgba(15,23,42,.28);transform:translateY(0)}
+.btn[disabled]{box-shadow:none;transform:none}
+.sw{box-shadow:0 0 0 1.5px var(--line),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+
+/* ---------- typing fields: white, with a firm bottom edge that says "write here" ---------- */
+input[type=text],input[type=number],input[type=url],input[type=search],textarea,select{background:#fff;border:1px solid #d5d3c2;border-bottom:2px solid #94a3b8;border-radius:6px 6px 3px 3px;box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 1px 2px rgba(15,23,42,.1),0 5px 14px -5px rgba(15,23,42,.28);transition:border-color .15s ease,box-shadow .15s ease}
+input[type=text]:hover,input[type=number]:hover,input[type=url]:hover,input[type=search]:hover,textarea:hover,select:hover{border-bottom-color:var(--deep)}
+input[type=text]:focus,input[type=number]:focus,input[type=url]:focus,input[type=search]:focus,textarea:focus,select:focus{outline:none;border-color:var(--deep);box-shadow:inset 0 1px 2px rgba(15,23,42,.05),0 5px 14px -5px rgba(15,23,42,.28),0 0 0 3px rgba(57,104,234,.22)}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1}
+select{appearance:none;-webkit-appearance:none;padding-right:2.2rem;cursor:pointer;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23475569' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right .8rem center}
+/* the word tiles keep their see-through name boxes */
+.word input{background:transparent;border:1px solid transparent;border-radius:5px;box-shadow:none}
+.word input:hover,.word input:focus{border-color:var(--line);background:#fff;box-shadow:none}
+.theme,.outs button{box-shadow:0 1px 2px rgba(15,23,42,.15),0 4px 10px -4px rgba(15,23,42,.3)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  body>*:not(#printArea){display:none!important}
+  body{background:#fff none;padding:0}
+  #printArea{display:block}
+  #printArea img{display:block;width:100vw;height:100vh;object-fit:contain;page-break-after:always;break-after:page}
+  #printArea img:last-child{page-break-after:auto;break-after:auto}
+}
+/* For schools: one quiet line at the end of the notes. Never shown in print. */
+.school-cta{grid-column:1/-1;margin:.5rem 0 0;padding-top:1rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--soft)}
+.school-cta a{color:var(--deep);font-weight:700}
+@media print{.school-cta{display:none!important}}
+/* ---------- card maker extras ---------- */
+textarea{width:100%;padding:.55rem .65rem;font-size:1rem;line-height:1.4;resize:vertical;min-height:4.6rem}
+label.f small{font-weight:400;color:var(--soft)}
+.pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(5.4rem,1fr));gap:.4rem;max-height:21rem;overflow:auto;padding:.15rem}
+.pick{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:.35rem .2rem .3rem;cursor:pointer;display:grid;justify-items:center;align-content:start;gap:.2rem;font-size:.76rem;line-height:1.15;color:var(--soft);min-height:44px;box-shadow:0 1px 2px rgba(15,23,42,.15),0 4px 10px -4px rgba(15,23,42,.3)}
+.pick canvas,.pick img{width:56px;height:56px;display:block}
+.pick:hover{border-color:var(--deep)}
+.pick[aria-pressed=true]{border-color:var(--deep);background:#eef2fb;color:var(--ink);font-weight:700;box-shadow:inset 0 0 0 1px var(--deep)}
+#libs .pick img{width:auto;height:84px;max-width:100%}
+#libs{grid-template-columns:repeat(auto-fill,minmax(6.5rem,1fr))}
+.libcredits{margin:0;padding-left:1.1rem}
+.libcredits li{margin-bottom:.3rem}
+.pics{grid-auto-rows:max-content}
+#libs{max-height:30rem}
+.seg.big3 label{min-height:64px}
+.seg.big3 span{display:grid;gap:.1rem}
+.seg.big3 small{font-size:.74rem;opacity:.85;font-weight:400}
+.libgroup{grid-column:1/-1;margin:.4rem 0 0;font-weight:700;color:var(--ink);font-size:.9rem}
+.smallnote{font-size:.68rem;color:var(--amber);font-weight:700}
+#libWarn{color:var(--amber)}
+.libcredits a{color:var(--deep);font-weight:700}
+.frames{grid-template-columns:repeat(auto-fill,minmax(5rem,1fr))}
+.frames .pick canvas{width:50px;height:70px}
+.seg.wrap4{grid-auto-flow:row;grid-template-columns:1fr 1fr}
+.seg.wrap4 label{border-bottom:1px solid var(--line)}
+.pdlinks ul{margin:.2rem 0 .4rem;padding-left:1.1rem;font-size:.9rem;color:var(--soft)}
+.pdlinks li{margin-bottom:.25rem}
+.pdlinks a{color:var(--deep);font-weight:700}
+details.sub>summary{cursor:pointer;font-weight:700;color:var(--deep);padding:.2rem 0}
+details.sub[open]>summary{margin-bottom:.5rem}
+label.btn{display:inline-flex;align-items:center}
+.viewtools{display:flex;align-items:center;gap:.5rem .8rem;flex-wrap:wrap}
+.zoombox{display:inline-flex;align-items:center;gap:.35rem}
+#zoomText{min-width:3.2em;text-align:center;font-size:.9rem;font-weight:700}
+#turnBtn[aria-pressed=true]{background:var(--deep);color:#fff}
+.paper.zoomed{display:block;overflow:auto;max-height:78vh}
+.paper.zoomed #preview{max-width:none;max-height:none;height:auto}
+details.group.flash>summary{animation:flash 1.6s ease}
+@keyframes flash{0%,40%{background:#fde047}100%{background:transparent}}
+.swpick{position:relative;overflow:hidden;display:inline-block;background:conic-gradient(#e53935,#fdd835,#43a047,#1e88e5,#8e24aa,#e53935)}
+.swpick input{position:absolute;inset:-6px;width:calc(100% + 12px);height:calc(100% + 12px);opacity:0;cursor:pointer;border:0;padding:0}
+.swpick[aria-pressed=true]{box-shadow:0 0 0 3px var(--deep),0 6px 14px -4px rgba(15,23,42,.42)}
+.sw[data-c="#ffffff"],.sw[data-c="#f6e7c1"]{box-shadow:0 0 0 1.5px #94a3b8,0 6px 14px -4px rgba(15,23,42,.42)}
+#outsHint{margin:0;font-size:.9rem;color:var(--soft)}
+#outsHint:empty{display:none}
+.supportbox{display:flex;align-items:center;justify-content:space-between;gap:.6rem 1rem;flex-wrap:wrap;padding:.7rem .9rem;border-radius:8px;background:#fff6e5}
+.supportbox p{margin:0;font-size:.92rem;color:var(--soft);flex:1 1 16rem}
+.supportbox .thanks{display:block;margin-top:.25rem;font-style:italic;color:var(--ink)}
+.btn.support{display:inline-flex;align-items:center;gap:.4rem;border-color:#ff7a1a;background:#ff7a1a;color:#1c1c1c;text-decoration:none;font-weight:800}
+.btn.support:hover{background:#ff9b3d}
+.btn.support span{color:#b3261e;font-size:1.1em;line-height:1}
+@media print{.supportbox{display:none!important}}
+.artad{display:grid;justify-items:center;align-content:center;gap:.15rem;min-height:9.2rem;padding:.4rem .3rem;border:1.5px dashed var(--foil);border-radius:8px;background:#eef7f4;color:var(--ink);text-align:center;text-decoration:none;font-size:.74rem;line-height:1.15}
+.artad:hover{background:#dff0ea;border-style:solid}
+.artad .adtag{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--foil);border-radius:3px;padding:.05rem .35rem}
+.artad .adplus{font-size:1.6rem;font-weight:700;line-height:1;color:var(--foil)}
+.artad .admail{font-weight:700;color:var(--foil);font-size:.66rem;word-break:break-all}
+.campaign a{color:#b3261e;font-weight:800}
+.bynote{font-size:.7rem;color:var(--foil);font-weight:700}
+.artistnote{display:flex;align-items:center;justify-content:space-between;gap:.5rem .8rem;flex-wrap:wrap;background:#eef7f4;border-left:4px solid var(--foil);border-radius:4px;padding:.55rem .7rem;color:var(--ink)}
+.artistnote span{flex:1 1 14rem}
+.artistnote[hidden]{display:none!important}
+.btn.artistbtn{display:inline-flex;align-items:center;gap:.35rem;background:var(--foil);border-color:var(--foil);color:#fff;text-decoration:none}
+.btn.artistbtn:hover{background:#0b6655}
+.libcredits a.support{color:var(--foil);font-weight:700}
+#sets .theme{gap:.5rem}
+</style>
+<!-- Consent Mode v2: ad and analytics cookies start "denied" for visitors in the EEA, UK and Switzerland
+     until they accept in Google's consent message (AdSense > Privacy & messaging). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],
+    wait_for_update: 500
+  });
+  gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+</script>
+<!-- Google AdSense. With Auto ads switched on in AdSense, Google places the ads on this page by itself. -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7047447363586796"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js): the same visitor statistics as the rest of the site -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCH5CJD2ZS"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-HCH5CJD2ZS');
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="titleblock"><p class="eyebrow">Modern English Australia<a class="toolsback" href="TeacherToolDirectory.html">‹ All teacher tools</a></p><h1>Christmas Origami Paper Maker</h1></div>
+    <div class="subblock">
+      <p>Free for teachers and students. Print origami squares in your colours and patterns, then fold a Christmas tree, a star, Santa or a bauble. No glue, just folding. No sign-up.</p>
+      <button type="button" class="appinstall" id="appInstall" hidden>Install Teacher Tools as an app</button>
+    </div>
+  </div>
+</header>
+<style>
+nav.me-menu{position:relative;z-index:20;background:#0f172a;font:600 15px/1.2 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-align:center;letter-spacing:normal;text-transform:none;white-space:normal;margin:0;padding:0}
+nav.me-menu details,nav.me-menu summary{margin:0;padding:0;border:0;background:none}
+nav.me-menu summary{display:none}
+nav.me-menu ul{list-style:none;margin:0 auto;padding:6px 8px;display:flex;flex-wrap:wrap;justify-content:center;gap:2px 4px;max-width:1100px}
+nav.me-menu li{margin:0;padding:0;border:0;display:block;line-height:1.2;font-size:inherit}
+nav.me-menu li::before{content:none}
+nav.me-menu a{display:inline-block;padding:7px 11px;color:#f8fafc;text-decoration:none;border-radius:6px;font-weight:600;opacity:1;white-space:nowrap}
+nav.me-menu a:hover{background:rgba(255,255,255,.14)}
+nav.me-menu a:focus-visible{outline:2px solid #fde047;outline-offset:1px}
+nav.me-menu a[aria-current]{background:#fde047;color:#1c1c1c}
+@media (max-width:640px){
+ nav.me-menu summary{display:block;cursor:pointer;list-style:none;padding:11px 16px;color:#f8fafc;font-weight:700}
+ nav.me-menu summary::-webkit-details-marker{display:none}
+ nav.me-menu summary::before{content:"\2630\00a0\00a0"}
+ nav.me-menu ul{flex-direction:column;align-items:stretch;padding:0 8px 8px}
+ nav.me-menu a{display:block;padding:11px 12px}
+}
+@media print{nav.me-menu{display:none!important}}
+</style>
+<nav class="me-menu" aria-label="Site menu">
+<details id="meMenu" open>
+<summary>Menu</summary>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/vocabularygames.html">Vocab games</a></li>
+<li><a href="/grammargames.html">Grammar games</a></li>
+<li><a href="/minilessons.html">Mini lessons</a></li>
+<li><a href="/learnEnglishwithMusic.html">Songs</a></li>
+<li><a href="/tests-ielts-reading.html">IELTS</a></li>
+<li><a href="/tests-cambridge.html">Cambridge</a></li>
+<li><a href="/teachertools/TeacherToolDirectory.html" aria-current="true">Teacher tools</a></li>
+<li><a href="/blog.html">Blog</a></li>
+<li><a href="/about.html">About</a></li>
+</ul>
+</details>
+</nav>
+<script>try{if(window.matchMedia("(max-width:640px)").matches)document.getElementById("meMenu").open=false}catch(e){}</script>
+
+<!-- AD SPACE 1 (top): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<main class="bench">
+  <form class="controls" id="controls" onsubmit="return false" autocomplete="off">
+
+    <details class="group" open>
+      <summary>1. Choose what to fold</summary>
+      <div class="group-body">
+        <div class="seg wrap4" role="radiogroup" aria-label="What to fold">
+          <label><input type="radio" name="model" value="tree">Christmas tree</label>
+          <label><input type="radio" name="model" value="star">5-point star</label>
+          <label><input type="radio" name="model" value="santa">Santa</label>
+          <label><input type="radio" name="model" value="bauble">Bauble (paper balloon)</label>
+        </div>
+        <p class="hint" id="modelHint"></p>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>2. Colours</summary>
+      <div class="group-body">
+        <div class="seg" role="radiogroup" aria-label="Colours">
+          <label><input type="radio" name="mode" value="one">One colour</label>
+          <label><input type="radio" name="mode" value="set">A mix of colours</label>
+        </div>
+        <div id="oneRow"><p class="lab">Colour</p><div class="swatches" id="colSw"></div></div>
+        <div id="setRow"><p class="lab">Colour mix</p><div class="themes" id="sets"></div></div>
+        <label class="check"><input type="checkbox" id="lineArt">Colour in (black outlines on white, for students to colour)</label>
+        <p class="hint" id="colHint"></p>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>3. Pattern</summary>
+      <div class="group-body">
+        <div class="seg wrap4" role="radiogroup" aria-label="Pattern" style="grid-template-columns:1fr 1fr 1fr">
+          <label><input type="radio" name="pat" value="plain">Plain</label>
+          <label><input type="radio" name="pat" value="dots">Dots</label>
+          <label><input type="radio" name="pat" value="stars">Stars</label>
+          <label><input type="radio" name="pat" value="snow">Snowflakes</label>
+          <label><input type="radio" name="pat" value="stripes">Stripes</label>
+          <label><input type="radio" name="pat" value="checks">Checks</label>
+        </div>
+        <div id="tintRow"><p class="lab">Pattern colour</p>
+          <div class="seg" role="radiogroup" aria-label="Pattern colour">
+            <label><input type="radio" name="tint" value="white">White</label>
+            <label><input type="radio" name="tint" value="gold">Gold</label>
+            <label><input type="radio" name="tint" value="dark">Darker shade</label>
+          </div></div>
+        <div id="scaleRow"><p class="lab">Pattern size</p>
+          <div class="seg" role="radiogroup" aria-label="Pattern size">
+            <label><input type="radio" name="scale" value="s">Small</label>
+            <label><input type="radio" name="scale" value="m">Medium</label>
+            <label><input type="radio" name="scale" value="l">Large</label>
+          </div></div>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>4. Size and paper</summary>
+      <div class="group-body">
+        <div><p class="lab">Square size</p>
+          <div class="seg wrap4" role="radiogroup" aria-label="Square size">
+            <label><input type="radio" name="size" value="88">Small (8.8 cm)</label>
+            <label><input type="radio" name="size" value="130">Medium (13 cm)</label>
+            <label><input type="radio" name="size" value="150">15 cm</label>
+            <label><input type="radio" name="size" value="190">Large (19 cm)</label>
+          </div></div>
+        <div><p class="lab">Paper</p>
+          <div class="seg" role="radiogroup" aria-label="Paper size">
+            <label><input type="radio" name="paper" value="a4">A4</label>
+            <label><input type="radio" name="paper" value="a3">A3 (bigger)</label>
+            <label><input type="radio" name="paper" value="letter">Letter</label>
+          </div></div>
+        <label class="f"><span>How many pages</span><select id="pages"></select></label>
+        <p class="hint" id="countHint"></p>
+        <p class="hint"><b>When you print, choose “Actual size” or 100%</b>, not “Fit to page”, so the squares stay square. Thin paper folds best: ordinary 80 gsm printer paper or thinner.</p>
+      </div>
+    </details>
+
+    <div class="actions">
+      <button type="button" class="btn quiet" id="linkBtn">Copy a link to these settings</button>
+      <button type="button" class="btn quiet" id="resetBtn">Start again</button>
+    </div>
+  </form>
+
+  <section class="stage" aria-label="Preview">
+    <div class="outs" role="group" aria-label="What to see" id="outs">
+      <button type="button" data-out="sheets" aria-pressed="true">What you print</button>
+      <button type="button" data-out="howto" aria-pressed="false">How to fold it</button>
+    </div>
+    <p id="outsHint"></p>
+    <div class="viewtools">
+      <span class="zoombox"><button type="button" class="btn small" id="zoomOut" aria-label="Zoom out">−</button><span id="zoomText">100%</span><button type="button" class="btn small" id="zoomIn" aria-label="Zoom in">+</button><button type="button" class="btn small quiet" id="zoomFit">Fit</button></span>
+    </div>
+    <div class="paper" id="paper"><canvas id="preview" role="img" aria-label="Preview of the page"></canvas></div>
+    <div class="stage-bar">
+      <div class="pager" id="pager" hidden>
+        <button type="button" class="btn small" id="prevBtn" aria-label="Previous page">‹</button>
+        <span id="pagerText"></span>
+        <button type="button" class="btn small" id="nextBtn" aria-label="Next page">›</button>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn main" id="pdfBtn">Download PDF</button>
+        <button type="button" class="btn" id="pngBtn">Download PNG</button>
+        <button type="button" class="btn" id="printBtn">Print</button>
+      </div>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+    <div class="supportbox">
+      <p>This tool is free, with no sign-up. Help us bring real art by real artists to Christmas cards. <span class="thanks">Thank you to the origami folders who share their tutorials with the world.</span></p>
+      <a class="btn support" href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener"><span aria-hidden="true">♥</span> Support real art on Christmas cards</a>
+    </div>
+    <p class="fineprint">© Koala Spies Sydney. <a href="#terms">Terms of use</a></p>
+  </section>
+</main>
+
+<section class="notes">
+  <div>
+    <h2>How it works</h2>
+    <ol>
+      <li>Choose what to fold: a Christmas tree, a 5-point star, Santa or a bauble.</li>
+      <li>Choose your colours and a pattern, and the size of the squares.</li>
+      <li>Print the squares and the “How to fold it” page. Cut out the squares, then fold. No glue, no more cutting: just folding.</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Ideas for class</h2>
+    <ul>
+      <li><strong>Follow instructions:</strong> one student reads the tutorial or watches the video, and a partner folds. Then swap.</li>
+      <li><strong>Teach a partner:</strong> students teach the folds with <em>First, Then, Next, Finally</em>.</li>
+      <li><strong>Folding words:</strong> before you start, match the words on “How to fold it” (fold, crease, unfold, turn over) to actions.</li>
+      <li><strong>Colour in:</strong> print outline patterns and let students colour their paper before they fold.</li>
+      <li><strong>A class display:</strong> hang the stars and baubles on a tree, or stick the Santas and trees on a card.</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Questions</h2>
+    <dl>
+      <dt>Is this real origami?</dt>
+      <dd>Yes. Each model folds from one uncut square, with no glue. You only cut the squares out of the printed page.</dd>
+      <dt>Why is the back white?</dt>
+      <dd>Origami paper is usually coloured on one side and white on the other. Some models use both sides: Santa is red and white.</dd>
+      <dt>Which size should I choose?</dt>
+      <dd>15 cm is the usual size for these models. Bigger squares are easier for young learners and first tries.</dd>
+      <dt>My bauble won't blow up.</dt>
+      <dd>The paper may be too thick. Try thinner paper, and blow gently into the small hole.</dd>
+    </dl>
+  </div>
+  <div>
+    <h2>Tutorials</h2>
+    <ul id="credits"></ul>
+    <p class="hint">The tutorials belong to the people who made them. We link to them, and the QR codes on “How to fold it” open them.</p>
+  </div>
+  <p class="school-cta">For schools and colleges: want worksheets and decorations with your school's logo, colours and events? <a href="custom-tools.html">Custom tools for your school →</a></p>
+</section>
+
+<!-- TERMS OF USE. A plain-English draft: have it checked by a lawyer before
+     the site goes public, and change the date when you edit it. -->
+<section class="terms" id="terms" tabindex="-1">
+  <div class="terms-in">
+    <h2>Terms of use</h2>
+    <p class="updated">Last updated 26 November 2026</p>
+    <p>The Christmas Origami Paper Maker is a free tool for teachers, students and families. By making, downloading or printing paper you agree to these terms.</p>
+    <h3>Patterns and tutorials</h3>
+    <ul>
+      <li>The patterns and the pages this tool makes are © Koala Spies Sydney. You may use them freely to fold decorations.</li>
+      <li>The origami models and tutorials belong to the people who designed and shared them. We link to them; we don't copy them. Those websites have their own terms.</li>
+    </ul>
+    <h3>Using what you make</h3>
+    <ul>
+      <li>Print and share the paper with your classes, students, friends and family.</li>
+      <li>Keep the © Koala Spies Sydney · modernenglish.au line on the pages. Do not sell the paper or republish it as your own product.</li>
+      <li>You are responsible for checking that the activity suits your students. Scissors need supervision with young children.</li>
+    </ul>
+    <h3>Your information</h3>
+    <p>Nothing you choose is sent to us. Your settings are kept in your own browser so they are there next time, and “Start again” removes them. A link you copy contains your settings, so anyone with the link can open them. This site uses cookies for visitor statistics and to show ads, and providers such as Google may set them. See our <a href="https://modernenglish.au/privacy.html">privacy policy</a>.</p>
+    <h3>What you must not do</h3>
+    <ul><li>Copy, resell or republish this tool or its code.</li></ul>
+    <h3>No guarantees</h3>
+    <p>The tool is provided free and as it is. Print one page before you print a class set. These terms are general information and not legal advice. To the extent the law allows, we are not liable for loss or damage arising from its use. Nothing in these terms limits any rights you have under the Australian Consumer Law. These terms are governed by the laws of New South Wales, Australia.</p>
+  </div>
+</section>
+
+<!-- AD SPACE 2 (bottom): to place an ad here by hand, paste an AdSense ad unit on this line. -->
+
+<footer>
+  <p style="margin:0">A free tool from <a href="https://modernenglish.au/">Modern English Australia</a>. © Koala Spies Sydney. <a href="/">Home</a> · <a href="TeacherToolDirectory.html">All teacher tools</a> · <a href="bespoke-greeting-card-maker.html">Christmas card maker</a> · <a href="bespoke-envelope-maker.html">Envelope maker</a> · <a href="bespoke-certificate-maker.html">Certificate maker</a> · <a href="bespoke-bingo-card-maker.html">Bingo card maker</a> · <a href="#terms">Terms of use</a> · <a href="https://www.paypal.com/pools/c/9uHzWMu2N1" target="_blank" rel="noopener">♥ Support real art on Christmas cards</a> · <a href="https://www.youtube.com/@koalaspiesSyd" target="_blank" rel="me noopener">YouTube</a> · <a href="https://www.tiktok.com/@koalaspies" target="_blank" rel="me noopener">TikTok</a> · <a href="../about.html">About</a> · <a href="https://modernenglish.au/privacy.html">Privacy</a></p>
+</footer>
+
+<div id="printArea" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+"use strict";
+// =====================================================================
+// SETTINGS YOU CAN EDIT
+// =====================================================================
+const COPYRIGHT = "© Koala Spies Sydney · modernenglish.au";
+const STORE = "origami-paper-maker.draft.v1";
+const PAPERS = { a4: [210, 297], a3: [297, 420], letter: [215.9, 279.4] };
+const PAPER_NAME = { a4: "A4", a3: "A3", letter: "Letter" };
+// The models. link = the tutorial (it belongs to the person who made it).
+// col/pat/mode = the colours and pattern chosen when someone picks this model.
+// steps = the short steps on the "How to fold it" page. words = the folding words for that page.
+const MODELS = {
+  tree: {
+    name: "Christmas tree", title: "an origami Christmas tree", one: "Christmas tree", col: "#1b5e20", pat: "plain", mode: "one",
+    hint: "A simple tree from one square. Green looks best: the coloured side is the tree.",
+    need: "One square, coloured on one side (green is best). 15 cm works well.",
+    link: { t: "Christmas tree (and Santa)", by: "Hobbycraft", u: "https://hobbycraft.co.uk/how-to-make-christmas-origami/how-to-make-christmas-origami.html" },
+    steps: [
+      "Put the square coloured side down. Fold it in half from corner to corner, then unfold it.",
+      "Scan the QR code and follow the tutorial for the next folds. Do one fold at a time.",
+      "Press each fold flat with your fingernail, so the edges are sharp.",
+      "Stand your tree up, or stick it on a card. Add a small star on top!"],
+    tip: "Make a forest: fold trees from big and small squares, in different greens.",
+    words: [["fold in half", "fold so the two halves meet"], ["corner", "where two edges meet"], ["unfold", "open a fold again"], ["crease", "the line a fold makes"], ["press", "push flat with your fingers"], ["turn over", "turn the paper to the other side"]]
+  },
+  star: {
+    name: "5-point star", title: "an origami 5-point star", one: "star", col: "#a87410", pat: "stars", mode: "one",
+    hint: "A flat star from one square, with no glue. It looks the same on both sides. A 15 cm square makes a star about 10 cm across.",
+    need: "One square. A 15 cm square makes a star about 10 cm across.",
+    link: { t: "Simple 5-point star", by: "Paper Kawaii", u: "https://www.paperkawaii.com/?p=11038" },
+    steps: [
+      "Cut out a square. Either side can face up: the finished star looks the same on both sides.",
+      "Scan the QR code and follow the tutorial. Pause after each step and check your paper looks the same.",
+      "Press every fold flat with your fingernail, so the points are sharp.",
+      "Hang your star with a thread, or stick it on a card or a window."],
+    tip: "Take your time. Fold a practice star from plain paper first.",
+    words: [["fold", "bend the paper over"], ["unfold", "open a fold again"], ["crease", "the line a fold makes"], ["edge", "the side of the paper"], ["point", "the sharp end of the star"], ["press", "push flat with your fingers"]]
+  },
+  santa: {
+    name: "Santa", title: "an origami Santa", one: "Santa", col: "#b3261e", pat: "plain", mode: "one",
+    hint: "A simple Santa face from one square. Choose red: Santa uses both sides of the paper, the red side and the white side. Keep it plain so there's room to draw a face.",
+    need: "One square, red on one side and white on the other. Felt pens for the face.",
+    link: { t: "Origami Santa", by: "Kids Activities Blog", u: "https://kidsactivitiesblog.com/?p=219872" },
+    steps: [
+      "Start with the white side facing up.",
+      "Scan the QR code and follow the tutorial to fold Santa's hat and beard.",
+      "Fold the sides back to make a large triangle.",
+      "Turn it over and draw Santa's face. Add rosy cheeks!"],
+    tip: "Make a Santa card: stick your Santa on the front, and write a message inside.",
+    words: [["white side up", "with the white side facing you"], ["fold back", "fold away from you"], ["triangle", "a shape with three sides"], ["turn over", "turn the paper to the other side"], ["draw", "make a picture with a pen"], ["beard", "the hair on a man's chin"]]
+  },
+  bauble: {
+    name: "Bauble", title: "an origami bauble (paper balloon)", one: "bauble", col: "#b3261e", pat: "snow", mode: "set",
+    hint: "The classic paper balloon, also called a water bomb. You blow into it and it puffs up into a ball. Use thin paper: thick paper is hard to blow up.",
+    need: "One square of thin paper. 15 cm is a good size.",
+    link: { t: "Traditional water bomb", by: "origami.me", u: "https://origami.me/?p=19609" },
+    steps: [
+      "Fold and unfold both diagonals: corner to corner, both ways.",
+      "Collapse the paper along the creases into a triangle. This is called the water bomb base.",
+      "Follow the tutorial to fold the corners up, fold them in to the middle, and tuck the flaps into the pockets.",
+      "Turn it over and do the same on the other side.",
+      "Blow gently into the small hole at the bottom. Your bauble puffs up into a ball!"],
+    tip: "Thread a needle through the top to hang your bauble on the tree.",
+    words: [["diagonal", "a line from one corner to the opposite corner"], ["collapse", "fold flat along the creases"], ["flap", "a loose piece of paper"], ["tuck", "push an end inside"], ["pocket", "a gap you can push paper into"], ["blow", "push air out of your mouth"]]
+  }
+};
+const COLOURS = [
+  { name: "Christmas red", c: "#b3261e" }, { name: "Holly green", c: "#1b5e20" }, { name: "Gold", c: "#a87410" },
+  { name: "Modern English navy", c: "#0e2861" }, { name: "Modern English teal", c: "#0e7c66" }, { name: "Ocean", c: "#0e5c7a" },
+  { name: "Purple", c: "#5b2a86" }, { name: "Pink", c: "#c2185b" }, { name: "Sky", c: "#1565c0" }, { name: "Orange", c: "#d9481f" }, { name: "Silver grey", c: "#8a96a3" }, { name: "Black", c: "#222222" }
+];
+const COLOUR_SETS = [
+  { id: "christmas", name: "Christmas", c: ["#b3261e", "#1b5e20", "#a87410", "#0e5c7a"] },
+  { id: "redgold", name: "Red and gold", c: ["#b3261e", "#a87410", "#7a1712"] },
+  { id: "greens", name: "Forest greens", c: ["#1b5e20", "#2e7d32", "#0e7c66", "#33691e"] },
+  { id: "snow", name: "Snow and sky", c: ["#0e5c7a", "#1565c0", "#5b2a86", "#4f9fd6"] },
+  { id: "bright", name: "Bright", c: ["#e53935", "#fb8c00", "#43a047", "#1e88e5", "#8e24aa", "#f06292"] },
+  { id: "me", name: "Modern English", c: ["#0e2861", "#0e7c66", "#a87410"] }
+];
+const SIZES = ["88", "130", "150", "190"];
+const M = 8, HEAD = 7, FOOT = 6;
+
+// =====================================================================
+// DRAWING HELPERS (all sizes in millimetres)
+// =====================================================================
+const INK = "#1f2937", GREY = "#64748b", DEEP = "#0e2861", TEAL = "#0e7c66";
+function rrPath(c, x, y, w, h, r) { r = Math.max(0, Math.min(r, w / 2, h / 2)); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function starPath(c, x, y, R, r, n, rot) { rot = rot === undefined ? -Math.PI / 2 : rot; for (let i = 0; i < n * 2; i++) { const a = rot + i * Math.PI / n, d = i % 2 ? r : R, px = x + Math.cos(a) * d, py = y + Math.sin(a) * d; i ? c.lineTo(px, py) : c.moveTo(px, py); } c.closePath(); }
+function uiFont(size, bold) { return (bold ? 700 : 400) + " " + size + 'px "Atkinson Hyperlegible", Verdana, sans-serif'; }
+function wordFont(size, bold) { return (bold ? 700 : 400) + " " + size + 'px "Andika", "Atkinson Hyperlegible", Verdana, sans-serif'; }
+function serif(size) { return "800 " + size + 'px "Source Serif 4", Georgia, serif'; }
+function mix(hex, a) { const n = parseInt(hex.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255, m = v => Math.round(255 - (255 - v) * a).toString(16).padStart(2, "0"); return "#" + m(r) + m(g) + m(b); }
+function shade(hex, a) { const n = parseInt(hex.slice(1), 16), f = v => Math.round(v * (1 - a)).toString(16).padStart(2, "0"); return "#" + f(n >> 16) + f(n >> 8 & 255) + f(n & 255); }
+function wrapLines(ctx, text, maxW) {
+  const out = [];
+  String(text).split("\n").forEach(par => { let line = ""; par.split(/\s+/).filter(Boolean).forEach(w => { const t = line ? line + " " + w : w; if (line && ctx.measureText(t).width > maxW) { out.push(line); line = w; } else line = t; }); out.push(line); });
+  return out;
+}
+function smallPrint(ctx, text, cx, y, size) { ctx.font = uiFont(size); ctx.fillStyle = GREY; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic"; ctx.fillText(text, cx, y); }
+
+// A pattern over a square: the colour with shapes on it, or (colour in) black outlines on white.
+// u = the size of one repeat
+function fillPattern(ctx, x, y, w, h, col, kind, u, line, tint) {
+  ctx.fillStyle = line ? "#ffffff" : col; ctx.fillRect(x, y, w, h);
+  if (kind === "plain") return;
+  const ink = tint === "gold" ? "rgba(247,214,122,.9)" : tint === "dark" ? shade(col, .35) : "rgba(255,255,255,.4)";
+  const paint = () => { if (line) { ctx.strokeStyle = "#222222"; ctx.lineWidth = .22; ctx.stroke(); } else { ctx.fillStyle = ink; ctx.fill(); } };
+  ctx.save();
+  if (kind === "stripes") {
+    const step = u * 1.1, bw = u * .42;
+    for (let t = -h; t < w + h; t += step) { ctx.beginPath(); ctx.moveTo(x + t, y); ctx.lineTo(x + t + bw, y); ctx.lineTo(x + t + bw - h, y + h); ctx.lineTo(x + t - h, y + h); ctx.closePath(); paint(); }
+  } else if (kind === "checks") {
+    const sp = u * .9, bw = u * .34;
+    if (line) { ctx.strokeStyle = "#222222"; ctx.lineWidth = .22; ctx.beginPath(); for (let t = x + sp / 2; t < x + w; t += sp) { ctx.moveTo(t, y); ctx.lineTo(t, y + h); ctx.moveTo(t + bw, y); ctx.lineTo(t + bw, y + h); } for (let t = y + sp / 2; t < y + h; t += sp) { ctx.moveTo(x, t); ctx.lineTo(x + w, t); ctx.moveTo(x, t + bw); ctx.lineTo(x + w, t + bw); } ctx.stroke(); }
+    else { ctx.fillStyle = ink; ctx.globalAlpha = .75; for (let t = x + sp / 2; t < x + w; t += sp) ctx.fillRect(t, y, bw, h); for (let t = y + sp / 2; t < y + h; t += sp) ctx.fillRect(x, t, w, bw); }
+  } else if (kind === "dots") {
+    const sp = u * .75, r = u * .14;
+    for (let j = 0, yy = y + sp / 2; yy < y + h + r; j++, yy += sp) for (let xx = x + (j % 2 ? sp / 2 : 0); xx < x + w + r; xx += sp) { ctx.beginPath(); ctx.arc(xx, yy, r, 0, Math.PI * 2); paint(); }
+  } else if (kind === "stars") {
+    const sp = u * 1.05;
+    for (let j = 0, yy = y + sp / 2; yy < y + h + sp; j++, yy += sp) for (let i = 0, xx = x + (j % 2 ? sp / 2 : sp / 4); xx < x + w + sp; i++, xx += sp) { ctx.beginPath(); starPath(ctx, xx, yy, u * .28, u * .12, 5, -Math.PI / 2 + ((i + j) % 3 - 1) * .3); paint(); }
+  } else if (kind === "snow") {
+    const sp = u * 1.2, R = u * .3;
+    ctx.lineCap = "round"; ctx.strokeStyle = line ? "#222222" : tint === "white" ? "rgba(255,255,255,.6)" : ink; ctx.lineWidth = line ? .25 : Math.max(.25, u * .045);
+    for (let j = 0, yy = y + sp / 2; yy < y + h + sp; j++, yy += sp) for (let xx = x + (j % 2 ? sp / 2 : sp / 5); xx < x + w + sp; xx += sp) {
+      ctx.beginPath();
+      for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3, cs = Math.cos(a), sn = Math.sin(a); ctx.moveTo(xx, yy); ctx.lineTo(xx + cs * R, yy + sn * R); const bx = xx + cs * R * .58, by = yy + sn * R * .58, a1 = a + .7, a2 = a - .7; ctx.moveTo(bx, by); ctx.lineTo(bx + Math.cos(a1) * R * .3, by + Math.sin(a1) * R * .3); ctx.moveTo(bx, by); ctx.lineTo(bx + Math.cos(a2) * R * .3, by + Math.sin(a2) * R * .3); }
+      ctx.stroke();
+    }
+  }
+  ctx.restore();
+}
+
+// =====================================================================
+// STATE
+// =====================================================================
+const $ = id => document.getElementById(id);
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; };
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+function fresh() {
+  const m = MODELS.tree;
+  return { model: "tree", mode: m.mode, col: m.col, set: "christmas", lineArt: false, pat: m.pat, tint: "white", scale: "m", size: "150", paper: "a4", pages: 1, out: "sheets" };
+}
+const ONE_OF = { model: Object.keys(MODELS), mode: ["one", "set"], pat: ["plain", "dots", "stars", "snow", "stripes", "checks"], tint: ["white", "gold", "dark"], scale: ["s", "m", "l"], size: SIZES, paper: ["a4", "a3", "letter"], out: ["sheets", "howto"] };
+function tidy(o) {
+  const d = fresh(); o = o && typeof o === "object" ? o : {};
+  const T = Object.assign(d, o);
+  Object.keys(ONE_OF).forEach(k => { T[k] = String(T[k]); if (ONE_OF[k].indexOf(T[k]) < 0) T[k] = fresh()[k]; });
+  if (!COLOUR_SETS.some(s => s.id === T.set)) T.set = "christmas";
+  if (!/^#[0-9a-f]{6}$/i.test(T.col)) T.col = d.col;
+  T.pages = clamp(parseInt(T.pages, 10) || 1, 1, 10);
+  T.lineArt = T.lineArt === true;
+  return T;
+}
+let S = fresh(), page = 0, pages = [];
+let saveTimer = 0;
+function save() { clearTimeout(saveTimer); saveTimer = setTimeout(() => { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} }, 300); }
+function say(m) { $("status").textContent = m; }
+const setOf = () => COLOUR_SETS.find(s => s.id === S.set) || COLOUR_SETS[0];
+const colourOf = i => S.mode === "set" ? setOf().c[i % setOf().c.length] : S.col;
+function applyModel(id) { const m = MODELS[id]; if (!m) return; Object.assign(S, { model: id, mode: m.mode, col: m.col, pat: m.pat }); }
+
+// =====================================================================
+// THE SQUARES, edge to edge so one cut separates two squares
+// =====================================================================
+function plan() {
+  const [pw, ph] = PAPERS[S.paper], D = +S.size, aw = pw - 2 * M, ah = ph - 2 * M - HEAD - FOOT;
+  const cols = Math.max(1, Math.floor((aw + .01) / D)), rows = Math.max(1, Math.floor((ah + .01) / D));
+  return { W: pw, H: ph, D, cols, rows, per: cols * rows, ox: (pw - cols * D) / 2, oy: M + HEAD + (ah - rows * D) / 2 };
+}
+const UNIT = { s: 7, m: 10, l: 15 };
+function squarePages() {
+  const p = plan(), out = [], m = MODELS[S.model];
+  for (let pg = 0; pg < S.pages; pg++) {
+    out.push({ W: p.W, H: p.H, orient: "portrait", draw: ctx => {
+      ctx.fillStyle = DEEP; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.font = serif(4.4);
+      ctx.fillText("Origami paper · " + (p.D / 10) + " cm squares · " + m.name, M, M + 4.5);
+      ctx.font = uiFont(2.8); ctx.fillStyle = GREY; ctx.textAlign = "right"; ctx.fillText("Cut along the lines. Fold with the white side as the back.", p.W - M, M + 4.5);
+      for (let r = 0; r < p.rows; r++) for (let c = 0; c < p.cols; c++) {
+        const i = pg * p.per + r * p.cols + c, x = p.ox + c * p.D, y = p.oy + r * p.D;
+        ctx.save(); ctx.beginPath(); ctx.rect(x, y, p.D, p.D); ctx.clip();
+        fillPattern(ctx, x, y, p.D, p.D, colourOf(i), S.pat, UNIT[S.scale], S.lineArt, S.tint);
+        ctx.restore();
+      }
+      ctx.strokeStyle = "#555555"; ctx.lineWidth = .3; ctx.beginPath();
+      for (let c = 0; c <= p.cols; c++) { ctx.moveTo(p.ox + c * p.D, p.oy - 4); ctx.lineTo(p.ox + c * p.D, p.oy + p.rows * p.D + 4); }
+      for (let r = 0; r <= p.rows; r++) { ctx.moveTo(p.ox - 4, p.oy + r * p.D); ctx.lineTo(p.ox + p.cols * p.D + 4, p.oy + r * p.D); }
+      ctx.stroke();
+      smallPrint(ctx, COPYRIGHT + "  ·  Christmas origami paper", p.W / 2, p.H - M + 1, 2.5);
+    } });
+  }
+  return out;
+}
+
+// =====================================================================
+// HOW TO FOLD IT: steps, a QR code for the tutorial, and English practice
+// =====================================================================
+function drawQR(ctx, x, y, size, url) {
+  if (!window.qrcode) return false;
+  try {
+    const q = window.qrcode(0, "M"); q.addData(url); q.make();
+    const n = q.getModuleCount(), m = size / (n + 4);
+    ctx.fillStyle = "#ffffff"; ctx.fillRect(x, y, size, size); ctx.fillStyle = "#111111";
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) ctx.fillRect(x + (c + 2) * m, y + (r + 2) * m, m + .02, m + .02);
+    return true;
+  } catch (e) { return false; }
+}
+function howtoPage() {
+  const [W, H] = PAPERS[S.paper], k = Math.min(W / 210, H / 297), D = MODELS[S.model];
+  return { W, H, orient: "portrait", draw: ctx => {
+    const L = 14 * k, R = W - 14 * k;
+    ctx.fillStyle = DEEP; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic"; ctx.font = serif(8.4 * k); ctx.fillText("How to fold " + D.title, L, 24 * k);
+    ctx.font = uiFont(3.9 * k); ctx.fillStyle = GREY; ctx.fillText("You need: " + D.need, L, 31 * k);
+    ctx.strokeStyle = DEEP; ctx.lineWidth = .9 * k; ctx.beginPath(); ctx.moveTo(L, 34 * k); ctx.lineTo(R, 34 * k); ctx.stroke();
+    const colW = (R - L) * .64; let y = 44 * k;
+    D.steps.forEach((t, i) => {
+      ctx.fillStyle = DEEP; ctx.beginPath(); ctx.arc(L + 4.5 * k, y + 2.6 * k, 4.5 * k, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#fff"; ctx.font = uiFont(5 * k, true); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(String(i + 1), L + 4.5 * k, y + 2.9 * k);
+      ctx.font = uiFont(4.1 * k); ctx.fillStyle = INK; ctx.textAlign = "left"; ctx.textBaseline = "top";
+      const lines = wrapLines(ctx, t, colW - 13 * k); lines.forEach((l, j) => ctx.fillText(l, L + 12 * k, y + j * 5.6 * k));
+      y += Math.max(12.5 * k, lines.length * 5.6 * k + 4.5 * k);
+    });
+    ctx.font = uiFont(3.8 * k); const tl = wrapLines(ctx, D.tip, colW - 19 * k), th = tl.length * 5 * k + 9 * k;
+    ctx.fillStyle = "#fff6e5"; ctx.beginPath(); rrPath(ctx, L, y, colW, th, 3 * k); ctx.fill();
+    ctx.fillStyle = "#b45309"; ctx.font = uiFont(3.8 * k, true); ctx.textBaseline = "top"; ctx.fillText("Tip", L + 5 * k, y + 4 * k);
+    ctx.fillStyle = INK; ctx.font = uiFont(3.8 * k); tl.forEach((l, j) => ctx.fillText(l, L + 14 * k, y + 4 * k + j * 5 * k));
+    const stepsEnd = y + th;
+    const qx = L + colW + 8 * k, qw = R - qx; let qy = 42 * k;
+    ctx.fillStyle = TEAL; ctx.font = uiFont(4.4 * k, true); ctx.textBaseline = "top"; ctx.textAlign = "left"; ctx.fillText("Scan for the tutorial", qx, qy); qy += 7 * k;
+    const lk = D.link, qs = Math.min(qw, 40 * k);
+    if (!drawQR(ctx, qx, qy, qs, lk.u)) { ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = .3; ctx.strokeRect(qx, qy, qs, qs); ctx.fillStyle = GREY; ctx.font = uiFont(3 * k); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("QR code", qx + qs / 2, qy + qs / 2); }
+    qy += qs + 2 * k; ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillStyle = INK; ctx.font = uiFont(3.8 * k, true);
+    wrapLines(ctx, lk.t + " · " + lk.by, qw).forEach(l => { let z = 3.8 * k; while (z > 2 * k && ctx.measureText(l).width > qw) { z *= .94; ctx.font = uiFont(z, true); } ctx.fillText(l, qx, qy); ctx.font = uiFont(3.8 * k, true); qy += 4.8 * k; });
+    qy += .4 * k; ctx.font = uiFont(2.5 * k); ctx.fillStyle = GREY;
+    wrapLines(ctx, lk.u.replace(/^https?:\/\//, "").replace(/([/?=.-])/g, "$1 "), qw).forEach(l => { ctx.fillText(l.replace(/([/?=.-]) /g, "$1"), qx, qy); qy += 3.3 * k; });
+    let ey = Math.max(stepsEnd, qy) + 8 * k;
+    const boxH = Math.min(H - 16 * k - ey, 112 * k);
+    ctx.fillStyle = mix(DEEP, .07); ctx.beginPath(); rrPath(ctx, L, ey, R - L, boxH, 3 * k); ctx.fill();
+    ctx.fillStyle = DEEP; ctx.font = serif(6 * k); ctx.textBaseline = "top"; ctx.textAlign = "left"; ctx.fillText("English practice", L + 6 * k, ey + 5 * k);
+    const wy = ey + 15 * k, half = (R - L - 18 * k) / 2;
+    ctx.fillStyle = TEAL; ctx.font = uiFont(4.1 * k, true); ctx.fillText("Folding words", L + 6 * k, wy);
+    let ly = wy + 7 * k;
+    D.words.forEach(([w, m]) => {
+      ctx.font = wordFont(4 * k, true); ctx.fillStyle = INK; ctx.fillText(w, L + 6 * k, ly);
+      const ww = ctx.measureText(w).width; ctx.font = uiFont(3.5 * k); ctx.fillStyle = "#475569";
+      const ml = wrapLines(ctx, m, half - ww - 6 * k); ml.forEach((l, j) => ctx.fillText((j ? "" : "– ") + l, L + 8 * k + ww, ly + .4 * k + j * 4.4 * k));
+      ly += Math.max(6.4 * k, ml.length * 4.4 * k + 2 * k);
+    });
+    const rx = L + 12 * k + half;
+    ctx.fillStyle = TEAL; ctx.font = uiFont(4.1 * k, true); ctx.fillText("Say it in order", rx, wy);
+    ctx.font = wordFont(4 * k); ctx.fillStyle = INK;
+    ["First, …", "Then, …", "Next, …", "After that, …", "Finally, …"].forEach((t, i) => ctx.fillText(t, rx, wy + 7 * k + i * 5.8 * k));
+    let ry = wy + 7 * k + 5 * 5.8 * k + 4 * k;
+    ctx.fillStyle = TEAL; ctx.font = uiFont(4.1 * k, true); ctx.fillText("Your turn", rx, ry); ry += 6.5 * k;
+    ctx.font = uiFont(3.6 * k); ctx.fillStyle = INK;
+    ["Teach a partner to fold a " + D.one + ". Say each step with First, Then, Next and Finally. Your partner folds while you speak.", "Who will you give your " + D.one + " to? Why?"].forEach(t => { wrapLines(ctx, t, half).forEach(l => { ctx.fillText(l, rx, ry); ry += 4.8 * k; }); ry += 2 * k; });
+    smallPrint(ctx, COPYRIGHT + "  ·  The origami model and tutorial belong to the people who made them.", W / 2, H - 8 * k, 2.6 * k);
+  } };
+}
+
+function printPages() { return S.out === "howto" ? [howtoPage()] : squarePages(); }
+function renderPage(canvas, pg, pxPerMm) {
+  canvas.width = Math.round(pg.W * pxPerMm); canvas.height = Math.round(pg.H * pxPerMm);
+  const ctx = canvas.getContext("2d"); ctx.setTransform(pxPerMm, 0, 0, pxPerMm, 0, 0);
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, pg.W, pg.H); pg.draw(ctx); return canvas;
+}
+
+// =====================================================================
+// SCREEN
+// =====================================================================
+let drawQueued = false, zoom = 1;
+const ZOOMS = [1, 1.5, 2, 3];
+function fontsReady() {
+  if (!(document.fonts && document.fonts.load)) return Promise.resolve();
+  return Promise.all([uiFont(20), uiFont(20, true), wordFont(20), wordFont(20, true), serif(20)].map(f => document.fonts.load(f).catch(() => {})));
+}
+async function redraw() {
+  if (drawQueued) return; drawQueued = true;
+  await fontsReady();
+  requestAnimationFrame(() => {
+    drawQueued = false;
+    pages = printPages(); page = clamp(page, 0, Math.max(0, pages.length - 1));
+    const pg = pages[page], cv = $("preview"), dpr = Math.min(2, window.devicePixelRatio || 1);
+    renderPage(cv, pg, Math.min(3.2 * dpr * zoom, 2800 * Math.min(zoom, 2) / Math.max(pg.W, pg.H)));
+    $("paper").classList.toggle("zoomed", zoom > 1); cv.style.width = zoom > 1 ? (zoom * 100) + "%" : "";
+    $("zoomText").textContent = Math.round(zoom * 100) + "%"; $("zoomOut").disabled = zoom <= 1; $("zoomIn").disabled = zoom >= ZOOMS[ZOOMS.length - 1];
+    cv.setAttribute("aria-label", S.out === "howto" ? "How to fold " + MODELS[S.model].title : "The page to print");
+    $("pager").hidden = pages.length < 2; $("pagerText").textContent = "Page " + (page + 1) + " of " + pages.length;
+    $("pdfBtn").textContent = "Download PDF (" + pages.length + (pages.length === 1 ? " page)" : " pages)");
+    hints(); fitStage();
+  });
+}
+function fitStage() {
+  const cv = $("preview"), st = document.querySelector(".stage");
+  if (window.innerWidth <= 980 || zoom > 1) { cv.style.maxHeight = ""; return; }
+  cv.style.maxHeight = "";
+  const other = st.scrollHeight - cv.offsetHeight, room = window.innerHeight - 40 - other;
+  cv.style.maxHeight = Math.max(280, Math.min(room, window.innerHeight * .74)) + "px";
+}
+let fitTimer = 0;
+window.addEventListener("resize", () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitStage, 120); });
+function hints() {
+  const m = MODELS[S.model], p = plan(), total = p.per * S.pages;
+  $("modelHint").textContent = m.hint;
+  $("colHint").textContent = S.lineArt ? "The squares print as black outlines on white. Students colour them before they fold. Saves ink, too." : S.mode === "set" ? "Each square takes the next colour in the mix." : "Every square is this colour. Click the rainbow circle to choose any colour.";
+  $("countHint").textContent = p.per + (p.per === 1 ? " square" : " squares") + " of " + (p.D / 10) + " cm on each " + PAPER_NAME[S.paper] + " page: " + total + " in all, enough for " + total + " " + (total === 1 ? m.one : m.one + "s") + ".";
+  $("outsHint").textContent = S.out === "howto" ? "Short steps, a QR code for the tutorial, and folding words for English practice. Print one for each table." : "";
+}
+$("zoomIn").onclick = () => { zoom = ZOOMS[Math.min(ZOOMS.length - 1, ZOOMS.indexOf(zoom) + 1)]; redraw(); };
+$("zoomOut").onclick = () => { zoom = ZOOMS[Math.max(0, ZOOMS.indexOf(zoom) - 1)]; redraw(); };
+$("zoomFit").onclick = () => { zoom = 1; redraw(); };
+
+// ---------- colours ----------
+function buildSwatches() {
+  const box = $("colSw"); box.textContent = "";
+  COLOURS.forEach(p => { const b = el("button", "sw"); b.type = "button"; b.dataset.c = p.c; b.title = p.name; b.setAttribute("aria-label", p.name); b.style.background = p.c; b.onclick = () => { S.col = p.c; S.mode = "one"; S.lineArt = false; syncForm(); changed(true); }; box.appendChild(b); });
+  const lab = el("label", "sw swpick"), inp = el("input"); inp.type = "color"; inp.id = "colPick"; inp.setAttribute("aria-label", "Choose any colour"); lab.title = "Choose any colour"; lab.append(inp); box.appendChild(lab);
+  inp.addEventListener("input", e => { S.col = e.target.value; S.mode = "one"; S.lineArt = false; syncForm(); changed(true); });
+}
+function buildSets() {
+  const box = $("sets"); box.textContent = "";
+  COLOUR_SETS.forEach(s => {
+    const b = el("button", "theme"); b.type = "button"; b.dataset.id = s.id;
+    const dots = el("span"); dots.setAttribute("aria-hidden", "true"); dots.style.cssText = "display:inline-flex;gap:2px;flex:none";
+    s.c.slice(0, 4).forEach(c => { const d = el("span"); d.style.cssText = "width:12px;height:12px;border-radius:50%;background:" + c + ";box-shadow:0 0 0 1px #94a3b8"; dots.appendChild(d); });
+    b.append(dots, el("span", "", s.name)); box.appendChild(b);
+  });
+}
+$("sets").addEventListener("click", e => { const b = e.target.closest(".theme"); if (!b) return; S.set = b.dataset.id; S.lineArt = false; syncForm(); changed(true); });
+function buildCredits() {
+  const ul = $("credits"); ul.textContent = "";
+  Object.values(MODELS).forEach(m => { const li = el("li"), a = el("a", "", m.name + ": " + m.link.t); a.href = m.link.u; a.target = "_blank"; a.rel = "noopener"; li.append(a, document.createTextNode(" (" + m.link.by + ")")); ul.appendChild(li); });
+}
+
+// ---------- the form ----------
+const RADIOS = ["model", "mode", "pat", "tint", "scale", "size", "paper"];
+const show = (id, on) => { $(id).hidden = !on; };
+function syncForm() {
+  RADIOS.forEach(n => document.querySelectorAll('input[name="' + n + '"]').forEach(r => { r.checked = String(S[n]) === r.value; }));
+  $("lineArt").checked = S.lineArt; $("pages").value = String(S.pages);
+  show("oneRow", S.mode === "one" && !S.lineArt); show("setRow", S.mode === "set" && !S.lineArt);
+  show("tintRow", S.pat !== "plain" && !S.lineArt); show("scaleRow", S.pat !== "plain");
+  document.querySelectorAll("#colSw .sw:not(.swpick)").forEach(b => b.setAttribute("aria-pressed", b.dataset.c === S.col));
+  $("colPick").value = S.col; $("colPick").closest(".swpick").setAttribute("aria-pressed", !COLOURS.some(x => x.c === S.col));
+  document.querySelectorAll("#sets .theme").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === S.set));
+  document.querySelectorAll("#outs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.out === S.out));
+}
+function changed(keepPage) { if (!keepPage) page = 0; save(); redraw(); }
+$("controls").addEventListener("change", e => {
+  const t = e.target;
+  if (t.type === "radio" && RADIOS.indexOf(t.name) > -1) {
+    if (t.name === "model") { applyModel(t.value); say(MODELS[t.value].name + ": the colours and pattern are set for it. Change them in steps 2 and 3."); }
+    else S[t.name] = t.value;
+    syncForm(); changed(); return;
+  }
+  if (t.id === "lineArt") S.lineArt = t.checked;
+  else if (t.id === "pages") S.pages = clamp(parseInt(t.value, 10) || 1, 1, 10);
+  else return;
+  syncForm(); changed(true);
+});
+$("outs").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; S.out = b.dataset.out; syncForm(); changed(); });
+for (let i = 1; i <= 10; i++) { const o = el("option", "", String(i)); o.value = String(i); $("pages").appendChild(o); }
+$("prevBtn").onclick = () => { page = Math.max(0, page - 1); redraw(); };
+$("nextBtn").onclick = () => { page = Math.min(pages.length - 1, page + 1); redraw(); };
+$("resetBtn").onclick = () => { try { localStorage.removeItem(STORE); } catch (e) {} S = fresh(); syncForm(); changed(); say("Started again."); };
+
+// ---------- a link to these settings ----------
+const b64u = bytes => { let s = ""; for (let i = 0; i < bytes.length; i += 8192) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192)); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); };
+const unb64u = s => { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; return Uint8Array.from(atob(s), c => c.charCodeAt(0)); };
+async function pipe(bytes, stream) { return new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer()); }
+async function pack(o) { const raw = new TextEncoder().encode(JSON.stringify(o)); if (window.CompressionStream) { try { return "z" + b64u(await pipe(raw, new CompressionStream("deflate-raw"))); } catch (e) {} } return "j" + b64u(raw); }
+async function unpack(s) { const bytes = unb64u(s.slice(1)); return JSON.parse(new TextDecoder().decode(s[0] === "z" ? await pipe(bytes, new DecompressionStream("deflate-raw")) : bytes)); }
+$("linkBtn").onclick = async () => {
+  const url = location.href.split("#")[0] + "#set=" + await pack(S);
+  try { await navigator.clipboard.writeText(url); say("Link copied. It opens these settings, ready to print, on any computer."); }
+  catch (e) { prompt("Copy this link:", url); }
+};
+
+// =====================================================================
+// DOWNLOAD AND PRINT
+// =====================================================================
+const pause = () => new Promise(r => setTimeout(r, 0));
+function fileBase() { return "christmas-origami-" + { tree: "tree", star: "star", santa: "santa", bauble: "bauble" }[S.model] + (S.out === "howto" ? "-how-to-fold" : "-paper"); }
+async function busy(job) {
+  const all = [$("pdfBtn"), $("pngBtn"), $("printBtn")]; all.forEach(b => b.disabled = true);
+  try { await fontsReady(); await job(); } catch (e) { console.error(e); say("Something went wrong making the file. Try again, or use Print."); }
+  all.forEach(b => b.disabled = false);
+}
+const dpiFor = () => (S.paper === "a3" ? 200 : 250) / 25.4;
+const fmtName = () => S.paper === "letter" ? "letter" : S.paper;
+$("pdfBtn").onclick = () => busy(async () => {
+  if (!window.jspdf) { say("The PDF tool didn't load (check your connection). Use Print and choose Save as PDF."); return; }
+  const ps = printPages(), pdf = new window.jspdf.jsPDF({ orientation: ps[0].orient, unit: "mm", format: fmtName() }), cv = document.createElement("canvas");
+  for (let i = 0; i < ps.length; i++) {
+    say("Making page " + (i + 1) + " of " + ps.length + "…"); await pause();
+    renderPage(cv, ps[i], dpiFor()); if (i) pdf.addPage(fmtName(), ps[i].orient);
+    pdf.addImage(cv.toDataURL("image/jpeg", .92), "JPEG", 0, 0, ps[i].W, ps[i].H, undefined, "FAST");
+  }
+  pdf.save(fileBase() + ".pdf");
+  say("Downloaded. When you print, choose “Actual size” or 100%.");
+});
+function downloadBlob(b, name) { const a = el("a"); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+const toBlob = c => new Promise(r => c.toBlob(r, "image/png"));
+$("pngBtn").onclick = () => busy(async () => {
+  const list = printPages(), cv = document.createElement("canvas");
+  if (list.length === 1) { renderPage(cv, list[0], dpiFor()); downloadBlob(await toBlob(cv), fileBase() + ".png"); say("Downloaded."); return; }
+  if (!window.JSZip) { say("The ZIP tool didn't load (check your connection)."); return; }
+  const zip = new JSZip();
+  for (let i = 0; i < list.length; i++) { say("Making picture " + (i + 1) + " of " + list.length + "…"); await pause(); renderPage(cv, list[i], dpiFor()); zip.file(fileBase() + "-page-" + String(i + 1).padStart(2, "0") + ".png", await toBlob(cv)); }
+  say("Packing the ZIP file…"); await pause();
+  downloadBlob(await zip.generateAsync({ type: "blob" }), fileBase() + "-png.zip");
+  say("Downloaded " + list.length + " pictures in one ZIP file.");
+});
+$("printBtn").onclick = () => busy(async () => {
+  const ps = printPages(), area = $("printArea"), cv = document.createElement("canvas"); area.textContent = "";
+  let pr = $("pageRule"); if (!pr) { pr = el("style"); pr.id = "pageRule"; document.head.appendChild(pr); }
+  pr.textContent = "@page{size:" + (S.paper === "letter" ? "letter" : S.paper.toUpperCase()) + " " + ps[0].orient + ";margin:0}";
+  const waits = [];
+  for (let i = 0; i < ps.length; i++) { say("Getting ready to print…"); await pause(); renderPage(cv, ps[i], 150 / 25.4); const im = new Image(); waits.push(new Promise(r => { im.onload = im.onerror = r; })); im.src = cv.toDataURL("image/jpeg", .92); area.appendChild(im); }
+  await Promise.all(waits);
+  say("Choose “Actual size” or 100% in the print window.");
+  window.print();
+  setTimeout(() => { area.textContent = ""; }, 1000);
+});
+
+// ---------- install as an app (Chrome and Edge offer this; the button stays hidden elsewhere) ----------
+(function () {
+  let deferred = null;
+  const btn = $("appInstall");
+  const standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); if (standalone) return; deferred = e; btn.hidden = false; });
+  btn.onclick = () => {
+    if (!deferred) return;
+    try { if (typeof gtag === "function") gtag("event", "app_install_click", { from: "origami_paper_maker" }); } catch (err) {}
+    deferred.prompt(); deferred.userChoice.finally(() => { deferred = null; btn.hidden = true; });
+  };
+  window.addEventListener("appinstalled", () => { btn.hidden = true; say("Installed. Find Teacher Tools with your other apps."); });
+})();
+
+// =====================================================================
+// START
+// =====================================================================
+(async function start() {
+  const h = location.hash;
+  let set = null;
+  if (/^#set=/.test(h)) { try { set = tidy(await unpack(h.slice(5))); } catch (e) { say("That link is incomplete, so the usual settings are open instead."); } history.replaceState(null, "", location.href.split("#")[0]); }
+  else if (/^#model=/.test(h)) { const id = decodeURIComponent(h.slice(7)); if (MODELS[id]) { set = fresh(); S = set; applyModel(id); } }
+  if (!set) { try { const s = localStorage.getItem(STORE); if (s) set = tidy(JSON.parse(s)); } catch (e) {} }
+  S = set || fresh();
+  buildSwatches(); buildSets(); buildCredits(); syncForm(); redraw();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => redraw());
+})();
+</script>
+</body>
+</html>
