@@ -452,8 +452,13 @@
   </url>
   <url>
     <loc>https://modernenglish.au/minilessons.html</loc>
-    <lastmod>2026-11-12</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/minilessons/conditionals-sentence-joiners-lesson.html</loc>
+    <lastmod>2026-11-27</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://modernenglish.au/minilessons/do-does-is-are-lesson.html</loc>
@@ -552,7 +557,7 @@
   </url>
   <url>
     <loc>https://modernenglish.au/teachertools/TeacherToolDirectory.html</loc>
-    <lastmod>2026-11-17</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
@@ -603,6 +608,11 @@
   <url>
     <loc>https://modernenglish.au/teachertools/bespoke-micro-drama-lesson-maker.html</loc>
     <lastmod>2026-11-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://modernenglish.au/teachertools/bespoke-origami-paper-maker.html</loc>
+    <lastmod>2026-11-27</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
