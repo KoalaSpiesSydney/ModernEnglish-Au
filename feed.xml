@@ -10,10 +10,20 @@
     <description>Notes on teaching English, classroom games, and the state of online ESL resources — from a native-speaker English teacher in Sydney.</description>
     <language>en-AU</language>
     <copyright>Koala Spies Sydney · Modern English Australia</copyright>
-    <lastBuildDate>Thu, 19 Nov 2026 09:00:00 +1100</lastBuildDate>
+    <lastBuildDate>Fri, 27 Nov 2026 09:00:00 +1100</lastBuildDate>
     <pubDate>Thu, 15 Oct 2026 09:00:00 +1100</pubDate>
     <generator>Hand-built</generator>
     <ttl>1440</ttl>
+
+    <item>
+      <title>AI Christmas Cards? The Art Should Belong to People</title>
+      <link>https://modernenglish.au/blog/ai-christmas-cards-art-belongs-to-people.html</link>
+      <guid isPermaLink="true">https://modernenglish.au/blog/ai-christmas-cards-art-belongs-to-people.html</guid>
+      <pubDate>Fri, 27 Nov 2026 09:00:00 +1100</pubDate>
+      <dc:creator>Modern English Australia</dc:creator>
+      <category>EdTech</category>
+      <description>Canva is pushing AI Christmas cards. Why I built a free card maker that is the frame, while the art comes from real artists, the public domain and you.</description>
+    </item>
 
     <item>
       <title>The AI-ing of English</title>
